@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Implementation Plan — Add Vehicle Class to License Application</title>
+<style>
+  :root {
+    --red:    #c0392b;
+    --orange: #e67e22;
+    --yellow: #f1c40f;
+    --green:  #27ae60;
+    --blue:   #2980b9;
+    --dark:   #2c3e50;
+    --light:  #ecf0f1;
+    --white:  #ffffff;
+    --border: #bdc3c7;
+    --code-bg:#f4f4f4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: var(--dark); background: #f9f9f9; }
+  header { background: var(--dark); color: var(--white); padding: 24px 32px; }
+  header h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  header .meta { font-size: 12px; opacity: 0.75; display: flex; gap: 24px; flex-wrap: wrap; margin-top: 8px; }
+  header .meta span { background: rgba(255,255,255,0.1); padding: 3px 10px; border-radius: 12px; }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; }
+  .badge-high   { background: #fdecea; color: var(--red); border: 1px solid #f5c6c2; }
+  .badge-medium { background: #fef9e7; color: #b7770d; border: 1px solid #f9e79f; }
+  .badge-low    { background: #eafaf1; color: var(--green); border: 1px solid #a9dfbf; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 24px 32px; }
+  section { background: var(--white); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 20px; overflow: hidden; }
+  section > .section-header { background: var(--dark); color: var(--white); padding: 12px 20px; font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+  section > .section-header .icon { font-size: 18px; }
+  .section-body { padding: 20px; }
+  h3 { font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--light); padding-bottom: 4px; }
+  h4 { font-size: 13px; font-weight: 700; color: var(--blue); margin: 14px 0 6px; }
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 16px; }
+  th { background: var(--light); padding: 8px 10px; text-align: left; font-weight: 700; font-size: 11px; text-transform: uppercase; border: 1px solid var(--border); }
+  td { padding: 7px 10px; border: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: #fafafa; }
+  code { font-family: 'Consolas', 'Courier New', monospace; background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-size: 12px; }
+  pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: 6px; padding: 14px; font-size: 12px; font-family: 'Consolas', 'Courier New', monospace; overflow-x: auto; margin-bottom: 14px; white-space: pre-wrap; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .card { background: var(--light); border-radius: 6px; padding: 14px; }
+  .card h4 { font-size: 12px; font-weight: 700; margin-bottom: 6px; color: var(--dark); }
+  .card p, .card ul { font-size: 12px; line-height: 1.6; }
+  .card ul { padding-left: 16px; }
+  .risk-high   { background: #fef5e7; border-left: 4px solid var(--orange); padding: 10px 14px; border-radius: 0 6px 6px 0; margin-bottom: 10px; }
+  .risk-medium { background: #fef9e7; border-left: 4px solid var(--yellow); padding: 10px 14px; border-radius: 0 6px 6px 0; margin-bottom: 10px; }
+  .risk-low    { background: #eafaf1; border-left: 4px solid var(--green); padding: 10px 14px; border-radius: 0 6px 6px 0; margin-bottom: 10px; }
+  .risk-header { font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+  .step-list { counter-reset: step; list-style: none; }
+  .step-list li { counter-increment: step; padding: 8px 10px 8px 44px; position: relative; border-bottom: 1px solid var(--light); font-size: 13px; line-height: 1.5; }
+  .step-list li:last-child { border-bottom: none; }
+  .step-list li::before { content: counter(step); position: absolute; left: 10px; width: 24px; height: 24px; background: var(--blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; top: 8px; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; margin: 2px; }
+  .tag-blue   { background: #d6eaf8; color: var(--blue); }
+  .tag-orange { background: #fef5e7; color: #b86c1e; }
+  .tag-grey   { background: #ecf0f1; color: #555; }
+  .tag-green  { background: #eafaf1; color: #1e8449; }
+  .tag-red    { background: #fdecea; color: var(--red); }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .toc { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px 20px; background: #f0f3f4; border-bottom: 1px solid var(--border); }
+  .toc a { font-size: 12px; color: var(--blue); text-decoration: none; padding: 3px 10px; background: white; border: 1px solid var(--border); border-radius: 12px; }
+  .toc a:hover { background: var(--light); }
+  .ws-label { display: inline-block; padding: 2px 7px; border-radius: 8px; font-size: 11px; font-weight: 700; }
+  .ws-a { background: #d4e6f1; color: #1a6d9e; }
+  .ws-b { background: #d5f5e3; color: #1a7a43; }
+  .ws-c { background: #fdebd0; color: #9e5a16; }
+  .ws-d { background: #e8daef; color: #6c3483; }
+  .ws-e { background: #fadbd8; color: #922b21; }
+  .note-box { background: #eaf4fb; border-left: 4px solid var(--blue); padding: 10px 14px; border-radius: 0 6px 6px 0; margin-bottom: 14px; font-size: 12.5px; line-height: 1.6; }
+  .warn-box  { background: #fef9e7; border-left: 4px solid var(--yellow); padding: 10px 14px; border-radius: 0 6px 6px 0; margin-bottom: 14px; font-size: 12.5px; line-height: 1.6; }
+  p { margin-bottom: 10px; line-height: 1.6; font-size: 13px; }
+  ul, ol { padding-left: 20px; margin-bottom: 10px; font-size: 13px; line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🔧 Implementation Plan: Add Vehicle Class to License Application Flow</h1>
+  <div class="meta">
+    <span>📅 2025-10-26</span>
+    <span>🏗️ New Feature</span>
+    <span>📁 DLIS — Driver License Issuance System</span>
+    <span>🔍 Local Workspace Analysis</span>
+    <span>📚 Data Dictionary: None (generation recommended)</span>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- TOC -->
+<div class="toc">
+  <a href="#summary">Executive Summary</a>
+  <a href="#prereqs">Prerequisites</a>
+  <a href="#requirements">Requirements</a>
+  <a href="#goals">Goals &amp; Non-Goals</a>
+  <a href="#current-state">Current State</a>
+  <a href="#design">Implementation Design</a>
+  <a href="#components">Affected Components</a>
+  <a href="#data-model">Data Model Changes</a>
+  <a href="#risks">Risks &amp; Mitigations</a>
+  <a href="#testing">Testing Strategy</a>
+  <a href="#rollout">Rollout Plan</a>
+  <a href="#appendix">Appendix</a>
+</div>
+
+<!-- ========================================================= -->
+<!-- EXECUTIVE SUMMARY                                         -->
+<!-- ========================================================= -->
+<section id="summary">
+  <div class="section-header"><span class="icon">📋</span> 1. Executive Summary</div>
+  <div class="section-body">
+    <p>
+      <strong>Change Description:</strong> Add a Vehicle Class field (A=Motorcycle, B=Light, C=Heavy, D=Bus) to the
+      license application process. Currently Vehicle Class is entered only at issuance time in <code>DLISISSU</code>.
+      This change captures it at application entry (<code>DLISAPPL / DL03</code>), persists it in
+      <code>DLIS.LICENSE_APPLICATION</code>, propagates it through the CICS COMMAREA to all downstream programs,
+      and retains it at issuance in <code>DLIS.ISSUED_LICENSE</code>.
+    </p>
+    <p>
+      <strong>Business Value:</strong> Regulatory compliance requires vehicle class to be declared and validated
+      at application time. Early capture allows eligibility and approval reviewers to see the intended class,
+      reduces the risk of a class mismatch between application and issued license, and lays the foundation for
+      future fee-schedule differentiation by vehicle class.
+    </p>
+
+    <div class="grid3" style="margin-top:16px">
+      <div class="card">
+        <h4>⚠️ Key Risk 1</h4>
+        <p>COMMAREA expansion requires <strong>simultaneous recompile and deployment</strong> of all 7 CICS programs — partial deployment causes storage overlay abends.</p>
+      </div>
+      <div class="card">
+        <h4>⚠️ Key Risk 2</h4>
+        <p>In-flight applications will have NULL in the new <code>VEHICLE_CLASS</code> column — a <strong>migration UPDATE</strong> must run before go-live.</p>
+      </div>
+      <div class="card">
+        <h4>⚠️ Key Risk 3</h4>
+        <p>The <code>ISSUED_LICENSE.VEHICLE_CLASS NOT NULL</code> constraint means <code>DLISISSU</code> must guarantee a non-blank value from COMMAREA <strong>or</strong> screen before INSERT.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- PREREQUISITES                                              -->
+<!-- ========================================================= -->
+<section id="prereqs">
+  <div class="section-header"><span class="icon">✅</span> 2. Prerequisites</div>
+  <div class="section-body">
+    <div class="warn-box">
+      ⚠️ <strong>Data Dictionary:</strong> No <code>bobz/DD.json</code> exists for this workspace.
+      Generating data dictionary entries for <code>DLISAPPL.cbl</code>, <code>DLISISSU.cbl</code>,
+      <code>DLISCSEC.cpy</code>, and <code>DLISDCLG.cpy</code> before implementation is recommended
+      to preserve variable business context during coding.
+    </div>
+    <h3>Prerequisite Checklist</h3>
+    <table>
+      <thead><tr><th>Item</th><th>Action Required</th><th>Blocking?</th></tr></thead>
+      <tbody>
+        <tr><td>Data Dictionary Generation</td><td>Generate DD entries for 4 source files using Z-Code mode</td><td>No — recommended</td></tr>
+        <tr><td>DB2 DDL authority</td><td>Verify ALTER TABLE privilege on DLIS schema under DSN1</td><td>Yes</td></tr>
+        <tr><td>DLIS.LOADLIB backup</td><td>Snapshot existing load modules before deployment</td><td>Yes</td></tr>
+        <tr><td>DLIS.COPYBOOK backup</td><td>Snapshot DSECT copybooks before BMS reassembly</td><td>Yes</td></tr>
+        <tr><td>CICS outage window</td><td>Schedule controlled CICS restart for atomic load module activation</td><td>Yes</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- REQUIREMENTS                                               -->
+<!-- ========================================================= -->
+<section id="requirements">
+  <div class="section-header"><span class="icon">📑</span> 3. Requirements</div>
+  <div class="section-body">
+    <div class="grid2">
+      <div>
+        <h3>Functional Requirements</h3>
+        <table>
+          <thead><tr><th>ID</th><th>Requirement</th></tr></thead>
+          <tbody>
+            <tr><td><code>FR1</code></td><td>Vehicle Class captured at application entry via DLISAE01 BMS screen (DLISAPPL / DL03)</td></tr>
+            <tr><td><code>FR2</code></td><td>Vehicle Class persisted in <code>DLIS.LICENSE_APPLICATION</code> as new <code>VEHICLE_CLASS CHAR(2)</code> column</td></tr>
+            <tr><td><code>FR3</code></td><td>Vehicle Class propagated through <code>DLIS-APPL-COMMAREA</code> to all downstream programs</td></tr>
+            <tr><td><code>FR4</code></td><td>DLISISSU reads Vehicle Class from COMMAREA to ensure application-issuance consistency</td></tr>
+            <tr><td><code>FR5</code></td><td>Vehicle Class validated at entry — values A, B, C, or D only</td></tr>
+            <tr><td><code>FR6</code></td><td>All programs sharing <code>DLISCSEC.cpy</code> recompiled and deployed as a single coordinated release</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h3>Non-Functional Requirements</h3>
+        <table>
+          <thead><tr><th>ID</th><th>Requirement</th></tr></thead>
+          <tbody>
+            <tr><td><code>NFR1</code></td><td>COMMAREA expansion stays within 32,763-byte CICS limit (350B + 2B = 352B — compliant)</td></tr>
+            <tr><td><code>NFR2</code></td><td>New DB2 column must be nullable to avoid breaking existing in-flight rows</td></tr>
+            <tr><td><code>NFR3</code></td><td>All DDL changes must be reversible via <code>ALTER TABLE ... DROP COLUMN</code></td></tr>
+            <tr><td><code>NFR4</code></td><td>No CSD resource definition changes — all transaction IDs and mapset names unchanged</td></tr>
+          </tbody>
+        </table>
+        <h3 style="margin-top:16px">Business Requirements</h3>
+        <table>
+          <thead><tr><th>ID</th><th>Requirement</th></tr></thead>
+          <tbody>
+            <tr><td><code>BR1</code></td><td>Vehicle Class on issued license must match class declared at application time</td></tr>
+            <tr><td><code>BR2</code></td><td>Approval reviewers must see declared vehicle class without additional DB2 queries</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- GOALS                                                      -->
+<!-- ========================================================= -->
+<section id="goals">
+  <div class="section-header"><span class="icon">🎯</span> 4. Goals &amp; Non-Goals</div>
+  <div class="section-body">
+    <div class="grid2">
+      <div>
+        <h3>Goals — In Scope</h3>
+        <ul>
+          <li>Add <code>VEHICLE_CLASS CHAR(2)</code> column to <code>DLIS.LICENSE_APPLICATION</code></li>
+          <li>Add <code>CA-VEHICLE-CLASS PIC X(2)</code> to <code>DLIS-APPL-COMMAREA</code> in <code>DLISCSEC.cpy</code> (append only — preserve offsets)</li>
+          <li>Add <code>VEHICLE-CLASS PIC X(2)</code> host variable to <code>DCLDLIS-LICENSE-APPL</code> in <code>DLISDCLG.cpy</code></li>
+          <li>Add Vehicle Class input field <code>DAEVCLS</code> to BMS map <code>DLISAE01</code></li>
+          <li>Modify <code>DLISAPPL</code> to validate, capture, and INSERT Vehicle Class</li>
+          <li>Propagate Vehicle Class through COMMAREA in DLISELIG, DLISHIST, DLISPAY, DLISAP1, DLISAP2</li>
+          <li>Modify <code>DLISISSU</code> to prefer COMMAREA Vehicle Class over screen input</li>
+          <li>Coordinate recompile and deployment of all 7 programs as a single release</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Non-Goals — Out of Scope</h3>
+        <ul>
+          <li>Fee schedule differentiation by Vehicle Class — future phase</li>
+          <li>Changes to <code>DLISCAND</code> — no vehicle class at candidate level</li>
+          <li>Changes to <code>DLISMENU</code> — routing unaffected</li>
+          <li>Migration of historical IS/RE rows in <code>ISSUED_LICENSE</code> — already valid</li>
+          <li>Changes to CSD group <code>DLISGRP</code></li>
+          <li>Eligibility rule changes based on vehicle class</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- CURRENT STATE                                              -->
+<!-- ========================================================= -->
+<section id="current-state">
+  <div class="section-header"><span class="icon">🔍</span> 5. Current State Analysis</div>
+  <div class="section-body">
+    <h3>System Context</h3>
+    <table>
+      <thead><tr><th>Program</th><th>Trans</th><th>Map</th><th>Current Role</th><th>Impact</th></tr></thead>
+      <tbody>
+        <tr><td><code>DLISAPPL.cbl</code></td><td>DL03</td><td>DLISAE01</td><td>Application entry — captures Candidate ID, License Type; no Vehicle Class</td><td><strong>Modify</strong></td></tr>
+        <tr><td><code>DLISELIG.cbl</code></td><td>DL04</td><td>DLISECHPE</td><td>Eligibility check — passes COMMAREA through</td><td>Recompile</td></tr>
+        <tr><td><code>DLISHIST.cbl</code></td><td>DL05</td><td>DLISECHPE</td><td>Driving history check — passes COMMAREA through</td><td>Recompile</td></tr>
+        <tr><td><code>DLISPAY.cbl</code></td><td>DL06</td><td>DLISECHPE</td><td>Payment entry — passes COMMAREA through</td><td>Recompile</td></tr>
+        <tr><td><code>DLISAP1.cbl</code></td><td>DL07</td><td>DLISA1M01</td><td>First authority approval — passes COMMAREA through</td><td>Recompile + optional display</td></tr>
+        <tr><td><code>DLISAP2.cbl</code></td><td>DL08</td><td>DLISA2M01</td><td>Second authority approval — passes COMMAREA through</td><td>Recompile + optional display</td></tr>
+        <tr><td><code>DLISISSU.cbl</code></td><td>DL09</td><td>DLISLIM01</td><td>License issuance — currently reads Vehicle Class from BMS screen field only</td><td><strong>Modify</strong></td></tr>
+        <tr><td><code>DLISSTAT.cbl</code></td><td>DL10</td><td>DLISST01</td><td>Status inquiry — read-only, no COMMAREA writes</td><td>None</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Key Findings</h3>
+    <div class="note-box">
+      <strong>ISSUED_LICENSE already has VEHICLE_CLASS.</strong> The <code>DLIS.ISSUED_LICENSE</code> table already contains
+      <code>VEHICLE_CLASS CHAR(2) NOT NULL</code> with <code>CHECK (VEHICLE_CLASS IN ('A','B','C','D'))</code>.
+      <code>DLISISSU.cbl</code> already validates and inserts this field from the screen. The change adds it to
+      <em>upstream</em> stages.
+    </div>
+    <div class="warn-box">
+      <strong>COMMAREA layout note.</strong> <code>DLIS-APPL-COMMAREA</code> currently ends at
+      <code>CA-LICENSE-NUMBER PIC X(20)</code>. Appending <code>CA-VEHICLE-CLASS PIC X(2)</code>
+      is safe — no existing field offsets shift. The <code>EXEC CICS RETURN LENGTH(350)</code> literals
+      in all programs must be verified to cover 352 bytes or updated accordingly.
+    </div>
+
+    <h3>Assumptions</h3>
+    <ul>
+      <li>Vehicle Class captured at application will always match the class stored in ISSUED_LICENSE — DLISISSU will prefer COMMAREA value</li>
+      <li>Existing in-flight applications (status not IS or RE) will receive default Vehicle Class 'C' via migration UPDATE before go-live</li>
+      <li>The append-only COMMAREA change keeps all 7 programs on the same byte layout after recompile</li>
+    </ul>
+
+    <h3>Constraints</h3>
+    <ul>
+      <li>All 7 COBOL programs must compile and deploy together — partial deployment will cause COMMAREA layout misalignment and CICS abends</li>
+      <li>DB2 Bind step must be rerun for DLISAPPL and DLISISSU after DBRM members are updated</li>
+      <li>BMS reassembly must complete before COBOL compilation to supply updated DSECT copybooks</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- IMPLEMENTATION DESIGN                                      -->
+<!-- ========================================================= -->
+<section id="design">
+  <div class="section-header"><span class="icon">🏗️</span> 6. Implementation Design</div>
+  <div class="section-body">
+
+    <h3>Workstreams</h3>
+
+    <div style="margin-bottom:16px">
+      <span class="ws-label ws-a">Workstream A</span> <strong>Database Schema</strong>
+      <p style="margin-top:8px">Add <code>VEHICLE_CLASS</code> column to <code>LICENSE_APPLICATION</code> and update the DCLGEN copybook.</p>
+      <ol>
+        <li>Write <code>db2/DLIS0004-ALTER-VEHICLE-CLASS.sql</code> — ALTER TABLE ADD COLUMN + CHECK constraint</li>
+        <li>Execute DDL via <code>jcl/DLISDB2.jcl</code> equivalent against DSN1</li>
+        <li>Run migration UPDATE: set <code>VEHICLE_CLASS = 'C'</code> for in-flight applications</li>
+        <li>Update <code>DCLDLIS-LICENSE-APPL</code> in <code>copybook/DLISDCLG.cpy</code> — add <code>10 VEHICLE-CLASS PIC X(2).</code></li>
+      </ol>
+      <p><em>Dependency: Must complete before any COBOL recompilation.</em></p>
+    </div>
+
+    <div style="margin-bottom:16px">
+      <span class="ws-label ws-b">Workstream B</span> <strong>COMMAREA Expansion</strong>
+      <p style="margin-top:8px">Append <code>CA-VEHICLE-CLASS PIC X(2)</code> to <code>DLIS-APPL-COMMAREA</code> in <code>DLISCSEC.cpy</code>.</p>
+      <ol>
+        <li>Open <code>copybook/DLISCSEC.cpy</code></li>
+        <li>After <code>CA-LICENSE-NUMBER PIC X(20)</code>, add <code>10 CA-VEHICLE-CLASS PIC X(2) VALUE SPACES.</code></li>
+        <li>Verify total COMMAREA byte count; confirm or update <code>LENGTH(350)</code> literals in all 7 programs</li>
+      </ol>
+      <p><em>Dependency: Must complete before Workstreams C, D, E.</em></p>
+    </div>
+
+    <div style="margin-bottom:16px">
+      <span class="ws-label ws-c">Workstream C</span> <strong>BMS Map Update</strong>
+      <p style="margin-top:8px">Add Vehicle Class input field to the Application Entry screen <code>DLISAE01</code>.</p>
+      <ol>
+        <li>Open <code>bms/DLISAE.bms</code></li>
+        <li>Add <code>DFHMDF</code> label at row 9, col 2: <code>INITIAL='VEHICLE CLASS   : '</code></li>
+        <li>Add input field <code>DAEVCLS</code> at row 9, col 20: LENGTH=2, ATTRB=(UNPROT)</li>
+        <li>Add legend at row 9, col 23: <code>INITIAL='(A=MOTO B=LIGHT C=HEAVY D=BUS)'</code></li>
+        <li>Submit <code>jcl/DLISBMS.jcl</code> to assemble and install updated DSECT</li>
+      </ol>
+      <p><em>Dependency: Workstream B. Must complete before Workstream D compilation.</em></p>
+    </div>
+
+    <div style="margin-bottom:16px">
+      <span class="ws-label ws-d">Workstream D</span> <strong>DLISAPPL Modifications</strong>
+      <p style="margin-top:8px">Capture and validate Vehicle Class at application submission.</p>
+      <ol>
+        <li>In <code>SUBMIT-APPLICATION</code>: add validation — blank Vehicle Class → error message</li>
+        <li>In <code>SUBMIT-APPLICATION</code>: add validation — <code>DAEVCLSI NOT IN ('A','B','C','D')</code> → error message</li>
+        <li>Before INSERT: <code>MOVE DAEVCLSI TO VEHICLE-CLASS OF DCLDLIS-LICENSE-APPL</code></li>
+        <li>Modify INSERT statement to include <code>VEHICLE_CLASS</code> column and <code>:VEHICLE-CLASS</code> host variable</li>
+        <li>After INSERT: <code>MOVE DAEVCLSI TO CA-VEHICLE-CLASS OF DLIS-APPL-COMMAREA</code></li>
+      </ol>
+      <p><em>Dependency: Workstreams A, B, C.</em></p>
+    </div>
+
+    <div style="margin-bottom:16px">
+      <span class="ws-label ws-e">Workstream E</span> <strong>Downstream Program Updates</strong>
+      <p style="margin-top:8px">Propagate Vehicle Class through COMMAREA; modify DLISISSU to use it.</p>
+      <ol>
+        <li><strong>DLISELIG, DLISHIST, DLISPAY</strong>: No logic changes — recompile only for COMMAREA alignment</li>
+        <li><strong>DLISAP1, DLISAP2</strong> (optional): Add display field for Vehicle Class from COMMAREA on approval screens</li>
+        <li><strong>DLISISSU — ISSUE-LICENSE</strong>: Move <code>CA-VEHICLE-CLASS OF DLIS-APPL-COMMAREA</code> to <code>VEHICLE-CLASS OF DCLDLIS-ISSUED-LIC</code> before INSERT; retain screen fallback if COMMAREA is spaces</li>
+      </ol>
+      <p><em>Dependency: Workstreams A, B.</em></p>
+    </div>
+
+    <h3>Execution Sequence</h3>
+    <ol class="step-list">
+      <li><span class="ws-label ws-a">A</span> Execute DB2 DDL (ALTER TABLE, CHECK constraint) + run migration UPDATE</li>
+      <li><span class="ws-label ws-b">B</span> Update COMMAREA copybook <code>DLISCSEC.cpy</code> — append CA-VEHICLE-CLASS</li>
+      <li><span class="ws-label ws-c">C</span> Update <code>DLISAE.bms</code> — add DAEVCLS field; assemble via DLISBMS.jcl</li>
+      <li><span class="ws-label ws-d">D</span> + <span class="ws-label ws-e">E</span> Code changes in DLISAPPL and all downstream programs (can proceed in parallel after B+C complete)</li>
+      <li>Coordinated recompile of all 7 programs via <code>jcl/DLISCOMP.jcl</code></li>
+      <li>DB2 Bind DLISAPPL and DLISISSU DBRMs via <code>jcl/DLISBIND.jcl</code></li>
+      <li>CICS PHASEIN / controlled restart — activate all new load modules atomically</li>
+      <li>Integration smoke test — full DL03→DL09 flow with Vehicle Class</li>
+    </ol>
+
+    <div class="note-box" style="margin-top:16px">
+      <strong>Parallel opportunity:</strong> DLISAP1 / DLISAP2 optional BMS display work and DLISELIG / DLISHIST / DLISPAY recompile preparation can all proceed concurrently once Workstream B is done.
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- AFFECTED COMPONENTS                                        -->
+<!-- ========================================================= -->
+<section id="components">
+  <div class="section-header"><span class="icon">🧩</span> 7. Affected Components</div>
+  <div class="section-body">
+    <h3>COBOL Programs</h3>
+    <table>
+      <thead><tr><th>Program</th><th>Change Type</th><th>Reason</th></tr></thead>
+      <tbody>
+        <tr><td><code>DLISAPPL.cbl</code></td><td><span class="tag tag-red">Modify</span></td><td>Add Vehicle Class field capture, validation, DB2 INSERT</td></tr>
+        <tr><td><code>DLISISSU.cbl</code></td><td><span class="tag tag-red">Modify</span></td><td>Read Vehicle Class from COMMAREA for license INSERT</td></tr>
+        <tr><td><code>DLISELIG.cbl</code></td><td><span class="tag tag-orange">Recompile</span></td><td>COMMAREA copybook changed — mandatory layout sync</td></tr>
+        <tr><td><code>DLISHIST.cbl</code></td><td><span class="tag tag-orange">Recompile</span></td><td>COMMAREA copybook changed — mandatory layout sync</td></tr>
+        <tr><td><code>DLISPAY.cbl</code></td><td><span class="tag tag-orange">Recompile</span></td><td>COMMAREA copybook changed — mandatory layout sync</td></tr>
+        <tr><td><code>DLISAP1.cbl</code></td><td><span class="tag tag-orange">Recompile</span> + optional <span class="tag tag-blue">Display</span></td><td>COMMAREA copybook changed; optional Vehicle Class display on approval screen</td></tr>
+        <tr><td><code>DLISAP2.cbl</code></td><td><span class="tag tag-orange">Recompile</span> + optional <span class="tag tag-blue">Display</span></td><td>COMMAREA copybook changed; optional Vehicle Class display on approval screen</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Copybooks</h3>
+    <table>
+      <thead><tr><th>Copybook</th><th>Change</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td><code>DLISCSEC.cpy</code></td><td><span class="tag tag-red">Modify</span></td><td>Append <code>10 CA-VEHICLE-CLASS PIC X(2) VALUE SPACES.</code> to <code>DLIS-APPL-COMMAREA</code></td></tr>
+        <tr><td><code>DLISDCLG.cpy</code></td><td><span class="tag tag-red">Modify</span></td><td>Add <code>10 VEHICLE-CLASS PIC X(2).</code> to <code>DCLDLIS-LICENSE-APPL</code></td></tr>
+      </tbody>
+    </table>
+
+    <h3>BMS Maps</h3>
+    <table>
+      <thead><tr><th>Mapset</th><th>Change</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td><code>DLISAE.bms (DLISAE01)</code></td><td><span class="tag tag-red">Modify</span></td><td>Add <code>DAEVCLS</code> input field (row 9) for Vehicle Class</td></tr>
+        <tr><td><code>DLISAPPR.bms</code> (optional)</td><td><span class="tag tag-blue">Optional</span></td><td>Add Vehicle Class display on DLISA1M01 / DLISA2M01 approval maps</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Database Tables</h3>
+    <table>
+      <thead><tr><th>Table</th><th>Change</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td><code>DLIS.LICENSE_APPLICATION</code></td><td><span class="tag tag-red">Modify</span></td><td>ADD COLUMN <code>VEHICLE_CLASS CHAR(2)</code> nullable + CHECK constraint</td></tr>
+        <tr><td><code>DLIS.ISSUED_LICENSE</code></td><td><span class="tag tag-green">No change</span></td><td>Already has <code>VEHICLE_CLASS CHAR(2) NOT NULL</code> with CHECK IN ('A','B','C','D')</td></tr>
+      </tbody>
+    </table>
+
+    <h3>JCL / Build Artifacts</h3>
+    <table>
+      <thead><tr><th>Artifact</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><code>db2/DLIS0004-ALTER-VEHICLE-CLASS.sql</code></td><td>Create new DDL script</td></tr>
+        <tr><td><code>jcl/DLISBMS.jcl</code></td><td>Execute — reassemble DLISAE mapset</td></tr>
+        <tr><td><code>jcl/DLISCOMP.jcl</code></td><td>Execute — recompile all 7 programs together</td></tr>
+        <tr><td><code>jcl/DLISBIND.jcl</code></td><td>Execute — rebind DLISAPPL and DLISISSU DBRMs</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- DATA MODEL                                                 -->
+<!-- ========================================================= -->
+<section id="data-model">
+  <div class="section-header"><span class="icon">🗄️</span> 8. Data Model Changes</div>
+  <div class="section-body">
+
+    <h3>DLIS.LICENSE_APPLICATION — New Column</h3>
+    <pre>ALTER TABLE DLIS.LICENSE_APPLICATION
+    ADD COLUMN VEHICLE_CLASS CHAR(2);
+
+ALTER TABLE DLIS.LICENSE_APPLICATION
+    ADD CONSTRAINT APPL_VC CHECK (VEHICLE_CLASS IN ('A','B','C','D'));
+
+-- Migration: fill in-flight applications
+UPDATE DLIS.LICENSE_APPLICATION
+    SET VEHICLE_CLASS = 'C'
+    WHERE VEHICLE_CLASS IS NULL
+      AND APPLICATION_STATUS NOT IN ('IS','RE');</pre>
+
+    <h3>DLISCSEC.cpy — COMMAREA Expansion</h3>
+    <pre>*----------------------------------------------------------------*
+* COMMAREA - Application status data                             *
+*----------------------------------------------------------------*
+ 01  DLIS-APPL-COMMAREA.
+     10 CA-APPLICATION-ID       PIC S9(10)  COMP-3.
+     10 CA-CANDIDATE-ID         PIC S9(10)  COMP-3.
+     10 CA-LICENSE-TYPE         PIC X(1).
+     10 CA-APP-STATUS           PIC X(2).
+     10 CA-APP-STATUS-DESC      PIC X(50).
+     10 CA-ELIG-STATUS          PIC X(1).
+     10 CA-HIST-STATUS          PIC X(1).
+     10 CA-PAY-STATUS           PIC X(1).
+     10 CA-APP1-STATUS          PIC X(1).
+     10 CA-APP2-STATUS          PIC X(1).
+     10 CA-LICENSE-NUMBER       PIC X(20).
+     10 CA-VEHICLE-CLASS        PIC X(2) VALUE SPACES.  &lt;-- NEW</pre>
+
+    <h3>DLISDCLG.cpy — DCLDLIS-LICENSE-APPL Extension</h3>
+    <pre> 01  DCLDLIS-LICENSE-APPL.
+     10 APPLICATION-ID          PIC S9(10)  COMP-3.
+     10 CANDIDATE-ID            PIC S9(10)  COMP-3.
+     10 LICENSE-TYPE            PIC X(1).
+     10 VEHICLE-CLASS           PIC X(2).   &lt;-- NEW (after LICENSE-TYPE)
+     ... (remaining fields unchanged)</pre>
+
+    <table style="margin-top:16px">
+      <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Backward Compatibility</td><td>Partial — nullable column, no existing rows broken</td></tr>
+        <tr><td>Breaking Change</td><td>No — additive only</td></tr>
+        <tr><td>Rollback</td><td>ALTER TABLE DROP COLUMN + recompile from pre-change copybooks</td></tr>
+        <tr><td>CHAR(2) to PIC X(2) mapping</td><td>Direct — COBOL PIC X(n) maps to DB2 CHAR(n) with no indicator variable required (column is not NULL after migration)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- RISKS                                                      -->
+<!-- ========================================================= -->
+<section id="risks">
+  <div class="section-header"><span class="icon">⚠️</span> 9. Risks &amp; Mitigations</div>
+  <div class="section-body">
+
+    <div class="risk-high">
+      <div class="risk-header">🔴 HIGH — Partial Deployment: Mismatched COMMAREA Layout</div>
+      <p><strong>Description:</strong> If any of the 7 programs is deployed with the old copybook while others use the new layout, CICS task storage will be misaligned, causing ASRA (storage protection) or AEIP abends.</p>
+      <p><strong>Mitigation:</strong> Enforce a single coordinated build and deployment using <code>jcl/DLISCOMP.jcl</code> for all 7 programs; activate all new load modules via CICS PHASEIN in one step.</p>
+      <p><strong>Contingency:</strong> CICS NEWCOPY old load modules immediately; revert copybooks and recompile.</p>
+    </div>
+
+    <div class="risk-high">
+      <div class="risk-header">🔴 HIGH — In-flight Application Rows Missing VEHICLE_CLASS</div>
+      <p><strong>Description:</strong> Applications already in DB2 will have NULL VEHICLE_CLASS after the ALTER. DLISISSU will read COMMAREA but COMMAREA will also be empty for old sessions — the NOT NULL constraint on ISSUED_LICENSE will cause INSERT failure.</p>
+      <p><strong>Mitigation:</strong> Run migration UPDATE inside a DB2 unit of recovery before go-live. Add a null guard in DLISISSU: if CA-VEHICLE-CLASS = SPACES, use DLIVCLSI from screen; fail with message if both are blank.</p>
+    </div>
+
+    <div class="risk-medium">
+      <div class="risk-header">🟡 MEDIUM — BMS Screen Row Position Conflict</div>
+      <p><strong>Description:</strong> Adding DAEVCLS at row 9, col 20 of DLISAE01 may conflict with existing screen layout if rows are already occupied.</p>
+      <p><strong>Mitigation:</strong> Test assembled BMS on a 3270 emulator before COBOL compilation; verify row 9 is free in current map layout.</p>
+    </div>
+
+    <div class="risk-medium">
+      <div class="risk-header">🟡 MEDIUM — DB2 Bind Failure After DBRM Update</div>
+      <p><strong>Description:</strong> If DLISBIND.jcl is not run after recompile, the plan may use stale DBRMs that reference the old table layout.</p>
+      <p><strong>Mitigation:</strong> Include DB2 Bind as a mandatory step immediately after DLISCOMP.jcl completes; verify plan name DLISPLAN is current.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- TESTING                                                    -->
+<!-- ========================================================= -->
+<section id="testing">
+  <div class="section-header"><span class="icon">🧪</span> 10. Testing Strategy</div>
+  <div class="section-body">
+
+    <h3>Unit Tests — DLISAPPL</h3>
+    <table>
+      <thead><tr><th>Test Case</th><th>Input</th><th>Expected Result</th><th>Requirement</th></tr></thead>
+      <tbody>
+        <tr><td>Blank Vehicle Class</td><td>DAEVCLSI = SPACES</td><td>Message: VEHICLE CLASS IS REQUIRED</td><td>FR1, FR5</td></tr>
+        <tr><td>Invalid Vehicle Class value</td><td>DAEVCLSI = 'E'</td><td>Message: VEHICLE CLASS MUST BE A B C OR D</td><td>FR5</td></tr>
+        <tr><td>Valid submission — class B</td><td>DAEVCLSI = 'B', valid Candidate ID + License Type</td><td>Application inserted; SELECT VEHICLE_CLASS = 'B'</td><td>FR2</td></tr>
+        <tr><td>COMMAREA populated after submit</td><td>Successful submission with DAEVCLSI = 'A'</td><td>CA-VEHICLE-CLASS = 'A' in COMMAREA</td><td>FR3</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Unit Tests — DLISISSU</h3>
+    <table>
+      <thead><tr><th>Test Case</th><th>Condition</th><th>Expected Result</th><th>Requirement</th></tr></thead>
+      <tbody>
+        <tr><td>COMMAREA class used for INSERT</td><td>CA-VEHICLE-CLASS = 'A' in COMMAREA</td><td>ISSUED_LICENSE.VEHICLE_CLASS = 'A'</td><td>FR4</td></tr>
+        <tr><td>Screen fallback when COMMAREA empty</td><td>CA-VEHICLE-CLASS = SPACES; DLIVCLSI = 'C'</td><td>ISSUED_LICENSE.VEHICLE_CLASS = 'C'</td><td>FR4</td></tr>
+        <tr><td>Both COMMAREA and screen blank</td><td>CA-VEHICLE-CLASS = SPACES; DLIVCLSI = SPACES</td><td>Error message; no INSERT</td><td>FR4</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Integration Test — Full Workflow</h3>
+    <table>
+      <thead><tr><th>Scenario</th><th>Steps</th><th>Validation</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Vehicle Class A — full flow</td>
+          <td>DL03 (Vehicle Class A) → DL04 → DL05 → DL06 → DL07 → DL08 → DL09</td>
+          <td>LICENSE_APPLICATION.VEHICLE_CLASS = 'A'; ISSUED_LICENSE.VEHICLE_CLASS = 'A'; license number contains 'A'</td>
+        </tr>
+        <tr>
+          <td>Vehicle Class D — full flow</td>
+          <td>DL03 (Vehicle Class D) → all steps → DL09</td>
+          <td>Both tables show 'D'; no COMMAREA layout errors in any intermediate step</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Regression Tests</h3>
+    <ul>
+      <li>License Type validation (L/P/O) in DLISAPPL — must still work</li>
+      <li>Fee calculation (CALC-FEE) in DLISAPPL — unchanged, must still retrieve correct fee</li>
+      <li>Eligibility check logic in DLISELIG — COMMAREA passthrough; verify no field offset shift</li>
+      <li>Both approval programs — verify approve/reject still functions correctly</li>
+      <li>Status inquiry DLISSTAT — verify Vehicle Class not displayed (not in scope) and no abend</li>
+    </ul>
+
+    <h3>Migration Tests</h3>
+    <ul>
+      <li>Validate row count of migration UPDATE matches expected in-flight application count</li>
+      <li>Verify zero NULL VEHICLE_CLASS rows remain in active applications after migration</li>
+      <li>Verify RE/IS rows tolerate NULL VEHICLE_CLASS without DB2 constraint violation</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- ROLLOUT                                                    -->
+<!-- ========================================================= -->
+<section id="rollout">
+  <div class="section-header"><span class="icon">🚀</span> 11. Rollout &amp; Operational Plan</div>
+  <div class="section-body">
+
+    <h3>Deployment Sequence</h3>
+    <ol class="step-list">
+      <li>Commit all source changes to version control; peer review completed</li>
+      <li>Execute <code>db2/DLIS0004-ALTER-VEHICLE-CLASS.sql</code> against DSN1 subsystem</li>
+      <li>Run migration UPDATE; validate row counts in DB2</li>
+      <li>Run <code>jcl/DLISBMS.jcl</code> — assemble DLISAE mapset; confirm DSECT in DLIS.COPYBOOK</li>
+      <li>Run <code>jcl/DLISCOMP.jcl</code> — compile all 7 programs simultaneously</li>
+      <li>Run <code>jcl/DLISBIND.jcl</code> — bind DLISAPPL and DLISISSU DBRMs into DLISPKG/DLISPLAN</li>
+      <li>CICS PHASEIN all new load modules atomically (or controlled CICS restart in lower environment)</li>
+      <li>Smoke test: DL03 → submit with Vehicle Class B → verify DB2 row → DL09 → issue → verify ISSUED_LICENSE</li>
+    </ol>
+
+    <h3>Rollback Procedure</h3>
+    <div class="risk-high" style="margin-top:8px">
+      <div class="risk-header">Rollback Triggers</div>
+      <ul style="margin-top:6px">
+        <li>ASRA or AEIP abends in any DLIS transaction after deployment</li>
+        <li>DB2 INSERT failure due to Vehicle Class constraint</li>
+        <li>BMS map corruption causing terminal errors</li>
+      </ul>
+    </div>
+    <ol>
+      <li>CICS PHASEIN old load modules from DLIS.LOADLIB backup</li>
+      <li>Restore pre-change DSECT copybooks to DLIS.COPYBOOK from backup</li>
+      <li>Recompile all 7 programs from pre-change COBOL + copybooks</li>
+      <li>CICS PHASEIN reverted load modules</li>
+      <li>If DB2 issues persist: <code>ALTER TABLE DLIS.LICENSE_APPLICATION DROP COLUMN VEHICLE_CLASS</code> (requires REORG)</li>
+    </ol>
+
+    <h3>Operational Readiness Checklist</h3>
+    <table>
+      <thead><tr><th>Item</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>DLIS.LOADLIB pre-change snapshot taken</td><td>☐ Pending</td></tr>
+        <tr><td>DLIS.COPYBOOK pre-change snapshot taken</td><td>☐ Pending</td></tr>
+        <tr><td>DB2 ALTER TABLE authority verified</td><td>☐ Pending</td></tr>
+        <tr><td>CICS outage window scheduled</td><td>☐ Pending</td></tr>
+        <tr><td>Migration UPDATE row count validated</td><td>☐ Pending</td></tr>
+        <tr><td>Integration smoke test script ready</td><td>☐ Pending</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- APPENDIX                                                   -->
+<!-- ========================================================= -->
+<section id="appendix">
+  <div class="section-header"><span class="icon">📎</span> Appendix — Traceability Matrix</div>
+  <div class="section-body">
+    <table>
+      <thead><tr><th>Requirement</th><th>Description</th><th>Workstream</th><th>Test Case</th></tr></thead>
+      <tbody>
+        <tr><td>FR1</td><td>Vehicle Class captured at application entry</td><td>C + D</td><td>DLISAPPL blank / invalid vehicle class</td></tr>
+        <tr><td>FR2</td><td>Vehicle Class persisted in LICENSE_APPLICATION</td><td>A + D</td><td>Valid submission DB2 verification</td></tr>
+        <tr><td>FR3</td><td>Vehicle Class propagated through COMMAREA</td><td>B + E</td><td>Integration full flow</td></tr>
+        <tr><td>FR4</td><td>DLISISSU uses COMMAREA Vehicle Class</td><td>E (DLISISSU)</td><td>DLISISSU COMMAREA-driven INSERT test</td></tr>
+        <tr><td>FR5</td><td>Validated A/B/C/D only</td><td>D</td><td>Blank + invalid value unit tests</td></tr>
+        <tr><td>FR6</td><td>All programs recompiled together</td><td>Build process</td><td>Deployment smoke test</td></tr>
+        <tr><td>NFR1</td><td>COMMAREA within 32,763-byte limit</td><td>B</td><td>Design-time byte count verification</td></tr>
+        <tr><td>NFR2</td><td>New column nullable for existing rows</td><td>A</td><td>Migration row count validation</td></tr>
+        <tr><td>BR1</td><td>Class matches between application and issuance</td><td>D + E</td><td>End-to-end vehicle class consistency test</td></tr>
+        <tr><td>BR2</td><td>Approval reviewers see vehicle class</td><td>E optional</td><td>Approval screen visual verification</td></tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:20px; font-size:12px; color:#888; text-align:center;">
+      Implementation Plan generated by IBM Bob Premium Package for Z AI Assistant &nbsp;|&nbsp;
+      Plan saved to <code>bobz/implementation-plans/vehicle-class-field-2025-10-26/implementation-plan.md</code> &nbsp;|&nbsp;
+      2025-10-26
+    </div>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

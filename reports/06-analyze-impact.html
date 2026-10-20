@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impact Analysis — Add Vehicle Class to License Application</title>
+<style>
+  :root {
+    --red:    #c0392b;
+    --orange: #e67e22;
+    --yellow: #f1c40f;
+    --green:  #27ae60;
+    --blue:   #2980b9;
+    --dark:   #2c3e50;
+    --light:  #ecf0f1;
+    --white:  #ffffff;
+    --border: #bdc3c7;
+    --code-bg:#f4f4f4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: var(--dark); background: #f9f9f9; }
+  header { background: var(--dark); color: var(--white); padding: 24px 32px; }
+  header h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  header .meta { font-size: 12px; opacity: 0.75; display: flex; gap: 24px; flex-wrap: wrap; margin-top: 8px; }
+  header .meta span { background: rgba(255,255,255,0.1); padding: 3px 10px; border-radius: 12px; }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; }
+  .badge-high   { background: #fdecea; color: var(--red); border: 1px solid #f5c6c2; }
+  .badge-medium { background: #fef9e7; color: #b7770d; border: 1px solid #f9e79f; }
+  .badge-low    { background: #eafaf1; color: var(--green); border: 1px solid #a9dfbf; }
+  .badge-critical { background: var(--red); color: var(--white); }
+  .container { max-width: 1100px; margin: 0 auto; padding: 24px 32px; }
+  section { background: var(--white); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 20px; overflow: hidden; }
+  section > .section-header { background: var(--dark); color: var(--white); padding: 12px 20px; font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+  section > .section-header .icon { font-size: 18px; }
+  .section-body { padding: 20px; }
+  h3 { font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--light); padding-bottom: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 16px; }
+  th { background: var(--light); padding: 8px 10px; text-align: left; font-weight: 700; font-size: 11px; text-transform: uppercase; border: 1px solid var(--border); }
+  td { padding: 7px 10px; border: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: #fafafa; }
+  code { font-family: 'Consolas', 'Courier New', monospace; background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-size: 12px; }
+  pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: 6px; padding: 14px; font-size: 12px; font-family: 'Consolas', 'Courier New', monospace; overflow-x: auto; margin-bottom: 14px; white-space: pre-wrap; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .card { background: var(--light); border-radius: 6px; padding: 14px; }
+  .card h4 { font-size: 12px; font-weight: 700; margin-bottom: 6px; color: var(--dark); }
+  .card p { font-size: 12px; line-height: 1.5; }
+  .risk-critical { background: #fdecea; border-left: 4px solid var(--red); padding: 10px 14px; border-radius: 0 6px 6px 0; margin-bottom: 10px; }
+  .risk-high     { background: #fef5e7; border-left: 4px solid var(--orange); padding: 10px 14px; border-radius: 0 6px 6px 0; margin-bottom: 10px; }
+  .risk-medium   { background: #fef9e7; border-left: 4px solid var(--yellow); padding: 10px 14px; border-radius: 0 6px 6px 0; margin-bottom: 10px; }
+  .risk-low      { background: #eafaf1; border-left: 4px solid var(--green); padding: 10px 14px; border-radius: 0 6px 6px 0; margin-bottom: 10px; }
+  .risk-header   { font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+  .step-list { counter-reset: step; list-style: none; }
+  .step-list li { counter-increment: step; padding: 8px 10px 8px 44px; position: relative; border-bottom: 1px solid var(--light); font-size: 13px; }
+  .step-list li:last-child { border-bottom: none; }
+  .step-list li::before { content: counter(step); position: absolute; left: 10px; width: 24px; height: 24px; background: var(--blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; top: 8px; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; margin: 2px; }
+  .tag-red    { background: #fdecea; color: var(--red); }
+  .tag-orange { background: #fef5e7; color: #b86c1e; }
+  .tag-grey   { background: #ecf0f1; color: #555; }
+  .tag-green  { background: #eafaf1; color: #1e8449; }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .confidence-bar { background: var(--light); border-radius: 20px; height: 12px; margin: 4px 0 10px; overflow: hidden; }
+  .confidence-fill { height: 100%; border-radius: 20px; background: linear-gradient(90deg, var(--green), #52be80); }
+  .toc { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px 20px; background: #f0f3f4; border-bottom: 1px solid var(--border); }
+  .toc a { font-size: 12px; color: var(--blue); text-decoration: none; padding: 3px 10px; background: white; border: 1px solid var(--border); border-radius: 12px; }
+  .toc a:hover { background: var(--light); }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; margin-bottom: 16px; }
+  .legend span { display: flex; align-items: center; gap: 5px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🔍 Impact Analysis: Add Vehicle Class to License Application</h1>
+  <div class="meta">
+    <span>📅 2025-10-26</span>
+    <span>🔧 Enhancement</span>
+    <span>📁 DLIS — Driver License Issuance System</span>
+    <span>✅ Confidence: High</span>
+    <span>⏱ Est. Effort: 17–24 hours</span>
+    <span>📄 Full report: bobz/impact-analysis/vehicle-class-field-20251026/IMPACT-ANALYSIS.md</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- TOC -->
+  <div class="toc" style="background:white;border:1px solid var(--border);border-radius:8px;margin-bottom:20px;">
+    <a href="#change">Change</a>
+    <a href="#scope">Scope</a>
+    <a href="#components">Components</a>
+    <a href="#dependencies">Dependencies</a>
+    <a href="#impact">Impact</a>
+    <a href="#propagation">Propagation</a>
+    <a href="#risks">Risks</a>
+    <a href="#confidence">Confidence</a>
+    <a href="#effort">Effort</a>
+    <a href="#nextsteps">Next Steps</a>
+  </div>
+
+  <!-- 1. Change Summary -->
+  <section id="change">
+    <div class="section-header"><span class="icon">📋</span> 1. Change Summary</div>
+    <div class="section-body">
+      <div class="grid2">
+        <div>
+          <h3>Change Specification</h3>
+          <table>
+            <tr><td><strong>Title</strong></td><td>Add Vehicle Class Field to License Application Process</td></tr>
+            <tr><td><strong>Type</strong></td><td><span class="badge badge-medium">Enhancement</span></td></tr>
+            <tr><td><strong>Entry Point</strong></td><td><code>DLISAPPL.cbl</code> — Transaction DL03</td></tr>
+            <tr><td><strong>Requested Class Values</strong></td><td>A (Heavy), B (Medium), C (Light), D (Motorcycle)</td></tr>
+          </table>
+          <p style="font-size:13px;line-height:1.6;">Vehicle Class is currently only collected at issuance (<code>DLISISSU / DL10</code>). This change captures it at application entry (<code>DLISAPPL / DL03</code>), stores it in <code>DLIS.LICENSE_APPLICATION</code>, and propagates it via COMMAREA through the full review workflow — preventing late-stage class mismatches and enabling class-specific fee/approval rules.</p>
+        </div>
+        <div>
+          <h3>Key Technologies Involved</h3>
+          <div class="pill-row">
+            <span class="tag tag-orange">IBM Enterprise COBOL</span>
+            <span class="tag tag-orange">CICS Transaction Server</span>
+            <span class="tag tag-orange">DB2 for z/OS</span>
+            <span class="tag tag-orange">BMS</span>
+          </div>
+          <h3 style="margin-top:14px;">Critical Constraint</h3>
+          <div class="risk-critical">
+            <div class="risk-header">🔴 COMMAREA Expansion Required</div>
+            <p style="font-size:12px;">The 350-byte COMMAREA must expand to 352 bytes. All 10 programs hard-code <code>LENGTH(350)</code> in <code>EXEC CICS RETURN</code> — ALL must be updated atomically or Vehicle Class will be silently truncated in transit.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Scope -->
+  <section id="scope">
+    <div class="section-header"><span class="icon">🗂</span> 2. Scope Definition</div>
+    <div class="section-body">
+      <div class="grid2">
+        <div>
+          <h3>In Scope — Direct Modifications</h3>
+          <table>
+            <tr><th>Component</th><th>Change Type</th></tr>
+            <tr><td><code>DLISCSEC.cpy</code></td><td><span class="tag tag-red">Modify</span> Add <code>CA-VEHICLE-CLASS PIC X(2)</code>; expand to 352 bytes</td></tr>
+            <tr><td><code>DLISDCLG.cpy</code></td><td><span class="tag tag-red">Modify</span> Add <code>VEHICLE-CLASS PIC X(2)</code> host variable</td></tr>
+            <tr><td><code>DLISWS.cpy</code></td><td><span class="tag tag-red">Modify</span> Add <code>WS-VEHICLE-CLASS PIC X(2)</code></td></tr>
+            <tr><td><code>DLISAE.bms</code></td><td><span class="tag tag-red">Modify</span> Add Vehicle Class input field <code>DAEVCLSI</code></td></tr>
+            <tr><td><code>DLISAPPL.cbl</code></td><td><span class="tag tag-red">Modify</span> Capture, validate, insert Vehicle Class</td></tr>
+            <tr><td><code>DLISISSU.cbl</code></td><td><span class="tag tag-red">Modify</span> Pre-populate from COMMAREA; remove screen re-entry</td></tr>
+            <tr><td><code>DLIS.LICENSE_APPLICATION</code></td><td><span class="tag tag-red">ALTER TABLE</span> Add <code>VEHICLE_CLASS CHAR(2) NOT NULL WITH DEFAULT 'C'</code></td></tr>
+          </table>
+        </div>
+        <div>
+          <h3>In Scope — Recompile Required</h3>
+          <table>
+            <tr><th>Program</th><th>Reason</th></tr>
+            <tr><td><code>DLISELIG.cbl</code></td><td>Updated copybooks; LENGTH literal change</td></tr>
+            <tr><td><code>DLISHIST.cbl</code></td><td>Updated copybooks; LENGTH literal change</td></tr>
+            <tr><td><code>DLISPAY.cbl</code></td><td>Updated copybooks; LENGTH literal change</td></tr>
+            <tr><td><code>DLISAP1.cbl</code></td><td>Updated copybooks; LENGTH literal change</td></tr>
+            <tr><td><code>DLISAP2.cbl</code></td><td>Updated copybooks; LENGTH literal change</td></tr>
+            <tr><td><code>DLISSTAT.cbl</code></td><td>Updated copybooks; optional display enhancement</td></tr>
+            <tr><td><code>DLISMENU.cbl</code></td><td>Copybook recompile only</td></tr>
+            <tr><td><code>DLISCAND.cbl</code></td><td>Copybook recompile only</td></tr>
+          </table>
+          <h3 style="margin-top:12px;">Out of Scope</h3>
+          <div class="pill-row">
+            <span class="tag tag-grey">DLIS.ISSUED_LICENSE (VEHICLE_CLASS exists)</span>
+            <span class="tag tag-grey">DLIS.CANDIDATE</span>
+            <span class="tag tag-grey">DLIS.PAYMENT</span>
+            <span class="tag tag-grey">DLIS.LICENSE_FEE_SCHEDULE</span>
+            <span class="tag tag-grey">DLIS.DRIVING_HISTORY</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Components -->
+  <section id="components">
+    <div class="section-header"><span class="icon">🏗</span> 3. System Overview — All 10 Programs</div>
+    <div class="section-body">
+      <div class="legend">
+        <span><span class="dot" style="background:var(--red)"></span> Directly Modified</span>
+        <span><span class="dot" style="background:var(--orange)"></span> Recompile Required</span>
+        <span><span class="dot" style="background:#95a5a6"></span> Unaffected</span>
+      </div>
+      <table>
+        <tr><th>Program</th><th>Tx</th><th>Role</th><th>SQL Ops</th><th>CICS RETURN Calls</th><th>Impact</th></tr>
+        <tr style="background:#fdecea"><td><code>DLISAPPL.cbl</code></td><td>DL03</td><td>Application Entry (Entry Point)</td><td>INSERT + 2× SELECT</td><td>2 × <code>LENGTH(350)</code></td><td><span class="badge badge-critical">Modified</span></td></tr>
+        <tr style="background:#fdecea"><td><code>DLISISSU.cbl</code></td><td>DL10</td><td>License Issuance</td><td>SELECT (JOIN) + INSERT + UPDATE</td><td>2 × <code>LENGTH(350)</code></td><td><span class="badge badge-critical">Modified</span></td></tr>
+        <tr style="background:#fef5e7"><td><code>DLISELIG.cbl</code></td><td>DL05</td><td>Eligibility Check</td><td>SELECT (JOIN) + 2× SELECT + UPDATE</td><td>2 × <code>LENGTH(350)</code></td><td><span class="badge badge-high">Recompile</span></td></tr>
+        <tr style="background:#fef5e7"><td><code>DLISHIST.cbl</code></td><td>DL06</td><td>Driving History Check</td><td>SELECT (JOIN) + CURSOR + UPDATE</td><td>2 × <code>LENGTH(350)</code></td><td><span class="badge badge-high">Recompile</span></td></tr>
+        <tr style="background:#fef5e7"><td><code>DLISPAY.cbl</code></td><td>DL07</td><td>Payment Entry</td><td>SELECT + INSERT + 2× UPDATE</td><td>2 × <code>LENGTH(350)</code></td><td><span class="badge badge-high">Recompile</span></td></tr>
+        <tr style="background:#fef5e7"><td><code>DLISAP1.cbl</code></td><td>DL08</td><td>First Approval</td><td>SELECT (JOIN) + SELECT + UPDATE</td><td>2 × <code>LENGTH(350)</code></td><td><span class="badge badge-high">Recompile</span></td></tr>
+        <tr style="background:#fef5e7"><td><code>DLISAP2.cbl</code></td><td>DL09</td><td>Second Approval</td><td>SELECT (JOIN) + SELECT + UPDATE</td><td>2 × <code>LENGTH(350)</code></td><td><span class="badge badge-high">Recompile</span></td></tr>
+        <tr style="background:#fef5e7"><td><code>DLISSTAT.cbl</code></td><td>DL04</td><td>Status Inquiry</td><td>SELECT + SELECT (conditional)</td><td>1 × <code>LENGTH(350)</code></td><td><span class="badge badge-medium">Recompile+Opt</span></td></tr>
+        <tr><td><code>DLISMENU.cbl</code></td><td>DL01</td><td>Main Menu</td><td>None</td><td>—</td><td><span class="badge badge-low">Recompile</span></td></tr>
+        <tr><td><code>DLISCAND.cbl</code></td><td>DL02</td><td>Candidate Maintenance</td><td>SELECT + INSERT + UPDATE</td><td>2 × <code>LENGTH(350)</code></td><td><span class="badge badge-low">Recompile</span></td></tr>
+      </table>
+      <p style="font-size:12px;color:#666;"><strong>Total <code>LENGTH(350)</code> occurrences to update:</strong> ~18 across 9 programs &nbsp;|&nbsp; <strong>DB2 rebinds required:</strong> 8 programs</p>
+    </div>
+  </section>
+
+  <!-- 4. Dependency Chain -->
+  <section id="dependencies">
+    <div class="section-header"><span class="icon">🔗</span> 4. Dependency Chain</div>
+    <div class="section-body">
+      <h3>COMMAREA Flow — DL03 to DL10</h3>
+      <div style="overflow-x:auto;padding:12px 0;">
+        <div style="display:flex;align-items:center;gap:0;flex-wrap:nowrap;font-size:12px;">
+          <div style="background:#c0392b;color:white;padding:8px 14px;border-radius:6px;text-align:center;min-width:90px;"><strong>DL03</strong><br>DLISAPPL<br><em>NEW: captures VEHICLE_CLASS</em></div>
+          <div style="color:#888;font-size:18px;padding:0 6px;">→</div>
+          <div style="background:#e67e22;color:white;padding:8px 14px;border-radius:6px;text-align:center;min-width:80px;"><strong>DL05</strong><br>DLISELIG<br><em>pass-through</em></div>
+          <div style="color:#888;font-size:18px;padding:0 6px;">→</div>
+          <div style="background:#e67e22;color:white;padding:8px 14px;border-radius:6px;text-align:center;min-width:80px;"><strong>DL06</strong><br>DLISHIST<br><em>pass-through</em></div>
+          <div style="color:#888;font-size:18px;padding:0 6px;">→</div>
+          <div style="background:#e67e22;color:white;padding:8px 14px;border-radius:6px;text-align:center;min-width:80px;"><strong>DL07</strong><br>DLISPAY<br><em>pass-through</em></div>
+          <div style="color:#888;font-size:18px;padding:0 6px;">→</div>
+          <div style="background:#e67e22;color:white;padding:8px 14px;border-radius:6px;text-align:center;min-width:80px;"><strong>DL08</strong><br>DLISAP1<br><em>pass-through</em></div>
+          <div style="color:#888;font-size:18px;padding:0 6px;">→</div>
+          <div style="background:#e67e22;color:white;padding:8px 14px;border-radius:6px;text-align:center;min-width:80px;"><strong>DL09</strong><br>DLISAP2<br><em>pass-through</em></div>
+          <div style="color:#888;font-size:18px;padding:0 6px;">→</div>
+          <div style="background:#c0392b;color:white;padding:8px 14px;border-radius:6px;text-align:center;min-width:90px;"><strong>DL10</strong><br>DLISISSU<br><em>consumes CA-VEHICLE-CLASS</em></div>
+        </div>
+      </div>
+      <p style="font-size:12px;margin-top:10px;color:#666;">Each arrow represents an <code>EXEC CICS RETURN COMMAREA(DLIS-COMMAREA) LENGTH(350→<strong>352</strong>)</code>. The 2-byte growth must be reflected in all RETURN statements simultaneously.</p>
+
+      <h3 style="margin-top:16px;">Copybook Impact — All 10 Programs</h3>
+      <table>
+        <tr><th>Copybook</th><th>Change</th><th>Programs Affected</th><th>Action Required</th></tr>
+        <tr><td><code>DLISCSEC.cpy</code></td><td>Add <code>CA-VEHICLE-CLASS PIC X(2)</code></td><td>All 10</td><td>Recompile all; update all RETURN LENGTH values</td></tr>
+        <tr><td><code>DLISDCLG.cpy</code></td><td>Add <code>VEHICLE-CLASS PIC X(2)</code></td><td>All 10</td><td>Recompile all; rebind all DB2 packages</td></tr>
+        <tr><td><code>DLISWS.cpy</code></td><td>Add <code>WS-VEHICLE-CLASS PIC X(2)</code></td><td>All 10</td><td>Recompile all</td></tr>
+        <tr><td><code>DLISAE.bms</code></td><td>Add <code>DAEVCLSI</code> DFHMDF field</td><td><code>DLISAPPL.cbl</code> only</td><td>Reassemble; CEDA INSTALL MAPSET</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- 5. Code Impact -->
+  <section id="impact">
+    <div class="section-header"><span class="icon">⚙️</span> 5. Code-Level Impact</div>
+    <div class="section-body">
+      <h3>DB2 Schema Change</h3>
+      <pre>ALTER TABLE DLIS.LICENSE_APPLICATION
+    ADD VEHICLE_CLASS CHAR(2) NOT NULL WITH DEFAULT 'C';
+
+ALTER TABLE DLIS.LICENSE_APPLICATION
+    ADD CONSTRAINT APPL_VC CHECK (VEHICLE_CLASS IN ('A','B','C','D'));</pre>
+      <p style="font-size:12px;margin-bottom:16px;color:#555;">Default <code>'C'</code> satisfies the CHECK constraint for all existing rows. Explicit INSERT column lists in existing programs are unaffected (DB2 automatically supplies the default). Rebind all packages after recompile to avoid SQLCODE -805/-818.</p>
+
+      <h3>DLISAPPL.cbl — SUBMIT-APPLICATION Additions</h3>
+      <pre>*    Validate Vehicle Class
+     IF DAEVCLSI NOT IN ('A','B','C','D')
+         MOVE 'VEHICLE CLASS MUST BE A B C OR D' TO DAEMSG
+         GO TO SUBMIT-APPLICATION-EXIT
+     END-IF
+     MOVE DAEVCLSI TO CA-VEHICLE-CLASS
+     MOVE DAEVCLSI TO VEHICLE-CLASS OF DCLDLIS-LICENSE-APPL
+
+*    Updated INSERT (add VEHICLE_CLASS column)
+     EXEC SQL
+         INSERT INTO DLIS.LICENSE_APPLICATION
+            (CANDIDATE_ID, LICENSE_TYPE, APPLICATION_STATUS, CREATED_BY,
+             LAST_UPDATED_BY, VEHICLE_CLASS)
+         VALUES
+            (:CANDIDATE-ID, :LICENSE-TYPE, 'PE', :CREATED-BY, :CREATED-BY,
+             :VEHICLE-CLASS)
+         OF DCLDLIS-LICENSE-APPL
+     END-EXEC</pre>
+
+      <h3>DLISAE.bms — New Screen Field (row 9)</h3>
+      <pre>         DFHMDF POS=(9,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='VEHICLE CLASS   : '
+DAEVCLSI DFHMDF POS=(9,20),LENGTH=1,ATTRB=(UNPROT)
+         DFHMDF POS=(9,22),LENGTH=38,ATTRB=(PROT,NORM),               X
+               INITIAL='(A=HEAVY  B=MEDIUM  C=LIGHT  D=MOTORCYCLE)'</pre>
+
+      <h3>Deployment Sequence — Mandatory Order</h3>
+      <ol class="step-list">
+        <li>Apply <code>ALTER TABLE</code> DDL to DB2 (non-prod first, then prod)</li>
+        <li>Modify copybooks: <code>DLISCSEC.cpy</code>, <code>DLISDCLG.cpy</code>, <code>DLISWS.cpy</code></li>
+        <li>Modify &amp; assemble <code>DLISAE.bms</code> → regenerate symbolic map</li>
+        <li>Modify <code>DLISAPPL.cbl</code>, <code>DLISISSU.cbl</code>; update <code>LENGTH(350)→LENGTH(352)</code> in all 10 programs</li>
+        <li>Compile &amp; link all 10 programs (<code>DLISCOMP.jcl</code>)</li>
+        <li>Rebind all DB2 packages (<code>DLISBIND.jcl</code>)</li>
+        <li><code>CEDA INSTALL MAPSET(DLISAE)</code> in CICS region</li>
+        <li>Deploy all load modules to <code>DLIS.LOADLIB</code></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 6. Change Propagation -->
+  <section id="propagation">
+    <div class="section-header"><span class="icon">🌊</span> 6. Change Propagation Paths</div>
+    <div class="section-body">
+      <div class="grid3">
+        <div class="card">
+          <h4>Path 1 — COMMAREA Expansion</h4>
+          <p>Add <code>CA-VEHICLE-CLASS</code> to <code>DLISCSEC.cpy</code> → all 10 programs recompile → update all <code>LENGTH(350)→(352)</code> → CICS propagates 352-byte COMMAREA through DL03→DL10 chain → <code>DLISISSU</code> reads <code>CA-VEHICLE-CLASS</code> without DB2 re-query</p>
+        </div>
+        <div class="card">
+          <h4>Path 2 — DB2 Schema &amp; SQL</h4>
+          <p><code>ALTER TABLE</code> adds column → <code>DLISDCLG.cpy</code> updated → all 10 programs recompile → <code>DLISAPPL</code> INSERT includes <code>VEHICLE_CLASS</code> → all packages rebound → <code>DLISISSU</code> reads value from COMMAREA for <code>ISSUED_LICENSE</code> INSERT</p>
+        </div>
+        <div class="card">
+          <h4>Path 3 — BMS Screen</h4>
+          <p>Add <code>DAEVCLSI</code> to <code>DLISAE.bms</code> → reassemble → new physical map + symbolic copybook → <code>DLISAPPL</code> recompile uses <code>DAEVCLSI</code> field → <code>CEDA INSTALL MAPSET(DLISAE)</code> → operators see Vehicle Class input on DL03</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Risks -->
+  <section id="risks">
+    <div class="section-header"><span class="icon">⚠️</span> 7. Risk Assessment</div>
+    <div class="section-body">
+      <div class="risk-critical">
+        <div class="risk-header">🔴 R1 &amp; R2 — COMMAREA LENGTH Mismatch (CRITICAL)</div>
+        <p>IBM CICS confirms: if <code>LENGTH</code> in <code>EXEC CICS RETURN</code> is smaller than the actual COMMAREA structure, CICS silently drops the extra bytes — no LENGERR is raised. <code>CA-VEHICLE-CLASS</code> will be binary zeros in all downstream programs if even one program still returns with <code>LENGTH(350)</code>. Mixed deployment of old and new load modules in the same CICS region creates the same failure. <strong>Mandatory: update all 18 occurrences atomically; deploy in a single maintenance window.</strong></p>
+      </div>
+      <div class="risk-critical">
+        <div class="risk-header">🔴 R3 — DB2 Package Timestamp Mismatch (CRITICAL)</div>
+        <p>After recompile, the DB2 precompiler generates a new DBRM timestamp. Any program executed before rebind receives SQLCODE -805 or -818 and abends. All 8 SQL programs must be rebound via <code>DLISBIND.jcl</code> before deployment. <strong>Mandatory: include bind step in deployment checklist and verify RC=0.</strong></p>
+      </div>
+      <div class="risk-high">
+        <div class="risk-header">🟠 R4 — BMS Symbolic Map Out-of-Sync</div>
+        <p>If <code>DLISAPPL.cbl</code> is compiled before <code>DLISAE.bms</code> is reassembled, the <code>DAEVCLSI</code> field will not be resolved. Assemble BMS map first; only compile DLISAPPL after the new symbolic copybook is generated.</p>
+      </div>
+      <div class="risk-high">
+        <div class="risk-header">🟠 R5 — DB2 CHECK Constraint vs. DEFAULT Value</div>
+        <p>If the <code>DEFAULT 'C'</code> value does not satisfy the CHECK constraint definition, the ALTER TABLE will fail. Confirm that <code>'C'</code> is in <code>('A','B','C','D')</code> and test in a non-production DB2 subsystem first.</p>
+      </div>
+      <div class="risk-medium">
+        <div class="risk-header">🟡 R6 — In-Flight Applications Receive Default 'C'</div>
+        <p>Existing applications not yet issued (status PE/EC/HC/PA/A2/AP) will receive <code>VEHICLE_CLASS='C'</code> after ALTER TABLE. Review and manually correct if the actual vehicle class is known before cutover.</p>
+      </div>
+      <div class="risk-medium">
+        <div class="risk-header">🟡 R7 — CICS Mapset Cache</div>
+        <p>Old BMS mapset load module may remain cached after reassembly. Issue <code>CEDA INSTALL MAPSET(DLISAE)</code> explicitly and verify with <code>CEMT INQ MAPSET(DLISAE)</code>.</p>
+      </div>
+      <table style="margin-top:14px;">
+        <tr><th>Risk ID</th><th>Category</th><th>Likelihood</th><th>Impact</th><th>Level</th></tr>
+        <tr><td>R1</td><td>COMMAREA silent truncation</td><td>High</td><td>High</td><td><span class="badge badge-critical">CRITICAL</span></td></tr>
+        <tr><td>R2</td><td>Mixed deployment COMMAREA mismatch</td><td>High</td><td>High</td><td><span class="badge badge-critical">CRITICAL</span></td></tr>
+        <tr><td>R3</td><td>SQLCODE -805/-818 no rebind</td><td>High</td><td>High</td><td><span class="badge badge-critical">CRITICAL</span></td></tr>
+        <tr><td>R4</td><td>BMS symbolic map out-of-sync</td><td>Medium</td><td>High</td><td><span class="badge badge-high">HIGH</span></td></tr>
+        <tr><td>R5</td><td>DB2 CHECK constraint conflict</td><td>Low</td><td>High</td><td><span class="badge badge-high">HIGH</span></td></tr>
+        <tr><td>R6</td><td>DLISISSU screen input override</td><td>Medium</td><td>Medium</td><td><span class="badge badge-medium">MEDIUM</span></td></tr>
+        <tr><td>R7</td><td>In-flight applications default class</td><td>Medium</td><td>Medium</td><td><span class="badge badge-medium">MEDIUM</span></td></tr>
+        <tr><td>R8</td><td>CICS mapset cache</td><td>Medium</td><td>Low</td><td><span class="badge badge-medium">MEDIUM</span></td></tr>
+        <tr><td>R9</td><td>BMS screen position conflict</td><td>Low</td><td>Medium</td><td><span class="badge badge-medium">MEDIUM</span></td></tr>
+        <tr><td>R10</td><td>DLISSTAT no Vehicle Class display</td><td>Low</td><td>Low</td><td><span class="badge badge-low">LOW</span></td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- 8. Confidence -->
+  <section id="confidence">
+    <div class="section-header"><span class="icon">📊</span> 8. Confidence Assessment</div>
+    <div class="section-body">
+      <div class="grid2">
+        <div>
+          <h3>Overall Confidence: High</h3>
+          <div class="confidence-bar"><div class="confidence-fill" style="width:90%"></div></div>
+          <table>
+            <tr><th>Category</th><th>Confidence</th><th>Reason</th></tr>
+            <tr><td>Code-Level Impact</td><td><span class="badge badge-low">High</span></td><td>All 10 programs read in full</td></tr>
+            <tr><td>Application-Level Impact</td><td><span class="badge badge-low">High</span></td><td>Complete COMMAREA chain traced</td></tr>
+            <tr><td>DB2 Schema Impact</td><td><span class="badge badge-low">High</span></td><td>Full DDL reviewed; ALTER TABLE semantics confirmed</td></tr>
+            <tr><td>System-Level Impact</td><td><span class="badge badge-low">High</span></td><td>No external integrations found</td></tr>
+            <tr><td>Operational Impact</td><td><span class="badge badge-low">High</span></td><td>Build sequence defined; rebind risk documented</td></tr>
+            <tr><td>Risk Assessment</td><td><span class="badge badge-low">High</span></td><td>Critical CICS + DB2 risks confirmed via IBM documentation</td></tr>
+          </table>
+        </div>
+        <div>
+          <h3>Assumptions Requiring Confirmation</h3>
+          <table>
+            <tr><th>#</th><th>Assumption</th><th>Status</th></tr>
+            <tr><td>A3</td><td>Default <code>'C'</code> (Light Vehicle) for in-flight applications is acceptable</td><td>⚠️ Confirm with business</td></tr>
+            <tr><td>A5</td><td>No class-specific approval rules in DLISAP1/AP2 in this increment</td><td>⚠️ Confirm with business</td></tr>
+            <tr><td>A7</td><td>DLISSTAT Vehicle Class display is optional (not required)</td><td>⚠️ Confirm with business</td></tr>
+          </table>
+          <h3 style="margin-top:14px;">Key Strengths</h3>
+          <ul style="font-size:12px;padding-left:18px;line-height:2;">
+            <li>All 10 COBOL source files read and analysed in full</li>
+            <li>Existing <code>VEHICLE_CLASS</code> in <code>ISSUED_LICENSE</code> confirmed — no schema conflict</li>
+            <li>IBM CICS COMMAREA truncation behaviour confirmed via documentation</li>
+            <li>DB2 <code>NOT NULL WITH DEFAULT</code> semantics confirmed via documentation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Effort -->
+  <section id="effort">
+    <div class="section-header"><span class="icon">⏱</span> 9. Effort Estimation</div>
+    <div class="section-body">
+      <div class="grid2">
+        <div>
+          <h3>By Component</h3>
+          <table>
+            <tr><th>Component</th><th>Complexity</th><th>Est. Effort</th></tr>
+            <tr><td>Copybooks (3 files)</td><td>Low</td><td>1.25 hr</td></tr>
+            <tr><td>DLISAE.bms + BMS assembly</td><td>Medium</td><td>1.25 hr</td></tr>
+            <tr><td>DB2 ALTER TABLE + DDL</td><td>Low</td><td>0.5 hr</td></tr>
+            <tr><td>DLISAPPL.cbl</td><td>Medium</td><td>2–3 hr</td></tr>
+            <tr><td>DLISISSU.cbl</td><td>Low-Medium</td><td>1–2 hr</td></tr>
+            <tr><td>8 recompile-only programs</td><td>Low</td><td>1.5 hr</td></tr>
+            <tr><td>Compile + link (DLISCOMP.jcl)</td><td>Low</td><td>0.5 hr</td></tr>
+            <tr><td>Rebind (DLISBIND.jcl)</td><td>Low</td><td>0.25 hr</td></tr>
+            <tr><td><strong>Testing — full DL03→DL10</strong></td><td>High</td><td><strong>8–12 hr</strong></td></tr>
+            <tr><td>Documentation</td><td>Low</td><td>1 hr</td></tr>
+          </table>
+        </div>
+        <div>
+          <h3>Summary &amp; Critical Path</h3>
+          <table>
+            <tr><td><strong>Development</strong></td><td>8–10 hours</td></tr>
+            <tr><td><strong>Testing</strong></td><td>8–12 hours</td></tr>
+            <tr><td><strong>Deployment</strong></td><td>1–2 hours</td></tr>
+            <tr style="background:#eafaf1"><td><strong>Total</strong></td><td><strong>17–24 hours (2–3 days)</strong></td></tr>
+          </table>
+          <h3 style="margin-top:14px;">Critical Path</h3>
+          <ol class="step-list">
+            <li>DB2 ALTER TABLE in test environment — 0.5 days</li>
+            <li>Modify copybooks; assemble BMS map — 0.5 days</li>
+            <li>Modify &amp; compile all 10 programs; rebind — 1 day</li>
+            <li>Integration testing (DL03→DL10 workflow) — 1 day</li>
+            <li>Production deployment — 0.5 days</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Next Steps -->
+  <section id="nextsteps">
+    <div class="section-header"><span class="icon">🚀</span> 10. Next Steps</div>
+    <div class="section-body">
+      <div class="grid3">
+        <div class="card">
+          <h4>Immediate — Before Coding</h4>
+          <ul style="font-size:12px;padding-left:16px;line-height:1.9;">
+            <li>Confirm <code>'C'</code> default for in-flight applications with business</li>
+            <li>Run <code>grep -rn "LENGTH(350)" cobol/</code> to count all occurrences</li>
+            <li>Confirm whether class-specific approval rules are in scope</li>
+            <li>Confirm DLISSTAT display requirement</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Before Implementation</h4>
+          <ul style="font-size:12px;padding-left:16px;line-height:1.9;">
+            <li>Test <code>ALTER TABLE</code> DDL in non-production DB2</li>
+            <li>Assemble BMS map first (before DLISAPPL compile)</li>
+            <li>Schedule CICS maintenance window for atomic deployment</li>
+            <li>Switch to Z Code mode for implementation</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Deployment Checklist</h4>
+          <ul style="font-size:12px;padding-left:16px;line-height:1.9;">
+            <li>All 18 <code>LENGTH(350)→(352)</code> occurrences updated</li>
+            <li>All 10 programs compiled &amp; linked (<code>DLISCOMP.jcl RC=0</code>)</li>
+            <li>All 8 packages rebound (<code>DLISBIND.jcl RC=0</code>)</li>
+            <li><code>CEDA INSTALL MAPSET(DLISAE)</code> confirmed</li>
+            <li>Full DL03→DL10 workflow tested end-to-end</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <p style="font-size:11px;color:#999;text-align:center;padding:20px 0;">
+    Full impact analysis report: <code>bobz/impact-analysis/vehicle-class-field-20251026/IMPACT-ANALYSIS.md</code> &nbsp;|&nbsp;
+    Generated by IBM Bob — Z Architect &nbsp;|&nbsp; 2025-10-26
+  </p>
+</div>
+
+</body>
+</html>
