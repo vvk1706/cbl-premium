@@ -1,0 +1,92 @@
+         TITLE 'DLIS BMS MAPSET - CANDIDATE MAINTENANCE'
+***================================================================***
+*** BMS Mapset : DLISCM                                            ***
+*** Map        : DLISCM01                                          ***
+*** Screen     : SCR-CANDIDATE-MAINT                               ***
+*** Trans      : DL02                                              ***
+***================================================================***
+DLISCM   DFHMSD TYPE=&SYSPARM,                                         X
+               LANG=COBOL,                                             X
+               MODE=INOUT,                                             X
+               TERM=3270-2,                                            X
+               CTRL=FREEKB,                                            X
+               STORAGE=AUTO,                                           X
+               TIOAPFX=YES
+
+DLISCM01 DFHMDI SIZE=(24,80),                                          X
+               LINE=1,                                                 X
+               COLUMN=1
+
+         DFHMDF POS=(1,1),LENGTH=80,ATTRB=(PROT,BRT),                 X
+               INITIAL='DLIS            CANDIDATE MAINTENANCE'
+         DFHMDF POS=(1,66),LENGTH=6,ATTRB=(PROT,NORM),                X
+               INITIAL='DATE: '
+DCMDATE  DFHMDF POS=(1,72),LENGTH=10,ATTRB=(PROT,NORM)
+         DFHMDF POS=(2,1),LENGTH=80,ATTRB=(PROT,NORM),                X
+               INITIAL='--------------------------------------------------------------------------------'
+
+         DFHMDF POS=(4,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='CANDIDATE ID    : '
+DCMCID   DFHMDF POS=(4,20),LENGTH=10,ATTRB=(NUM,UNPROT)
+
+         DFHMDF POS=(5,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='FIRST NAME      : '
+DCMFNAM  DFHMDF POS=(5,20),LENGTH=30,ATTRB=(UNPROT,IC)
+
+         DFHMDF POS=(6,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='LAST NAME       : '
+DCMLNAM  DFHMDF POS=(6,20),LENGTH=30,ATTRB=(UNPROT)
+
+         DFHMDF POS=(7,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='DATE OF BIRTH   : '
+DCMDOB   DFHMDF POS=(7,20),LENGTH=10,ATTRB=(UNPROT)
+
+         DFHMDF POS=(8,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='NATIONAL ID NO  : '
+DCMIDNO  DFHMDF POS=(8,20),LENGTH=20,ATTRB=(UNPROT)
+
+         DFHMDF POS=(9,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='ADDRESS LINE 1  : '
+DCMADR1  DFHMDF POS=(9,20),LENGTH=50,ATTRB=(UNPROT)
+
+         DFHMDF POS=(10,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='ADDRESS LINE 2  : '
+DCMADR2  DFHMDF POS=(10,20),LENGTH=50,ATTRB=(UNPROT)
+
+         DFHMDF POS=(11,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='CITY            : '
+DCMCITY  DFHMDF POS=(11,20),LENGTH=30,ATTRB=(UNPROT)
+
+         DFHMDF POS=(12,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='STATE/PROVINCE  : '
+DCMSTAT  DFHMDF POS=(12,20),LENGTH=30,ATTRB=(UNPROT)
+
+         DFHMDF POS=(13,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='POSTAL CODE     : '
+DCMPOST  DFHMDF POS=(13,20),LENGTH=10,ATTRB=(UNPROT)
+
+         DFHMDF POS=(14,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='COUNTRY         : '
+DCMCTRY  DFHMDF POS=(14,20),LENGTH=30,ATTRB=(UNPROT)
+
+         DFHMDF POS=(15,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='PHONE NUMBER    : '
+DCMPHN   DFHMDF POS=(15,20),LENGTH=15,ATTRB=(UNPROT)
+
+         DFHMDF POS=(16,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='EMAIL ADDRESS   : '
+DCMEML   DFHMDF POS=(16,20),LENGTH=60,ATTRB=(UNPROT)
+
+         DFHMDF POS=(17,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='STATUS          : '
+DCMSTS   DFHMDF POS=(17,20),LENGTH=1,ATTRB=(UNPROT)
+
+DCMMSG   DFHMDF POS=(22,2),LENGTH=76,ATTRB=(PROT,NORM)
+
+         DFHMDF POS=(23,1),LENGTH=80,ATTRB=(PROT,NORM),               X
+               INITIAL='--------------------------------------------------------------------------------'
+         DFHMDF POS=(24,2),LENGTH=76,ATTRB=(PROT,NORM),               X
+               INITIAL='F1=CREATE  F2=UPDATE  F3=INQUIRE  F4=DEACTIVATE  F12=EXIT'
+
+         DFHMSD TYPE=FINAL
+         END

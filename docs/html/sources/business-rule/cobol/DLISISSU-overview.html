@@ -1,0 +1,728 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLISISSU-overview</title>
+    <link rel="stylesheet" href="../../../assets/style.css">
+    <script src="../../../assets/mermaid.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+
+    <!-- Prism.js for syntax highlighting (bundled — no CDN required) -->
+    <link rel="stylesheet" href="../../../assets/prism-tomorrow.css">
+    <script src="../../../assets/prism-core.js"></script>
+    <script src="../../../assets/prism-languages.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="header-app-name"><a href="../../../../index.html" style="color: inherit; text-decoration: none;">Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</a></span>
+        </div>
+        <div class="header-right">
+        </div>
+    </header>
+    <div class="shell">
+        <aside class="sidebar" id="wiki-sidebar">
+            <nav>
+                
+        <div class="nav-home-wrap">
+            <a href="../../../../index.html" class="nav-home">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 6.5L8 2l6 4.5V14a1 1 0 01-1 1H3a1 1 0 01-1-1V6.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M6 15V9h4v6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                Home
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Application Documentation</div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Overview</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/system-overview.html" class="nav-link" data-page-id="system-overview">DLIS System Overview</a>
+                <a href="../../../pages/main-menu-navigation.html" class="nav-link" data-page-id="main-menu-navigation">Main Menu &amp; Navigation (DL01)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Candidate &amp; Application Intake</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/candidate-management.html" class="nav-link" data-page-id="candidate-management">Candidate Maintenance (DL02)</a>
+                <a href="../../../pages/license-application-entry.html" class="nav-link" data-page-id="license-application-entry">License Application Entry (DL03)</a>
+                <a href="../../../pages/application-status-inquiry.html" class="nav-link" data-page-id="application-status-inquiry">Application Status Inquiry (DL04)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Verification &amp; Payment</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/eligibility-check.html" class="nav-link" data-page-id="eligibility-check">Eligibility Check (DL05)</a>
+                <a href="../../../pages/driving-history-check.html" class="nav-link" data-page-id="driving-history-check">Driving History Check (DL06)</a>
+                <a href="../../../pages/payment-processing.html" class="nav-link" data-page-id="payment-processing">Payment Entry &amp; Processing (DL07)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Approval &amp; License Issuance</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/first-level-approval.html" class="nav-link" data-page-id="first-level-approval">First-Level Authority Approval (DL08)</a>
+                <a href="../../../pages/second-level-approval.html" class="nav-link" data-page-id="second-level-approval">Second-Level Authority Approval (DL09)</a>
+                <a href="../../../pages/license-issuance.html" class="nav-link" data-page-id="license-issuance">License Issuance (DL10)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Architecture</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/application-lifecycle-flow.html" class="nav-link" data-page-id="application-lifecycle-flow">Application Lifecycle &amp; Status Flow</a>
+                <a href="../../../pages/data-architecture.html" class="nav-link" data-page-id="data-architecture">Data Architecture (DB2)</a>
+                <a href="../../../pages/cics-integration-patterns.html" class="nav-link" data-page-id="cics-integration-patterns">CICS Integration Patterns</a>
+            </div>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Program Documentation</div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">program</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../sources/program/cobol/DLISPAY.html" class="nav-link">DLISPAY</a>
+                <a href="../../../sources/program/cobol/DLISSTAT.html" class="nav-link">DLISSTAT</a>
+                <a href="../../../sources/program/cobol/DLISMENU.html" class="nav-link">DLISMENU</a>
+                <a href="../../../sources/program/cobol/DLISELIG.html" class="nav-link">DLISELIG</a>
+                <a href="../../../sources/program/cobol/DLISCAND.html" class="nav-link">DLISCAND</a>
+                <a href="../../../sources/program/cobol/DLISAPPL.html" class="nav-link">DLISAPPL</a>
+                <a href="../../../sources/program/cobol/DLISISSU.html" class="nav-link">DLISISSU</a>
+                <a href="../../../sources/program/cobol/DLISAP2.html" class="nav-link">DLISAP2</a>
+                <a href="../../../sources/program/cobol/DLISHIST.html" class="nav-link">DLISHIST</a>
+                <a href="../../../sources/program/cobol/DLISAP1.html" class="nav-link">DLISAP1</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="nav-section">
+        <button class="nav-section-toggle open" type="button">
+            <span class="nav-toggle-text">business-rule</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items open">
+        <div class="nav-section">
+            <button class="nav-section-toggle open" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items open">
+                <a href="../../../sources/business-rule/cobol/DLISELIG-overview.html" class="nav-link">DLISELIG-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-inventory.html" class="nav-link">DLISPAY-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-overview.html" class="nav-link">DLISCAND-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-inventory.html" class="nav-link">DLISAP2-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-inventory.html" class="nav-link">DLISHIST-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-inventory.html" class="nav-link">DLISMENU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISELIG-inventory.html" class="nav-link">DLISELIG-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-overview.html" class="nav-link">DLISPAY-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-overview.html" class="nav-link">DLISSTAT-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-overview.html" class="nav-link">DLISHIST-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-overview.html" class="nav-link">DLISAPPL-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-inventory.html" class="nav-link">DLISISSU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-inventory.html" class="nav-link">DLISAPPL-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-inventory.html" class="nav-link">DLISSTAT-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-overview.html" class="nav-link">DLISAP1-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-inventory.html" class="nav-link">DLISCAND-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-overview.html" class="nav-link">DLISAP2-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-overview.html" class="nav-link active">DLISISSU-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-inventory.html" class="nav-link">DLISAP1-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-overview.html" class="nav-link">DLISMENU-overview</a>
+            </div>
+        </div>
+        </div>
+    </div>
+            </nav>
+        </aside>
+        <main class="main">
+            <div class="prog-container">
+                <div id="wiki-breadcrumb"></div>
+                <div class="content-layout">
+                    <article class="prose">
+                        <h1 id="business-rules-overview" tabindex="-1">Business rules: Overview</h1>
+<p><strong>Program:</strong> DLISISSU</p>
+<h2 id="1-purpose" tabindex="-1">1. Purpose</h2>
+<p>This document presents a program-level functional view of the business logic in DLISISSU. Business rules are organised into a Function → SubFunction → Business Rule hierarchy representing the business functions performed in the program. Semantically related rules are consolidated into named SubFunctions that group related business capabilities, and purely technical or setup logic is excluded. Each rule documents its purpose, ordered execution steps with conditions, actions, and outcomes, references to the contributing source paragraphs, and the business significance of each rule.</p>
+<h2 id="2-function-issuance-workflow-control" tabindex="-1">2. Function: Issuance Workflow Control</h2>
+<h3 id="21-subfunction-transaction-entry-and-action-routing" tabindex="-1">2.1 SubFunction: Transaction Entry and Action Routing</h3>
+<h4 id="211-business-rule-first-entry-vs-returning-transaction-handling" tabindex="-1">2.1.1 Business Rule: First-Entry vs. Returning Transaction Handling</h4>
+<h5 id="2111-purpose" tabindex="-1">2.1.1.1 Purpose</h5>
+<p>Determines whether the officer is starting a new license issuance session or continuing an existing one. State is preserved across the multi-step workflow (load application, issue license, print license) by saving and restoring the communication area. A fresh session starts from a clean screen, and a returning session restores prior state before any input is processed.</p>
+<h5 id="2112-rule-steps" tabindex="-1">2.1.1.2 Rule Steps</h5>
+<ol>
+<li>Detect a fresh transaction entry
+<ul>
+<li>Conditions: The communication area length (EIBCALEN) is zero.</li>
+<li>Actions: Initialise the screen for the officer.</li>
+<li>Outcomes: A new session starts with a clean, initialised screen.</li>
+<li>Relevant Paragraphs: MAIN-LOGIC (INIT-SCREEN)</li>
+</ul>
+</li>
+<li>Restore workflow state on a returning transaction
+<ul>
+<li>Conditions: EIBCALEN is non-zero.</li>
+<li>Actions: Restore DLIS-COMMAREA from DFHCOMMAREA, then process the officer’s input.</li>
+<li>Outcomes: Prior workflow state is carried forward into input processing.</li>
+<li>Relevant Paragraphs: MAIN-LOGIC (PROCESS-INPUT)</li>
+</ul>
+</li>
+</ol>
+<h5 id="2113-business-significance" tabindex="-1">2.1.1.3 Business Significance</h5>
+<p>If state restoration fails, the officer loses the loaded application context between interactions. This can cause issuance against the wrong or an empty application, or force repeated data entry. Re-initialising a screen mid-session would discard validated data.</p>
+<h4 id="212-business-rule-function-key-routing-for-license-issuance-workflow" tabindex="-1">2.1.2 Business Rule: Function Key Routing for License Issuance Workflow</h4>
+<h5 id="2121-purpose" tabindex="-1">2.1.2.1 Purpose</h5>
+<p>Restricts the officer to a defined set of actions and routes each one to the matching business function. Any other key triggers guidance, which enforces the allowed interaction model.</p>
+<h5 id="2122-rule-steps" tabindex="-1">2.1.2.2 Rule Steps</h5>
+<ol>
+<li>Route a recognised function key to its business action
+<ul>
+<li>Conditions: The key pressed is F1, F3, F6 or F12.</li>
+<li>Actions:
+<ul>
+<li>F1 invokes license issuance (ISSUE-LICENSE).</li>
+<li>F3 invokes application loading (LOAD-APPLICATION).</li>
+<li>F6 invokes license printing (PRINT-LICENSE).</li>
+<li>F12 terminates the transaction.</li>
+</ul>
+</li>
+<li>Outcomes: The selected business operation is executed or the session ends.</li>
+<li>Relevant Paragraphs: PROCESS-INPUT</li>
+</ul>
+</li>
+<li>Reject an unrecognised key
+<ul>
+<li>Conditions: The key pressed is none of F1, F3, F6 or F12.</li>
+<li>Actions: Display a guidance message restricting the officer to the defined function keys.</li>
+<li>Outcomes: No business action is taken and the officer is told which keys are valid.</li>
+<li>Relevant Paragraphs: PROCESS-INPUT</li>
+</ul>
+</li>
+<li>Preserve the workflow state after the action
+<ul>
+<li>Conditions: The transaction continues after a non-exit action.</li>
+<li>Actions: Return control to CICS with DLIS-COMMAREA to maintain state for the next cycle.</li>
+<li>Outcomes: The workflow continues in a pseudo-conversational manner.</li>
+<li>Relevant Paragraphs: PROCESS-INPUT</li>
+</ul>
+</li>
+</ol>
+<h5 id="2123-business-significance" tabindex="-1">2.1.2.3 Business Significance</h5>
+<p>Incorrect routing could trigger issuance or printing unintentionally. Uncontrolled keys could bypass the intended sequence of load, issue and print, which compromises control over a regulated document.</p>
+<h2 id="3-function-application-retrieval-and-eligibility-review" tabindex="-1">3. Function: Application Retrieval and Eligibility Review</h2>
+<h3 id="31-subfunction-application-loading" tabindex="-1">3.1 SubFunction: Application Loading</h3>
+<h4 id="311-business-rule-application-id-presence-validation" tabindex="-1">3.1.1 Business Rule: Application ID Presence Validation</h4>
+<h5 id="3111-purpose" tabindex="-1">3.1.1.1 Purpose</h5>
+<p>An Application ID is required before any application can be retrieved. This prevents lookups without a defined target.</p>
+<h5 id="3112-rule-steps" tabindex="-1">3.1.1.2 Rule Steps</h5>
+<ol>
+<li>Verify that an Application ID is provided
+<ul>
+<li>Conditions: APPLICATION-ID is blank or zero.</li>
+<li>Actions: Prompt the officer to enter the Application ID and halt further processing.</li>
+<li>Outcomes: The load is blocked until a valid identifier is supplied.</li>
+<li>Relevant Paragraphs: LOAD-APPLICATION</li>
+</ul>
+</li>
+</ol>
+<h5 id="3113-business-significance" tabindex="-1">3.1.1.3 Business Significance</h5>
+<p>Without this check, the lookup may fail ambiguously or return unintended data. The officer would then make issuance decisions on missing or wrong application information.</p>
+<h4 id="312-business-rule-display-of-pre-issuance-eligibility-gate-statuses" tabindex="-1">3.1.2 Business Rule: Display of Pre-Issuance Eligibility Gate Statuses</h4>
+<h5 id="3121-purpose" tabindex="-1">3.1.2.1 Purpose</h5>
+<p>Shows the officer every gate that must be satisfied before issuance, so they can judge readiness. These are the candidate’s name, license type, eligibility check, history check, payment, and first- and second-level approvals. A successful load also sets the “APPLICATION LOADED” message, which the issuance function uses as a gate.</p>
+<h5 id="3122-rule-steps" tabindex="-1">3.1.2.2 Rule Steps</h5>
+<ol>
+<li>Present the candidate and gate statuses on the map
+<ul>
+<li>Conditions: The application has been found for the supplied APPLICATION-ID.</li>
+<li>Actions: Display the candidate’s full name, LICENSE-TYPE, ELIG-CHECK-STATUS, HIST-CHECK-STATUS, PAYMENT-STATUS, APPROVAL-1-STATUS and APPROVAL-2-STATUS.</li>
+<li>Outcomes: The officer can see whether eligibility, history, payment and dual approval requirements are met.</li>
+<li>Relevant Paragraphs: LOAD-APPLICATION</li>
+</ul>
+</li>
+<li>Confirm a successful load
+<ul>
+<li>Conditions: The application data was displayed successfully.</li>
+<li>Actions: Set the message to “APPLICATION LOADED”.</li>
+<li>Outcomes: The issuance process can recognise that an application has been reviewed.</li>
+<li>Relevant Paragraphs: LOAD-APPLICATION (consumed by ISSUE-LICENSE)</li>
+</ul>
+</li>
+</ol>
+<h5 id="3123-business-significance" tabindex="-1">3.1.2.3 Business Significance</h5>
+<p>If statuses are shown incompletely or incorrectly, the officer may approve an application with unmet prerequisites. This weakens the dual-approval, payment and background-check controls.</p>
+<h2 id="4-function-license-issuance" tabindex="-1">4. Function: License Issuance</h2>
+<h3 id="41-subfunction-issuance-pre-conditions" tabindex="-1">4.1 SubFunction: Issuance Pre-Conditions</h3>
+<h4 id="411-business-rule-mandatory-input-validation-for-issuance" tabindex="-1">4.1.1 Business Rule: Mandatory Input Validation for Issuance</h4>
+<h5 id="4111-purpose" tabindex="-1">4.1.1.1 Purpose</h5>
+<p>Ensures every mandatory input is present and valid before a license is created. This guarantees the license has a traceable source application, a valid vehicle class, and a named officer and authority.</p>
+<h5 id="4112-rule-steps" tabindex="-1">4.1.1.2 Rule Steps</h5>
+<ol>
+<li>Require an Application ID
+<ul>
+<li>Conditions: APPLICATION-ID is absent.</li>
+<li>Actions: Halt issuance with a descriptive message.</li>
+<li>Outcomes: Issuance is blocked.</li>
+<li>Relevant Paragraphs: ISSUE-LICENSE</li>
+</ul>
+</li>
+<li>Validate the vehicle class
+<ul>
+<li>Conditions: VEHICLE-CLASS is not one of A, B, C or D, or is blank.</li>
+<li>Actions: Halt issuance with a descriptive message.</li>
+<li>Outcomes: Only permitted vehicle classes proceed.</li>
+<li>Relevant Paragraphs: ISSUE-LICENSE</li>
+</ul>
+</li>
+<li>Require the issuing officer
+<ul>
+<li>Conditions: ISSUED-BY-OFFICER is absent.</li>
+<li>Actions: Halt issuance with a descriptive message.</li>
+<li>Outcomes: Accountability for the issuance is guaranteed.</li>
+<li>Relevant Paragraphs: ISSUE-LICENSE</li>
+</ul>
+</li>
+<li>Require the issuing authority
+<ul>
+<li>Conditions: ISSUED-BY-AUTH is absent.</li>
+<li>Actions: Halt issuance with a descriptive message.</li>
+<li>Outcomes: The issuing organisation is always identified.</li>
+<li>Relevant Paragraphs: ISSUE-LICENSE</li>
+</ul>
+</li>
+</ol>
+<h5 id="4113-business-significance" tabindex="-1">4.1.1.3 Business Significance</h5>
+<p>Missing or invalid inputs would yield licenses with an invalid vehicle class, no accountable officer, or no issuing authority. This creates audit and legal exposure for an official document.</p>
+<h4 id="412-business-rule-approved-status-eligibility-gate" tabindex="-1">4.1.2 Business Rule: Approved-Status Eligibility Gate</h4>
+<h5 id="4121-purpose" tabindex="-1">4.1.2.1 Purpose</h5>
+<p>Allows a license to be issued only when the application has reached the fully approved status. This enforces completion of all upstream checks and approvals.</p>
+<h5 id="4122-rule-steps" tabindex="-1">4.1.2.2 Rule Steps</h5>
+<ol>
+<li>Check the application status
+<ul>
+<li>Conditions: APPLICATION-STATUS is not ‘AP’ (Approved).</li>
+<li>Actions: Block issuance and inform the officer that the application is ineligible.</li>
+<li>Outcomes: Only fully approved applications proceed to license creation.</li>
+<li>Relevant Paragraphs: ISSUE-LICENSE</li>
+</ul>
+</li>
+</ol>
+<h5 id="4123-business-significance" tabindex="-1">4.1.2.3 Business Significance</h5>
+<p>Bypassing this gate could produce licenses for applications that have not passed the eligibility, history, payment or dual-approval controls. This is a regulatory and fraud risk. It also allows reissuance of applications already issued (‘IS’).</p>
+<h3 id="42-subfunction-license-attribute-derivation" tabindex="-1">4.2 SubFunction: License Attribute Derivation</h3>
+<h4 id="421-business-rule-expiry-date-and-number-prefix-assignment-by-license-type" tabindex="-1">4.2.1 Business Rule: Expiry Date and Number Prefix Assignment by License Type</h4>
+<h5 id="4211-purpose" tabindex="-1">4.2.1.1 Purpose</h5>
+<p>Sets the validity period and the number prefix that distinguish Learner, Probationary and Open licenses.</p>
+<h5 id="4212-rule-steps" tabindex="-1">4.2.1.2 Rule Steps</h5>
+<ol>
+<li>Assign validity and prefix by license type
+<ul>
+<li>Conditions: LICENSE-TYPE is ‘L’, ‘P’ or ‘O’.</li>
+<li>Actions:
+<ul>
+<li>‘L’ (Learner): 1-year validity, prefix ‘LRN’.</li>
+<li>‘P’ (Probationary): 2-year validity, prefix ‘PRB’.</li>
+<li>‘O’ (Open/Full): 5-year validity, prefix ‘OPN’.</li>
+</ul>
+</li>
+<li>Outcomes: The expiry year and prefix are determined.</li>
+<li>Relevant Paragraphs: ISSUE-LICENSE</li>
+</ul>
+</li>
+<li>Assemble the expiry date
+<ul>
+<li>Conditions: The expiry year has been calculated.</li>
+<li>Actions: Combine the expiry year with the current month and day into WS-EXPIRY-DATE.</li>
+<li>Outcomes: The expiry date falls on the anniversary of issue.</li>
+<li>Relevant Paragraphs: ISSUE-LICENSE</li>
+</ul>
+</li>
+</ol>
+<h5 id="4213-business-significance" tabindex="-1">4.2.1.3 Business Significance</h5>
+<p>An incorrect validity period lets licenses remain valid longer or expire sooner than the law allows. A wrong prefix mislabels the license class.</p>
+<h4 id="422-business-rule-license-number-generation" tabindex="-1">4.2.2 Business Rule: License Number Generation</h4>
+<h5 id="4221-purpose" tabindex="-1">4.2.2.1 Purpose</h5>
+<p>Builds a unique, meaningful identifier for each license. It encodes the license type, vehicle class, candidate and originating application.</p>
+<h5 id="4222-rule-steps" tabindex="-1">4.2.2.2 Rule Steps</h5>
+<ol>
+<li>Concatenate the identifier components
+<ul>
+<li>Conditions: The prefix, VEHICLE-CLASS, CANDIDATE-ID and APPLICATION-ID are available.</li>
+<li>Actions: Build WS-LICENSE-NUMBER as prefix + vehicle class + candidate ID + application ID, in that order.</li>
+<li>Outcomes: A unique license number linking the license to its holder and source application.</li>
+<li>Relevant Paragraphs: ISSUE-LICENSE</li>
+</ul>
+</li>
+</ol>
+<h5 id="4223-business-significance" tabindex="-1">4.2.2.3 Business Significance</h5>
+<p>A non-unique or malformed number would break lookup, printing, enforcement and demerit tracking. It could also cause identity confusion between holders.</p>
+<h3 id="43-subfunction-license-record-creation" tabindex="-1">4.3 SubFunction: License Record Creation</h3>
+<h4 id="431-business-rule-issued-license-record-creation" tabindex="-1">4.3.1 Business Rule: Issued License Record Creation</h4>
+<h5 id="4311-purpose" tabindex="-1">4.3.1.1 Purpose</h5>
+<p>Creates the official license record in DLIS.ISSUED_LICENSE. This is the core business event that brings the license into existence with full attribution.</p>
+<h5 id="4312-rule-steps" tabindex="-1">4.3.1.2 Rule Steps</h5>
+<ol>
+<li>Insert the issued license with initial state
+<ul>
+<li>Conditions: All validation and eligibility gates have passed, and the license number and expiry date have been derived.</li>
+<li>Actions: Insert APPLICATION-ID, CANDIDATE-ID, WS-LICENSE-NUMBER, LICENSE-TYPE, issue and WS-EXPIRY-DATE, VEHICLE-CLASS, restrictions, ISSUED-BY-OFFICER and ISSUED-BY-AUTH. Set the status to ‘A’ (Active) and the demerit balance to 12.</li>
+<li>Outcomes: An active license with a full demerit allowance is created and attributed to a named officer and authority.</li>
+<li>Relevant Paragraphs: ISSUE-LICENSE</li>
+</ul>
+</li>
+</ol>
+<h5 id="4313-business-significance" tabindex="-1">4.3.1.3 Business Significance</h5>
+<p>A failed or partial insert leaves the candidate without a legal license, or leaves a license with wrong status or demerit balance. This distorts the later enforcement and suspension rules that depend on the starting balance.</p>
+<h4 id="432-business-rule-application-closure-and-issuance-confirmation" tabindex="-1">4.3.2 Business Rule: Application Closure and Issuance Confirmation</h4>
+<h5 id="4321-purpose" tabindex="-1">4.3.2.1 Purpose</h5>
+<p>Closes the originating application by marking it as issued and confirms the outcome to the officer. This prevents the same application from being issued again.</p>
+<h5 id="4322-rule-steps" tabindex="-1">4.3.2.2 Rule Steps</h5>
+<ol>
+<li>Mark the application as issued
+<ul>
+<li>Conditions: The issued license record was created successfully.</li>
+<li>Actions: Update LICENSE_APPLICATION for the matching APPLICATION-ID, setting APPLICATION-STATUS to ‘IS’ and recording the date and the officer as last updater.</li>
+<li>Outcomes: The application workflow is closed with an audit trail.</li>
+<li>Relevant Paragraphs: ISSUE-LICENSE</li>
+</ul>
+</li>
+<li>Confirm the result to the officer
+<ul>
+<li>Conditions: The status update completed.</li>
+<li>Actions: Show WS-LICENSE-NUMBER and WS-EXPIRY-DATE on the map and set a success message.</li>
+<li>Outcomes: The officer sees the license number and expiry, and the license becomes eligible for printing.</li>
+<li>Relevant Paragraphs: ISSUE-LICENSE</li>
+</ul>
+</li>
+</ol>
+<h5 id="4323-business-significance" tabindex="-1">4.3.2.3 Business Significance</h5>
+<p>If the status is not updated, the same approved application could be used to issue duplicate licenses. If the license number is not displayed, the printing gate would block the follow-on step.</p>
+<h2 id="5-function-license-printing" tabindex="-1">5. Function: License Printing</h2>
+<h3 id="51-subfunction-print-authorisation-and-invocation" tabindex="-1">5.1 SubFunction: Print Authorisation and Invocation</h3>
+<h4 id="511-business-rule-print-eligibility-gate-and-print-invocation" tabindex="-1">5.1.1 Business Rule: Print Eligibility Gate and Print Invocation</h4>
+<h5 id="5111-purpose" tabindex="-1">5.1.1.1 Purpose</h5>
+<p>Ensures only a successfully issued license can be printed. Issuance is evidenced by a license number being present on screen. When the gate is passed, the print program is invoked.</p>
+<h5 id="5112-rule-steps" tabindex="-1">5.1.1.2 Rule Steps</h5>
+<ol>
+<li>Verify that the license has been issued
+<ul>
+<li>Conditions: No license number is present on the screen.</li>
+<li>Actions: Block printing and inform the officer.</li>
+<li>Outcomes: Printing cannot precede issuance.</li>
+<li>Relevant Paragraphs: PRINT-LICENSE</li>
+</ul>
+</li>
+<li>Invoke the print program
+<ul>
+<li>Conditions: A license number is present.</li>
+<li>Actions: Link to DLISLPRT with DLIS-COMMAREA and set a confirmation message.</li>
+<li>Outcomes: The physical or electronic license document is produced and the officer is notified.</li>
+<li>Relevant Paragraphs: PRINT-LICENSE</li>
+</ul>
+</li>
+</ol>
+<h5 id="5113-business-significance" tabindex="-1">5.1.1.3 Business Significance</h5>
+<p>Printing without an issued license could produce unauthorised or invalid documents. A missing commarea in the call would leave the print program without the issuance context, resulting in blank or wrong documents.</p>
+
+                    </article>
+                    <nav class="toc-panel" aria-label="On this page">
+  <span class="toc-panel-label">On this page</span>
+  <ul class="toc-list">
+<li class="toc-level-2"><a href="#1-purpose">1. Purpose</a></li>
+<li class="toc-level-2"><a href="#2-function-issuance-workflow-control">2. Function: Issuance Workflow Control</a>
+<ul>
+<li class="toc-level-3"><a href="#21-subfunction-transaction-entry-and-action-routing">2.1 SubFunction: Transaction Entry and Action Routing</a>
+<ul>
+<li class="toc-level-4"><a href="#211-business-rule-first-entry-vs-returning-transaction-handling">2.1.1 Business Rule: First-Entry vs. Returning Transaction Handling</a></li>
+<li class="toc-level-4"><a href="#212-business-rule-function-key-routing-for-license-issuance-workflow">2.1.2 Business Rule: Function Key Routing for License Issuance Workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#3-function-application-retrieval-and-eligibility-review">3. Function: Application Retrieval and Eligibility Review</a>
+<ul>
+<li class="toc-level-3"><a href="#31-subfunction-application-loading">3.1 SubFunction: Application Loading</a>
+<ul>
+<li class="toc-level-4"><a href="#311-business-rule-application-id-presence-validation">3.1.1 Business Rule: Application ID Presence Validation</a></li>
+<li class="toc-level-4"><a href="#312-business-rule-display-of-pre-issuance-eligibility-gate-statuses">3.1.2 Business Rule: Display of Pre-Issuance Eligibility Gate Statuses</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#4-function-license-issuance">4. Function: License Issuance</a>
+<ul>
+<li class="toc-level-3"><a href="#41-subfunction-issuance-pre-conditions">4.1 SubFunction: Issuance Pre-Conditions</a>
+<ul>
+<li class="toc-level-4"><a href="#411-business-rule-mandatory-input-validation-for-issuance">4.1.1 Business Rule: Mandatory Input Validation for Issuance</a></li>
+<li class="toc-level-4"><a href="#412-business-rule-approved-status-eligibility-gate">4.1.2 Business Rule: Approved-Status Eligibility Gate</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#42-subfunction-license-attribute-derivation">4.2 SubFunction: License Attribute Derivation</a>
+<ul>
+<li class="toc-level-4"><a href="#421-business-rule-expiry-date-and-number-prefix-assignment-by-license-type">4.2.1 Business Rule: Expiry Date and Number Prefix Assignment by License Type</a></li>
+<li class="toc-level-4"><a href="#422-business-rule-license-number-generation">4.2.2 Business Rule: License Number Generation</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#43-subfunction-license-record-creation">4.3 SubFunction: License Record Creation</a>
+<ul>
+<li class="toc-level-4"><a href="#431-business-rule-issued-license-record-creation">4.3.1 Business Rule: Issued License Record Creation</a></li>
+<li class="toc-level-4"><a href="#432-business-rule-application-closure-and-issuance-confirmation">4.3.2 Business Rule: Application Closure and Issuance Confirmation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#5-function-license-printing">5. Function: License Printing</a>
+<ul>
+<li class="toc-level-3"><a href="#51-subfunction-print-authorisation-and-invocation">5.1 SubFunction: Print Authorisation and Invocation</a>
+<ul>
+<li class="toc-level-4"><a href="#511-business-rule-print-eligibility-gate-and-print-invocation">5.1.1 Business Rule: Print Eligibility Gate and Print Invocation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</nav>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="wiki-footer">Made by IBM Bob Premium Package for Z</footer>
+    <script>
+    /* toc-spy.js — highlights the active heading in the TOC panel on scroll */
+    (function () {
+      function init() {
+        var panel = document.querySelector('.toc-panel');
+        if (!panel) return;
+        var links = Array.prototype.slice.call(panel.querySelectorAll('a[href^="#"]'));
+        if (!links.length) return;
+
+        var headingIds = links.map(function (a) { return a.getAttribute('href').slice(1); });
+        var headings = headingIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+        function clearActive() {
+          panel.querySelectorAll('.toc-active').forEach(function (el) { el.classList.remove('toc-active'); });
+          panel.querySelectorAll('.toc-parent-active').forEach(function (el) { el.classList.remove('toc-parent-active'); });
+        }
+
+        function setActive(id) {
+          clearActive();
+          var link = panel.querySelector('a[href="#' + id + '"]');
+          if (!link) return;
+          link.classList.add('toc-active');
+          var li = link.closest('li');
+          if (li) {
+            var parentLi = li.parentElement && li.parentElement.closest('li');
+            if (parentLi) parentLi.classList.add('toc-parent-active');
+          }
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+        headings.forEach(function (h) { observer.observe(h); });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
+    <script>
+    /* breadcrumb.js — reads sessionStorage['wiki_referrer'] and renders breadcrumb.
+       Only fires when the referrer was set by clicking a link inside the Source Files
+       disclosure on a wiki page; clears after rendering so stale state never lingers. */
+    (function () {
+      var raw;
+      try { raw = sessionStorage.getItem('wiki_referrer'); } catch (_e) {}
+      if (!raw) return;
+      /* Consume immediately — prevents the breadcrumb re-appearing on the next visit. */
+      try { sessionStorage.removeItem('wiki_referrer'); } catch (_e) {}
+      var ref;
+      try { ref = JSON.parse(raw); } catch (_e) { return; }
+      if (!ref || !ref.href) return;
+      var bc = document.getElementById('wiki-breadcrumb');
+      if (!bc) return;
+      bc.className = 'wiki-breadcrumb';
+      bc.innerHTML =
+        '<a href="' + ref.href + '">' + (ref.title || 'Back') + '</a>' +
+        '<span class="wiki-breadcrumb-sep"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' +
+        '<span class="wiki-breadcrumb-current">DLISISSU-overview</span>';
+    })();
+    </script>
+    <script>
+    /* sidebar toggle — same as main wiki pages */
+    (function () {
+
+      var STORAGE_KEY = 'sb_open';
+
+      function getOpenSet() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+      }
+
+      function saveOpenSet(set) {
+        try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(set)); } catch (e) {}
+      }
+
+      function findItems(toggle) {
+        var node = toggle.nextSibling;
+        while (node) {
+          if (node.nodeType === 1 && node.classList.contains('nav-section-items'))
+            return node;
+          node = node.nextSibling;
+        }
+        return null;
+      }
+
+      function toggleKey(toggle, index) {
+        var label = (toggle.querySelector('.nav-toggle-text') || toggle).textContent.trim().replace(/\s+/g, ' ');
+        return index + ':' + label;
+      }
+
+      function openSection(toggle, items, key, set) {
+        toggle.classList.add('open');
+        items.classList.add('open');
+        if (set) set[key] = true;
+      }
+
+      function closeSection(toggle, items, key, set) {
+        toggle.classList.remove('open');
+        items.classList.remove('open');
+        if (set) set[key] = false;
+      }
+
+      function init() {
+        var sidebar = document.getElementById('wiki-sidebar');
+        var toggles = Array.prototype.slice.call(
+          document.querySelectorAll('.nav-section-toggle')
+        );
+
+        var savedSet = getOpenSet();
+        var openSet = savedSet || {};
+
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+
+          var key = toggleKey(toggle, idx);
+          var shouldOpen = openSet[key] === true;
+
+          if (shouldOpen) {
+            toggle.classList.add('open');
+            items.classList.add('open');
+          }
+
+          toggle.addEventListener('click', function () {
+            var nowOpen = toggle.classList.contains('open');
+            if (nowOpen) {
+              closeSection(toggle, items, key, openSet);
+            } else {
+              openSection(toggle, items, key, openSet);
+            }
+            saveOpenSet(openSet);
+          });
+        });
+
+        saveOpenSet(openSet);
+
+        /* Restore sidebar scroll position after sections are expanded so the
+           scroll height is correct when we apply scrollTop. */
+        if (sidebar) {
+          try {
+            var savedScroll = sessionStorage.getItem('sb_scroll');
+            if (savedScroll !== null) { sidebar.scrollTop = parseInt(savedScroll, 10) || 0; }
+          } catch (_e) {}
+        }
+
+        window.addEventListener('pagehide', function () {
+          saveOpenSet(openSet);
+          if (sidebar) {
+            try { sessionStorage.setItem('sb_scroll', String(sidebar.scrollTop)); } catch (_e) {}
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+    </script>
+</body>
+</html>

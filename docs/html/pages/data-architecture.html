@@ -1,0 +1,2169 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Architecture (DB2) - Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script src="../assets/mermaid.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+
+    <!-- Prism.js for syntax highlighting (bundled — no CDN required) -->
+    <link rel="stylesheet" href="../assets/prism-tomorrow.css">
+    <script src="../assets/prism-core.js"></script>
+    <script src="../assets/prism-languages.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="header-app-name"><a href="../../index.html" style="color: inherit; text-decoration: none;">Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</a></span>
+        </div>
+        <div class="header-right">
+        </div>
+    </header>
+    <div class="shell">
+        <aside class="sidebar" id="wiki-sidebar">
+            <nav>
+                
+        <div class="nav-home-wrap">
+            <a href="../../index.html" class="nav-home">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 6.5L8 2l6 4.5V14a1 1 0 01-1 1H3a1 1 0 01-1-1V6.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M6 15V9h4v6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                Home
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Application Documentation</div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Overview</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="system-overview.html" class="nav-link" data-page-id="system-overview">DLIS System Overview</a>
+                <a href="main-menu-navigation.html" class="nav-link" data-page-id="main-menu-navigation">Main Menu &amp; Navigation (DL01)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Candidate &amp; Application Intake</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="candidate-management.html" class="nav-link" data-page-id="candidate-management">Candidate Maintenance (DL02)</a>
+                <a href="license-application-entry.html" class="nav-link" data-page-id="license-application-entry">License Application Entry (DL03)</a>
+                <a href="application-status-inquiry.html" class="nav-link" data-page-id="application-status-inquiry">Application Status Inquiry (DL04)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Verification &amp; Payment</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="eligibility-check.html" class="nav-link" data-page-id="eligibility-check">Eligibility Check (DL05)</a>
+                <a href="driving-history-check.html" class="nav-link" data-page-id="driving-history-check">Driving History Check (DL06)</a>
+                <a href="payment-processing.html" class="nav-link" data-page-id="payment-processing">Payment Entry &amp; Processing (DL07)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Approval &amp; License Issuance</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="first-level-approval.html" class="nav-link" data-page-id="first-level-approval">First-Level Authority Approval (DL08)</a>
+                <a href="second-level-approval.html" class="nav-link" data-page-id="second-level-approval">Second-Level Authority Approval (DL09)</a>
+                <a href="license-issuance.html" class="nav-link" data-page-id="license-issuance">License Issuance (DL10)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle open" type="button">
+                <span class="nav-toggle-text">Architecture</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items open">
+                <a href="application-lifecycle-flow.html" class="nav-link" data-page-id="application-lifecycle-flow">Application Lifecycle &amp; Status Flow</a>
+                <a href="data-architecture.html" class="nav-link active" data-page-id="data-architecture">Data Architecture (DB2)</a>
+                <a href="cics-integration-patterns.html" class="nav-link" data-page-id="cics-integration-patterns">CICS Integration Patterns</a>
+            </div>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Program Documentation</div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">program</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../sources/program/cobol/DLISPAY.html" class="nav-link">DLISPAY</a>
+                <a href="../sources/program/cobol/DLISSTAT.html" class="nav-link">DLISSTAT</a>
+                <a href="../sources/program/cobol/DLISMENU.html" class="nav-link">DLISMENU</a>
+                <a href="../sources/program/cobol/DLISELIG.html" class="nav-link">DLISELIG</a>
+                <a href="../sources/program/cobol/DLISCAND.html" class="nav-link">DLISCAND</a>
+                <a href="../sources/program/cobol/DLISAPPL.html" class="nav-link">DLISAPPL</a>
+                <a href="../sources/program/cobol/DLISISSU.html" class="nav-link">DLISISSU</a>
+                <a href="../sources/program/cobol/DLISAP2.html" class="nav-link">DLISAP2</a>
+                <a href="../sources/program/cobol/DLISHIST.html" class="nav-link">DLISHIST</a>
+                <a href="../sources/program/cobol/DLISAP1.html" class="nav-link">DLISAP1</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">business-rule</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../sources/business-rule/cobol/DLISELIG-overview.html" class="nav-link">DLISELIG-overview</a>
+                <a href="../sources/business-rule/cobol/DLISPAY-inventory.html" class="nav-link">DLISPAY-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISCAND-overview.html" class="nav-link">DLISCAND-overview</a>
+                <a href="../sources/business-rule/cobol/DLISAP2-inventory.html" class="nav-link">DLISAP2-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISHIST-inventory.html" class="nav-link">DLISHIST-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISMENU-inventory.html" class="nav-link">DLISMENU-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISELIG-inventory.html" class="nav-link">DLISELIG-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISPAY-overview.html" class="nav-link">DLISPAY-overview</a>
+                <a href="../sources/business-rule/cobol/DLISSTAT-overview.html" class="nav-link">DLISSTAT-overview</a>
+                <a href="../sources/business-rule/cobol/DLISHIST-overview.html" class="nav-link">DLISHIST-overview</a>
+                <a href="../sources/business-rule/cobol/DLISAPPL-overview.html" class="nav-link">DLISAPPL-overview</a>
+                <a href="../sources/business-rule/cobol/DLISISSU-inventory.html" class="nav-link">DLISISSU-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISAPPL-inventory.html" class="nav-link">DLISAPPL-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISSTAT-inventory.html" class="nav-link">DLISSTAT-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISAP1-overview.html" class="nav-link">DLISAP1-overview</a>
+                <a href="../sources/business-rule/cobol/DLISCAND-inventory.html" class="nav-link">DLISCAND-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISAP2-overview.html" class="nav-link">DLISAP2-overview</a>
+                <a href="../sources/business-rule/cobol/DLISISSU-overview.html" class="nav-link">DLISISSU-overview</a>
+                <a href="../sources/business-rule/cobol/DLISAP1-inventory.html" class="nav-link">DLISAP1-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISMENU-overview.html" class="nav-link">DLISMENU-overview</a>
+            </div>
+        </div>
+        </div>
+    </div>
+            </nav>
+        </aside>
+        <main class="main">
+            <div class="page-container">
+                <div class="content-layout">
+                    <div class="prose">
+                        <details class="source-files-disclosure">
+            <summary>
+                <svg class="sf-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Source Files
+                <span style="margin-left:4px;font-size:11px;color:var(--fg-subtle)">(8)</span>
+            </summary>
+            <div class="source-files-body">
+                <ul class="source-files-list">
+            <li><a href="../sources/program/cobol/DLISPAY.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISPAY
+            </a></li>
+            <li><a href="../sources/program/cobol/DLISSTAT.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISSTAT
+            </a></li>
+            <li><a href="../sources/program/cobol/DLISCAND.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISCAND
+            </a></li>
+            <li><a href="../sources/program/cobol/DLISAPPL.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISAPPL
+            </a></li>
+            <li><a href="../sources/program/cobol/DLISISSU.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISISSU
+            </a></li>
+            <li><a href="../sources/program/cobol/DLISAP2.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISAP2
+            </a></li>
+            <li><a href="../sources/program/cobol/DLISHIST.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISHIST
+            </a></li>
+            <li><a href="../sources/program/cobol/DLISAP1.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISAP1
+            </a></li>
+                </ul>
+            </div>
+        </details>
+                        <h1 id="data-architecture-db2" tabindex="-1">Data Architecture (DB2)</h1>
+<hr>
+<h2 id="1-overview" tabindex="-1">1. Overview</h2>
+<p>The Driver License Information System (DLIS) uses IBM DB2 as its relational database management system to persist all data across the full lifecycle of a driver’s license application — from candidate registration through to license issuance. The schema is owned by the <code>DLIS</code> schema and is accessed by a suite of CICS/COBOL online transactions running under IBM z/OS.</p>
+<p>Seven core DB2 tables underpin the system:</p>
+<table>
+<thead>
+<tr>
+<th>Table</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DLIS.CANDIDATE</code></td>
+<td>Stores personal details of individuals applying for a driver’s license</td>
+</tr>
+<tr>
+<td><code>DLIS.LICENSE_APPLICATION</code></td>
+<td>Tracks each application and its full workflow status</td>
+</tr>
+<tr>
+<td><code>DLIS.LICENSE_FEE_SCHEDULE</code></td>
+<td>Holds the fee schedule for each license type</td>
+</tr>
+<tr>
+<td><code>DLIS.PAYMENT</code></td>
+<td>Records payment transactions against applications</td>
+</tr>
+<tr>
+<td><code>DLIS.ISSUED_LICENSE</code></td>
+<td>Stores issued license records after final approval</td>
+</tr>
+<tr>
+<td><code>DLIS.AUTHORITY_USER</code></td>
+<td>Holds authority user records for the two-level approval workflow</td>
+</tr>
+<tr>
+<td><code>DLIS.DRIVING_HISTORY</code></td>
+<td>Records driving incidents for each candidate</td>
+</tr>
+</tbody>
+</table>
+<p>Each table is accessed by one or more CICS transactions (DL02–DL10), and data flows in a strict pipeline: a candidate is registered, an application is submitted, fees are calculated and paid, history and eligibility checks are performed, dual-authority approval is obtained, and finally the license is issued.</p>
+<hr>
+<h2 id="2-system-architecture" tabindex="-1">2. System Architecture</h2>
+<h3 id="21-high-level-component-architecture" tabindex="-1">2.1 High-Level Component Architecture</h3>
+<p>The DLIS system is a classic z/OS online transaction processing (OLTP) architecture. CICS manages all terminal interactions using 3270 BMS maps, while DB2 provides relational data persistence. All programs are written in Enterprise COBOL, precompiled with the DB2 precompiler (<code>DSNHPC</code>), and bound into a single DB2 plan (<code>DLISPLAN</code>) under collection <code>DLISPKG</code> on subsystem <code>DSN1</code>.</p>
+<div class="mermaid">
+graph TD
+    T[3270 Terminal Operator] --> CICS[CICS Transaction Server]
+
+    subgraph CICS_Region [CICS Region - Group DLISGRP]
+        DL02[DL02 DLISCAND\nCandidate Maintenance]
+        DL03[DL03 DLISAPPL\nLicense Application Entry]
+        DL04[DL04 DLISSTAT\nApplication Status Inquiry]
+        DL06[DL06 DLISHIST\nDriving History Check]
+        DL07[DL07 DLISPAY\nPayment Processing]
+        DL08[DL08 DLISAP1\nFirst Authority Approval]
+        DL09[DL09 DLISAP2\nSecond Authority Approval]
+        DL10[DL10 DLISISSU\nLicense Issuance]
+        DLISRPRT[DLISRPRT\nReceipt Printing]
+        DLISLPRT[DLISLPRT\nLicense Printing]
+    end
+
+    subgraph DB2_Subsystem [DB2 Subsystem DSN1 - Plan DLISPLAN]
+        CAND[(DLIS.CANDIDATE)]
+        APPL[(DLIS.LICENSE_APPLICATION)]
+        FEE[(DLIS.LICENSE_FEE_SCHEDULE)]
+        PAY[(DLIS.PAYMENT)]
+        LIC[(DLIS.ISSUED_LICENSE)]
+        AUTH[(DLIS.AUTHORITY_USER)]
+        HIST[(DLIS.DRIVING_HISTORY)]
+    end
+
+    CICS --> CICS_Region
+    CICS_Region --> DB2_Subsystem
+
+    DL02 --> CAND
+    DL03 --> APPL
+    DL03 --> CAND
+    DL03 --> FEE
+    DL04 --> APPL
+    DL04 --> LIC
+    DL06 --> APPL
+    DL06 --> CAND
+    DL06 --> HIST
+    DL07 --> APPL
+    DL07 --> CAND
+    DL07 --> FEE
+    DL07 --> PAY
+    DL08 --> APPL
+    DL08 --> CAND
+    DL08 --> AUTH
+    DL09 --> APPL
+    DL09 --> CAND
+    DL09 --> AUTH
+    DL10 --> APPL
+    DL10 --> CAND
+    DL10 --> LIC
+</div>
+<h3 id="22-application-workflow-pipeline" tabindex="-1">2.2 Application Workflow Pipeline</h3>
+<p>All license applications flow through a mandatory multi-step pipeline. Each step is enforced by checking the <code>APPLICATION_STATUS</code> code in <code>DLIS.LICENSE_APPLICATION</code> before a transaction can proceed to the next stage.</p>
+<div class="mermaid">
+graph LR
+    A([Candidate\nRegistration\nDL02]) --> B([Application\nSubmission\nDL03])
+    B --> C([Eligibility\nCheck])
+    C --> D([History\nCheck\nDL06])
+    D --> E([Payment\nDL07])
+    E --> F([First Authority\nApproval\nDL08])
+    F --> G([Second Authority\nApproval\nDL09])
+    G --> H([License\nIssuance\nDL10])
+
+    style A fill:#d4f1f4,stroke:#5aa9b5,color:#000
+    style B fill:#e6f0ff,stroke:#7a9fd4,color:#000
+    style C fill:#e6f0ff,stroke:#7a9fd4,color:#000
+    style D fill:#e6f0ff,stroke:#7a9fd4,color:#000
+    style E fill:#e6f0ff,stroke:#7a9fd4,color:#000
+    style F fill:#fff4cc,stroke:#d4b85a,color:#000
+    style G fill:#fff4cc,stroke:#d4b85a,color:#000
+    style H fill:#d9f5d9,stroke:#7fbf7f,color:#000
+</div>
+<p>The <code>APPLICATION_STATUS</code> code in <code>DLIS.LICENSE_APPLICATION</code> reflects each stage:</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+<th>Set By</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PE</code></td>
+<td>Pending — awaiting eligibility check</td>
+<td>DLISAPPL (DL03)</td>
+</tr>
+<tr>
+<td><code>EC</code></td>
+<td>Eligibility checked — awaiting history</td>
+<td>(upstream eligibility program)</td>
+</tr>
+<tr>
+<td><code>HC</code></td>
+<td>History checked — awaiting payment</td>
+<td>DLISHIST (DL06)</td>
+</tr>
+<tr>
+<td><code>PA</code></td>
+<td>Payment approved — awaiting Auth 1</td>
+<td>DLISPAY (DL07)</td>
+</tr>
+<tr>
+<td><code>A2</code></td>
+<td>Awaiting second authority approval</td>
+<td>DLISAP1 (DL08)</td>
+</tr>
+<tr>
+<td><code>AP</code></td>
+<td>Fully approved — ready for issue</td>
+<td>DLISAP2 (DL09)</td>
+</tr>
+<tr>
+<td><code>IS</code></td>
+<td>License issued</td>
+<td>DLISISSU (DL10)</td>
+</tr>
+<tr>
+<td><code>RE</code></td>
+<td>Rejected</td>
+<td>DLISHIST, DLISAP1, or DLISAP2</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="3-db2-tables" tabindex="-1">3. DB2 Tables</h2>
+<h3 id="31-dliscandidate" tabindex="-1">3.1 DLIS.CANDIDATE</h3>
+<p>The <code>CANDIDATE</code> table is the root entity of the system. It stores personal and contact details for every individual who registers to apply for a driver’s license. Each candidate is assigned a system-generated identity column as the primary key.</p>
+<h4 id="311-column-definitions" tabindex="-1">3.1.1 Column Definitions</h4>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CANDIDATE_ID</code></td>
+<td><code>DECIMAL(10)</code></td>
+<td>Primary key, identity generated always</td>
+</tr>
+<tr>
+<td><code>FIRST_NAME</code></td>
+<td><code>VARCHAR(30)</code></td>
+<td>Required on create</td>
+</tr>
+<tr>
+<td><code>LAST_NAME</code></td>
+<td><code>VARCHAR(30)</code></td>
+<td>Required on create</td>
+</tr>
+<tr>
+<td><code>DATE_OF_BIRTH</code></td>
+<td><code>DATE</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>ID_NUMBER</code></td>
+<td><code>VARCHAR(20)</code></td>
+<td>Unique — national ID</td>
+</tr>
+<tr>
+<td><code>ADDRESS_LINE_1</code></td>
+<td><code>VARCHAR(50)</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>ADDRESS_LINE_2</code></td>
+<td><code>VARCHAR(50)</code></td>
+<td>Nullable</td>
+</tr>
+<tr>
+<td><code>CITY</code></td>
+<td><code>VARCHAR(30)</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>STATE_PROVINCE</code></td>
+<td><code>VARCHAR(30)</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>POSTAL_CODE</code></td>
+<td><code>VARCHAR(10)</code></td>
+<td>Nullable</td>
+</tr>
+<tr>
+<td><code>COUNTRY</code></td>
+<td><code>VARCHAR(30)</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>PHONE_NUMBER</code></td>
+<td><code>VARCHAR(15)</code></td>
+<td>Nullable</td>
+</tr>
+<tr>
+<td><code>EMAIL_ADDRESS</code></td>
+<td><code>VARCHAR(60)</code></td>
+<td>Nullable</td>
+</tr>
+<tr>
+<td><code>CREATED_DATE</code></td>
+<td><code>DATE</code></td>
+<td>Default: current date</td>
+</tr>
+<tr>
+<td><code>CREATED_BY</code></td>
+<td><code>VARCHAR(20)</code></td>
+<td>Set from CICS terminal ID (<code>EIBTRMID</code>)</td>
+</tr>
+<tr>
+<td><code>RECORD_STATUS</code></td>
+<td><code>CHAR(1)</code></td>
+<td><code>A</code> = Active, <code>I</code> = Inactive</td>
+</tr>
+</tbody>
+</table>
+<h4 id="312-programs-that-access-this-table" tabindex="-1">3.1.2 Programs That Access This Table</h4>
+<table>
+<thead>
+<tr>
+<th>Program</th>
+<th>Transaction</th>
+<th>Operation</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DLISCAND</td>
+<td>DL02</td>
+<td>SELECT</td>
+<td>Duplicate national ID check before insert</td>
+</tr>
+<tr>
+<td>DLISCAND</td>
+<td>DL02</td>
+<td>SELECT</td>
+<td>Inquiry by <code>CANDIDATE_ID</code> or <code>ID_NUMBER</code></td>
+</tr>
+<tr>
+<td>DLISCAND</td>
+<td>DL02</td>
+<td>INSERT</td>
+<td>Create new candidate (<code>RECORD_STATUS = 'A'</code>)</td>
+</tr>
+<tr>
+<td>DLISCAND</td>
+<td>DL02</td>
+<td>UPDATE</td>
+<td>Update personal details</td>
+</tr>
+<tr>
+<td>DLISCAND</td>
+<td>DL02</td>
+<td>UPDATE</td>
+<td>Deactivate candidate (<code>RECORD_STATUS = 'I'</code>)</td>
+</tr>
+<tr>
+<td>DLISAPPL</td>
+<td>DL03</td>
+<td>SELECT (JOIN)</td>
+<td>Retrieve <code>FIRST_NAME</code>, <code>LAST_NAME</code> for display</td>
+</tr>
+<tr>
+<td>DLISHIST</td>
+<td>DL06</td>
+<td>SELECT (JOIN)</td>
+<td>Retrieve candidate name for history check screen</td>
+</tr>
+<tr>
+<td>DLISPAY</td>
+<td>DL07</td>
+<td>SELECT (JOIN)</td>
+<td>Retrieve candidate name for payment screen</td>
+</tr>
+<tr>
+<td>DLISAP1</td>
+<td>DL08</td>
+<td>SELECT (JOIN)</td>
+<td>Retrieve candidate name for first approval screen</td>
+</tr>
+<tr>
+<td>DLISAP2</td>
+<td>DL09</td>
+<td>SELECT (JOIN)</td>
+<td>Retrieve candidate name for second approval screen</td>
+</tr>
+<tr>
+<td>DLISISSU</td>
+<td>DL10</td>
+<td>SELECT (JOIN)</td>
+<td>Retrieve candidate name for issuance screen</td>
+</tr>
+</tbody>
+</table>
+<h4 id="313-sql-code-example--insert-new-candidate-dliscand" tabindex="-1">3.1.3 SQL Code Example — Insert New Candidate (DLISCAND)</h4>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EXEC SQL
+    INSERT INTO DLIS.CANDIDATE
+        (FIRST_NAME, LAST_NAME, DATE_OF_BIRTH, ID_NUMBER,
+         ADDRESS_LINE_1, ADDRESS_LINE_2, CITY, STATE_PROVINCE,
+         POSTAL_CODE, COUNTRY, PHONE_NUMBER, EMAIL_ADDRESS,
+         RECORD_STATUS, CREATED_BY)
+    VALUES
+        (:FIRST-NAME, :LAST-NAME, :DATE-OF-BIRTH, :ID-NUMBER,
+         :ADDRESS-LINE-1, :ADDRESS-LINE-2, :CITY, :STATE-PROVINCE,
+         :POSTAL-CODE, :COUNTRY, :PHONE-NUMBER, :EMAIL-ADDRESS,
+         &#039;A&#039;, :CREATED-BY)
+END-EXEC</code></pre>
+</div>
+<p>After the insert, the generated <code>CANDIDATE_ID</code> is retrieved using:</p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EXEC SQL
+    SELECT IDENTITY_VAL_LOCAL()
+    INTO :CANDIDATE-ID
+    FROM SYSIBM.SYSDUMMY1
+END-EXEC</code></pre>
+</div>
+<hr>
+<h3 id="32-dlislicense_application" tabindex="-1">3.2 DLIS.LICENSE_APPLICATION</h3>
+<p>The <code>LICENSE_APPLICATION</code> table is the central table of the DLIS system. It is the only table written to or read by every workflow transaction. It tracks the full lifecycle of an application, including the results of all check stages, payment, and both approval levels.</p>
+<h4 id="321-column-definitions" tabindex="-1">3.2.1 Column Definitions</h4>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>APPLICATION_ID</code></td>
+<td><code>DECIMAL(10)</code></td>
+<td>Primary key, identity generated</td>
+</tr>
+<tr>
+<td><code>CANDIDATE_ID</code></td>
+<td><code>DECIMAL(10)</code></td>
+<td>Foreign key → <code>DLIS.CANDIDATE</code></td>
+</tr>
+<tr>
+<td><code>LICENSE_TYPE</code></td>
+<td><code>CHAR(1)</code></td>
+<td><code>L</code> = Learner, <code>P</code> = Probation, <code>O</code> = Open</td>
+</tr>
+<tr>
+<td><code>APPLICATION_DATE</code></td>
+<td><code>DATE</code></td>
+<td>Date application submitted</td>
+</tr>
+<tr>
+<td><code>APPLICATION_STATUS</code></td>
+<td><code>CHAR(2)</code></td>
+<td>Workflow state (PE/EC/HC/PA/A2/AP/IS/RE)</td>
+</tr>
+<tr>
+<td><code>ELIG_CHECK_STATUS</code></td>
+<td><code>CHAR(1)</code></td>
+<td><code>P</code> = Pass, <code>F</code> = Fail</td>
+</tr>
+<tr>
+<td><code>ELIG_CHECK_DATE</code></td>
+<td><code>DATE</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>ELIG_CHECK_NOTES</code></td>
+<td><code>VARCHAR(200)</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>HIST_CHECK_STATUS</code></td>
+<td><code>CHAR(1)</code></td>
+<td><code>P</code> = Pass, <code>F</code> = Fail</td>
+</tr>
+<tr>
+<td><code>HIST_CHECK_DATE</code></td>
+<td><code>DATE</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>HIST_CHECK_NOTES</code></td>
+<td><code>VARCHAR(200)</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>PAYMENT_STATUS</code></td>
+<td><code>CHAR(1)</code></td>
+<td><code>P</code> = Paid</td>
+</tr>
+<tr>
+<td><code>PAYMENT_REFERENCE</code></td>
+<td><code>VARCHAR(20)</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>APPROVAL_1_STATUS</code></td>
+<td><code>CHAR(1)</code></td>
+<td><code>A</code> = Approved, <code>R</code> = Rejected</td>
+</tr>
+<tr>
+<td><code>APPROVAL_1_AUTHORITY</code></td>
+<td><code>VARCHAR(50)</code></td>
+<td>Name of first approving authority</td>
+</tr>
+<tr>
+<td><code>APPROVAL_1_DATE</code></td>
+<td><code>DATE</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>APPROVAL_1_NOTES</code></td>
+<td><code>VARCHAR(200)</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>APPROVAL_2_STATUS</code></td>
+<td><code>CHAR(1)</code></td>
+<td><code>A</code> = Approved, <code>R</code> = Rejected</td>
+</tr>
+<tr>
+<td><code>APPROVAL_2_AUTHORITY</code></td>
+<td><code>VARCHAR(50)</code></td>
+<td>Name of second approving authority</td>
+</tr>
+<tr>
+<td><code>APPROVAL_2_DATE</code></td>
+<td><code>DATE</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>APPROVAL_2_NOTES</code></td>
+<td><code>VARCHAR(200)</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>REJECTION_REASON</code></td>
+<td><code>VARCHAR(300)</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>CREATED_DATE</code></td>
+<td><code>DATE</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>LAST_UPDATED_DATE</code></td>
+<td><code>DATE</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>CREATED_BY</code></td>
+<td><code>VARCHAR(20)</code></td>
+<td>CICS terminal ID</td>
+</tr>
+<tr>
+<td><code>LAST_UPDATED_BY</code></td>
+<td><code>VARCHAR(20)</code></td>
+<td>Updated by each workflow step</td>
+</tr>
+</tbody>
+</table>
+<h4 id="322-programs-that-access-this-table" tabindex="-1">3.2.2 Programs That Access This Table</h4>
+<table>
+<thead>
+<tr>
+<th>Program</th>
+<th>Transaction</th>
+<th>Operation</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DLISAPPL</td>
+<td>DL03</td>
+<td>SELECT COUNT</td>
+<td>Duplicate open-application check</td>
+</tr>
+<tr>
+<td>DLISAPPL</td>
+<td>DL03</td>
+<td>INSERT</td>
+<td>Create new application (<code>STATUS = 'PE'</code>)</td>
+</tr>
+<tr>
+<td>DLISSTAT</td>
+<td>DL04</td>
+<td>SELECT</td>
+<td>Full status inquiry by <code>APPLICATION_ID</code></td>
+</tr>
+<tr>
+<td>DLISHIST</td>
+<td>DL06</td>
+<td>SELECT (JOIN)</td>
+<td>Load application + candidate for history check</td>
+</tr>
+<tr>
+<td>DLISHIST</td>
+<td>DL06</td>
+<td>SELECT</td>
+<td>Re-read <code>ELIG_CHECK_STATUS</code> before history check</td>
+</tr>
+<tr>
+<td>DLISHIST</td>
+<td>DL06</td>
+<td>UPDATE</td>
+<td>Write <code>HIST_CHECK_STATUS</code>, <code>HIST_CHECK_NOTES</code>, <code>APPLICATION_STATUS</code></td>
+</tr>
+<tr>
+<td>DLISPAY</td>
+<td>DL07</td>
+<td>SELECT (JOIN)</td>
+<td>Load application + candidate for payment screen</td>
+</tr>
+<tr>
+<td>DLISPAY</td>
+<td>DL07</td>
+<td>UPDATE</td>
+<td>Set <code>PAYMENT_STATUS = 'P'</code>, <code>APPLICATION_STATUS = 'PA'</code></td>
+</tr>
+<tr>
+<td>DLISAP1</td>
+<td>DL08</td>
+<td>SELECT (JOIN)</td>
+<td>Load application + candidate for first approval</td>
+</tr>
+<tr>
+<td>DLISAP1</td>
+<td>DL08</td>
+<td>UPDATE</td>
+<td>Write <code>APPROVAL_1_*</code> fields, set <code>APPLICATION_STATUS</code> to <code>A2</code> or <code>RE</code></td>
+</tr>
+<tr>
+<td>DLISAP2</td>
+<td>DL09</td>
+<td>SELECT (JOIN)</td>
+<td>Load application + candidate for second approval</td>
+</tr>
+<tr>
+<td>DLISAP2</td>
+<td>DL09</td>
+<td>UPDATE</td>
+<td>Write <code>APPROVAL_2_*</code> fields, set <code>APPLICATION_STATUS</code> to <code>AP</code> or <code>RE</code></td>
+</tr>
+<tr>
+<td>DLISISSU</td>
+<td>DL10</td>
+<td>SELECT (JOIN)</td>
+<td>Load application + candidate for issuance</td>
+</tr>
+<tr>
+<td>DLISISSU</td>
+<td>DL10</td>
+<td>UPDATE</td>
+<td>Set <code>APPLICATION_STATUS = 'IS'</code>, <code>LAST_UPDATED_BY</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="323-sql-code-example--insert-new-application-dlisappl" tabindex="-1">3.2.3 SQL Code Example — Insert New Application (DLISAPPL)</h4>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EXEC SQL
+    INSERT INTO DLIS.LICENSE_APPLICATION
+        (CANDIDATE_ID, LICENSE_TYPE, APPLICATION_STATUS,
+         CREATED_BY, LAST_UPDATED_BY)
+    VALUES
+        (:CANDIDATE-ID, :LICENSE-TYPE, &#039;PE&#039;,
+         :CREATED-BY, :CREATED-BY)
+END-EXEC</code></pre>
+</div>
+<h4 id="324-sql-code-example--history-check-update-dlishist" tabindex="-1">3.2.4 SQL Code Example — History Check Update (DLISHIST)</h4>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EXEC SQL
+    UPDATE DLIS.LICENSE_APPLICATION
+    SET HIST_CHECK_STATUS  = :WS-HISTORY-STATUS,
+        HIST_CHECK_DATE    = CURRENT DATE,
+        HIST_CHECK_NOTES   = :WS-HIST-FAIL-MSG,
+        APPLICATION_STATUS = :APPLICATION-STATUS,
+        LAST_UPDATED_DATE  = CURRENT DATE,
+        LAST_UPDATED_BY    = :EIBTRMID
+    WHERE APPLICATION_ID   = :APPLICATION-ID
+END-EXEC</code></pre>
+</div>
+<hr>
+<h3 id="33-dlislicense_fee_schedule" tabindex="-1">3.3 DLIS.LICENSE_FEE_SCHEDULE</h3>
+<p>The <code>LICENSE_FEE_SCHEDULE</code> table stores the applicable fees for each license type. It is read-only at the application level — no DLIS transaction inserts or updates it. The table supports effective-date and expiry-date filtering so that fee changes can be scheduled in advance.</p>
+<h4 id="331-column-definitions" tabindex="-1">3.3.1 Column Definitions</h4>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LICENSE_TYPE</code></td>
+<td><code>CHAR(1)</code></td>
+<td><code>L</code>, <code>P</code>, or <code>O</code></td>
+</tr>
+<tr>
+<td><code>FEE_TYPE</code></td>
+<td><code>CHAR(2)</code></td>
+<td><code>IF</code> = Initial Fee</td>
+</tr>
+<tr>
+<td><code>FEE_AMOUNT</code></td>
+<td><code>DECIMAL(10,2)</code></td>
+<td>Monetary amount</td>
+</tr>
+<tr>
+<td><code>CURRENCY_CODE</code></td>
+<td><code>CHAR(3)</code></td>
+<td>e.g. <code>USD</code></td>
+</tr>
+<tr>
+<td><code>ACTIVE_STATUS</code></td>
+<td><code>CHAR(1)</code></td>
+<td><code>A</code> = Active</td>
+</tr>
+<tr>
+<td><code>EFFECTIVE_DATE</code></td>
+<td><code>DATE</code></td>
+<td>Fee is valid from this date</td>
+</tr>
+<tr>
+<td><code>EXPIRY_DATE</code></td>
+<td><code>DATE</code></td>
+<td>Nullable — null means no expiry</td>
+</tr>
+</tbody>
+</table>
+<h4 id="332-programs-that-access-this-table" tabindex="-1">3.3.2 Programs That Access This Table</h4>
+<table>
+<thead>
+<tr>
+<th>Program</th>
+<th>Transaction</th>
+<th>Operation</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DLISAPPL</td>
+<td>DL03</td>
+<td>SELECT</td>
+<td>Retrieve <code>FEE_AMOUNT</code>, <code>CURRENCY_CODE</code> for display (F5 — Calculate Fee)</td>
+</tr>
+<tr>
+<td>DLISPAY</td>
+<td>DL07</td>
+<td>SELECT</td>
+<td>Retrieve active initial fee for the license type before recording payment</td>
+</tr>
+</tbody>
+</table>
+<h4 id="333-sql-code-example--fee-schedule-lookup-dlisappl--dlispay" tabindex="-1">3.3.3 SQL Code Example — Fee Schedule Lookup (DLISAPPL / DLISPAY)</h4>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EXEC SQL
+    SELECT FEE_AMOUNT, CURRENCY_CODE
+    INTO   :FEE-AMOUNT, :CURRENCY-CODE
+    FROM   DLIS.LICENSE_FEE_SCHEDULE
+    WHERE  LICENSE_TYPE   = :LICENSE-TYPE
+    AND    FEE_TYPE        = &#039;IF&#039;
+    AND    ACTIVE_STATUS   = &#039;A&#039;
+    AND    EFFECTIVE_DATE &lt;= CURRENT DATE
+    AND    (EXPIRY_DATE IS NULL OR EXPIRY_DATE &gt;= CURRENT DATE)
+    FETCH FIRST 1 ROW ONLY
+END-EXEC</code></pre>
+</div>
+<hr>
+<h3 id="34-dlispayment" tabindex="-1">3.4 DLIS.PAYMENT</h3>
+<p>The <code>PAYMENT</code> table records each payment transaction made against a license application. A single application should have at most one payment row (duplicate payment is blocked by DLISPAY). The payment ID is a DB2-generated identity column.</p>
+<h4 id="341-column-definitions" tabindex="-1">3.4.1 Column Definitions</h4>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PAYMENT_ID</code></td>
+<td><code>DECIMAL(10)</code></td>
+<td>Primary key, identity generated</td>
+</tr>
+<tr>
+<td><code>APPLICATION_ID</code></td>
+<td><code>DECIMAL(10)</code></td>
+<td>Foreign key → <code>DLIS.LICENSE_APPLICATION</code></td>
+</tr>
+<tr>
+<td><code>CANDIDATE_ID</code></td>
+<td><code>DECIMAL(10)</code></td>
+<td>Foreign key → <code>DLIS.CANDIDATE</code></td>
+</tr>
+<tr>
+<td><code>PAYMENT_AMOUNT</code></td>
+<td><code>DECIMAL(10,2)</code></td>
+<td>Amount taken from fee schedule</td>
+</tr>
+<tr>
+<td><code>PAYMENT_METHOD</code></td>
+<td><code>CHAR(2)</code></td>
+<td><code>CC</code>, <code>DC</code>, <code>EF</code>, <code>CS</code>, or <code>CH</code></td>
+</tr>
+<tr>
+<td><code>PAYMENT_REFERENCE</code></td>
+<td><code>VARCHAR(30)</code></td>
+<td>Bank/authorisation reference</td>
+</tr>
+<tr>
+<td><code>PAYMENT_STATUS</code></td>
+<td><code>CHAR(1)</code></td>
+<td><code>S</code> = Successful</td>
+</tr>
+<tr>
+<td><code>LICENSE_TYPE</code></td>
+<td><code>CHAR(1)</code></td>
+<td>License type at time of payment</td>
+</tr>
+<tr>
+<td><code>FEE_TYPE</code></td>
+<td><code>CHAR(2)</code></td>
+<td>Always <code>IF</code> (Initial Fee)</td>
+</tr>
+<tr>
+<td><code>RECEIPT_NUMBER</code></td>
+<td><code>VARCHAR(20)</code></td>
+<td>Constructed as <code>RCP</code> + date + application ID</td>
+</tr>
+<tr>
+<td><code>PROCESSED_BY</code></td>
+<td><code>VARCHAR(20)</code></td>
+<td>Operator ID who recorded the payment</td>
+</tr>
+</tbody>
+</table>
+<h4 id="342-programs-that-access-this-table" tabindex="-1">3.4.2 Programs That Access This Table</h4>
+<table>
+<thead>
+<tr>
+<th>Program</th>
+<th>Transaction</th>
+<th>Operation</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DLISPAY</td>
+<td>DL07</td>
+<td>INSERT</td>
+<td>Record successful payment after all validations pass</td>
+</tr>
+</tbody>
+</table>
+<h4 id="343-sql-code-example--payment-insert-dlispay" tabindex="-1">3.4.3 SQL Code Example — Payment Insert (DLISPAY)</h4>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EXEC SQL
+    INSERT INTO DLIS.PAYMENT
+        (APPLICATION_ID, CANDIDATE_ID, PAYMENT_AMOUNT,
+         PAYMENT_METHOD, PAYMENT_REFERENCE, PAYMENT_STATUS,
+         LICENSE_TYPE, FEE_TYPE, RECEIPT_NUMBER, PROCESSED_BY)
+    VALUES
+        (:APPLICATION-ID, :CANDIDATE-ID, :PAYMENT-AMOUNT,
+         :PAYMENT-METHOD, :PAYMENT-REFERENCE, &#039;S&#039;,
+         :LICENSE-TYPE, &#039;IF&#039;, :RECEIPT-NUMBER, :PROCESSED-BY)
+END-EXEC</code></pre>
+</div>
+<p>The generated <code>PAYMENT_ID</code> is then retrieved with:</p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EXEC SQL
+    SELECT IDENTITY_VAL_LOCAL()
+    INTO   :PAYMENT-ID
+    FROM   SYSIBM.SYSDUMMY1
+END-EXEC</code></pre>
+</div>
+<hr>
+<h3 id="35-dlisissued_license" tabindex="-1">3.5 DLIS.ISSUED_LICENSE</h3>
+<p>The <code>ISSUED_LICENSE</code> table stores the physical license record created at the end of the workflow. It is only populated after an application reaches <code>APPLICATION_STATUS = 'AP'</code>. It is also queried by the status inquiry transaction (DL04) to display license number and expiry to clerks.</p>
+<h4 id="351-column-definitions" tabindex="-1">3.5.1 Column Definitions</h4>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LICENSE_ID</code></td>
+<td><code>DECIMAL(10)</code></td>
+<td>Primary key</td>
+</tr>
+<tr>
+<td><code>APPLICATION_ID</code></td>
+<td><code>DECIMAL(10)</code></td>
+<td>Foreign key → <code>DLIS.LICENSE_APPLICATION</code></td>
+</tr>
+<tr>
+<td><code>CANDIDATE_ID</code></td>
+<td><code>DECIMAL(10)</code></td>
+<td>Foreign key → <code>DLIS.CANDIDATE</code></td>
+</tr>
+<tr>
+<td><code>LICENSE_NUMBER</code></td>
+<td><code>VARCHAR(20)</code></td>
+<td>Built from type prefix + vehicle class + IDs</td>
+</tr>
+<tr>
+<td><code>LICENSE_TYPE</code></td>
+<td><code>CHAR(1)</code></td>
+<td><code>L</code>, <code>P</code>, or <code>O</code></td>
+</tr>
+<tr>
+<td><code>ISSUE_DATE</code></td>
+<td><code>DATE</code></td>
+<td>DB2 <code>CURRENT DATE</code> at time of insert</td>
+</tr>
+<tr>
+<td><code>EXPIRY_DATE</code></td>
+<td><code>VARCHAR(10)</code></td>
+<td>Calculated: +1/+2/+5 years by license type</td>
+</tr>
+<tr>
+<td><code>LICENSE_STATUS</code></td>
+<td><code>CHAR(1)</code></td>
+<td>Always <code>A</code> (Active) on insert</td>
+</tr>
+<tr>
+<td><code>VEHICLE_CLASS</code></td>
+<td><code>CHAR(2)</code></td>
+<td><code>A</code>, <code>B</code>, <code>C</code>, or <code>D</code></td>
+</tr>
+<tr>
+<td><code>RESTRICTIONS</code></td>
+<td><code>VARCHAR(200)</code></td>
+<td>Optional text entered by issuing officer</td>
+</tr>
+<tr>
+<td><code>DEMERIT_BALANCE</code></td>
+<td><code>INTEGER</code></td>
+<td>Always 12 on insert</td>
+</tr>
+<tr>
+<td><code>ISSUED_BY_AUTH</code></td>
+<td><code>VARCHAR(50)</code></td>
+<td>Issuing authority entered by officer</td>
+</tr>
+<tr>
+<td><code>ISSUED_BY_OFFICER</code></td>
+<td><code>VARCHAR(50)</code></td>
+<td>Issuing officer entered by officer</td>
+</tr>
+<tr>
+<td><code>RENEWAL_COUNT</code></td>
+<td><code>INTEGER</code></td>
+<td>Number of renewals</td>
+</tr>
+<tr>
+<td><code>PREV_LICENSE_ID</code></td>
+<td><code>INTEGER</code></td>
+<td>Prior license reference</td>
+</tr>
+<tr>
+<td><code>NOTES</code></td>
+<td><code>VARCHAR(300)</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="352-programs-that-access-this-table" tabindex="-1">3.5.2 Programs That Access This Table</h4>
+<table>
+<thead>
+<tr>
+<th>Program</th>
+<th>Transaction</th>
+<th>Operation</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DLISSTAT</td>
+<td>DL04</td>
+<td>SELECT</td>
+<td>Retrieve <code>LICENSE_NUMBER</code>, <code>EXPIRY_DATE</code> when <code>APPLICATION_STATUS = 'IS'</code></td>
+</tr>
+<tr>
+<td>DLISISSU</td>
+<td>DL10</td>
+<td>INSERT</td>
+<td>Create issued license record after final approval</td>
+</tr>
+</tbody>
+</table>
+<h4 id="353-sql-code-example--insert-issued-license-dlisissu" tabindex="-1">3.5.3 SQL Code Example — Insert Issued License (DLISISSU)</h4>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EXEC SQL
+    INSERT INTO DLIS.ISSUED_LICENSE
+        (APPLICATION_ID, CANDIDATE_ID, LICENSE_NUMBER,
+         LICENSE_TYPE, ISSUE_DATE, EXPIRY_DATE,
+         LICENSE_STATUS, VEHICLE_CLASS, RESTRICTIONS,
+         DEMERIT_BALANCE, ISSUED_BY_AUTH, ISSUED_BY_OFFICER)
+    VALUES
+        (:APPLICATION-ID, :CANDIDATE-ID, :WS-LICENSE-NUMBER,
+         :LICENSE-TYPE, CURRENT DATE, :WS-EXPIRY-DATE,
+         &#039;A&#039;, :VEHICLE-CLASS, :RESTRICTIONS,
+         12, :ISSUED-BY-AUTH, :ISSUED-BY-OFFICER)
+END-EXEC</code></pre>
+</div>
+<hr>
+<h3 id="36-dlisauthority_user" tabindex="-1">3.6 DLIS.AUTHORITY_USER</h3>
+<p>The <code>AUTHORITY_USER</code> table is the authority user registry used by both approval transactions. It controls who may approve a license application and at what level. Crucially, the second approval transaction (DL09) enforces <strong>segregation of duties</strong> by comparing the second approver’s <code>AUTHORITY_NAME</code> with the first approver’s authority stored in <code>LICENSE_APPLICATION.APPROVAL_1_AUTHORITY</code>.</p>
+<h4 id="361-column-definitions" tabindex="-1">3.6.1 Column Definitions</h4>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>USER_CODE</code></td>
+<td><code>VARCHAR(20)</code></td>
+<td>Primary key — entered by approver on screen</td>
+</tr>
+<tr>
+<td><code>USER_NAME</code></td>
+<td><code>VARCHAR(60)</code></td>
+<td>Display name</td>
+</tr>
+<tr>
+<td><code>AUTHORITY_NAME</code></td>
+<td><code>VARCHAR(50)</code></td>
+<td>Organisation name — used in segregation check</td>
+</tr>
+<tr>
+<td><code>AUTHORITY_LEVEL</code></td>
+<td><code>CHAR(1)</code></td>
+<td><code>1</code> = First approver, <code>2</code> = Second approver</td>
+</tr>
+<tr>
+<td><code>ACTIVE_STATUS</code></td>
+<td><code>CHAR(1)</code></td>
+<td><code>A</code> = Active</td>
+</tr>
+<tr>
+<td><code>LIC_TYPES_AUTH</code></td>
+<td><code>CHAR(3)</code></td>
+<td>License types this authority may approve</td>
+</tr>
+</tbody>
+</table>
+<h4 id="362-programs-that-access-this-table" tabindex="-1">3.6.2 Programs That Access This Table</h4>
+<table>
+<thead>
+<tr>
+<th>Program</th>
+<th>Transaction</th>
+<th>Operation</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DLISAP1</td>
+<td>DL08</td>
+<td>SELECT</td>
+<td>Validate approver: <code>ACTIVE_STATUS = 'A'</code> AND <code>AUTHORITY_LEVEL = '1'</code></td>
+</tr>
+<tr>
+<td>DLISAP2</td>
+<td>DL09</td>
+<td>SELECT</td>
+<td>Validate approver: <code>ACTIVE_STATUS = 'A'</code> AND <code>AUTHORITY_LEVEL = '2'</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="363-sql-code-example--authority-validation-dlisap1--dlisap2" tabindex="-1">3.6.3 SQL Code Example — Authority Validation (DLISAP1 / DLISAP2)</h4>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EXEC SQL
+    SELECT USER_NAME, AUTHORITY_NAME, AUTHORITY_LEVEL, LIC_TYPES_AUTH
+    INTO   :USER-NAME, :AUTHORITY-NAME,
+           :AUTHORITY-LEVEL, :LIC-TYPES-AUTH
+    FROM   DLIS.AUTHORITY_USER
+    WHERE  USER_CODE      = :USER-CODE
+    AND    ACTIVE_STATUS  = &#039;A&#039;
+    AND    AUTHORITY_LEVEL = &#039;1&#039;
+END-EXEC</code></pre>
+</div>
+<hr>
+<h3 id="37-dlisdriving_history" tabindex="-1">3.7 DLIS.DRIVING_HISTORY</h3>
+<p>The <code>DRIVING_HISTORY</code> table stores driving incidents for each candidate. It is read during the history check (DL06) via a DB2 cursor, ordered by incident date descending. The driving history check evaluates three pass/fail criteria derived from this table.</p>
+<h4 id="371-column-definitions" tabindex="-1">3.7.1 Column Definitions</h4>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>HISTORY_ID</code></td>
+<td><code>INTEGER</code></td>
+<td>Primary key</td>
+</tr>
+<tr>
+<td><code>CANDIDATE_ID</code></td>
+<td><code>DECIMAL(10)</code></td>
+<td>Foreign key → <code>DLIS.CANDIDATE</code></td>
+</tr>
+<tr>
+<td><code>INCIDENT_DATE</code></td>
+<td><code>VARCHAR(10)</code></td>
+<td>Date of incident</td>
+</tr>
+<tr>
+<td><code>INCIDENT_TYPE</code></td>
+<td><code>CHAR(2)</code></td>
+<td>e.g. <code>SU</code> = Suspension, <code>DQ</code> = Disqualification, <code>SP</code> = Speed</td>
+</tr>
+<tr>
+<td><code>INCIDENT_DESC</code></td>
+<td><code>VARCHAR(300)</code></td>
+<td>Description</td>
+</tr>
+<tr>
+<td><code>DEMERIT_POINTS</code></td>
+<td><code>INTEGER</code></td>
+<td>Accumulated for threshold check (limit: 12)</td>
+</tr>
+<tr>
+<td><code>FINE_AMOUNT</code></td>
+<td><code>DECIMAL(10,2)</code></td>
+<td>Fine associated with the incident</td>
+</tr>
+<tr>
+<td><code>FINE_PAID_STATUS</code></td>
+<td><code>CHAR(1)</code></td>
+<td><code>Y</code> = Paid, <code>N</code> = Unpaid</td>
+</tr>
+<tr>
+<td><code>SUSP_START_DATE</code></td>
+<td><code>VARCHAR(10)</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>SUSP_END_DATE</code></td>
+<td><code>VARCHAR(10)</code></td>
+<td>Blank = open-ended suspension</td>
+</tr>
+<tr>
+<td><code>COURT_CASE_NUMBER</code></td>
+<td><code>VARCHAR(20)</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>RECORDED_BY_AUTH</code></td>
+<td><code>VARCHAR(50)</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>RECORD_STATUS</code></td>
+<td><code>CHAR(1)</code></td>
+<td><code>A</code> = Active</td>
+</tr>
+</tbody>
+</table>
+<h4 id="372-programs-that-access-this-table" tabindex="-1">3.7.2 Programs That Access This Table</h4>
+<table>
+<thead>
+<tr>
+<th>Program</th>
+<th>Transaction</th>
+<th>Operation</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DLISHIST</td>
+<td>DL06</td>
+<td>OPEN/FETCH/CLOSE cursor</td>
+<td>Read all active incidents for the candidate; accumulate demerit points, check for active suspensions and unpaid fines</td>
+</tr>
+</tbody>
+</table>
+<h4 id="373-sql-code-example--driving-history-cursor-dlishist" tabindex="-1">3.7.3 SQL Code Example — Driving History Cursor (DLISHIST)</h4>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EXEC SQL
+    DECLARE HISTCUR CURSOR FOR
+        SELECT INCIDENT_DATE, INCIDENT_TYPE, INCIDENT_DESC,
+               DEMERIT_POINTS, FINE_AMOUNT, FINE_PAID_STATUS,
+               SUSP_START_DATE, SUSP_END_DATE
+        FROM   DLIS.DRIVING_HISTORY
+        WHERE  CANDIDATE_ID  = :CANDIDATE-ID
+        AND    RECORD_STATUS = &#039;A&#039;
+        ORDER BY INCIDENT_DATE DESC
+END-EXEC</code></pre>
+</div>
+<p>The history check fails if any of the following are true (evaluated in priority order):</p>
+<ol>
+<li>An active suspension or disqualification (<code>INCIDENT_TYPE IN ('SU','DQ')</code> with an open or future <code>SUSP_END_DATE</code>)</li>
+<li>Total <code>DEMERIT_POINTS</code> across all active incidents exceeds <strong>12</strong></li>
+<li>Any row has <code>FINE_AMOUNT &gt; 0</code> and <code>FINE_PAID_STATUS = 'N'</code></li>
+</ol>
+<hr>
+<h2 id="4-entity-relationship-diagram" tabindex="-1">4. Entity Relationship Diagram</h2>
+<p>The following diagram shows all seven DLIS tables and their relationships:</p>
+<div class="mermaid">
+erDiagram
+    CANDIDATE {
+        decimal CANDIDATE_ID "PK identity"
+        string FIRST_NAME "length 30"
+        string LAST_NAME "length 30"
+        date DATE_OF_BIRTH
+        string ID_NUMBER "length 20 unique"
+        string RECORD_STATUS "A or I"
+        string CREATED_BY "length 20"
+    }
+
+    LICENSE_APPLICATION {
+        decimal APPLICATION_ID "PK identity"
+        decimal CANDIDATE_ID "FK"
+        string LICENSE_TYPE "L P O"
+        string APPLICATION_STATUS "PE EC HC PA A2 AP IS RE"
+        string ELIG_CHECK_STATUS "P or F"
+        string HIST_CHECK_STATUS "P or F"
+        string PAYMENT_STATUS "P = Paid"
+        string APPROVAL_1_STATUS "A or R"
+        string APPROVAL_1_AUTHORITY "length 50"
+        string APPROVAL_2_STATUS "A or R"
+        string APPROVAL_2_AUTHORITY "length 50"
+        string LAST_UPDATED_BY "length 20"
+    }
+
+    LICENSE_FEE_SCHEDULE {
+        string LICENSE_TYPE "L P O"
+        string FEE_TYPE "IF = Initial Fee"
+        decimal FEE_AMOUNT "10 2"
+        string CURRENCY_CODE "length 3"
+        string ACTIVE_STATUS "A"
+        date EFFECTIVE_DATE
+        date EXPIRY_DATE "nullable"
+    }
+
+    PAYMENT {
+        decimal PAYMENT_ID "PK identity"
+        decimal APPLICATION_ID "FK"
+        decimal CANDIDATE_ID "FK"
+        decimal PAYMENT_AMOUNT
+        string PAYMENT_METHOD "CC DC EF CS CH"
+        string RECEIPT_NUMBER "length 20"
+        string PROCESSED_BY "length 20"
+    }
+
+    ISSUED_LICENSE {
+        decimal LICENSE_ID "PK"
+        decimal APPLICATION_ID "FK"
+        decimal CANDIDATE_ID "FK"
+        string LICENSE_NUMBER "length 20"
+        string EXPIRY_DATE "length 10"
+        string LICENSE_STATUS "A = Active"
+        string VEHICLE_CLASS "A B C D"
+        int DEMERIT_BALANCE "starts at 12"
+    }
+
+    AUTHORITY_USER {
+        string USER_CODE "PK length 20"
+        string AUTHORITY_NAME "length 50"
+        string AUTHORITY_LEVEL "1 or 2"
+        string ACTIVE_STATUS "A"
+        string LIC_TYPES_AUTH "length 3"
+    }
+
+    DRIVING_HISTORY {
+        int HISTORY_ID "PK"
+        decimal CANDIDATE_ID "FK"
+        string INCIDENT_TYPE "SU DQ SP etc"
+        int DEMERIT_POINTS
+        decimal FINE_AMOUNT
+        string FINE_PAID_STATUS "Y or N"
+        string SUSP_END_DATE "blank = open ended"
+        string RECORD_STATUS "A = Active"
+    }
+
+    CANDIDATE ||--o{ LICENSE_APPLICATION : "applies for"
+    CANDIDATE ||--o{ DRIVING_HISTORY : "has incidents"
+    CANDIDATE ||--o{ PAYMENT : "makes"
+    CANDIDATE ||--o{ ISSUED_LICENSE : "holds"
+    LICENSE_APPLICATION ||--o{ PAYMENT : "paid by"
+    LICENSE_APPLICATION ||--o| ISSUED_LICENSE : "results in"
+    LICENSE_FEE_SCHEDULE ||--o{ LICENSE_APPLICATION : "prices"
+</div>
+<hr>
+<h2 id="5-data-flow-by-transaction" tabindex="-1">5. Data Flow by Transaction</h2>
+<h3 id="51-end-to-end-data-flow" tabindex="-1">5.1 End-to-End Data Flow</h3>
+<p>The following sequence diagram shows the complete data lifecycle from candidate registration to license issuance across all DLIS transactions and DB2 tables.</p>
+<div class="mermaid">
+sequenceDiagram
+    participant Op as Operator
+    participant DL02 as DL02 DLISCAND
+    participant DL03 as DL03 DLISAPPL
+    participant DL06 as DL06 DLISHIST
+    participant DL07 as DL07 DLISPAY
+    participant DL08 as DL08 DLISAP1
+    participant DL09 as DL09 DLISAP2
+    participant DL10 as DL10 DLISISSU
+    participant DB2 as DB2
+
+    Op->>DL02: F1 Create Candidate
+    DL02->>DB2: INSERT DLIS.CANDIDATE
+    DB2-->>DL02: IDENTITY_VAL_LOCAL() → CANDIDATE_ID
+    DL02-->>Op: CANDIDATE CREATED SUCCESSFULLY
+
+    Op->>DL03: F1 Submit Application
+    DL03->>DB2: SELECT DLIS.CANDIDATE (validate)
+    DL03->>DB2: SELECT DLIS.LICENSE_FEE_SCHEDULE (fee)
+    DL03->>DB2: INSERT DLIS.LICENSE_APPLICATION (STATUS=PE)
+    DB2-->>DL03: IDENTITY_VAL_LOCAL() → APPLICATION_ID
+    DL03-->>Op: APPLICATION SUBMITTED SUCCESSFULLY
+
+    Op->>DL06: F1 Run History Check
+    DL06->>DB2: SELECT DLIS.LICENSE_APPLICATION (check ELIG_CHECK_STATUS)
+    DL06->>DB2: OPEN/FETCH/CLOSE cursor DLIS.DRIVING_HISTORY
+    DL06->>DB2: UPDATE DLIS.LICENSE_APPLICATION (STATUS=HC or RE)
+    DL06-->>Op: HISTORY CHECK PASSED / FAILED
+
+    Op->>DL07: F1 Record Payment
+    DL07->>DB2: SELECT DLIS.LICENSE_APPLICATION JOIN DLIS.CANDIDATE
+    DL07->>DB2: SELECT DLIS.LICENSE_FEE_SCHEDULE
+    DL07->>DB2: INSERT DLIS.PAYMENT
+    DL07->>DB2: UPDATE DLIS.LICENSE_APPLICATION (STATUS=PA)
+    DL07-->>Op: PAYMENT RECORDED SUCCESSFULLY
+
+    Op->>DL08: F1 First Approval
+    DL08->>DB2: SELECT DLIS.LICENSE_APPLICATION JOIN DLIS.CANDIDATE
+    DL08->>DB2: SELECT DLIS.AUTHORITY_USER (level 1)
+    DL08->>DB2: UPDATE DLIS.LICENSE_APPLICATION (STATUS=A2 or RE)
+    DL08-->>Op: FIRST APPROVAL RECORDED
+
+    Op->>DL09: F1 Second Approval
+    DL09->>DB2: SELECT DLIS.LICENSE_APPLICATION JOIN DLIS.CANDIDATE
+    DL09->>DB2: SELECT DLIS.AUTHORITY_USER (level 2)
+    DL09->>DB2: UPDATE DLIS.LICENSE_APPLICATION (STATUS=AP or RE)
+    DL09-->>Op: SECOND APPROVAL GRANTED
+
+    Op->>DL10: F1 Issue License
+    DL10->>DB2: SELECT DLIS.LICENSE_APPLICATION JOIN DLIS.CANDIDATE
+    DL10->>DB2: INSERT DLIS.ISSUED_LICENSE
+    DL10->>DB2: UPDATE DLIS.LICENSE_APPLICATION (STATUS=IS)
+    DL10-->>Op: DRIVER LICENSE ISSUED SUCCESSFULLY
+</div>
+<h3 id="52-readwrite-matrix" tabindex="-1">5.2 Read/Write Matrix</h3>
+<p>The following matrix summarises which tables each transaction reads ® and writes (W):</p>
+<table>
+<thead>
+<tr>
+<th>Table</th>
+<th>DL02</th>
+<th>DL03</th>
+<th>DL04</th>
+<th>DL06</th>
+<th>DL07</th>
+<th>DL08</th>
+<th>DL09</th>
+<th>DL10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DLIS.CANDIDATE</code></td>
+<td>R/W</td>
+<td>R</td>
+<td>—</td>
+<td>R</td>
+<td>R</td>
+<td>R</td>
+<td>R</td>
+<td>R</td>
+</tr>
+<tr>
+<td><code>DLIS.LICENSE_APPLICATION</code></td>
+<td>—</td>
+<td>R/W</td>
+<td>R</td>
+<td>R/W</td>
+<td>R/W</td>
+<td>R/W</td>
+<td>R/W</td>
+<td>R/W</td>
+</tr>
+<tr>
+<td><code>DLIS.LICENSE_FEE_SCHEDULE</code></td>
+<td>—</td>
+<td>R</td>
+<td>—</td>
+<td>—</td>
+<td>R</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>DLIS.PAYMENT</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>W</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>DLIS.ISSUED_LICENSE</code></td>
+<td>—</td>
+<td>—</td>
+<td>R</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>W</td>
+</tr>
+<tr>
+<td><code>DLIS.AUTHORITY_USER</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>R</td>
+<td>R</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>DLIS.DRIVING_HISTORY</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>R</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="6-db2-infrastructure" tabindex="-1">6. DB2 Infrastructure</h2>
+<h3 id="61-db2-bind-and-plan-details" tabindex="-1">6.1 DB2 Bind and Plan Details</h3>
+<p>All DLIS programs share a single DB2 plan. The static SQL embedded in each program is precompiled using the DB2 precompiler (<code>DSNHPC</code>) and bound using JCL <code>jcl/DLISBIND.jcl</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DB2 Subsystem</td>
+<td><code>DSN1</code></td>
+</tr>
+<tr>
+<td>Plan Name</td>
+<td><code>DLISPLAN</code></td>
+</tr>
+<tr>
+<td>Collection</td>
+<td><code>DLISPKG</code></td>
+</tr>
+<tr>
+<td>Bind JCL</td>
+<td><code>jcl/DLISBIND.jcl</code></td>
+</tr>
+<tr>
+<td>Compile JCL</td>
+<td><code>jcl/DLISCOMP.jcl</code></td>
+</tr>
+<tr>
+<td>Precompiler</td>
+<td><code>DSNHPC</code></td>
+</tr>
+<tr>
+<td>Compiler</td>
+<td><code>IGYCRCTL</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="62-cics-to-db2-connection" tabindex="-1">6.2 CICS-to-DB2 Connection</h3>
+<p>CICS accesses DB2 via a DB2ENTRY resource (<code>DLISDB2E</code>) defined in <code>csd/DLISCSD.csd</code>, bound to plan <code>DLISPLAN</code>. The entry supports a thread pool of up to 10 concurrent DB2 threads.</p>
+<h3 id="63-sql-communication-area-sqlca" tabindex="-1">6.3 SQL Communication Area (SQLCA)</h3>
+<p>All programs include the standard DB2 SQL Communication Area via:</p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EXEC SQL INCLUDE SQLCA END-EXEC</code></pre>
+</div>
+<p>The <code>SQLCODE</code> field is tested after every significant SQL operation. The standard codes used across all programs are:</p>
+<table>
+<thead>
+<tr>
+<th>SQLCODE</th>
+<th>Meaning</th>
+<th>How It Is Handled</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0</code></td>
+<td>Success</td>
+<td>Continue processing</td>
+</tr>
+<tr>
+<td><code>+100</code></td>
+<td>No row found</td>
+<td>Set “NOT FOUND” message, branch to exit paragraph</td>
+</tr>
+<tr>
+<td>Any negative</td>
+<td>DB2 error</td>
+<td>Set generic database error message (for INSERT/UPDATE)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="64-host-variable-structures-dclgen" tabindex="-1">6.4 Host Variable Structures (DCLGEN)</h3>
+<p>All DB2 host variables are declared via DCLGEN-generated structures, consolidated in the shared copybook <code>DLISDCLG</code> (<code>copybook/DLISDCLG.cpy</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Structure Name</th>
+<th>Maps To</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DCLDLIS-CANDIDATE</code></td>
+<td><code>DLIS.CANDIDATE</code></td>
+</tr>
+<tr>
+<td><code>DCLDLIS-LICENSE-APPL</code></td>
+<td><code>DLIS.LICENSE_APPLICATION</code></td>
+</tr>
+<tr>
+<td><code>DCLDLIS-DRIVING-HIST</code></td>
+<td><code>DLIS.DRIVING_HISTORY</code></td>
+</tr>
+<tr>
+<td><code>DCLDLIS-PAYMENT</code></td>
+<td><code>DLIS.PAYMENT</code></td>
+</tr>
+<tr>
+<td><code>DCLDLIS-ISSUED-LIC</code></td>
+<td><code>DLIS.ISSUED_LICENSE</code></td>
+</tr>
+<tr>
+<td><code>DCLDLIS-AUTH-USER</code></td>
+<td><code>DLIS.AUTHORITY_USER</code></td>
+</tr>
+<tr>
+<td><code>DCLDLIS-FEE-SCHED</code></td>
+<td><code>DLIS.LICENSE_FEE_SCHEDULE</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="65-schema-ddl-artefacts" tabindex="-1">6.5 Schema DDL Artefacts</h3>
+<p>The DLIS DB2 schema is created and maintained via the following SQL and JCL artefacts:</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>db2/DLIS0001-CREATE-TABLES.sql</code></td>
+<td>Creates all seven DLIS tables</td>
+</tr>
+<tr>
+<td><code>db2/DLIS0002-CREATE-INDEXES.sql</code></td>
+<td>Creates indexes (including unique index on <code>CANDIDATE.ID_NUMBER</code>)</td>
+</tr>
+<tr>
+<td><code>db2/DLIS0003-GRANTS.sql</code></td>
+<td>Grants SELECT, INSERT, UPDATE, DELETE to the CICS execution user</td>
+</tr>
+<tr>
+<td><code>jcl/DLISDB2.jcl</code></td>
+<td>JCL to run all three SQL scripts against subsystem <code>DSN1</code></td>
+</tr>
+</tbody>
+</table>
+
+                        <div class="related-pages">
+                            <p class="related-pages-title">Related Pages</p>
+                            <div class="card-grid">
+                                
+            <a href="application-lifecycle-flow.html" class="card">
+                <span class="card-title">Application Lifecycle &amp; Status Flow</span>
+                <span class="card-description">End-to-end view of how a license application moves from entry through eligibility, history, payment, first and second approval to issuance, including the status codes and gating conditions between steps.</span>
+            </a>
+            <a href="cics-integration-patterns.html" class="card">
+                <span class="card-title">CICS Integration Patterns</span>
+                <span class="card-description">Common CICS design patterns in DLIS: pseudo-conversational processing, BMS maps, COMMAREA context passing, program-to-program control transfer with XCTL and LINK, and print program delegation.</span>
+            </a>
+                            </div>
+                        </div>
+                    </div>
+                    <nav class="toc-panel" aria-label="On this page">
+  <span class="toc-panel-label">On this page</span>
+  <ul class="toc-list">
+<li class="toc-level-2"><a href="#1-overview">1. Overview</a></li>
+<li class="toc-level-2"><a href="#2-system-architecture">2. System Architecture</a>
+<ul>
+<li class="toc-level-3"><a href="#21-high-level-component-architecture">2.1 High-Level Component Architecture</a></li>
+<li class="toc-level-3"><a href="#22-application-workflow-pipeline">2.2 Application Workflow Pipeline</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#3-db2-tables">3. DB2 Tables</a>
+<ul>
+<li class="toc-level-3"><a href="#31-dliscandidate">3.1 DLIS.CANDIDATE</a>
+<ul>
+<li class="toc-level-4"><a href="#311-column-definitions">3.1.1 Column Definitions</a></li>
+<li class="toc-level-4"><a href="#312-programs-that-access-this-table">3.1.2 Programs That Access This Table</a></li>
+<li class="toc-level-4"><a href="#313-sql-code-example--insert-new-candidate-dliscand">3.1.3 SQL Code Example — Insert New Candidate (DLISCAND)</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#32-dlislicense_application">3.2 DLIS.LICENSE_APPLICATION</a>
+<ul>
+<li class="toc-level-4"><a href="#321-column-definitions">3.2.1 Column Definitions</a></li>
+<li class="toc-level-4"><a href="#322-programs-that-access-this-table">3.2.2 Programs That Access This Table</a></li>
+<li class="toc-level-4"><a href="#323-sql-code-example--insert-new-application-dlisappl">3.2.3 SQL Code Example — Insert New Application (DLISAPPL)</a></li>
+<li class="toc-level-4"><a href="#324-sql-code-example--history-check-update-dlishist">3.2.4 SQL Code Example — History Check Update (DLISHIST)</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#33-dlislicense_fee_schedule">3.3 DLIS.LICENSE_FEE_SCHEDULE</a>
+<ul>
+<li class="toc-level-4"><a href="#331-column-definitions">3.3.1 Column Definitions</a></li>
+<li class="toc-level-4"><a href="#332-programs-that-access-this-table">3.3.2 Programs That Access This Table</a></li>
+<li class="toc-level-4"><a href="#333-sql-code-example--fee-schedule-lookup-dlisappl--dlispay">3.3.3 SQL Code Example — Fee Schedule Lookup (DLISAPPL / DLISPAY)</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#34-dlispayment">3.4 DLIS.PAYMENT</a>
+<ul>
+<li class="toc-level-4"><a href="#341-column-definitions">3.4.1 Column Definitions</a></li>
+<li class="toc-level-4"><a href="#342-programs-that-access-this-table">3.4.2 Programs That Access This Table</a></li>
+<li class="toc-level-4"><a href="#343-sql-code-example--payment-insert-dlispay">3.4.3 SQL Code Example — Payment Insert (DLISPAY)</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#35-dlisissued_license">3.5 DLIS.ISSUED_LICENSE</a>
+<ul>
+<li class="toc-level-4"><a href="#351-column-definitions">3.5.1 Column Definitions</a></li>
+<li class="toc-level-4"><a href="#352-programs-that-access-this-table">3.5.2 Programs That Access This Table</a></li>
+<li class="toc-level-4"><a href="#353-sql-code-example--insert-issued-license-dlisissu">3.5.3 SQL Code Example — Insert Issued License (DLISISSU)</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#36-dlisauthority_user">3.6 DLIS.AUTHORITY_USER</a>
+<ul>
+<li class="toc-level-4"><a href="#361-column-definitions">3.6.1 Column Definitions</a></li>
+<li class="toc-level-4"><a href="#362-programs-that-access-this-table">3.6.2 Programs That Access This Table</a></li>
+<li class="toc-level-4"><a href="#363-sql-code-example--authority-validation-dlisap1--dlisap2">3.6.3 SQL Code Example — Authority Validation (DLISAP1 / DLISAP2)</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#37-dlisdriving_history">3.7 DLIS.DRIVING_HISTORY</a>
+<ul>
+<li class="toc-level-4"><a href="#371-column-definitions">3.7.1 Column Definitions</a></li>
+<li class="toc-level-4"><a href="#372-programs-that-access-this-table">3.7.2 Programs That Access This Table</a></li>
+<li class="toc-level-4"><a href="#373-sql-code-example--driving-history-cursor-dlishist">3.7.3 SQL Code Example — Driving History Cursor (DLISHIST)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#4-entity-relationship-diagram">4. Entity Relationship Diagram</a></li>
+<li class="toc-level-2"><a href="#5-data-flow-by-transaction">5. Data Flow by Transaction</a>
+<ul>
+<li class="toc-level-3"><a href="#51-end-to-end-data-flow">5.1 End-to-End Data Flow</a></li>
+<li class="toc-level-3"><a href="#52-readwrite-matrix">5.2 Read/Write Matrix</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#6-db2-infrastructure">6. DB2 Infrastructure</a>
+<ul>
+<li class="toc-level-3"><a href="#61-db2-bind-and-plan-details">6.1 DB2 Bind and Plan Details</a></li>
+<li class="toc-level-3"><a href="#62-cics-to-db2-connection">6.2 CICS-to-DB2 Connection</a></li>
+<li class="toc-level-3"><a href="#63-sql-communication-area-sqlca">6.3 SQL Communication Area (SQLCA)</a></li>
+<li class="toc-level-3"><a href="#64-host-variable-structures-dclgen">6.4 Host Variable Structures (DCLGEN)</a></li>
+<li class="toc-level-3"><a href="#65-schema-ddl-artefacts">6.5 Schema DDL Artefacts</a></li>
+</ul>
+</li>
+</ul>
+
+</nav>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+    /* toc-spy.js — highlights the active heading in the TOC panel on scroll */
+    (function () {
+      function init() {
+        var panel = document.querySelector('.toc-panel');
+        if (!panel) return;
+        var links = Array.prototype.slice.call(panel.querySelectorAll('a[href^="#"]'));
+        if (!links.length) return;
+
+        var headingIds = links.map(function (a) { return a.getAttribute('href').slice(1); });
+        var headings = headingIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+        function clearActive() {
+          panel.querySelectorAll('.toc-active').forEach(function (el) { el.classList.remove('toc-active'); });
+          panel.querySelectorAll('.toc-parent-active').forEach(function (el) { el.classList.remove('toc-parent-active'); });
+        }
+
+        function setActive(id) {
+          clearActive();
+          var link = panel.querySelector('a[href="#' + id + '"]');
+          if (!link) return;
+          link.classList.add('toc-active');
+          var li = link.closest('li');
+          if (li) {
+            var parentLi = li.parentElement && li.parentElement.closest('li');
+            if (parentLi) parentLi.classList.add('toc-parent-active');
+          }
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+        headings.forEach(function (h) { observer.observe(h); });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
+    <script>
+    /* sidebar-toggle.js — persists open/closed state across navigation */
+    (function () {
+
+      var STORAGE_KEY = 'sb_open';
+
+      function getOpenSet() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+      }
+
+      function saveOpenSet(set) {
+        try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(set)); } catch (e) {}
+      }
+
+      function findItems(toggle) {
+        var node = toggle.nextSibling;
+        while (node) {
+          if (node.nodeType === 1 && node.classList.contains('nav-section-items'))
+            return node;
+          node = node.nextSibling;
+        }
+        return null;
+      }
+
+      function toggleKey(toggle, index) {
+        var label = (toggle.querySelector('.nav-toggle-text') || toggle).textContent.trim().replace(/\s+/g, ' ');
+        return index + ':' + label;
+      }
+
+      function openSection(toggle, items, key, set) {
+        toggle.classList.add('open');
+        items.classList.add('open');
+        if (set) set[key] = true;
+      }
+
+      function closeSection(toggle, items, key, set) {
+        toggle.classList.remove('open');
+        items.classList.remove('open');
+        if (set) set[key] = false;
+      }
+
+      function init() {
+        var sidebar = document.getElementById('wiki-sidebar');
+        var toggles = Array.prototype.slice.call(
+          document.querySelectorAll('.nav-section-toggle')
+        );
+
+        var activeIdx = -1;
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+          if (items.querySelector('.nav-link.active')) {
+            activeIdx = idx;
+          }
+        });
+
+        var savedSet = getOpenSet();
+        var openSet = savedSet || {};
+
+        if (activeIdx !== -1) {
+          openSet[toggleKey(toggles[activeIdx], activeIdx)] = true;
+        }
+
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+
+          var key = toggleKey(toggle, idx);
+          var shouldOpen = openSet[key] === true;
+
+          if (shouldOpen) {
+            toggle.classList.add('open');
+            items.classList.add('open');
+          }
+
+          toggle.addEventListener('click', function () {
+            var nowOpen = toggle.classList.contains('open');
+            if (nowOpen) {
+              closeSection(toggle, items, key, openSet);
+            } else {
+              openSection(toggle, items, key, openSet);
+            }
+            saveOpenSet(openSet);
+          });
+        });
+
+        saveOpenSet(openSet);
+
+        /* Restore sidebar scroll position after sections are expanded so the
+           scroll height is correct when we apply scrollTop. */
+        if (sidebar) {
+          try {
+            var savedScroll = sessionStorage.getItem('sb_scroll');
+            if (savedScroll !== null) { sidebar.scrollTop = parseInt(savedScroll, 10) || 0; }
+          } catch (_e) {}
+        }
+
+        window.addEventListener('pagehide', function () {
+          saveOpenSet(openSet);
+          if (sidebar) {
+            try { sessionStorage.setItem('sb_scroll', String(sidebar.scrollTop)); } catch (_e) {}
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+    </script>
+    <script>
+    /* nav-tracking.js — only stamps sessionStorage when clicking a source-file link
+       that lives inside the "Source Files" disclosure section, not from sidebar or cards. */
+    (function () {
+      document.addEventListener('click', function (e) {
+        var link = e.target.closest('a[href]');
+        if (!link) return;
+        var href = link.getAttribute('href');
+        if (!href || href.indexOf('sources/') === -1) return;
+        /* Only set referrer when the click originates from inside the Source Files
+           disclosure (.source-files-disclosure). Any other path — sidebar, cards,
+           direct navigation — must not set a referrer. */
+        if (!link.closest('.source-files-disclosure')) return;
+        try {
+          sessionStorage.setItem('wiki_referrer', JSON.stringify({
+            href: location.href,
+            title: document.title,
+            file: location.pathname.split('/').pop()
+          }));
+        } catch (_e) {}
+      });
+    })();
+    </script>
+    <footer class="wiki-footer">Made by IBM Bob Premium Package for Z</footer>
+</body>
+</html>

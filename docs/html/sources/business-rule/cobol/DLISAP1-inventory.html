@@ -1,0 +1,1184 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLISAP1-inventory</title>
+    <link rel="stylesheet" href="../../../assets/style.css">
+    <script src="../../../assets/mermaid.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+
+    <!-- Prism.js for syntax highlighting (bundled — no CDN required) -->
+    <link rel="stylesheet" href="../../../assets/prism-tomorrow.css">
+    <script src="../../../assets/prism-core.js"></script>
+    <script src="../../../assets/prism-languages.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="header-app-name"><a href="../../../../index.html" style="color: inherit; text-decoration: none;">Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</a></span>
+        </div>
+        <div class="header-right">
+        </div>
+    </header>
+    <div class="shell">
+        <aside class="sidebar" id="wiki-sidebar">
+            <nav>
+                
+        <div class="nav-home-wrap">
+            <a href="../../../../index.html" class="nav-home">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 6.5L8 2l6 4.5V14a1 1 0 01-1 1H3a1 1 0 01-1-1V6.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M6 15V9h4v6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                Home
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Application Documentation</div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Overview</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/system-overview.html" class="nav-link" data-page-id="system-overview">DLIS System Overview</a>
+                <a href="../../../pages/main-menu-navigation.html" class="nav-link" data-page-id="main-menu-navigation">Main Menu &amp; Navigation (DL01)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Candidate &amp; Application Intake</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/candidate-management.html" class="nav-link" data-page-id="candidate-management">Candidate Maintenance (DL02)</a>
+                <a href="../../../pages/license-application-entry.html" class="nav-link" data-page-id="license-application-entry">License Application Entry (DL03)</a>
+                <a href="../../../pages/application-status-inquiry.html" class="nav-link" data-page-id="application-status-inquiry">Application Status Inquiry (DL04)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Verification &amp; Payment</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/eligibility-check.html" class="nav-link" data-page-id="eligibility-check">Eligibility Check (DL05)</a>
+                <a href="../../../pages/driving-history-check.html" class="nav-link" data-page-id="driving-history-check">Driving History Check (DL06)</a>
+                <a href="../../../pages/payment-processing.html" class="nav-link" data-page-id="payment-processing">Payment Entry &amp; Processing (DL07)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Approval &amp; License Issuance</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/first-level-approval.html" class="nav-link" data-page-id="first-level-approval">First-Level Authority Approval (DL08)</a>
+                <a href="../../../pages/second-level-approval.html" class="nav-link" data-page-id="second-level-approval">Second-Level Authority Approval (DL09)</a>
+                <a href="../../../pages/license-issuance.html" class="nav-link" data-page-id="license-issuance">License Issuance (DL10)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Architecture</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/application-lifecycle-flow.html" class="nav-link" data-page-id="application-lifecycle-flow">Application Lifecycle &amp; Status Flow</a>
+                <a href="../../../pages/data-architecture.html" class="nav-link" data-page-id="data-architecture">Data Architecture (DB2)</a>
+                <a href="../../../pages/cics-integration-patterns.html" class="nav-link" data-page-id="cics-integration-patterns">CICS Integration Patterns</a>
+            </div>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Program Documentation</div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">program</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../sources/program/cobol/DLISPAY.html" class="nav-link">DLISPAY</a>
+                <a href="../../../sources/program/cobol/DLISSTAT.html" class="nav-link">DLISSTAT</a>
+                <a href="../../../sources/program/cobol/DLISMENU.html" class="nav-link">DLISMENU</a>
+                <a href="../../../sources/program/cobol/DLISELIG.html" class="nav-link">DLISELIG</a>
+                <a href="../../../sources/program/cobol/DLISCAND.html" class="nav-link">DLISCAND</a>
+                <a href="../../../sources/program/cobol/DLISAPPL.html" class="nav-link">DLISAPPL</a>
+                <a href="../../../sources/program/cobol/DLISISSU.html" class="nav-link">DLISISSU</a>
+                <a href="../../../sources/program/cobol/DLISAP2.html" class="nav-link">DLISAP2</a>
+                <a href="../../../sources/program/cobol/DLISHIST.html" class="nav-link">DLISHIST</a>
+                <a href="../../../sources/program/cobol/DLISAP1.html" class="nav-link">DLISAP1</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="nav-section">
+        <button class="nav-section-toggle open" type="button">
+            <span class="nav-toggle-text">business-rule</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items open">
+        <div class="nav-section">
+            <button class="nav-section-toggle open" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items open">
+                <a href="../../../sources/business-rule/cobol/DLISELIG-overview.html" class="nav-link">DLISELIG-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-inventory.html" class="nav-link">DLISPAY-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-overview.html" class="nav-link">DLISCAND-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-inventory.html" class="nav-link">DLISAP2-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-inventory.html" class="nav-link">DLISHIST-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-inventory.html" class="nav-link">DLISMENU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISELIG-inventory.html" class="nav-link">DLISELIG-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-overview.html" class="nav-link">DLISPAY-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-overview.html" class="nav-link">DLISSTAT-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-overview.html" class="nav-link">DLISHIST-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-overview.html" class="nav-link">DLISAPPL-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-inventory.html" class="nav-link">DLISISSU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-inventory.html" class="nav-link">DLISAPPL-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-inventory.html" class="nav-link">DLISSTAT-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-overview.html" class="nav-link">DLISAP1-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-inventory.html" class="nav-link">DLISCAND-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-overview.html" class="nav-link">DLISAP2-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-overview.html" class="nav-link">DLISISSU-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-inventory.html" class="nav-link active">DLISAP1-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-overview.html" class="nav-link">DLISMENU-overview</a>
+            </div>
+        </div>
+        </div>
+    </div>
+            </nav>
+        </aside>
+        <main class="main">
+            <div class="prog-container">
+                <div id="wiki-breadcrumb"></div>
+                <div class="content-layout">
+                    <article class="prose">
+                        <h1 id="business-rules-inventory" tabindex="-1">Business rules: Inventory</h1>
+<p><strong>Program:</strong> DLISAP1</p>
+<p><strong>Total rules extracted:</strong> 16</p>
+<h2 id="1-purpose" tabindex="-1">1. Purpose</h2>
+<p>This document is an inventory of all business rules extracted from DLISAP1, organised at the Paragraph level. Each Paragraph contributes one or more named rule blocks, where each block captures a discrete business policy with its title, decision logic, conditions, actions, outcomes, and the exact source code that realises it. Key variables, when available, are annotated with their role (input or output) and their specific purpose within the rule. References to related Paragraphs called or invoked by each rule are also recorded.</p>
+<h2 id="2-rule-inventory" tabindex="-1">2. Rule Inventory</h2>
+<h3 id="21-paragraph-process-input" tabindex="-1">2.1 Paragraph: PROCESS-INPUT</h3>
+<h4 id="211-function-key-routing-to-business-actions" tabindex="-1">2.1.1 Function Key Routing to Business Actions</h4>
+<p><strong>Description:</strong> Routes the user’s function key press to the appropriate business action: F1 submits the first approval, F3 loads an application, F4 validates the authority user, F12 exits the transaction, and any other key produces an instructional message.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>F1 triggers the first approval submission workflow</li>
+<li>F3 triggers loading of an application record</li>
+<li>F4 triggers authority user validation</li>
+<li>F12 exits the transaction immediately</li>
+<li>Any unrecognised key results in a guidance message rather than an action</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EVALUATE TRUE
+               WHEN EIBAID = DFHPF1   PERFORM SUBMIT-APPROVAL1
+               WHEN EIBAID = DFHPF3   PERFORM LOAD-APPLICATION
+               WHEN EIBAID = DFHPF4   PERFORM VALIDATE-AUTHORITY
+               WHEN EIBAID = DFHPF12  EXEC CICS RETURN END-EXEC
+               OTHER
+                   MOVE &#039;USE F1 F3 F4 OR F12&#039; TO DA1MSG
+           END-EVALUATE</code></pre>
+</div>
+<p><strong>Paragraphs:</strong></p>
+<ul>
+<li>SUBMIT-APPROVAL1</li>
+<li>LOAD-APPLICATION</li>
+<li>VALIDATE-AUTHORITY</li>
+</ul>
+<h3 id="22-paragraph-main-logic" tabindex="-1">2.2 Paragraph: MAIN-LOGIC</h3>
+<h4 id="221-new-session-vs-returning-session-routing" tabindex="-1">2.2.1 New Session vs. Returning Session Routing</h4>
+<p><strong>Description:</strong> Determines whether the transaction is being started for the first time (no commarea) or is a returning interaction. On first entry the screen is initialised; on subsequent entries the saved commarea is restored and user input is processed.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>A commarea length of zero means a fresh session — initialise the screen</li>
+<li>A non-zero commarea length means a returning session — restore state and process the user’s input</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF EIBCALEN = 0
+               PERFORM INIT-SCREEN
+           ELSE
+               MOVE DFHCOMMAREA TO DLIS-COMMAREA
+               PERFORM PROCESS-INPUT
+           END-IF</code></pre>
+</div>
+<p><strong>Paragraphs:</strong></p>
+<ul>
+<li>INIT-SCREEN</li>
+<li>PROCESS-INPUT</li>
+</ul>
+<h3 id="23-paragraph-load-application" tabindex="-1">2.3 Paragraph: LOAD-APPLICATION</h3>
+<h4 id="231-application-id-presence-validation" tabindex="-1">2.3.1 Application ID Presence Validation</h4>
+<p><strong>Description:</strong> Enforces that an Application ID must be supplied before an application can be loaded. If the field is blank or zero, the user is prompted and processing stops.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>An Application ID of zero is treated as absent — the user must supply a valid value before proceeding</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF DA1AIDI = ZEROS
+               MOVE &#039;ENTER APPLICATION ID&#039; TO DA1MSG
+               GO TO LOAD-APP-EXIT
+           END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>APPLICATION-ID</code></td>
+<td>input</td>
+<td>The value entered by the user that must be non-zero for application retrieval to proceed</td>
+</tr>
+</tbody>
+</table>
+<h4 id="232-retrieve-application-and-candidate-details" tabindex="-1">2.3.2 Retrieve Application and Candidate Details</h4>
+<p><strong>Description:</strong> Retrieves the full set of business details for a license application — including its type, lifecycle status, eligibility and history check results, payment information, and the candidate’s name — by joining the license application and candidate tables on the supplied Application ID.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>Application details are fetched using the user-supplied Application ID as the lookup key</li>
+<li>The candidate’s name is resolved by joining the candidate table to the application record</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE DA1AIDI TO APPLICATION-ID OF DCLDLIS-LICENSE-APPL
+           EXEC SQL
+               SELECT A.LICENSE_TYPE, A.APPLICATION_STATUS,
+                      A.ELIG_CHECK_STATUS, A.HIST_CHECK_STATUS,
+                      A.PAYMENT_STATUS,    A.PAYMENT_REFERENCE,
+                      A.ELIG_CHECK_NOTES,  A.HIST_CHECK_NOTES,
+                      C.FIRST_NAME, C.LAST_NAME
+               INTO   :LICENSE-TYPE, :APPLICATION-STATUS,
+                      :ELIG-CHECK-STATUS, :HIST-CHECK-STATUS,
+                      :PAYMENT-STATUS, :PAYMENT-REFERENCE
+                      OF DCLDLIS-LICENSE-APPL,
+                      :ELIG-CHECK-NOTES, :HIST-CHECK-NOTES
+                      OF DCLDLIS-LICENSE-APPL,
+                      :FIRST-NAME, :LAST-NAME OF DCLDLIS-CANDIDATE
+               FROM   DLIS.LICENSE_APPLICATION A
+               JOIN   DLIS.CANDIDATE C ON A.CANDIDATE_ID = C.CANDIDATE_I        
+               WHERE  A.APPLICATION_ID = :APPLICATION-ID
+                                         OF DCLDLIS-LICENSE-APPL
+           END-EXEC</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>APPLICATION-ID</code></td>
+<td>input</td>
+<td>Used as the WHERE clause key to identify the specific application record to retrieve</td>
+</tr>
+<tr>
+<td><code>APPLICATION-STATUS</code></td>
+<td>output</td>
+<td>Receives the current lifecycle status of the application from the database</td>
+</tr>
+<tr>
+<td><code>LICENSE-TYPE</code></td>
+<td>output</td>
+<td>Receives the category of license applied for from the database</td>
+</tr>
+<tr>
+<td><code>PAYMENT-STATUS</code></td>
+<td>output</td>
+<td>Receives the payment completion status of the application from the database</td>
+</tr>
+<tr>
+<td><code>PAYMENT-REFERENCE</code></td>
+<td>output</td>
+<td>Receives the payment reference identifier from the database for display</td>
+</tr>
+<tr>
+<td><code>ELIG-CHECK-STATUS</code></td>
+<td>output</td>
+<td>Receives the eligibility check result from the database for display to the approver</td>
+</tr>
+<tr>
+<td><code>HIST-CHECK-STATUS</code></td>
+<td>output</td>
+<td>Receives the history check result from the database for display to the approver</td>
+</tr>
+<tr>
+<td><code>FIRST-NAME</code></td>
+<td>output</td>
+<td>Receives the candidate’s given name from the candidate table for display</td>
+</tr>
+<tr>
+<td><code>LAST-NAME</code></td>
+<td>output</td>
+<td>Receives the candidate’s family name from the candidate table for display</td>
+</tr>
+</tbody>
+</table>
+<h4 id="233-application-not-found-guard" tabindex="-1">2.3.3 Application Not Found Guard</h4>
+<p><strong>Description:</strong> Detects when the supplied Application ID does not match any record in the database and informs the user, preventing further processing on a non-existent application.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>If the database returns no rows for the given Application ID the load operation is aborted with a descriptive message</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF SQLCODE = 100
+               MOVE &#039;APPLICATION NOT FOUND&#039; TO DA1MSG
+               GO TO LOAD-APP-EXIT
+           END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>APPLICATION-ID</code></td>
+<td>input</td>
+<td>The key that was used in the query; its absence in the result set triggers the not-found message</td>
+</tr>
+</tbody>
+</table>
+<h4 id="234-populate-screen-with-application-business-data" tabindex="-1">2.3.4 Populate Screen with Application Business Data</h4>
+<p><strong>Description:</strong> Presents all retrieved application and candidate information on the screen for the approving authority to review, including the candidate’s full name, license type, application status, eligibility and history check outcomes, and payment details.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>The candidate’s first and last names are combined into a single display field</li>
+<li>All key business attributes of the application are surfaced to support the approver’s decision</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">STRING FIRST-NAME OF DCLDLIS-CANDIDATE DELIMITED SPACE
+                  &#039; &#039; DELIMITED SIZE
+                  LAST-NAME  OF DCLDLIS-CANDIDATE DELIMITED SPACE
+               INTO DA1CNAMO
+           MOVE LICENSE-TYPE       OF DCLDLIS-LICENSE-APPL TO DA1LTYO
+           MOVE APPLICATION-STATUS OF DCLDLIS-LICENSE-APPL TO DA1ASTTO
+           MOVE ELIG-CHECK-STATUS  OF DCLDLIS-LICENSE-APPL TO DA1ELIGO
+           MOVE HIST-CHECK-STATUS  OF DCLDLIS-LICENSE-APPL TO DA1HISTO
+           MOVE PAYMENT-STATUS     OF DCLDLIS-LICENSE-APPL TO DA1PAYO
+           MOVE PAYMENT-REFERENCE  OF DCLDLIS-LICENSE-APPL TO DA1PYRFO
+           MOVE ELIG-CHECK-NOTES   OF DCLDLIS-LICENSE-APPL TO DA1ELNTO
+           MOVE HIST-CHECK-NOTES   OF DCLDLIS-LICENSE-APPL TO DA1HSNTO
+           MOVE &#039;APPLICATION LOADED&#039; TO DA1MSG.</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FIRST-NAME</code></td>
+<td>input</td>
+<td>Combined with the last name to form the candidate’s full name for screen display</td>
+</tr>
+<tr>
+<td><code>LAST-NAME</code></td>
+<td>input</td>
+<td>Combined with the first name to form the candidate’s full name for screen display</td>
+</tr>
+<tr>
+<td><code>LICENSE-TYPE</code></td>
+<td>input</td>
+<td>Displayed to show the category of license being applied for</td>
+</tr>
+<tr>
+<td><code>APPLICATION-STATUS</code></td>
+<td>input</td>
+<td>Displayed to show the current lifecycle status of the application</td>
+</tr>
+<tr>
+<td><code>ELIG-CHECK-STATUS</code></td>
+<td>input</td>
+<td>Displayed as supporting information for the approver’s eligibility assessment</td>
+</tr>
+<tr>
+<td><code>HIST-CHECK-STATUS</code></td>
+<td>input</td>
+<td>Displayed as supporting information for the approver’s history assessment</td>
+</tr>
+<tr>
+<td><code>PAYMENT-STATUS</code></td>
+<td>input</td>
+<td>Displayed to confirm whether payment has been completed</td>
+</tr>
+<tr>
+<td><code>PAYMENT-REFERENCE</code></td>
+<td>input</td>
+<td>Displayed so the approver can trace the associated payment transaction</td>
+</tr>
+</tbody>
+</table>
+<h3 id="24-paragraph-validate-authority" tabindex="-1">2.4 Paragraph: VALIDATE-AUTHORITY</h3>
+<h4 id="241-authority-user-code-presence-validation" tabindex="-1">2.4.1 Authority User Code Presence Validation</h4>
+<p><strong>Description:</strong> Enforces that an authority user code must be provided before validation can proceed. If the field is blank, the user is prompted and processing stops.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>A blank authority user code is treated as absent — the user must supply a value before authority validation can proceed</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF DA1AUCOI = SPACES
+               MOVE &#039;ENTER AUTHORITY USER CODE&#039; TO DA1MSG
+               GO TO VALIDATE-AUTH-EXIT
+           END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>USER-CODE</code></td>
+<td>input</td>
+<td>The value checked for presence; if blank, validation is refused</td>
+</tr>
+</tbody>
+</table>
+<h4 id="242-lookup-active-level-1-authority-user" tabindex="-1">2.4.2 Lookup Active Level-1 Authority User</h4>
+<p><strong>Description:</strong> Retrieves the authority user’s details from the database, enforcing that the user must be active and hold authority level 1. Only users meeting both criteria are returned, making this the primary eligibility gate for first-approval rights.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>Only authority users with an active status of ‘A’ are permitted to perform first approvals</li>
+<li>Only authority users at level ‘1’ are eligible for first approval — users at other levels are rejected</li>
+<li>The lookup retrieves the user’s name, authority name, and permitted license types for subsequent checks</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE DA1AUCOI TO USER-CODE OF DCLDLIS-AUTH-USER
+           EXEC SQL
+               SELECT USER_NAME, AUTHORITY_NAME, AUTHORITY_LEVEL,
+                      LIC_TYPES_AUTH
+               INTO   :USER-NAME, :AUTHORITY-NAME, :AUTHORITY-LEVEL,
+                      :LIC-TYPES-AUTH OF DCLDLIS-AUTH-USER
+               FROM   DLIS.AUTHORITY_USER
+               WHERE  USER_CODE       = :USER-CODE OF DCLDLIS-AUTH-USER
+               AND    ACTIVE_STATUS   = &#039;A&#039;
+               AND    AUTHORITY_LEVEL = &#039;1&#039;
+           END-EXEC</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>USER-CODE</code></td>
+<td>input</td>
+<td>Used as the primary lookup key to identify the authority user in the database</td>
+</tr>
+<tr>
+<td><code>USER-NAME</code></td>
+<td>output</td>
+<td>Receives the authority user’s display name from the database</td>
+</tr>
+<tr>
+<td><code>AUTHORITY-NAME</code></td>
+<td>output</td>
+<td>Receives the authority’s formal name from the database for display and recording</td>
+</tr>
+<tr>
+<td><code>AUTHORITY-LEVEL</code></td>
+<td>output</td>
+<td>Receives the authority tier; the query constrains this to ‘1’ so only level-1 approvers are returned</td>
+</tr>
+<tr>
+<td><code>LIC-TYPES-AUTH</code></td>
+<td>output</td>
+<td>Receives the list of license types the authority is permitted to approve, used in subsequent authorization checks</td>
+</tr>
+</tbody>
+</table>
+<h4 id="243-authority-user-not-found-or-ineligible-guard" tabindex="-1">2.4.3 Authority User Not Found or Ineligible Guard</h4>
+<p><strong>Description:</strong> Detects when the supplied user code does not correspond to an active level-1 authority user and informs the operator, preventing the approval from proceeding with an unqualified user.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>If no active level-1 authority user is found for the given code, validation fails and the approval is blocked</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF SQLCODE = 100
+               MOVE &#039;AUTHORITY USER NOT FOUND OR NOT ACTIVE AT LEVEL 1&#039;
+                   TO DA1MSG
+               GO TO VALIDATE-AUTH-EXIT
+           END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>USER-CODE</code></td>
+<td>input</td>
+<td>The code that was used in the failed lookup, whose absence from results triggers the ineligibility message</td>
+</tr>
+</tbody>
+</table>
+<h4 id="244-display-validated-authority-user-on-screen" tabindex="-1">2.4.4 Display Validated Authority User on Screen</h4>
+<p><strong>Description:</strong> Presents the validated authority user’s name and authority name on the screen to confirm to the operator which approver has been recognised and accepted.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>The authority user’s name and authority name are shown on screen upon successful validation to confirm the approver’s identity</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE USER-NAME      OF DCLDLIS-AUTH-USER TO DA1AUNMO
+           MOVE AUTHORITY-NAME OF DCLDLIS-AUTH-USER TO DA1AUNMO
+           MOVE &#039;AUTHORITY USER VALIDATED&#039; TO DA1MSG.</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>USER-NAME</code></td>
+<td>input</td>
+<td>Displayed on screen to identify the validated approver by name</td>
+</tr>
+<tr>
+<td><code>AUTHORITY-NAME</code></td>
+<td>input</td>
+<td>Displayed on screen to confirm the authority designation of the validated approver</td>
+</tr>
+</tbody>
+</table>
+<h3 id="25-paragraph-submit-approval1" tabindex="-1">2.5 Paragraph: SUBMIT-APPROVAL1</h3>
+<h4 id="251-mandatory-input-validation-before-approval-submission" tabindex="-1">2.5.1 Mandatory Input Validation Before Approval Submission</h4>
+<p><strong>Description:</strong> Enforces that all three mandatory business inputs — Application ID, authority user code, and a valid decision — must be present and valid before the first approval can be submitted. Only ‘A’ (approve) or ‘R’ (reject) are accepted as decisions.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>Application ID must be non-zero to proceed</li>
+<li>Authority user code must be non-blank to proceed</li>
+<li>Decision must be explicitly ‘A’ (approve) or ‘R’ (reject) — blank or any other value is rejected</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF DA1AIDI = ZEROS
+               MOVE &#039;ENTER APPLICATION ID&#039; TO DA1MSG
+               GO TO SUBMIT-A1-EXIT
+           END-IF
+           IF DA1AUCOI = SPACES
+               MOVE &#039;AUTHORITY USER CODE IS REQUIRED&#039; TO DA1MSG
+               GO TO SUBMIT-A1-EXIT
+           END-IF
+           IF DA1DECI = SPACES OR DA1DECI NOT IN (&#039;A&#039;,&#039;R&#039;)
+               MOVE &#039;DECISION MUST BE A=APPROVE OR R=REJECT&#039; TO DA1MSG
+               GO TO SUBMIT-A1-EXIT
+           END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>APPLICATION-ID</code></td>
+<td>input</td>
+<td>Must be non-zero to confirm the target application has been identified</td>
+</tr>
+<tr>
+<td><code>USER-CODE</code></td>
+<td>input</td>
+<td>Must be non-blank to confirm that an authority user has been identified for the approval</td>
+</tr>
+<tr>
+<td><code>WS-DECISION</code></td>
+<td>input</td>
+<td>Must be ‘A’ or ‘R’ to represent a valid first-approval decision</td>
+</tr>
+</tbody>
+</table>
+<h4 id="252-payment-completion-gate-for-first-approval" tabindex="-1">2.5.2 Payment Completion Gate for First Approval</h4>
+<p><strong>Description:</strong> Enforces the business rule that payment must be fully completed before a first approval can be recorded. If the payment status is not ‘P’ (paid), the approval submission is blocked.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>Payment status must be ‘P’ (paid) before the first approval is permitted — any other payment status blocks the approval</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF PAYMENT-STATUS OF DCLDLIS-LICENSE-APPL NOT = &#039;P&#039;
+               MOVE &#039;PAYMENT MUST BE COMPLETED BEFORE FIRST APPROVAL&#039;
+                   TO DA1MSG
+               GO TO SUBMIT-A1-EXIT
+           END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PAYMENT-STATUS</code></td>
+<td>input</td>
+<td>Acts as a business gate — must equal ‘P’ for the first approval to be allowed to proceed</td>
+</tr>
+</tbody>
+</table>
+<h4 id="253-license-type-authorization-check-for-authority" tabindex="-1">2.5.3 License Type Authorization Check for Authority</h4>
+<p><strong>Description:</strong> Verifies that the validated authority user is permitted to approve the specific license type of the application. If the application’s license type is not within the authority’s authorised list, the approval is refused.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>The authority user must be explicitly authorized for the application’s license type — approval is blocked if the license type is outside their permitted scope</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">*    Check license type authorisation
+           IF DA1LTYO NOT IN LIC-TYPES-AUTH OF DCLDLIS-AUTH-USER
+               MOVE &#039;AUTHORITY NOT AUTHORISED FOR THIS LICENSE TYPE&#039;
+                   TO DA1MSG
+               GO TO SUBMIT-A1-EXIT
+           END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LIC-TYPES-AUTH</code></td>
+<td>input</td>
+<td>Contains the list of license types the authority is permitted to approve; the application’s type must be found within this list</td>
+</tr>
+<tr>
+<td><code>LICENSE-TYPE</code></td>
+<td>input</td>
+<td>The application’s license category that is checked against the authority’s permitted license types</td>
+</tr>
+</tbody>
+</table>
+<h4 id="254-determine-new-application-status-from-decision" tabindex="-1">2.5.4 Determine New Application Status from Decision</h4>
+<p><strong>Description:</strong> Translates the first authority’s decision into the new application lifecycle status. An approval decision advances the application to ‘A2’ (forwarded for second approval), while a rejection sets it to ‘RE’ (rejected).</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>A decision of ‘A’ (approve) advances the application status to ‘A2’ — forwarded for second approval</li>
+<li>A decision of ‘R’ (reject) sets the application status to ‘RE’ — application closed as rejected</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE DA1DECI TO WS-DECISION
+           IF WS-DECISION = &#039;A&#039;
+               MOVE &#039;A2&#039; TO APPLICATION-STATUS OF DCLDLIS-LICENSE-APPL
+           ELSE
+               MOVE &#039;RE&#039; TO APPLICATION-STATUS OF DCLDLIS-LICENSE-APPL
+           END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>WS-DECISION</code></td>
+<td>input</td>
+<td>Holds the first authority’s decision (‘A’ or ‘R’) that determines which new application status is applied</td>
+</tr>
+<tr>
+<td><code>APPLICATION-STATUS</code></td>
+<td>output</td>
+<td>Receives the new lifecycle status derived from the approval decision — ‘A2’ for approval or ‘RE’ for rejection</td>
+</tr>
+</tbody>
+</table>
+<h4 id="255-persist-first-approval-decision-to-database" tabindex="-1">2.5.5 Persist First Approval Decision to Database</h4>
+<p><strong>Description:</strong> Records the first approval decision permanently in the license application database record, capturing the approval status, the authority who made the decision, the date, any decision notes, the updated application lifecycle status, and the audit trail of who last updated the record.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>The first approval status, authority name, date, and notes are recorded against the application</li>
+<li>The application’s lifecycle status is updated to reflect the approval or rejection outcome</li>
+<li>The last-updated audit fields are stamped with the current date and the authority user’s code</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EXEC SQL
+               UPDATE DLIS.LICENSE_APPLICATION SET
+                   APPROVAL_1_STATUS    = :WS-DECISION,
+                   APPROVAL_1_AUTHORITY = :AUTHORITY-NAME
+                                          OF DCLDLIS-AUTH-USER,
+                   APPROVAL_1_DATE      = CURRENT DATE,
+                   APPROVAL_1_NOTES     = :DA1DCNTI,
+                   APPLICATION_STATUS   = :APPLICATION-STATUS
+                                          OF DCLDLIS-LICENSE-APPL,
+                   LAST_UPDATED_DATE    = CURRENT DATE,
+                   LAST_UPDATED_BY      = :DA1AUCOI
+               WHERE APPLICATION_ID     = :APPLICATION-ID
+                                          OF DCLDLIS-LICENSE-APPL
+           END-EXEC</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>WS-DECISION</code></td>
+<td>input</td>
+<td>Written to APPROVAL_1_STATUS to record whether the first authority approved or rejected</td>
+</tr>
+<tr>
+<td><code>AUTHORITY-NAME</code></td>
+<td>input</td>
+<td>Written to APPROVAL_1_AUTHORITY to record the identity of the approving authority</td>
+</tr>
+<tr>
+<td><code>APPLICATION-STATUS</code></td>
+<td>input</td>
+<td>Written to APPLICATION_STATUS to persist the new lifecycle status determined by the decision</td>
+</tr>
+<tr>
+<td><code>APPLICATION-ID</code></td>
+<td>input</td>
+<td>Used in the WHERE clause to target the correct application record for the update</td>
+</tr>
+<tr>
+<td><code>USER-CODE</code></td>
+<td>input</td>
+<td>Written to LAST_UPDATED_BY as the audit trail identifier of the person who submitted the approval</td>
+</tr>
+</tbody>
+</table>
+<h4 id="256-approval-outcome-confirmation-message" tabindex="-1">2.5.6 Approval Outcome Confirmation Message</h4>
+<p><strong>Description:</strong> Informs the operator of the outcome of the first approval submission. An approval confirms that the application has been forwarded for second approval; a rejection confirms that the application has been closed.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>An ‘A’ decision produces a confirmation that the application is forwarded for second approval</li>
+<li>An ‘R’ decision produces a confirmation that the application has been rejected and closed</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF WS-DECISION = &#039;A&#039;
+               MOVE &#039;FIRST APPROVAL RECORDED - FORWARDED FOR 2ND APPROVA        
+                   TO DA1MSG
+           ELSE
+               MOVE &#039;FIRST APPROVAL REJECTED - APPLICATION CLOSED&#039;
+                   TO DA1MSG
+           END-IF.</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>WS-DECISION</code></td>
+<td>input</td>
+<td>Determines which outcome message is displayed to the operator after the approval is saved</td>
+</tr>
+</tbody>
+</table>
+
+                    </article>
+                    <nav class="toc-panel" aria-label="On this page">
+  <span class="toc-panel-label">On this page</span>
+  <ul class="toc-list">
+<li class="toc-level-2"><a href="#1-purpose">1. Purpose</a></li>
+<li class="toc-level-2"><a href="#2-rule-inventory">2. Rule Inventory</a>
+<ul>
+<li class="toc-level-3"><a href="#21-paragraph-process-input">2.1 Paragraph: PROCESS-INPUT</a>
+<ul>
+<li class="toc-level-4"><a href="#211-function-key-routing-to-business-actions">2.1.1 Function Key Routing to Business Actions</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#22-paragraph-main-logic">2.2 Paragraph: MAIN-LOGIC</a>
+<ul>
+<li class="toc-level-4"><a href="#221-new-session-vs-returning-session-routing">2.2.1 New Session vs. Returning Session Routing</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#23-paragraph-load-application">2.3 Paragraph: LOAD-APPLICATION</a>
+<ul>
+<li class="toc-level-4"><a href="#231-application-id-presence-validation">2.3.1 Application ID Presence Validation</a></li>
+<li class="toc-level-4"><a href="#232-retrieve-application-and-candidate-details">2.3.2 Retrieve Application and Candidate Details</a></li>
+<li class="toc-level-4"><a href="#233-application-not-found-guard">2.3.3 Application Not Found Guard</a></li>
+<li class="toc-level-4"><a href="#234-populate-screen-with-application-business-data">2.3.4 Populate Screen with Application Business Data</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#24-paragraph-validate-authority">2.4 Paragraph: VALIDATE-AUTHORITY</a>
+<ul>
+<li class="toc-level-4"><a href="#241-authority-user-code-presence-validation">2.4.1 Authority User Code Presence Validation</a></li>
+<li class="toc-level-4"><a href="#242-lookup-active-level-1-authority-user">2.4.2 Lookup Active Level-1 Authority User</a></li>
+<li class="toc-level-4"><a href="#243-authority-user-not-found-or-ineligible-guard">2.4.3 Authority User Not Found or Ineligible Guard</a></li>
+<li class="toc-level-4"><a href="#244-display-validated-authority-user-on-screen">2.4.4 Display Validated Authority User on Screen</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#25-paragraph-submit-approval1">2.5 Paragraph: SUBMIT-APPROVAL1</a>
+<ul>
+<li class="toc-level-4"><a href="#251-mandatory-input-validation-before-approval-submission">2.5.1 Mandatory Input Validation Before Approval Submission</a></li>
+<li class="toc-level-4"><a href="#252-payment-completion-gate-for-first-approval">2.5.2 Payment Completion Gate for First Approval</a></li>
+<li class="toc-level-4"><a href="#253-license-type-authorization-check-for-authority">2.5.3 License Type Authorization Check for Authority</a></li>
+<li class="toc-level-4"><a href="#254-determine-new-application-status-from-decision">2.5.4 Determine New Application Status from Decision</a></li>
+<li class="toc-level-4"><a href="#255-persist-first-approval-decision-to-database">2.5.5 Persist First Approval Decision to Database</a></li>
+<li class="toc-level-4"><a href="#256-approval-outcome-confirmation-message">2.5.6 Approval Outcome Confirmation Message</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</nav>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="wiki-footer">Made by IBM Bob Premium Package for Z</footer>
+    <script>
+    /* toc-spy.js — highlights the active heading in the TOC panel on scroll */
+    (function () {
+      function init() {
+        var panel = document.querySelector('.toc-panel');
+        if (!panel) return;
+        var links = Array.prototype.slice.call(panel.querySelectorAll('a[href^="#"]'));
+        if (!links.length) return;
+
+        var headingIds = links.map(function (a) { return a.getAttribute('href').slice(1); });
+        var headings = headingIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+        function clearActive() {
+          panel.querySelectorAll('.toc-active').forEach(function (el) { el.classList.remove('toc-active'); });
+          panel.querySelectorAll('.toc-parent-active').forEach(function (el) { el.classList.remove('toc-parent-active'); });
+        }
+
+        function setActive(id) {
+          clearActive();
+          var link = panel.querySelector('a[href="#' + id + '"]');
+          if (!link) return;
+          link.classList.add('toc-active');
+          var li = link.closest('li');
+          if (li) {
+            var parentLi = li.parentElement && li.parentElement.closest('li');
+            if (parentLi) parentLi.classList.add('toc-parent-active');
+          }
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+        headings.forEach(function (h) { observer.observe(h); });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
+    <script>
+    /* breadcrumb.js — reads sessionStorage['wiki_referrer'] and renders breadcrumb.
+       Only fires when the referrer was set by clicking a link inside the Source Files
+       disclosure on a wiki page; clears after rendering so stale state never lingers. */
+    (function () {
+      var raw;
+      try { raw = sessionStorage.getItem('wiki_referrer'); } catch (_e) {}
+      if (!raw) return;
+      /* Consume immediately — prevents the breadcrumb re-appearing on the next visit. */
+      try { sessionStorage.removeItem('wiki_referrer'); } catch (_e) {}
+      var ref;
+      try { ref = JSON.parse(raw); } catch (_e) { return; }
+      if (!ref || !ref.href) return;
+      var bc = document.getElementById('wiki-breadcrumb');
+      if (!bc) return;
+      bc.className = 'wiki-breadcrumb';
+      bc.innerHTML =
+        '<a href="' + ref.href + '">' + (ref.title || 'Back') + '</a>' +
+        '<span class="wiki-breadcrumb-sep"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' +
+        '<span class="wiki-breadcrumb-current">DLISAP1-inventory</span>';
+    })();
+    </script>
+    <script>
+    /* sidebar toggle — same as main wiki pages */
+    (function () {
+
+      var STORAGE_KEY = 'sb_open';
+
+      function getOpenSet() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+      }
+
+      function saveOpenSet(set) {
+        try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(set)); } catch (e) {}
+      }
+
+      function findItems(toggle) {
+        var node = toggle.nextSibling;
+        while (node) {
+          if (node.nodeType === 1 && node.classList.contains('nav-section-items'))
+            return node;
+          node = node.nextSibling;
+        }
+        return null;
+      }
+
+      function toggleKey(toggle, index) {
+        var label = (toggle.querySelector('.nav-toggle-text') || toggle).textContent.trim().replace(/\s+/g, ' ');
+        return index + ':' + label;
+      }
+
+      function openSection(toggle, items, key, set) {
+        toggle.classList.add('open');
+        items.classList.add('open');
+        if (set) set[key] = true;
+      }
+
+      function closeSection(toggle, items, key, set) {
+        toggle.classList.remove('open');
+        items.classList.remove('open');
+        if (set) set[key] = false;
+      }
+
+      function init() {
+        var sidebar = document.getElementById('wiki-sidebar');
+        var toggles = Array.prototype.slice.call(
+          document.querySelectorAll('.nav-section-toggle')
+        );
+
+        var savedSet = getOpenSet();
+        var openSet = savedSet || {};
+
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+
+          var key = toggleKey(toggle, idx);
+          var shouldOpen = openSet[key] === true;
+
+          if (shouldOpen) {
+            toggle.classList.add('open');
+            items.classList.add('open');
+          }
+
+          toggle.addEventListener('click', function () {
+            var nowOpen = toggle.classList.contains('open');
+            if (nowOpen) {
+              closeSection(toggle, items, key, openSet);
+            } else {
+              openSection(toggle, items, key, openSet);
+            }
+            saveOpenSet(openSet);
+          });
+        });
+
+        saveOpenSet(openSet);
+
+        /* Restore sidebar scroll position after sections are expanded so the
+           scroll height is correct when we apply scrollTop. */
+        if (sidebar) {
+          try {
+            var savedScroll = sessionStorage.getItem('sb_scroll');
+            if (savedScroll !== null) { sidebar.scrollTop = parseInt(savedScroll, 10) || 0; }
+          } catch (_e) {}
+        }
+
+        window.addEventListener('pagehide', function () {
+          saveOpenSet(openSet);
+          if (sidebar) {
+            try { sessionStorage.setItem('sb_scroll', String(sidebar.scrollTop)); } catch (_e) {}
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+    </script>
+</body>
+</html>

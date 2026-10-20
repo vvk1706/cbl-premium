@@ -1,0 +1,411 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</title>
+    <link rel="stylesheet" href="html/assets/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="header-app-name">Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</span>
+        </div>
+        <div class="header-right">
+        </div>
+    </header>
+    <div class="shell">
+        <aside class="sidebar" id="wiki-sidebar">
+            <nav>
+                
+        <div class="nav-home-wrap">
+            <a href="index.html" class="nav-home active">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 6.5L8 2l6 4.5V14a1 1 0 01-1 1H3a1 1 0 01-1-1V6.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M6 15V9h4v6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                Home
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Application Documentation</div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Overview</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="html/pages/system-overview.html" class="nav-link" data-page-id="system-overview">DLIS System Overview</a>
+                <a href="html/pages/main-menu-navigation.html" class="nav-link" data-page-id="main-menu-navigation">Main Menu &amp; Navigation (DL01)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Candidate &amp; Application Intake</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="html/pages/candidate-management.html" class="nav-link" data-page-id="candidate-management">Candidate Maintenance (DL02)</a>
+                <a href="html/pages/license-application-entry.html" class="nav-link" data-page-id="license-application-entry">License Application Entry (DL03)</a>
+                <a href="html/pages/application-status-inquiry.html" class="nav-link" data-page-id="application-status-inquiry">Application Status Inquiry (DL04)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Verification &amp; Payment</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="html/pages/eligibility-check.html" class="nav-link" data-page-id="eligibility-check">Eligibility Check (DL05)</a>
+                <a href="html/pages/driving-history-check.html" class="nav-link" data-page-id="driving-history-check">Driving History Check (DL06)</a>
+                <a href="html/pages/payment-processing.html" class="nav-link" data-page-id="payment-processing">Payment Entry &amp; Processing (DL07)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Approval &amp; License Issuance</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="html/pages/first-level-approval.html" class="nav-link" data-page-id="first-level-approval">First-Level Authority Approval (DL08)</a>
+                <a href="html/pages/second-level-approval.html" class="nav-link" data-page-id="second-level-approval">Second-Level Authority Approval (DL09)</a>
+                <a href="html/pages/license-issuance.html" class="nav-link" data-page-id="license-issuance">License Issuance (DL10)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Architecture</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="html/pages/application-lifecycle-flow.html" class="nav-link" data-page-id="application-lifecycle-flow">Application Lifecycle &amp; Status Flow</a>
+                <a href="html/pages/data-architecture.html" class="nav-link" data-page-id="data-architecture">Data Architecture (DB2)</a>
+                <a href="html/pages/cics-integration-patterns.html" class="nav-link" data-page-id="cics-integration-patterns">CICS Integration Patterns</a>
+            </div>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Program Documentation</div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">program</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="html/sources/program/cobol/DLISPAY.html" class="nav-link">DLISPAY</a>
+                <a href="html/sources/program/cobol/DLISSTAT.html" class="nav-link">DLISSTAT</a>
+                <a href="html/sources/program/cobol/DLISMENU.html" class="nav-link">DLISMENU</a>
+                <a href="html/sources/program/cobol/DLISELIG.html" class="nav-link">DLISELIG</a>
+                <a href="html/sources/program/cobol/DLISCAND.html" class="nav-link">DLISCAND</a>
+                <a href="html/sources/program/cobol/DLISAPPL.html" class="nav-link">DLISAPPL</a>
+                <a href="html/sources/program/cobol/DLISISSU.html" class="nav-link">DLISISSU</a>
+                <a href="html/sources/program/cobol/DLISAP2.html" class="nav-link">DLISAP2</a>
+                <a href="html/sources/program/cobol/DLISHIST.html" class="nav-link">DLISHIST</a>
+                <a href="html/sources/program/cobol/DLISAP1.html" class="nav-link">DLISAP1</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">business-rule</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="html/sources/business-rule/cobol/DLISELIG-overview.html" class="nav-link">DLISELIG-overview</a>
+                <a href="html/sources/business-rule/cobol/DLISPAY-inventory.html" class="nav-link">DLISPAY-inventory</a>
+                <a href="html/sources/business-rule/cobol/DLISCAND-overview.html" class="nav-link">DLISCAND-overview</a>
+                <a href="html/sources/business-rule/cobol/DLISAP2-inventory.html" class="nav-link">DLISAP2-inventory</a>
+                <a href="html/sources/business-rule/cobol/DLISHIST-inventory.html" class="nav-link">DLISHIST-inventory</a>
+                <a href="html/sources/business-rule/cobol/DLISMENU-inventory.html" class="nav-link">DLISMENU-inventory</a>
+                <a href="html/sources/business-rule/cobol/DLISELIG-inventory.html" class="nav-link">DLISELIG-inventory</a>
+                <a href="html/sources/business-rule/cobol/DLISPAY-overview.html" class="nav-link">DLISPAY-overview</a>
+                <a href="html/sources/business-rule/cobol/DLISSTAT-overview.html" class="nav-link">DLISSTAT-overview</a>
+                <a href="html/sources/business-rule/cobol/DLISHIST-overview.html" class="nav-link">DLISHIST-overview</a>
+                <a href="html/sources/business-rule/cobol/DLISAPPL-overview.html" class="nav-link">DLISAPPL-overview</a>
+                <a href="html/sources/business-rule/cobol/DLISISSU-inventory.html" class="nav-link">DLISISSU-inventory</a>
+                <a href="html/sources/business-rule/cobol/DLISAPPL-inventory.html" class="nav-link">DLISAPPL-inventory</a>
+                <a href="html/sources/business-rule/cobol/DLISSTAT-inventory.html" class="nav-link">DLISSTAT-inventory</a>
+                <a href="html/sources/business-rule/cobol/DLISAP1-overview.html" class="nav-link">DLISAP1-overview</a>
+                <a href="html/sources/business-rule/cobol/DLISCAND-inventory.html" class="nav-link">DLISCAND-inventory</a>
+                <a href="html/sources/business-rule/cobol/DLISAP2-overview.html" class="nav-link">DLISAP2-overview</a>
+                <a href="html/sources/business-rule/cobol/DLISISSU-overview.html" class="nav-link">DLISISSU-overview</a>
+                <a href="html/sources/business-rule/cobol/DLISAP1-inventory.html" class="nav-link">DLISAP1-inventory</a>
+                <a href="html/sources/business-rule/cobol/DLISMENU-overview.html" class="nav-link">DLISMENU-overview</a>
+            </div>
+        </div>
+        </div>
+    </div>
+            </nav>
+        </aside>
+        <main class="main">
+            <div class="ov-page">
+                <div class="page-header">
+                    <h1 class="page-title">Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</h1>
+                    <p class="page-desc">Architecture and functional documentation for the DLIS CICS/COBOL application. It covers the full driver license workflow: candidate maintenance, application entry, eligibility and history checks, payment, two-level authority approval and license issuance. The application runs on DB2 and is reached through a central menu.</p>
+                </div>
+                <div class="ov-group-heading ov-group-heading--first">Application Documentation</div>
+        <div class="ov-section">
+            <span class="ov-section-title">Overview</span>
+            <div class="card-grid">
+                <a href="html/pages/system-overview.html" class="card">
+                    <span class="card-title">DLIS System Overview</span>
+                    <span class="card-description">High-level introduction to the Driver License Information System: purpose, the set of CICS transactions (DL01–DL10), the programs behind them and how they support the end-to-end licensing process.</span>
+                </a>
+                <a href="html/pages/main-menu-navigation.html" class="card">
+                    <span class="card-title">Main Menu &amp; Navigation (DL01)</span>
+                    <span class="card-description">The pseudo-conversational main menu program DLISMENU. It covers the BMS map, option routing to the ten downstream transactions, and how session context is passed through the shared communication area using XCTL.</span>
+                </a>
+            </div>
+        </div>
+        <div class="ov-section">
+            <span class="ov-section-title">Candidate &amp; Application Intake</span>
+            <div class="card-grid">
+                <a href="html/pages/candidate-management.html" class="card">
+                    <span class="card-title">Candidate Maintenance (DL02)</span>
+                    <span class="card-description">DLISCAND: creating, updating, inquiring on and deactivating candidate records through function keys on a single 3270 screen, including validation of required fields and duplicate national ID checks.</span>
+                </a>
+                <a href="html/pages/license-application-entry.html" class="card">
+                    <span class="card-title">License Application Entry (DL03)</span>
+                    <span class="card-description">DLISAPPL: how clerks look up a candidate, retrieve the initial-issue fee for a license type (Learner, Probation, Open) and submit a new pending license application, with duplicate open-application checks.</span>
+                </a>
+                <a href="html/pages/application-status-inquiry.html" class="card">
+                    <span class="card-title">Application Status Inquiry (DL04)</span>
+                    <span class="card-description">DLISSTAT: read-only inquiry that displays each workflow stage of an application (eligibility, history, payment, two approvals), the overall status description and issued license details.</span>
+                </a>
+            </div>
+        </div>
+        <div class="ov-section">
+            <span class="ov-section-title">Verification &amp; Payment</span>
+            <div class="card-grid">
+                <a href="html/pages/eligibility-check.html" class="card">
+                    <span class="card-title">Eligibility Check (DL05)</span>
+                    <span class="card-description">DLISELIG: evaluates whether a candidate qualifies for the requested license type based on minimum age and prerequisite active license, and records the result, failure reason, officer and resulting application status.</span>
+                </a>
+                <a href="html/pages/driving-history-check.html" class="card">
+                    <span class="card-title">Driving History Check (DL06)</span>
+                    <span class="card-description">DLISHIST: retrieval and scrollable display of a candidate&#039;s active driving incidents and the pass/fail decision based on suspensions, demerit points and unpaid fines, gated by a passed eligibility check.</span>
+                </a>
+                <a href="html/pages/payment-processing.html" class="card">
+                    <span class="card-title">Payment Entry &amp; Processing (DL07)</span>
+                    <span class="card-description">DLISPAY: fee lookup, payment recording in the PAYMENT table, receipt number generation, application status update to paid, and receipt printing delegated to DLISRPRT via EXEC CICS LINK.</span>
+                </a>
+            </div>
+        </div>
+        <div class="ov-section">
+            <span class="ov-section-title">Approval &amp; License Issuance</span>
+            <div class="card-grid">
+                <a href="html/pages/first-level-approval.html" class="card">
+                    <span class="card-title">First-Level Authority Approval (DL08)</span>
+                    <span class="card-description">DLISAP1: authority user validation, level-1 approval rights and license type authorization, and the approve/reject decision that moves an application to second-level review (A2) or closes it (RE).</span>
+                </a>
+                <a href="html/pages/second-level-approval.html" class="card">
+                    <span class="card-title">Second-Level Authority Approval (DL09)</span>
+                    <span class="card-description">DLISAP2: final approval step with level-2 authority validation, segregation of duties against the first approver, license type authorization, and the decision that sets status AP (approved) or RE (rejected).</span>
+                </a>
+                <a href="html/pages/license-issuance.html" class="card">
+                    <span class="card-title">License Issuance (DL10)</span>
+                    <span class="card-description">DLISISSU: issuing a license for an approved application, including validity and expiry calculation, license number generation, recording in the issued-license table and printing via DLISLPRT.</span>
+                </a>
+            </div>
+        </div>
+        <div class="ov-section">
+            <span class="ov-section-title">Architecture</span>
+            <div class="card-grid">
+                <a href="html/pages/application-lifecycle-flow.html" class="card">
+                    <span class="card-title">Application Lifecycle &amp; Status Flow</span>
+                    <span class="card-description">End-to-end view of how a license application moves from entry through eligibility, history, payment, first and second approval to issuance, including the status codes and gating conditions between steps.</span>
+                </a>
+                <a href="html/pages/data-architecture.html" class="card">
+                    <span class="card-title">Data Architecture (DB2)</span>
+                    <span class="card-description">DB2 tables used across DLIS (CANDIDATE, LICENSE_APPLICATION, LICENSE_FEE_SCHEDULE, PAYMENT, ISSUED_LICENSE, authority user data, driving incidents) and which programs read or write them.</span>
+                </a>
+                <a href="html/pages/cics-integration-patterns.html" class="card">
+                    <span class="card-title">CICS Integration Patterns</span>
+                    <span class="card-description">Common CICS design patterns in DLIS: pseudo-conversational processing, BMS maps, COMMAREA context passing, program-to-program control transfer with XCTL and LINK, and print program delegation.</span>
+                </a>
+            </div>
+        </div>
+            </div>
+        </main>
+    </div>
+    <script>
+    (function () {
+
+      var STORAGE_KEY = 'sb_open';
+
+      function getOpenSet() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+      }
+
+      function saveOpenSet(set) {
+        try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(set)); } catch (e) {}
+      }
+
+      function findItems(toggle) {
+        var node = toggle.nextSibling;
+        while (node) {
+          if (node.nodeType === 1 && node.classList.contains('nav-section-items'))
+            return node;
+          node = node.nextSibling;
+        }
+        return null;
+      }
+
+      function toggleKey(toggle, index) {
+        var label = (toggle.querySelector('.nav-toggle-text') || toggle).textContent.trim().replace(/\s+/g, ' ');
+        return index + ':' + label;
+      }
+
+      function openSection(toggle, items, key, set) {
+        toggle.classList.add('open');
+        items.classList.add('open');
+        if (set) set[key] = true;
+      }
+
+      function closeSection(toggle, items, key, set) {
+        toggle.classList.remove('open');
+        items.classList.remove('open');
+        if (set) set[key] = false;
+      }
+
+      function init() {
+        var sidebar = document.getElementById('wiki-sidebar');
+        var toggles = Array.prototype.slice.call(
+          document.querySelectorAll('.nav-section-toggle')
+        );
+
+        var activeIdx = -1;
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+          if (items.querySelector('.nav-link.active')) {
+            activeIdx = idx;
+          }
+        });
+
+        var savedSet = getOpenSet();
+        var openSet = savedSet || {};
+
+        if (activeIdx !== -1) {
+          openSet[toggleKey(toggles[activeIdx], activeIdx)] = true;
+        }
+
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+
+          var key = toggleKey(toggle, idx);
+          var shouldOpen = openSet[key] === true;
+
+          if (shouldOpen) {
+            toggle.classList.add('open');
+            items.classList.add('open');
+          }
+
+          toggle.addEventListener('click', function () {
+            var nowOpen = toggle.classList.contains('open');
+            if (nowOpen) {
+              closeSection(toggle, items, key, openSet);
+            } else {
+              openSection(toggle, items, key, openSet);
+            }
+            saveOpenSet(openSet);
+          });
+        });
+
+        saveOpenSet(openSet);
+
+        /* Restore sidebar scroll position after sections are expanded so the
+           scroll height is correct when we apply scrollTop. */
+        if (sidebar) {
+          try {
+            var savedScroll = sessionStorage.getItem('sb_scroll');
+            if (savedScroll !== null) { sidebar.scrollTop = parseInt(savedScroll, 10) || 0; }
+          } catch (_e) {}
+        }
+
+        window.addEventListener('pagehide', function () {
+          saveOpenSet(openSet);
+          if (sidebar) {
+            try { sessionStorage.setItem('sb_scroll', String(sidebar.scrollTop)); } catch (_e) {}
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+    </script>
+    <script>
+    /* nav-tracking.js — index page never sets a referrer; breadcrumb only shows
+       when arriving from the Source Files section of a wiki page. */
+    (function () {
+      document.addEventListener('click', function (e) {
+        var link = e.target.closest('a[href]');
+        if (!link) return;
+        /* Clear any stale referrer so direct navigation never shows a breadcrumb. */
+        if (link.getAttribute('href') && link.getAttribute('href').indexOf('sources/') === -1) {
+          try { sessionStorage.removeItem('wiki_referrer'); } catch (_e) {}
+        }
+      });
+    })();
+    </script>
+    <footer class="wiki-footer">Made by IBM Bob Premium Package for Z</footer>
+</body>
+</html>

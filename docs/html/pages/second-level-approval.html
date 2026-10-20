@@ -1,0 +1,1456 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Second-Level Authority Approval (DL09) - Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script src="../assets/mermaid.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+
+    <!-- Prism.js for syntax highlighting (bundled — no CDN required) -->
+    <link rel="stylesheet" href="../assets/prism-tomorrow.css">
+    <script src="../assets/prism-core.js"></script>
+    <script src="../assets/prism-languages.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="header-app-name"><a href="../../index.html" style="color: inherit; text-decoration: none;">Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</a></span>
+        </div>
+        <div class="header-right">
+        </div>
+    </header>
+    <div class="shell">
+        <aside class="sidebar" id="wiki-sidebar">
+            <nav>
+                
+        <div class="nav-home-wrap">
+            <a href="../../index.html" class="nav-home">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 6.5L8 2l6 4.5V14a1 1 0 01-1 1H3a1 1 0 01-1-1V6.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M6 15V9h4v6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                Home
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Application Documentation</div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Overview</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="system-overview.html" class="nav-link" data-page-id="system-overview">DLIS System Overview</a>
+                <a href="main-menu-navigation.html" class="nav-link" data-page-id="main-menu-navigation">Main Menu &amp; Navigation (DL01)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Candidate &amp; Application Intake</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="candidate-management.html" class="nav-link" data-page-id="candidate-management">Candidate Maintenance (DL02)</a>
+                <a href="license-application-entry.html" class="nav-link" data-page-id="license-application-entry">License Application Entry (DL03)</a>
+                <a href="application-status-inquiry.html" class="nav-link" data-page-id="application-status-inquiry">Application Status Inquiry (DL04)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Verification &amp; Payment</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="eligibility-check.html" class="nav-link" data-page-id="eligibility-check">Eligibility Check (DL05)</a>
+                <a href="driving-history-check.html" class="nav-link" data-page-id="driving-history-check">Driving History Check (DL06)</a>
+                <a href="payment-processing.html" class="nav-link" data-page-id="payment-processing">Payment Entry &amp; Processing (DL07)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle open" type="button">
+                <span class="nav-toggle-text">Approval &amp; License Issuance</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items open">
+                <a href="first-level-approval.html" class="nav-link" data-page-id="first-level-approval">First-Level Authority Approval (DL08)</a>
+                <a href="second-level-approval.html" class="nav-link active" data-page-id="second-level-approval">Second-Level Authority Approval (DL09)</a>
+                <a href="license-issuance.html" class="nav-link" data-page-id="license-issuance">License Issuance (DL10)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Architecture</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="application-lifecycle-flow.html" class="nav-link" data-page-id="application-lifecycle-flow">Application Lifecycle &amp; Status Flow</a>
+                <a href="data-architecture.html" class="nav-link" data-page-id="data-architecture">Data Architecture (DB2)</a>
+                <a href="cics-integration-patterns.html" class="nav-link" data-page-id="cics-integration-patterns">CICS Integration Patterns</a>
+            </div>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Program Documentation</div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">program</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../sources/program/cobol/DLISPAY.html" class="nav-link">DLISPAY</a>
+                <a href="../sources/program/cobol/DLISSTAT.html" class="nav-link">DLISSTAT</a>
+                <a href="../sources/program/cobol/DLISMENU.html" class="nav-link">DLISMENU</a>
+                <a href="../sources/program/cobol/DLISELIG.html" class="nav-link">DLISELIG</a>
+                <a href="../sources/program/cobol/DLISCAND.html" class="nav-link">DLISCAND</a>
+                <a href="../sources/program/cobol/DLISAPPL.html" class="nav-link">DLISAPPL</a>
+                <a href="../sources/program/cobol/DLISISSU.html" class="nav-link">DLISISSU</a>
+                <a href="../sources/program/cobol/DLISAP2.html" class="nav-link">DLISAP2</a>
+                <a href="../sources/program/cobol/DLISHIST.html" class="nav-link">DLISHIST</a>
+                <a href="../sources/program/cobol/DLISAP1.html" class="nav-link">DLISAP1</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">business-rule</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../sources/business-rule/cobol/DLISELIG-overview.html" class="nav-link">DLISELIG-overview</a>
+                <a href="../sources/business-rule/cobol/DLISPAY-inventory.html" class="nav-link">DLISPAY-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISCAND-overview.html" class="nav-link">DLISCAND-overview</a>
+                <a href="../sources/business-rule/cobol/DLISAP2-inventory.html" class="nav-link">DLISAP2-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISHIST-inventory.html" class="nav-link">DLISHIST-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISMENU-inventory.html" class="nav-link">DLISMENU-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISELIG-inventory.html" class="nav-link">DLISELIG-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISPAY-overview.html" class="nav-link">DLISPAY-overview</a>
+                <a href="../sources/business-rule/cobol/DLISSTAT-overview.html" class="nav-link">DLISSTAT-overview</a>
+                <a href="../sources/business-rule/cobol/DLISHIST-overview.html" class="nav-link">DLISHIST-overview</a>
+                <a href="../sources/business-rule/cobol/DLISAPPL-overview.html" class="nav-link">DLISAPPL-overview</a>
+                <a href="../sources/business-rule/cobol/DLISISSU-inventory.html" class="nav-link">DLISISSU-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISAPPL-inventory.html" class="nav-link">DLISAPPL-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISSTAT-inventory.html" class="nav-link">DLISSTAT-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISAP1-overview.html" class="nav-link">DLISAP1-overview</a>
+                <a href="../sources/business-rule/cobol/DLISCAND-inventory.html" class="nav-link">DLISCAND-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISAP2-overview.html" class="nav-link">DLISAP2-overview</a>
+                <a href="../sources/business-rule/cobol/DLISISSU-overview.html" class="nav-link">DLISISSU-overview</a>
+                <a href="../sources/business-rule/cobol/DLISAP1-inventory.html" class="nav-link">DLISAP1-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISMENU-overview.html" class="nav-link">DLISMENU-overview</a>
+            </div>
+        </div>
+        </div>
+    </div>
+            </nav>
+        </aside>
+        <main class="main">
+            <div class="page-container">
+                <div class="content-layout">
+                    <div class="prose">
+                        <details class="source-files-disclosure">
+            <summary>
+                <svg class="sf-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Source Files
+                <span style="margin-left:4px;font-size:11px;color:var(--fg-subtle)">(3)</span>
+            </summary>
+            <div class="source-files-body">
+                <ul class="source-files-list">
+            <li><a href="../sources/program/cobol/DLISAP2.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISAP2
+            </a></li>
+            <li><a href="../sources/business-rule/cobol/DLISAP2-inventory.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISAP2-inventory
+            </a></li>
+            <li><a href="../sources/business-rule/cobol/DLISAP2-overview.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISAP2-overview
+            </a></li>
+                </ul>
+            </div>
+        </details>
+                        <h1 id="second-level-authority-approval-dl09" tabindex="-1">Second-Level Authority Approval (DL09)</h1>
+<h2 id="1-overview" tabindex="-1">1. Overview</h2>
+<p>DLISAP2 is a CICS COBOL program that runs as transaction <strong>DL09</strong>. It handles the <strong>second-level authority approval</strong> step of a driver’s licence application workflow. An authorised reviewer uses a BMS screen (map <code>DLISA2M01</code>, mapset <code>DLISA2</code>) to do the following:</p>
+<ul>
+<li>Load an application by its ID. The screen shows the candidate’s name, licence type, eligibility, history and payment status, and the first approver’s details.</li>
+<li>Identify themselves with an authority user code. The program checks that code against the database.</li>
+<li>Submit an <strong>Approve (<code>A</code>)</strong> or <strong>Reject (<code>R</code>)</strong> decision.</li>
+</ul>
+<p>Before it accepts a decision, the program enforces these controls:</p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First-approval prerequisite</td>
+<td><code>APPROVAL_1_STATUS</code> must be <code>A</code>.</td>
+</tr>
+<tr>
+<td>Active level-2 approver</td>
+<td>The user must be active (<code>ACTIVE_STATUS = 'A'</code>) and at <code>AUTHORITY_LEVEL = '2'</code>.</td>
+</tr>
+<tr>
+<td>Segregation of duties</td>
+<td>The second approver’s authority must differ from the first approver’s authority.</td>
+</tr>
+<tr>
+<td>Licence-type authorisation</td>
+<td>The application’s licence type must be in the approver’s authorised list (<code>LIC_TYPES_AUTH</code>).</td>
+</tr>
+</tbody>
+</table>
+<p>If every check passes, the program updates <code>LICENSE_APPLICATION</code>. It records the second approval status, authority, date, notes and audit user. It also sets the overall status:</p>
+<ul>
+<li><strong><code>AP</code></strong>: approved, ready for licence issuance.</li>
+<li><strong><code>RE</code></strong>: rejected, application closed.</li>
+</ul>
+<h3 id="11-function-keys" tabindex="-1">1.1 Function Keys</h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+<th>Paragraph</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F1</td>
+<td>Submit the second approval decision</td>
+<td><code>SUBMIT-APPROVAL2</code></td>
+</tr>
+<tr>
+<td>F3</td>
+<td>Load the application</td>
+<td><code>LOAD-APPLICATION</code></td>
+</tr>
+<tr>
+<td>F4</td>
+<td>Validate the authority user</td>
+<td><code>VALIDATE-AUTHORITY</code></td>
+</tr>
+<tr>
+<td>F12</td>
+<td>Exit the transaction</td>
+<td>(<code>EXEC CICS RETURN</code>)</td>
+</tr>
+<tr>
+<td>Other</td>
+<td>Show “USE F1 F3 F4 OR F12”</td>
+<td><code>PROCESS-INPUT</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-system-architecture" tabindex="-1">2. System Architecture</h2>
+<h3 id="21-component-view" tabindex="-1">2.1 Component View</h3>
+<p>The program is a pseudo-conversational CICS transaction. It talks to the terminal through BMS and to three DB2 tables. State between interactions is carried in a 350-byte COMMAREA.</p>
+<div class="mermaid">
+graph TD
+    U[Level-2 Approver<br>3270 Terminal] <--> BMS[BMS Map DLISA2M01<br>Mapset DLISA2]
+    BMS <--> P[DLISAP2<br>Transaction DL09]
+    P <--> CA[DFHCOMMAREA<br>DLIS-COMMAREA 350 bytes]
+    P --> LA[(DLIS.LICENSE_APPLICATION)]
+    P --> CD[(DLIS.CANDIDATE)]
+    P --> AU[(DLIS.AUTHORITY_USER)]
+    P -.uses.-> CPY1[DLISWS<br>Working storage]
+    P -.uses.-> CPY2[DLISCSEC<br>COMMAREA layout]
+    P -.uses.-> CPY3[DLISDCLG<br>DCLGEN host variables]
+</div>
+<h3 id="22-program-structure" tabindex="-1">2.2 Program Structure</h3>
+<p>The paragraphs below form the call hierarchy. <code>SUBMIT-APPROVAL2</code> reuses the load and validate paragraphs and then tests the message they leave on the screen.</p>
+<div class="mermaid">
+graph TD
+    ML[MAIN-LOGIC] -->|EIBCALEN = 0| IS[INIT-SCREEN]
+    ML -->|EIBCALEN > 0| PI[PROCESS-INPUT]
+    PI -->|PF1| SA[SUBMIT-APPROVAL2]
+    PI -->|PF3| LA[LOAD-APPLICATION]
+    PI -->|PF4| VA[VALIDATE-AUTHORITY]
+    PI -->|PF12| END([EXEC CICS RETURN])
+    SA -->|PERFORM| LA
+    SA -->|PERFORM| VA
+    LA --> LAE[LOAD-APP-EXIT]
+    VA --> VAE[VALIDATE-AUTH-EXIT]
+    SA --> SAE[SUBMIT-A2-EXIT]
+</div>
+<h3 id="23-entity-relationships" tabindex="-1">2.3 Entity Relationships</h3>
+<div class="mermaid">
+erDiagram
+    LICENSE_APPLICATION {
+        decimal APPLICATION_ID "key"
+        decimal CANDIDATE_ID
+        string LICENSE_TYPE "length 1"
+        string APPLICATION_STATUS "length 2"
+        string ELIG_CHECK_STATUS "length 1"
+        string HIST_CHECK_STATUS "length 1"
+        string PAYMENT_STATUS "length 1"
+        string APPROVAL_1_STATUS "length 1"
+        string APPROVAL_1_AUTHORITY "length 50"
+        string APPROVAL_2_STATUS "length 1"
+        string APPROVAL_2_AUTHORITY "length 50"
+        date APPROVAL_2_DATE
+        string APPROVAL_2_NOTES "length 200"
+        date LAST_UPDATED_DATE
+        string LAST_UPDATED_BY "length 20"
+    }
+    CANDIDATE {
+        decimal CANDIDATE_ID "key"
+        string FIRST_NAME "length 30"
+        string LAST_NAME "length 30"
+    }
+    AUTHORITY_USER {
+        string USER_CODE "length 20"
+        string USER_NAME "length 60"
+        string AUTHORITY_NAME "length 50"
+        string AUTHORITY_LEVEL "length 1"
+        string ACTIVE_STATUS "length 1"
+        string LIC_TYPES_AUTH "length 3"
+    }
+    CANDIDATE ||--o{ LICENSE_APPLICATION : "has applications"
+</div>
+<p><code>AUTHORITY_USER</code> has no foreign key to the other tables. It is linked logically at run time: the user’s <code>AUTHORITY_NAME</code> is compared with <code>APPROVAL_1_AUTHORITY</code>, and the application’s <code>LICENSE_TYPE</code> is checked against <code>LIC_TYPES_AUTH</code>.</p>
+<h2 id="3-inputs-and-outputs" tabindex="-1">3. Inputs and Outputs</h2>
+<h3 id="31-inputs" tabindex="-1">3.1 Inputs</h3>
+<h4 id="311-commarea" tabindex="-1">3.1.1 COMMAREA</h4>
+<p><code>DFHCOMMAREA</code> is 350 bytes and is overlaid onto <code>DLIS-COMMAREA</code> on every re-entry. It holds:</p>
+<ul>
+<li><code>CA-TRANSACTION-ID</code> (<code>DL09</code>)</li>
+<li><code>CA-RETURN-SCREEN</code></li>
+<li><code>CA-APPLICATION-ID</code></li>
+<li><code>CA-USER-ID</code></li>
+</ul>
+<h4 id="312-bms-screen-fields" tabindex="-1">3.1.2 BMS Screen Fields</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DA2AIDI</code></td>
+<td>Application ID typed by the operator.</td>
+</tr>
+<tr>
+<td><code>DA2AUCOI</code></td>
+<td>Authority user code. Also written to <code>LAST_UPDATED_BY</code>.</td>
+</tr>
+<tr>
+<td><code>DA2DECI</code></td>
+<td>Decision: <code>A</code> = approve, <code>R</code> = reject.</td>
+</tr>
+<tr>
+<td><code>DA2DCNTI</code></td>
+<td>Decision notes, stored as <code>APPROVAL_2_NOTES</code>.</td>
+</tr>
+<tr>
+<td><code>EIBAID</code></td>
+<td>Attention identifier (PF1, PF3, PF4, PF12).</td>
+</tr>
+</tbody>
+</table>
+<h4 id="313-db2-tables-read" tabindex="-1">3.1.3 DB2 Tables Read</h4>
+<table>
+<thead>
+<tr>
+<th>Table</th>
+<th>Columns used</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DLIS.LICENSE_APPLICATION</code></td>
+<td><code>LICENSE_TYPE</code>, <code>APPLICATION_STATUS</code>, <code>ELIG_CHECK_STATUS</code>, <code>HIST_CHECK_STATUS</code>, <code>PAYMENT_STATUS</code>, <code>APPROVAL_1_STATUS</code>, <code>APPROVAL_1_AUTHORITY</code></td>
+<td>Display and gate checks.</td>
+</tr>
+<tr>
+<td><code>DLIS.CANDIDATE</code></td>
+<td><code>FIRST_NAME</code>, <code>LAST_NAME</code></td>
+<td>Candidate full name.</td>
+</tr>
+<tr>
+<td><code>DLIS.AUTHORITY_USER</code></td>
+<td><code>USER_NAME</code>, <code>AUTHORITY_NAME</code>, <code>AUTHORITY_LEVEL</code>, <code>LIC_TYPES_AUTH</code></td>
+<td>Approver validation, segregation and licence-type checks.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-outputs" tabindex="-1">3.2 Outputs</h3>
+<h4 id="321-screen-output-fields" tabindex="-1">3.2.1 Screen Output Fields</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DA2MSG</code></td>
+<td>Message for every interaction: errors, progress and the final outcome.</td>
+</tr>
+<tr>
+<td><code>DA2CNAMO</code></td>
+<td>Candidate full name (first name + space + last name).</td>
+</tr>
+<tr>
+<td><code>DA2LTYO</code></td>
+<td>Licence type.</td>
+</tr>
+<tr>
+<td><code>DA2ELIGO</code>, <code>DA2HISTO</code>, <code>DA2PAYO</code></td>
+<td>Eligibility, history and payment statuses.</td>
+</tr>
+<tr>
+<td><code>DA2A1STO</code>, <code>DA2A1NMO</code></td>
+<td>First approval status and authority name.</td>
+</tr>
+<tr>
+<td><code>DA2AUNMO</code></td>
+<td>Validated authority name of the second approver.</td>
+</tr>
+<tr>
+<td><code>DA2DATE</code></td>
+<td>Current date on the initial screen.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="322-db2-update" tabindex="-1">3.2.2 DB2 Update</h4>
+<p>The <code>UPDATE</code> on <code>DLIS.LICENSE_APPLICATION</code> sets:</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>APPROVAL_2_STATUS</code></td>
+<td><code>WS-DECISION</code> (from <code>DA2DECI</code>)</td>
+</tr>
+<tr>
+<td><code>APPROVAL_2_AUTHORITY</code></td>
+<td><code>AUTHORITY-NAME</code> of the validated approver</td>
+</tr>
+<tr>
+<td><code>APPROVAL_2_DATE</code></td>
+<td><code>CURRENT DATE</code></td>
+</tr>
+<tr>
+<td><code>APPROVAL_2_NOTES</code></td>
+<td><code>DA2DCNTI</code></td>
+</tr>
+<tr>
+<td><code>APPLICATION_STATUS</code></td>
+<td><code>'AP'</code> or <code>'RE'</code></td>
+</tr>
+<tr>
+<td><code>LAST_UPDATED_DATE</code></td>
+<td><code>CURRENT DATE</code></td>
+</tr>
+<tr>
+<td><code>LAST_UPDATED_BY</code></td>
+<td><code>DA2AUCOI</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-processing-logic" tabindex="-1">4. Processing Logic</h2>
+<h3 id="41-overall-flow" tabindex="-1">4.1 Overall Flow</h3>
+<div class="mermaid">
+graph TD
+    A([Start DLISAP2 transaction DL09]) --> B{First entry<br>no COMMAREA}
+    B -- Yes --> C[Set current date on map]
+    C --> D[Send blank approval screen]
+    D --> E([Return to CICS with TRANSID DL09])
+    B -- No --> F[Copy COMMAREA to working area]
+    F --> G[Receive map input]
+    G --> H{Which key pressed}
+    H -- F1 --> I[Submit second approval]
+    H -- F3 --> J[Load application]
+    H -- F4 --> K[Validate authority user]
+    H -- F12 --> L([Return to CICS and end])
+    H -- Other --> M[Show message<br>use F1 F3 F4 or F12]
+    I --> N[Send map data only]
+    J --> N
+    K --> N
+    M --> N
+    N --> E
+</div>
+<h3 id="42-pseudo-conversational-sequence" tabindex="-1">4.2 Pseudo-Conversational Sequence</h3>
+<div class="mermaid">
+sequenceDiagram
+    participant User as Approver
+    participant CICS as CICS / BMS
+    participant Pgm as DLISAP2 (DL09)
+    participant DB as DB2
+
+    User->>CICS: Enter DL09
+    CICS->>Pgm: Start (EIBCALEN = 0)
+    Pgm->>CICS: SEND MAP ERASE FREEKB
+    Pgm->>CICS: RETURN TRANSID DL09 + COMMAREA
+    User->>CICS: Type Application ID, press F3
+    CICS->>Pgm: Re-entry (COMMAREA)
+    Pgm->>CICS: RECEIVE MAP
+    Pgm->>DB: SELECT application JOIN candidate
+    DB-->>Pgm: Application and candidate data
+    Pgm->>CICS: SEND MAP DATAONLY
+    Pgm->>CICS: RETURN TRANSID DL09
+    User->>CICS: Type user code, press F4
+    CICS->>Pgm: Re-entry
+    Pgm->>DB: SELECT AUTHORITY_USER (active, level 2)
+    DB-->>Pgm: Authority profile
+    Pgm->>CICS: SEND MAP DATAONLY
+    User->>CICS: Enter decision and notes, press F1
+    CICS->>Pgm: Re-entry
+    Pgm->>DB: Reload application, validate authority
+    Pgm->>DB: UPDATE LICENSE_APPLICATION
+    Pgm->>CICS: SEND MAP with outcome message
+    Pgm->>CICS: RETURN TRANSID DL09
+</div>
+<h3 id="43-entry-and-screen-handling" tabindex="-1">4.3 Entry and Screen Handling</h3>
+<h4 id="431-main-logic" tabindex="-1">4.3.1 MAIN-LOGIC</h4>
+<ul>
+<li>If <code>EIBCALEN = 0</code>, this is the first invocation and the program performs <code>INIT-SCREEN</code>.</li>
+<li>Otherwise it copies <code>DFHCOMMAREA</code> into <code>DLIS-COMMAREA</code> and performs <code>PROCESS-INPUT</code>.</li>
+<li>It then reaches <code>STOP RUN</code>.</li>
+</ul>
+<h4 id="432-init-screen" tabindex="-1">4.3.2 INIT-SCREEN</h4>
+<ul>
+<li>Moves the first 10 characters of <code>CURRENT-DATE</code> to <code>DA2DATE</code>.</li>
+<li>Sends the map with <code>ERASE</code> and <code>FREEKB</code>.</li>
+<li>Issues <code>EXEC CICS RETURN TRANSID('DL09')</code> with the 350-byte COMMAREA.</li>
+</ul>
+<h4 id="433-process-input" tabindex="-1">4.3.3 PROCESS-INPUT</h4>
+<ul>
+<li>Receives the map and dispatches on <code>EIBAID</code> with <code>EVALUATE TRUE</code>.</li>
+<li>After the chosen action, it re-sends the map with <code>DATAONLY</code> and <code>FREEKB</code>.</li>
+<li>It then returns with <code>TRANSID('DL09')</code> and the COMMAREA.</li>
+<li>F12 issues <code>EXEC CICS RETURN</code> with no TRANSID, which ends the conversation.</li>
+</ul>
+<h3 id="44-load-application-f3" tabindex="-1">4.4 Load Application (F3)</h3>
+<div class="mermaid">
+graph TD
+    J[LOAD-APPLICATION] --> J1{Application ID entered}
+    J1 -- No --> J2[Message: ENTER APPLICATION ID]
+    J1 -- Yes --> J3[SELECT application JOIN candidate]
+    J3 --> J4{SQLCODE = 100}
+    J4 -- Yes --> J5[Message: APPLICATION NOT FOUND]
+    J4 -- No --> J6[Show name, licence type, check statuses,<br>first approval details]
+    J6 --> J7[Save WS-APPROVAL1-AUTH<br>Message: APPLICATION LOADED]
+</div>
+<p>The program joins the two tables on <code>CANDIDATE_ID</code>. It builds the full name with <code>STRING</code> and saves the first approver’s authority in <code>WS-APPROVAL1-AUTH</code> for the later segregation check.</p>
+<h3 id="45-validate-authority-f4" tabindex="-1">4.5 Validate Authority (F4)</h3>
+<div class="mermaid">
+graph TD
+    K[VALIDATE-AUTHORITY] --> K1{User code entered}
+    K1 -- No --> K2[Message: ENTER AUTHORITY USER CODE]
+    K1 -- Yes --> K3[SELECT active level-2 user]
+    K3 --> K4{SQLCODE = 100}
+    K4 -- Yes --> K5[Message: NOT FOUND OR NOT ACTIVE AT LEVEL 2]
+    K4 -- No --> K6[Show authority name<br>Message: AUTHORITY USER VALIDATED]
+</div>
+<p>The SQL statement filters on the user’s activity and level:</p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EXEC SQL
+               SELECT USER_NAME, AUTHORITY_NAME, AUTHORITY_LEVEL,
+                      LIC_TYPES_AUTH
+               INTO   :USER-NAME, :AUTHORITY-NAME, :AUTHORITY-LEVEL,
+                      :LIC-TYPES-AUTH OF DCLDLIS-AUTH-USER
+               FROM   DLIS.AUTHORITY_USER
+               WHERE  USER_CODE       = :USER-CODE OF DCLDLIS-AUTH-USER
+               AND    ACTIVE_STATUS   = &#039;A&#039;
+               AND    AUTHORITY_LEVEL = &#039;2&#039;
+           END-EXEC
+           IF SQLCODE = 100
+               MOVE &#039;AUTHORITY USER NOT FOUND OR NOT ACTIVE AT LEVEL 2&#039;
+                   TO DA2MSG
+               GO TO VALIDATE-AUTH-EXIT
+           END-IF</code></pre>
+</div>
+<p>Inactive users and users at the wrong level have no separate error branch. The <code>WHERE</code> clause excludes them, and they surface as <code>SQLCODE = 100</code>.</p>
+<h3 id="46-submit-second-approval-f1" tabindex="-1">4.6 Submit Second Approval (F1)</h3>
+<p>The submit paragraph runs its checks in a fixed order. The first failure puts a message on the screen and exits without updating.</p>
+<div class="mermaid">
+graph TD
+    I[SUBMIT-APPROVAL2] --> S1{Application ID entered}
+    S1 -- No --> S1E[ENTER APPLICATION ID]
+    S1 -- Yes --> S2{Authority user code entered}
+    S2 -- No --> S2E[AUTHORITY USER CODE IS REQUIRED]
+    S2 -- Yes --> S3{Decision is A or R}
+    S3 -- No --> S3E[DECISION MUST BE A=APPROVE OR R=REJECT]
+    S3 -- Yes --> S4[PERFORM LOAD-APPLICATION]
+    S4 --> S5{Message = APPLICATION LOADED}
+    S5 -- No --> S5E[Exit with load message]
+    S5 -- Yes --> S6{APPROVAL-1-STATUS = A}
+    S6 -- No --> S6E[FIRST APPROVAL MUST BE GRANTED BEFORE SECOND]
+    S6 -- Yes --> S7[PERFORM VALIDATE-AUTHORITY]
+    S7 --> S8{Message = AUTHORITY USER VALIDATED}
+    S8 -- No --> S8E[Exit with validation message]
+    S8 -- Yes --> S9{Same authority as first approver}
+    S9 -- Yes --> S9E[SECOND APPROVER MUST BE FROM DIFFERENT AUTHORITY]
+    S9 -- No --> S10{Licence type authorised}
+    S10 -- No --> S10E[AUTHORITY NOT AUTHORISED FOR THIS LICENSE TYPE]
+    S10 -- Yes --> S11{Decision is A}
+    S11 -- Yes --> S12[Status = AP]
+    S11 -- No --> S13[Status = RE]
+    S12 --> S14[UPDATE LICENSE_APPLICATION]
+    S13 --> S14
+    S14 --> S15{Decision is A}
+    S15 -- Yes --> S16[SECOND APPROVAL GRANTED - READY FOR LICENSE ISSUE]
+    S15 -- No --> S17[SECOND APPROVAL REJECTED - APPLICATION CLOSED]
+</div>
+<h4 id="461-decision-validation" tabindex="-1">4.6.1 Decision Validation</h4>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF DA2DECI = SPACES OR DA2DECI NOT IN (&#039;A&#039;,&#039;R&#039;)
+               MOVE &#039;DECISION MUST BE A=APPROVE OR R=REJECT&#039; TO DA2MSG
+               GO TO SUBMIT-A2-EXIT
+           END-IF</code></pre>
+</div>
+<h4 id="462-first-approval-prerequisite" tabindex="-1">4.6.2 First-Approval Prerequisite</h4>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF APPROVAL-1-STATUS OF DCLDLIS-LICENSE-APPL NOT = &#039;A&#039;
+               MOVE &#039;FIRST APPROVAL MUST BE GRANTED BEFORE SECOND&#039;
+                   TO DA2MSG
+               GO TO SUBMIT-A2-EXIT
+           END-IF</code></pre>
+</div>
+<h4 id="463-segregation-of-duties" tabindex="-1">4.6.3 Segregation of Duties</h4>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">*    Segregation: second approver must differ from first
+           IF AUTHORITY-NAME OF DCLDLIS-AUTH-USER = WS-APPROVAL1-AUTH
+               MOVE &#039;SECOND APPROVER MUST BE FROM DIFFERENT AUTHORITY&#039;
+                   TO DA2MSG
+               GO TO SUBMIT-A2-EXIT
+           END-IF</code></pre>
+</div>
+<h4 id="464-licence-type-authorisation" tabindex="-1">4.6.4 Licence-Type Authorisation</h4>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">*    Check license type authorisation
+           IF DA2LTYO NOT IN LIC-TYPES-AUTH OF DCLDLIS-AUTH-USER
+               MOVE &#039;AUTHORITY NOT AUTHORISED FOR THIS LICENSE TYPE&#039;
+                   TO DA2MSG
+               GO TO SUBMIT-A2-EXIT
+           END-IF</code></pre>
+</div>
+<p>The licence-type test uses the screen output field <code>DA2LTYO</code>, which <code>LOAD-APPLICATION</code> fills. It is tested with <code>NOT IN</code> against the authority’s <code>LIC-TYPES-AUTH</code> string.</p>
+<h4 id="465-status-derivation" tabindex="-1">4.6.5 Status Derivation</h4>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE DA2DECI TO WS-DECISION
+           IF WS-DECISION = &#039;A&#039;
+               MOVE &#039;AP&#039; TO APPLICATION-STATUS OF DCLDLIS-LICENSE-APPL
+           ELSE
+               MOVE &#039;RE&#039; TO APPLICATION-STATUS OF DCLDLIS-LICENSE-APPL
+           END-IF</code></pre>
+</div>
+<h4 id="466-persisting-the-second-approval" tabindex="-1">4.6.6 Persisting the Second Approval</h4>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EXEC SQL
+               UPDATE DLIS.LICENSE_APPLICATION SET
+                   APPROVAL_2_STATUS    = :WS-DECISION,
+                   APPROVAL_2_AUTHORITY = :AUTHORITY-NAME
+                                          OF DCLDLIS-AUTH-USER,
+                   APPROVAL_2_DATE      = CURRENT DATE,
+                   APPROVAL_2_NOTES     = :DA2DCNTI,
+                   APPLICATION_STATUS   = :APPLICATION-STATUS
+                                          OF DCLDLIS-LICENSE-APPL,
+                   LAST_UPDATED_DATE    = CURRENT DATE,
+                   LAST_UPDATED_BY      = :DA2AUCOI
+               WHERE APPLICATION_ID     = :APPLICATION-ID
+                                          OF DCLDLIS-LICENSE-APPL
+           END-EXEC</code></pre>
+</div>
+<h4 id="467-outcome-message" tabindex="-1">4.6.7 Outcome Message</h4>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF WS-DECISION = &#039;A&#039;
+               MOVE &#039;SECOND APPROVAL GRANTED - READY FOR LICENSE ISSUE&#039;
+                   TO DA2MSG
+           ELSE
+               MOVE &#039;SECOND APPROVAL REJECTED - APPLICATION CLOSED&#039;
+                   TO DA2MSG
+           END-IF</code></pre>
+</div>
+<h3 id="47-application-status-state-transition" tabindex="-1">4.7 Application Status State Transition</h3>
+<div class="mermaid">
+stateDiagram-v2
+    [*] --> FirstApproved: First approval = A
+    FirstApproved --> AP: Second decision A and all checks pass
+    FirstApproved --> RE: Second decision R and all checks pass
+    FirstApproved --> FirstApproved: Any check fails (no update)
+    AP --> [*]: Ready for licence issuance
+    RE --> [*]: Application closed
+</div>
+<h2 id="5-paragraph-reference" tabindex="-1">5. Paragraph Reference</h2>
+<table>
+<thead>
+<tr>
+<th>Paragraph</th>
+<th>Role</th>
+<th>Key behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MAIN-LOGIC</code></td>
+<td>Entry point</td>
+<td>Chooses first-time or re-entry path. Ends with <code>STOP RUN</code>.</td>
+</tr>
+<tr>
+<td><code>INIT-SCREEN</code></td>
+<td>First-time display</td>
+<td>Sends the empty map and returns with <code>TRANSID('DL09')</code>.</td>
+</tr>
+<tr>
+<td><code>PROCESS-INPUT</code></td>
+<td>Re-entry dispatcher</td>
+<td>Receives the map, routes by PF key and re-sends with <code>DATAONLY</code>.</td>
+</tr>
+<tr>
+<td><code>LOAD-APPLICATION</code></td>
+<td>F3 and reused by submit</td>
+<td>Reads application and candidate, fills the screen and saves <code>WS-APPROVAL1-AUTH</code>.</td>
+</tr>
+<tr>
+<td><code>LOAD-APP-EXIT</code></td>
+<td>Exit</td>
+<td>Contains only <code>EXIT</code>.</td>
+</tr>
+<tr>
+<td><code>VALIDATE-AUTHORITY</code></td>
+<td>F4 and reused by submit</td>
+<td>Validates an active level-2 authority user.</td>
+</tr>
+<tr>
+<td><code>VALIDATE-AUTH-EXIT</code></td>
+<td>Exit</td>
+<td>Contains only <code>EXIT</code>.</td>
+</tr>
+<tr>
+<td><code>SUBMIT-APPROVAL2</code></td>
+<td>F1</td>
+<td>Runs the guard chain, the update and the outcome message.</td>
+</tr>
+<tr>
+<td><code>SUBMIT-A2-EXIT</code></td>
+<td>Exit</td>
+<td>Contains only <code>EXIT</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>The program uses <code>GO TO</code> to a dedicated exit paragraph as its early-termination path. After an error message is set, no further validation or update logic runs.</p>
+<h2 id="6-dependencies" tabindex="-1">6. Dependencies</h2>
+<h3 id="61-cics-resources" tabindex="-1">6.1 CICS Resources</h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Transaction <code>DL09</code></td>
+<td>Used on every <code>EXEC CICS RETURN TRANSID</code> to keep the pseudo-conversation going.</td>
+</tr>
+<tr>
+<td>BMS map <code>DLISA2M01</code> / mapset <code>DLISA2</code></td>
+<td>Screen layout for all send and receive operations.</td>
+</tr>
+<tr>
+<td><code>DFHCOMMAREA</code> (350 bytes)</td>
+<td>State carried between interactions.</td>
+</tr>
+<tr>
+<td>EIB fields</td>
+<td><code>EIBCALEN</code> (first-time or re-entry), <code>EIBAID</code> (PF key), <code>EIBRESP</code> (captured in <code>WS-RESP1</code>).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="62-copybooks" tabindex="-1">6.2 Copybooks</h3>
+<table>
+<thead>
+<tr>
+<th>Copybook</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DLISDCLG</code></td>
+<td>Container for the DCLGEN host-variable groups.</td>
+</tr>
+<tr>
+<td><code>DLISCAND</code> (<code>DCLDLIS-CANDIDATE</code>)</td>
+<td>Host variables for <code>DLIS.CANDIDATE</code>.</td>
+</tr>
+<tr>
+<td><code>DLISAPPL</code> (<code>DCLDLIS-LICENSE-APPL</code>)</td>
+<td>Host variables for <code>DLIS.LICENSE_APPLICATION</code>.</td>
+</tr>
+<tr>
+<td><code>DLISAUTH</code> (<code>DCLDLIS-AUTH-USER</code>)</td>
+<td>Host variables for <code>DLIS.AUTHORITY_USER</code>.</td>
+</tr>
+<tr>
+<td><code>DLISHIST</code>, <code>DLISPAY</code>, <code>DLISLIC</code>, <code>DLISFEE</code></td>
+<td>Declared but not queried by this program.</td>
+</tr>
+<tr>
+<td><code>SQLCA</code></td>
+<td>DB2 communication area (<code>SQLCODE</code>).</td>
+</tr>
+<tr>
+<td><code>DLISWS</code></td>
+<td>Shared working storage, including <code>WS-APPROVAL</code> (<code>WS-DECISION</code>, <code>WS-AUTH-NAME</code>).</td>
+</tr>
+<tr>
+<td><code>DLISCSEC</code></td>
+<td>COMMAREA layouts and <code>WS-CICS-RESPONSE</code> (<code>WS-RESP1</code>, <code>WS-RESP2</code>).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="63-external-services" tabindex="-1">6.3 External Services</h3>
+<ul>
+<li>DB2 only (the three tables above).</li>
+<li>No MQ operations are present.</li>
+</ul>
+<h2 id="7-constraints-and-business-rules" tabindex="-1">7. Constraints and Business Rules</h2>
+<h3 id="71-business-rule-summary" tabindex="-1">7.1 Business Rule Summary</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Rule</th>
+<th>Paragraph</th>
+<th>Failure message</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>The authority user must be active (<code>A</code>) and at level <code>2</code>.</td>
+<td><code>VALIDATE-AUTHORITY</code></td>
+<td>AUTHORITY USER NOT FOUND OR NOT ACTIVE AT LEVEL 2</td>
+</tr>
+<tr>
+<td>2</td>
+<td>The decision must be <code>A</code> or <code>R</code>.</td>
+<td><code>SUBMIT-APPROVAL2</code></td>
+<td>DECISION MUST BE A=APPROVE OR R=REJECT</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>APPROVAL_1_STATUS</code> must be <code>A</code>.</td>
+<td><code>SUBMIT-APPROVAL2</code></td>
+<td>FIRST APPROVAL MUST BE GRANTED BEFORE SECOND</td>
+</tr>
+<tr>
+<td>4</td>
+<td>The second authority must differ from the first.</td>
+<td><code>SUBMIT-APPROVAL2</code></td>
+<td>SECOND APPROVER MUST BE FROM DIFFERENT AUTHORITY</td>
+</tr>
+<tr>
+<td>5</td>
+<td>The licence type must be in <code>LIC_TYPES_AUTH</code>.</td>
+<td><code>SUBMIT-APPROVAL2</code></td>
+<td>AUTHORITY NOT AUTHORISED FOR THIS LICENSE TYPE</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Decision <code>A</code> gives <code>AP</code>. Any other decision (<code>R</code>) gives <code>RE</code>.</td>
+<td><code>SUBMIT-APPROVAL2</code></td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>7</td>
+<td>The second approval is recorded with status, authority, date, notes and audit user.</td>
+<td><code>SUBMIT-APPROVAL2</code></td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>8</td>
+<td>The outcome message depends on the decision.</td>
+<td><code>SUBMIT-APPROVAL2</code></td>
+<td>n/a</td>
+</tr>
+</tbody>
+</table>
+<h3 id="72-business-significance" tabindex="-1">7.2 Business Significance</h3>
+<ul>
+<li><strong>Approver qualification.</strong> If it were weakened, inactive or first-level users could give final approval.</li>
+<li><strong>Segregation of duties.</strong> Without it, a single authority could approve at both levels. That removes dual control.</li>
+<li><strong>Licence-type scope.</strong> It stops an authority from approving licence types outside its remit.</li>
+<li><strong>Sequencing.</strong> It stops applications that never passed, or failed, the first level from being approved at the second.</li>
+<li><strong>Status mapping.</strong> An incorrect mapping would send rejected applications to licence issuance, or close approved ones.</li>
+</ul>
+<h3 id="73-navigation-and-technical-constraints" tabindex="-1">7.3 Navigation and Technical Constraints</h3>
+<ul>
+<li>Only F1, F3, F4 and F12 are recognised. Any other key shows “USE F1 F3 F4 OR F12” and does no processing.</li>
+<li>The COMMAREA is fixed at 350 bytes (<code>PIC X(350)</code>, <code>LENGTH(350)</code>).</li>
+<li><code>LAST_UPDATED_BY</code> holds the authority user code typed on the screen, not the CICS signed-on user ID. The program does not cross-check the two.</li>
+<li>Only <code>A</code> and <code>R</code> are accepted, so the only application statuses this program can write are <code>AP</code> and <code>RE</code>.</li>
+</ul>
+<h2 id="8-error-handling" tabindex="-1">8. Error Handling</h2>
+<h3 id="81-error-categories" tabindex="-1">8.1 Error Categories</h3>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Handling</th>
+<th>Message</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Missing application ID</td>
+<td>Exit through <code>GO TO</code></td>
+<td>ENTER APPLICATION ID</td>
+</tr>
+<tr>
+<td>Missing authority user code</td>
+<td>Exit through <code>GO TO</code></td>
+<td>ENTER AUTHORITY USER CODE (validate) / AUTHORITY USER CODE IS REQUIRED (submit)</td>
+</tr>
+<tr>
+<td>Invalid decision</td>
+<td>Exit through <code>GO TO</code></td>
+<td>DECISION MUST BE A=APPROVE OR R=REJECT</td>
+</tr>
+<tr>
+<td>Application not found (<code>SQLCODE 100</code>)</td>
+<td>Exit through <code>GO TO</code></td>
+<td>APPLICATION NOT FOUND</td>
+</tr>
+<tr>
+<td>Authority not found, inactive or wrong level</td>
+<td>Exit through <code>GO TO</code></td>
+<td>AUTHORITY USER NOT FOUND OR NOT ACTIVE AT LEVEL 2</td>
+</tr>
+<tr>
+<td>Workflow or business rule failure</td>
+<td>Exit through <code>GO TO</code></td>
+<td>See section 7.1</td>
+</tr>
+<tr>
+<td>Unrecognised PF key</td>
+<td>Default <code>EVALUATE</code> branch</td>
+<td>USE F1 F3 F4 OR F12</td>
+</tr>
+</tbody>
+</table>
+<h3 id="82-error-handling-approach" tabindex="-1">8.2 Error-Handling Approach</h3>
+<ul>
+<li>All feedback goes through the single <code>DA2MSG</code> field. It carries both error and success text.</li>
+<li>Only one message is shown at a time. The first failing check wins.</li>
+<li>Success messages are “APPLICATION LOADED”, “AUTHORITY USER VALIDATED”, “SECOND APPROVAL GRANTED - READY FOR LICENSE ISSUE” and “SECOND APPROVAL REJECTED - APPLICATION CLOSED”.</li>
+<li>The map is re-sent after every action, so the user sees the result immediately.</li>
+<li>The <code>SUBMIT-APPROVAL2</code> paragraph reads the first-approval authority from the database again on every submit. The segregation check therefore does not depend on earlier screen state.</li>
+<li>Every failure leaves the screen available for correction and resubmission. There is no retry loop or default substitution.</li>
+</ul>
+<h3 id="83-gaps-and-limitations" tabindex="-1">8.3 Gaps and Limitations</h3>
+<ul>
+<li><strong>SQLCODE handling.</strong> Only <code>SQLCODE = 100</code> is tested. Negative codes such as deadlock, timeout or authorisation errors are not detected on either <code>SELECT</code>.</li>
+<li><strong>Unchecked <code>UPDATE</code>.</strong> The update has no <code>SQLCODE</code> check. The “granted” or “rejected” message appears even if the update failed or changed no row.</li>
+<li><strong>Unchecked CICS responses.</strong> <code>RESP</code> values are stored in <code>WS-RESP1</code> but never examined. <code>MAPFAIL</code> and terminal errors are not handled.</li>
+<li><strong>No exception handling or audit logging.</strong> There is no <code>HANDLE CONDITION</code>, <code>HANDLE ABEND</code>, explicit commit or rollback, or logging to a queue or file. The unit of work is committed by the final <code>EXEC CICS RETURN</code>.</li>
+<li><strong>Unused fields.</strong> <code>SQLCA</code> and the shared return code and message fields from the common copybook are declared but not used.</li>
+<li><strong>Transaction ID discrepancy.</strong> The program header says DL09. The mapping table in <a href="http://AGENTS.md">AGENTS.md</a> lists this program as DL08.</li>
+</ul>
+<h2 id="9-examples" tabindex="-1">9. Examples</h2>
+<h3 id="91-example-1-successful-approval" tabindex="-1">9.1 Example 1: Successful Approval</h3>
+<p><strong>Scenario:</strong> An authority user from a different body than the first approver approves a car licence application.</p>
+<table>
+<thead>
+<tr>
+<th>Screen field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DA2AIDI</code></td>
+<td><code>1001</code></td>
+</tr>
+<tr>
+<td><code>DA2AUCOI</code></td>
+<td><code>AUTH002</code></td>
+</tr>
+<tr>
+<td><code>DA2DECI</code></td>
+<td><code>A</code></td>
+</tr>
+<tr>
+<td><code>DA2DCNTI</code></td>
+<td><code>All checks clear</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Database state before submission:</strong></p>
+<ul>
+<li>Application <code>1001</code>: <code>APPROVAL_1_STATUS = 'A'</code>, <code>APPROVAL_1_AUTHORITY = 'City Transport Authority'</code>, <code>APPLICATION_STATUS = 'A1'</code>, licence type <code>C</code>.</li>
+<li>User <code>AUTH002</code>: level <code>2</code>, active, <code>AUTHORITY_NAME = 'State Roads Authority'</code>, <code>LIC_TYPES_AUTH = 'CAB'</code>.</li>
+</ul>
+<p><strong>Steps (F3, then F4, then F1):</strong></p>
+<ol>
+<li>F3 loads the application and shows the candidate, the licence type and the first approver’s authority.</li>
+<li>F4 validates <code>AUTH002</code> and shows <code>State Roads Authority</code>.</li>
+<li>F1 runs all guards and executes the <code>UPDATE</code>.</li>
+</ol>
+<p><strong>Result:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">CODE</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code>SECOND APPROVAL GRANTED - READY FOR LICENSE ISSUE</code></pre>
+</div>
+<p>The row now has <code>APPROVAL_2_STATUS = 'A'</code>, <code>APPROVAL_2_AUTHORITY = 'State Roads Authority'</code>, <code>APPLICATION_STATUS = 'AP'</code> and <code>LAST_UPDATED_BY = 'AUTH002'</code>.</p>
+<p>All guards pass for these reasons:</p>
+<ul>
+<li>The first approval is <code>A</code>.</li>
+<li>The two authorities differ.</li>
+<li><code>'CAB'</code> contains <code>'C'</code>.</li>
+</ul>
+<h3 id="92-example-2-segregation-of-duties-violation" tabindex="-1">9.2 Example 2: Segregation-of-Duties Violation</h3>
+<p><strong>Scenario:</strong> The second approver belongs to the same authority as the first.</p>
+<ul>
+<li>Application <code>1002</code>: <code>APPROVAL_1_STATUS = 'A'</code>, <code>APPROVAL_1_AUTHORITY = 'City Transport Authority'</code>.</li>
+<li>User <code>AUTH003</code>: level <code>2</code>, active, <code>AUTHORITY_NAME = 'City Transport Authority'</code>.</li>
+<li>Decision: <code>A</code>.</li>
+</ul>
+<p><strong>Result:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">CODE</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code>SECOND APPROVER MUST BE FROM DIFFERENT AUTHORITY</code></pre>
+</div>
+<p><code>AUTHORITY-NAME</code> equals <code>WS-APPROVAL1-AUTH</code>, so the guard fires before any <code>UPDATE</code>. No database changes are made.</p>
+<h3 id="93-example-3-first-approval-missing" tabindex="-1">9.3 Example 3: First Approval Missing</h3>
+<p><strong>Scenario:</strong> A user submits a second approval before the first approval has been granted.</p>
+<ul>
+<li>Application <code>1003</code>: <code>APPROVAL_1_STATUS = ' '</code>.</li>
+<li>User <code>AUTH004</code>: valid level-2 user.</li>
+<li>Decision: <code>A</code>.</li>
+</ul>
+<p><strong>Result:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">CODE</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code>FIRST APPROVAL MUST BE GRANTED BEFORE SECOND</code></pre>
+</div>
+<p><code>SUBMIT-APPROVAL2</code> exits through <code>GO TO SUBMIT-A2-EXIT</code>. It does not reach authority validation or the update.</p>
+
+                        <div class="related-pages">
+                            <p class="related-pages-title">Related Pages</p>
+                            <div class="card-grid">
+                                
+            <a href="first-level-approval.html" class="card">
+                <span class="card-title">First-Level Authority Approval (DL08)</span>
+                <span class="card-description">DLISAP1: authority user validation, level-1 approval rights and license type authorization, and the approve/reject decision that moves an application to second-level review (A2) or closes it (RE).</span>
+            </a>
+            <a href="license-issuance.html" class="card">
+                <span class="card-title">License Issuance (DL10)</span>
+                <span class="card-description">DLISISSU: issuing a license for an approved application, including validity and expiry calculation, license number generation, recording in the issued-license table and printing via DLISLPRT.</span>
+            </a>
+            <a href="application-lifecycle-flow.html" class="card">
+                <span class="card-title">Application Lifecycle &amp; Status Flow</span>
+                <span class="card-description">End-to-end view of how a license application moves from entry through eligibility, history, payment, first and second approval to issuance, including the status codes and gating conditions between steps.</span>
+            </a>
+                            </div>
+                        </div>
+                    </div>
+                    <nav class="toc-panel" aria-label="On this page">
+  <span class="toc-panel-label">On this page</span>
+  <ul class="toc-list">
+<li class="toc-level-2"><a href="#1-overview">1. Overview</a>
+<ul>
+<li class="toc-level-3"><a href="#11-function-keys">1.1 Function Keys</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#2-system-architecture">2. System Architecture</a>
+<ul>
+<li class="toc-level-3"><a href="#21-component-view">2.1 Component View</a></li>
+<li class="toc-level-3"><a href="#22-program-structure">2.2 Program Structure</a></li>
+<li class="toc-level-3"><a href="#23-entity-relationships">2.3 Entity Relationships</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#3-inputs-and-outputs">3. Inputs and Outputs</a>
+<ul>
+<li class="toc-level-3"><a href="#31-inputs">3.1 Inputs</a>
+<ul>
+<li class="toc-level-4"><a href="#311-commarea">3.1.1 COMMAREA</a></li>
+<li class="toc-level-4"><a href="#312-bms-screen-fields">3.1.2 BMS Screen Fields</a></li>
+<li class="toc-level-4"><a href="#313-db2-tables-read">3.1.3 DB2 Tables Read</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#32-outputs">3.2 Outputs</a>
+<ul>
+<li class="toc-level-4"><a href="#321-screen-output-fields">3.2.1 Screen Output Fields</a></li>
+<li class="toc-level-4"><a href="#322-db2-update">3.2.2 DB2 Update</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#4-processing-logic">4. Processing Logic</a>
+<ul>
+<li class="toc-level-3"><a href="#41-overall-flow">4.1 Overall Flow</a></li>
+<li class="toc-level-3"><a href="#42-pseudo-conversational-sequence">4.2 Pseudo-Conversational Sequence</a></li>
+<li class="toc-level-3"><a href="#43-entry-and-screen-handling">4.3 Entry and Screen Handling</a>
+<ul>
+<li class="toc-level-4"><a href="#431-main-logic">4.3.1 MAIN-LOGIC</a></li>
+<li class="toc-level-4"><a href="#432-init-screen">4.3.2 INIT-SCREEN</a></li>
+<li class="toc-level-4"><a href="#433-process-input">4.3.3 PROCESS-INPUT</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#44-load-application-f3">4.4 Load Application (F3)</a></li>
+<li class="toc-level-3"><a href="#45-validate-authority-f4">4.5 Validate Authority (F4)</a></li>
+<li class="toc-level-3"><a href="#46-submit-second-approval-f1">4.6 Submit Second Approval (F1)</a>
+<ul>
+<li class="toc-level-4"><a href="#461-decision-validation">4.6.1 Decision Validation</a></li>
+<li class="toc-level-4"><a href="#462-first-approval-prerequisite">4.6.2 First-Approval Prerequisite</a></li>
+<li class="toc-level-4"><a href="#463-segregation-of-duties">4.6.3 Segregation of Duties</a></li>
+<li class="toc-level-4"><a href="#464-licence-type-authorisation">4.6.4 Licence-Type Authorisation</a></li>
+<li class="toc-level-4"><a href="#465-status-derivation">4.6.5 Status Derivation</a></li>
+<li class="toc-level-4"><a href="#466-persisting-the-second-approval">4.6.6 Persisting the Second Approval</a></li>
+<li class="toc-level-4"><a href="#467-outcome-message">4.6.7 Outcome Message</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#47-application-status-state-transition">4.7 Application Status State Transition</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#5-paragraph-reference">5. Paragraph Reference</a></li>
+<li class="toc-level-2"><a href="#6-dependencies">6. Dependencies</a>
+<ul>
+<li class="toc-level-3"><a href="#61-cics-resources">6.1 CICS Resources</a></li>
+<li class="toc-level-3"><a href="#62-copybooks">6.2 Copybooks</a></li>
+<li class="toc-level-3"><a href="#63-external-services">6.3 External Services</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#7-constraints-and-business-rules">7. Constraints and Business Rules</a>
+<ul>
+<li class="toc-level-3"><a href="#71-business-rule-summary">7.1 Business Rule Summary</a></li>
+<li class="toc-level-3"><a href="#72-business-significance">7.2 Business Significance</a></li>
+<li class="toc-level-3"><a href="#73-navigation-and-technical-constraints">7.3 Navigation and Technical Constraints</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#8-error-handling">8. Error Handling</a>
+<ul>
+<li class="toc-level-3"><a href="#81-error-categories">8.1 Error Categories</a></li>
+<li class="toc-level-3"><a href="#82-error-handling-approach">8.2 Error-Handling Approach</a></li>
+<li class="toc-level-3"><a href="#83-gaps-and-limitations">8.3 Gaps and Limitations</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#9-examples">9. Examples</a>
+<ul>
+<li class="toc-level-3"><a href="#91-example-1-successful-approval">9.1 Example 1: Successful Approval</a></li>
+<li class="toc-level-3"><a href="#92-example-2-segregation-of-duties-violation">9.2 Example 2: Segregation-of-Duties Violation</a></li>
+<li class="toc-level-3"><a href="#93-example-3-first-approval-missing">9.3 Example 3: First Approval Missing</a></li>
+</ul>
+</li>
+</ul>
+
+</nav>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+    /* toc-spy.js — highlights the active heading in the TOC panel on scroll */
+    (function () {
+      function init() {
+        var panel = document.querySelector('.toc-panel');
+        if (!panel) return;
+        var links = Array.prototype.slice.call(panel.querySelectorAll('a[href^="#"]'));
+        if (!links.length) return;
+
+        var headingIds = links.map(function (a) { return a.getAttribute('href').slice(1); });
+        var headings = headingIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+        function clearActive() {
+          panel.querySelectorAll('.toc-active').forEach(function (el) { el.classList.remove('toc-active'); });
+          panel.querySelectorAll('.toc-parent-active').forEach(function (el) { el.classList.remove('toc-parent-active'); });
+        }
+
+        function setActive(id) {
+          clearActive();
+          var link = panel.querySelector('a[href="#' + id + '"]');
+          if (!link) return;
+          link.classList.add('toc-active');
+          var li = link.closest('li');
+          if (li) {
+            var parentLi = li.parentElement && li.parentElement.closest('li');
+            if (parentLi) parentLi.classList.add('toc-parent-active');
+          }
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+        headings.forEach(function (h) { observer.observe(h); });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
+    <script>
+    /* sidebar-toggle.js — persists open/closed state across navigation */
+    (function () {
+
+      var STORAGE_KEY = 'sb_open';
+
+      function getOpenSet() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+      }
+
+      function saveOpenSet(set) {
+        try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(set)); } catch (e) {}
+      }
+
+      function findItems(toggle) {
+        var node = toggle.nextSibling;
+        while (node) {
+          if (node.nodeType === 1 && node.classList.contains('nav-section-items'))
+            return node;
+          node = node.nextSibling;
+        }
+        return null;
+      }
+
+      function toggleKey(toggle, index) {
+        var label = (toggle.querySelector('.nav-toggle-text') || toggle).textContent.trim().replace(/\s+/g, ' ');
+        return index + ':' + label;
+      }
+
+      function openSection(toggle, items, key, set) {
+        toggle.classList.add('open');
+        items.classList.add('open');
+        if (set) set[key] = true;
+      }
+
+      function closeSection(toggle, items, key, set) {
+        toggle.classList.remove('open');
+        items.classList.remove('open');
+        if (set) set[key] = false;
+      }
+
+      function init() {
+        var sidebar = document.getElementById('wiki-sidebar');
+        var toggles = Array.prototype.slice.call(
+          document.querySelectorAll('.nav-section-toggle')
+        );
+
+        var activeIdx = -1;
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+          if (items.querySelector('.nav-link.active')) {
+            activeIdx = idx;
+          }
+        });
+
+        var savedSet = getOpenSet();
+        var openSet = savedSet || {};
+
+        if (activeIdx !== -1) {
+          openSet[toggleKey(toggles[activeIdx], activeIdx)] = true;
+        }
+
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+
+          var key = toggleKey(toggle, idx);
+          var shouldOpen = openSet[key] === true;
+
+          if (shouldOpen) {
+            toggle.classList.add('open');
+            items.classList.add('open');
+          }
+
+          toggle.addEventListener('click', function () {
+            var nowOpen = toggle.classList.contains('open');
+            if (nowOpen) {
+              closeSection(toggle, items, key, openSet);
+            } else {
+              openSection(toggle, items, key, openSet);
+            }
+            saveOpenSet(openSet);
+          });
+        });
+
+        saveOpenSet(openSet);
+
+        /* Restore sidebar scroll position after sections are expanded so the
+           scroll height is correct when we apply scrollTop. */
+        if (sidebar) {
+          try {
+            var savedScroll = sessionStorage.getItem('sb_scroll');
+            if (savedScroll !== null) { sidebar.scrollTop = parseInt(savedScroll, 10) || 0; }
+          } catch (_e) {}
+        }
+
+        window.addEventListener('pagehide', function () {
+          saveOpenSet(openSet);
+          if (sidebar) {
+            try { sessionStorage.setItem('sb_scroll', String(sidebar.scrollTop)); } catch (_e) {}
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+    </script>
+    <script>
+    /* nav-tracking.js — only stamps sessionStorage when clicking a source-file link
+       that lives inside the "Source Files" disclosure section, not from sidebar or cards. */
+    (function () {
+      document.addEventListener('click', function (e) {
+        var link = e.target.closest('a[href]');
+        if (!link) return;
+        var href = link.getAttribute('href');
+        if (!href || href.indexOf('sources/') === -1) return;
+        /* Only set referrer when the click originates from inside the Source Files
+           disclosure (.source-files-disclosure). Any other path — sidebar, cards,
+           direct navigation — must not set a referrer. */
+        if (!link.closest('.source-files-disclosure')) return;
+        try {
+          sessionStorage.setItem('wiki_referrer', JSON.stringify({
+            href: location.href,
+            title: document.title,
+            file: location.pathname.split('/').pop()
+          }));
+        } catch (_e) {}
+      });
+    })();
+    </script>
+    <footer class="wiki-footer">Made by IBM Bob Premium Package for Z</footer>
+</body>
+</html>

@@ -1,0 +1,1506 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CICS Integration Patterns - Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script src="../assets/mermaid.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+
+    <!-- Prism.js for syntax highlighting (bundled — no CDN required) -->
+    <link rel="stylesheet" href="../assets/prism-tomorrow.css">
+    <script src="../assets/prism-core.js"></script>
+    <script src="../assets/prism-languages.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="header-app-name"><a href="../../index.html" style="color: inherit; text-decoration: none;">Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</a></span>
+        </div>
+        <div class="header-right">
+        </div>
+    </header>
+    <div class="shell">
+        <aside class="sidebar" id="wiki-sidebar">
+            <nav>
+                
+        <div class="nav-home-wrap">
+            <a href="../../index.html" class="nav-home">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 6.5L8 2l6 4.5V14a1 1 0 01-1 1H3a1 1 0 01-1-1V6.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M6 15V9h4v6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                Home
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Application Documentation</div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Overview</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="system-overview.html" class="nav-link" data-page-id="system-overview">DLIS System Overview</a>
+                <a href="main-menu-navigation.html" class="nav-link" data-page-id="main-menu-navigation">Main Menu &amp; Navigation (DL01)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Candidate &amp; Application Intake</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="candidate-management.html" class="nav-link" data-page-id="candidate-management">Candidate Maintenance (DL02)</a>
+                <a href="license-application-entry.html" class="nav-link" data-page-id="license-application-entry">License Application Entry (DL03)</a>
+                <a href="application-status-inquiry.html" class="nav-link" data-page-id="application-status-inquiry">Application Status Inquiry (DL04)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Verification &amp; Payment</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="eligibility-check.html" class="nav-link" data-page-id="eligibility-check">Eligibility Check (DL05)</a>
+                <a href="driving-history-check.html" class="nav-link" data-page-id="driving-history-check">Driving History Check (DL06)</a>
+                <a href="payment-processing.html" class="nav-link" data-page-id="payment-processing">Payment Entry &amp; Processing (DL07)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Approval &amp; License Issuance</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="first-level-approval.html" class="nav-link" data-page-id="first-level-approval">First-Level Authority Approval (DL08)</a>
+                <a href="second-level-approval.html" class="nav-link" data-page-id="second-level-approval">Second-Level Authority Approval (DL09)</a>
+                <a href="license-issuance.html" class="nav-link" data-page-id="license-issuance">License Issuance (DL10)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle open" type="button">
+                <span class="nav-toggle-text">Architecture</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items open">
+                <a href="application-lifecycle-flow.html" class="nav-link" data-page-id="application-lifecycle-flow">Application Lifecycle &amp; Status Flow</a>
+                <a href="data-architecture.html" class="nav-link" data-page-id="data-architecture">Data Architecture (DB2)</a>
+                <a href="cics-integration-patterns.html" class="nav-link active" data-page-id="cics-integration-patterns">CICS Integration Patterns</a>
+            </div>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Program Documentation</div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">program</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../sources/program/cobol/DLISPAY.html" class="nav-link">DLISPAY</a>
+                <a href="../sources/program/cobol/DLISSTAT.html" class="nav-link">DLISSTAT</a>
+                <a href="../sources/program/cobol/DLISMENU.html" class="nav-link">DLISMENU</a>
+                <a href="../sources/program/cobol/DLISELIG.html" class="nav-link">DLISELIG</a>
+                <a href="../sources/program/cobol/DLISCAND.html" class="nav-link">DLISCAND</a>
+                <a href="../sources/program/cobol/DLISAPPL.html" class="nav-link">DLISAPPL</a>
+                <a href="../sources/program/cobol/DLISISSU.html" class="nav-link">DLISISSU</a>
+                <a href="../sources/program/cobol/DLISAP2.html" class="nav-link">DLISAP2</a>
+                <a href="../sources/program/cobol/DLISHIST.html" class="nav-link">DLISHIST</a>
+                <a href="../sources/program/cobol/DLISAP1.html" class="nav-link">DLISAP1</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">business-rule</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../sources/business-rule/cobol/DLISELIG-overview.html" class="nav-link">DLISELIG-overview</a>
+                <a href="../sources/business-rule/cobol/DLISPAY-inventory.html" class="nav-link">DLISPAY-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISCAND-overview.html" class="nav-link">DLISCAND-overview</a>
+                <a href="../sources/business-rule/cobol/DLISAP2-inventory.html" class="nav-link">DLISAP2-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISHIST-inventory.html" class="nav-link">DLISHIST-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISMENU-inventory.html" class="nav-link">DLISMENU-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISELIG-inventory.html" class="nav-link">DLISELIG-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISPAY-overview.html" class="nav-link">DLISPAY-overview</a>
+                <a href="../sources/business-rule/cobol/DLISSTAT-overview.html" class="nav-link">DLISSTAT-overview</a>
+                <a href="../sources/business-rule/cobol/DLISHIST-overview.html" class="nav-link">DLISHIST-overview</a>
+                <a href="../sources/business-rule/cobol/DLISAPPL-overview.html" class="nav-link">DLISAPPL-overview</a>
+                <a href="../sources/business-rule/cobol/DLISISSU-inventory.html" class="nav-link">DLISISSU-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISAPPL-inventory.html" class="nav-link">DLISAPPL-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISSTAT-inventory.html" class="nav-link">DLISSTAT-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISAP1-overview.html" class="nav-link">DLISAP1-overview</a>
+                <a href="../sources/business-rule/cobol/DLISCAND-inventory.html" class="nav-link">DLISCAND-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISAP2-overview.html" class="nav-link">DLISAP2-overview</a>
+                <a href="../sources/business-rule/cobol/DLISISSU-overview.html" class="nav-link">DLISISSU-overview</a>
+                <a href="../sources/business-rule/cobol/DLISAP1-inventory.html" class="nav-link">DLISAP1-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISMENU-overview.html" class="nav-link">DLISMENU-overview</a>
+            </div>
+        </div>
+        </div>
+    </div>
+            </nav>
+        </aside>
+        <main class="main">
+            <div class="page-container">
+                <div class="content-layout">
+                    <div class="prose">
+                        <details class="source-files-disclosure">
+            <summary>
+                <svg class="sf-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Source Files
+                <span style="margin-left:4px;font-size:11px;color:var(--fg-subtle)">(5)</span>
+            </summary>
+            <div class="source-files-body">
+                <ul class="source-files-list">
+            <li><a href="../sources/program/cobol/DLISPAY.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISPAY
+            </a></li>
+            <li><a href="../sources/program/cobol/DLISMENU.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISMENU
+            </a></li>
+            <li><a href="../sources/program/cobol/DLISCAND.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISCAND
+            </a></li>
+            <li><a href="../sources/program/cobol/DLISAPPL.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISAPPL
+            </a></li>
+            <li><a href="../sources/program/cobol/DLISISSU.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISISSU
+            </a></li>
+                </ul>
+            </div>
+        </details>
+                        <h1 id="cics-integration-patterns" tabindex="-1">CICS Integration Patterns</h1>
+<h2 id="1-overview" tabindex="-1">1. Overview</h2>
+<p>The Driver License Information System (DLIS) is a set of CICS/COBOL online transactions. Operators use 3270 terminals to register candidates, enter license applications, take fee payments and issue licenses. The programs share a small set of CICS design patterns:</p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Purpose</th>
+<th>Main programs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pseudo-conversational processing</td>
+<td>The task ends after every screen interaction and is re-queued under the same transaction ID. No task or storage is held while the operator thinks.</td>
+<td>All DLIS programs</td>
+</tr>
+<tr>
+<td>BMS maps</td>
+<td>One map per program, sent with <code>ERASE</code> on first display and <code>DATAONLY</code> afterwards. Function keys (AID) select the action.</td>
+<td>All DLIS programs</td>
+</tr>
+<tr>
+<td>COMMAREA context passing</td>
+<td>A fixed 350-byte <code>DLIS-COMMAREA</code> carries session context between invocations and between programs.</td>
+<td>All DLIS programs</td>
+</tr>
+<tr>
+<td><code>XCTL</code> control transfer</td>
+<td>The main menu hands control to a functional program and is released from storage.</td>
+<td><code>DLISMENU</code> to nine downstream programs</td>
+</tr>
+<tr>
+<td><code>LINK</code> and print delegation</td>
+<td>A functional program calls a print program as a subroutine and then regains control.</td>
+<td><code>DLISPAY</code> to <code>DLISRPRT</code>; <code>DLISISSU</code> to <code>DLISLPRT</code></td>
+</tr>
+</tbody>
+</table>
+<p>This page describes how these patterns work together at application level. It uses the menu program <code>DLISMENU</code> and the functional programs <code>DLISCAND</code>, <code>DLISAPPL</code>, <code>DLISPAY</code> and <code>DLISISSU</code> as examples.</p>
+<h2 id="2-system-architecture" tabindex="-1">2. System Architecture</h2>
+<h3 id="21-component-view" tabindex="-1">2.1 Component View</h3>
+<div class="mermaid">
+graph TD
+    T[3270 Terminal Operator]
+
+    subgraph CICS[CICS Region]
+        M[DLISMENU<br>Transaction DL01]
+        C[DLISCAND<br>Transaction DL02]
+        A[DLISAPPL<br>Transaction DL03]
+        P[DLISPAY<br>Transaction DL07]
+        I[DLISISSU<br>Transaction DL10]
+        O[Other targets<br>DLISSTAT DLISELIG DLISHIST<br>DLISAP1 DLISAP2]
+        RP[DLISRPRT<br>Receipt print program]
+        LP[DLISLPRT<br>License print program]
+        CA[(DLIS-COMMAREA<br>350 bytes)]
+    end
+
+    subgraph BMS[BMS Mapsets]
+        MM[DLISMM / DLISMM01]
+        CM[DLISCM / DLISCM01]
+        AE[DLISAE / DLISAE01]
+        PE[DLISPE / DLISPE01]
+        LI[DLISLI / DLISLIM01]
+    end
+
+    DB[(DB2 schema DLIS)]
+
+    T <--> MM
+    T <--> CM
+    T <--> AE
+    T <--> PE
+    T <--> LI
+
+    MM --- M
+    CM --- C
+    AE --- A
+    PE --- P
+    LI --- I
+
+    M -- XCTL --> C
+    M -- XCTL --> A
+    M -- XCTL --> P
+    M -- XCTL --> I
+    M -- XCTL --> O
+    P -- LINK --> RP
+    I -- LINK --> LP
+
+    CA -.-> M
+    CA -.-> C
+    CA -.-> A
+    CA -.-> P
+    CA -.-> I
+
+    C --> DB
+    A --> DB
+    P --> DB
+    I --> DB
+</div>
+<p>The diagram shows four layers:</p>
+<ul>
+<li><strong>Presentation layer.</strong> Each program owns one BMS mapset and map. The menu uses <code>DLISMM</code>/<code>DLISMM01</code>, candidate maintenance uses <code>DLISCM</code>/<code>DLISCM01</code>, application entry uses <code>DLISAE</code>/<code>DLISAE01</code>, payment uses <code>DLISPE</code>/<code>DLISPE01</code>, and license issuance uses <code>DLISLI</code>/<code>DLISLIM01</code>.</li>
+<li><strong>Control layer.</strong> <code>DLISMENU</code> routes to the functional programs with <code>XCTL</code>. The functional programs call print programs with <code>LINK</code>.</li>
+<li><strong>Context layer.</strong> <code>DLIS-COMMAREA</code> is the shared context, defined in the <code>DLISCSEC</code> copybook.</li>
+<li><strong>Data layer.</strong> The functional programs read and write DB2 tables in the <code>DLIS</code> schema. The menu program does no SQL.</li>
+</ul>
+<h3 id="22-transaction-and-program-map" tabindex="-1">2.2 Transaction and Program Map</h3>
+<table>
+<thead>
+<tr>
+<th>Transaction</th>
+<th>Program</th>
+<th>Role</th>
+<th>BMS mapset / map</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DL01</code></td>
+<td><code>DLISMENU</code></td>
+<td>Main menu and navigation hub</td>
+<td><code>DLISMM</code> / <code>DLISMM01</code></td>
+</tr>
+<tr>
+<td><code>DL02</code></td>
+<td><code>DLISCAND</code></td>
+<td>Candidate create, update, inquire, deactivate</td>
+<td><code>DLISCM</code> / <code>DLISCM01</code></td>
+</tr>
+<tr>
+<td><code>DL03</code></td>
+<td><code>DLISAPPL</code></td>
+<td>License application entry</td>
+<td><code>DLISAE</code> / <code>DLISAE01</code></td>
+</tr>
+<tr>
+<td><code>DL07</code></td>
+<td><code>DLISPAY</code></td>
+<td>Payment entry and receipt printing</td>
+<td><code>DLISPE</code> / <code>DLISPE01</code></td>
+</tr>
+<tr>
+<td><code>DL10</code></td>
+<td><code>DLISISSU</code></td>
+<td>License issuance and printing</td>
+<td><code>DLISLI</code> / <code>DLISLIM01</code></td>
+</tr>
+</tbody>
+</table>
+<p>All programs are registered in CICS CSD group <code>DLISGRP</code> (<code>csd/DLISCSD.csd</code>).</p>
+<blockquote>
+<p><strong>Note:</strong> The payment program source uses transaction <code>DL07</code>, but workspace documentation lists the payment transaction as <code>DL06</code>. Check the CSD definition for consistency.</p>
+</blockquote>
+<h2 id="3-pseudo-conversational-processing" tabindex="-1">3. Pseudo-Conversational Processing</h2>
+<h3 id="31-principle" tabindex="-1">3.1 Principle</h3>
+<p>Every DLIS program ends its task after each screen interaction. It issues <code>EXEC CICS RETURN TRANSID(...) COMMAREA(...)</code>. CICS then re-invokes the same transaction when the operator presses an attention key. From the operator’s point of view the screen stays up and waits. Meanwhile the system holds no running task for that terminal.</p>
+<p>All DLIS programs have the same top-level structure:</p>
+<table>
+<thead>
+<tr>
+<th>Paragraph</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MAIN-LOGIC</code></td>
+<td>Tests <code>EIBCALEN</code> to decide between first entry and re-entry.</td>
+</tr>
+<tr>
+<td><code>INIT-SCREEN</code></td>
+<td>First entry only. Sets the date, sends the map with <code>ERASE FREEKB</code>, and returns with the transaction ID.</td>
+</tr>
+<tr>
+<td><code>PROCESS-INPUT</code></td>
+<td>Re-entry. Receives the map, dispatches on <code>EIBAID</code>, re-sends the map with <code>DATAONLY FREEKB</code>, and returns with the transaction ID.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-first-entry-and-re-entry" tabindex="-1">3.2 First Entry and Re-Entry</h3>
+<div class="mermaid">
+graph TD
+    S([Transaction started]) --> Q{EIBCALEN = 0}
+    Q -- Yes --> I[INIT-SCREEN]
+    I --> I1[Move date to map]
+    I1 --> I2[SEND MAP ERASE FREEKB]
+    I2 --> I3[RETURN TRANSID with COMMAREA]
+    I3 --> W([Wait for operator])
+    Q -- No --> R[Move DFHCOMMAREA to DLIS-COMMAREA]
+    R --> P[PROCESS-INPUT]
+    P --> P1[RECEIVE MAP]
+    P1 --> P2{EIBAID}
+    P2 -- Action key --> P3[Perform business paragraph]
+    P2 -- PF12 --> X([RETURN without TRANSID])
+    P2 -- Other --> P4[Set hint message]
+    P3 --> P5[SEND MAP DATAONLY FREEKB]
+    P4 --> P5
+    P5 --> P6[RETURN TRANSID with COMMAREA]
+    P6 --> W
+    W --> S
+</div>
+<h3 id="33-interaction-sequence" tabindex="-1">3.3 Interaction Sequence</h3>
+<div class="mermaid">
+sequenceDiagram
+    participant Op as Operator
+    participant CICS as CICS
+    participant Prog as DLIS Program
+    Op->>CICS: Start transaction
+    CICS->>Prog: Invoke with EIBCALEN = 0
+    Prog->>Op: SEND MAP ERASE FREEKB
+    Prog-->>CICS: RETURN TRANSID COMMAREA LENGTH 350
+    Note over Prog: Task ends, no storage held
+    Op->>CICS: Press AID key
+    CICS->>Prog: Invoke with DFHCOMMAREA, EIBCALEN greater than 0
+    Prog->>Prog: RECEIVE MAP, test EIBAID
+    Prog->>Prog: Perform requested action
+    Prog->>Op: SEND MAP DATAONLY FREEKB
+    Prog-->>CICS: RETURN TRANSID COMMAREA LENGTH 350
+</div>
+<h3 id="34-code-pattern-entry-dispatch" tabindex="-1">3.4 Code Pattern: Entry Dispatch</h3>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MAIN-LOGIC.
+           IF EIBCALEN = 0
+               PERFORM INIT-SCREEN
+           ELSE
+               MOVE DFHCOMMAREA TO DLIS-COMMAREA
+               PERFORM PROCESS-INPUT
+           END-IF.
+           STOP RUN.</code></pre>
+</div>
+<p><code>DLISCAND</code>, <code>DLISAPPL</code> and <code>DLISPAY</code> also move <code>EIBTRNID</code> into <code>CA-TRANSACTION-ID</code> at entry.</p>
+<h3 id="35-code-pattern-first-display" tabindex="-1">3.5 Code Pattern: First Display</h3>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">INIT-SCREEN.
+           MOVE CURRENT-DATE(1:10) TO DPEDATE
+           EXEC CICS SEND MAP(&#039;DLISPE01&#039;) MAPSET(&#039;DLISPE&#039;)
+                ERASE FREEKB RESP(WS-RESP1)
+           END-EXEC
+           EXEC CICS RETURN TRANSID(&#039;DL07&#039;)
+                COMMAREA(DLIS-COMMAREA) LENGTH(350)
+           END-EXEC.</code></pre>
+</div>
+<p>This snippet is from <code>DLISPAY</code>. The other programs follow the same shape with their own map names, mapsets, date fields and transaction IDs.</p>
+<h3 id="36-behavior-rules" tabindex="-1">3.6 Behavior Rules</h3>
+<ul>
+<li>Every re-entry must arrive under the same transaction ID with a 350-byte COMMAREA. Otherwise <code>EIBCALEN</code> is zero and the screen is re-initialised, which discards in-flight state.</li>
+<li>Every path through the main logic ends in <code>EXEC CICS RETURN</code>. The <code>STOP RUN</code> after the <code>PERFORM</code> statements is effectively unreachable.</li>
+<li>PF12 is the exit key in every program. It issues <code>EXEC CICS RETURN</code> with no <code>TRANSID</code>, which ends the conversation.</li>
+<li>A validation error does not loop inside the task. The program sets a message and still goes through a full <code>SEND MAP</code> / <code>RETURN TRANSID</code> cycle.</li>
+</ul>
+<h2 id="4-bms-maps" tabindex="-1">4. BMS Maps</h2>
+<h3 id="41-map-usage-across-programs" tabindex="-1">4.1 Map Usage Across Programs</h3>
+<table>
+<thead>
+<tr>
+<th>Program</th>
+<th>Map / mapset</th>
+<th>Input fields (suffix <code>I</code>)</th>
+<th>Output fields (suffix <code>O</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DLISMENU</code></td>
+<td><code>DLISMM01</code> / <code>DLISMM</code></td>
+<td><code>DMMOPTI</code></td>
+<td><code>DMMDATE</code>, <code>DMMMSG</code></td>
+</tr>
+<tr>
+<td><code>DLISCAND</code></td>
+<td><code>DLISCM01</code> / <code>DLISCM</code></td>
+<td><code>DCMCIDI</code>, <code>DCMFNAMI</code>, <code>DCMLNAMI</code>, <code>DCMIDNOI</code>, and others</td>
+<td><code>DCMCIDO</code>, <code>DCMFNAMO</code>, <code>DCMSTSO</code>, <code>DCMMSG</code>, <code>DCMDATE</code>, and others</td>
+</tr>
+<tr>
+<td><code>DLISAPPL</code></td>
+<td><code>DLISAE01</code> / <code>DLISAE</code></td>
+<td><code>DAECIDI</code>, <code>DAELTYPI</code></td>
+<td><code>DAECNAMO</code>, <code>DAEFEEO</code>, <code>DAECURRO</code>, <code>DAEAIDO</code>, <code>DAEASTTO</code>, <code>DAEADATO</code>, <code>DAEMSG</code>, <code>DAEDATE</code></td>
+</tr>
+<tr>
+<td><code>DLISPAY</code></td>
+<td><code>DLISPE01</code> / <code>DLISPE</code></td>
+<td><code>DPEAIDI</code>, <code>DPEMETHI</code>, <code>DPEREFI</code>, <code>DPEPRCBYI</code></td>
+<td><code>DPECNAMO</code>, <code>DPEFEEO</code>, <code>DPERCTO</code>, <code>DPEPIDO</code>, <code>DPEMSG</code>, and others</td>
+</tr>
+<tr>
+<td><code>DLISISSU</code></td>
+<td><code>DLISLIM01</code> / <code>DLISLI</code></td>
+<td><code>DLIAIDI</code>, <code>DLIVCLSI</code>, <code>DLIOFCRI</code>, <code>DLIAUTHI</code>, <code>DLIRSTI</code></td>
+<td><code>DLICNAMO</code>, <code>DLIILNUMO</code>, <code>DLIEXPO</code>, <code>DLIMSG</code>, and others</td>
+</tr>
+</tbody>
+</table>
+<p>The symbolic map fields come from the BMS-generated copybooks in <code>DLIS.COPYBOOK</code>. The programs use them without an explicit <code>COPY</code> statement.</p>
+<h3 id="42-send-map-variants" tabindex="-1">4.2 SEND MAP Variants</h3>
+<table>
+<thead>
+<tr>
+<th>Variant</th>
+<th>Options</th>
+<th>Used when</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Initial display</td>
+<td><code>ERASE FREEKB</code></td>
+<td>First entry (<code>EIBCALEN = 0</code>)</td>
+<td>Clears the screen, paints the whole map, unlocks the keyboard</td>
+</tr>
+<tr>
+<td>Refresh</td>
+<td><code>DATAONLY FREEKB</code></td>
+<td>After any action or validation error</td>
+<td>Updates only the data fields. This avoids repainting the whole screen and unlocks the keyboard</td>
+</tr>
+</tbody>
+</table>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EXEC CICS SEND MAP(&#039;DLISAE01&#039;) MAPSET(&#039;DLISAE&#039;)
+                DATAONLY FREEKB RESP(WS-RESP1)
+           END-EXEC
+           EXEC CICS RETURN TRANSID(&#039;DL03&#039;)
+                COMMAREA(DLIS-COMMAREA) LENGTH(350)
+           END-EXEC.</code></pre>
+</div>
+<h3 id="43-receive-map-and-aid-dispatch" tabindex="-1">4.3 RECEIVE MAP and AID Dispatch</h3>
+<p><code>RECEIVE MAP</code> always runs before the AID is evaluated. The function key then selects the action.</p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">PROCESS-INPUT.
+           EXEC CICS RECEIVE MAP(&#039;DLISPE01&#039;) MAPSET(&#039;DLISPE&#039;)
+                RESP(WS-RESP1)
+           END-EXEC
+           EVALUATE TRUE
+               WHEN EIBAID = DFHPF1
+                   PERFORM PROCESS-PAYMENT
+               WHEN EIBAID = DFHPF3
+                   PERFORM LOAD-APPLICATION
+               WHEN EIBAID = DFHPF5
+                   PERFORM PRINT-RECEIPT
+               WHEN EIBAID = DFHPF12
+                   EXEC CICS RETURN END-EXEC
+               WHEN OTHER
+                   MOVE &#039;USE F1 F3 F5 OR F12&#039; TO DPEMSG
+           END-EVALUATE.</code></pre>
+</div>
+<p>The program sources show the final branch of this dispatch as <code>OTHER</code> rather than <code>WHEN OTHER</code>. Valid COBOL requires <code>WHEN OTHER</code>. The snippet above shows the intended, valid form.</p>
+<h3 id="44-function-key-assignments" tabindex="-1">4.4 Function-Key Assignments</h3>
+<table>
+<thead>
+<tr>
+<th>Program</th>
+<th>PF1</th>
+<th>PF3</th>
+<th>PF5</th>
+<th>PF6</th>
+<th>PF12</th>
+<th>Other keys</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DLISMENU</code></td>
+<td>not used</td>
+<td>not used</td>
+<td>not used</td>
+<td>not used</td>
+<td>Exit</td>
+<td>Only ENTER selects an option. Any other key gives <code>PRESS ENTER TO SELECT OR F12 TO EXIT</code></td>
+</tr>
+<tr>
+<td><code>DLISCAND</code></td>
+<td>Create</td>
+<td>Inquire</td>
+<td>not used</td>
+<td>not used</td>
+<td>Exit</td>
+<td><code>INVALID KEY - USE F1-F4 OR F12</code> (PF2 updates, PF4 deactivates)</td>
+</tr>
+<tr>
+<td><code>DLISAPPL</code></td>
+<td>Submit application</td>
+<td>Look up candidate</td>
+<td>Calculate fee</td>
+<td>not used</td>
+<td>Exit</td>
+<td><code>USE F1 F3 F5 OR F12</code></td>
+</tr>
+<tr>
+<td><code>DLISPAY</code></td>
+<td>Process payment</td>
+<td>Load application</td>
+<td>Print receipt</td>
+<td>not used</td>
+<td>Exit</td>
+<td><code>USE F1 F3 F5 OR F12</code></td>
+</tr>
+<tr>
+<td><code>DLISISSU</code></td>
+<td>Issue license</td>
+<td>Load application</td>
+<td>not used</td>
+<td>Print license</td>
+<td>Exit</td>
+<td><code>USE F1 F3 F6 OR F12</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="45-single-message-field-pattern" tabindex="-1">4.5 Single Message Field Pattern</h3>
+<p>Each map has one message field: <code>DMMMSG</code>, <code>DCMMSG</code>, <code>DAEMSG</code>, <code>DPEMSG</code> or <code>DLIMSG</code>. It carries every validation error, business-rule rejection, database error and success confirmation. The program sets the text and then sends the map.</p>
+<p>A called paragraph can also use the message as a status result. <code>DLISPAY</code> and <code>DLISISSU</code> run <code>LOAD-APPLICATION</code> first, then continue only if the message is <code>APPLICATION LOADED</code>. The comparison depends on the exact text of the message, so changing the wording would break the check.</p>
+<h2 id="5-commarea-context-passing" tabindex="-1">5. COMMAREA Context Passing</h2>
+<h3 id="51-structure" tabindex="-1">5.1 Structure</h3>
+<p>The shared <code>DLIS-COMMAREA</code> is defined in the <code>DLISCSEC</code> copybook. The Linkage Section receives it as <code>DFHCOMMAREA PIC X(350)</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CA-TRANSACTION-ID</code></td>
+<td>4-character transaction ID of the originating or returning transaction</td>
+</tr>
+<tr>
+<td><code>CA-RETURN-SCREEN</code></td>
+<td>8-character program name to return to after navigation</td>
+</tr>
+<tr>
+<td><code>CA-CANDIDATE-ID</code></td>
+<td>Candidate in context (packed decimal)</td>
+</tr>
+<tr>
+<td><code>CA-APPLICATION-ID</code></td>
+<td>Application in context (packed decimal)</td>
+</tr>
+<tr>
+<td><code>CA-LICENSE-ID</code></td>
+<td>Issued license in context (packed decimal)</td>
+</tr>
+<tr>
+<td><code>CA-PAYMENT-ID</code></td>
+<td>Payment in context (packed decimal)</td>
+</tr>
+<tr>
+<td><code>CA-USER-ID</code></td>
+<td>8-character operator ID</td>
+</tr>
+<tr>
+<td><code>CA-RETURN-CODE</code></td>
+<td>Result code from a previous program</td>
+</tr>
+<tr>
+<td><code>CA-MSG-TEXT</code></td>
+<td>78-character message passed back for display</td>
+</tr>
+<tr>
+<td><code>CA-MSG-COLOR</code></td>
+<td>5-character message color</td>
+</tr>
+<tr>
+<td><code>CA-ACTION</code></td>
+<td>Single-character action code</td>
+</tr>
+</tbody>
+</table>
+<p><code>DLISCSEC</code> also defines <code>DLIS-CAND-COMMAREA</code>, <code>DLIS-APPL-COMMAREA</code> and <code>WS-CICS-RESPONSE</code>. <code>WS-CICS-RESPONSE</code> holds <code>WS-RESP1</code>, <code>WS-RESP2</code> and the EIB save fields.</p>
+<h3 id="52-context-flow" tabindex="-1">5.2 Context Flow</h3>
+<div class="mermaid">
+graph LR
+    subgraph Cycle[Pseudo-conversational cycle]
+        R1[RETURN TRANSID<br>COMMAREA LENGTH 350] --> CICS1[CICS holds COMMAREA]
+        CICS1 --> D[DFHCOMMAREA<br>PIC X 350]
+        D --> W[DLIS-COMMAREA<br>working storage]
+        W --> R1
+    end
+    W -- XCTL COMMAREA --> N[Next program]
+    W -- LINK COMMAREA --> PR[Print program]
+    PR -. updated COMMAREA .-> W
+</div>
+<p>The COMMAREA moves along three paths:</p>
+<ol>
+<li><strong>Same program, next interaction.</strong> <code>RETURN TRANSID(...) COMMAREA(...)</code> stores it, and the next invocation receives it as <code>DFHCOMMAREA</code>.</li>
+<li><strong>Forward transfer.</strong> <code>XCTL</code> passes it to the next program. The caller does not regain control.</li>
+<li><strong>Subroutine call.</strong> <code>LINK</code> passes it to a print program and then regains control.</li>
+</ol>
+<h3 id="53-code-pattern-restore-and-return" tabindex="-1">5.3 Code Pattern: Restore and Return</h3>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">LINKAGE SECTION.
+       01  DFHCOMMAREA              PIC X(350).
+
+           ...
+           MOVE DFHCOMMAREA TO DLIS-COMMAREA
+
+           ...
+           EXEC CICS RETURN TRANSID(&#039;DL01&#039;)
+                COMMAREA(DLIS-COMMAREA) LENGTH(350)
+           END-EXEC.</code></pre>
+</div>
+<h3 id="54-data-handed-to-downstream-programs" tabindex="-1">5.4 Data Handed to Downstream Programs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Used by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CA-PAYMENT-ID</code></td>
+<td>Relays the new payment ID to the receipt print program</td>
+</tr>
+<tr>
+<td><code>CA-APPLICATION-ID</code></td>
+<td>Available to the print programs</td>
+</tr>
+<tr>
+<td><code>CA-CANDIDATE-ID</code></td>
+<td>Candidate context across screens</td>
+</tr>
+<tr>
+<td><code>CA-USER-ID</code></td>
+<td>Operator identity and audit continuity</td>
+</tr>
+<tr>
+<td><code>CA-MSG-TEXT</code>, <code>CA-MSG-COLOR</code></td>
+<td>Messages from a previous program for display on the menu</td>
+</tr>
+</tbody>
+</table>
+<h3 id="55-constraints" tabindex="-1">5.5 Constraints</h3>
+<ul>
+<li>The length is fixed at 350 bytes in every <code>RETURN</code>, <code>XCTL</code> and <code>LINK</code>. The menu hard-codes it in all three <code>RETURN</code> calls and all ten <code>XCTL</code> calls. Every receiving program must expect exactly this layout.</li>
+<li><code>DLIS-COMMAREA</code> is shorter than 350 bytes. The <code>DLISISSU</code> documentation puts it at roughly 130 bytes. The declared length is larger than the data structure, and no program checks that the two match.</li>
+<li>A message in the COMMAREA is limited to 78 characters, and <code>CA-USER-ID</code> to 8 characters.</li>
+<li>The programs test only for a zero <code>EIBCALEN</code>. They do not validate the length or content of the COMMAREA beyond that.</li>
+<li>The menu does not set anything in the COMMAREA to distinguish option 1 from option 2, so <code>DLISCAND</code> cannot tell them apart.</li>
+</ul>
+<h2 id="6-program-to-program-control-transfer-with-xctl" tabindex="-1">6. Program-to-Program Control Transfer with XCTL</h2>
+<h3 id="61-menu-routing" tabindex="-1">6.1 Menu Routing</h3>
+<p><code>DLISMENU</code> (transaction <code>DL01</code>) is the navigation hub. After validation, it uses <code>EXEC CICS XCTL</code> to pass control to one of nine programs. It reaches them through ten menu options.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Target program</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>DLISCAND</code></td>
+<td>Candidate registration</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>DLISCAND</code></td>
+<td>Candidate search / maintenance</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>DLISAPPL</code></td>
+<td>License application entry</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>DLISSTAT</code></td>
+<td>Application status inquiry</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>DLISELIG</code></td>
+<td>Eligibility check</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>DLISHIST</code></td>
+<td>Driving history review</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>DLISPAY</code></td>
+<td>Payment processing</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>DLISAP1</code></td>
+<td>First authority approval</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>DLISAP2</code></td>
+<td>Second authority approval</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>DLISISSU</code></td>
+<td>License issuance</td>
+</tr>
+</tbody>
+</table>
+<h3 id="62-menu-decision-flow" tabindex="-1">6.2 Menu Decision Flow</h3>
+<div class="mermaid">
+graph TD
+    A[PROCESS-INPUT<br>RECEIVE MAP] --> B{EIBAID = DFHPF12}
+    B -- Yes --> X([RETURN - end transaction])
+    B -- No --> C{EIBAID = DFHENTER}
+    C -- No --> M1[Message PRESS ENTER TO SELECT OR F12 TO EXIT]
+    C -- Yes --> D{DMMOPTI blank}
+    D -- Yes --> M2[Message PLEASE SELECT AN OPTION 1-10]
+    D -- No --> E{EVALUATE DMMOPTI}
+    E -- 1 or 2 --> T1[XCTL DLISCAND]
+    E -- 3 --> T2[XCTL DLISAPPL]
+    E -- 4 --> T3[XCTL DLISSTAT]
+    E -- 5 --> T4[XCTL DLISELIG]
+    E -- 6 --> T5[XCTL DLISHIST]
+    E -- 7 --> T6[XCTL DLISPAY]
+    E -- 8 --> T7[XCTL DLISAP1]
+    E -- 9 --> T8[XCTL DLISAP2]
+    E -- 10 --> T9[XCTL DLISISSU]
+    E -- Other --> M3[Message INVALID OPTION PLEASE SELECT 1-10]
+    M1 --> R[REDISPLAY-MENU<br>SEND MAP DATAONLY FREEKB<br>RETURN TRANSID DL01]
+    M2 --> R
+    M3 --> R
+</div>
+<h3 id="63-code-pattern-menu-validation-and-routing" tabindex="-1">6.3 Code Pattern: Menu Validation and Routing</h3>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">PROCESS-INPUT.
+           EXEC CICS RECEIVE MAP(&#039;DLISMM01&#039;) MAPSET(&#039;DLISMM&#039;)
+                RESP(WS-RESP1)
+           END-EXEC
+           IF EIBAID = DFHPF12
+               EXEC CICS RETURN END-EXEC
+           END-IF
+           IF EIBAID NOT = DFHENTER
+               MOVE &#039;PRESS ENTER TO SELECT OR F12 TO EXIT&#039; TO DMMMSG
+               PERFORM REDISPLAY-MENU
+           END-IF
+           IF DMMOPTI = SPACES OR LOW-VALUES
+               MOVE &#039;PLEASE SELECT AN OPTION (1-10)&#039; TO DMMMSG
+               PERFORM REDISPLAY-MENU
+           END-IF
+           EVALUATE DMMOPTI
+               WHEN &#039;3&#039;
+                   EXEC CICS XCTL PROGRAM(&#039;DLISAPPL&#039;)
+                        COMMAREA(DLIS-COMMAREA) LENGTH(350)
+                   END-EXEC
+               ...
+               WHEN OTHER
+                   MOVE &#039;INVALID OPTION. PLEASE SELECT 1-10&#039; TO DMMMSG
+                   PERFORM REDISPLAY-MENU
+           END-EVALUATE.</code></pre>
+</div>
+<p>Only the <code>WHEN '3'</code> branch is written out here. The other nine follow the same shape. The two validation <code>IF</code> blocks work because <code>REDISPLAY-MENU</code> ends in a CICS <code>RETURN</code>, so later statements are not reached.</p>
+<h3 id="64-error-redisplay-in-the-menu" tabindex="-1">6.4 Error Redisplay in the Menu</h3>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">REDISPLAY-MENU.
+           EXEC CICS SEND MAP(&#039;DLISMM01&#039;) MAPSET(&#039;DLISMM&#039;)
+                DATAONLY FREEKB RESP(WS-RESP1)
+           END-EXEC
+           EXEC CICS RETURN TRANSID(&#039;DL01&#039;)
+                COMMAREA(DLIS-COMMAREA) LENGTH(350)
+           END-EXEC.</code></pre>
+</div>
+<p><code>REDISPLAY-MENU</code> does not set a message. The caller sets <code>DMMMSG</code> first.</p>
+<h3 id="65-xctl-behavior" tabindex="-1">6.5 XCTL Behavior</h3>
+<ul>
+<li><strong>One way.</strong> <code>XCTL</code> releases <code>DLISMENU</code> and control never returns to it. All state the target needs must travel in the 350-byte COMMAREA.</li>
+<li><strong>Same logical level.</strong> There is no stack of callers, unlike <code>LINK</code>.</li>
+<li><strong>Fixed contract.</strong> Every <code>XCTL</code> uses <code>COMMAREA(DLIS-COMMAREA) LENGTH(350)</code>.</li>
+<li><strong>No error handling.</strong> None of the <code>XCTL</code> calls has a <code>RESP</code> option or a <code>HANDLE CONDITION</code>. If a target program is missing or disabled, CICS applies its default behavior and abends the task.</li>
+<li><strong>Return to the menu.</strong> After an <code>XCTL</code>, the target program runs under its own transaction ID. The functional programs in this document end with <code>RETURN TRANSID</code> for their own transaction and do not transfer back to <code>DL01</code>. They do not use <code>CA-RETURN-SCREEN</code> to navigate elsewhere. Operators return to the menu by starting <code>DL01</code> again.</li>
+</ul>
+<h3 id="66-sequence-menu-to-functional-program" tabindex="-1">6.6 Sequence: Menu to Functional Program</h3>
+<div class="mermaid">
+sequenceDiagram
+    participant Op as Operator
+    participant Menu as DLISMENU DL01
+    participant App as DLISAPPL DL03
+    Op->>Menu: Type 3 and press ENTER
+    Menu->>Menu: Restore COMMAREA, RECEIVE MAP
+    Menu->>Menu: Check AID and option
+    Menu->>App: XCTL PROGRAM DLISAPPL COMMAREA 350
+    Note over Menu: DLISMENU released from storage
+    App->>Op: SEND MAP DLISAE01
+    App-->>Op: RETURN TRANSID DL03 COMMAREA
+</div>
+<h2 id="7-print-program-delegation-with-link" tabindex="-1">7. Print Program Delegation with LINK</h2>
+<h3 id="71-pattern" tabindex="-1">7.1 Pattern</h3>
+<p>Two functional programs delegate printing to separate programs by using <code>EXEC CICS LINK</code>. This is a subroutine call. The called program runs at a lower logical level and control comes back to the caller. The caller keeps its screen and its place in the pseudo-conversation.</p>
+<table>
+<thead>
+<tr>
+<th>Caller</th>
+<th>Key</th>
+<th>Print program</th>
+<th>Condition for printing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DLISPAY</code> (<code>DL07</code>)</td>
+<td>PF5</td>
+<td><code>DLISRPRT</code></td>
+<td>Receipt number field <code>DPERCTO</code> is not blank</td>
+</tr>
+<tr>
+<td><code>DLISISSU</code> (<code>DL10</code>)</td>
+<td>PF6</td>
+<td><code>DLISLPRT</code></td>
+<td>License number field <code>DLIILNUMO</code> is not blank</td>
+</tr>
+</tbody>
+</table>
+<h3 id="72-code-pattern" tabindex="-1">7.2 Code Pattern</h3>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">PRINT-RECEIPT.
+           IF DPERCTO = SPACES
+               MOVE &#039;PROCESS PAYMENT FIRST BEFORE PRINTING&#039; TO DPEMSG
+               GO TO PRINT-RECEIPT-EXIT
+           END-IF
+           EXEC CICS LINK PROGRAM(&#039;DLISRPRT&#039;)
+                COMMAREA(DLIS-COMMAREA) LENGTH(350)
+           END-EXEC
+           MOVE &#039;RECEIPT SENT TO PRINTER&#039; TO DPEMSG.
+       PRINT-RECEIPT-EXIT.
+           EXIT.</code></pre>
+</div>
+<p><code>DLISISSU</code> uses the same shape for <code>PRINT-LICENSE</code>. It guards on <code>DLIILNUMO</code>, links to <code>DLISLPRT</code>, and sets <code>LICENSE SENT TO PRINTER</code>.</p>
+<h3 id="73-sequence-payment-then-receipt-print" tabindex="-1">7.3 Sequence: Payment, Then Receipt Print</h3>
+<div class="mermaid">
+sequenceDiagram
+    participant Op as Operator
+    participant Pay as DLISPAY DL07
+    participant DB as DB2
+    participant Prt as DLISRPRT
+    Op->>Pay: F3 with application ID
+    Pay->>DB: Read application, candidate, fee
+    Pay-->>Op: Application loaded
+    Op->>Pay: F1 with method and reference
+    Pay->>DB: INSERT PAYMENT, UPDATE LICENSE_APPLICATION
+    Pay-->>Op: Receipt number and payment ID shown
+    Op->>Pay: F5
+    Pay->>Pay: Check receipt number is present
+    Pay->>Prt: LINK COMMAREA 350 with CA-PAYMENT-ID
+    Prt-->>Pay: Return to caller
+    Pay-->>Op: Message RECEIPT SENT TO PRINTER
+</div>
+<h3 id="74-design-points" tabindex="-1">7.4 Design Points</h3>
+<ul>
+<li><strong>Guard before delegation.</strong> Both callers refuse to print until the business action has happened, which is a payment in <code>DLISPAY</code> and an issued license in <code>DLISISSU</code>. The guard tests the screen output field, not a database value.</li>
+<li><strong>Context through the COMMAREA.</strong> <code>DLISPAY</code> relays the new payment ID in <code>CA-PAYMENT-ID</code>, so <code>DLISRPRT</code> can retrieve and format the right receipt. <code>DLISISSU</code> passes <code>DLIS-COMMAREA</code> so <code>DLISLPRT</code> can locate the issued license. <code>DLISISSU</code> does not copy the generated license number into the COMMAREA.</li>
+<li><strong>Required size.</strong> Each print program must accept a 350-byte COMMAREA.</li>
+<li><strong>Resource definitions.</strong> The print programs must be defined in CICS group <code>DLISGRP</code> and available in <code>DLIS.LOADLIB</code>.</li>
+<li><strong>No outcome check.</strong> The <code>LINK</code> has no <code>RESP</code> or <code>HANDLE CONDITION</code>. The success message is shown whether or not printing worked. If the program is not found or abends, CICS applies default handling and normally abends the task.</li>
+</ul>
+<h3 id="75-xctl-and-link-compared" tabindex="-1">7.5 XCTL and LINK Compared</h3>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th><code>XCTL</code> (menu routing)</th>
+<th><code>LINK</code> (print delegation)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Control returns to caller</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Caller storage</td>
+<td>Released</td>
+<td>Retained</td>
+</tr>
+<tr>
+<td>Typical use</td>
+<td>Move to the next functional area</td>
+<td>Call a helper or utility</td>
+</tr>
+<tr>
+<td>Used by</td>
+<td><code>DLISMENU</code></td>
+<td><code>DLISPAY</code>, <code>DLISISSU</code></td>
+</tr>
+<tr>
+<td>Message after the call</td>
+<td>Not applicable</td>
+<td>Caller sets <code>... SENT TO PRINTER</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="8-error-handling-patterns" tabindex="-1">8. Error Handling Patterns</h2>
+<p>The programs use the same error-handling approach, with the same gaps.</p>
+<h3 id="81-fail-fast-guards-with-exit-paragraphs" tabindex="-1">8.1 Fail-Fast Guards with Exit Paragraphs</h3>
+<p>Business paragraphs check conditions in order and branch to a dedicated exit paragraph on the first failure. The names are <code>LOAD-APP-EXIT</code>, <code>PROCESS-PAY-EXIT</code>, <code>ISSUE-LIC-EXIT</code>, <code>CREATE-CANDIDATE-EXIT</code>, <code>LOOKUP-CANDIDATE-EXIT</code> and similar. Only the first failing message is shown, and no database work happens after a failed check.</p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF DPEMETHI = SPACES
+               MOVE &#039;PAYMENT METHOD IS REQUIRED&#039; TO DPEMSG
+               GO TO PROCESS-PAY-EXIT
+           END-IF
+           IF DPEMETHI NOT = &#039;CC&#039; AND &#039;DC&#039; AND &#039;EF&#039; AND &#039;CS&#039; AND &#039;CH&#039;
+               MOVE &#039;INVALID PAYMENT METHOD&#039; TO DPEMSG
+               GO TO PROCESS-PAY-EXIT
+           END-IF</code></pre>
+</div>
+<h3 id="82-error-handling-summary" tabindex="-1">8.2 Error Handling Summary</h3>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AID keys</td>
+<td>Unknown keys produce a hint message and a redisplay. PF12 exits cleanly.</td>
+</tr>
+<tr>
+<td>Input validation</td>
+<td>Required-field and domain checks run before any SQL. Each failure shows a message on the map and keeps the conversation going.</td>
+</tr>
+<tr>
+<td>DB2</td>
+<td><code>SQLCODE</code> is checked inconsistently: <code>100</code> after most <code>SELECT</code> statements, and non-zero after most <code>INSERT</code> and <code>UPDATE</code> statements. Checks after the identity retrieval and some updates are missing.</td>
+</tr>
+<tr>
+<td>CICS <code>SEND</code> / <code>RECEIVE</code></td>
+<td><code>RESP(WS-RESP1)</code> is coded, which suppresses the default abend, but the value is never tested. A <code>MAPFAIL</code> passes silently.</td>
+</tr>
+<tr>
+<td><code>XCTL</code> / <code>LINK</code></td>
+<td>No <code>RESP</code>, no <code>HANDLE CONDITION</code>, no <code>HANDLE ABEND</code>. CICS defaults apply.</td>
+</tr>
+<tr>
+<td>Unit of work</td>
+<td>No explicit <code>SYNCPOINT</code> or <code>ROLLBACK</code>. Commit happens at task end through <code>RETURN</code>.</td>
+</tr>
+<tr>
+<td>Diagnostics</td>
+<td>No logging to TD or TS queues. The common return code and message fields in <code>DLISWS</code> are defined but unused.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="83-known-gaps" tabindex="-1">8.3 Known Gaps</h3>
+<ul>
+<li>Because <code>RESP(WS-RESP1)</code> is never tested, a failed <code>RECEIVE MAP</code> lets the program carry on with stale or empty map data.</li>
+<li>In <code>DLISPAY</code> and <code>DLISISSU</code>, the <code>UPDATE</code> of <code>LICENSE_APPLICATION</code> is not checked after the <code>INSERT</code>. The success message can appear even if the update failed.</li>
+<li>Some bare <code>OTHER</code> branches in <code>EVALUATE</code> statements in <code>DLISMENU</code>, <code>DLISCAND</code>, <code>DLISAPPL</code> and <code>DLISISSU</code> are written without <code>WHEN</code> and need correcting.</li>
+<li>Option 10 on the menu compares against <code>'10'</code>, which may not fit the one-character option field. It could be unreachable, depending on the map definition.</li>
+</ul>
+<h2 id="9-build-and-runtime-dependencies" tabindex="-1">9. Build and Runtime Dependencies</h2>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CICS resources</td>
+<td>Programs, transactions and mapsets are defined in <code>csd/DLISCSD.csd</code> (group <code>DLISGRP</code>), installed with <code>DFHCSDUP</code>.</td>
+</tr>
+<tr>
+<td>BMS</td>
+<td><code>jcl/DLISBMS.jcl</code> with <code>proc/DLISBASM.proc</code> assembles the maps into <code>DLIS.LOADLIB</code>. Symbolic maps are generated into <code>DLIS.COPYBOOK</code>.</td>
+</tr>
+<tr>
+<td>Compile and link</td>
+<td><code>jcl/DLISCOMP.jcl</code> with <code>proc/DLISCLNK.proc</code>. The DB2 precompiler <code>DSNHPC</code> runs first. The compiler <code>IGYCRCTL</code> uses <code>RENT,APOST,LIB,NOSEQ,NOTERM</code>. The link editor <code>IEWL</code> uses <code>AMODE(31),RMODE(ANY)</code>.</td>
+</tr>
+<tr>
+<td>DB2</td>
+<td>Subsystem <code>DSN1</code>, plan <code>DLISPLAN</code>, collection <code>DLISPKG</code>. Bound by <code>jcl/DLISBIND.jcl</code>.</td>
+</tr>
+<tr>
+<td>Copybooks</td>
+<td><code>DLISWS</code> (shared working storage and <code>SQLCA</code>), <code>DLISCSEC</code> (COMMAREA layouts), <code>DLISDCLG</code> (DCLGEN host structures). <code>DFHAID</code> supplies the attention-key constants.</td>
+</tr>
+</tbody>
+</table>
+<p><code>DLISMENU</code> includes <code>SQLCA</code> through <code>DLISWS</code> but runs no SQL. The DB2 precompiler still processes it at compile time.</p>
+<h2 id="10-summary-of-integration-patterns" tabindex="-1">10. Summary of Integration Patterns</h2>
+<div class="mermaid">
+graph TD
+    OP[Operator] --> MENU[DLISMENU DL01<br>pseudo-conversational hub]
+    MENU -- XCTL + COMMAREA --> FUNC[Functional programs<br>each pseudo-conversational]
+    FUNC -- BMS map plus AID keys --> OP
+    FUNC -- RETURN TRANSID + COMMAREA --> FUNC
+    FUNC -- LINK + COMMAREA --> PRINT[Print programs<br>DLISRPRT DLISLPRT]
+    FUNC -- EXEC SQL --> DB2[(DB2 DLIS)]
+</div>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Key rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pseudo-conversational</td>
+<td>Test <code>EIBCALEN</code>. Always end with <code>RETURN TRANSID(...) COMMAREA(...) LENGTH(350)</code>. Use PF12 as the only clean exit.</td>
+</tr>
+<tr>
+<td>BMS</td>
+<td><code>ERASE FREEKB</code> on first send, <code>DATAONLY FREEKB</code> on later sends. One message field per map.</td>
+</tr>
+<tr>
+<td>COMMAREA</td>
+<td>A fixed 350-byte <code>DLIS-COMMAREA</code>. Restore it from <code>DFHCOMMAREA</code> on every re-entry.</td>
+</tr>
+<tr>
+<td><code>XCTL</code></td>
+<td>The menu hands over the whole COMMAREA and is released. There is no return path.</td>
+</tr>
+<tr>
+<td><code>LINK</code></td>
+<td>The caller guards on a screen value, calls the print program with the COMMAREA, then reports the result.</td>
+</tr>
+</tbody>
+</table>
+<p>New DLIS programs should follow the same skeleton: <code>MAIN-LOGIC</code> with an <code>EIBCALEN</code> test, <code>INIT-SCREEN</code>, <code>PROCESS-INPUT</code>, fail-fast business paragraphs with exit paragraphs, and the shared COMMAREA contract. They should also test <code>RESP</code> values and add <code>RESP</code> handling on <code>XCTL</code> and <code>LINK</code>, which the current programs omit.</p>
+
+                        <div class="related-pages">
+                            <p class="related-pages-title">Related Pages</p>
+                            <div class="card-grid">
+                                
+            <a href="main-menu-navigation.html" class="card">
+                <span class="card-title">Main Menu &amp; Navigation (DL01)</span>
+                <span class="card-description">The pseudo-conversational main menu program DLISMENU. It covers the BMS map, option routing to the ten downstream transactions, and how session context is passed through the shared communication area using XCTL.</span>
+            </a>
+            <a href="payment-processing.html" class="card">
+                <span class="card-title">Payment Entry &amp; Processing (DL07)</span>
+                <span class="card-description">DLISPAY: fee lookup, payment recording in the PAYMENT table, receipt number generation, application status update to paid, and receipt printing delegated to DLISRPRT via EXEC CICS LINK.</span>
+            </a>
+            <a href="license-issuance.html" class="card">
+                <span class="card-title">License Issuance (DL10)</span>
+                <span class="card-description">DLISISSU: issuing a license for an approved application, including validity and expiry calculation, license number generation, recording in the issued-license table and printing via DLISLPRT.</span>
+            </a>
+            <a href="data-architecture.html" class="card">
+                <span class="card-title">Data Architecture (DB2)</span>
+                <span class="card-description">DB2 tables used across DLIS (CANDIDATE, LICENSE_APPLICATION, LICENSE_FEE_SCHEDULE, PAYMENT, ISSUED_LICENSE, authority user data, driving incidents) and which programs read or write them.</span>
+            </a>
+                            </div>
+                        </div>
+                    </div>
+                    <nav class="toc-panel" aria-label="On this page">
+  <span class="toc-panel-label">On this page</span>
+  <ul class="toc-list">
+<li class="toc-level-2"><a href="#1-overview">1. Overview</a></li>
+<li class="toc-level-2"><a href="#2-system-architecture">2. System Architecture</a>
+<ul>
+<li class="toc-level-3"><a href="#21-component-view">2.1 Component View</a></li>
+<li class="toc-level-3"><a href="#22-transaction-and-program-map">2.2 Transaction and Program Map</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#3-pseudo-conversational-processing">3. Pseudo-Conversational Processing</a>
+<ul>
+<li class="toc-level-3"><a href="#31-principle">3.1 Principle</a></li>
+<li class="toc-level-3"><a href="#32-first-entry-and-re-entry">3.2 First Entry and Re-Entry</a></li>
+<li class="toc-level-3"><a href="#33-interaction-sequence">3.3 Interaction Sequence</a></li>
+<li class="toc-level-3"><a href="#34-code-pattern-entry-dispatch">3.4 Code Pattern: Entry Dispatch</a></li>
+<li class="toc-level-3"><a href="#35-code-pattern-first-display">3.5 Code Pattern: First Display</a></li>
+<li class="toc-level-3"><a href="#36-behavior-rules">3.6 Behavior Rules</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#4-bms-maps">4. BMS Maps</a>
+<ul>
+<li class="toc-level-3"><a href="#41-map-usage-across-programs">4.1 Map Usage Across Programs</a></li>
+<li class="toc-level-3"><a href="#42-send-map-variants">4.2 SEND MAP Variants</a></li>
+<li class="toc-level-3"><a href="#43-receive-map-and-aid-dispatch">4.3 RECEIVE MAP and AID Dispatch</a></li>
+<li class="toc-level-3"><a href="#44-function-key-assignments">4.4 Function-Key Assignments</a></li>
+<li class="toc-level-3"><a href="#45-single-message-field-pattern">4.5 Single Message Field Pattern</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#5-commarea-context-passing">5. COMMAREA Context Passing</a>
+<ul>
+<li class="toc-level-3"><a href="#51-structure">5.1 Structure</a></li>
+<li class="toc-level-3"><a href="#52-context-flow">5.2 Context Flow</a></li>
+<li class="toc-level-3"><a href="#53-code-pattern-restore-and-return">5.3 Code Pattern: Restore and Return</a></li>
+<li class="toc-level-3"><a href="#54-data-handed-to-downstream-programs">5.4 Data Handed to Downstream Programs</a></li>
+<li class="toc-level-3"><a href="#55-constraints">5.5 Constraints</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#6-program-to-program-control-transfer-with-xctl">6. Program-to-Program Control Transfer with XCTL</a>
+<ul>
+<li class="toc-level-3"><a href="#61-menu-routing">6.1 Menu Routing</a></li>
+<li class="toc-level-3"><a href="#62-menu-decision-flow">6.2 Menu Decision Flow</a></li>
+<li class="toc-level-3"><a href="#63-code-pattern-menu-validation-and-routing">6.3 Code Pattern: Menu Validation and Routing</a></li>
+<li class="toc-level-3"><a href="#64-error-redisplay-in-the-menu">6.4 Error Redisplay in the Menu</a></li>
+<li class="toc-level-3"><a href="#65-xctl-behavior">6.5 XCTL Behavior</a></li>
+<li class="toc-level-3"><a href="#66-sequence-menu-to-functional-program">6.6 Sequence: Menu to Functional Program</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#7-print-program-delegation-with-link">7. Print Program Delegation with LINK</a>
+<ul>
+<li class="toc-level-3"><a href="#71-pattern">7.1 Pattern</a></li>
+<li class="toc-level-3"><a href="#72-code-pattern">7.2 Code Pattern</a></li>
+<li class="toc-level-3"><a href="#73-sequence-payment-then-receipt-print">7.3 Sequence: Payment, Then Receipt Print</a></li>
+<li class="toc-level-3"><a href="#74-design-points">7.4 Design Points</a></li>
+<li class="toc-level-3"><a href="#75-xctl-and-link-compared">7.5 XCTL and LINK Compared</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#8-error-handling-patterns">8. Error Handling Patterns</a>
+<ul>
+<li class="toc-level-3"><a href="#81-fail-fast-guards-with-exit-paragraphs">8.1 Fail-Fast Guards with Exit Paragraphs</a></li>
+<li class="toc-level-3"><a href="#82-error-handling-summary">8.2 Error Handling Summary</a></li>
+<li class="toc-level-3"><a href="#83-known-gaps">8.3 Known Gaps</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#9-build-and-runtime-dependencies">9. Build and Runtime Dependencies</a></li>
+<li class="toc-level-2"><a href="#10-summary-of-integration-patterns">10. Summary of Integration Patterns</a></li>
+</ul>
+
+</nav>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+    /* toc-spy.js — highlights the active heading in the TOC panel on scroll */
+    (function () {
+      function init() {
+        var panel = document.querySelector('.toc-panel');
+        if (!panel) return;
+        var links = Array.prototype.slice.call(panel.querySelectorAll('a[href^="#"]'));
+        if (!links.length) return;
+
+        var headingIds = links.map(function (a) { return a.getAttribute('href').slice(1); });
+        var headings = headingIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+        function clearActive() {
+          panel.querySelectorAll('.toc-active').forEach(function (el) { el.classList.remove('toc-active'); });
+          panel.querySelectorAll('.toc-parent-active').forEach(function (el) { el.classList.remove('toc-parent-active'); });
+        }
+
+        function setActive(id) {
+          clearActive();
+          var link = panel.querySelector('a[href="#' + id + '"]');
+          if (!link) return;
+          link.classList.add('toc-active');
+          var li = link.closest('li');
+          if (li) {
+            var parentLi = li.parentElement && li.parentElement.closest('li');
+            if (parentLi) parentLi.classList.add('toc-parent-active');
+          }
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+        headings.forEach(function (h) { observer.observe(h); });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
+    <script>
+    /* sidebar-toggle.js — persists open/closed state across navigation */
+    (function () {
+
+      var STORAGE_KEY = 'sb_open';
+
+      function getOpenSet() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+      }
+
+      function saveOpenSet(set) {
+        try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(set)); } catch (e) {}
+      }
+
+      function findItems(toggle) {
+        var node = toggle.nextSibling;
+        while (node) {
+          if (node.nodeType === 1 && node.classList.contains('nav-section-items'))
+            return node;
+          node = node.nextSibling;
+        }
+        return null;
+      }
+
+      function toggleKey(toggle, index) {
+        var label = (toggle.querySelector('.nav-toggle-text') || toggle).textContent.trim().replace(/\s+/g, ' ');
+        return index + ':' + label;
+      }
+
+      function openSection(toggle, items, key, set) {
+        toggle.classList.add('open');
+        items.classList.add('open');
+        if (set) set[key] = true;
+      }
+
+      function closeSection(toggle, items, key, set) {
+        toggle.classList.remove('open');
+        items.classList.remove('open');
+        if (set) set[key] = false;
+      }
+
+      function init() {
+        var sidebar = document.getElementById('wiki-sidebar');
+        var toggles = Array.prototype.slice.call(
+          document.querySelectorAll('.nav-section-toggle')
+        );
+
+        var activeIdx = -1;
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+          if (items.querySelector('.nav-link.active')) {
+            activeIdx = idx;
+          }
+        });
+
+        var savedSet = getOpenSet();
+        var openSet = savedSet || {};
+
+        if (activeIdx !== -1) {
+          openSet[toggleKey(toggles[activeIdx], activeIdx)] = true;
+        }
+
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+
+          var key = toggleKey(toggle, idx);
+          var shouldOpen = openSet[key] === true;
+
+          if (shouldOpen) {
+            toggle.classList.add('open');
+            items.classList.add('open');
+          }
+
+          toggle.addEventListener('click', function () {
+            var nowOpen = toggle.classList.contains('open');
+            if (nowOpen) {
+              closeSection(toggle, items, key, openSet);
+            } else {
+              openSection(toggle, items, key, openSet);
+            }
+            saveOpenSet(openSet);
+          });
+        });
+
+        saveOpenSet(openSet);
+
+        /* Restore sidebar scroll position after sections are expanded so the
+           scroll height is correct when we apply scrollTop. */
+        if (sidebar) {
+          try {
+            var savedScroll = sessionStorage.getItem('sb_scroll');
+            if (savedScroll !== null) { sidebar.scrollTop = parseInt(savedScroll, 10) || 0; }
+          } catch (_e) {}
+        }
+
+        window.addEventListener('pagehide', function () {
+          saveOpenSet(openSet);
+          if (sidebar) {
+            try { sessionStorage.setItem('sb_scroll', String(sidebar.scrollTop)); } catch (_e) {}
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+    </script>
+    <script>
+    /* nav-tracking.js — only stamps sessionStorage when clicking a source-file link
+       that lives inside the "Source Files" disclosure section, not from sidebar or cards. */
+    (function () {
+      document.addEventListener('click', function (e) {
+        var link = e.target.closest('a[href]');
+        if (!link) return;
+        var href = link.getAttribute('href');
+        if (!href || href.indexOf('sources/') === -1) return;
+        /* Only set referrer when the click originates from inside the Source Files
+           disclosure (.source-files-disclosure). Any other path — sidebar, cards,
+           direct navigation — must not set a referrer. */
+        if (!link.closest('.source-files-disclosure')) return;
+        try {
+          sessionStorage.setItem('wiki_referrer', JSON.stringify({
+            href: location.href,
+            title: document.title,
+            file: location.pathname.split('/').pop()
+          }));
+        } catch (_e) {}
+      });
+    })();
+    </script>
+    <footer class="wiki-footer">Made by IBM Bob Premium Package for Z</footer>
+</body>
+</html>

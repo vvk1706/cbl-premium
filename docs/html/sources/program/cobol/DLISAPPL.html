@@ -1,0 +1,1585 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLISAPPL</title>
+    <link rel="stylesheet" href="../../../assets/style.css">
+    <script src="../../../assets/mermaid.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+
+    <!-- Prism.js for syntax highlighting (bundled — no CDN required) -->
+    <link rel="stylesheet" href="../../../assets/prism-tomorrow.css">
+    <script src="../../../assets/prism-core.js"></script>
+    <script src="../../../assets/prism-languages.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="header-app-name"><a href="../../../../index.html" style="color: inherit; text-decoration: none;">Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</a></span>
+        </div>
+        <div class="header-right">
+        </div>
+    </header>
+    <div class="shell">
+        <aside class="sidebar" id="wiki-sidebar">
+            <nav>
+                
+        <div class="nav-home-wrap">
+            <a href="../../../../index.html" class="nav-home">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 6.5L8 2l6 4.5V14a1 1 0 01-1 1H3a1 1 0 01-1-1V6.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M6 15V9h4v6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                Home
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Application Documentation</div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Overview</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/system-overview.html" class="nav-link" data-page-id="system-overview">DLIS System Overview</a>
+                <a href="../../../pages/main-menu-navigation.html" class="nav-link" data-page-id="main-menu-navigation">Main Menu &amp; Navigation (DL01)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Candidate &amp; Application Intake</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/candidate-management.html" class="nav-link" data-page-id="candidate-management">Candidate Maintenance (DL02)</a>
+                <a href="../../../pages/license-application-entry.html" class="nav-link" data-page-id="license-application-entry">License Application Entry (DL03)</a>
+                <a href="../../../pages/application-status-inquiry.html" class="nav-link" data-page-id="application-status-inquiry">Application Status Inquiry (DL04)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Verification &amp; Payment</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/eligibility-check.html" class="nav-link" data-page-id="eligibility-check">Eligibility Check (DL05)</a>
+                <a href="../../../pages/driving-history-check.html" class="nav-link" data-page-id="driving-history-check">Driving History Check (DL06)</a>
+                <a href="../../../pages/payment-processing.html" class="nav-link" data-page-id="payment-processing">Payment Entry &amp; Processing (DL07)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Approval &amp; License Issuance</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/first-level-approval.html" class="nav-link" data-page-id="first-level-approval">First-Level Authority Approval (DL08)</a>
+                <a href="../../../pages/second-level-approval.html" class="nav-link" data-page-id="second-level-approval">Second-Level Authority Approval (DL09)</a>
+                <a href="../../../pages/license-issuance.html" class="nav-link" data-page-id="license-issuance">License Issuance (DL10)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Architecture</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/application-lifecycle-flow.html" class="nav-link" data-page-id="application-lifecycle-flow">Application Lifecycle &amp; Status Flow</a>
+                <a href="../../../pages/data-architecture.html" class="nav-link" data-page-id="data-architecture">Data Architecture (DB2)</a>
+                <a href="../../../pages/cics-integration-patterns.html" class="nav-link" data-page-id="cics-integration-patterns">CICS Integration Patterns</a>
+            </div>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Program Documentation</div>
+    <div class="nav-section">
+        <button class="nav-section-toggle open" type="button">
+            <span class="nav-toggle-text">program</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items open">
+        <div class="nav-section">
+            <button class="nav-section-toggle open" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items open">
+                <a href="../../../sources/program/cobol/DLISPAY.html" class="nav-link">DLISPAY</a>
+                <a href="../../../sources/program/cobol/DLISSTAT.html" class="nav-link">DLISSTAT</a>
+                <a href="../../../sources/program/cobol/DLISMENU.html" class="nav-link">DLISMENU</a>
+                <a href="../../../sources/program/cobol/DLISELIG.html" class="nav-link">DLISELIG</a>
+                <a href="../../../sources/program/cobol/DLISCAND.html" class="nav-link">DLISCAND</a>
+                <a href="../../../sources/program/cobol/DLISAPPL.html" class="nav-link active">DLISAPPL</a>
+                <a href="../../../sources/program/cobol/DLISISSU.html" class="nav-link">DLISISSU</a>
+                <a href="../../../sources/program/cobol/DLISAP2.html" class="nav-link">DLISAP2</a>
+                <a href="../../../sources/program/cobol/DLISHIST.html" class="nav-link">DLISHIST</a>
+                <a href="../../../sources/program/cobol/DLISAP1.html" class="nav-link">DLISAP1</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">business-rule</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../sources/business-rule/cobol/DLISELIG-overview.html" class="nav-link">DLISELIG-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-inventory.html" class="nav-link">DLISPAY-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-overview.html" class="nav-link">DLISCAND-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-inventory.html" class="nav-link">DLISAP2-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-inventory.html" class="nav-link">DLISHIST-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-inventory.html" class="nav-link">DLISMENU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISELIG-inventory.html" class="nav-link">DLISELIG-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-overview.html" class="nav-link">DLISPAY-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-overview.html" class="nav-link">DLISSTAT-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-overview.html" class="nav-link">DLISHIST-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-overview.html" class="nav-link">DLISAPPL-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-inventory.html" class="nav-link">DLISISSU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-inventory.html" class="nav-link">DLISAPPL-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-inventory.html" class="nav-link">DLISSTAT-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-overview.html" class="nav-link">DLISAP1-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-inventory.html" class="nav-link">DLISCAND-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-overview.html" class="nav-link">DLISAP2-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-overview.html" class="nav-link">DLISISSU-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-inventory.html" class="nav-link">DLISAP1-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-overview.html" class="nav-link">DLISMENU-overview</a>
+            </div>
+        </div>
+        </div>
+    </div>
+            </nav>
+        </aside>
+        <main class="main">
+            <div class="prog-container">
+                <div id="wiki-breadcrumb"></div>
+                <div class="content-layout">
+                    <article class="prose">
+                        <h2 id="1-purpose" tabindex="-1">1. Purpose</h2>
+<p>DLISAPPL is a CICS transaction (DL03) that gives clerks a License Application Entry screen in a driver license information system. From this screen, an operator can look up a candidate by ID and check that the candidate exists and is active. The operator can also retrieve the current initial-issue fee and currency for a chosen license type from the fee schedule. Finally, the operator can submit a new license application for that candidate. Before submitting, the program checks that a candidate ID and a valid license type (L, P or O) were entered. It also checks that the candidate has no other open application of the same type. If the checks pass, it records the application as pending, tagged with the submitting terminal, and shows the new application ID, status and date on the screen. The program keeps the conversation going across screen interactions and ends the session on the exit key.</p>
+<h2 id="2-inputs" tabindex="-1">2. Inputs</h2>
+<ul>
+<li>
+<p><strong>CICS pseudo-conversational context</strong></p>
+<ul>
+<li><code>DFHCOMMAREA</code> (linkage section, 350 bytes)
+<ul>
+<li>Holds the communication area passed back by the previous <code>EXEC CICS RETURN TRANSID('DL03') COMMAREA(...)</code>.</li>
+<li>It is copied into <code>DLIS-COMMAREA</code> to restore conversational state.</li>
+<li>It is only read when <code>EIBCALEN</code> is not 0.</li>
+</ul>
+</li>
+<li><code>EIBCALEN</code>
+<ul>
+<li>The length of the communication area passed in.</li>
+<li>A value of 0 means first entry, so the program sends the blank entry screen.</li>
+<li>Any other value means a reply to the screen, so the program processes the user’s input.</li>
+</ul>
+</li>
+<li><code>EIBTRNID</code>
+<ul>
+<li>The current transaction ID (<code>DL03</code>).</li>
+<li>It is stored in <code>CA-TRANSACTION-ID</code> in the communication area.</li>
+</ul>
+</li>
+<li><code>EIBTRMID</code>
+<ul>
+<li>The ID of the terminal that submitted the request.</li>
+<li>It is used as the created-by and last-updated-by value when a new license application is inserted.</li>
+</ul>
+</li>
+<li><code>EIBAID</code>
+<ul>
+<li>The attention identifier of the key the user pressed.</li>
+<li>It selects the action:
+<ul>
+<li>F1 submits the application.</li>
+<li>F3 looks up the candidate.</li>
+<li>F5 calculates the fee.</li>
+<li>F12 exits.</li>
+<li>Any other key produces a “USE F1 F3 F5 OR F12” message.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>User inputs (BMS map <code>DLISAE01</code> in mapset <code>DLISAE</code>, received with <code>EXEC CICS RECEIVE MAP</code>)</strong></p>
+<ul>
+<li><code>DAECIDI</code> (Candidate ID, numeric, unprotected field)
+<ul>
+<li>The candidate the user is working with.</li>
+<li>It must be non-zero for lookup (F3) and submit (F1).</li>
+<li>It is moved to <code>CANDIDATE-ID</code> for the candidate query, the duplicate-application check and the application insert.</li>
+</ul>
+</li>
+<li><code>DAELTYPI</code> (License Type, 1 character)
+<ul>
+<li>The license type the user selects.</li>
+<li>It must be entered for fee calculation (F5) and submit (F1).</li>
+<li>On submit it must be <code>L</code> (Learner), <code>P</code> (Probation) or <code>O</code> (Open).</li>
+<li>It is used as <code>LICENSE-TYPE</code> in the fee schedule lookup, the duplicate-application check and the application insert.</li>
+</ul>
+</li>
+<li>Keyboard function keys (F1, F3, F5, F12)
+<ul>
+<li>These are user inputs that choose the operation (see <code>EIBAID</code> above).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>External data sources (DB2 tables read by the program)</strong></p>
+<ul>
+<li><code>DLIS.CANDIDATE</code>
+<ul>
+<li>Read in the F3 lookup, keyed by the candidate ID entered on screen.</li>
+<li>It supplies the candidate’s <code>FIRST_NAME</code>, <code>LAST_NAME</code> and <code>RECORD_STATUS</code>.</li>
+<li>These are used to confirm the candidate exists and is not inactive (<code>I</code>), and to show the candidate’s name.</li>
+</ul>
+</li>
+<li><code>DLIS.LICENSE_FEE_SCHEDULE</code>
+<ul>
+<li>Read in the F5 fee calculation.</li>
+<li>It is filtered by the license type entered, a fee type of <code>IF</code>, an active status of <code>A</code>, and the current effective and expiry dates.</li>
+<li>It supplies <code>FEE_AMOUNT</code> and <code>CURRENCY_CODE</code>, which are shown on the screen.</li>
+</ul>
+</li>
+<li><code>DLIS.LICENSE_APPLICATION</code>
+<ul>
+<li>Counted on submit to find existing applications for the same candidate and license type.</li>
+<li>Applications with status <code>RE</code> or <code>IS</code> are excluded from the count.</li>
+<li>A non-zero count blocks the new application.</li>
+<li>After the insert, the generated application ID is read back with <code>IDENTITY_VAL_LOCAL()</code> from <code>SYSIBM.SYSDUMMY1</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>System-supplied values</strong></p>
+<ul>
+<li>Current system date (<code>CURRENT-DATE</code>, first 10 characters)
+<ul>
+<li>Shown as the screen date when the screen is first displayed.</li>
+<li>Shown as the application date after a successful submit.</li>
+</ul>
+</li>
+<li><code>CURRENT DATE</code> (DB2 special register)
+<ul>
+<li>Used to select the fee schedule row that is in effect.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-outputs" tabindex="-1">3. Outputs</h2>
+<ul>
+<li>
+<p><strong>Screen output (CICS BMS map DLISAE01, mapset DLISAE, transaction DL03)</strong></p>
+<ul>
+<li>The program sends the map with <code>EXEC CICS SEND MAP</code>. It uses ERASE on first entry and DATAONLY on later interactions.</li>
+<li>Message line
+<ul>
+<li><code>DAEMSG</code> is the main user-facing status message. Its value depends on the PF key pressed and the result of the operation.</li>
+<li>Prompts and validation messages:
+<ul>
+<li>“USE F1 F3 F5 OR F12”</li>
+<li>“ENTER CANDIDATE ID”</li>
+<li>“SELECT LICENSE TYPE FIRST”</li>
+<li>“CANDIDATE ID IS REQUIRED”</li>
+<li>“LICENSE TYPE IS REQUIRED”</li>
+<li>“LICENSE TYPE MUST BE L P OR O”</li>
+</ul>
+</li>
+<li>Candidate lookup messages:
+<ul>
+<li>“CANDIDATE NOT FOUND”</li>
+<li>“CANDIDATE RECORD IS INACTIVE”</li>
+<li>“CANDIDATE FOUND”</li>
+</ul>
+</li>
+<li>Fee calculation messages:
+<ul>
+<li>“NO FEE SCHEDULE FOR THIS LICENSE TYPE”</li>
+<li>“FEE RETRIEVED SUCCESSFULLY”</li>
+</ul>
+</li>
+<li>Submission messages:
+<ul>
+<li>“ACTIVE APPLICATION ALREADY EXISTS FOR THIS TYPE”</li>
+<li>“DATABASE ERROR ON APPLICATION INSERT”</li>
+<li>“APPLICATION SUBMITTED SUCCESSFULLY”</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Initial screen
+<ul>
+<li><code>DAEDATE</code> shows the current date, taken from the first 10 characters of <code>CURRENT-DATE</code>. It is set only on first entry, when there is no COMMAREA.</li>
+</ul>
+</li>
+<li>Candidate lookup (F3)
+<ul>
+<li><code>DAECNAMO</code> shows the candidate’s full name. It is built by concatenating <code>FIRST-NAME</code>, a space and <code>LAST-NAME</code> from <code>DCLDLIS-CANDIDATE</code>. It is shown only when the candidate exists and is not inactive (<code>RECORD-STATUS</code> not ‘I’).</li>
+</ul>
+</li>
+<li>Fee calculation (F5)
+<ul>
+<li><code>DAEFEEO</code> shows the license fee. It comes from <code>FEE-AMOUNT</code>, passed through <code>WS-FEE-AMOUNT</code> and then the edited field <code>WS-FEE-AMOUNT-D</code>.</li>
+<li><code>DAECURRO</code> shows the fee currency, taken from <code>CURRENCY-CODE</code>.</li>
+</ul>
+</li>
+<li>Application submission (F1)
+<ul>
+<li><code>DAEAIDO</code> shows the new application ID, taken from <code>APPLICATION-ID</code> after <code>IDENTITY_VAL_LOCAL()</code>.</li>
+<li><code>DAEASTTO</code> shows the initial status ‘PE’ (pending).</li>
+<li><code>DAEADATO</code> shows the submission date, taken from the first 10 characters of <code>CURRENT-DATE</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Database writes (DB2)</strong></p>
+<ul>
+<li>Table <code>DLIS.LICENSE_APPLICATION</code> receives one INSERT per successful submission.
+<ul>
+<li>Inserted columns:
+<ul>
+<li><code>CANDIDATE_ID</code>, from <code>CANDIDATE-ID</code>.</li>
+<li><code>LICENSE_TYPE</code>, from <code>LICENSE-TYPE</code>.</li>
+<li><code>APPLICATION_STATUS</code>, set to the literal ‘PE’.</li>
+<li><code>CREATED_BY</code>, from <code>CREATED-BY</code>. It holds the terminal ID (<code>EIBTRMID</code>) of the submitting terminal.</li>
+<li><code>LAST_UPDATED_BY</code>, set from the same terminal ID.</li>
+</ul>
+</li>
+<li>The INSERT also supplies a creation date. That part of the statement is truncated in the source.</li>
+<li>The generated application ID is read back with <code>IDENTITY_VAL_LOCAL()</code> into <code>APPLICATION-ID</code> and displayed on the screen.</li>
+<li>The INSERT is not committed explicitly, so any commit happens at CICS task end.</li>
+<li>If the INSERT fails (SQLCODE not 0), the program shows the database error message and does not read back an ID.</li>
+</ul>
+</li>
+<li>The program does not write to any other table. The reads of <code>DLIS.CANDIDATE</code>, <code>DLIS.LICENSE_FEE_SCHEDULE</code> and <code>DLIS.LICENSE_APPLICATION</code> only affect what is displayed or whether the insert proceeds.</li>
+</ul>
+</li>
+<li>
+<p><strong>Conversation state returned to CICS</strong></p>
+<ul>
+<li><code>DLIS-COMMAREA</code> is passed back with <code>EXEC CICS RETURN TRANSID('DL03') COMMAREA(...) LENGTH(350)</code>. This keeps the conversation going and makes the next invocation restore state from <code>DFHCOMMAREA</code>.</li>
+<li><code>CA-TRANSACTION-ID</code> is set from <code>EIBTRNID</code> and returned in the COMMAREA to carry the transaction identity forward.</li>
+<li>F12 ends the transaction with <code>EXEC CICS RETURN</code> and no COMMAREA, so the conversation ends.</li>
+</ul>
+</li>
+<li>
+<p><strong>Status and response fields</strong></p>
+<ul>
+<li><code>WS-RESP1</code> holds the CICS response code from the SEND MAP and RECEIVE MAP commands. It is stored but never checked or displayed.</li>
+<li><code>SQLCODE</code> is tested after the candidate lookup, fee lookup and application insert. It selects which message is shown and whether processing continues.</li>
+<li>Lookup-driven eligibility
+<ul>
+<li><code>RECORD-STATUS</code> (‘I’ means inactive) decides whether candidate details are displayed.</li>
+<li><code>APPLICATION-ID</code>, used as a count host variable, decides whether a duplicate active application blocks the insert. Duplicates are counted for the same candidate and license type, excluding statuses ‘RE’ and ‘IS’.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Program termination</strong></p>
+<ul>
+<li><code>STOP RUN</code> ends the program at the end of <code>MAIN-LOGIC</code>. No numeric return code is set for a caller, and no files or queues are written.</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-processing-logic" tabindex="-1">4. Processing Logic</h2>
+<h3 id="41-mermaid-flow-diagram" tabindex="-1">4.1 Mermaid Flow Diagram</h3>
+<div class="mermaid">
+graph TD
+    A([Start DL03 transaction]) --> B[Save transaction id in COMMAREA]
+    B --> C{First entry with no COMMAREA}
+    C -- Yes --> D[Set current date on map]
+    D --> E[Send blank application map with erase]
+    E --> F([Return to CICS with transid DL03])
+    C -- No --> G[Restore COMMAREA from DFHCOMMAREA]
+    G --> H[Receive map DLISAE01]
+    H --> I{Which key was pressed}
+    I -- F1 --> J[Submit application]
+    I -- F3 --> K[Lookup candidate]
+    I -- F5 --> L[Calculate fee]
+    I -- F12 --> M([Return to CICS and end])
+    I -- Other --> N[Show message use F1 F3 F5 or F12]
+
+    K --> K1{Candidate id entered}
+    K1 -- No --> K2[Message enter candidate id]
+    K1 -- Yes --> K3[Select name and status from CANDIDATE]
+    K3 --> K4{Row found}
+    K4 -- No --> K5[Message candidate not found]
+    K4 -- Yes --> K6{Record status inactive}
+    K6 -- Yes --> K7[Message candidate record is inactive]
+    K6 -- No --> K8[Build full name and show on map]
+    K8 --> K9[Message candidate found]
+
+    L --> L1{License type entered}
+    L1 -- No --> L2[Message select license type first]
+    L1 -- Yes --> L3[Select active initial fee from LICENSE_FEE_SCHEDULE]
+    L3 --> L4{Fee row found}
+    L4 -- No --> L5[Message no fee schedule for this type]
+    L4 -- Yes --> L6[Format fee amount and currency for map]
+    L6 --> L7[Message fee retrieved successfully]
+
+    J --> J1{Candidate id entered}
+    J1 -- No --> J2[Message candidate id is required]
+    J1 -- Yes --> J3{License type entered}
+    J3 -- No --> J4[Message license type is required]
+    J3 -- Yes --> J5{License type is L P or O}
+    J5 -- No --> J6[Message license type must be L P or O]
+    J5 -- Yes --> J7[Count open applications for candidate and type]
+    J7 --> J8{Open application exists}
+    J8 -- Yes --> J9[Message active application already exists]
+    J8 -- No --> J10[Insert application with status PE and terminal id]
+    J10 --> J11{Insert successful}
+    J11 -- No --> J12[Message database error on insert]
+    J11 -- Yes --> J13[Get generated application id]
+    J13 --> J14[Show id status PE and date on map]
+    J14 --> J15[Message application submitted successfully]
+
+    K2 --> P[Send map data only with message]
+    K5 --> P
+    K7 --> P
+    K9 --> P
+    L2 --> P
+    L5 --> P
+    L7 --> P
+    J2 --> P
+    J4 --> P
+    J6 --> P
+    J9 --> P
+    J12 --> P
+    J15 --> P
+    N --> P
+    P --> Q([Return to CICS with transid DL03 and COMMAREA])
+
+    classDef start fill:#d4f1f4,stroke:#5aa9b5,color:#000
+    classDef process fill:#e3f2fd,stroke:#7aa7d9,color:#000
+    classDef decision fill:#fff4cc,stroke:#d4b84a,color:#000
+    classDef error fill:#fde2e4,stroke:#d98c95,color:#000
+    classDef success fill:#e2f0cb,stroke:#8fb85a,color:#000
+    classDef endnode fill:#e8def8,stroke:#9b84c9,color:#000
+
+    class A start
+    class F,M,Q endnode
+    class B,D,E,G,H,J,K,L,K3,K8,L3,L6,J7,J10,J13,J14,P process
+    class C,I,K1,K4,K6,L1,L4,J1,J3,J5,J8,J11 decision
+    class K2,K5,K7,L2,L5,J2,J4,J6,J9,J12,N error
+    class K9,L7,J15 success
+</div>
+<h3 id="42-processing-logic-description" tabindex="-1">4.2 Processing Logic Description</h3>
+<h4 id="421-high-level-summary" tabindex="-1">4.2.1 High-level Summary</h4>
+<p>DLISAPPL is a pseudo-conversational CICS/COBOL program for transaction DL03, the License Application Entry screen. It uses BMS map DLISAE01 in mapset DLISAE and DB2 tables in schema DLIS. Through function keys, an operator can:</p>
+<ul>
+<li>look up a candidate (F3),</li>
+<li>calculate the initial license fee (F5),</li>
+<li>submit a new license application (F1).</li>
+</ul>
+<p>F12 exits the transaction. A valid submission creates a <code>LICENSE_APPLICATION</code> row with status <code>PE</code> (Pending).</p>
+<h4 id="422-execution-flow" tabindex="-1">4.2.2 Execution Flow</h4>
+<ol>
+<li>
+<p><strong>Entry (MAIN-LOGIC)</strong></p>
+<ul>
+<li>The program copies the transaction id (<code>EIBTRNID</code>) into <code>CA-TRANSACTION-ID</code>.</li>
+<li>If <code>EIBCALEN = 0</code>, this is the first invocation and the program runs INIT-SCREEN.</li>
+<li>Otherwise it moves <code>DFHCOMMAREA</code> into <code>DLIS-COMMAREA</code> and runs PROCESS-INPUT.</li>
+<li><code>STOP RUN</code> is only reached as a fallback, because both paths end in <code>EXEC CICS RETURN</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>INIT-SCREEN (first entry)</strong></p>
+<ul>
+<li>It moves the first 10 characters of <code>CURRENT-DATE</code> into the map date field <code>DAEDATE</code>.</li>
+<li>It sends map <code>DLISAE01</code> with <code>ERASE</code> and <code>FREEKB</code>, and stores the response in <code>WS-RESP1</code>.</li>
+<li>It issues <code>EXEC CICS RETURN TRANSID('DL03')</code> with the COMMAREA (<code>LENGTH(350)</code>). The transaction restarts when the user presses a key.</li>
+</ul>
+</li>
+<li>
+<p><strong>PROCESS-INPUT (subsequent entries)</strong></p>
+<ul>
+<li>It receives map <code>DLISAE01</code>.</li>
+<li>It branches on the attention key (<code>EIBAID</code>):
+<ul>
+<li><strong>F1</strong> runs SUBMIT-APPLICATION.</li>
+<li><strong>F3</strong> runs LOOKUP-CANDIDATE.</li>
+<li><strong>F5</strong> runs CALC-FEE.</li>
+<li><strong>F12</strong> issues <code>EXEC CICS RETURN</code> with no TRANSID, which ends the conversation.</li>
+<li><strong>Any other key</strong> sets the message “USE F1 F3 F5 OR F12”.</li>
+</ul>
+</li>
+<li>It then re-sends the map with <code>DATAONLY</code> and <code>FREEKB</code>, so only changed data is refreshed.</li>
+<li>It issues <code>RETURN TRANSID('DL03')</code> with the COMMAREA.</li>
+</ul>
+</li>
+<li>
+<p><strong>LOOKUP-CANDIDATE (F3)</strong></p>
+<ul>
+<li>If the candidate id input (<code>DAECIDI</code>) is zeros, the message is “ENTER CANDIDATE ID” and the paragraph exits.</li>
+<li>Otherwise it selects <code>FIRST_NAME</code>, <code>LAST_NAME</code> and <code>RECORD_STATUS</code> from <code>DLIS.CANDIDATE</code> by <code>CANDIDATE_ID</code>.</li>
+<li>If <code>SQLCODE = 100</code>, the message is “CANDIDATE NOT FOUND”.</li>
+<li>If <code>RECORD_STATUS = 'I'</code>, the message is “CANDIDATE RECORD IS INACTIVE”.</li>
+<li>Otherwise it builds the full name with <code>STRING</code>: first name up to the first space, one blank, then last name up to the first space. The result goes to <code>DAECNAMO</code>, and the message is “CANDIDATE FOUND”.</li>
+</ul>
+</li>
+<li>
+<p><strong>CALC-FEE (F5)</strong></p>
+<ul>
+<li>If the license type input (<code>DAELTYPI</code>) is spaces or low-values, the message is “SELECT LICENSE TYPE FIRST”.</li>
+<li>Otherwise it selects <code>FEE_AMOUNT</code> and <code>CURRENCY_CODE</code> from <code>DLIS.LICENSE_FEE_SCHEDULE</code> where:
+<ul>
+<li>the license type matches,</li>
+<li><code>FEE_TYPE = 'IF'</code> (initial fee),</li>
+<li><code>ACTIVE_STATUS = 'A'</code>,</li>
+<li><code>EFFECTIVE_DATE &lt;= CURRENT DATE</code>,</li>
+<li><code>EXPIRY_DATE</code> is null or <code>&gt;= CURRENT DATE</code>.</li>
+</ul>
+</li>
+<li>The query uses <code>FETCH FIRST 1 ROW ONLY</code>.</li>
+<li>If <code>SQLCODE = 100</code>, the message is “NO FEE SCHEDULE FOR THIS LICENSE TYPE”.</li>
+<li>Otherwise the amount is moved to <code>WS-FEE-AMOUNT</code>, then to the edited field <code>WS-FEE-AMOUNT-D</code> (picture <code>ZZZ,ZZ9.99</code>), then to the map field <code>DAEFEEO</code>. The currency goes to <code>DAECURRO</code>, and the message is “FEE RETRIEVED SUCCESSFULLY”.</li>
+</ul>
+</li>
+<li>
+<p><strong>SUBMIT-APPLICATION (F1)</strong></p>
+<ul>
+<li><strong>Validations, in order:</strong>
+<ul>
+<li>Candidate id must not be zeros: “CANDIDATE ID IS REQUIRED”.</li>
+<li>License type must not be blank or low-values: “LICENSE TYPE IS REQUIRED”.</li>
+<li>License type must be <code>L</code>, <code>P</code> or <code>O</code>: “LICENSE TYPE MUST BE L P OR O”.</li>
+</ul>
+</li>
+<li><strong>Duplicate check:</strong>
+<ul>
+<li>It counts rows in <code>DLIS.LICENSE_APPLICATION</code> for the same candidate and license type whose <code>APPLICATION_STATUS</code> is not <code>RE</code> (rejected) or <code>IS</code> (issued).</li>
+<li>If the count is greater than 0, the message is “ACTIVE APPLICATION ALREADY EXISTS FOR THIS TYPE”.</li>
+</ul>
+</li>
+<li><strong>Insert:</strong>
+<ul>
+<li><code>CREATED-BY</code> is set from the terminal id (<code>EIBTRMID</code>).</li>
+<li>A new row is inserted with the candidate id, license type, status <code>'PE'</code>, and the creator and last-updater values.</li>
+<li>If <code>SQLCODE</code> is not 0, the message is “DATABASE ERROR ON APPLICATION INSERT”.</li>
+</ul>
+</li>
+<li><strong>Success:</strong>
+<ul>
+<li><code>IDENTITY_VAL_LOCAL()</code> from <code>SYSIBM.SYSDUMMY1</code> returns the generated application id.</li>
+<li>The id goes to <code>DAEAIDO</code>, status <code>PE</code> to <code>DAEASTTO</code>, and the date to <code>DAEADATO</code>.</li>
+<li>The message is “APPLICATION SUBMITTED SUCCESSFULLY”.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="423-important-business-rules" tabindex="-1">4.2.3 Important Business Rules</h4>
+<ul>
+<li>Valid license types are <code>L</code>, <code>P</code> and <code>O</code> only.</li>
+<li>Only one open application is allowed per candidate and license type. Rejected (<code>RE</code>) and issued (<code>IS</code>) applications do not count as open.</li>
+<li>New applications always start with status <code>PE</code>.</li>
+<li>Fees come only from active schedule rows of fee type <code>IF</code> that are in effect on the current date.</li>
+<li>Inactive candidates (<code>RECORD_STATUS = 'I'</code>) are flagged on lookup.</li>
+</ul>
+<h4 id="424-observations" tabindex="-1">4.2.4 Observations</h4>
+<ul>
+<li>The SQLCODE after the duplicate-count <code>SELECT</code> and the identity <code>SELECT</code> is not checked. After the candidate and fee <code>SELECT</code>s, only SQLCODE 100 is handled, so other negative codes are not.</li>
+<li><code>SUBMIT-APPLICATION</code> does not check that the candidate exists or is active. This is only done in the F3 lookup.</li>
+<li><code>RESP(WS-RESP1)</code> is captured on SEND and RECEIVE but never tested.</li>
+<li>The COMMAREA is returned with <code>LENGTH(350)</code>, while <code>DLIS-COMMAREA</code> is shorter than that. <code>DFHCOMMAREA</code> is <code>PIC X(350)</code>.</li>
+<li><code>GO TO ...-EXIT</code> is used for early exits in the lookup, fee and submit paragraphs.</li>
+<li>Some embedded SQL lines in the source listing are truncated at column 72, for example the <code>INSERT</code> column and value lists.</li>
+</ul>
+<h4 id="425-external-interactions" tabindex="-1">4.2.5 External Interactions</h4>
+<ul>
+<li><strong>CICS/BMS:</strong> Map <code>DLISAE01</code> in mapset <code>DLISAE</code> is sent and received. The program uses pseudo-conversational <code>RETURN TRANSID('DL03')</code> with a COMMAREA, and checks <code>EIBAID</code>, <code>EIBCALEN</code>, <code>EIBTRNID</code> and <code>EIBTRMID</code>.</li>
+<li><strong>DB2 <code>DLIS.CANDIDATE</code>:</strong> Read to validate and display the candidate name and status.</li>
+<li><strong>DB2 <code>DLIS.LICENSE_FEE_SCHEDULE</code>:</strong> Read to get the current initial fee and currency for a license type.</li>
+<li><strong>DB2 <code>DLIS.LICENSE_APPLICATION</code>:</strong> Read to count open applications, then written with a new pending application.</li>
+<li><strong>DB2 <code>SYSIBM.SYSDUMMY1</code>:</strong> Used with <code>IDENTITY_VAL_LOCAL()</code> to get the generated application id.</li>
+</ul>
+<h4 id="426-plain-language-summary" tabindex="-1">4.2.6 Plain Language Summary</h4>
+<p>The screen lets a clerk start a driver’s license application. After the clerk enters a candidate number and a license type, there are three actions:</p>
+<ul>
+<li><strong>F3</strong> checks that the candidate exists and is active, and shows their name.</li>
+<li><strong>F5</strong> shows the fee for the chosen license type.</li>
+<li><strong>F1</strong> submits the application.</li>
+</ul>
+<p>Before submitting, the program checks that both fields are filled in, that the type is L, P or O, and that the candidate doesn’t already have an open application of that type. If all checks pass, it saves the application as “Pending”, records which terminal created it, and shows the new application number. Any problem is shown as a short message on the same screen. F12 leaves the screen.</p>
+<h3 id="43-database-tables" tabindex="-1">4.3 Database Tables</h3>
+<div class="mermaid">
+erDiagram
+    CANDIDATE {
+        int CANDIDATE_ID "primary key"
+        string FIRST_NAME "length 30"
+        string LAST_NAME "length 30"
+        string RECORD_STATUS "length 1"
+    }
+    LICENSE_FEE_SCHEDULE {
+        string LICENSE_TYPE "length 1"
+        string FEE_TYPE "length 2 filter IF"
+        decimal FEE_AMOUNT "10 2"
+        string CURRENCY_CODE "length 3"
+        string ACTIVE_STATUS "length 1"
+        date EFFECTIVE_DATE
+        date EXPIRY_DATE "nullable"
+    }
+    LICENSE_APPLICATION {
+        int APPLICATION_ID "identity generated"
+        int CANDIDATE_ID "foreign key"
+        string LICENSE_TYPE "length 1"
+        string APPLICATION_STATUS "length 2"
+        string CREATED_BY "length 20"
+        string LAST_UPDATED_BY "length 20"
+    }
+    CANDIDATE ||--o{ LICENSE_APPLICATION : "applies for"
+    LICENSE_FEE_SCHEDULE ||--o{ LICENSE_APPLICATION : "prices license type"
+</div>
+<h2 id="5-paragraphs" tabindex="-1">5. Paragraphs</h2>
+<ul>
+<li>
+<p><strong>MAIN-LOGIC</strong> — Entry point and dispatcher for the program. This is the top-level paragraph that runs when CICS invokes transaction <code>DL03</code>.</p>
+<ul>
+<li>Captures the current CICS transaction identifier from the Execute Interface Block (<code>EIBTRNID</code>) into <code>CA-TRANSACTION-ID</code>.</li>
+<li>Checks <code>EIBCALEN</code> (the CICS Execute Interface Block field indicating the length of the passed communication area): if it equals zero, this is the first invocation of the transaction (no commarea exists), so <code>INIT-SCREEN</code> is performed; otherwise, the commarea passed from the prior pseudo-conversational cycle is moved from <code>DFHCOMMAREA</code> into <code>DLIS-COMMAREA</code> and <code>PROCESS-INPUT</code> is performed.</li>
+<li>Terminates with <code>STOP RUN</code> after the chosen branch completes, transferring control back to CICS.</li>
+</ul>
+</li>
+<li>
+<p><strong>INIT-SCREEN</strong> — Initialises and displays the blank application entry screen on the first transaction invocation.</p>
+<ul>
+<li>Moves the current system date (first 10 characters of <code>CURRENT-DATE</code>) into the map field <code>DAEDATE</code> to pre-populate the date on-screen.</li>
+<li>Issues <code>EXEC CICS SEND MAP('DLISAE01') MAPSET('DLISAE') ERASE FREEKB RESP(WS-RESP1)</code> to paint the full map to the terminal, erasing any prior content and unlocking the keyboard; the CICS response code is captured in <code>WS-RESP1</code>.</li>
+<li>Issues <code>EXEC CICS RETURN TRANSID('DL03') COMMAREA(DLIS-COMMAREA) LENGTH(350)</code> to end this task while instructing CICS to re-invoke transaction <code>DL03</code> when the user next presses an AID key, preserving the 350-byte commarea for the next cycle — the core of pseudo-conversational design.</li>
+</ul>
+</li>
+<li>
+<p><strong>PROCESS-INPUT</strong> — Receives user input and dispatches to the appropriate function handler based on the pressed function key.</p>
+<ul>
+<li>Issues <code>EXEC CICS RECEIVE MAP('DLISAE01') MAPSET('DLISAE') RESP(WS-RESP1)</code> to transfer the terminal’s 3270 data stream into the symbolic map fields; after the call, <code>EIBAID</code> contains the attention identifier (AID) of the key the user pressed.</li>
+<li>Uses an <code>EVALUATE TRUE</code> construct to branch on <code>EIBAID</code>:
+<ul>
+<li><code>DFHPF1</code> (PF1) → <code>PERFORM SUBMIT-APPLICATION</code></li>
+<li><code>DFHPF3</code> (PF3) → <code>PERFORM LOOKUP-CANDIDATE</code></li>
+<li><code>DFHPF5</code> (PF5) → <code>PERFORM CALC-FEE</code></li>
+<li><code>DFHPF12</code> (PF12) → <code>EXEC CICS RETURN END-EXEC</code> (unconditional exit, ending the conversation)</li>
+<li>Any other key → moves the instruction message <code>'USE F1 F3 F5 OR F12'</code> into the map message field <code>DAEMSG</code></li>
+</ul>
+</li>
+<li>After the <code>EVALUATE</code>, issues <code>EXEC CICS SEND MAP('DLISAE01') MAPSET('DLISAE') DATAONLY FREEKB RESP(WS-RESP1)</code> to refresh only the data fields on the screen (without erasing the base map), then re-issues <code>EXEC CICS RETURN TRANSID('DL03') COMMAREA(DLIS-COMMAREA) LENGTH(350)</code> to continue the pseudo-conversational cycle.</li>
+</ul>
+</li>
+<li>
+<p><strong>LOOKUP-CANDIDATE</strong> — Validates and retrieves candidate details from the database for display on the application entry screen (triggered by PF3).</p>
+<ul>
+<li>Guards against a missing candidate ID: if map field <code>DAECIDI</code> is zeros, moves <code>'ENTER CANDIDATE ID'</code> to <code>DAEMSG</code> and exits via <code>GO TO LOOKUP-CANDIDATE-EXIT</code>.</li>
+<li>Moves the screen-entered candidate ID (<code>DAECIDI</code>) into the DB2 host variable <code>CANDIDATE-ID OF DCLDLIS-CANDIDATE</code>.</li>
+<li>Executes an <code>EXEC SQL SELECT</code> against <code>DLIS.CANDIDATE</code>, retrieving <code>FIRST_NAME</code>, <code>LAST_NAME</code>, and <code>RECORD_STATUS</code> into their respective host variables in <code>DCLDLIS-CANDIDATE</code>.</li>
+<li>Checks <code>SQLCODE = 100</code> (row not found); if true, sets <code>DAEMSG</code> to <code>'CANDIDATE NOT FOUND'</code> and exits.</li>
+<li>Checks whether <code>RECORD-STATUS OF DCLDLIS-CANDIDATE = 'I'</code> (inactive); if so, sets <code>DAEMSG</code> to <code>'CANDIDATE RECORD IS INACTIVE'</code> and exits.</li>
+<li>On success, uses a <code>STRING</code> statement to concatenate <code>FIRST-NAME</code>, a space, and <code>LAST-NAME</code> (both space-delimited) into the map output field <code>DAECNAMO</code>, then sets <code>DAEMSG</code> to <code>'CANDIDATE FOUND'</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>LOOKUP-CANDIDATE-EXIT</strong> — Degenerate exit paragraph for <code>LOOKUP-CANDIDATE</code>.</p>
+<ul>
+<li>Contains only an <code>EXIT</code> statement; serves as the <code>GO TO</code> target to allow early exit from <code>LOOKUP-CANDIDATE</code> without falling through to subsequent logic.</li>
+</ul>
+</li>
+<li>
+<p><strong>CALC-FEE</strong> — Retrieves the applicable license fee from the fee schedule table for the selected license type and displays it on screen (triggered by PF5).</p>
+<ul>
+<li>Guards against a missing license type: if <code>DAELTYPI</code> is spaces or low-values, moves <code>'SELECT LICENSE TYPE FIRST'</code> to <code>DAEMSG</code> and exits via <code>GO TO CALC-FEE-EXIT</code>.</li>
+<li>Moves the screen-entered license type (<code>DAELTYPI</code>) into the host variable <code>LICENSE-TYPE OF DCLDLIS-FEE-SCHED</code>.</li>
+<li>Executes an <code>EXEC SQL SELECT</code> against <code>DLIS.LICENSE_FEE_SCHEDULE</code>, fetching <code>FEE_AMOUNT</code> and <code>CURRENCY_CODE</code> with filter criteria: matching license type, fee type <code>'IF'</code> (initial fee), active status <code>'A'</code>, effective date on or before the current date, and expiry date null or in the future; <code>FETCH FIRST 1 ROW ONLY</code> ensures a single result.</li>
+<li>Checks <code>SQLCODE = 100</code>; if no schedule row exists, moves <code>'NO FEE SCHEDULE FOR THIS LICENSE TYPE'</code> to <code>DAEMSG</code> and exits.</li>
+<li>On success: moves <code>FEE-AMOUNT OF DCLDLIS-FEE-SCHED</code> to <code>WS-FEE-AMOUNT</code>, moves it into the edited display field <code>WS-FEE-AMOUNT-D</code>, and then moves the formatted value to the map output field <code>DAEFEEO</code>; moves <code>CURRENCY-CODE OF DCLDLIS-FEE-SCHED</code> to <code>DAECURRO</code>; sets <code>DAEMSG</code> to <code>'FEE RETRIEVED SUCCESSFULLY'</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>CALC-FEE-EXIT</strong> — Degenerate exit paragraph for <code>CALC-FEE</code>.</p>
+<ul>
+<li>Contains only an <code>EXIT</code> statement; serves as the <code>GO TO</code> target for early exits from <code>CALC-FEE</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>SUBMIT-APPLICATION</strong> — Validates screen inputs, checks for duplicate active applications, inserts a new license application row, and retrieves the generated application ID (triggered by PF1).</p>
+<ul>
+<li>Validates that <code>DAECIDI</code> is not zeros; if missing, sets <code>DAEMSG</code> to <code>'CANDIDATE ID IS REQUIRED'</code> and exits.</li>
+<li>Validates that <code>DAELTYPI</code> is not spaces/low-values; if missing, sets <code>DAEMSG</code> to <code>'LICENSE TYPE IS REQUIRED'</code> and exits.</li>
+<li>Validates that license type is one of the permitted values <code>'L'</code>, <code>'P'</code>, or <code>'O'</code>; if not, sets <code>DAEMSG</code> to <code>'LICENSE TYPE MUST BE L P OR O'</code> and exits.</li>
+<li>Moves screen inputs to the host variables <code>CANDIDATE-ID OF DCLDLIS-LICENSE-APPL</code> and <code>LICENSE-TYPE OF DCLDLIS-LICENSE-APPL</code>, then executes an <code>EXEC SQL SELECT COUNT(*)</code> against <code>DLIS.LICENSE_APPLICATION</code> to count existing active (non-<code>'RE'</code>/<code>'IS'</code> status) applications for the same candidate and license type; if the count exceeds zero, sets <code>DAEMSG</code> to <code>'ACTIVE APPLICATION ALREADY EXISTS FOR THIS TYPE'</code> and exits.</li>
+<li>Captures the CICS terminal ID (<code>EIBTRMID</code>) into <code>CREATED-BY OF DCLDLIS-LICENSE-APPL</code> for audit purposes, then executes an <code>EXEC SQL INSERT INTO DLIS.LICENSE_APPLICATION</code> with status <code>'PE'</code> (pending), candidate ID, license type, and the created/last-updated-by values; if <code>SQLCODE ≠ 0</code>, sets <code>DAEMSG</code> to <code>'DATABASE ERROR ON APPLICATION INSERT'</code> and exits.</li>
+<li>After a successful insert, executes <code>EXEC SQL SELECT IDENTITY_VAL_LOCAL() INTO :APPLICATION-ID ... FROM SYSIBM.SYSDUMMY1</code> to retrieve the DB2-generated identity value for the newly inserted row, placing it into <code>APPLICATION-ID OF DCLDLIS-LICENSE-APPL</code>.</li>
+<li>Moves the retrieved application ID to the map output field <code>DAEAIDO</code>, sets status field <code>DAEASTTO</code> to <code>'PE'</code>, populates the application date field <code>DAEADATO</code> with the current date, and sets <code>DAEMSG</code> to <code>'APPLICATION SUBMITTED SUCCESSFULLY'</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>SUBMIT-APPLICATION-EXIT</strong> — Degenerate exit paragraph for <code>SUBMIT-APPLICATION</code>.</p>
+<ul>
+<li>Contains only an <code>EXIT</code> statement; serves as the <code>GO TO</code> target for all early exits from <code>SUBMIT-APPLICATION</code>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-dependencies" tabindex="-1">6. Dependencies</h2>
+<h3 id="61-database-dependencies-ibm-db2" tabindex="-1">6.1 Database Dependencies (IBM Db2)</h3>
+<ul>
+<li><strong>DLIS.CANDIDATE</strong>
+<ul>
+<li>Queried in the <code>LOOKUP-CANDIDATE</code> routine using <code>SELECT FIRST_NAME, LAST_NAME, RECORD_STATUS</code> filtered by <code>CANDIDATE_ID</code> to verify candidate existence, retrieve name details, and ensure the candidate record is active (<code>RECORD_STATUS &lt;&gt; 'I'</code>).</li>
+</ul>
+</li>
+<li><strong>DLIS.LICENSE_FEE_SCHEDULE</strong>
+<ul>
+<li>Queried in the <code>CALC-FEE</code> routine using <code>SELECT FEE_AMOUNT, CURRENCY_CODE</code> based on <code>LICENSE_TYPE</code>, initial fee type (<code>FEE_TYPE = 'IF'</code>), active status (<code>ACTIVE_STATUS = 'A'</code>), and current effective/expiry dates to compute and display application fees.</li>
+</ul>
+</li>
+<li><strong>DLIS.LICENSE_APPLICATION</strong>
+<ul>
+<li>Evaluated in <code>SUBMIT-APPLICATION</code> via <code>SELECT COUNT(*)</code> to ensure no existing active application exists for the candidate and license type (excluding rejected <code>'RE'</code> or issued <code>'IS'</code> statuses).</li>
+<li>Target of an <code>INSERT</code> statement in <code>SUBMIT-APPLICATION</code> to create a new license application with status <code>'PE'</code> (Pending Eligibility), recording the candidate ID, license type, and creator ID.</li>
+</ul>
+</li>
+<li><strong>SYSIBM.SYSDUMMY1</strong>
+<ul>
+<li>Referenced via <code>SELECT IDENTITY_VAL_LOCAL() FROM SYSIBM.SYSDUMMY1</code> after application insertion to retrieve the auto-generated identity value assigned to the newly created <code>APPLICATION_ID</code>.</li>
+</ul>
+</li>
+<li><strong>SQLCA (SQL Communication Area)</strong>
+<ul>
+<li>Included via <code>EXEC SQL INCLUDE SQLCA END-EXEC</code> to track Db2 execution return status (<code>SQLCODE</code>), determining query success (<code>SQLCODE = 0</code>), record absence (<code>SQLCODE = 100</code>), or error states.</li>
+</ul>
+</li>
+</ul>
+<h3 id="62-cics-system--middleware-dependencies" tabindex="-1">6.2 CICS System &amp; Middleware Dependencies</h3>
+<ul>
+<li><strong>CICS Control &amp; Runtime Environment</strong>
+<ul>
+<li>Relies on CICS transaction runtime to manage pseudo-conversational execution across screen interactions for transaction code <code>DL03</code>.</li>
+</ul>
+</li>
+<li><strong>BMS Mapset / Map (DLISAE / DLISAE01)</strong>
+<ul>
+<li><code>EXEC CICS SEND MAP('DLISAE01') MAPSET('DLISAE')</code> sends screen layouts to the 3270 terminal, both during initial full screen paint (<code>ERASE</code>) and subsequent field-only refreshes (<code>DATAONLY</code>).</li>
+<li><code>EXEC CICS RECEIVE MAP('DLISAE01') MAPSET('DLISAE')</code> retrieves user input data submitted from the screen interface.</li>
+</ul>
+</li>
+<li><strong>EXEC CICS RETURN</strong>
+<ul>
+<li>Terminates execution turns and schedules the next transaction (<code>DL03</code>) while transferring state via <code>COMMAREA(DLIS-COMMAREA) LENGTH(350)</code> or exiting the application upon PF12.</li>
+</ul>
+</li>
+<li><strong>CICS Execute Interface Block (EIB)</strong>
+<ul>
+<li><code>EIBCALEN</code>: Evaluated on program entry to distinguish between initial transaction execution (<code>EIBCALEN = 0</code>) and conversational map responses.</li>
+<li><code>EIBTRNID</code>: Used to capture and propagate the CICS transaction identifier into working storage.</li>
+<li><code>EIBAID</code>: Evaluated against CICS attention identifier standard values (<code>DFHPF1</code>, <code>DFHPF3</code>, <code>DFHPF5</code>, <code>DFHPF12</code>) to direct program control flow based on user function key presses.</li>
+<li><code>EIBTRMID</code>: Used to capture the terminal identifier populated into <code>CREATED-BY</code> and <code>LAST-UPDATED-BY</code> audit fields during database insertion.</li>
+</ul>
+</li>
+</ul>
+<h3 id="63-copybook--data-structure-dependencies" tabindex="-1">6.3 Copybook &amp; Data Structure Dependencies</h3>
+<ul>
+<li><strong>DLISWS (<code>DLISWS.cpy</code>)</strong>
+<ul>
+<li>Defines shared system work areas, common return codes (<code>WS-COMMON-AREA</code>), and business entity domain structures (<code>WS-CANDIDATE</code>, <code>WS-APPLICATION</code>, <code>WS-PAYMENT</code>, <code>WS-ELIGIBILITY</code>, <code>WS-HISTORY</code>, <code>WS-APPROVAL</code>, <code>WS-LICENSE</code>).</li>
+</ul>
+</li>
+<li><strong>DLISCSEC (<code>DLISCSEC.cpy</code>)</strong>
+<ul>
+<li>Defines the inter-program communication area structures, including the main navigation layout <code>DLIS-COMMAREA</code> used in <code>EXEC CICS RETURN</code>, as well as specialized commareas (<code>DLIS-CAND-COMMAREA</code>, <code>DLIS-APPL-COMMAREA</code>) and CICS response code holders (<code>WS-CICS-RESPONSE</code>).</li>
+</ul>
+</li>
+<li><strong>DLISDCLG (<code>DLISDCLG.cpy</code>)</strong>
+<ul>
+<li>Supplies Db2 table host variable declarations and DCLGEN record layouts for <code>DCLDLIS-CANDIDATE</code>, <code>DCLDLIS-LICENSE-APPL</code>, <code>DCLDLIS-DRIVING-HIST</code>, <code>DCLDLIS-PAYMENT</code>, <code>DCLDLIS-ISSUED-LIC</code>, <code>DCLDLIS-AUTH-USER</code>, and <code>DCLDLIS-FEE-SCHED</code>.</li>
+</ul>
+</li>
+<li><strong>DLISAE (BMS Symbolic Map Copybook)</strong>
+<ul>
+<li>Supplies screen I/O structure field definitions (e.g., <code>DAEDATE</code>, <code>DAECIDI</code>, <code>DAECNAMO</code>, <code>DAELTYPI</code>, <code>DAEFEEO</code>, <code>DAECURRO</code>, <code>DAEAIDO</code>, <code>DAEASTTO</code>, <code>DAEADATO</code>, <code>DAEMSG</code>) for sending data to and receiving data from BMS map <code>DLISAE01</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="64-input-parameters--interface-interfaces" tabindex="-1">6.4 Input Parameters &amp; Interface Interfaces</h3>
+<ul>
+<li><strong>DFHCOMMAREA (Linkage Section)</strong>
+<ul>
+<li>Receives the 350-byte conversational communication area passed from prior CICS transaction turns or caller programs.</li>
+</ul>
+</li>
+<li><strong>BMS Terminal Screen Input Fields</strong>
+<ul>
+<li><code>DAECIDI</code>: Candidate identifier input used to query candidate records or submit applications.</li>
+<li><code>DAELTYPI</code>: License type input code (<code>'L'</code>, <code>'P'</code>, <code>'O'</code>) used for fee lookup and application submission.</li>
+</ul>
+</li>
+</ul>
+<h2 id="7-constraints" tabindex="-1">7. Constraints</h2>
+<ul>
+<li>
+<p>Transaction and session-flow constraints</p>
+<ul>
+<li>Pseudo-conversational design
+<ul>
+<li><code>EIBCALEN = 0</code> marks first entry. The program sends the map with <code>ERASE FREEKB</code>, then issues <code>EXEC CICS RETURN TRANSID('DL03')</code>.</li>
+<li>When <code>EIBCALEN</code> is not 0, <code>DFHCOMMAREA</code> is moved to <code>DLIS-COMMAREA</code> and <code>PROCESS-INPUT</code> runs. The conversation continues only through the COMMAREA, and every path ends in <code>EXEC CICS RETURN TRANSID('DL03')</code>.</li>
+<li><code>EIBTRNID</code> is moved to <code>CA-TRANSACTION-ID</code> at the start of every invocation. The transaction identity is therefore always propagated.</li>
+</ul>
+</li>
+<li>COMMAREA size
+<ul>
+<li><code>DFHCOMMAREA</code> is <code>PIC X(350)</code>, and the <code>RETURN</code> statements pass <code>LENGTH(350)</code>. State carried between interactions cannot exceed 350 bytes.</li>
+<li><code>DLIS-COMMAREA</code> is moved from <code>DFHCOMMAREA</code> without a length check. The program assumes the caller supplied a compatible layout.</li>
+</ul>
+</li>
+<li>Permitted keys
+<ul>
+<li>The <code>EVALUATE TRUE</code> on <code>EIBAID</code> accepts only F1 (submit), F3 (candidate lookup), F5 (fee calculation) and F12 (exit).</li>
+<li>Any other key sets the message <code>USE F1 F3 F5 OR F12</code>.</li>
+<li>The <code>OTHER</code> branch is written without the <code>WHEN</code> keyword, which is not valid <code>EVALUATE</code> syntax. As written, the “other key” rule may not compile.</li>
+</ul>
+</li>
+<li>Sequencing
+<ul>
+<li><code>RECEIVE MAP</code> always runs before the AID is evaluated.</li>
+<li>The reply map is sent with <code>DATAONLY FREEKB</code> after the action. The screen is rebuilt only after processing finishes.</li>
+<li>F12 issues <code>EXEC CICS RETURN</code> without <code>TRANSID</code>. This ends the conversation, so the transaction no longer restarts.</li>
+</ul>
+</li>
+<li>CICS response handling
+<ul>
+<li><code>RESP(WS-RESP1)</code> is captured on <code>SEND MAP</code> and <code>RECEIVE MAP</code>, but <code>WS-RESP1</code> is never tested. A failed <code>RECEIVE MAP</code> does not stop processing, so a BMS error is not enforced as a constraint.</li>
+</ul>
+</li>
+<li>Termination
+<ul>
+<li><code>MAIN-LOGIC</code> ends with <code>STOP RUN</code>. In CICS this is effectively unreachable, because every path ends in <code>RETURN</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Candidate lookup constraints (F3)</p>
+<ul>
+<li>Input validation
+<ul>
+<li><code>DAECIDI = ZEROS</code> is rejected with <code>ENTER CANDIDATE ID</code>. A candidate ID is mandatory.</li>
+</ul>
+</li>
+<li>Existence
+<ul>
+<li>The candidate must exist in <code>DLIS.CANDIDATE</code>, found by <code>CANDIDATE_ID</code>. <code>SQLCODE = 100</code> gives <code>CANDIDATE NOT FOUND</code>.</li>
+<li>The SELECT is a singleton. Any SQLCODE other than 0 or 100 is not handled, and the code proceeds as if the SELECT had succeeded.</li>
+</ul>
+</li>
+<li>Eligibility by record status
+<ul>
+<li><code>RECORD-STATUS = 'I'</code> (inactive) blocks use of the candidate and gives <code>CANDIDATE RECORD IS INACTIVE</code>.</li>
+<li>Only candidates that are not inactive are shown.</li>
+</ul>
+</li>
+<li>Display formatting
+<ul>
+<li>The full name is built with <code>STRING ... DELIMITED SPACE</code>. Each name is truncated at its first embedded space, so multi-word first or last names are cut short.</li>
+<li>The result must fit in <code>DAECNAMO</code>. <code>STRING</code> has no <code>ON OVERFLOW</code> clause, so overflow is silently truncated.</li>
+</ul>
+</li>
+<li>Control flow
+<ul>
+<li>Each failed check uses <code>GO TO LOOKUP-CANDIDATE-EXIT</code>. No later step runs once a check fails.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Fee calculation constraints (F5)</p>
+<ul>
+<li>Input validation
+<ul>
+<li>The license type (<code>DAELTYPI</code>) must not be <code>SPACES</code> or <code>LOW-VALUES</code>. Otherwise the message is <code>SELECT LICENSE TYPE FIRST</code>.</li>
+<li>F5 does not apply the L/P/O check that submit applies. Any non-blank value goes to the fee lookup.</li>
+</ul>
+</li>
+<li>Fee schedule selection rules (all enforced in the SQL <code>WHERE</code> clause)
+<ul>
+<li><code>LICENSE_TYPE</code> must match the entered type.</li>
+<li><code>FEE_TYPE</code> must be <code>'IF'</code>, the initial fee type. This is hard-coded.</li>
+<li><code>ACTIVE_STATUS</code> must be <code>'A'</code>.</li>
+<li><code>EFFECTIVE_DATE</code> must be on or before <code>CURRENT DATE</code>.</li>
+<li><code>EXPIRY_DATE</code> must be null or on or after <code>CURRENT DATE</code>. The fee must be currently valid.</li>
+<li><code>FETCH FIRST 1 ROW ONLY</code> limits the result to a single row. Only one fee is used even if several rows qualify.</li>
+</ul>
+</li>
+<li>Existence
+<ul>
+<li><code>SQLCODE = 100</code> gives <code>NO FEE SCHEDULE FOR THIS LICENSE TYPE</code>.</li>
+<li>As in the lookup, other negative SQLCODEs are not checked.</li>
+</ul>
+</li>
+<li>Output formatting
+<ul>
+<li>The fee goes through <code>WS-FEE-AMOUNT</code> (<code>S9(10)V99 COMP-3</code>) into <code>WS-FEE-AMOUNT-D</code> (<code>ZZZ,ZZ9.99</code>).</li>
+<li>The edited field allows at most 6 integer digits. Fees of 1,000,000 or more would be truncated on display.</li>
+<li>The currency code is limited to 3 characters (<code>PIC X(3)</code>) and is shown next to the fee.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Application submission constraints (F1)</p>
+<ul>
+<li>Mandatory fields
+<ul>
+<li><code>DAECIDI = ZEROS</code> gives <code>CANDIDATE ID IS REQUIRED</code>.</li>
+<li><code>DAELTYPI</code> as <code>SPACES</code> or <code>LOW-VALUES</code> gives <code>LICENSE TYPE IS REQUIRED</code>.</li>
+</ul>
+</li>
+<li>Domain of values
+<ul>
+<li>The license type must be <code>'L'</code>, <code>'P'</code> or <code>'O'</code>. Otherwise the message is <code>LICENSE TYPE MUST BE L P OR O</code>.</li>
+<li>The checks run in a fixed order: candidate ID, then presence of license type, then the allowed values.</li>
+</ul>
+</li>
+<li>Business rule: one active application per candidate and license type
+<ul>
+<li><code>COUNT(*)</code> is taken from <code>DLIS.LICENSE_APPLICATION</code> for the same <code>CANDIDATE_ID</code> and <code>LICENSE_TYPE</code>, where <code>APPLICATION_STATUS NOT IN ('RE','IS')</code>.</li>
+<li>Statuses <code>RE</code> and <code>IS</code> are treated as terminal (rejected and issued). Any other status counts as active.</li>
+<li>If the count is greater than 0, the program gives <code>ACTIVE APPLICATION ALREADY EXISTS FOR THIS TYPE</code> and no insert occurs.</li>
+<li>The count is read into <code>APPLICATION-ID</code>, a <code>COMP-3</code> field reused as a counter. This reuse is an implementation constraint.</li>
+<li>The SQLCODE of the count query is not checked.</li>
+<li>The check and the insert are separate statements with no lock between them. Two concurrent submissions could in principle both pass the check.</li>
+</ul>
+</li>
+<li>Initial state of a new application
+<ul>
+<li>The status is set to the hard-coded value <code>'PE'</code> (pending) on insert and shown on the screen as <code>DAEASTTO</code>.</li>
+<li>Every new application therefore starts in the pending state.</li>
+</ul>
+</li>
+<li>Audit data
+<ul>
+<li><code>EIBTRMID</code> (the terminal ID) is moved into <code>CREATED-BY</code> and used for the creator and last-updater columns.</li>
+<li>The audit field is <code>PIC X(20)</code> and the terminal ID is 4 characters.</li>
+<li>Dates (created and last updated) are supplied by the program. The screen date comes from <code>CURRENT-DATE(1:10)</code>.</li>
+</ul>
+</li>
+<li>Insert result handling
+<ul>
+<li><code>SQLCODE NOT = 0</code> after the insert gives <code>DATABASE ERROR ON APPLICATION INSERT</code>, and the identity is not retrieved.</li>
+<li>On success, <code>IDENTITY_VAL_LOCAL()</code> from <code>SYSIBM.SYSDUMMY1</code> returns the system-generated application ID. The ID is therefore generated by the database and not entered by the user.</li>
+<li>The application ID is shown on the screen (<code>DAEAIDO</code>) along with the status and date.</li>
+<li>The success message is <code>APPLICATION SUBMITTED SUCCESSFULLY</code>.</li>
+</ul>
+</li>
+<li>Candidate state not verified
+<ul>
+<li>Submit does not check that the candidate exists or is active. It relies on database referential integrity, and a violation would surface only as the generic insert error.</li>
+<li>Lookup and submit are independent paths, so F3 is not a required prior step.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Data and field-size constraints</p>
+<ul>
+<li>Key and identifier types
+<ul>
+<li>Candidate, application, license and payment IDs are <code>S9(10) COMP-3</code>, so at most 10 digits.</li>
+</ul>
+</li>
+<li>License type
+<ul>
+<li>It is a single character (<code>PIC X(1)</code>).</li>
+</ul>
+</li>
+<li>Application status
+<ul>
+<li>It is a 2-character code (<code>PIC X(2)</code>).</li>
+</ul>
+</li>
+<li>COMMAREA message and color
+<ul>
+<li>They are limited to 78 and 5 characters (<code>CA-MSG-TEXT</code>, <code>CA-MSG-COLOR</code>).</li>
+</ul>
+</li>
+<li>Screen-size limits on messages
+<ul>
+<li>Messages are moved into <code>DAEMSG</code>. The screen field length is defined in the BMS map, and longer text would be truncated.</li>
+</ul>
+</li>
+<li>Declared but unused structures
+<ul>
+<li>Many working-storage structures are declared but not used by this program. They are for eligibility, history, approval and license issuance. They place no runtime constraints on it.</li>
+<li><code>SQLCA</code> is included twice, once through the copybook section and once explicitly after the DCLGEN section. Duplicate definitions can cause compile errors.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Error handling and message constraints</p>
+<ul>
+<li>One message per interaction
+<ul>
+<li>Each validation failure moves a single text to <code>DAEMSG</code> and skips the remaining logic through the exit paragraphs. Only the first failing rule is reported.</li>
+</ul>
+</li>
+<li>Fixed messages
+<ul>
+<li><code>ENTER CANDIDATE ID</code>, <code>CANDIDATE NOT FOUND</code>, <code>CANDIDATE RECORD IS INACTIVE</code>, <code>CANDIDATE FOUND</code>, <code>SELECT LICENSE TYPE FIRST</code>, <code>NO FEE SCHEDULE FOR THIS LICENSE TYPE</code>, <code>FEE RETRIEVED SUCCESSFULLY</code>, <code>CANDIDATE ID IS REQUIRED</code>, <code>LICENSE TYPE IS REQUIRED</code>, <code>LICENSE TYPE MUST BE L P OR O</code>, <code>ACTIVE APPLICATION ALREADY EXISTS FOR THIS TYPE</code>, <code>DATABASE ERROR ON APPLICATION INSERT</code>, <code>APPLICATION SUBMITTED SUCCESSFULLY</code> and <code>USE F1 F3 F5 OR F12</code>.</li>
+</ul>
+</li>
+<li>Partial error coverage
+<ul>
+<li>Only the insert is checked for SQLCODE other than 0, and in the lookup and fee queries only for 100. Other database errors in the three SELECTs do not stop processing or produce a message.</li>
+</ul>
+</li>
+<li>No explicit commit or rollback
+<ul>
+<li>The program does not issue <code>SYNCPOINT</code>. The insert is committed when the task ends through <code>EXEC CICS RETURN</code>, and a failed insert is not explicitly rolled back.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="8-error-handling" tabindex="-1">8. Error Handling</h2>
+<ul>
+<li>
+<p><strong>Input validation checks (user-facing, message-based)</strong></p>
+<ul>
+<li>Lookup Candidate (F3)
+<ul>
+<li>If the candidate ID field is zero, the paragraph sets the message “ENTER CANDIDATE ID” and jumps to its exit paragraph. No database access is made.</li>
+</ul>
+</li>
+<li>Calculate Fee (F5)
+<ul>
+<li>If the license type field is spaces or low-values, the message “SELECT LICENSE TYPE FIRST” is set and control branches to the exit paragraph.</li>
+</ul>
+</li>
+<li>Submit Application (F1)
+<ul>
+<li>A zero candidate ID gives the message “CANDIDATE ID IS REQUIRED”.</li>
+<li>A license type that is spaces or low-values gives “LICENSE TYPE IS REQUIRED”.</li>
+<li>A license type other than L, P or O gives “LICENSE TYPE MUST BE L P OR O”.</li>
+<li>Each failure branches straight to the exit paragraph, so later checks and the database insert are skipped.</li>
+</ul>
+</li>
+<li>Function key validation
+<ul>
+<li>An unrecognised attention key (not F1, F3, F5 or F12) sets the message “USE F1 F3 F5 OR F12”. The screen is then redisplayed and the conversation continues.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Database (DB2) error and exception handling</strong></p>
+<ul>
+<li>“No rows found” handling
+<ul>
+<li>After the candidate SELECT, SQLCODE 100 sets “CANDIDATE NOT FOUND” and exits the paragraph.</li>
+<li>After the fee schedule SELECT, SQLCODE 100 sets “NO FEE SCHEDULE FOR THIS LICENSE TYPE” and exits the paragraph. The fee and currency display fields are not updated.</li>
+</ul>
+</li>
+<li>Insert failure handling
+<ul>
+<li>After the INSERT into the license application table, any SQLCODE other than zero sets “DATABASE ERROR ON APPLICATION INSERT” and exits. This is the only generic check of SQLCODE for failure.</li>
+<li>The message gives no detail from SQLCODE or the SQLCA.</li>
+</ul>
+</li>
+<li>Unchecked SQL statements (gaps)
+<ul>
+<li>Candidate SELECT: only SQLCODE 100 is checked. Other negative SQLCODEs (such as deadlock, authorization or connection errors) are not detected.</li>
+<li>Fee SELECT: also only SQLCODE 100 is checked.</li>
+<li>The duplicate-application COUNT query has no SQLCODE check. The program relies on the returned count, so a failed query would leave the count field unreliable.</li>
+<li>The IDENTITY_VAL_LOCAL retrieval after the insert has no SQLCODE check. A failure here could show a wrong application ID with a success message.</li>
+<li>A SELECT INTO with no explicit handling for multiple rows (SQLCODE -811) is only partly mitigated. The fee query limits results with FETCH FIRST 1 ROW ONLY, but the candidate query does not.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Business rule enforcement</strong></p>
+<ul>
+<li>Inactive candidate check
+<ul>
+<li>After a successful candidate lookup, a record status of “I” sets “CANDIDATE RECORD IS INACTIVE” and exits. The candidate name is not displayed.</li>
+</ul>
+</li>
+<li>Duplicate application prevention
+<ul>
+<li>The program counts existing applications for the same candidate and license type, excluding those with status RE (rejected) or IS (issued).</li>
+<li>If the count is above zero, the message “ACTIVE APPLICATION ALREADY EXISTS FOR THIS TYPE” is set and the insert is not attempted.</li>
+</ul>
+</li>
+<li>Fee eligibility filtering
+<ul>
+<li>The fee query itself acts as a safeguard. It selects only active fee schedule rows that are in effect today (effective date reached, expiry date null or not passed). If none qualify, the “no rows” path is taken.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>CICS error handling</strong></p>
+<ul>
+<li>Response code capture
+<ul>
+<li>SEND MAP and RECEIVE MAP commands use a RESP option that stores the result in a working-storage field.</li>
+<li>The field is never tested after any command, so map send or receive failures (such as MAPFAIL) are not acted upon.</li>
+<li>Because RESP is specified, CICS does not abend on these conditions. The errors are silently ignored, and processing continues with possibly empty or stale map data.</li>
+</ul>
+</li>
+<li>Exit via F12
+<ul>
+<li>A CICS RETURN without TRANSID ends the conversation cleanly. This is the sole intended termination path.</li>
+</ul>
+</li>
+<li>Working-storage fields for further CICS response codes (RESP2, saved EIBRESP and saved EIBCALEN) are defined in the shared copybook but not used in this program.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recovery, fallback and flow control logic</strong></p>
+<ul>
+<li>First-entry handling
+<ul>
+<li>If the communication area length is zero (first invocation), the program displays a blank map with the current date and returns with the transaction ID. It does not read input.</li>
+</ul>
+</li>
+<li>Conversational continuation
+<ul>
+<li>After every action, including failed validations or lookups, the map is resent with data only and the program returns to the same transaction with the communication area. The user sees the error message and can correct the input and retry. No data is lost and the session continues.</li>
+</ul>
+</li>
+<li>Early-exit pattern
+<ul>
+<li>Each processing paragraph uses a GO TO to a dedicated exit paragraph on any error. This prevents later steps (database calls or inserts) from running after a failed check.</li>
+</ul>
+</li>
+<li>Default message handling
+<ul>
+<li>Success paths set a message such as “CANDIDATE FOUND”, “FEE RETRIEVED SUCCESSFULLY” or “APPLICATION SUBMITTED SUCCESSFULLY”. Errors and successes use the same message field, which gives the user a single feedback channel.</li>
+</ul>
+</li>
+<li>No retry, rollback or abend logic
+<ul>
+<li>There are no retries, no explicit SYNCPOINT ROLLBACK, no HANDLE CONDITION or HANDLE ABEND, and no ABEND calls.</li>
+<li>A failed insert is only reported to the user. Recovery of the unit of work depends on the CICS task-end default.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>User and system notifications</strong></p>
+<ul>
+<li>On-screen message line
+<ul>
+<li>All errors, validation failures and statuses are reported via a single message field on the map, shown after the map is resent.</li>
+</ul>
+</li>
+<li>No logging
+<ul>
+<li>The program writes no error logs, no transient data or temporary storage queue entries, and no console messages. The SQLCODE and CICS response values are not recorded for diagnostics.</li>
+</ul>
+</li>
+<li>Unused shared error fields
+<ul>
+<li>The shared working storage defines a return code, a return message and a message color. The program does not set them, so they play no part in error handling here.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Program termination</strong></p>
+<ul>
+<li>The program ends through STOP RUN after the MAIN-LOGIC dispatch. In practice, the CICS RETURN statements in the initial display and input paragraphs end the task earlier.</li>
+<li>There is no abnormal termination handling and no error exit routine.</li>
+</ul>
+</li>
+</ul>
+<h2 id="9-examples" tabindex="-1">9. Examples</h2>
+<p><strong>Example 1: Candidate lookup (F3)</strong></p>
+<p>Input on screen DLISAE01 (transaction DL03):</p>
+<ul>
+<li>Candidate ID (<code>DAECIDI</code>) = <code>0000000123</code></li>
+<li>Key pressed: F3</li>
+</ul>
+<p>Assume <code>DLIS.CANDIDATE</code> holds candidate 123 with FIRST_NAME <code>JOHN</code>, LAST_NAME <code>SMITH</code> and RECORD_STATUS <code>A</code>.</p>
+<p>Expected output:</p>
+<ul>
+<li><code>DAECNAMO</code> = <code>JOHN SMITH</code></li>
+<li><code>DAEMSG</code> = <code>CANDIDATE FOUND</code></li>
+</ul>
+<p>Explanation: <code>PROCESS-INPUT</code> receives the map and <code>EIBAID = DFHPF3</code> runs <code>LOOKUP-CANDIDATE</code>. The program selects the name and status for the candidate ID. The row is found (SQLCODE is not 100) and the record status is not <code>I</code>. <code>STRING ... DELIMITED SPACE</code> joins the first and last name with a single blank. The map is then re-sent with <code>DATAONLY</code>, and the program returns to <code>DL03</code>.</p>
+<p><strong>Example 2: Candidate lookup error cases (F3)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th><code>DAEMSG</code> shown</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Candidate ID = <code>0000000000</code></td>
+<td><code>ENTER CANDIDATE ID</code></td>
+<td>The ID is zero, so the program exits before any SQL.</td>
+</tr>
+<tr>
+<td>Candidate ID = <code>0000009999</code> (no row)</td>
+<td><code>CANDIDATE NOT FOUND</code></td>
+<td>SQLCODE = 100.</td>
+</tr>
+<tr>
+<td>Candidate ID = <code>0000000456</code>, RECORD_STATUS = <code>I</code></td>
+<td><code>CANDIDATE RECORD IS INACTIVE</code></td>
+<td>The status check fails, so the name is not shown.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example 3: Fee calculation (F5)</strong></p>
+<p>Input:</p>
+<ul>
+<li>License type (<code>DAELTYPI</code>) = <code>L</code></li>
+<li>Key pressed: F5</li>
+</ul>
+<p>Assume <code>DLIS.LICENSE_FEE_SCHEDULE</code> has an active row for type <code>L</code>, fee type <code>IF</code>, FEE_AMOUNT = 85.50 and CURRENCY_CODE = <code>USD</code>. The row is currently effective (effective date reached, not yet expired).</p>
+<p>Expected output:</p>
+<ul>
+<li><code>DAEFEEO</code> = <code>    85.50</code> (edited with <code>ZZZ,ZZ9.99</code>)</li>
+<li><code>DAECURRO</code> = <code>USD</code></li>
+<li><code>DAEMSG</code> = <code>FEE RETRIEVED SUCCESSFULLY</code></li>
+</ul>
+<p>Explanation: <code>CALC-FEE</code> selects the first active, currently effective “IF” fee row for the license type. It moves the amount through <code>WS-FEE-AMOUNT</code> into the edited field <code>WS-FEE-AMOUNT-D</code>, then to the screen. If the license type is blank, the message is <code>SELECT LICENSE TYPE FIRST</code>. If no row matches (SQLCODE = 100), the message is <code>NO FEE SCHEDULE FOR THIS LICENSE TYPE</code>.</p>
+<p><strong>Example 4: Successful application submission (F1)</strong></p>
+<p>Input:</p>
+<ul>
+<li>Candidate ID = <code>0000000123</code></li>
+<li>License type = <code>P</code></li>
+<li>Terminal ID (<code>EIBTRMID</code>) = <code>T001</code></li>
+<li>Key pressed: F1</li>
+</ul>
+<p>Assume candidate 123 has no application of type <code>P</code> with a status other than <code>RE</code> or <code>IS</code>.</p>
+<p>Expected output:</p>
+<ul>
+<li><code>DAEAIDO</code> = the new application ID from <code>IDENTITY_VAL_LOCAL()</code>, for example <code>1001</code></li>
+<li><code>DAEASTTO</code> = <code>PE</code></li>
+<li><code>DAEADATO</code> = the first 10 characters of <code>CURRENT-DATE</code></li>
+<li><code>DAEMSG</code> = <code>APPLICATION SUBMITTED SUCCESSFULLY</code></li>
+</ul>
+<p>Explanation: <code>SUBMIT-APPLICATION</code> checks that the candidate ID and license type are present, and that the type is <code>L</code>, <code>P</code> or <code>O</code>. A <code>COUNT(*)</code> query finds no open application for this candidate and type. The program inserts a new row with status <code>PE</code> (pending), with the terminal ID <code>T001</code> as creator and last updater. It then reads the generated identity value and shows it, together with the status and date, on the screen.</p>
+<p><strong>Example 5: Submission rejected (F1)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th><code>DAEMSG</code> shown</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Candidate ID = <code>0</code></td>
+<td><code>CANDIDATE ID IS REQUIRED</code></td>
+<td>Candidate ID validation fails.</td>
+</tr>
+<tr>
+<td>License type blank</td>
+<td><code>LICENSE TYPE IS REQUIRED</code></td>
+<td>License type validation fails.</td>
+</tr>
+<tr>
+<td>License type = <code>X</code></td>
+<td><code>LICENSE TYPE MUST BE L P OR O</code></td>
+<td>The type is not one of the allowed values.</td>
+</tr>
+<tr>
+<td>Candidate 123, type <code>L</code>, with an existing application in status <code>PE</code></td>
+<td><code>ACTIVE APPLICATION ALREADY EXISTS FOR THIS TYPE</code></td>
+<td>The count is greater than 0, so no insert is done.</td>
+</tr>
+<tr>
+<td>INSERT returns SQLCODE not 0</td>
+<td><code>DATABASE ERROR ON APPLICATION INSERT</code></td>
+<td>The insert failed.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example 6: Initial entry and other keys</strong></p>
+<ul>
+<li>First invocation (<code>EIBCALEN = 0</code>): <code>INIT-SCREEN</code> puts the current date in <code>DAEDATE</code>, sends a blank map with <code>ERASE</code>, and returns with <code>TRANSID('DL03')</code>.</li>
+<li>Any other key, such as F2: <code>DAEMSG</code> = <code>USE F1 F3 F5 OR F12</code>.</li>
+<li>F12: the transaction ends with <code>EXEC CICS RETURN</code> and the map is not re-sent.</li>
+</ul>
+
+                    </article>
+                    <nav class="toc-panel" aria-label="On this page">
+  <span class="toc-panel-label">On this page</span>
+  <ul class="toc-list">
+<li class="toc-level-2"><a href="#1-purpose">1. Purpose</a></li>
+<li class="toc-level-2"><a href="#2-inputs">2. Inputs</a></li>
+<li class="toc-level-2"><a href="#3-outputs">3. Outputs</a></li>
+<li class="toc-level-2"><a href="#4-processing-logic">4. Processing Logic</a>
+<ul>
+<li class="toc-level-3"><a href="#41-mermaid-flow-diagram">4.1 Mermaid Flow Diagram</a></li>
+<li class="toc-level-3"><a href="#42-processing-logic-description">4.2 Processing Logic Description</a>
+<ul>
+<li class="toc-level-4"><a href="#421-high-level-summary">4.2.1 High-level Summary</a></li>
+<li class="toc-level-4"><a href="#422-execution-flow">4.2.2 Execution Flow</a></li>
+<li class="toc-level-4"><a href="#423-important-business-rules">4.2.3 Important Business Rules</a></li>
+<li class="toc-level-4"><a href="#424-observations">4.2.4 Observations</a></li>
+<li class="toc-level-4"><a href="#425-external-interactions">4.2.5 External Interactions</a></li>
+<li class="toc-level-4"><a href="#426-plain-language-summary">4.2.6 Plain Language Summary</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#43-database-tables">4.3 Database Tables</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#5-paragraphs">5. Paragraphs</a></li>
+<li class="toc-level-2"><a href="#6-dependencies">6. Dependencies</a>
+<ul>
+<li class="toc-level-3"><a href="#61-database-dependencies-ibm-db2">6.1 Database Dependencies (IBM Db2)</a></li>
+<li class="toc-level-3"><a href="#62-cics-system--middleware-dependencies">6.2 CICS System &amp;amp; Middleware Dependencies</a></li>
+<li class="toc-level-3"><a href="#63-copybook--data-structure-dependencies">6.3 Copybook &amp;amp; Data Structure Dependencies</a></li>
+<li class="toc-level-3"><a href="#64-input-parameters--interface-interfaces">6.4 Input Parameters &amp;amp; Interface Interfaces</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#7-constraints">7. Constraints</a></li>
+<li class="toc-level-2"><a href="#8-error-handling">8. Error Handling</a></li>
+<li class="toc-level-2"><a href="#9-examples">9. Examples</a></li>
+</ul>
+
+</nav>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="wiki-footer">Made by IBM Bob Premium Package for Z</footer>
+    <script>
+    /* toc-spy.js — highlights the active heading in the TOC panel on scroll */
+    (function () {
+      function init() {
+        var panel = document.querySelector('.toc-panel');
+        if (!panel) return;
+        var links = Array.prototype.slice.call(panel.querySelectorAll('a[href^="#"]'));
+        if (!links.length) return;
+
+        var headingIds = links.map(function (a) { return a.getAttribute('href').slice(1); });
+        var headings = headingIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+        function clearActive() {
+          panel.querySelectorAll('.toc-active').forEach(function (el) { el.classList.remove('toc-active'); });
+          panel.querySelectorAll('.toc-parent-active').forEach(function (el) { el.classList.remove('toc-parent-active'); });
+        }
+
+        function setActive(id) {
+          clearActive();
+          var link = panel.querySelector('a[href="#' + id + '"]');
+          if (!link) return;
+          link.classList.add('toc-active');
+          var li = link.closest('li');
+          if (li) {
+            var parentLi = li.parentElement && li.parentElement.closest('li');
+            if (parentLi) parentLi.classList.add('toc-parent-active');
+          }
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+        headings.forEach(function (h) { observer.observe(h); });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
+    <script>
+    /* breadcrumb.js — reads sessionStorage['wiki_referrer'] and renders breadcrumb.
+       Only fires when the referrer was set by clicking a link inside the Source Files
+       disclosure on a wiki page; clears after rendering so stale state never lingers. */
+    (function () {
+      var raw;
+      try { raw = sessionStorage.getItem('wiki_referrer'); } catch (_e) {}
+      if (!raw) return;
+      /* Consume immediately — prevents the breadcrumb re-appearing on the next visit. */
+      try { sessionStorage.removeItem('wiki_referrer'); } catch (_e) {}
+      var ref;
+      try { ref = JSON.parse(raw); } catch (_e) { return; }
+      if (!ref || !ref.href) return;
+      var bc = document.getElementById('wiki-breadcrumb');
+      if (!bc) return;
+      bc.className = 'wiki-breadcrumb';
+      bc.innerHTML =
+        '<a href="' + ref.href + '">' + (ref.title || 'Back') + '</a>' +
+        '<span class="wiki-breadcrumb-sep"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' +
+        '<span class="wiki-breadcrumb-current">DLISAPPL</span>';
+    })();
+    </script>
+    <script>
+    /* sidebar toggle — same as main wiki pages */
+    (function () {
+
+      var STORAGE_KEY = 'sb_open';
+
+      function getOpenSet() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+      }
+
+      function saveOpenSet(set) {
+        try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(set)); } catch (e) {}
+      }
+
+      function findItems(toggle) {
+        var node = toggle.nextSibling;
+        while (node) {
+          if (node.nodeType === 1 && node.classList.contains('nav-section-items'))
+            return node;
+          node = node.nextSibling;
+        }
+        return null;
+      }
+
+      function toggleKey(toggle, index) {
+        var label = (toggle.querySelector('.nav-toggle-text') || toggle).textContent.trim().replace(/\s+/g, ' ');
+        return index + ':' + label;
+      }
+
+      function openSection(toggle, items, key, set) {
+        toggle.classList.add('open');
+        items.classList.add('open');
+        if (set) set[key] = true;
+      }
+
+      function closeSection(toggle, items, key, set) {
+        toggle.classList.remove('open');
+        items.classList.remove('open');
+        if (set) set[key] = false;
+      }
+
+      function init() {
+        var sidebar = document.getElementById('wiki-sidebar');
+        var toggles = Array.prototype.slice.call(
+          document.querySelectorAll('.nav-section-toggle')
+        );
+
+        var savedSet = getOpenSet();
+        var openSet = savedSet || {};
+
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+
+          var key = toggleKey(toggle, idx);
+          var shouldOpen = openSet[key] === true;
+
+          if (shouldOpen) {
+            toggle.classList.add('open');
+            items.classList.add('open');
+          }
+
+          toggle.addEventListener('click', function () {
+            var nowOpen = toggle.classList.contains('open');
+            if (nowOpen) {
+              closeSection(toggle, items, key, openSet);
+            } else {
+              openSection(toggle, items, key, openSet);
+            }
+            saveOpenSet(openSet);
+          });
+        });
+
+        saveOpenSet(openSet);
+
+        /* Restore sidebar scroll position after sections are expanded so the
+           scroll height is correct when we apply scrollTop. */
+        if (sidebar) {
+          try {
+            var savedScroll = sessionStorage.getItem('sb_scroll');
+            if (savedScroll !== null) { sidebar.scrollTop = parseInt(savedScroll, 10) || 0; }
+          } catch (_e) {}
+        }
+
+        window.addEventListener('pagehide', function () {
+          saveOpenSet(openSet);
+          if (sidebar) {
+            try { sessionStorage.setItem('sb_scroll', String(sidebar.scrollTop)); } catch (_e) {}
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+    </script>
+</body>
+</html>

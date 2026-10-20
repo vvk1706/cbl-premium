@@ -1,0 +1,37 @@
+Explain your code
+
+Understand what your programs actually do. Use the Explain code workflow to get an easy to understand explanation of any mainframe program from an Architect, Developer, or Business perspective. Run the Explain code workflow to get started.
+
+
+Overview
+Generate an explanation that analyzes the code, includes copybook references, and identifies program logic, business rules, and data usage.
+
+This workflow helps you:
+
+Customize your explanation by selecting an explanation perspective: Architect, Business, or Developer
+Leverage existing data dictionaries to enhance explanations
+Understand complex legacy code without manual analysis
+Prepare
+Select the file for analysis and generate the program metadata.
+
+Program selection
+Select a COBOL, PL/I, JCL, REXX, or HLASM file to generate an explanation.
+*
+
+Browse files
+No files selected. Click the button above to browse for files.
+
+Continue
+
+Selection confirmed.
+
+Select one of the following perspectives:
+An architect-focused, a developer-focused, or a business-focused perspective.
+
+Architect
+
+Developer
+
+Business
+
+

@@ -1,0 +1,187 @@
+         TITLE 'DLIS BMS MAPSETS - ELIGIBILITY, HISTORY, PAYMENT'
+***================================================================***
+*** BMS Mapset : DLISEC - ELIGIBILITY CHECK                        ***
+*** Map        : DLISEC01  Trans: DL05                             ***
+***================================================================***
+DLISEC   DFHMSD TYPE=&SYSPARM,                                         X
+               LANG=COBOL,MODE=INOUT,TERM=3270-2,                      X
+               CTRL=FREEKB,STORAGE=AUTO,TIOAPFX=YES
+
+DLISEC01 DFHMDI SIZE=(24,80),LINE=1,COLUMN=1
+
+         DFHMDF POS=(1,1),LENGTH=80,ATTRB=(PROT,BRT),                 X
+               INITIAL='DLIS                  ELIGIBILITY CHECK'
+DECDATE  DFHMDF POS=(1,72),LENGTH=10,ATTRB=(PROT,NORM)
+         DFHMDF POS=(2,1),LENGTH=80,ATTRB=(PROT,NORM),                X
+               INITIAL='--------------------------------------------------------------------------------'
+
+         DFHMDF POS=(4,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='APPLICATION ID  : '
+DECAID   DFHMDF POS=(4,20),LENGTH=10,ATTRB=(NUM,UNPROT,IC)
+         DFHMDF POS=(5,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='CANDIDATE NAME  : '
+DECCNAM  DFHMDF POS=(5,20),LENGTH=60,ATTRB=(PROT,NORM)
+         DFHMDF POS=(6,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='DATE OF BIRTH   : '
+DECDOB   DFHMDF POS=(6,20),LENGTH=10,ATTRB=(PROT,NORM)
+         DFHMDF POS=(7,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='CALCULATED AGE  : '
+DECAGE   DFHMDF POS=(7,20),LENGTH=3,ATTRB=(PROT,NORM)
+         DFHMDF POS=(8,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='LICENSE TYPE    : '
+DECLTYP  DFHMDF POS=(8,20),LENGTH=1,ATTRB=(PROT,NORM)
+DECLDSC  DFHMDF POS=(8,22),LENGTH=20,ATTRB=(PROT,NORM)
+         DFHMDF POS=(9,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='MIN AGE REQUIRED: '
+DECMAGE  DFHMDF POS=(9,20),LENGTH=3,ATTRB=(PROT,NORM)
+         DFHMDF POS=(10,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='PRIOR LICENSE   : '
+DECPRIOR DFHMDF POS=(10,20),LENGTH=30,ATTRB=(PROT,NORM)
+         DFHMDF POS=(12,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='CHECK STATUS    : '
+DECESTS  DFHMDF POS=(12,20),LENGTH=1,ATTRB=(PROT,BRT)
+DECEDSC  DFHMDF POS=(12,22),LENGTH=30,ATTRB=(PROT,NORM)
+         DFHMDF POS=(13,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='CHECK NOTES     : '
+DECENTS  DFHMDF POS=(13,20),LENGTH=60,ATTRB=(PROT,NORM)
+         DFHMDF POS=(15,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='CHECKED BY      : '
+DECCHKBY DFHMDF POS=(15,20),LENGTH=20,ATTRB=(UNPROT)
+DECMSG   DFHMDF POS=(22,2),LENGTH=76,ATTRB=(PROT,NORM)
+         DFHMDF POS=(24,2),LENGTH=76,ATTRB=(PROT,NORM),               X
+               INITIAL='F1=RUN CHECK  F3=LOOKUP APP  F12=EXIT'
+
+         DFHMSD TYPE=FINAL
+         END
+
+***================================================================***
+*** BMS Mapset : DLISHC - HISTORY CHECK                            ***
+*** Map        : DLISHC01  Trans: DL06                             ***
+***================================================================***
+DLISHC   DFHMSD TYPE=&SYSPARM,                                         X
+               LANG=COBOL,MODE=INOUT,TERM=3270-2,                      X
+               CTRL=FREEKB,STORAGE=AUTO,TIOAPFX=YES
+
+DLISHC01 DFHMDI SIZE=(24,80),LINE=1,COLUMN=1
+
+         DFHMDF POS=(1,1),LENGTH=80,ATTRB=(PROT,BRT),                 X
+               INITIAL='DLIS              DRIVING HISTORY CHECK'
+DHCDATE  DFHMDF POS=(1,72),LENGTH=10,ATTRB=(PROT,NORM)
+         DFHMDF POS=(2,1),LENGTH=80,ATTRB=(PROT,NORM),                X
+               INITIAL='--------------------------------------------------------------------------------'
+
+         DFHMDF POS=(4,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='APPLICATION ID  : '
+DHCAID   DFHMDF POS=(4,20),LENGTH=10,ATTRB=(NUM,UNPROT,IC)
+         DFHMDF POS=(5,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='CANDIDATE NAME  : '
+DHCCNAM  DFHMDF POS=(5,20),LENGTH=60,ATTRB=(PROT,NORM)
+         DFHMDF POS=(6,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='LICENSE TYPE    : '
+DHCLTYP  DFHMDF POS=(6,20),LENGTH=1,ATTRB=(PROT,NORM)
+         DFHMDF POS=(7,1),LENGTH=80,ATTRB=(PROT,NORM),                X
+               INITIAL='--------------------------------------------------------------------------------'
+         DFHMDF POS=(8,2),LENGTH=76,ATTRB=(PROT,NORM),                X
+               INITIAL=' HISTORY RECORDS (ACTIVE):'
+         DFHMDF POS=(9,2),LENGTH=76,ATTRB=(PROT,NORM),                X
+               INITIAL=' DATE       TYPE  DESCRIPTION                     DEMERIT'
+         DFHMDF POS=(10,2),LENGTH=76,ATTRB=(PROT,NORM),               X
+               INITIAL='----------------------------------------------------------------------------'
+
+* History scroll lines (7 rows)
+DHCHL1   DFHMDF POS=(11,2),LENGTH=76,ATTRB=(PROT,NORM)
+DHCHL2   DFHMDF POS=(12,2),LENGTH=76,ATTRB=(PROT,NORM)
+DHCHL3   DFHMDF POS=(13,2),LENGTH=76,ATTRB=(PROT,NORM)
+DHCHL4   DFHMDF POS=(14,2),LENGTH=76,ATTRB=(PROT,NORM)
+DHCHL5   DFHMDF POS=(15,2),LENGTH=76,ATTRB=(PROT,NORM)
+DHCHL6   DFHMDF POS=(16,2),LENGTH=76,ATTRB=(PROT,NORM)
+DHCHL7   DFHMDF POS=(17,2),LENGTH=76,ATTRB=(PROT,NORM)
+
+         DFHMDF POS=(18,1),LENGTH=80,ATTRB=(PROT,NORM),               X
+               INITIAL='--------------------------------------------------------------------------------'
+         DFHMDF POS=(19,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='TOTAL DEMERITS  : '
+DHCDMRT  DFHMDF POS=(19,20),LENGTH=3,ATTRB=(PROT,BRT)
+         DFHMDF POS=(20,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='ACTIVE SUSPENSN : '
+DHCSUSP  DFHMDF POS=(20,20),LENGTH=3,ATTRB=(PROT,BRT)
+         DFHMDF POS=(21,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='UNPAID FINES    : '
+DHCFINE  DFHMDF POS=(21,20),LENGTH=3,ATTRB=(PROT,BRT)
+         DFHMDF POS=(22,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='HISTORY STATUS  : '
+DHCHSTS  DFHMDF POS=(22,20),LENGTH=1,ATTRB=(PROT,BRT)
+DHCHSDSC DFHMDF POS=(22,22),LENGTH=30,ATTRB=(PROT,NORM)
+DHCMSG   DFHMDF POS=(23,2),LENGTH=76,ATTRB=(PROT,NORM)
+         DFHMDF POS=(24,2),LENGTH=76,ATTRB=(PROT,NORM),               X
+               INITIAL='F1=RUN CHECK  F3=LOOKUP  F7=UP  F8=DOWN  F12=EXIT'
+
+         DFHMSD TYPE=FINAL
+         END
+
+***================================================================***
+*** BMS Mapset : DLISPE - PAYMENT ENTRY                            ***
+*** Map        : DLISPE01  Trans: DL07                             ***
+***================================================================***
+DLISPE   DFHMSD TYPE=&SYSPARM,                                         X
+               LANG=COBOL,MODE=INOUT,TERM=3270-2,                      X
+               CTRL=FREEKB,STORAGE=AUTO,TIOAPFX=YES
+
+DLISPE01 DFHMDI SIZE=(24,80),LINE=1,COLUMN=1
+
+         DFHMDF POS=(1,1),LENGTH=80,ATTRB=(PROT,BRT),                 X
+               INITIAL='DLIS                   PAYMENT ENTRY'
+DPEDATE  DFHMDF POS=(1,72),LENGTH=10,ATTRB=(PROT,NORM)
+         DFHMDF POS=(2,1),LENGTH=80,ATTRB=(PROT,NORM),                X
+               INITIAL='--------------------------------------------------------------------------------'
+
+         DFHMDF POS=(4,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='APPLICATION ID  : '
+DPEAID   DFHMDF POS=(4,20),LENGTH=10,ATTRB=(NUM,UNPROT,IC)
+         DFHMDF POS=(5,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='CANDIDATE NAME  : '
+DPECNAM  DFHMDF POS=(5,20),LENGTH=60,ATTRB=(PROT,NORM)
+         DFHMDF POS=(6,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='LICENSE TYPE    : '
+DPELTYP  DFHMDF POS=(6,20),LENGTH=1,ATTRB=(PROT,NORM)
+DPELDSC  DFHMDF POS=(6,22),LENGTH=20,ATTRB=(PROT,NORM)
+         DFHMDF POS=(7,1),LENGTH=80,ATTRB=(PROT,NORM),                X
+               INITIAL='--------------------------------------------------------------------------------'
+         DFHMDF POS=(8,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='FEE APPLICABLE  : '
+DPEFEE   DFHMDF POS=(8,20),LENGTH=14,ATTRB=(PROT,BRT)
+         DFHMDF POS=(9,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='CURRENCY        : '
+DPECURR  DFHMDF POS=(9,20),LENGTH=3,ATTRB=(PROT,NORM)
+         DFHMDF POS=(10,1),LENGTH=80,ATTRB=(PROT,NORM),               X
+               INITIAL='--------------------------------------------------------------------------------'
+         DFHMDF POS=(11,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='PAYMENT METHOD  : '
+DPEMETH  DFHMDF POS=(11,20),LENGTH=2,ATTRB=(UNPROT)
+         DFHMDF POS=(11,23),LENGTH=46,ATTRB=(PROT,NORM),              X
+               INITIAL='(CC=Credit DC=Debit EF=EFT CS=Cash CH=Cheque)'
+         DFHMDF POS=(12,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='PAYMENT REF     : '
+DPEREF   DFHMDF POS=(12,20),LENGTH=30,ATTRB=(UNPROT)
+         DFHMDF POS=(13,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='PROCESSED BY    : '
+DPEPRCBY DFHMDF POS=(13,20),LENGTH=20,ATTRB=(UNPROT)
+         DFHMDF POS=(14,1),LENGTH=80,ATTRB=(PROT,NORM),               X
+               INITIAL='--------------------------------------------------------------------------------'
+         DFHMDF POS=(15,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='PAYMENT ID      : '
+DPEPID   DFHMDF POS=(15,20),LENGTH=10,ATTRB=(PROT,NORM)
+         DFHMDF POS=(16,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='RECEIPT NUMBER  : '
+DPERCT   DFHMDF POS=(16,20),LENGTH=20,ATTRB=(PROT,BRT)
+         DFHMDF POS=(17,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='PAYMENT STATUS  : '
+DPEPSTS  DFHMDF POS=(17,20),LENGTH=1,ATTRB=(PROT,NORM)
+DPEMSG   DFHMDF POS=(22,2),LENGTH=76,ATTRB=(PROT,NORM)
+         DFHMDF POS=(23,1),LENGTH=80,ATTRB=(PROT,NORM),               X
+               INITIAL='--------------------------------------------------------------------------------'
+         DFHMDF POS=(24,2),LENGTH=76,ATTRB=(PROT,NORM),               X
+               INITIAL='F1=PROCESS PAYMENT  F3=LOOKUP APP  F5=PRINT RECEIPT  F12=EXIT'
+
+         DFHMSD TYPE=FINAL
+         END

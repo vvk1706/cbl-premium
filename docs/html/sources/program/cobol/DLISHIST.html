@@ -1,0 +1,1706 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLISHIST</title>
+    <link rel="stylesheet" href="../../../assets/style.css">
+    <script src="../../../assets/mermaid.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+
+    <!-- Prism.js for syntax highlighting (bundled — no CDN required) -->
+    <link rel="stylesheet" href="../../../assets/prism-tomorrow.css">
+    <script src="../../../assets/prism-core.js"></script>
+    <script src="../../../assets/prism-languages.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="header-app-name"><a href="../../../../index.html" style="color: inherit; text-decoration: none;">Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</a></span>
+        </div>
+        <div class="header-right">
+        </div>
+    </header>
+    <div class="shell">
+        <aside class="sidebar" id="wiki-sidebar">
+            <nav>
+                
+        <div class="nav-home-wrap">
+            <a href="../../../../index.html" class="nav-home">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 6.5L8 2l6 4.5V14a1 1 0 01-1 1H3a1 1 0 01-1-1V6.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M6 15V9h4v6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                Home
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Application Documentation</div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Overview</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/system-overview.html" class="nav-link" data-page-id="system-overview">DLIS System Overview</a>
+                <a href="../../../pages/main-menu-navigation.html" class="nav-link" data-page-id="main-menu-navigation">Main Menu &amp; Navigation (DL01)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Candidate &amp; Application Intake</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/candidate-management.html" class="nav-link" data-page-id="candidate-management">Candidate Maintenance (DL02)</a>
+                <a href="../../../pages/license-application-entry.html" class="nav-link" data-page-id="license-application-entry">License Application Entry (DL03)</a>
+                <a href="../../../pages/application-status-inquiry.html" class="nav-link" data-page-id="application-status-inquiry">Application Status Inquiry (DL04)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Verification &amp; Payment</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/eligibility-check.html" class="nav-link" data-page-id="eligibility-check">Eligibility Check (DL05)</a>
+                <a href="../../../pages/driving-history-check.html" class="nav-link" data-page-id="driving-history-check">Driving History Check (DL06)</a>
+                <a href="../../../pages/payment-processing.html" class="nav-link" data-page-id="payment-processing">Payment Entry &amp; Processing (DL07)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Approval &amp; License Issuance</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/first-level-approval.html" class="nav-link" data-page-id="first-level-approval">First-Level Authority Approval (DL08)</a>
+                <a href="../../../pages/second-level-approval.html" class="nav-link" data-page-id="second-level-approval">Second-Level Authority Approval (DL09)</a>
+                <a href="../../../pages/license-issuance.html" class="nav-link" data-page-id="license-issuance">License Issuance (DL10)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Architecture</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/application-lifecycle-flow.html" class="nav-link" data-page-id="application-lifecycle-flow">Application Lifecycle &amp; Status Flow</a>
+                <a href="../../../pages/data-architecture.html" class="nav-link" data-page-id="data-architecture">Data Architecture (DB2)</a>
+                <a href="../../../pages/cics-integration-patterns.html" class="nav-link" data-page-id="cics-integration-patterns">CICS Integration Patterns</a>
+            </div>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Program Documentation</div>
+    <div class="nav-section">
+        <button class="nav-section-toggle open" type="button">
+            <span class="nav-toggle-text">program</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items open">
+        <div class="nav-section">
+            <button class="nav-section-toggle open" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items open">
+                <a href="../../../sources/program/cobol/DLISPAY.html" class="nav-link">DLISPAY</a>
+                <a href="../../../sources/program/cobol/DLISSTAT.html" class="nav-link">DLISSTAT</a>
+                <a href="../../../sources/program/cobol/DLISMENU.html" class="nav-link">DLISMENU</a>
+                <a href="../../../sources/program/cobol/DLISELIG.html" class="nav-link">DLISELIG</a>
+                <a href="../../../sources/program/cobol/DLISCAND.html" class="nav-link">DLISCAND</a>
+                <a href="../../../sources/program/cobol/DLISAPPL.html" class="nav-link">DLISAPPL</a>
+                <a href="../../../sources/program/cobol/DLISISSU.html" class="nav-link">DLISISSU</a>
+                <a href="../../../sources/program/cobol/DLISAP2.html" class="nav-link">DLISAP2</a>
+                <a href="../../../sources/program/cobol/DLISHIST.html" class="nav-link active">DLISHIST</a>
+                <a href="../../../sources/program/cobol/DLISAP1.html" class="nav-link">DLISAP1</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">business-rule</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../sources/business-rule/cobol/DLISELIG-overview.html" class="nav-link">DLISELIG-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-inventory.html" class="nav-link">DLISPAY-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-overview.html" class="nav-link">DLISCAND-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-inventory.html" class="nav-link">DLISAP2-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-inventory.html" class="nav-link">DLISHIST-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-inventory.html" class="nav-link">DLISMENU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISELIG-inventory.html" class="nav-link">DLISELIG-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-overview.html" class="nav-link">DLISPAY-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-overview.html" class="nav-link">DLISSTAT-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-overview.html" class="nav-link">DLISHIST-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-overview.html" class="nav-link">DLISAPPL-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-inventory.html" class="nav-link">DLISISSU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-inventory.html" class="nav-link">DLISAPPL-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-inventory.html" class="nav-link">DLISSTAT-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-overview.html" class="nav-link">DLISAP1-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-inventory.html" class="nav-link">DLISCAND-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-overview.html" class="nav-link">DLISAP2-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-overview.html" class="nav-link">DLISISSU-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-inventory.html" class="nav-link">DLISAP1-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-overview.html" class="nav-link">DLISMENU-overview</a>
+            </div>
+        </div>
+        </div>
+    </div>
+            </nav>
+        </aside>
+        <main class="main">
+            <div class="prog-container">
+                <div id="wiki-breadcrumb"></div>
+                <div class="content-layout">
+                    <article class="prose">
+                        <h2 id="1-purpose" tabindex="-1">1. Purpose</h2>
+<p>DLISHIST is a CICS transaction (DL06) that runs the driving history check for a driver’s license application. An operator enters an application ID and the program loads the applicant’s name and license type. It then retrieves the candidate’s active driving incidents, including dates, types, descriptions, demerit points, fines and suspensions, and shows them as a scrollable list. The program uses this history to decide whether the applicant passes. The check fails if there is an active suspension or disqualification, if total demerit points exceed 12, or if there are unpaid fines. The check can only run after the eligibility check has been passed. The program records the pass or fail result, the reason, and the new application status (rejected or history-check-passed) on the license application record. It then reports the outcome on the screen.</p>
+<h2 id="2-inputs" tabindex="-1">2. Inputs</h2>
+<ul>
+<li>
+<p><strong>CICS invocation and communication area</strong></p>
+<ul>
+<li><code>DFHCOMMAREA</code> (Linkage Section, 350 bytes)
+<ul>
+<li>Holds the state passed in from the previous pseudo-conversational invocation of transaction DL06.</li>
+<li>It is copied into <code>DLIS-COMMAREA</code> when the program is re-entered.</li>
+</ul>
+</li>
+<li><code>EIBCALEN</code>
+<ul>
+<li>The COMMAREA length supplied by CICS.</li>
+<li>A value of 0 means first entry, so the program sends the initial screen. Any other value means a reply to a previous screen, so the program processes the user’s input.</li>
+</ul>
+</li>
+<li><code>EIBAID</code>
+<ul>
+<li>The attention identifier of the key the user pressed.</li>
+<li>F1 runs the history check, F3 loads the application, F7 scrolls up, F8 scrolls down, and F12 exits. Any other key shows a help message.</li>
+</ul>
+</li>
+<li><code>EIBTRMID</code>
+<ul>
+<li>The terminal ID of the session.</li>
+<li>It is written to <code>LAST_UPDATED_BY</code> when the application record is updated.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>User inputs from the BMS map (<code>DLISHC01</code> in mapset <code>DLISHC</code>)</strong></p>
+<ul>
+<li><code>DHCAIDI</code>
+<ul>
+<li>The application ID the user enters on the screen.</li>
+<li>It is the key used to look up the license application, load the candidate’s driving history and run the history check.</li>
+<li>A value of zeros makes the program ask the user to enter an application ID.</li>
+</ul>
+</li>
+<li>Function keys F1, F3, F7, F8 and F12
+<ul>
+<li>These select the action to perform.</li>
+<li>F7 and F8 change the scroll position (<code>WS-SCROLL-TOP</code>) by 7 rows in the history display.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>External data sources: DB2 tables</strong></p>
+<ul>
+<li><code>DLIS.LICENSE_APPLICATION</code>
+<ul>
+<li><code>APPLICATION-ID</code> is the lookup key. It comes from <code>DHCAIDI</code>.</li>
+<li><code>CANDIDATE-ID</code> and <code>LICENSE-TYPE</code> are read to identify the applicant and the license type.</li>
+<li><code>ELIG-CHECK-STATUS</code> is read to confirm that the eligibility check has passed (‘P’). The history check cannot run unless it has.</li>
+</ul>
+</li>
+<li><code>DLIS.CANDIDATE</code>
+<ul>
+<li><code>FIRST-NAME</code> and <code>LAST-NAME</code> are joined on <code>CANDIDATE_ID</code>. They are used to show the candidate’s name on the screen.</li>
+</ul>
+</li>
+<li><code>DLIS.DRIVING_HISTORY</code> (read through cursor <code>HISTCUR</code>)
+<ul>
+<li>Only active records are selected (<code>RECORD_STATUS = 'A'</code>) for the candidate’s <code>CANDIDATE-ID</code>, sorted by incident date, newest first.</li>
+<li>Incident fields read:
+<ul>
+<li><code>INCIDENT-DATE</code></li>
+<li><code>INCIDENT-TYPE</code></li>
+<li><code>INCIDENT-DESC</code></li>
+</ul>
+</li>
+<li>Fields used to evaluate the check:
+<ul>
+<li><code>DEMERIT-POINTS</code> is added into <code>WS-DEMERIT-TOTAL</code>. A total above 12 fails the check.</li>
+<li><code>FINE-AMOUNT</code> and <code>FINE-PAID-STATUS</code> set <code>WS-FINE-FLAG</code> when an unpaid fine exists.</li>
+<li><code>SUSP-START-DATE</code> and <code>SUSP-END-DATE</code> set <code>WS-SUSP-FLAG</code> when a suspension or disqualification (type ‘SU’ or ‘DQ’) is still active.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Runtime and system values</strong></p>
+<ul>
+<li>Current date
+<ul>
+<li>The <code>CURRENT-DATE</code> function result is compared with <code>SUSP-END-DATE</code> to decide whether a suspension is still active. It also fills the screen date field (<code>DHCDATE</code>).</li>
+<li>The DB2 special register <code>CURRENT DATE</code> is used for <code>HIST_CHECK_DATE</code> and <code>LAST_UPDATED_DATE</code>.</li>
+</ul>
+</li>
+<li><code>SQLCODE</code>
+<ul>
+<li>The DB2 return code, used to detect “not found” (100) and the end of cursor fetches.</li>
+</ul>
+</li>
+<li><code>WS-RESP1</code>
+<ul>
+<li>Receives the CICS response code from the map SEND and RECEIVE commands.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Working-storage state carried between interactions</strong></p>
+<ul>
+<li><code>WS-SCROLL-TOP</code>
+<ul>
+<li>The current top row of the scrolling history display.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-outputs" tabindex="-1">3. Outputs</h2>
+<ul>
+<li>
+<p><strong>Persisted database results (DLIS.LICENSE_APPLICATION update, run on F1 history check)</strong></p>
+</li>
+<li>
+<p>HIST_CHECK_STATUS</p>
+<ul>
+<li>Comes from WS-HISTORY-STATUS.</li>
+<li>It is ‘P’ (pass) or ‘F’ (fail), and it records the outcome of the driving history check.</li>
+</ul>
+</li>
+<li>
+<p>HIST_CHECK_NOTES</p>
+<ul>
+<li>Comes from WS-HIST-FAIL-MSG.</li>
+<li>It holds the failure reason. It is blank when the check passes.</li>
+<li>The reasons, in priority order, are:
+<ul>
+<li>Active suspension or disqualification on file.</li>
+<li>Total demerit points exceed the threshold of 12.</li>
+<li>Outstanding unpaid fines on file.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>APPLICATION_STATUS</p>
+<ul>
+<li>Comes from APPLICATION-STATUS.</li>
+<li>It is set to ‘RE’ (rejected) when the check fails and ‘HC’ (history check passed) when it passes.</li>
+</ul>
+</li>
+<li>
+<p>HIST_CHECK_DATE and LAST_UPDATED_DATE</p>
+<ul>
+<li>Both are set to the current database date.</li>
+</ul>
+</li>
+<li>
+<p>LAST_UPDATED_BY</p>
+<ul>
+<li>Set to the terminal ID (EIBTRMID) of the user who ran the check.</li>
+</ul>
+</li>
+<li>
+<p>The update is skipped in these cases:</p>
+<ul>
+<li>No application ID was entered.</li>
+<li>The application was not found.</li>
+<li>The eligibility check has not been passed (ELIG-CHECK-STATUS is not ‘P’).</li>
+</ul>
+</li>
+<li>
+<p>The program does not check SQLCODE after the update. The pass or fail message is shown whether or not the update worked.</p>
+</li>
+<li>
+<p><strong>Pass/fail decision inputs (drive the persisted result)</strong></p>
+</li>
+<li>
+<p>WS-DEMERIT-TOTAL</p>
+<ul>
+<li>Sum of DEMERIT-POINTS over the candidate’s active history rows.</li>
+<li>The sum includes only the first 50 rows.</li>
+<li>The check fails if the total is above 12.</li>
+</ul>
+</li>
+<li>
+<p>WS-SUSP-FLAG</p>
+<ul>
+<li>Set to ‘Y’ when an incident of type ‘SU’ or ‘DQ’ has a SUSP-END-DATE that is current or later, or blank (open-ended).</li>
+</ul>
+</li>
+<li>
+<p>WS-FINE-FLAG</p>
+<ul>
+<li>Set to ‘Y’ when FINE-AMOUNT is above 0 and FINE-PAID-STATUS is ‘N’.</li>
+</ul>
+</li>
+<li>
+<p>Source data for these flags and totals:</p>
+<ul>
+<li>DLIS.DRIVING_HISTORY rows for the candidate (RECORD_STATUS ‘A’).</li>
+<li>DLIS.LICENSE_APPLICATION joined to DLIS.CANDIDATE, used to resolve the application’s candidate and name.</li>
+</ul>
+</li>
+<li>
+<p><strong>Screen output (BMS map DLISHC01, mapset DLISHC)</strong></p>
+</li>
+<li>
+<p>Initial screen (first entry, EIBCALEN = 0)</p>
+<ul>
+<li>The map is sent with ERASE FREEKB and the current date in DHCDATE.</li>
+<li>The transaction then returns to DL06 with the commarea.</li>
+</ul>
+</li>
+<li>
+<p>Applicant summary (shown after a successful application load)</p>
+<ul>
+<li>DHCCNAMO shows the candidate’s full name (first name and last name).</li>
+<li>DHCLTYO shows the license type.</li>
+</ul>
+</li>
+<li>
+<p>History summary indicators</p>
+<ul>
+<li>DHCDMRTO shows the total demerit points (WS-DEMERIT-TOTAL).</li>
+<li>DHCSUSPO shows the suspension flag (WS-SUSP-FLAG).</li>
+<li>DHCFINEO shows the unpaid fine flag (WS-FINE-FLAG).</li>
+</ul>
+</li>
+<li>
+<p>History result fields (shown after the F1 check)</p>
+<ul>
+<li>DHCHSTSO shows “PASS” or “FAIL”.</li>
+<li>DHCHSDSO shows the failure description. It is blank on a pass.</li>
+</ul>
+</li>
+<li>
+<p>Scrollable history list</p>
+<ul>
+<li>DHCHL1O through DHCHL7O each show one incident line: incident date, type and description (first 30 characters).</li>
+<li>Which seven lines appear depends on WS-SCROLL-TOP and WS-ROW-COUNT. F7 moves the window up by 7, to a minimum of 1. F8 moves it down by 7.</li>
+<li>A defect in the loop means the display only works correctly while WS-SCROLL-TOP is 7 or less. Later pages show blank lines.</li>
+<li>The loop also changes WS-SCROLL-TOP itself.</li>
+</ul>
+</li>
+<li>
+<p>Message line (DHCMSG)</p>
+<ul>
+<li>‘USE F1 F3 F7 F8 OR F12’ for an unrecognized key.</li>
+<li>‘ENTER APPLICATION ID’ when F3 is pressed with no application ID.</li>
+<li>‘ENTER APPLICATION ID FIRST’ when F1 is pressed with no application ID.</li>
+<li>‘APPLICATION NOT FOUND’ when the application lookup returns SQLCODE 100.</li>
+<li>‘APPLICATION LOADED’ after a successful F3 lookup.</li>
+<li>‘ELIGIBILITY CHECK MUST BE PASSED FIRST’ when the eligibility check has not been passed.</li>
+<li>‘HISTORY CHECK PASSED’ when the check passes.</li>
+<li>The failure reason text (WS-HIST-FAIL-MSG) when the check fails.</li>
+</ul>
+</li>
+<li>
+<p>Every non-exit interaction resends the map with DATAONLY FREEKB after the key handling.</p>
+</li>
+<li>
+<p><strong>Pseudo-conversational control and state hand-off</strong></p>
+</li>
+<li>
+<p>Each interaction ends with EXEC CICS RETURN TRANSID(‘DL06’) COMMAREA(DLIS-COMMAREA) LENGTH(350).</p>
+<ul>
+<li>This keeps the transaction alive and passes state to the next invocation through DFHCOMMAREA.</li>
+<li>The commarea is only passed back as it was received. The program does not store the candidate ID, application ID or scroll position in it.</li>
+</ul>
+</li>
+<li>
+<p>F12 issues EXEC CICS RETURN, which ends the transaction with no further screen output.</p>
+</li>
+<li>
+<p>The program does not set a return code or write to files, queues or external APIs.</p>
+</li>
+</ul>
+<h2 id="4-processing-logic" tabindex="-1">4. Processing Logic</h2>
+<h3 id="41-mermaid-flow-diagram" tabindex="-1">4.1 Mermaid Flow Diagram</h3>
+<div class="mermaid">
+graph TD
+    classDef startEnd fill:#b5ead7,stroke:#4caf82,color:#000
+    classDef process fill:#c7ceea,stroke:#7a85c7,color:#000
+    classDef decision fill:#ffdac1,stroke:#e8956a,color:#000
+    classDef db fill:#e2f0cb,stroke:#82b74b,color:#000
+
+    A([Start - Transaction DL06 Invoked]):::startEnd
+    B{{EIBCALEN = 0}}:::decision
+    C[Init Screen<br>Send DLISHC01 map with ERASE<br>Set current date]:::process
+    D[Return TRANSID DL06<br>with COMMAREA - pseudo-conv loop]:::process
+    E[Restore COMMAREA to DLIS-COMMAREA<br>Perform PROCESS-INPUT]:::process
+    F[EXEC CICS RECEIVE MAP DLISHC01]:::process
+    G{{Evaluate EIBAID<br>PF key pressed}}:::decision
+    H[PF1 - Run History Check]:::process
+    I[PF3 - Load Application]:::process
+    J[PF7 - Scroll Up<br>Subtract 7 from WS-SCROLL-TOP<br>min 1]:::process
+    K[PF8 - Scroll Down<br>Add 7 to WS-SCROLL-TOP]:::process
+    L[PF12 - Exit<br>EXEC CICS RETURN]:::startEnd
+    M[Other - Display usage message]:::process
+
+    N{{App ID entered on screen}}:::decision
+    O[Show ENTER APPLICATION ID]:::process
+    P[SQL SELECT from LICENSE_APPLICATION<br>JOIN CANDIDATE<br>Fetch Candidate name and license type]:::db
+    Q{{SQLCODE = 100}}:::decision
+    R[Show APPLICATION NOT FOUND]:::process
+    S[Display candidate name and license type<br>on map]:::process
+    T[Load History Table]:::process
+    U[Display History]:::process
+
+    V[Init accumulators<br>WS-ROW-COUNT WS-DEMERIT-TOTAL = 0<br>WS-SUSP-FLAG WS-FINE-FLAG = N]:::process
+    W[OPEN cursor HISTCUR on DRIVING_HISTORY]:::db
+    X{{FETCH row<br>SQLCODE = 0}}:::decision
+    Y[Store row in WS-HIST-TABLE up to 50 rows<br>Add DEMERIT-POINTS to WS-DEMERIT-TOTAL]:::process
+    Z{{Incident type SU or DQ<br>and SUSP-END-DATE current or blank}}:::decision
+    AA[Set WS-SUSP-FLAG = Y]:::process
+    AB{{FINE-AMOUNT gt 0<br>and FINE-PAID-STATUS = N}}:::decision
+    AC[Set WS-FINE-FLAG = Y]:::process
+    AD[CLOSE cursor HISTCUR<br>Move totals to map output fields]:::db
+    AE[Clear 7 map history lines<br>Fill visible lines from WS-HIST-TABLE<br>based on WS-SCROLL-TOP]:::process
+
+    AF{{App ID entered on screen}}:::decision
+    AG[Show ENTER APPLICATION ID FIRST]:::process
+    AH[Perform LOAD-APPLICATION]:::process
+    AI{{Application loaded successfully}}:::decision
+    AJ[Exit check - message not APPLICATION LOADED]:::process
+    AK[SQL SELECT ELIG_CHECK_STATUS<br>from LICENSE_APPLICATION]:::db
+    AL{{ELIG-CHECK-STATUS = P}}:::decision
+    AM[Show ELIGIBILITY CHECK MUST BE PASSED FIRST]:::process
+    AN{{WS-SUSP-FLAG = Y}}:::decision
+    AO[Set FAIL-FLAG = Y<br>Msg ACTIVE SUSPENSION OR DISQUALIFICATION]:::process
+    AP{{WS-DEMERIT-TOTAL gt 12<br>and FAIL-FLAG still N}}:::decision
+    AQ[Set FAIL-FLAG = Y<br>Msg TOTAL DEMERIT POINTS EXCEED THRESHOLD OF 12]:::process
+    AR{{WS-FINE-FLAG = Y<br>and FAIL-FLAG still N}}:::decision
+    AS[Set FAIL-FLAG = Y<br>Msg OUTSTANDING UNPAID FINES ON FILE]:::process
+    AT{{WS-FAIL-FLAG = Y}}:::decision
+    AU[WS-HISTORY-STATUS = F<br>APPLICATION-STATUS = RE - Rejected<br>Map shows FAIL and reason]:::process
+    AV[WS-HISTORY-STATUS = P<br>APPLICATION-STATUS = HC - History Check Passed<br>Map shows PASS]:::process
+    AW[SQL UPDATE LICENSE_APPLICATION<br>Set HIST_CHECK_STATUS HIST_CHECK_DATE<br>HIST_CHECK_NOTES APPLICATION_STATUS<br>LAST_UPDATED_DATE LAST_UPDATED_BY]:::db
+    AX[Show HISTORY CHECK PASSED or fail message]:::process
+    AY[EXEC CICS SEND MAP DLISHC01 DATAONLY FREEKB<br>Return TRANSID DL06 with COMMAREA]:::process
+    AZ([End - Pseudo-Conv Return]):::startEnd
+
+    A --> B
+    B -- Yes --> C
+    C --> D
+    B -- No --> E
+    E --> F
+    F --> G
+    G -- PF1 --> H
+    G -- PF3 --> I
+    G -- PF7 --> J
+    G -- PF8 --> K
+    G -- PF12 --> L
+    G -- Other --> M
+
+    I --> N
+    N -- No --> O
+    N -- Yes --> P
+    P --> Q
+    Q -- Yes --> R
+    Q -- No --> S
+    S --> T
+    T --> U
+    U --> AY
+
+    T --> V
+    V --> W
+    W --> X
+    X -- Yes --> Y
+    Y --> Z
+    Z -- Yes --> AA
+    Z -- No --> AB
+    AA --> AB
+    AB -- Yes --> AC
+    AB -- No --> X
+    AC --> X
+    X -- No --> AD
+
+    AE --> AY
+    U --> AE
+
+    H --> AF
+    AF -- No --> AG
+    AF -- Yes --> AH
+    AH --> AI
+    AI -- No --> AJ
+    AI -- Yes --> AK
+    AK --> AL
+    AL -- No --> AM
+    AL -- Yes --> AN
+    AN -- Yes --> AO
+    AN -- No --> AP
+    AO --> AP
+    AP -- Yes --> AQ
+    AP -- No --> AR
+    AQ --> AR
+    AR -- Yes --> AS
+    AR -- No --> AT
+    AS --> AT
+    AT -- Yes --> AU
+    AT -- No --> AV
+    AU --> AW
+    AV --> AW
+    AW --> AX
+    AX --> AY
+
+    M --> AY
+    J --> AE
+    K --> AE
+    O --> AY
+    R --> AY
+    AG --> AY
+    AJ --> AY
+    AM --> AY
+
+    AY --> AZ
+</div>
+<hr>
+<h3 id="42-processing-logic-description" tabindex="-1">4.2 Processing Logic Description</h3>
+<h4 id="421-high-level-summary" tabindex="-1">4.2.1 High-level Summary</h4>
+<p>DLISHIST is a CICS pseudo-conversational COBOL program (transaction <code>DL06</code>) that performs the <strong>Driving History Check</strong> step in a driver’s licence application workflow. It allows a licensing officer to look up a licence application, view the applicant’s driving history paginated on a 3270 screen (map <code>DLISHC01</code> / mapset <code>DLISHC</code>), and formally run a history check that evaluates three disqualifying criteria — active suspension or disqualification, total demerit points exceeding 12, and unpaid fines. The outcome (<code>P</code> = pass, <code>F</code> = fail) is written back to DB2 and the application status is advanced or rejected accordingly.</p>
+<hr>
+<h4 id="422-execution-flow" tabindex="-1">4.2.2 Execution Flow</h4>
+<p><strong>1. Entry Point — Initial vs. Return Invocation</strong></p>
+<p>The program’s <code>MAIN-LOGIC</code> paragraph tests <code>EIBCALEN</code>:</p>
+<ul>
+<li><strong><code>EIBCALEN = 0</code></strong> (first invocation, no COMMAREA): performs <code>INIT-SCREEN</code>, which sends the blank <code>DLISHC01</code> map with <code>ERASE</code>, then issues <code>EXEC CICS RETURN TRANSID('DL06') COMMAREA(DLIS-COMMAREA) LENGTH(350)</code>. This suspends the program and hands control back to CICS, leaving the screen displayed — the classic pseudo-conversational pattern. The 350-byte COMMAREA is passed so subsequent invocations can restore state.</li>
+<li><strong><code>EIBCALEN &gt; 0</code></strong> (return invocation, COMMAREA present): the saved <code>DFHCOMMAREA</code> is moved back into <code>DLIS-COMMAREA</code> to restore prior context, then <code>PROCESS-INPUT</code> is called.</li>
+</ul>
+<hr>
+<p><strong>2. PROCESS-INPUT — Key Routing</strong></p>
+<p><code>EXEC CICS RECEIVE MAP('DLISHC01') MAPSET('DLISHC')</code> reads the operator’s input. An <code>EVALUATE TRUE</code> block inspects <code>EIBAID</code> (the Attention Identifier reflecting which key was pressed):</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PF1</strong></td>
+<td><code>RUN-HISTORY-CHECK</code> — execute the formal history evaluation</td>
+</tr>
+<tr>
+<td><strong>PF3</strong></td>
+<td><code>LOAD-APPLICATION</code> — look up an application by ID and show its history</td>
+</tr>
+<tr>
+<td><strong>PF7</strong></td>
+<td>Subtract 7 from <code>WS-SCROLL-TOP</code> (floor 1), then <code>DISPLAY-HISTORY</code></td>
+</tr>
+<tr>
+<td><strong>PF8</strong></td>
+<td>Add 7 to <code>WS-SCROLL-TOP</code>, then <code>DISPLAY-HISTORY</code></td>
+</tr>
+<tr>
+<td><strong>PF12</strong></td>
+<td><code>EXEC CICS RETURN</code> — unconditional exit, session ends</td>
+</tr>
+<tr>
+<td><strong>Other</strong></td>
+<td>Place usage message <code>'USE F1 F3 F7 F8 OR F12'</code> into <code>DHCMSG</code></td>
+</tr>
+</tbody>
+</table>
+<p>After the EVALUATE block, the updated map is sent with <code>DATAONLY FREEKB</code> (preserving existing screen content while refreshing only changed fields and unlocking the keyboard), followed by <code>EXEC CICS RETURN TRANSID('DL06')</code> to re-arm the pseudo-conversational loop.</p>
+<hr>
+<p><strong>3. LOAD-APPLICATION (PF3)</strong></p>
+<p>Validates that the operator has keyed an Application ID (<code>DHCAIDI</code> must not be zeros). If blank, a prompt message is set and the paragraph exits via <code>GO TO LOAD-APP-EXIT</code>.</p>
+<p>A DB2 <code>SELECT</code> joins <code>DLIS.LICENSE_APPLICATION</code> (alias <code>A</code>) with <code>DLIS.CANDIDATE</code> (alias <code>C</code>) on <code>CANDIDATE_ID</code>, retrieving:</p>
+<ul>
+<li><code>CANDIDATE_ID</code>, <code>LICENSE_TYPE</code></li>
+<li><code>FIRST_NAME</code>, <code>LAST_NAME</code></li>
+</ul>
+<p><code>SQLCODE = 100</code> (not found) sets an error message and exits.</p>
+<p>On success: the candidate’s full name and licence type are formatted onto the map output fields. <code>LOAD-HISTORY-TABLE</code> and <code>DISPLAY-HISTORY</code> are then called to populate and render the history grid.</p>
+<hr>
+<p><strong>4. LOAD-HISTORY-TABLE</strong></p>
+<p>This paragraph fetches all active driving history records for the candidate via DB2 cursor <code>HISTCUR</code>:</p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">SQL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-sql">DECLARE HISTCUR CURSOR FOR
+    SELECT INCIDENT_DATE, INCIDENT_TYPE, INCIDENT_DESC,
+           DEMERIT_POINTS, FINE_AMOUNT, FINE_PAID_STATUS,
+           SUSP_START_DATE, SUSP_END_DATE
+    FROM   DLIS.DRIVING_HISTORY
+    WHERE  CANDIDATE_ID  = :CANDIDATE-ID
+    AND    RECORD_STATUS = &#039;A&#039;
+    ORDER BY INCIDENT_DATE DESC</code></pre>
+</div>
+<p>Accumulators are zeroed and flags reset before opening the cursor. Each <code>FETCH</code> loop iteration:</p>
+<ol>
+<li><strong>Stores</strong> the row in <code>WS-HIST-TABLE</code> (up to 50 rows) for display.</li>
+<li><strong>Accumulates</strong> <code>DEMERIT-POINTS</code> into <code>WS-DEMERIT-TOTAL</code>.</li>
+<li><strong>Suspension check</strong>: if <code>INCIDENT-TYPE</code> is <code>'SU'</code> or <code>'DQ'</code> and <code>SUSP-END-DATE</code> ≥ current date <strong>or</strong> is spaces (open-ended), sets <code>WS-SUSP-FLAG = 'Y'</code>.</li>
+<li><strong>Fine check</strong>: if <code>FINE-AMOUNT &gt; 0</code> and <code>FINE-PAID-STATUS = 'N'</code>, sets <code>WS-FINE-FLAG = 'Y'</code>.</li>
+</ol>
+<p>The cursor is closed after all rows are processed. Summary values (<code>WS-DEMERIT-TOTAL</code>, <code>WS-SUSP-FLAG</code>, <code>WS-FINE-FLAG</code>) are moved to the corresponding map output fields.</p>
+<hr>
+<p><strong>5. DISPLAY-HISTORY — Scrollable Grid</strong></p>
+<p>Clears the seven map history line fields (<code>DHCHL1O</code>–<code>DHCHL7O</code>). A <code>PERFORM VARYING</code> loop starting from <code>WS-SCROLL-TOP</code> fills up to 7 lines using <code>STRING</code> to concatenate <code>WS-HR-DATE</code>, <code>WS-HR-TYPE</code>, and <code>WS-HR-DESC</code> for each visible row. PF7/PF8 adjust <code>WS-SCROLL-TOP</code> before calling this paragraph, implementing pagination across up to 50 stored history rows.</p>
+<hr>
+<p><strong>6. RUN-HISTORY-CHECK (PF1) — Business Rule Evaluation</strong></p>
+<p>This is the core business logic paragraph. Steps:</p>
+<ol>
+<li>
+<p><strong>Pre-condition: Application ID present.</strong> If <code>DHCAIDI = ZEROS</code>, show prompt and exit.</p>
+</li>
+<li>
+<p><strong>Re-load application.</strong> Calls <code>LOAD-APPLICATION</code> (which also rebuilds the history table). If the load fails (message is not <code>'APPLICATION LOADED'</code>), exits immediately.</p>
+</li>
+<li>
+<p><strong>Eligibility gate.</strong> Queries <code>DLIS.LICENSE_APPLICATION</code> for <code>ELIG_CHECK_STATUS</code>. If not <code>'P'</code>, the history check is blocked with message <code>'ELIGIBILITY CHECK MUST BE PASSED FIRST'</code>. This enforces the mandatory workflow sequence.</p>
+</li>
+<li>
+<p><strong>Three-criteria evaluation</strong> (priority-ordered, first failure wins):</p>
+<table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Condition</th>
+<th>Fail Message</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1st</td>
+<td><code>WS-SUSP-FLAG = 'Y'</code></td>
+<td><code>ACTIVE SUSPENSION OR DISQUALIFICATION ON FILE</code></td>
+</tr>
+<tr>
+<td>2nd</td>
+<td><code>WS-DEMERIT-TOTAL &gt; 12</code></td>
+<td><code>TOTAL DEMERIT POINTS EXCEED THRESHOLD OF 12</code></td>
+</tr>
+<tr>
+<td>3rd</td>
+<td><code>WS-FINE-FLAG = 'Y'</code></td>
+<td><code>OUTSTANDING UNPAID FINES ON FILE</code></td>
+</tr>
+</tbody>
+</table>
+<p>Each check only fires if <code>WS-FAIL-FLAG</code> is still <code>'N'</code>, preventing multiple failure reasons from overwriting each other.</p>
+</li>
+<li>
+<p><strong>Outcome assignment:</strong></p>
+<ul>
+<li><strong>Fail</strong>: <code>WS-HISTORY-STATUS = 'F'</code>, map shows <code>FAIL</code>, <code>APPLICATION-STATUS = 'RE'</code> (Rejected).</li>
+<li><strong>Pass</strong>: <code>WS-HISTORY-STATUS = 'P'</code>, map shows <code>PASS</code>, <code>APPLICATION-STATUS = 'HC'</code> (History Check passed).</li>
+</ul>
+</li>
+<li>
+<p><strong>DB2 UPDATE</strong> against <code>DLIS.LICENSE_APPLICATION</code>:</p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">SQL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-sql">UPDATE DLIS.LICENSE_APPLICATION SET
+       HIST_CHECK_STATUS  = :WS-HISTORY-STATUS,
+       HIST_CHECK_DATE    = CURRENT DATE,
+       HIST_CHECK_NOTES   = :WS-HIST-FAIL-MSG,
+       APPLICATION_STATUS = :APPLICATION-STATUS,
+       LAST_UPDATED_DATE  = CURRENT DATE,
+       LAST_UPDATED_BY    = EIBTRMID
+   WHERE APPLICATION_ID   = :APPLICATION-ID</code></pre>
+</div>
+<p><code>CURRENT DATE</code> is a DB2 special register resolved at execution time. <code>EIBTRMID</code> (the terminal ID from the CICS Execute Interface Block) is used as the audit trail for who last updated the record.</p>
+</li>
+<li>
+<p>A confirmation or failure message is placed into <code>DHCMSG</code> for display.</p>
+</li>
+</ol>
+<hr>
+<h4 id="423-external-interactions" tabindex="-1">4.2.3 External Interactions</h4>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Operation</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DB2 – <code>DLIS.LICENSE_APPLICATION</code></strong></td>
+<td><code>SELECT</code> (LOAD-APPLICATION)</td>
+<td>Retrieve candidate ID, licence type by application ID</td>
+</tr>
+<tr>
+<td><strong>DB2 – <code>DLIS.CANDIDATE</code></strong></td>
+<td><code>SELECT</code> (JOIN in LOAD-APPLICATION)</td>
+<td>Retrieve candidate first/last name</td>
+</tr>
+<tr>
+<td><strong>DB2 – <code>DLIS.LICENSE_APPLICATION</code></strong></td>
+<td><code>SELECT</code> (RUN-HISTORY-CHECK)</td>
+<td>Verify eligibility check has been passed</td>
+</tr>
+<tr>
+<td><strong>DB2 – <code>DLIS.DRIVING_HISTORY</code></strong></td>
+<td>Cursor <code>HISTCUR</code> OPEN/FETCH/CLOSE</td>
+<td>Read all active driving incidents for the candidate</td>
+</tr>
+<tr>
+<td><strong>DB2 – <code>DLIS.LICENSE_APPLICATION</code></strong></td>
+<td><code>UPDATE</code> (RUN-HISTORY-CHECK)</td>
+<td>Persist history check result, status, date, notes, and audit fields</td>
+</tr>
+<tr>
+<td><strong>CICS BMS</strong></td>
+<td><code>SEND MAP</code> / <code>RECEIVE MAP</code> (<code>DLISHC01</code>)</td>
+<td>Present data to and receive data from the 3270 terminal operator</td>
+</tr>
+<tr>
+<td><strong>CICS</strong></td>
+<td><code>RETURN TRANSID('DL06') COMMAREA(...)</code></td>
+<td>Maintain pseudo-conversational state across screen interactions</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h4 id="424-plain-language-summary" tabindex="-1">4.2.4 Plain Language Summary</h4>
+<p>The program is a screen-based tool used by a licensing officer to check an applicant’s driving history before approving their licence application. The officer types in an Application ID and presses <strong>F3</strong> to look up the application and see a list of the applicant’s past driving incidents — up to 50 records — scrollable with <strong>F7</strong> (up) and <strong>F8</strong> (down). The screen also shows the total demerit points, whether there is an active suspension, and whether there are any unpaid fines.</p>
+<p>When the officer is satisfied and presses <strong>F1</strong>, the program runs an automatic check with three rules: (1) no active suspensions or disqualifications, (2) total demerit points must not exceed 12, (3) no unpaid fines. If any rule is violated, the application is marked <strong>Rejected</strong> and the reason is saved. If all three rules are passed, the application advances to the next stage (<strong>History Check Passed</strong>). The result is saved directly to the database with the date and the terminal ID as an audit record.</p>
+<p>The program cannot run the history check unless the eligibility check has already been passed — this enforces the mandatory step-by-step order of the licence application process.</p>
+<hr>
+<h3 id="43-database-tables" tabindex="-1">4.3 Database Tables</h3>
+<div class="mermaid">
+erDiagram
+    LICENSE_APPLICATION {
+        int APPLICATION_ID "Primary key"
+        int CANDIDATE_ID "FK to CANDIDATE"
+        string LICENSE_TYPE "length 1"
+        string APPLICATION_DATE "length 10"
+        string APPLICATION_STATUS "length 2 - RE rejected HC passed"
+        string ELIG_CHECK_STATUS "length 1 - P pass"
+        string ELIG_CHECK_DATE "length 10"
+        string ELIG_CHECK_NOTES "length 200"
+        string HIST_CHECK_STATUS "length 1 - P pass F fail"
+        string HIST_CHECK_DATE "length 10"
+        string HIST_CHECK_NOTES "length 200"
+        string PAYMENT_STATUS "length 1"
+        string PAYMENT_REFERENCE "length 20"
+        string APPROVAL_1_STATUS "length 1"
+        string APPROVAL_1_AUTHORITY "length 50"
+        string APPROVAL_1_DATE "length 10"
+        string APPROVAL_1_NOTES "length 200"
+        string APPROVAL_2_STATUS "length 1"
+        string APPROVAL_2_AUTHORITY "length 50"
+        string APPROVAL_2_DATE "length 10"
+        string APPROVAL_2_NOTES "length 200"
+        string REJECTION_REASON "length 300"
+        string CREATED_DATE "length 10"
+        string LAST_UPDATED_DATE "length 10"
+        string CREATED_BY "length 20"
+        string LAST_UPDATED_BY "length 20 - set to EIBTRMID on update"
+    }
+
+    CANDIDATE {
+        int CANDIDATE_ID "Primary key"
+        string FIRST_NAME "length 30"
+        string LAST_NAME "length 30"
+        string DATE_OF_BIRTH "length 10"
+        string ID_NUMBER "length 20"
+        string ADDRESS_LINE_1 "length 50"
+        string ADDRESS_LINE_2 "length 50"
+        string CITY "length 30"
+        string STATE_PROVINCE "length 30"
+        string POSTAL_CODE "length 10"
+        string COUNTRY "length 30"
+        string PHONE_NUMBER "length 15"
+        string EMAIL_ADDRESS "length 60"
+        string CREATED_DATE "length 10"
+        string RECORD_STATUS "length 1"
+    }
+
+    DRIVING_HISTORY {
+        int HISTORY_ID "Primary key"
+        int CANDIDATE_ID "FK to CANDIDATE"
+        string INCIDENT_DATE "length 10"
+        string INCIDENT_TYPE "length 2 - SU DQ etc"
+        string INCIDENT_DESC "length 300"
+        int DEMERIT_POINTS "accumulated for threshold check"
+        decimal FINE_AMOUNT "unpaid fine check"
+        string FINE_PAID_STATUS "length 1 - Y or N"
+        string SUSP_START_DATE "length 10"
+        string SUSP_END_DATE "length 10 - blank means open-ended"
+        string COURT_CASE_NUMBER "length 20"
+        string RECORDED_BY_AUTH "length 50"
+        string RECORD_STATUS "length 1 - A active"
+    }
+
+    CANDIDATE ||--o{ LICENSE_APPLICATION : "applies for"
+    CANDIDATE ||--o{ DRIVING_HISTORY : "has incidents"
+    LICENSE_APPLICATION }o--|| CANDIDATE : "belongs to"
+</div>
+<h2 id="5-paragraphs" tabindex="-1">5. Paragraphs</h2>
+<ul>
+<li>
+<p><strong>MAIN-LOGIC</strong></p>
+<ul>
+<li><strong>Purpose:</strong> Serves as the primary entry point and pseudo-conversational dispatcher for the program.</li>
+<li><strong>Operations:</strong> Evaluates the CICS communication area length (<code>EIBCALEN</code>) to determine whether the transaction was initiated afresh or is returning from a conversational state, restores COMMAREA data, routes execution to appropriate processing routines, and terminates execution.</li>
+<li><strong>Control Flow:</strong> Uses an <code>IF-ELSE</code> block based on <code>EIBCALEN = 0</code> to branch to <code>INIT-SCREEN</code> (first entry) or <code>PROCESS-INPUT</code> (subsequent entry).</li>
+<li><strong>Interactions:</strong> Interacts with CICS system fields (<code>EIBCALEN</code>, <code>DFHCOMMAREA</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>INIT-SCREEN</strong></p>
+<ul>
+<li><strong>Purpose:</strong> Initializes and sends the driving history check screen layout when the transaction is first invoked.</li>
+<li><strong>Operations:</strong> Formats the current date onto the map header, sends the initial map screen with keyboard unlocked and screen erased, and sets up pseudo-conversational return for transaction ID <code>DL06</code>.</li>
+<li><strong>Control Flow:</strong> Linear sequential execution.</li>
+<li><strong>Interactions:</strong> Issues <code>EXEC CICS SEND MAP('DLISHC01') MAPSET('DLISHC')</code> and <code>EXEC CICS RETURN TRANSID('DL06')</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>PROCESS-INPUT</strong></p>
+<ul>
+<li><strong>Purpose:</strong> Receives user map input and dispatches execution according to the attention identifier (AID / PF key) pressed.</li>
+<li><strong>Operations:</strong> Reads map data, evaluates the pressed function key (<code>EIBAID</code>), invokes corresponding routines for running checks, looking up applications, or scrolling through driving history, re-sends the map with updated data, and returns pseudo-conversationally.</li>
+<li><strong>Control Flow:</strong> Utilizes an <code>EVALUATE TRUE</code> construct on <code>EIBAID</code> (<code>DFHPF1</code>, <code>DFHPF3</code>, <code>DFHPF7</code>, <code>DFHPF8</code>, <code>DFHPF12</code>, and <code>OTHER</code>), including bounds checking on scrolling (<code>WS-SCROLL-TOP</code>).</li>
+<li><strong>Interactions:</strong> Executes <code>EXEC CICS RECEIVE MAP</code>, <code>EXEC CICS SEND MAP</code>, and <code>EXEC CICS RETURN</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>LOAD-APPLICATION</strong></p>
+<ul>
+<li><strong>Purpose:</strong> Validates the application identifier and retrieves applicant details and driving history from the database.</li>
+<li><strong>Operations:</strong> Checks that an application ID was entered, queries the database for application and candidate information, formats applicant full name and license type for display, and triggers driving history retrieval and display routines.</li>
+<li><strong>Control Flow:</strong> Uses <code>IF</code> conditions for zero-ID check and SQL return code (<code>SQLCODE = 100</code>) with <code>GO TO LOAD-APP-EXIT</code> on validation or lookup errors.</li>
+<li><strong>Interactions:</strong> Executes an embedded <code>EXEC SQL SELECT</code> joining <code>DLIS.LICENSE_APPLICATION</code> and <code>DLIS.CANDIDATE</code> tables.</li>
+</ul>
+</li>
+<li>
+<p><strong>LOAD-APP-EXIT</strong></p>
+<ul>
+<li><strong>Purpose:</strong> Serves as the common exit point for the <code>LOAD-APPLICATION</code> paragraph.</li>
+<li><strong>Operations:</strong> Provides an explicit exit label for conditional branch termination.</li>
+<li><strong>Control Flow:</strong> Linear exit via the <code>EXIT</code> statement.</li>
+<li><strong>Interactions:</strong> None.</li>
+</ul>
+</li>
+<li>
+<p><strong>LOAD-HISTORY-TABLE</strong></p>
+<ul>
+<li><strong>Purpose:</strong> Fetches candidate driving history records from the database into an internal table and evaluates violation flags.</li>
+<li><strong>Operations:</strong> Resets accumulator counters and flags, opens database cursor <code>HISTCUR</code>, iterates through history records storing up to 50 entries into <code>WS-HIST-TABLE</code>, sums demerit points (<code>WS-DEMERIT-TOTAL</code>), checks for active suspensions or disqualifications (<code>WS-SUSP-FLAG</code>), detects unpaid fines (<code>WS-FINE-FLAG</code>), and closes the cursor.</li>
+<li><strong>Control Flow:</strong> Uses a <code>PERFORM UNTIL SQLCODE NOT = 0</code> loop over cursor fetches, containing nested <code>IF</code> statements to handle record storage bounds, suspension date criteria, and unpaid fine checks.</li>
+<li><strong>Interactions:</strong> Interacts with the DB2 database via <code>EXEC SQL OPEN HISTCUR</code>, <code>EXEC SQL FETCH HISTCUR</code>, and <code>EXEC SQL CLOSE HISTCUR</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>DISPLAY-HISTORY</strong></p>
+<ul>
+<li><strong>Purpose:</strong> Formats and populates driving history lines into the screen map fields based on the current scroll position.</li>
+<li><strong>Operations:</strong> Clears map line fields (<code>DHCHL1O</code> through <code>DHCHL7O</code>) and concatenates incident date, type, and description into corresponding map display rows for visible entries.</li>
+<li><strong>Control Flow:</strong> Uses a <code>PERFORM VARYING</code> loop constrained by <code>WS-ROW-COUNT</code> and screen page limit (7 rows), with an inner <code>EVALUATE WS-SCROLL-TOP</code> mapping entries to specific screen lines.</li>
+<li><strong>Interactions:</strong> Updates BMS screen output map fields.</li>
+</ul>
+</li>
+<li>
+<p><strong>RUN-HISTORY-CHECK</strong></p>
+<ul>
+<li><strong>Purpose:</strong> Evaluates driver eligibility, applies business rules against driving history violations, and updates application status in the database.</li>
+<li><strong>Operations:</strong> Verifies application ID entry and loads application data, validates that the applicant previously passed the eligibility check (<code>ELIG_CHECK_STATUS = 'P'</code>), evaluates suspension flags, demerit point thresholds (&gt; 12), and unpaid fines, sets pass (<code>P</code> / <code>HC</code>) or fail (<code>F</code> / <code>RE</code>) statuses with descriptive reason messages, and updates the application record.</li>
+<li><strong>Control Flow:</strong> Uses conditional checks (<code>IF</code>) for input presence, application load status, eligibility status, and sequential evaluation of disqualifying conditions (<code>WS-SUSP-FLAG</code>, <code>WS-DEMERIT-TOTAL</code>, <code>WS-FINE-FLAG</code>), branching to <code>RUN-HIST-EXIT</code> on early failures.</li>
+<li><strong>Interactions:</strong> Executes <code>EXEC SQL SELECT</code> to check <code>ELIG_CHECK_STATUS</code> and <code>EXEC SQL UPDATE</code> against <code>DLIS.LICENSE_APPLICATION</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>RUN-HIST-EXIT</strong></p>
+<ul>
+<li><strong>Purpose:</strong> Serves as the common exit point for the <code>RUN-HISTORY-CHECK</code> paragraph.</li>
+<li><strong>Operations:</strong> Provides an explicit exit label for conditional branch termination.</li>
+<li><strong>Control Flow:</strong> Linear exit via the <code>EXIT</code> statement.</li>
+<li><strong>Interactions:</strong> None.</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-dependencies" tabindex="-1">6. Dependencies</h2>
+<h3 id="61-external-systems--middleware" tabindex="-1">6.1 External Systems &amp; Middleware</h3>
+<ul>
+<li>CICS (Customer Information Control System)
+<ul>
+<li>Provides the transaction processing runtime environment for program execution under transaction ID <code>DL06</code>.</li>
+<li>Manages pseudo-conversational session state and control transfers via <code>EXEC CICS RETURN</code>, <code>EXEC CICS SEND MAP</code>, and <code>EXEC CICS RECEIVE MAP</code>.</li>
+<li>Supplies runtime system variables through the Execute Interface Block (<code>DFHEIBLK</code>), specifically <code>EIBCALEN</code>, <code>EIBAID</code>, and <code>EIBTRMID</code>.</li>
+</ul>
+</li>
+<li>IBM DB2 Relational Database Management System
+<ul>
+<li>Manages relational data persistence, SQL query execution, cursor processing, and data updates.</li>
+<li>Communicates execution results and status back to the program via the SQL Communication Area (<code>SQLCA</code>).</li>
+</ul>
+</li>
+</ul>
+<h3 id="62-database-tables" tabindex="-1">6.2 Database Tables</h3>
+<ul>
+<li><code>DLIS.LICENSE_APPLICATION</code>
+<ul>
+<li>Queried to retrieve candidate identification, license type applied for, and eligibility check verification status (<code>ELIG_CHECK_STATUS</code>).</li>
+<li>Updated to persist the driving history check outcome (<code>HIST_CHECK_STATUS</code>), notes/failure reasons (<code>HIST_CHECK_NOTES</code>), application state (<code>APPLICATION_STATUS</code>), completion timestamp (<code>HIST_CHECK_DATE</code>, <code>LAST_UPDATED_DATE</code>), and terminal identifier (<code>LAST_UPDATED_BY</code>).</li>
+</ul>
+</li>
+<li><code>DLIS.CANDIDATE</code>
+<ul>
+<li>Queried in join operations with <code>DLIS.LICENSE_APPLICATION</code> to retrieve applicant demographic details (<code>FIRST_NAME</code>, <code>LAST_NAME</code>) for screen presentation.</li>
+</ul>
+</li>
+<li><code>DLIS.DRIVING_HISTORY</code>
+<ul>
+<li>Queried via cursor <code>HISTCUR</code> to retrieve active driving incidents (<code>RECORD_STATUS = 'A'</code>) including incident dates, violation types, descriptions, demerit points, fine amounts, fine payment statuses, and suspension date ranges.</li>
+</ul>
+</li>
+</ul>
+<h3 id="63-user-interface--bms-maps" tabindex="-1">6.3 User Interface &amp; BMS Maps</h3>
+<ul>
+<li>BMS Mapset <code>DLISHC</code> / Map <code>DLISHC01</code>
+<ul>
+<li>Defines the 3270 screen layout used for user interaction.</li>
+<li>Receives operator input including application identifier (<code>DHCAIDI</code>) and function key commands (<code>DFHPF1</code>, <code>DFHPF3</code>, <code>DFHPF7</code>, <code>DFHPF8</code>, <code>DFHPF12</code>).</li>
+<li>Sends processed output data to the terminal display, including candidate name (<code>DHCCNAMO</code>), license type (<code>DHCLTYO</code>), aggregated demerits (<code>DHCDMRTO</code>), suspension indicators (<code>DHCSUSPO</code>), fine indicators (<code>DHCFINEO</code>), history record lines (<code>DHCHL1O</code>–<code>DHCHL7O</code>), history check status (<code>DHCHSTSO</code>), failure descriptions (<code>DHCHSDSO</code>), and system notification messages (<code>DHCMSG</code>).</li>
+</ul>
+</li>
+</ul>
+<h3 id="64-source-copybooks--data-structures" tabindex="-1">6.4 Source Copybooks &amp; Data Structures</h3>
+<ul>
+<li><code>DLISWS</code>
+<ul>
+<li>Contains shared Working-Storage definitions, common program variables, and response codes (<code>WS-RESP1</code>, <code>WS-FAIL-FLAG</code>).</li>
+</ul>
+</li>
+<li><code>DLISCSEC</code>
+<ul>
+<li>Defines the DLIS common security and communication structure (<code>DLIS-COMMAREA</code>) shared across DLIS transactions via <code>DFHCOMMAREA</code>.</li>
+</ul>
+</li>
+<li><code>DLISDCLG</code>
+<ul>
+<li>Provides DB2 DCLGEN host variable declarations for DLIS tables (<code>DCLDLIS-LICENSE-APPL</code>, <code>DCLDLIS-CANDIDATE</code>, and <code>DCLDLIS-DRIVING-HIST</code>).</li>
+</ul>
+</li>
+<li><code>SQLCA</code>
+<ul>
+<li>IBM standard SQL Communication Area included via <code>EXEC SQL INCLUDE SQLCA</code> for handling DB2 execution status codes (<code>SQLCODE</code>).</li>
+</ul>
+</li>
+</ul>
+<h3 id="65-input-parameters--interface-data" tabindex="-1">6.5 Input Parameters &amp; Interface Data</h3>
+<ul>
+<li><code>DFHCOMMAREA</code> (Linkage Section)
+<ul>
+<li>350-byte CICS communication area passed between pseudo-conversational transactions to preserve session context across terminal interactions.</li>
+</ul>
+</li>
+<li>CICS Execute Interface Block (<code>DFHEIBLK</code>)
+<ul>
+<li><code>EIBCALEN</code>: Evaluated to determine initial entry (<code>EIBCALEN = 0</code>) versus conversational re-entry.</li>
+<li><code>EIBAID</code>: Evaluated to capture operator attention identifier keys (PF1, PF3, PF7, PF8, PF12).</li>
+<li><code>EIBTRMID</code>: Captured to populate the auditing field (<code>LAST_UPDATED_BY</code>) upon updating application records.</li>
+</ul>
+</li>
+</ul>
+<h2 id="7-constraints" tabindex="-1">7. Constraints</h2>
+<p>After analyzing the database records and program flow, I will present a natural language update about the constraints before providing the structured categorization of constraints found in <code>DLISHIST.cbl</code>.</p>
+<p>I have successfully analyzed the <code>DLISHIST.cbl</code> COBOL source code and extracted all rules, limits, and operational sequences. Below is the detailed breakdown of constraints grouped by logical category.</p>
+<h3 id="71-application-status--operational-sequence-constraints" tabindex="-1">7.1 Application Status &amp; Operational Sequence Constraints</h3>
+<ul>
+<li><strong>Pre-requisite Eligibility Verification</strong>: A driving history check cannot be executed unless the candidate has already passed their eligibility check. The program queries the <code>DLIS.LICENSE_APPLICATION</code> table and explicitly checks that the <code>ELIG_CHECK_STATUS</code> field is equal to <code>'P'</code>. If the status is any other value, the operation is aborted with the error message <code>&quot;ELIGIBILITY CHECK MUST BE PASSED FIRST&quot;</code>.</li>
+<li><strong>Application Presence Constraint</strong>: Operations like loading history or running a history check require a valid application ID to exist. If the <code>APPLICATION-ID</code> is zero (checked via map field <code>DHCAIDI = ZEROS</code>), the transaction shows <code>&quot;ENTER APPLICATION ID&quot;</code> or <code>&quot;ENTER APPLICATION ID FIRST&quot;</code> and halts processing. If the query to fetch the application from the <code>LICENSE_APPLICATION</code> and <code>CANDIDATE</code> tables returns <code>SQLCODE = 100</code>, the transaction halts with <code>&quot;APPLICATION NOT FOUND&quot;</code>.</li>
+<li><strong>Conditional Workflow Transition</strong>: Depending on the driving history evaluation result, the system updates the application status to one of two terminal codes:
+<ul>
+<li>If the candidate fails the history check, the overall <code>APPLICATION_STATUS</code> is set to <code>'RE'</code> (Rejected).</li>
+<li>If the candidate passes the history check, the overall <code>APPLICATION_STATUS</code> is set to <code>'HC'</code> (History Check Passed).</li>
+</ul>
+</li>
+</ul>
+<h3 id="72-data-validation--evaluation-constraints" tabindex="-1">7.2 Data Validation &amp; Evaluation Constraints</h3>
+<ul>
+<li><strong>Active Suspension or Disqualification Prohibition</strong>: A candidate is failed immediately if an active suspension or disqualification is found on their record. The program flags this condition as <code>'Y'</code> (<code>WS-SUSP-FLAG</code>) if:
+<ul>
+<li>An incident of type <code>'SU'</code> (Suspension) or <code>'DQ'</code> (Disqualification) is encountered.</li>
+<li>The associated <code>SUSP_END_DATE</code> is greater than or equal to the current system date (<code>CURRENT-DATE(1:10)</code>) or the <code>SUSP_END_DATE</code> is blank (<code>SPACES</code>), representing an open-ended/indefinite suspension.</li>
+<li>Failure results in the error message <code>&quot;ACTIVE SUSPENSION OR DISQUALIFICATION ON FILE&quot;</code>.</li>
+</ul>
+</li>
+<li><strong>Demerit Points Upper Bound</strong>: A candidate must not exceed a cumulative threshold of demerit points across their entire recorded active history.
+<ul>
+<li>The program sums up the <code>DEMERIT_POINTS</code> of all retrieved active incidents in <code>WS-DEMERIT-TOTAL</code>.</li>
+<li>If the total exceeds 12 (<code>WS-DEMERIT-TOTAL &gt; 12</code>), the history check fails with the message <code>&quot;TOTAL DEMERIT POINTS EXCEED THRESHOLD OF 12&quot;</code>.</li>
+</ul>
+</li>
+<li><strong>Unpaid Outstanding Fines Restriction</strong>: Candidates must not have any unpaid driving fines outstanding.
+<ul>
+<li>An unpaid fine is defined as any record where the <code>FINE_AMOUNT</code> is greater than 0 and the <code>FINE_PAID_STATUS</code> is equal to <code>'N'</code>.</li>
+<li>Detection of any such incident sets <code>WS-FINE-FLAG</code> to <code>'Y'</code>, failing the check with the message <code>&quot;OUTSTANDING UNPAID FINES ON FILE&quot;</code>.</li>
+</ul>
+</li>
+<li><strong>Priority of Failures</strong>: When checking conditions, the program evaluates and reports failures in a specific order of precedence, moving to the next condition only if the previous flag is still <code>'N'</code>:
+<ul>
+<li>Active suspension/disqualification check is evaluated first.</li>
+<li>Demerit threshold check is evaluated second.</li>
+<li>Outstanding unpaid fines check is evaluated third.</li>
+</ul>
+</li>
+</ul>
+<h3 id="73-technical--environmental-resource-constraints" tabindex="-1">7.3 Technical &amp; Environmental Resource Constraints</h3>
+<ul>
+<li><strong>History Log Array Capacity</strong>: The temporary working storage array (<code>WS-HIST-ROW</code> within <code>WS-HIST-TABLE</code>) has a maximum capacity of 50 rows (<code>OCCURS 50 TIMES</code>).
+<ul>
+<li>When fetching incidents via the DB2 cursor <code>HISTCUR</code>, the program increments <code>WS-ROW-COUNT</code>.</li>
+<li>To prevent memory corruption or boundary violations, data is only loaded into the storage array if <code>WS-ROW-COUNT &lt;= 50</code>. Any retrieved rows beyond 50 are skipped for map storage, although their demerit totals and suspension/fine statuses are still aggregated.</li>
+</ul>
+</li>
+<li><strong>Display Pagination Limit</strong>: The CICS physical screen map (<code>DLISHC01</code>) only displays up to 7 history lines at a time.
+<ul>
+<li>The variable <code>WS-SCROLL-TOP</code> tracks the scrolling position.</li>
+<li>The pagination loop limits output display using a vertical window constraint: <code>UNTIL WS-SCROLL-TOP &gt; WS-ROW-COUNT OR WS-SCROLL-TOP &gt; 7</code>.</li>
+</ul>
+</li>
+<li><strong>Database Scope Isolation</strong>: Only active history records are evaluated for the driving history check.
+<ul>
+<li>The DB2 cursor definition <code>HISTCUR</code> filters records explicitly with the predicate <code>RECORD_STATUS = 'A'</code>. Any historic incidents marked as inactive are ignored.</li>
+</ul>
+</li>
+<li><strong>Pseudo-Conversational Context Preservation</strong>: The transaction is designed to execute pseudo-conversationally under CICS transaction code <code>DL06</code>.
+<ul>
+<li>State between interactions (such as current Application ID, Candidate ID, and scroll position) is restricted to the bounds of the 350-byte <code>DFHCOMMAREA</code> link structure (<code>DLIS-COMMAREA</code>).</li>
+<li>System activity and screen maps are handled through defensive inline checks with CICS execution response variables (<code>RESP(WS-RESP1)</code>), avoiding transaction abends on non-critical terminal interactions.</li>
+</ul>
+</li>
+</ul>
+<h2 id="8-error-handling" tabindex="-1">8. Error Handling</h2>
+<h3 id="81-db2-sql-error-handling" tabindex="-1">8.1 DB2 SQL Error Handling</h3>
+<ul>
+<li>
+<p><strong>SQLCODE = 100 check after SELECT in LOAD-APPLICATION</strong></p>
+<ul>
+<li>After the JOIN query against <code>DLIS.LICENSE_APPLICATION</code> and <code>DLIS.CANDIDATE</code>, the program explicitly checks whether <code>SQLCODE = 100</code>, which DB2 sets when no row satisfies the query predicate</li>
+<li>If no matching application record is found, the message <code>APPLICATION NOT FOUND</code> is placed in the map message field (<code>DHCMSG</code>) and control is transferred to <code>LOAD-APP-EXIT</code> via <code>GO TO</code>, bypassing any further processing for that invocation</li>
+</ul>
+</li>
+<li>
+<p><strong>Implicit reliance on SQLCODE during cursor fetch loop (LOAD-HISTORY-TABLE)</strong></p>
+<ul>
+<li>The <code>PERFORM UNTIL SQLCODE NOT = 0</code> loop drives the cursor fetch cycle over <code>HISTCUR</code></li>
+<li>The loop continues only while <code>SQLCODE = 0</code> (successful fetch); any non-zero value, including <code>SQLCODE = 100</code> at end-of-data, naturally terminates the loop without explicit messaging — this is the standard end-of-cursor detection pattern</li>
+<li>An inner <code>IF SQLCODE = 0</code> guard ensures that individual fetch results are only processed when the fetch succeeded, preventing stale data from being accidentally used on the terminating iteration</li>
+</ul>
+</li>
+<li>
+<p><strong>No explicit negative SQLCODE (error) handling</strong></p>
+<ul>
+<li>DB2 negative SQLCODE values (indicating hard SQL errors) from any of the SELECT, cursor OPEN/FETCH/CLOSE, or UPDATE statements are not individually trapped; the program relies on the loop termination mechanism but does not surface a user message or log a failure for unexpected SQL errors</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="82-business-rule-validation--history-check-failures" tabindex="-1">8.2 Business Rule Validation — History Check Failures</h3>
+<ul>
+<li>
+<p><strong>Missing Application ID guard (RUN-HISTORY-CHECK and LOAD-APPLICATION)</strong></p>
+<ul>
+<li>At the start of both <code>RUN-HISTORY-CHECK</code> and <code>LOAD-APPLICATION</code>, the program tests whether the application ID input field (<code>DHCAIDI</code>) is zero</li>
+<li>If zero, the appropriate instructional message (<code>ENTER APPLICATION ID FIRST</code> or <code>ENTER APPLICATION ID</code>) is placed in <code>DHCMSG</code> and control jumps to the respective exit paragraph via <code>GO TO</code>, preventing any downstream database activity</li>
+</ul>
+</li>
+<li>
+<p><strong>Prerequisite eligibility check gate (RUN-HISTORY-CHECK)</strong></p>
+<ul>
+<li>After loading the application, the program performs a dedicated SQL SELECT to retrieve <code>ELIG_CHECK_STATUS</code> for the application</li>
+<li>If the retrieved status is not <code>'P'</code> (passed), the message <code>ELIGIBILITY CHECK MUST BE PASSED FIRST</code> is written to <code>DHCMSG</code> and execution exits via <code>GO TO RUN-HIST-EXIT</code>, enforcing the workflow dependency that eligibility must precede history checking</li>
+</ul>
+</li>
+<li>
+<p><strong>Load-application success verification (RUN-HISTORY-CHECK)</strong></p>
+<ul>
+<li>After calling <code>LOAD-APPLICATION</code>, the program inspects the current value of <code>DHCMSG</code>; if it is not exactly <code>'APPLICATION LOADED'</code>, it infers that the load failed (e.g., application not found) and exits via <code>GO TO RUN-HIST-EXIT</code> without proceeding to history evaluation — a secondary guard against continuing with incomplete data</li>
+</ul>
+</li>
+<li>
+<p><strong>Active suspension / disqualification detection</strong></p>
+<ul>
+<li>During cursor fetch processing in <code>LOAD-HISTORY-TABLE</code>, each incident with type <code>'SU'</code> or <code>'DQ'</code> is inspected</li>
+<li>If the <code>SUSP_END_DATE</code> is greater than or equal to the current date, or equals spaces (indicating an open-ended suspension), <code>WS-SUSP-FLAG</code> is set to <code>'Y'</code></li>
+<li>In <code>RUN-HISTORY-CHECK</code>, when <code>WS-SUSP-FLAG = 'Y'</code>, <code>WS-FAIL-FLAG</code> is set to <code>'Y'</code> and <code>WS-HIST-FAIL-MSG</code> is set to <code>'ACTIVE SUSPENSION OR DISQUALIFICATION ON FILE'</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Demerit point threshold check</strong></p>
+<ul>
+<li>Demerit points from all fetched incidents are accumulated into <code>WS-DEMERIT-TOTAL</code></li>
+<li>If the total exceeds 12 and no prior failure has been flagged (<code>WS-FAIL-FLAG = 'N'</code>), the fail flag is raised and <code>WS-HIST-FAIL-MSG</code> is set to <code>'TOTAL DEMERIT POINTS EXCEED THRESHOLD OF 12'</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Unpaid fines detection</strong></p>
+<ul>
+<li>During fetch processing, each incident with <code>FINE_AMOUNT &gt; 0</code> and <code>FINE_PAID_STATUS = 'N'</code> causes <code>WS-FINE-FLAG</code> to be set to <code>'Y'</code></li>
+<li>In <code>RUN-HISTORY-CHECK</code>, if <code>WS-FINE-FLAG = 'Y'</code> and no prior failure is flagged, the fail flag is raised and <code>WS-HIST-FAIL-MSG</code> is set to <code>'OUTSTANDING UNPAID FINES ON FILE'</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Prioritised single-failure-reason capture</strong></p>
+<ul>
+<li>The three business rule checks (suspension → demerit threshold → unpaid fines) are applied in sequence with an <code>AND WS-FAIL-FLAG = 'N'</code> guard on each, ensuring only the first triggered failure reason is retained in <code>WS-HIST-FAIL-MSG</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="83-application-status-update-and-result-recording" tabindex="-1">8.3 Application Status Update and Result Recording</h3>
+<ul>
+<li><strong>Pass/fail outcome written to the database</strong>
+<ul>
+<li>After evaluating all business rules, <code>WS-HISTORY-STATUS</code> is set to <code>'F'</code> (fail) or <code>'P'</code> (pass), and <code>APPLICATION-STATUS</code> is set to <code>'RE'</code> (rejected) or <code>'HC'</code> (history check passed) accordingly</li>
+<li>A SQL UPDATE persists <code>HIST_CHECK_STATUS</code>, <code>HIST_CHECK_DATE</code>, <code>HIST_CHECK_NOTES</code> (the failure message), <code>APPLICATION_STATUS</code>, <code>LAST_UPDATED_DATE</code>, and <code>LAST_UPDATED_BY</code> to <code>DLIS.LICENSE_APPLICATION</code>, creating an auditable record of the outcome</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="84-user-notification-via-cics-map-messages" tabindex="-1">8.4 User Notification via CICS Map Messages</h3>
+<ul>
+<li>
+<p><strong>DHCMSG field used as the on-screen error/status channel</strong></p>
+<ul>
+<li>All error conditions and status outcomes are communicated to the operator by moving descriptive text into the BMS map field <code>DHCMSG</code>, which is rendered on the CICS 3270 display after every <code>EXEC CICS SEND MAP</code> call</li>
+<li>Messages include: <code>ENTER APPLICATION ID</code>, <code>ENTER APPLICATION ID FIRST</code>, <code>APPLICATION NOT FOUND</code>, <code>ELIGIBILITY CHECK MUST BE PASSED FIRST</code>, the specific history fail reason text, and <code>HISTORY CHECK PASSED</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Invalid key press notification</strong></p>
+<ul>
+<li>In <code>PROCESS-INPUT</code>, an <code>EVALUATE TRUE</code> on <code>EIBAID</code> covers F1, F3, F7, F8, and F12; any other attention identifier falls into the <code>OTHER</code> branch, placing the instruction <code>USE F1 F3 F7 F8 OR F12</code> in <code>DHCMSG</code> — a soft guard against unrecognised user input</li>
+</ul>
+</li>
+<li>
+<p><strong>Map output fields reflect check outcome</strong></p>
+<ul>
+<li><code>DHCHSTSO</code> is set to <code>'FAIL'</code> or <code>'PASS'</code>, and <code>DHCHSDSO</code> is populated with the failure description or cleared to spaces, giving the operator an immediate visual indication of the check result alongside the message area</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="85-cics-command-response-capture" tabindex="-1">8.5 CICS Command Response Capture</h3>
+<ul>
+<li><strong>RESP(WS-RESP1) on CICS commands</strong>
+<ul>
+<li>The <code>EXEC CICS SEND MAP</code> (both in <code>INIT-SCREEN</code> and <code>PROCESS-INPUT</code>) and <code>EXEC CICS RECEIVE MAP</code> commands each include <code>RESP(WS-RESP1)</code>, which captures the CICS response code into the working-storage field rather than allowing CICS to abend the transaction on a non-normal condition</li>
+<li>Although the response code is captured, there is no subsequent conditional check on <code>WS-RESP1</code> in the code; this prevents automatic CICS abends on command failures but does not implement explicit recovery logic for map send/receive errors</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="86-pseudo-conversational-entry-guard" tabindex="-1">8.6 Pseudo-Conversational Entry Guard</h3>
+<ul>
+<li><strong>EIBCALEN = 0 initial-entry check</strong>
+<ul>
+<li>At the top of <code>MAIN-LOGIC</code>, the program checks whether <code>EIBCALEN</code> is zero, which CICS sets when no COMMAREA was passed — indicating the very first invocation of transaction DL06</li>
+<li>On initial entry, <code>INIT-SCREEN</code> is performed to send a blank map and return; on subsequent invocations (EIBCALEN non-zero), the COMMAREA is restored and <code>PROCESS-INPUT</code> handles the operator’s response — ensuring the program never attempts to process uninitialised input data on first entry</li>
+</ul>
+</li>
+</ul>
+<h2 id="9-examples" tabindex="-1">9. Examples</h2>
+<h3 id="91-example-1-f1-on-a-clean-history-pass" tabindex="-1">9.1 Example 1: F1 on a clean history (PASS)</h3>
+<p><strong>Input</strong></p>
+<ul>
+<li>Key pressed: F1</li>
+<li>Application ID (<code>DHCAIDI</code>): <code>1001</code></li>
+<li><code>LICENSE_APPLICATION</code>: candidate 501, license type <code>C</code>, <code>ELIG_CHECK_STATUS = 'P'</code></li>
+<li>Active <code>DRIVING_HISTORY</code> rows for candidate 501, newest first:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>INCIDENT_DATE</th>
+<th>TYPE</th>
+<th>DEMERIT_POINTS</th>
+<th>FINE_AMOUNT</th>
+<th>FINE_PAID_STATUS</th>
+<th>SUSP_END_DATE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2023-08-14</td>
+<td>SP</td>
+<td>3</td>
+<td>150.00</td>
+<td>Y</td>
+<td>blank</td>
+</tr>
+<tr>
+<td>2021-03-02</td>
+<td>SP</td>
+<td>3</td>
+<td>0</td>
+<td>blank</td>
+<td>blank</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Output</strong></p>
+<ul>
+<li><code>DHCHSTSO</code> = <code>PASS</code>, <code>DHCHSDSO</code> = spaces</li>
+<li><code>DHCDMRTO</code> = 6, <code>DHCSUSPO</code> = <code>N</code>, <code>DHCFINEO</code> = <code>N</code></li>
+<li><code>DHCMSG</code> = <code>HISTORY CHECK PASSED</code></li>
+<li><code>HIST_CHECK_STATUS = 'P'</code>, <code>APPLICATION_STATUS = 'HC'</code>, <code>HIST_CHECK_NOTES</code> = spaces</li>
+</ul>
+<p><strong>Why</strong></p>
+<ul>
+<li><code>LOAD-APPLICATION</code> finds the application, then <code>LOAD-HISTORY-TABLE</code> totals the points (3 + 3 = 6).</li>
+<li>No row has type <code>SU</code> or <code>DQ</code>, and no fine is unpaid, so both flags stay <code>N</code>.</li>
+<li>Eligibility is <code>P</code> and the total is not above 12, so <code>WS-FAIL-FLAG</code> stays <code>N</code>.</li>
+<li>The program takes the pass branch and runs the <code>UPDATE</code>.</li>
+</ul>
+<h3 id="92-example-2-f1-with-an-active-suspension-and-too-many-points-fail" tabindex="-1">9.2 Example 2: F1 with an active suspension and too many points (FAIL)</h3>
+<p><strong>Input</strong></p>
+<ul>
+<li>Key pressed: F1</li>
+<li>Application ID: <code>1002</code>, with <code>ELIG_CHECK_STATUS = 'P'</code></li>
+<li>History rows:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>INCIDENT_DATE</th>
+<th>TYPE</th>
+<th>DEMERIT_POINTS</th>
+<th>FINE_AMOUNT</th>
+<th>FINE_PAID_STATUS</th>
+<th>SUSP_END_DATE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2024-01-10</td>
+<td>SU</td>
+<td>6</td>
+<td>0</td>
+<td>blank</td>
+<td>blank (open-ended)</td>
+</tr>
+<tr>
+<td>2022-06-05</td>
+<td>SP</td>
+<td>4</td>
+<td>200.00</td>
+<td>N</td>
+<td>blank</td>
+</tr>
+<tr>
+<td>2020-09-21</td>
+<td>SP</td>
+<td>4</td>
+<td>0</td>
+<td>blank</td>
+<td>blank</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Output</strong></p>
+<ul>
+<li><code>DHCHSTSO</code> = <code>FAIL</code></li>
+<li><code>DHCHSDSO</code> and <code>DHCMSG</code> = <code>ACTIVE SUSPENSION OR DISQUALIFICATION ON FILE</code></li>
+<li><code>DHCDMRTO</code> = 14, <code>DHCSUSPO</code> = <code>Y</code>, <code>DHCFINEO</code> = <code>Y</code></li>
+<li><code>HIST_CHECK_STATUS = 'F'</code>, <code>APPLICATION_STATUS = 'RE'</code></li>
+</ul>
+<p><strong>Why</strong></p>
+<ul>
+<li>All three failure conditions are true: an open-ended <code>SU</code> row, 14 demerit points (above 12), and an unpaid fine.</li>
+<li>The checks run in a fixed order: suspension, then demerit points, then fines.</li>
+<li>Each later check only runs if <code>WS-FAIL-FLAG</code> is still <code>N</code>. The suspension message is therefore the only one reported.</li>
+</ul>
+<h3 id="93-example-3-f1-before-eligibility-has-been-passed" tabindex="-1">9.3 Example 3: F1 before eligibility has been passed</h3>
+<p><strong>Input</strong></p>
+<ul>
+<li>Key pressed: F1</li>
+<li>Application ID: <code>1003</code>, with <code>ELIG_CHECK_STATUS = 'F'</code>, or any value other than <code>P</code></li>
+</ul>
+<p><strong>Output</strong></p>
+<ul>
+<li><code>DHCMSG</code> = <code>ELIGIBILITY CHECK MUST BE PASSED FIRST</code></li>
+<li>No <code>UPDATE</code> is issued, and the application status is unchanged.</li>
+</ul>
+<p><strong>Why</strong></p>
+<ul>
+<li>The application loads, so <code>DHCMSG</code> is <code>APPLICATION LOADED</code> and the program continues.</li>
+<li>It re-reads <code>ELIG_CHECK_STATUS</code>. The value is not <code>P</code>, so it jumps to <code>RUN-HIST-EXIT</code>.</li>
+</ul>
+<h3 id="94-example-4-f3-lookup-and-history-display" tabindex="-1">9.4 Example 4: F3 lookup and history display</h3>
+<p><strong>Input</strong></p>
+<ul>
+<li>Key pressed: F3</li>
+<li>Application ID: <code>1001</code> (candidate John Smith, license type <code>C</code>, with the two history rows from Example 1)</li>
+</ul>
+<p><strong>Output</strong></p>
+<ul>
+<li><code>DHCCNAMO</code> = <code>John Smith</code>, <code>DHCLTYO</code> = <code>C</code></li>
+<li><code>DHCHL1O</code> = <code>2023-08-14 SP &lt;first 30 chars of description&gt;</code></li>
+<li><code>DHCHL2O</code> = <code>2021-03-02 SP &lt;first 30 chars of description&gt;</code></li>
+<li><code>DHCHL3O</code> to <code>DHCHL7O</code> = spaces</li>
+<li><code>DHCDMRTO</code> = 6, <code>DHCSUSPO</code> = <code>N</code>, <code>DHCFINEO</code> = <code>N</code></li>
+<li><code>DHCMSG</code> = <code>APPLICATION LOADED</code></li>
+</ul>
+<p><strong>Why</strong></p>
+<ul>
+<li>F3 runs <code>LOAD-APPLICATION</code> only and does not update the database.</li>
+<li><code>STRING</code> builds the name from first name, a space, and last name, each cut at the first space.</li>
+<li><code>DISPLAY-HISTORY</code> fills up to 7 screen lines, one per stored row, newest first.</li>
+</ul>
+<h3 id="95-example-5-error-and-edge-cases" tabindex="-1">9.5 Example 5: Error and edge cases</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Output (<code>DHCMSG</code>)</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F3 with Application ID <code>0</code></td>
+<td><code>ENTER APPLICATION ID</code></td>
+<td><code>DHCAIDI = ZEROS</code> skips the lookup.</td>
+</tr>
+<tr>
+<td>F1 with Application ID <code>0</code></td>
+<td><code>ENTER APPLICATION ID FIRST</code></td>
+<td>The same check in <code>RUN-HISTORY-CHECK</code>.</td>
+</tr>
+<tr>
+<td>F3 with an ID not in the table (SQLCODE 100)</td>
+<td><code>APPLICATION NOT FOUND</code></td>
+<td>The lookup returns no row.</td>
+</tr>
+<tr>
+<td>Any other key, such as ENTER or F5</td>
+<td><code>USE F1 F3 F7 F8 OR F12</code></td>
+<td>The <code>OTHER</code> branch of the <code>EVALUATE</code>.</td>
+</tr>
+<tr>
+<td>F12</td>
+<td>Transaction ends with no further screen.</td>
+<td><code>EXEC CICS RETURN</code> without <code>TRANSID</code>.</td>
+</tr>
+<tr>
+<td>F8 or F7</td>
+<td>Screen lines may come back blank.</td>
+<td><code>WS-SCROLL-TOP</code> and <code>WS-HIST-TABLE</code> are in Working-Storage, which is not saved in the COMMAREA. Each task starts with the scroll position at 1 and an empty table. F8 adds 7 and F7 subtracts 7, floored at 1.</td>
+</tr>
+</tbody>
+</table>
+
+                    </article>
+                    <nav class="toc-panel" aria-label="On this page">
+  <span class="toc-panel-label">On this page</span>
+  <ul class="toc-list">
+<li class="toc-level-2"><a href="#1-purpose">1. Purpose</a></li>
+<li class="toc-level-2"><a href="#2-inputs">2. Inputs</a></li>
+<li class="toc-level-2"><a href="#3-outputs">3. Outputs</a></li>
+<li class="toc-level-2"><a href="#4-processing-logic">4. Processing Logic</a>
+<ul>
+<li class="toc-level-3"><a href="#41-mermaid-flow-diagram">4.1 Mermaid Flow Diagram</a></li>
+<li class="toc-level-3"><a href="#42-processing-logic-description">4.2 Processing Logic Description</a>
+<ul>
+<li class="toc-level-4"><a href="#421-high-level-summary">4.2.1 High-level Summary</a></li>
+<li class="toc-level-4"><a href="#422-execution-flow">4.2.2 Execution Flow</a></li>
+<li class="toc-level-4"><a href="#423-external-interactions">4.2.3 External Interactions</a></li>
+<li class="toc-level-4"><a href="#424-plain-language-summary">4.2.4 Plain Language Summary</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#43-database-tables">4.3 Database Tables</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#5-paragraphs">5. Paragraphs</a></li>
+<li class="toc-level-2"><a href="#6-dependencies">6. Dependencies</a>
+<ul>
+<li class="toc-level-3"><a href="#61-external-systems--middleware">6.1 External Systems &amp;amp; Middleware</a></li>
+<li class="toc-level-3"><a href="#62-database-tables">6.2 Database Tables</a></li>
+<li class="toc-level-3"><a href="#63-user-interface--bms-maps">6.3 User Interface &amp;amp; BMS Maps</a></li>
+<li class="toc-level-3"><a href="#64-source-copybooks--data-structures">6.4 Source Copybooks &amp;amp; Data Structures</a></li>
+<li class="toc-level-3"><a href="#65-input-parameters--interface-data">6.5 Input Parameters &amp;amp; Interface Data</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#7-constraints">7. Constraints</a>
+<ul>
+<li class="toc-level-3"><a href="#71-application-status--operational-sequence-constraints">7.1 Application Status &amp;amp; Operational Sequence Constraints</a></li>
+<li class="toc-level-3"><a href="#72-data-validation--evaluation-constraints">7.2 Data Validation &amp;amp; Evaluation Constraints</a></li>
+<li class="toc-level-3"><a href="#73-technical--environmental-resource-constraints">7.3 Technical &amp;amp; Environmental Resource Constraints</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#8-error-handling">8. Error Handling</a>
+<ul>
+<li class="toc-level-3"><a href="#81-db2-sql-error-handling">8.1 DB2 SQL Error Handling</a></li>
+<li class="toc-level-3"><a href="#82-business-rule-validation--history-check-failures">8.2 Business Rule Validation — History Check Failures</a></li>
+<li class="toc-level-3"><a href="#83-application-status-update-and-result-recording">8.3 Application Status Update and Result Recording</a></li>
+<li class="toc-level-3"><a href="#84-user-notification-via-cics-map-messages">8.4 User Notification via CICS Map Messages</a></li>
+<li class="toc-level-3"><a href="#85-cics-command-response-capture">8.5 CICS Command Response Capture</a></li>
+<li class="toc-level-3"><a href="#86-pseudo-conversational-entry-guard">8.6 Pseudo-Conversational Entry Guard</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#9-examples">9. Examples</a>
+<ul>
+<li class="toc-level-3"><a href="#91-example-1-f1-on-a-clean-history-pass">9.1 Example 1: F1 on a clean history (PASS)</a></li>
+<li class="toc-level-3"><a href="#92-example-2-f1-with-an-active-suspension-and-too-many-points-fail">9.2 Example 2: F1 with an active suspension and too many points (FAIL)</a></li>
+<li class="toc-level-3"><a href="#93-example-3-f1-before-eligibility-has-been-passed">9.3 Example 3: F1 before eligibility has been passed</a></li>
+<li class="toc-level-3"><a href="#94-example-4-f3-lookup-and-history-display">9.4 Example 4: F3 lookup and history display</a></li>
+<li class="toc-level-3"><a href="#95-example-5-error-and-edge-cases">9.5 Example 5: Error and edge cases</a></li>
+</ul>
+</li>
+</ul>
+
+</nav>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="wiki-footer">Made by IBM Bob Premium Package for Z</footer>
+    <script>
+    /* toc-spy.js — highlights the active heading in the TOC panel on scroll */
+    (function () {
+      function init() {
+        var panel = document.querySelector('.toc-panel');
+        if (!panel) return;
+        var links = Array.prototype.slice.call(panel.querySelectorAll('a[href^="#"]'));
+        if (!links.length) return;
+
+        var headingIds = links.map(function (a) { return a.getAttribute('href').slice(1); });
+        var headings = headingIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+        function clearActive() {
+          panel.querySelectorAll('.toc-active').forEach(function (el) { el.classList.remove('toc-active'); });
+          panel.querySelectorAll('.toc-parent-active').forEach(function (el) { el.classList.remove('toc-parent-active'); });
+        }
+
+        function setActive(id) {
+          clearActive();
+          var link = panel.querySelector('a[href="#' + id + '"]');
+          if (!link) return;
+          link.classList.add('toc-active');
+          var li = link.closest('li');
+          if (li) {
+            var parentLi = li.parentElement && li.parentElement.closest('li');
+            if (parentLi) parentLi.classList.add('toc-parent-active');
+          }
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+        headings.forEach(function (h) { observer.observe(h); });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
+    <script>
+    /* breadcrumb.js — reads sessionStorage['wiki_referrer'] and renders breadcrumb.
+       Only fires when the referrer was set by clicking a link inside the Source Files
+       disclosure on a wiki page; clears after rendering so stale state never lingers. */
+    (function () {
+      var raw;
+      try { raw = sessionStorage.getItem('wiki_referrer'); } catch (_e) {}
+      if (!raw) return;
+      /* Consume immediately — prevents the breadcrumb re-appearing on the next visit. */
+      try { sessionStorage.removeItem('wiki_referrer'); } catch (_e) {}
+      var ref;
+      try { ref = JSON.parse(raw); } catch (_e) { return; }
+      if (!ref || !ref.href) return;
+      var bc = document.getElementById('wiki-breadcrumb');
+      if (!bc) return;
+      bc.className = 'wiki-breadcrumb';
+      bc.innerHTML =
+        '<a href="' + ref.href + '">' + (ref.title || 'Back') + '</a>' +
+        '<span class="wiki-breadcrumb-sep"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' +
+        '<span class="wiki-breadcrumb-current">DLISHIST</span>';
+    })();
+    </script>
+    <script>
+    /* sidebar toggle — same as main wiki pages */
+    (function () {
+
+      var STORAGE_KEY = 'sb_open';
+
+      function getOpenSet() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+      }
+
+      function saveOpenSet(set) {
+        try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(set)); } catch (e) {}
+      }
+
+      function findItems(toggle) {
+        var node = toggle.nextSibling;
+        while (node) {
+          if (node.nodeType === 1 && node.classList.contains('nav-section-items'))
+            return node;
+          node = node.nextSibling;
+        }
+        return null;
+      }
+
+      function toggleKey(toggle, index) {
+        var label = (toggle.querySelector('.nav-toggle-text') || toggle).textContent.trim().replace(/\s+/g, ' ');
+        return index + ':' + label;
+      }
+
+      function openSection(toggle, items, key, set) {
+        toggle.classList.add('open');
+        items.classList.add('open');
+        if (set) set[key] = true;
+      }
+
+      function closeSection(toggle, items, key, set) {
+        toggle.classList.remove('open');
+        items.classList.remove('open');
+        if (set) set[key] = false;
+      }
+
+      function init() {
+        var sidebar = document.getElementById('wiki-sidebar');
+        var toggles = Array.prototype.slice.call(
+          document.querySelectorAll('.nav-section-toggle')
+        );
+
+        var savedSet = getOpenSet();
+        var openSet = savedSet || {};
+
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+
+          var key = toggleKey(toggle, idx);
+          var shouldOpen = openSet[key] === true;
+
+          if (shouldOpen) {
+            toggle.classList.add('open');
+            items.classList.add('open');
+          }
+
+          toggle.addEventListener('click', function () {
+            var nowOpen = toggle.classList.contains('open');
+            if (nowOpen) {
+              closeSection(toggle, items, key, openSet);
+            } else {
+              openSection(toggle, items, key, openSet);
+            }
+            saveOpenSet(openSet);
+          });
+        });
+
+        saveOpenSet(openSet);
+
+        /* Restore sidebar scroll position after sections are expanded so the
+           scroll height is correct when we apply scrollTop. */
+        if (sidebar) {
+          try {
+            var savedScroll = sessionStorage.getItem('sb_scroll');
+            if (savedScroll !== null) { sidebar.scrollTop = parseInt(savedScroll, 10) || 0; }
+          } catch (_e) {}
+        }
+
+        window.addEventListener('pagehide', function () {
+          saveOpenSet(openSet);
+          if (sidebar) {
+            try { sessionStorage.setItem('sb_scroll', String(sidebar.scrollTop)); } catch (_e) {}
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+    </script>
+</body>
+</html>

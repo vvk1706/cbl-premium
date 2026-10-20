@@ -1,0 +1,70 @@
+         TITLE 'DLIS BMS MAPSET - MAIN MENU'
+***================================================================***
+*** BMS Mapset : DLISMM                                            ***
+*** Map        : DLISMM01                                          ***
+*** Screen     : SCR-MAIN-MENU                                     ***
+*** Trans      : DL01                                              ***
+***================================================================***
+DLISMM   DFHMSD TYPE=&SYSPARM,                                         X
+               LANG=COBOL,                                             X
+               MODE=INOUT,                                             X
+               TERM=3270-2,                                            X
+               CTRL=FREEKB,                                            X
+               STORAGE=AUTO,                                           X
+               TIOAPFX=YES
+
+DLISMM01 DFHMDI SIZE=(24,80),                                          X
+               LINE=1,                                                 X
+               COLUMN=1
+
+* Row 1 - Title
+         DFHMDF POS=(1,1),LENGTH=80,ATTRB=(PROT,BRT),                 X
+               INITIAL='***** DRIVER LICENSE ISSUANCE SYSTEM (DLIS)'
+
+* Row 4 - Date
+DMMDATE  DFHMDF POS=(4,66),LENGTH=10,ATTRB=(PROT,NORM)
+
+* Option labels
+         DFHMDF POS=(6,5),LENGTH=25,ATTRB=(PROT,NORM),                X
+               INITIAL='--- CANDIDATE ---'
+         DFHMDF POS=(7,7),LENGTH=30,ATTRB=(PROT,NORM),                X
+               INITIAL='1.  CANDIDATE MAINTENANCE'
+         DFHMDF POS=(8,7),LENGTH=30,ATTRB=(PROT,NORM),                X
+               INITIAL='2.  CANDIDATE INQUIRY'
+         DFHMDF POS=(10,5),LENGTH=25,ATTRB=(PROT,NORM),               X
+               INITIAL='--- APPLICATION ---'
+         DFHMDF POS=(11,7),LENGTH=35,ATTRB=(PROT,NORM),               X
+               INITIAL='3.  NEW LICENSE APPLICATION'
+         DFHMDF POS=(12,7),LENGTH=35,ATTRB=(PROT,NORM),               X
+               INITIAL='4.  APPLICATION STATUS INQUIRY'
+         DFHMDF POS=(14,5),LENGTH=25,ATTRB=(PROT,NORM),               X
+               INITIAL='--- PROCESSING ---'
+         DFHMDF POS=(15,7),LENGTH=30,ATTRB=(PROT,NORM),               X
+               INITIAL='5.  ELIGIBILITY CHECK'
+         DFHMDF POS=(16,7),LENGTH=35,ATTRB=(PROT,NORM),               X
+               INITIAL='6.  DRIVING HISTORY CHECK'
+         DFHMDF POS=(17,7),LENGTH=30,ATTRB=(PROT,NORM),               X
+               INITIAL='7.  PAYMENT ENTRY'
+         DFHMDF POS=(19,5),LENGTH=25,ATTRB=(PROT,NORM),               X
+               INITIAL='--- APPROVALS ---'
+         DFHMDF POS=(20,7),LENGTH=35,ATTRB=(PROT,NORM),               X
+               INITIAL='8.  FIRST AUTHORITY APPROVAL'
+         DFHMDF POS=(21,7),LENGTH=35,ATTRB=(PROT,NORM),               X
+               INITIAL='9.  SECOND AUTHORITY APPROVAL'
+         DFHMDF POS=(22,5),LENGTH=30,ATTRB=(PROT,NORM),               X
+               INITIAL='10. ISSUE LICENSE'
+
+* Option input
+         DFHMDF POS=(15,45),LENGTH=15,ATTRB=(PROT,NORM),              X
+               INITIAL='SELECT OPTION: '
+DMMOPT   DFHMDF POS=(15,61),LENGTH=2,ATTRB=(UNPROT,IC)
+
+* Message area
+DMMMSG   DFHMDF POS=(23,2),LENGTH=76,ATTRB=(PROT,NORM)
+
+* PF key legend
+         DFHMDF POS=(24,2),LENGTH=78,ATTRB=(PROT,NORM),               X
+               INITIAL='ENTER=SELECT  F12=EXIT'
+
+         DFHMSD TYPE=FINAL
+         END

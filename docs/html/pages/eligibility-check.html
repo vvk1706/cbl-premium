@@ -1,0 +1,1323 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eligibility Check (DL05) - Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script src="../assets/mermaid.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+
+    <!-- Prism.js for syntax highlighting (bundled — no CDN required) -->
+    <link rel="stylesheet" href="../assets/prism-tomorrow.css">
+    <script src="../assets/prism-core.js"></script>
+    <script src="../assets/prism-languages.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="header-app-name"><a href="../../index.html" style="color: inherit; text-decoration: none;">Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</a></span>
+        </div>
+        <div class="header-right">
+        </div>
+    </header>
+    <div class="shell">
+        <aside class="sidebar" id="wiki-sidebar">
+            <nav>
+                
+        <div class="nav-home-wrap">
+            <a href="../../index.html" class="nav-home">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 6.5L8 2l6 4.5V14a1 1 0 01-1 1H3a1 1 0 01-1-1V6.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M6 15V9h4v6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                Home
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Application Documentation</div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Overview</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="system-overview.html" class="nav-link" data-page-id="system-overview">DLIS System Overview</a>
+                <a href="main-menu-navigation.html" class="nav-link" data-page-id="main-menu-navigation">Main Menu &amp; Navigation (DL01)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Candidate &amp; Application Intake</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="candidate-management.html" class="nav-link" data-page-id="candidate-management">Candidate Maintenance (DL02)</a>
+                <a href="license-application-entry.html" class="nav-link" data-page-id="license-application-entry">License Application Entry (DL03)</a>
+                <a href="application-status-inquiry.html" class="nav-link" data-page-id="application-status-inquiry">Application Status Inquiry (DL04)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle open" type="button">
+                <span class="nav-toggle-text">Verification &amp; Payment</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items open">
+                <a href="eligibility-check.html" class="nav-link active" data-page-id="eligibility-check">Eligibility Check (DL05)</a>
+                <a href="driving-history-check.html" class="nav-link" data-page-id="driving-history-check">Driving History Check (DL06)</a>
+                <a href="payment-processing.html" class="nav-link" data-page-id="payment-processing">Payment Entry &amp; Processing (DL07)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Approval &amp; License Issuance</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="first-level-approval.html" class="nav-link" data-page-id="first-level-approval">First-Level Authority Approval (DL08)</a>
+                <a href="second-level-approval.html" class="nav-link" data-page-id="second-level-approval">Second-Level Authority Approval (DL09)</a>
+                <a href="license-issuance.html" class="nav-link" data-page-id="license-issuance">License Issuance (DL10)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Architecture</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="application-lifecycle-flow.html" class="nav-link" data-page-id="application-lifecycle-flow">Application Lifecycle &amp; Status Flow</a>
+                <a href="data-architecture.html" class="nav-link" data-page-id="data-architecture">Data Architecture (DB2)</a>
+                <a href="cics-integration-patterns.html" class="nav-link" data-page-id="cics-integration-patterns">CICS Integration Patterns</a>
+            </div>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Program Documentation</div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">program</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../sources/program/cobol/DLISPAY.html" class="nav-link">DLISPAY</a>
+                <a href="../sources/program/cobol/DLISSTAT.html" class="nav-link">DLISSTAT</a>
+                <a href="../sources/program/cobol/DLISMENU.html" class="nav-link">DLISMENU</a>
+                <a href="../sources/program/cobol/DLISELIG.html" class="nav-link">DLISELIG</a>
+                <a href="../sources/program/cobol/DLISCAND.html" class="nav-link">DLISCAND</a>
+                <a href="../sources/program/cobol/DLISAPPL.html" class="nav-link">DLISAPPL</a>
+                <a href="../sources/program/cobol/DLISISSU.html" class="nav-link">DLISISSU</a>
+                <a href="../sources/program/cobol/DLISAP2.html" class="nav-link">DLISAP2</a>
+                <a href="../sources/program/cobol/DLISHIST.html" class="nav-link">DLISHIST</a>
+                <a href="../sources/program/cobol/DLISAP1.html" class="nav-link">DLISAP1</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">business-rule</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../sources/business-rule/cobol/DLISELIG-overview.html" class="nav-link">DLISELIG-overview</a>
+                <a href="../sources/business-rule/cobol/DLISPAY-inventory.html" class="nav-link">DLISPAY-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISCAND-overview.html" class="nav-link">DLISCAND-overview</a>
+                <a href="../sources/business-rule/cobol/DLISAP2-inventory.html" class="nav-link">DLISAP2-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISHIST-inventory.html" class="nav-link">DLISHIST-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISMENU-inventory.html" class="nav-link">DLISMENU-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISELIG-inventory.html" class="nav-link">DLISELIG-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISPAY-overview.html" class="nav-link">DLISPAY-overview</a>
+                <a href="../sources/business-rule/cobol/DLISSTAT-overview.html" class="nav-link">DLISSTAT-overview</a>
+                <a href="../sources/business-rule/cobol/DLISHIST-overview.html" class="nav-link">DLISHIST-overview</a>
+                <a href="../sources/business-rule/cobol/DLISAPPL-overview.html" class="nav-link">DLISAPPL-overview</a>
+                <a href="../sources/business-rule/cobol/DLISISSU-inventory.html" class="nav-link">DLISISSU-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISAPPL-inventory.html" class="nav-link">DLISAPPL-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISSTAT-inventory.html" class="nav-link">DLISSTAT-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISAP1-overview.html" class="nav-link">DLISAP1-overview</a>
+                <a href="../sources/business-rule/cobol/DLISCAND-inventory.html" class="nav-link">DLISCAND-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISAP2-overview.html" class="nav-link">DLISAP2-overview</a>
+                <a href="../sources/business-rule/cobol/DLISISSU-overview.html" class="nav-link">DLISISSU-overview</a>
+                <a href="../sources/business-rule/cobol/DLISAP1-inventory.html" class="nav-link">DLISAP1-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISMENU-overview.html" class="nav-link">DLISMENU-overview</a>
+            </div>
+        </div>
+        </div>
+    </div>
+            </nav>
+        </aside>
+        <main class="main">
+            <div class="page-container">
+                <div class="content-layout">
+                    <div class="prose">
+                        <details class="source-files-disclosure">
+            <summary>
+                <svg class="sf-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Source Files
+                <span style="margin-left:4px;font-size:11px;color:var(--fg-subtle)">(3)</span>
+            </summary>
+            <div class="source-files-body">
+                <ul class="source-files-list">
+            <li><a href="../sources/program/cobol/DLISELIG.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISELIG
+            </a></li>
+            <li><a href="../sources/business-rule/cobol/DLISELIG-overview.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISELIG-overview
+            </a></li>
+            <li><a href="../sources/business-rule/cobol/DLISELIG-inventory.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISELIG-inventory
+            </a></li>
+                </ul>
+            </div>
+        </details>
+                        <h1 id="eligibility-check-dl05" tabindex="-1">Eligibility Check (DL05)</h1>
+<h2 id="1-overview" tabindex="-1">1. Overview</h2>
+<p>Eligibility Check (transaction <code>DL05</code>, program <code>DLISELIG</code>) is a CICS pseudo-conversational transaction in the Driver License Information System (DLIS). A licensing officer uses it to decide whether a candidate qualifies for the license type named on a license application.</p>
+<p>The program evaluates two business rules:</p>
+<ol>
+<li><strong>Minimum age.</strong> The candidate must be at least 16 for a Learner (<code>L</code>) license, 17 for Probation (<code>P</code>) and 18 for Open (<code>O</code>).</li>
+<li><strong>Prerequisite active license (upgrade path).</strong> A Probation application requires an active Learner license. An Open application requires an active Probation license. A Learner application has no prerequisite.</li>
+</ol>
+<p>The program then records the outcome on the application: the pass/fail result, the failure reason, the date, the checking officer and the new application status.</p>
+<h3 id="11-key-capabilities" tabindex="-1">1.1 Key Capabilities</h3>
+<table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Application lookup (F3)</td>
+<td>Loads the application and candidate details (name, date of birth, license type, minimum age) onto the screen.</td>
+</tr>
+<tr>
+<td>Eligibility check (F1)</td>
+<td>Runs the age and prerequisite rules and records the result.</td>
+</tr>
+<tr>
+<td>Exit (F12)</td>
+<td>Ends the transaction.</td>
+</tr>
+<tr>
+<td>Audit trail</td>
+<td>Writes the check date, the officer ID and the failure notes to the application record.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="12-outcome-summary" tabindex="-1">1.2 Outcome Summary</h3>
+<table>
+<thead>
+<tr>
+<th>Outcome</th>
+<th><code>ELIG_CHECK_STATUS</code></th>
+<th><code>APPLICATION_STATUS</code></th>
+<th>Screen status</th>
+<th>Screen message</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pass</td>
+<td><code>P</code></td>
+<td><code>EC</code> (eligibility cleared)</td>
+<td><code>PASS</code></td>
+<td><code>ELIGIBILITY CHECK PASSED</code></td>
+</tr>
+<tr>
+<td>Fail</td>
+<td><code>F</code></td>
+<td><code>RE</code> (rejected / eligibility failed)</td>
+<td><code>FAIL</code></td>
+<td>The failure reason text</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-system-architecture" tabindex="-1">2. System Architecture</h2>
+<h3 id="21-component-overview" tabindex="-1">2.1 Component Overview</h3>
+<p>DLISELIG runs under CICS and presents a 3270 BMS screen. It reads and updates DB2 tables through embedded SQL, and it shares its copybooks with the rest of the DLIS application.</p>
+<div class="mermaid">
+graph TD
+    Officer[Licensing Officer<br>3270 Terminal] <--> BMS[BMS Mapset DLISEC<br>Map DLISEC01]
+    BMS <--> CICS[CICS Transaction DL05]
+    CICS --> PGM[Program DLISELIG]
+
+    PGM --> CPY1[Copybook DLISWS<br>Shared working storage]
+    PGM --> CPY2[Copybook DLISCSEC<br>DLIS-COMMAREA 350 bytes]
+    PGM --> CPY3[Copybook DLISDCLG<br>DB2 DCLGEN host variables]
+    PGM --> CPY4[SQLCA]
+
+    PGM --> DB2[(IBM DB2)]
+    DB2 --> T1[DLIS.LICENSE_APPLICATION]
+    DB2 --> T2[DLIS.CANDIDATE]
+    DB2 --> T3[DLIS.ISSUED_LICENSE]
+</div>
+<h3 id="22-components-and-responsibilities" tabindex="-1">2.2 Components and Responsibilities</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Type</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DL05</code></td>
+<td>CICS transaction ID</td>
+<td>Starts <code>DLISELIG</code> and is the pseudo-conversational re-entry point.</td>
+</tr>
+<tr>
+<td><code>DLISELIG</code></td>
+<td>COBOL program</td>
+<td>Contains all control flow, validation, business rules and DB2 access.</td>
+</tr>
+<tr>
+<td><code>DLISEC</code> / <code>DLISEC01</code></td>
+<td>BMS mapset / map</td>
+<td>Captures the Application ID and Checked-By, and displays the results.</td>
+</tr>
+<tr>
+<td><code>DLISWS</code></td>
+<td>Copybook</td>
+<td>Shared working-storage layouts, return codes and common message variables.</td>
+</tr>
+<tr>
+<td><code>DLISCSEC</code></td>
+<td>Copybook</td>
+<td>Defines the 350-byte <code>DLIS-COMMAREA</code>, <code>DLIS-CAND-COMMAREA</code> and <code>DLIS-APPL-COMMAREA</code>.</td>
+</tr>
+<tr>
+<td><code>DLISDCLG</code></td>
+<td>Copybook</td>
+<td>DCLGEN host variables, such as <code>DCLDLIS-LICENSE-APPL</code>, <code>DCLDLIS-CANDIDATE</code> and <code>DCLDLIS-ISSUED-LIC</code>.</td>
+</tr>
+<tr>
+<td><code>SQLCA</code></td>
+<td>Copybook</td>
+<td>Provides <code>SQLCODE</code> for DB2 status checking.</td>
+</tr>
+<tr>
+<td><code>DLIS.LICENSE_APPLICATION</code></td>
+<td>DB2 table</td>
+<td>Read to find the application. Updated with the eligibility result.</td>
+</tr>
+<tr>
+<td><code>DLIS.CANDIDATE</code></td>
+<td>DB2 table</td>
+<td>Supplies the candidate’s name and date of birth.</td>
+</tr>
+<tr>
+<td><code>DLIS.ISSUED_LICENSE</code></td>
+<td>DB2 table</td>
+<td>Supplies the count of active prerequisite licenses.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="23-program-structure" tabindex="-1">2.3 Program Structure</h3>
+<p>The program is built from a small set of paragraphs. <code>MAIN-LOGIC</code> is the entry point and calls the others.</p>
+<div class="mermaid">
+graph TD
+    ML[MAIN-LOGIC] -->|EIBCALEN = 0| IS[INIT-SCREEN]
+    ML -->|EIBCALEN > 0| PI[PROCESS-INPUT]
+    PI -->|F1| REC[RUN-ELIGIBILITY-CHECK]
+    PI -->|F3| LA[LOAD-APPLICATION]
+    PI -->|F12| EX[EXEC CICS RETURN]
+    PI -->|Other key| MSG[Message USE F1 F3 OR F12]
+    REC -->|re-loads data| LA
+    REC -.->|early exit| REX[RUN-ELIG-EXIT]
+    LA -.->|early exit| LAX[LOAD-APPLICATION-EXIT]
+</div>
+<h3 id="24-entities-and-relationships" tabindex="-1">2.4 Entities and Relationships</h3>
+<div class="mermaid">
+erDiagram
+    CANDIDATE ||--o{ LICENSE_APPLICATION : "applies via"
+    LICENSE_APPLICATION ||--o{ ISSUED_LICENSE : "results in"
+    CANDIDATE ||--o{ ISSUED_LICENSE : "holds"
+
+    LICENSE_APPLICATION {
+        int APPLICATION_ID
+        int CANDIDATE_ID
+        string LICENSE_TYPE
+        string APPLICATION_STATUS
+        string ELIG_CHECK_STATUS
+        string ELIG_CHECK_DATE
+        string ELIG_CHECK_NOTES
+        string LAST_UPDATED_DATE
+        string LAST_UPDATED_BY
+    }
+    CANDIDATE {
+        int CANDIDATE_ID
+        string FIRST_NAME
+        string LAST_NAME
+        string DATE_OF_BIRTH
+    }
+    ISSUED_LICENSE {
+        int LICENSE_ID
+        int CANDIDATE_ID
+        string LICENSE_TYPE
+        string LICENSE_STATUS
+    }
+</div>
+<p>The diagram shows only the columns that DLISELIG uses. The full tables contain many more columns, such as history check, payment, approvals and address details.</p>
+<h2 id="3-inputs-and-outputs" tabindex="-1">3. Inputs and Outputs</h2>
+<h3 id="31-inputs" tabindex="-1">3.1 Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Field</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CICS</td>
+<td><code>DFHCOMMAREA</code> (350 bytes)</td>
+<td>Carries context between pseudo-conversational invocations. It is moved to <code>DLIS-COMMAREA</code>.</td>
+</tr>
+<tr>
+<td>CICS</td>
+<td><code>EIBCALEN</code></td>
+<td><code>0</code> means first entry. Any other value means the user has already seen the screen.</td>
+</tr>
+<tr>
+<td>CICS</td>
+<td><code>EIBAID</code></td>
+<td>Identifies the pressed key: F1, F3, F12 or other.</td>
+</tr>
+<tr>
+<td>BMS map</td>
+<td><code>DECAIDI</code></td>
+<td>Application ID. It must be non-zero. It is the key for the lookup and for the update.</td>
+</tr>
+<tr>
+<td>BMS map</td>
+<td><code>DECCHKBYI</code></td>
+<td>Checked-By officer ID. It is mandatory for F1 and is stored as <code>LAST_UPDATED_BY</code>.</td>
+</tr>
+<tr>
+<td>DB2</td>
+<td><code>LICENSE_APPLICATION</code>, <code>CANDIDATE</code></td>
+<td>Application and candidate data (license type, name, date of birth).</td>
+</tr>
+<tr>
+<td>DB2</td>
+<td><code>ISSUED_LICENSE</code></td>
+<td>Count of the candidate’s active prerequisite licenses.</td>
+</tr>
+<tr>
+<td>System</td>
+<td><code>CURRENT-DATE</code></td>
+<td>The current year, used for the age calculation.</td>
+</tr>
+<tr>
+<td>System</td>
+<td>DB2 <code>CURRENT DATE</code></td>
+<td>The check date and the last-updated date.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-outputs" tabindex="-1">3.2 Outputs</h3>
+<p><strong>DB2 update to <code>DLIS.LICENSE_APPLICATION</code></strong></p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ELIG_CHECK_STATUS</code></td>
+<td><code>P</code> (pass) or <code>F</code> (fail)</td>
+</tr>
+<tr>
+<td><code>ELIG_CHECK_DATE</code></td>
+<td><code>CURRENT DATE</code></td>
+</tr>
+<tr>
+<td><code>ELIG_CHECK_NOTES</code></td>
+<td>The failure reason, or spaces on a pass</td>
+</tr>
+<tr>
+<td><code>APPLICATION_STATUS</code></td>
+<td><code>EC</code> on pass, <code>RE</code> on fail</td>
+</tr>
+<tr>
+<td><code>LAST_UPDATED_DATE</code></td>
+<td><code>CURRENT DATE</code></td>
+</tr>
+<tr>
+<td><code>LAST_UPDATED_BY</code></td>
+<td>The <code>DECCHKBYI</code> value</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Screen fields (map <code>DLISEC01</code>)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DECCNAMO</code></td>
+<td>Candidate full name (first name and last name)</td>
+</tr>
+<tr>
+<td><code>DECDOBO</code></td>
+<td>Date of birth</td>
+</tr>
+<tr>
+<td><code>DECLTYO</code></td>
+<td>License type code (<code>L</code>, <code>P</code> or <code>O</code>)</td>
+</tr>
+<tr>
+<td><code>DECLDSO</code></td>
+<td><code>LEARNER</code>, <code>PROBATION</code> or <code>OPEN</code></td>
+</tr>
+<tr>
+<td><code>DECMAGEO</code></td>
+<td>Minimum age: 16, 17 or 18</td>
+</tr>
+<tr>
+<td><code>DECAGEO</code></td>
+<td>Calculated age</td>
+</tr>
+<tr>
+<td><code>DECESTSO</code></td>
+<td><code>PASS</code> or <code>FAIL</code></td>
+</tr>
+<tr>
+<td><code>DECENTSO</code></td>
+<td>Failure reason, or spaces</td>
+</tr>
+<tr>
+<td><code>DECMSG</code></td>
+<td>Status or error message</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-processing-logic" tabindex="-1">4. Processing Logic</h2>
+<h3 id="41-pseudo-conversational-flow" tabindex="-1">4.1 Pseudo-Conversational Flow</h3>
+<p>Every execution ends with a CICS <code>RETURN TRANSID('DL05')</code> that passes the 350-byte COMMAREA. The exception is F12, which returns without a <code>TRANSID</code> and so ends the conversation.</p>
+<div class="mermaid">
+graph TD
+    A([Start DL05]) --> B{EIBCALEN = 0?}
+    B -- Yes --> C[INIT-SCREEN<br>SEND MAP ERASE FREEKB]
+    C --> D[RETURN TRANSID DL05<br>COMMAREA 350]
+    B -- No --> E[Move DFHCOMMAREA to DLIS-COMMAREA]
+    E --> F[PROCESS-INPUT<br>RECEIVE MAP]
+    F --> G{EIBAID}
+    G -- F1 --> H[RUN-ELIGIBILITY-CHECK]
+    G -- F3 --> I[LOAD-APPLICATION]
+    G -- F12 --> J[RETURN without TRANSID]
+    G -- Other --> K[USE F1 F3 OR F12]
+    H --> L[SEND MAP DATAONLY FREEKB]
+    I --> L
+    K --> L
+    L --> M[RETURN TRANSID DL05<br>COMMAREA 350]
+    D --> Z([End of task])
+    M --> Z
+    J --> Z
+</div>
+<h3 id="42-load-application-f3" tabindex="-1">4.2 Load Application (F3)</h3>
+<p><code>LOAD-APPLICATION</code> validates the Application ID and joins the application and candidate tables. It then fills in the screen fields.</p>
+<div class="mermaid">
+graph TD
+    A[LOAD-APPLICATION] --> B{DECAIDI = ZEROS?}
+    B -- Yes --> C[ENTER APPLICATION ID]
+    B -- No --> D[SELECT join<br>LICENSE_APPLICATION and CANDIDATE]
+    D --> E{SQLCODE = 100?}
+    E -- Yes --> F[APPLICATION NOT FOUND]
+    E -- No --> G[Build name with STRING<br>Move DOB, license type]
+    G --> H[EVALUATE LICENSE-TYPE<br>set description and min age]
+    H --> I[APPLICATION LOADED]
+</div>
+<p>The license type maps to the screen values like this:</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+<th>Minimum age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>L</code></td>
+<td>LEARNER</td>
+<td>16</td>
+</tr>
+<tr>
+<td><code>P</code></td>
+<td>PROBATION</td>
+<td>17</td>
+</tr>
+<tr>
+<td><code>O</code></td>
+<td>OPEN</td>
+<td>18</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43-run-eligibility-check-f1" tabindex="-1">4.3 Run Eligibility Check (F1)</h3>
+<div class="mermaid">
+graph TD
+    A[RUN-ELIGIBILITY-CHECK] --> B{Application ID entered?}
+    B -- No --> B1[ENTER APPLICATION ID FIRST]
+    B -- Yes --> C{Checked-By entered?}
+    C -- No --> C1[CHECKED-BY IS REQUIRED]
+    C -- Yes --> D[PERFORM LOAD-APPLICATION]
+    D --> E{DECMSG = APPLICATION LOADED?}
+    E -- No --> X[RUN-ELIG-EXIT]
+    E -- Yes --> F[Calculate age<br>current year - birth year]
+    F --> G[Fail flag = N<br>Reason = spaces]
+    G --> H[Age rule by license type]
+    H --> I{Type P and flag N?}
+    I -- Yes --> J[COUNT active Learner licenses]
+    J --> K{Count = 0?}
+    K -- Yes --> K1[Fail: MUST HOLD ACTIVE LEARNER LICENSE FOR PROBATION]
+    I -- No --> L
+    K -- No --> L
+    K1 --> L{Type O and flag N?}
+    L -- Yes --> M[COUNT active Probation licenses]
+    M --> N{Count = 0?}
+    N -- Yes --> N1[Fail: MUST HOLD ACTIVE PROBATION LICENSE FOR OPEN]
+    L -- No --> O
+    N -- No --> O
+    N1 --> O{Fail flag = Y?}
+    O -- Yes --> P[Status F, App status RE<br>Screen FAIL and reason]
+    O -- No --> Q[Status P, App status EC<br>Screen PASS]
+    P --> R[UPDATE LICENSE_APPLICATION]
+    Q --> R
+    R --> S[Set DECMSG]
+</div>
+<h3 id="44-sequence-of-operations" tabindex="-1">4.4 Sequence of Operations</h3>
+<p>This sequence shows an F1 request from the terminal for a Probation application.</p>
+<div class="mermaid">
+sequenceDiagram
+    participant U as Officer
+    participant C as CICS / BMS
+    participant P as DLISELIG
+    participant D as DB2
+
+    U->>C: Enter App ID + Checked-By, press F1
+    C->>P: Start DL05 with COMMAREA
+    P->>C: RECEIVE MAP DLISEC01
+    P->>D: SELECT application JOIN candidate
+    D-->>P: Type, name, date of birth
+    P->>P: Calculate age, apply age rule
+    P->>D: SELECT COUNT(*) active Learner licenses
+    D-->>P: WS-PRIOR-COUNT
+    P->>D: UPDATE LICENSE_APPLICATION
+    D-->>P: Result recorded
+    P->>C: SEND MAP DATAONLY
+    P->>C: RETURN TRANSID DL05 COMMAREA
+    C-->>U: Display PASS / FAIL and message
+</div>
+<h2 id="5-business-rules" tabindex="-1">5. Business Rules</h2>
+<h3 id="51-age-calculation" tabindex="-1">5.1 Age Calculation</h3>
+<p>Age is the current year minus the birth year. Month and day are ignored, so a candidate whose birthday falls later in the current year is treated as already having reached that age.</p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE DATE-OF-BIRTH OF DCLDLIS-CANDIDATE(1:4)
+               TO WS-DOB-YEAR
+           MOVE CURRENT-DATE(1:4) TO WS-CURR-YEAR
+           COMPUTE WS-CALC-AGE = WS-CURR-YEAR - WS-DOB-YEAR
+           MOVE WS-CALC-AGE TO DECAGEO</code></pre>
+</div>
+<h3 id="52-minimum-age-by-license-type" tabindex="-1">5.2 Minimum Age by License Type</h3>
+<p>The fail flag and reason are initialised, then an <code>EVALUATE</code> applies the age threshold for the license type.</p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE &#039;N&#039; TO WS-FAIL-FLAG
+           MOVE SPACES TO WS-ELIG-FAIL-REASON
+
+      *    Age check
+           EVALUATE LICENSE-TYPE OF DCLDLIS-LICENSE-APPL
+               WHEN &#039;L&#039;
+                   IF WS-CALC-AGE &lt; 16
+                       MOVE &#039;Y&#039; TO WS-FAIL-FLAG
+                       MOVE &#039;AGE BELOW 16 - LEARNER LICENSE REQUIRES MIN
+                           TO WS-ELIG-FAIL-REASON
+                   END-IF
+               WHEN &#039;P&#039;
+                   IF WS-CALC-AGE &lt; 17
+                       ...
+               WHEN &#039;O&#039;
+                   IF WS-CALC-AGE &lt; 18
+                       ...
+           END-EVALUATE</code></pre>
+</div>
+<p>The age failure messages are truncated in the source (for example <code>AGE BELOW 16 - LEARNER LICENSE REQUIRES MIN…</code>).</p>
+<h3 id="53-prerequisite-license-checks" tabindex="-1">5.3 Prerequisite License Checks</h3>
+<p>These checks run only if the age check has not already failed (<code>WS-FAIL-FLAG = 'N'</code>). That avoids unnecessary DB2 calls.</p>
+<p><strong>Probation applicants need an active Learner license</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF LICENSE-TYPE OF DCLDLIS-LICENSE-APPL = &#039;P&#039;
+                           AND WS-FAIL-FLAG = &#039;N&#039;
+               EXEC SQL
+                   SELECT COUNT(*) INTO :WS-PRIOR-COUNT
+                   FROM   DLIS.ISSUED_LICENSE
+                   WHERE  CANDIDATE_ID   = :CANDIDATE-ID
+                                           OF DCLDLIS-LICENSE-APPL
+                   AND    LICENSE_TYPE   = &#039;L&#039;
+                   AND    LICENSE_STATUS = &#039;A&#039;
+               END-EXEC
+               IF WS-PRIOR-COUNT = 0
+                   MOVE &#039;Y&#039; TO WS-FAIL-FLAG
+                   MOVE &#039;MUST HOLD ACTIVE LEARNER LICENSE FOR PROBATION&#039;
+                       TO WS-ELIG-FAIL-REASON
+               END-IF
+           END-IF</code></pre>
+</div>
+<p><strong>Open applicants need an active Probation license</strong></p>
+<p>The structure is the same as above, with <code>LICENSE_TYPE = 'P'</code> and the reason <code>MUST HOLD ACTIVE PROBATION LICENSE FOR OPEN</code>.</p>
+<h3 id="54-rule-summary" tabindex="-1">5.4 Rule Summary</h3>
+<table>
+<thead>
+<tr>
+<th>License type</th>
+<th>Minimum age</th>
+<th>Prerequisite (active)</th>
+<th>Failure reasons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Learner (<code>L</code>)</td>
+<td>16</td>
+<td>None</td>
+<td>Age below 16</td>
+</tr>
+<tr>
+<td>Probation (<code>P</code>)</td>
+<td>17</td>
+<td>Learner (<code>L</code>, status <code>A</code>)</td>
+<td>Age below 17, or must hold active Learner license</td>
+</tr>
+<tr>
+<td>Open (<code>O</code>)</td>
+<td>18</td>
+<td>Probation (<code>P</code>, status <code>A</code>)</td>
+<td>Age below 18, or must hold active Probation license</td>
+</tr>
+</tbody>
+</table>
+<h3 id="55-determining-and-persisting-the-outcome" tabindex="-1">5.5 Determining and Persisting the Outcome</h3>
+<p>A single failure is enough to reject the application. The result is then written to the application record.</p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF WS-FAIL-FLAG = &#039;Y&#039;
+               MOVE &#039;F&#039; TO WS-ELIGIBILITY-STATUS
+               MOVE &#039;FAIL&#039;             TO DECESTSO
+               MOVE WS-ELIG-FAIL-REASON TO DECENTSO
+               MOVE &#039;RE&#039;              TO APPLICATION-STATUS
+                                         OF DCLDLIS-LICENSE-APPL
+           ELSE
+               MOVE &#039;P&#039; TO WS-ELIGIBILITY-STATUS
+               MOVE &#039;PASS&#039; TO DECESTSO
+               MOVE SPACES TO DECENTSO
+               MOVE &#039;EC&#039;   TO APPLICATION-STATUS
+                               OF DCLDLIS-LICENSE-APPL
+           END-IF</code></pre>
+</div>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EXEC SQL
+               UPDATE DLIS.LICENSE_APPLICATION SET
+                   ELIG_CHECK_STATUS = :WS-ELIGIBILITY-STATUS,
+                   ELIG_CHECK_DATE   = CURRENT DATE,
+                   ELIG_CHECK_NOTES  = :WS-ELIG-FAIL-REASON,
+                   APPLICATION_STATUS= :APPLICATION-STATUS
+                                       OF DCLDLIS-LICENSE-APPL,
+                   LAST_UPDATED_DATE = CURRENT DATE,
+                   LAST_UPDATED_BY   = :DECCHKBYI
+               WHERE APPLICATION_ID  = :APPLICATION-ID
+                                       OF DCLDLIS-LICENSE-APPL
+           END-EXEC</code></pre>
+</div>
+<p>The <code>UPDATE</code> runs for both pass and fail, so the outcome and the audit trail are always stored. Afterwards <code>DECMSG</code> is set to <code>ELIGIBILITY CHECK PASSED</code> on a pass. On a fail it is set to the failure reason text.</p>
+<h2 id="6-paragraph-reference" tabindex="-1">6. Paragraph Reference</h2>
+<table>
+<thead>
+<tr>
+<th>Paragraph</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MAIN-LOGIC</code></td>
+<td>Entry point. Tests <code>EIBCALEN</code>. Performs <code>INIT-SCREEN</code> on first entry, otherwise restores the COMMAREA and performs <code>PROCESS-INPUT</code>.</td>
+</tr>
+<tr>
+<td><code>INIT-SCREEN</code></td>
+<td>Moves the current date to <code>DECDATE</code>. Sends map <code>DLISEC01</code> with <code>ERASE FREEKB</code>. Returns with <code>TRANSID('DL05')</code>, <code>COMMAREA(DLIS-COMMAREA)</code> and <code>LENGTH(350)</code>.</td>
+</tr>
+<tr>
+<td><code>PROCESS-INPUT</code></td>
+<td>Receives the map. Evaluates <code>EIBAID</code> for <code>DFHPF1</code>, <code>DFHPF3</code>, <code>DFHPF12</code> or other. Sends the map with <code>DATAONLY FREEKB</code> and then returns pseudo-conversationally.</td>
+</tr>
+<tr>
+<td><code>LOAD-APPLICATION</code></td>
+<td>Validates the Application ID. Runs the join <code>SELECT</code>. Handles <code>SQLCODE = 100</code>. Populates the screen fields.</td>
+</tr>
+<tr>
+<td><code>LOAD-APPLICATION-EXIT</code></td>
+<td><code>EXIT</code> target for <code>GO TO</code> within <code>LOAD-APPLICATION</code>.</td>
+</tr>
+<tr>
+<td><code>RUN-ELIGIBILITY-CHECK</code></td>
+<td>Runs the input validation, application reload, age calculation, age rule, upgrade-path rules, result recording and DB2 <code>UPDATE</code>.</td>
+</tr>
+<tr>
+<td><code>RUN-ELIG-EXIT</code></td>
+<td><code>EXIT</code> target for early exits from <code>RUN-ELIGIBILITY-CHECK</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-constraints" tabindex="-1">7. Constraints</h2>
+<h3 id="71-input-constraints" tabindex="-1">7.1 Input Constraints</h3>
+<ul>
+<li>The Application ID must be non-zero for both F1 and F3.</li>
+<li>Checked-By must not be spaces for F1.</li>
+<li>The application must exist and load successfully (<code>DECMSG = 'APPLICATION LOADED'</code>) before the rules run.</li>
+</ul>
+<h3 id="72-license-type-and-age-constraints" tabindex="-1">7.2 License Type and Age Constraints</h3>
+<ul>
+<li>Only <code>L</code>, <code>P</code> and <code>O</code> are recognised. Any other value skips the age check and sets no failure flag.</li>
+<li>Age is a simple year difference, not an exact date comparison.</li>
+</ul>
+<h3 id="73-cics-constraints" tabindex="-1">7.3 CICS Constraints</h3>
+<ul>
+<li>The COMMAREA is fixed at 350 bytes. This matches <code>DFHCOMMAREA PIC X(350)</code>.</li>
+<li>Only F1, F3 and F12 are accepted. Any other key produces <code>USE F1 F3 OR F12</code>.</li>
+<li>On first entry (<code>EIBCALEN = 0</code>) the program only displays the blank screen.</li>
+</ul>
+<h2 id="8-error-handling" tabindex="-1">8. Error Handling</h2>
+<table>
+<thead>
+<tr>
+<th>Condition</th>
+<th>Handling</th>
+<th>Message</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Application ID is zero (F3)</td>
+<td>Branch to <code>LOAD-APPLICATION-EXIT</code>, no SQL</td>
+<td><code>ENTER APPLICATION ID</code></td>
+</tr>
+<tr>
+<td>Application ID is zero (F1)</td>
+<td><code>GO TO RUN-ELIG-EXIT</code></td>
+<td><code>ENTER APPLICATION ID FIRST</code></td>
+</tr>
+<tr>
+<td>Checked-By is blank</td>
+<td><code>GO TO RUN-ELIG-EXIT</code>, no update</td>
+<td><code>CHECKED-BY IS REQUIRED</code></td>
+</tr>
+<tr>
+<td><code>SQLCODE = 100</code> on lookup</td>
+<td>Branch to <code>LOAD-APPLICATION-EXIT</code></td>
+<td><code>APPLICATION NOT FOUND</code></td>
+</tr>
+<tr>
+<td>Load did not return success</td>
+<td><code>GO TO RUN-ELIG-EXIT</code></td>
+<td>The load message is shown</td>
+</tr>
+<tr>
+<td>Unrecognised key</td>
+<td>No processing</td>
+<td><code>USE F1 F3 OR F12</code></td>
+</tr>
+<tr>
+<td>Business rule failure</td>
+<td><code>WS-FAIL-FLAG</code> = <code>Y</code>, result recorded as failed</td>
+<td>The failure reason</td>
+</tr>
+</tbody>
+</table>
+<h3 id="81-known-limitations" tabindex="-1">8.1 Known Limitations</h3>
+<ul>
+<li>Negative <code>SQLCODE</code> values (hard SQL errors) are not checked on the <code>SELECT</code>, the <code>COUNT(*)</code> queries or the <code>UPDATE</code>.</li>
+<li><code>RESP(WS-RESP1)</code> is captured on <code>SEND MAP</code> and <code>RECEIVE MAP</code>, but it is never tested. CICS map I/O errors are therefore silently ignored.</li>
+</ul>
+<h2 id="9-examples" tabindex="-1">9. Examples</h2>
+<h3 id="91-example-1-successful-learner-eligibility-check" tabindex="-1">9.1 Example 1: Successful Learner Eligibility Check</h3>
+<p><strong>Input.</strong> Application ID <code>1001</code> and Checked-By <code>OFFICER01</code>. The user presses F1 on <code>2024-05-15</code>. The candidate is Alice Smith, born <code>2007-03-12</code>, and the license type is <code>L</code>.</p>
+<p><strong>Processing.</strong> The age is 2024 − 2007 = 17, which is at least 16. A Learner license has no prerequisite, so the fail flag stays <code>N</code>.</p>
+<p><strong>Result.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DECCNAMO</code></td>
+<td><code>ALICE SMITH</code></td>
+</tr>
+<tr>
+<td><code>DECMAGEO</code> / <code>DECAGEO</code></td>
+<td><code>16</code> / <code>17</code></td>
+</tr>
+<tr>
+<td><code>DECESTSO</code></td>
+<td><code>PASS</code></td>
+</tr>
+<tr>
+<td><code>DECMSG</code></td>
+<td><code>ELIGIBILITY CHECK PASSED</code></td>
+</tr>
+<tr>
+<td><code>ELIG_CHECK_STATUS</code></td>
+<td><code>P</code></td>
+</tr>
+<tr>
+<td><code>APPLICATION_STATUS</code></td>
+<td><code>EC</code></td>
+</tr>
+<tr>
+<td><code>ELIG_CHECK_NOTES</code></td>
+<td>Spaces</td>
+</tr>
+<tr>
+<td><code>LAST_UPDATED_BY</code></td>
+<td><code>OFFICER01</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="92-example-2-failed-probation-check-missing-learner-license" tabindex="-1">9.2 Example 2: Failed Probation Check, Missing Learner License</h3>
+<p><strong>Input.</strong> Application ID <code>1002</code> and Checked-By <code>OFFICER02</code>. The user presses F1 on <code>2024-05-15</code>. The candidate is Bob Brown, born <code>2005-08-20</code>, and the license type is <code>P</code>. There is no active Learner license in <code>ISSUED_LICENSE</code> for candidate 502.</p>
+<p><strong>Processing.</strong> The age is 2024 − 2005 = 19, which meets the minimum of 17. The prerequisite count is <code>0</code>, so the check fails.</p>
+<p><strong>Result.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DECCNAMO</code></td>
+<td><code>BOB BROWN</code></td>
+</tr>
+<tr>
+<td><code>DECMAGEO</code> / <code>DECAGEO</code></td>
+<td><code>17</code> / <code>19</code></td>
+</tr>
+<tr>
+<td><code>DECESTSO</code></td>
+<td><code>FAIL</code></td>
+</tr>
+<tr>
+<td><code>DECENTSO</code> and <code>DECMSG</code></td>
+<td><code>MUST HOLD ACTIVE LEARNER LICENSE FOR PROBATION</code></td>
+</tr>
+<tr>
+<td><code>ELIG_CHECK_STATUS</code></td>
+<td><code>F</code></td>
+</tr>
+<tr>
+<td><code>APPLICATION_STATUS</code></td>
+<td><code>RE</code></td>
+</tr>
+<tr>
+<td><code>LAST_UPDATED_BY</code></td>
+<td><code>OFFICER02</code></td>
+</tr>
+</tbody>
+</table>
+<div class="mermaid">
+sequenceDiagram
+    participant O as OFFICER02
+    participant P as DLISELIG
+    participant D as DB2
+    O->>P: App 1002, Checked-By, F1
+    P->>D: Load application 1002 + candidate
+    D-->>P: Type P, DOB 2005-08-20
+    P->>P: Age 19 >= 17, age rule OK
+    P->>D: COUNT active Learner licenses (candidate 502)
+    D-->>P: 0
+    P->>D: UPDATE status F, application status RE
+    P-->>O: FAIL - MUST HOLD ACTIVE LEARNER LICENSE FOR PROBATION
+</div>
+<h2 id="10-business-significance" tabindex="-1">10. Business Significance</h2>
+<ul>
+<li><strong>Age enforcement.</strong> The age rules keep under-age applicants from advancing to licenses they are not legally entitled to hold. The year-based calculation is approximate, so it could let through a candidate who is just short of the minimum age.</li>
+<li><strong>Graduated licensing.</strong> The prerequisite rule enforces the Learner → Probation → Open progression. Without it, applicants could skip intermediate stages.</li>
+<li><strong>Reliable workflow state.</strong> Always writing <code>EC</code> or <code>RE</code> leaves the application in a defined state. Downstream steps can act on that state.</li>
+<li><strong>Auditability.</strong> The date, the officer ID and the failure notes are stored on the application record.</li>
+</ul>
+
+                        <div class="related-pages">
+                            <p class="related-pages-title">Related Pages</p>
+                            <div class="card-grid">
+                                
+            <a href="license-application-entry.html" class="card">
+                <span class="card-title">License Application Entry (DL03)</span>
+                <span class="card-description">DLISAPPL: how clerks look up a candidate, retrieve the initial-issue fee for a license type (Learner, Probation, Open) and submit a new pending license application, with duplicate open-application checks.</span>
+            </a>
+            <a href="driving-history-check.html" class="card">
+                <span class="card-title">Driving History Check (DL06)</span>
+                <span class="card-description">DLISHIST: retrieval and scrollable display of a candidate&#039;s active driving incidents and the pass/fail decision based on suspensions, demerit points and unpaid fines, gated by a passed eligibility check.</span>
+            </a>
+            <a href="application-lifecycle-flow.html" class="card">
+                <span class="card-title">Application Lifecycle &amp; Status Flow</span>
+                <span class="card-description">End-to-end view of how a license application moves from entry through eligibility, history, payment, first and second approval to issuance, including the status codes and gating conditions between steps.</span>
+            </a>
+                            </div>
+                        </div>
+                    </div>
+                    <nav class="toc-panel" aria-label="On this page">
+  <span class="toc-panel-label">On this page</span>
+  <ul class="toc-list">
+<li class="toc-level-2"><a href="#1-overview">1. Overview</a>
+<ul>
+<li class="toc-level-3"><a href="#11-key-capabilities">1.1 Key Capabilities</a></li>
+<li class="toc-level-3"><a href="#12-outcome-summary">1.2 Outcome Summary</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#2-system-architecture">2. System Architecture</a>
+<ul>
+<li class="toc-level-3"><a href="#21-component-overview">2.1 Component Overview</a></li>
+<li class="toc-level-3"><a href="#22-components-and-responsibilities">2.2 Components and Responsibilities</a></li>
+<li class="toc-level-3"><a href="#23-program-structure">2.3 Program Structure</a></li>
+<li class="toc-level-3"><a href="#24-entities-and-relationships">2.4 Entities and Relationships</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#3-inputs-and-outputs">3. Inputs and Outputs</a>
+<ul>
+<li class="toc-level-3"><a href="#31-inputs">3.1 Inputs</a></li>
+<li class="toc-level-3"><a href="#32-outputs">3.2 Outputs</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#4-processing-logic">4. Processing Logic</a>
+<ul>
+<li class="toc-level-3"><a href="#41-pseudo-conversational-flow">4.1 Pseudo-Conversational Flow</a></li>
+<li class="toc-level-3"><a href="#42-load-application-f3">4.2 Load Application (F3)</a></li>
+<li class="toc-level-3"><a href="#43-run-eligibility-check-f1">4.3 Run Eligibility Check (F1)</a></li>
+<li class="toc-level-3"><a href="#44-sequence-of-operations">4.4 Sequence of Operations</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#5-business-rules">5. Business Rules</a>
+<ul>
+<li class="toc-level-3"><a href="#51-age-calculation">5.1 Age Calculation</a></li>
+<li class="toc-level-3"><a href="#52-minimum-age-by-license-type">5.2 Minimum Age by License Type</a></li>
+<li class="toc-level-3"><a href="#53-prerequisite-license-checks">5.3 Prerequisite License Checks</a></li>
+<li class="toc-level-3"><a href="#54-rule-summary">5.4 Rule Summary</a></li>
+<li class="toc-level-3"><a href="#55-determining-and-persisting-the-outcome">5.5 Determining and Persisting the Outcome</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#6-paragraph-reference">6. Paragraph Reference</a></li>
+<li class="toc-level-2"><a href="#7-constraints">7. Constraints</a>
+<ul>
+<li class="toc-level-3"><a href="#71-input-constraints">7.1 Input Constraints</a></li>
+<li class="toc-level-3"><a href="#72-license-type-and-age-constraints">7.2 License Type and Age Constraints</a></li>
+<li class="toc-level-3"><a href="#73-cics-constraints">7.3 CICS Constraints</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#8-error-handling">8. Error Handling</a>
+<ul>
+<li class="toc-level-3"><a href="#81-known-limitations">8.1 Known Limitations</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#9-examples">9. Examples</a>
+<ul>
+<li class="toc-level-3"><a href="#91-example-1-successful-learner-eligibility-check">9.1 Example 1: Successful Learner Eligibility Check</a></li>
+<li class="toc-level-3"><a href="#92-example-2-failed-probation-check-missing-learner-license">9.2 Example 2: Failed Probation Check, Missing Learner License</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#10-business-significance">10. Business Significance</a></li>
+</ul>
+
+</nav>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+    /* toc-spy.js — highlights the active heading in the TOC panel on scroll */
+    (function () {
+      function init() {
+        var panel = document.querySelector('.toc-panel');
+        if (!panel) return;
+        var links = Array.prototype.slice.call(panel.querySelectorAll('a[href^="#"]'));
+        if (!links.length) return;
+
+        var headingIds = links.map(function (a) { return a.getAttribute('href').slice(1); });
+        var headings = headingIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+        function clearActive() {
+          panel.querySelectorAll('.toc-active').forEach(function (el) { el.classList.remove('toc-active'); });
+          panel.querySelectorAll('.toc-parent-active').forEach(function (el) { el.classList.remove('toc-parent-active'); });
+        }
+
+        function setActive(id) {
+          clearActive();
+          var link = panel.querySelector('a[href="#' + id + '"]');
+          if (!link) return;
+          link.classList.add('toc-active');
+          var li = link.closest('li');
+          if (li) {
+            var parentLi = li.parentElement && li.parentElement.closest('li');
+            if (parentLi) parentLi.classList.add('toc-parent-active');
+          }
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+        headings.forEach(function (h) { observer.observe(h); });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
+    <script>
+    /* sidebar-toggle.js — persists open/closed state across navigation */
+    (function () {
+
+      var STORAGE_KEY = 'sb_open';
+
+      function getOpenSet() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+      }
+
+      function saveOpenSet(set) {
+        try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(set)); } catch (e) {}
+      }
+
+      function findItems(toggle) {
+        var node = toggle.nextSibling;
+        while (node) {
+          if (node.nodeType === 1 && node.classList.contains('nav-section-items'))
+            return node;
+          node = node.nextSibling;
+        }
+        return null;
+      }
+
+      function toggleKey(toggle, index) {
+        var label = (toggle.querySelector('.nav-toggle-text') || toggle).textContent.trim().replace(/\s+/g, ' ');
+        return index + ':' + label;
+      }
+
+      function openSection(toggle, items, key, set) {
+        toggle.classList.add('open');
+        items.classList.add('open');
+        if (set) set[key] = true;
+      }
+
+      function closeSection(toggle, items, key, set) {
+        toggle.classList.remove('open');
+        items.classList.remove('open');
+        if (set) set[key] = false;
+      }
+
+      function init() {
+        var sidebar = document.getElementById('wiki-sidebar');
+        var toggles = Array.prototype.slice.call(
+          document.querySelectorAll('.nav-section-toggle')
+        );
+
+        var activeIdx = -1;
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+          if (items.querySelector('.nav-link.active')) {
+            activeIdx = idx;
+          }
+        });
+
+        var savedSet = getOpenSet();
+        var openSet = savedSet || {};
+
+        if (activeIdx !== -1) {
+          openSet[toggleKey(toggles[activeIdx], activeIdx)] = true;
+        }
+
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+
+          var key = toggleKey(toggle, idx);
+          var shouldOpen = openSet[key] === true;
+
+          if (shouldOpen) {
+            toggle.classList.add('open');
+            items.classList.add('open');
+          }
+
+          toggle.addEventListener('click', function () {
+            var nowOpen = toggle.classList.contains('open');
+            if (nowOpen) {
+              closeSection(toggle, items, key, openSet);
+            } else {
+              openSection(toggle, items, key, openSet);
+            }
+            saveOpenSet(openSet);
+          });
+        });
+
+        saveOpenSet(openSet);
+
+        /* Restore sidebar scroll position after sections are expanded so the
+           scroll height is correct when we apply scrollTop. */
+        if (sidebar) {
+          try {
+            var savedScroll = sessionStorage.getItem('sb_scroll');
+            if (savedScroll !== null) { sidebar.scrollTop = parseInt(savedScroll, 10) || 0; }
+          } catch (_e) {}
+        }
+
+        window.addEventListener('pagehide', function () {
+          saveOpenSet(openSet);
+          if (sidebar) {
+            try { sessionStorage.setItem('sb_scroll', String(sidebar.scrollTop)); } catch (_e) {}
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+    </script>
+    <script>
+    /* nav-tracking.js — only stamps sessionStorage when clicking a source-file link
+       that lives inside the "Source Files" disclosure section, not from sidebar or cards. */
+    (function () {
+      document.addEventListener('click', function (e) {
+        var link = e.target.closest('a[href]');
+        if (!link) return;
+        var href = link.getAttribute('href');
+        if (!href || href.indexOf('sources/') === -1) return;
+        /* Only set referrer when the click originates from inside the Source Files
+           disclosure (.source-files-disclosure). Any other path — sidebar, cards,
+           direct navigation — must not set a referrer. */
+        if (!link.closest('.source-files-disclosure')) return;
+        try {
+          sessionStorage.setItem('wiki_referrer', JSON.stringify({
+            href: location.href,
+            title: document.title,
+            file: location.pathname.split('/').pop()
+          }));
+        } catch (_e) {}
+      });
+    })();
+    </script>
+    <footer class="wiki-footer">Made by IBM Bob Premium Package for Z</footer>
+</body>
+</html>

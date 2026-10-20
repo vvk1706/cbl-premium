@@ -1,0 +1,702 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLISCAND-overview</title>
+    <link rel="stylesheet" href="../../../assets/style.css">
+    <script src="../../../assets/mermaid.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+
+    <!-- Prism.js for syntax highlighting (bundled — no CDN required) -->
+    <link rel="stylesheet" href="../../../assets/prism-tomorrow.css">
+    <script src="../../../assets/prism-core.js"></script>
+    <script src="../../../assets/prism-languages.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="header-app-name"><a href="../../../../index.html" style="color: inherit; text-decoration: none;">Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</a></span>
+        </div>
+        <div class="header-right">
+        </div>
+    </header>
+    <div class="shell">
+        <aside class="sidebar" id="wiki-sidebar">
+            <nav>
+                
+        <div class="nav-home-wrap">
+            <a href="../../../../index.html" class="nav-home">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 6.5L8 2l6 4.5V14a1 1 0 01-1 1H3a1 1 0 01-1-1V6.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M6 15V9h4v6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                Home
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Application Documentation</div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Overview</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/system-overview.html" class="nav-link" data-page-id="system-overview">DLIS System Overview</a>
+                <a href="../../../pages/main-menu-navigation.html" class="nav-link" data-page-id="main-menu-navigation">Main Menu &amp; Navigation (DL01)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Candidate &amp; Application Intake</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/candidate-management.html" class="nav-link" data-page-id="candidate-management">Candidate Maintenance (DL02)</a>
+                <a href="../../../pages/license-application-entry.html" class="nav-link" data-page-id="license-application-entry">License Application Entry (DL03)</a>
+                <a href="../../../pages/application-status-inquiry.html" class="nav-link" data-page-id="application-status-inquiry">Application Status Inquiry (DL04)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Verification &amp; Payment</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/eligibility-check.html" class="nav-link" data-page-id="eligibility-check">Eligibility Check (DL05)</a>
+                <a href="../../../pages/driving-history-check.html" class="nav-link" data-page-id="driving-history-check">Driving History Check (DL06)</a>
+                <a href="../../../pages/payment-processing.html" class="nav-link" data-page-id="payment-processing">Payment Entry &amp; Processing (DL07)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Approval &amp; License Issuance</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/first-level-approval.html" class="nav-link" data-page-id="first-level-approval">First-Level Authority Approval (DL08)</a>
+                <a href="../../../pages/second-level-approval.html" class="nav-link" data-page-id="second-level-approval">Second-Level Authority Approval (DL09)</a>
+                <a href="../../../pages/license-issuance.html" class="nav-link" data-page-id="license-issuance">License Issuance (DL10)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Architecture</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/application-lifecycle-flow.html" class="nav-link" data-page-id="application-lifecycle-flow">Application Lifecycle &amp; Status Flow</a>
+                <a href="../../../pages/data-architecture.html" class="nav-link" data-page-id="data-architecture">Data Architecture (DB2)</a>
+                <a href="../../../pages/cics-integration-patterns.html" class="nav-link" data-page-id="cics-integration-patterns">CICS Integration Patterns</a>
+            </div>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Program Documentation</div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">program</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../sources/program/cobol/DLISPAY.html" class="nav-link">DLISPAY</a>
+                <a href="../../../sources/program/cobol/DLISSTAT.html" class="nav-link">DLISSTAT</a>
+                <a href="../../../sources/program/cobol/DLISMENU.html" class="nav-link">DLISMENU</a>
+                <a href="../../../sources/program/cobol/DLISELIG.html" class="nav-link">DLISELIG</a>
+                <a href="../../../sources/program/cobol/DLISCAND.html" class="nav-link">DLISCAND</a>
+                <a href="../../../sources/program/cobol/DLISAPPL.html" class="nav-link">DLISAPPL</a>
+                <a href="../../../sources/program/cobol/DLISISSU.html" class="nav-link">DLISISSU</a>
+                <a href="../../../sources/program/cobol/DLISAP2.html" class="nav-link">DLISAP2</a>
+                <a href="../../../sources/program/cobol/DLISHIST.html" class="nav-link">DLISHIST</a>
+                <a href="../../../sources/program/cobol/DLISAP1.html" class="nav-link">DLISAP1</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="nav-section">
+        <button class="nav-section-toggle open" type="button">
+            <span class="nav-toggle-text">business-rule</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items open">
+        <div class="nav-section">
+            <button class="nav-section-toggle open" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items open">
+                <a href="../../../sources/business-rule/cobol/DLISELIG-overview.html" class="nav-link">DLISELIG-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-inventory.html" class="nav-link">DLISPAY-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-overview.html" class="nav-link active">DLISCAND-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-inventory.html" class="nav-link">DLISAP2-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-inventory.html" class="nav-link">DLISHIST-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-inventory.html" class="nav-link">DLISMENU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISELIG-inventory.html" class="nav-link">DLISELIG-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-overview.html" class="nav-link">DLISPAY-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-overview.html" class="nav-link">DLISSTAT-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-overview.html" class="nav-link">DLISHIST-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-overview.html" class="nav-link">DLISAPPL-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-inventory.html" class="nav-link">DLISISSU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-inventory.html" class="nav-link">DLISAPPL-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-inventory.html" class="nav-link">DLISSTAT-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-overview.html" class="nav-link">DLISAP1-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-inventory.html" class="nav-link">DLISCAND-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-overview.html" class="nav-link">DLISAP2-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-overview.html" class="nav-link">DLISISSU-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-inventory.html" class="nav-link">DLISAP1-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-overview.html" class="nav-link">DLISMENU-overview</a>
+            </div>
+        </div>
+        </div>
+    </div>
+            </nav>
+        </aside>
+        <main class="main">
+            <div class="prog-container">
+                <div id="wiki-breadcrumb"></div>
+                <div class="content-layout">
+                    <article class="prose">
+                        <h1 id="business-rules-overview" tabindex="-1">Business rules: Overview</h1>
+<p><strong>Program:</strong> DLISCAND</p>
+<h2 id="1-purpose" tabindex="-1">1. Purpose</h2>
+<p>This document presents a program-level functional view of the business logic in DLISCAND. Business rules are organised into a Function → SubFunction → Business Rule hierarchy representing the business functions performed in the program. Semantically related rules are consolidated into named SubFunctions that group related business capabilities, and purely technical or setup logic is excluded. Each rule documents its purpose, ordered execution steps with conditions, actions, and outcomes, references to the contributing source paragraphs, and the business significance of each rule.</p>
+<h2 id="2-function-transaction-entry-and-request-routing" tabindex="-1">2. Function: Transaction Entry and Request Routing</h2>
+<h3 id="21-subfunction-session-entry-handling" tabindex="-1">2.1 SubFunction: Session Entry Handling</h3>
+<h4 id="211-business-rule-first-time-vs-return-entry-determination" tabindex="-1">2.1.1 Business Rule: First-Time vs. Return Entry Determination</h4>
+<h5 id="2111-purpose" tabindex="-1">2.1.1.1 Purpose</h5>
+<p>Determines whether the user is starting a new candidate-maintenance session or continuing an existing conversation. A fresh session presents a blank screen. A returning session restores the saved context and processes what the user entered.</p>
+<h5 id="2112-rule-steps" tabindex="-1">2.1.1.2 Rule Steps</h5>
+<ol>
+<li>Detect a fresh session.
+<ul>
+<li>Conditions: Commarea length is zero.</li>
+<li>Actions: Initialise the candidate maintenance screen for new input.</li>
+<li>Outcomes: The user sees a clean screen and no input is processed.</li>
+<li>Relevant Paragraphs: MAIN-LOGIC, INIT-SCREEN</li>
+</ul>
+</li>
+<li>Detect a returning session.
+<ul>
+<li>Conditions: Commarea length is non-zero.</li>
+<li>Actions: Restore the saved commarea data and pass control to user input processing.</li>
+<li>Outcomes: The user’s request is processed with the prior context preserved.</li>
+<li>Relevant Paragraphs: MAIN-LOGIC, PROCESS-INPUT</li>
+</ul>
+</li>
+</ol>
+<h5 id="2113-business-significance" tabindex="-1">2.1.1.3 Business Significance</h5>
+<p>If the two entry modes are confused, users could see stale data from a prior interaction, or their input could be discarded. Either error can cause candidate records to be maintained against the wrong context.</p>
+<h3 id="22-subfunction-function-key-dispatch" tabindex="-1">2.2 SubFunction: Function Key Dispatch</h3>
+<h4 id="221-business-rule-function-key-to-candidate-operation-mapping" tabindex="-1">2.2.1 Business Rule: Function Key to Candidate Operation Mapping</h4>
+<h5 id="2211-purpose" tabindex="-1">2.2.1.1 Purpose</h5>
+<p>Maps each function key to one candidate lifecycle operation, giving users a fixed set of actions: create, update, inquire, deactivate and exit. Any other key is rejected.</p>
+<h5 id="2212-rule-steps" tabindex="-1">2.2.1.2 Rule Steps</h5>
+<ol>
+<li>Route a recognised function key to its operation.
+<ul>
+<li>Conditions: F1 creates, F2 updates, F3 inquires, F4 deactivates.</li>
+<li>Actions: Invoke the matching candidate operation.</li>
+<li>Outcomes: The requested candidate operation runs.</li>
+<li>Relevant Paragraphs: PROCESS-INPUT, CREATE-CANDIDATE, UPDATE-CANDIDATE, INQUIRE-CANDIDATE, DEACTIVATE-CANDIDATE</li>
+</ul>
+</li>
+<li>Handle exit.
+<ul>
+<li>Conditions: F12 is pressed.</li>
+<li>Actions: End the transaction.</li>
+<li>Outcomes: The user leaves the candidate maintenance session.</li>
+<li>Relevant Paragraphs: PROCESS-INPUT</li>
+</ul>
+</li>
+<li>Reject unsupported keys.
+<ul>
+<li>Conditions: Any key other than F1, F2, F3, F4 or F12.</li>
+<li>Actions: Display an invalid key message.</li>
+<li>Outcomes: No operation runs and the user is told to choose a valid key.</li>
+<li>Relevant Paragraphs: PROCESS-INPUT</li>
+</ul>
+</li>
+</ol>
+<h5 id="2213-business-significance" tabindex="-1">2.2.1.3 Business Significance</h5>
+<p>Incorrect routing could trigger the wrong operation, for example deactivating a candidate when an inquiry was intended. This would change candidate data unintentionally.</p>
+<h2 id="3-function-candidate-registration" tabindex="-1">3. Function: Candidate Registration</h2>
+<h3 id="31-subfunction-pre-creation-validation" tabindex="-1">3.1 SubFunction: Pre-Creation Validation</h3>
+<h4 id="311-business-rule-mandatory-identity-fields-for-new-candidates" tabindex="-1">3.1.1 Business Rule: Mandatory Identity Fields for New Candidates</h4>
+<h5 id="3111-purpose" tabindex="-1">3.1.1.1 Purpose</h5>
+<p>Ensures every new candidate has a first name, last name and National ID, so each record can be identified and matched to a real person.</p>
+<h5 id="3112-rule-steps" tabindex="-1">3.1.1.2 Rule Steps</h5>
+<ol>
+<li>Check the mandatory fields.
+<ul>
+<li>Conditions: FIRST-NAME, LAST-NAME or ID-NUMBER is missing.</li>
+<li>Actions: Stop processing and show the error message specific to the missing field.</li>
+<li>Outcomes: No candidate is created until all three fields are supplied.</li>
+<li>Relevant Paragraphs: CREATE-CANDIDATE</li>
+</ul>
+</li>
+</ol>
+<h5 id="3113-business-significance" tabindex="-1">3.1.1.3 Business Significance</h5>
+<p>Without these checks, incomplete candidate records would enter the database. This would hamper later identification, duplicate detection and National ID lookups.</p>
+<h4 id="312-business-rule-duplicate-active-candidate-prevention" tabindex="-1">3.1.2 Business Rule: Duplicate Active Candidate Prevention</h4>
+<h5 id="3121-purpose" tabindex="-1">3.1.2.1 Purpose</h5>
+<p>Prevents the same person from being registered twice while an active record already exists under the same National ID. Only active records count, so a person with an inactive record can be registered again.</p>
+<h5 id="3122-rule-steps" tabindex="-1">3.1.2.2 Rule Steps</h5>
+<ol>
+<li>Search for an existing active candidate.
+<ul>
+<li>Conditions: A record exists with ID-NUMBER equal to the entered value and RECORD-STATUS = ‘A’.</li>
+<li>Actions: Look up CANDIDATE-ID for the matching record.</li>
+<li>Outcomes: A match identifies a duplicate.</li>
+<li>Relevant Paragraphs: CREATE-CANDIDATE</li>
+</ul>
+</li>
+<li>Block creation if a duplicate exists.
+<ul>
+<li>Conditions: An active match was found.</li>
+<li>Actions: Halt creation and inform the user.</li>
+<li>Outcomes: No second active record is created for the same National ID.</li>
+<li>Relevant Paragraphs: CREATE-CANDIDATE</li>
+</ul>
+</li>
+<li>Allow creation if the match is inactive or absent.
+<ul>
+<li>Conditions: No active record has the same ID-NUMBER.</li>
+<li>Actions: Continue to record insertion.</li>
+<li>Outcomes: Registration may proceed.</li>
+<li>Relevant Paragraphs: CREATE-CANDIDATE</li>
+</ul>
+</li>
+</ol>
+<h5 id="3123-business-significance" tabindex="-1">3.1.2.3 Business Significance</h5>
+<p>Failing to prevent duplicates would create conflicting candidate profiles for one person. This undermines the integrity of National ID lookups and of any downstream use of the records.</p>
+<h3 id="32-subfunction-candidate-record-creation" tabindex="-1">3.2 SubFunction: Candidate Record Creation</h3>
+<h4 id="321-business-rule-create-active-candidate-with-audit-stamp" tabindex="-1">3.2.1 Business Rule: Create Active Candidate with Audit Stamp</h4>
+<h5 id="3211-purpose" tabindex="-1">3.2.1.1 Purpose</h5>
+<p>Persists a new candidate with full personal, address and contact details. The record starts as active and is stamped with the creating terminal for audit purposes.</p>
+<h5 id="3212-rule-steps" tabindex="-1">3.2.1.2 Rule Steps</h5>
+<ol>
+<li>Insert the candidate record.
+<ul>
+<li>Conditions: Mandatory field and duplicate checks have passed.</li>
+<li>Actions: Store FIRST-NAME, LAST-NAME, DATE-OF-BIRTH, ID-NUMBER, ADDRESS-LINE-1, ADDRESS-LINE-2, CITY, STATE-PROVINCE, POSTAL-CODE, COUNTRY, PHONE-NUMBER and EMAIL-ADDRESS. Set RECORD-STATUS to ‘A’ and set CREATED-BY to the terminal identifier.</li>
+<li>Outcomes: A new active candidate exists, traceable to its originating terminal.</li>
+<li>Relevant Paragraphs: CREATE-CANDIDATE</li>
+</ul>
+</li>
+<li>Return the generated ID and confirm.
+<ul>
+<li>Conditions: The insert succeeded.</li>
+<li>Actions: Retrieve the system-generated CANDIDATE-ID, show it on the screen and display a success message.</li>
+<li>Outcomes: The user receives the new identifier for later update, inquiry or deactivation.</li>
+<li>Relevant Paragraphs: CREATE-CANDIDATE</li>
+</ul>
+</li>
+</ol>
+<h5 id="3213-business-significance" tabindex="-1">3.2.1.3 Business Significance</h5>
+<p>An incorrect initial status or a missing audit stamp would leave records invisible to duplicate checks or untraceable to their creator. If the generated ID is not shown, the user cannot easily find the record for subsequent maintenance.</p>
+<h2 id="4-function-candidate-maintenance" tabindex="-1">4. Function: Candidate Maintenance</h2>
+<h3 id="41-subfunction-candidate-update" tabindex="-1">4.1 SubFunction: Candidate Update</h3>
+<h4 id="411-business-rule-candidate-update-with-mandatory-target-identification" tabindex="-1">4.1.1 Business Rule: Candidate Update with Mandatory Target Identification</h4>
+<h5 id="4111-purpose" tabindex="-1">4.1.1.1 Purpose</h5>
+<p>Allows changes to an existing candidate’s name, address, contact details and status, and only when the target record is explicitly identified by Candidate ID.</p>
+<h5 id="4112-rule-steps" tabindex="-1">4.1.1.2 Rule Steps</h5>
+<ol>
+<li>Validate that the target is identified.
+<ul>
+<li>Conditions: CANDIDATE-ID is not provided.</li>
+<li>Actions: Stop the update and return an error message.</li>
+<li>Outcomes: No update is attempted without a target.</li>
+<li>Relevant Paragraphs: UPDATE-CANDIDATE</li>
+</ul>
+</li>
+<li>Apply the update.
+<ul>
+<li>Conditions: CANDIDATE-ID is present.</li>
+<li>Actions: Modify FIRST-NAME, LAST-NAME, ADDRESS-LINE-1, ADDRESS-LINE-2, CITY, STATE-PROVINCE, POSTAL-CODE, COUNTRY, PHONE-NUMBER, EMAIL-ADDRESS and RECORD-STATUS in one operation.</li>
+<li>Outcomes: The record reflects the new values.</li>
+<li>Relevant Paragraphs: UPDATE-CANDIDATE</li>
+</ul>
+</li>
+<li>Communicate the result.
+<ul>
+<li>Conditions: The update finds no matching candidate, succeeds, or fails with a database error.</li>
+<li>Actions: Show a “not found” message, a success confirmation, or a database error message accordingly.</li>
+<li>Outcomes: The user knows whether the change was applied.</li>
+<li>Relevant Paragraphs: UPDATE-CANDIDATE</li>
+</ul>
+</li>
+</ol>
+<h5 id="4113-business-significance" tabindex="-1">4.1.1.3 Business Significance</h5>
+<p>Updating without a valid target risks changing the wrong record or none at all. Because RECORD-STATUS is updatable here, an error could also reactivate or deactivate a candidate unintentionally. Misleading result messages could lead users to believe a change was saved when it was not.</p>
+<h3 id="42-subfunction-candidate-deactivation" tabindex="-1">4.2 SubFunction: Candidate Deactivation</h3>
+<h4 id="421-business-rule-logical-deactivation-of-a-candidate" tabindex="-1">4.2.1 Business Rule: Logical Deactivation of a Candidate</h4>
+<h5 id="4211-purpose" tabindex="-1">4.2.1.1 Purpose</h5>
+<p>Retires a candidate without deleting data by setting its status to inactive (‘I’). The record is retained for history, and inactive candidates no longer block re-registration under the same National ID.</p>
+<h5 id="4212-rule-steps" tabindex="-1">4.2.1.2 Rule Steps</h5>
+<ol>
+<li>Validate that the target is identified.
+<ul>
+<li>Conditions: CANDIDATE-ID is not provided.</li>
+<li>Actions: Stop the operation and prompt the user.</li>
+<li>Outcomes: Deactivation is not attempted without a target.</li>
+<li>Relevant Paragraphs: DEACTIVATE-CANDIDATE</li>
+</ul>
+</li>
+<li>Set the candidate inactive.
+<ul>
+<li>Conditions: CANDIDATE-ID is present.</li>
+<li>Actions: Set RECORD-STATUS to ‘I’ for the matching record.</li>
+<li>Outcomes: The candidate becomes inactive.</li>
+<li>Relevant Paragraphs: DEACTIVATE-CANDIDATE</li>
+</ul>
+</li>
+<li>Communicate the result.
+<ul>
+<li>Conditions: No matching candidate is found, the deactivation succeeds, or a database error occurs.</li>
+<li>Actions: Show a “not found” message, or on success update the screen status field to ‘I’ with a confirmation message, or show a database error message.</li>
+<li>Outcomes: The user sees the outcome and the screen reflects the new status.</li>
+<li>Relevant Paragraphs: DEACTIVATE-CANDIDATE</li>
+</ul>
+</li>
+</ol>
+<h5 id="4213-business-significance" tabindex="-1">4.2.1.3 Business Significance</h5>
+<p>Deactivating the wrong candidate, or failing to deactivate one, affects the candidate’s eligibility. It also affects whether the active-duplicate check blocks later registrations. Using a logical rather than a physical removal preserves history for audit and recovery.</p>
+<h2 id="5-function-candidate-inquiry" tabindex="-1">5. Function: Candidate Inquiry</h2>
+<h3 id="51-subfunction-candidate-lookup-and-display" tabindex="-1">5.1 SubFunction: Candidate Lookup and Display</h3>
+<h4 id="511-business-rule-search-key-requirement-for-inquiry" tabindex="-1">5.1.1 Business Rule: Search Key Requirement for Inquiry</h4>
+<h5 id="5111-purpose" tabindex="-1">5.1.1.1 Purpose</h5>
+<p>Requires the user to supply at least one search key, either Candidate ID or National ID, so that inquiries are directed at a specific person and not a broad scan.</p>
+<h5 id="5112-rule-steps" tabindex="-1">5.1.1.2 Rule Steps</h5>
+<ol>
+<li>Verify that a search key is present.
+<ul>
+<li>Conditions: Both CANDIDATE-ID and ID-NUMBER are missing.</li>
+<li>Actions: Halt the inquiry and prompt the user to supply a key.</li>
+<li>Outcomes: No lookup runs without a key.</li>
+<li>Relevant Paragraphs: INQUIRE-CANDIDATE</li>
+</ul>
+</li>
+</ol>
+<h5 id="5113-business-significance" tabindex="-1">5.1.1.3 Business Significance</h5>
+<p>Without this rule, an inquiry with no criteria could return arbitrary data or fail unpredictably. That would expose personal information about the wrong candidate.</p>
+<h4 id="512-business-rule-candidate-retrieval-and-profile-presentation" tabindex="-1">5.1.2 Business Rule: Candidate Retrieval and Profile Presentation</h4>
+<h5 id="5121-purpose" tabindex="-1">5.1.2.1 Purpose</h5>
+<p>Finds a candidate by Candidate ID or by National ID. It then presents the full profile, including the current active or inactive status, so the user can verify the candidate’s details and standing.</p>
+<h5 id="5122-rule-steps" tabindex="-1">5.1.2.2 Rule Steps</h5>
+<ol>
+<li>Locate the candidate record.
+<ul>
+<li>Conditions: CANDIDATE-ID or ID-NUMBER is provided. ID-NUMBER serves as the alternate key when CANDIDATE-ID is absent.</li>
+<li>Actions: Read the matching record, including FIRST-NAME, LAST-NAME, DATE-OF-BIRTH, address fields, PHONE-NUMBER, EMAIL-ADDRESS and RECORD-STATUS.</li>
+<li>Outcomes: The candidate data is available for display.</li>
+<li>Relevant Paragraphs: INQUIRE-CANDIDATE</li>
+</ul>
+</li>
+<li>Handle a missing candidate.
+<ul>
+<li>Conditions: No record matches the supplied key.</li>
+<li>Actions: Display a “not found” message and end the inquiry.</li>
+<li>Outcomes: The user knows no such candidate exists.</li>
+<li>Relevant Paragraphs: INQUIRE-CANDIDATE</li>
+</ul>
+</li>
+<li>Display the candidate profile.
+<ul>
+<li>Conditions: A matching record was retrieved.</li>
+<li>Actions: Move CANDIDATE-ID, names, DATE-OF-BIRTH, ID-NUMBER, address fields, PHONE-NUMBER, EMAIL-ADDRESS and RECORD-STATUS to the screen, then show a success message.</li>
+<li>Outcomes: The user sees the complete candidate profile and can tell whether the candidate is active or inactive.</li>
+<li>Relevant Paragraphs: INQUIRE-CANDIDATE</li>
+</ul>
+</li>
+</ol>
+<h5 id="5123-business-significance" tabindex="-1">5.1.2.3 Business Significance</h5>
+<p>Incorrect retrieval or display could show details of the wrong person or a misleading status. The user would then base update or deactivation decisions on inaccurate information.</p>
+
+                    </article>
+                    <nav class="toc-panel" aria-label="On this page">
+  <span class="toc-panel-label">On this page</span>
+  <ul class="toc-list">
+<li class="toc-level-2"><a href="#1-purpose">1. Purpose</a></li>
+<li class="toc-level-2"><a href="#2-function-transaction-entry-and-request-routing">2. Function: Transaction Entry and Request Routing</a>
+<ul>
+<li class="toc-level-3"><a href="#21-subfunction-session-entry-handling">2.1 SubFunction: Session Entry Handling</a>
+<ul>
+<li class="toc-level-4"><a href="#211-business-rule-first-time-vs-return-entry-determination">2.1.1 Business Rule: First-Time vs. Return Entry Determination</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#22-subfunction-function-key-dispatch">2.2 SubFunction: Function Key Dispatch</a>
+<ul>
+<li class="toc-level-4"><a href="#221-business-rule-function-key-to-candidate-operation-mapping">2.2.1 Business Rule: Function Key to Candidate Operation Mapping</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#3-function-candidate-registration">3. Function: Candidate Registration</a>
+<ul>
+<li class="toc-level-3"><a href="#31-subfunction-pre-creation-validation">3.1 SubFunction: Pre-Creation Validation</a>
+<ul>
+<li class="toc-level-4"><a href="#311-business-rule-mandatory-identity-fields-for-new-candidates">3.1.1 Business Rule: Mandatory Identity Fields for New Candidates</a></li>
+<li class="toc-level-4"><a href="#312-business-rule-duplicate-active-candidate-prevention">3.1.2 Business Rule: Duplicate Active Candidate Prevention</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#32-subfunction-candidate-record-creation">3.2 SubFunction: Candidate Record Creation</a>
+<ul>
+<li class="toc-level-4"><a href="#321-business-rule-create-active-candidate-with-audit-stamp">3.2.1 Business Rule: Create Active Candidate with Audit Stamp</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#4-function-candidate-maintenance">4. Function: Candidate Maintenance</a>
+<ul>
+<li class="toc-level-3"><a href="#41-subfunction-candidate-update">4.1 SubFunction: Candidate Update</a>
+<ul>
+<li class="toc-level-4"><a href="#411-business-rule-candidate-update-with-mandatory-target-identification">4.1.1 Business Rule: Candidate Update with Mandatory Target Identification</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#42-subfunction-candidate-deactivation">4.2 SubFunction: Candidate Deactivation</a>
+<ul>
+<li class="toc-level-4"><a href="#421-business-rule-logical-deactivation-of-a-candidate">4.2.1 Business Rule: Logical Deactivation of a Candidate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#5-function-candidate-inquiry">5. Function: Candidate Inquiry</a>
+<ul>
+<li class="toc-level-3"><a href="#51-subfunction-candidate-lookup-and-display">5.1 SubFunction: Candidate Lookup and Display</a>
+<ul>
+<li class="toc-level-4"><a href="#511-business-rule-search-key-requirement-for-inquiry">5.1.1 Business Rule: Search Key Requirement for Inquiry</a></li>
+<li class="toc-level-4"><a href="#512-business-rule-candidate-retrieval-and-profile-presentation">5.1.2 Business Rule: Candidate Retrieval and Profile Presentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</nav>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="wiki-footer">Made by IBM Bob Premium Package for Z</footer>
+    <script>
+    /* toc-spy.js — highlights the active heading in the TOC panel on scroll */
+    (function () {
+      function init() {
+        var panel = document.querySelector('.toc-panel');
+        if (!panel) return;
+        var links = Array.prototype.slice.call(panel.querySelectorAll('a[href^="#"]'));
+        if (!links.length) return;
+
+        var headingIds = links.map(function (a) { return a.getAttribute('href').slice(1); });
+        var headings = headingIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+        function clearActive() {
+          panel.querySelectorAll('.toc-active').forEach(function (el) { el.classList.remove('toc-active'); });
+          panel.querySelectorAll('.toc-parent-active').forEach(function (el) { el.classList.remove('toc-parent-active'); });
+        }
+
+        function setActive(id) {
+          clearActive();
+          var link = panel.querySelector('a[href="#' + id + '"]');
+          if (!link) return;
+          link.classList.add('toc-active');
+          var li = link.closest('li');
+          if (li) {
+            var parentLi = li.parentElement && li.parentElement.closest('li');
+            if (parentLi) parentLi.classList.add('toc-parent-active');
+          }
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+        headings.forEach(function (h) { observer.observe(h); });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
+    <script>
+    /* breadcrumb.js — reads sessionStorage['wiki_referrer'] and renders breadcrumb.
+       Only fires when the referrer was set by clicking a link inside the Source Files
+       disclosure on a wiki page; clears after rendering so stale state never lingers. */
+    (function () {
+      var raw;
+      try { raw = sessionStorage.getItem('wiki_referrer'); } catch (_e) {}
+      if (!raw) return;
+      /* Consume immediately — prevents the breadcrumb re-appearing on the next visit. */
+      try { sessionStorage.removeItem('wiki_referrer'); } catch (_e) {}
+      var ref;
+      try { ref = JSON.parse(raw); } catch (_e) { return; }
+      if (!ref || !ref.href) return;
+      var bc = document.getElementById('wiki-breadcrumb');
+      if (!bc) return;
+      bc.className = 'wiki-breadcrumb';
+      bc.innerHTML =
+        '<a href="' + ref.href + '">' + (ref.title || 'Back') + '</a>' +
+        '<span class="wiki-breadcrumb-sep"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' +
+        '<span class="wiki-breadcrumb-current">DLISCAND-overview</span>';
+    })();
+    </script>
+    <script>
+    /* sidebar toggle — same as main wiki pages */
+    (function () {
+
+      var STORAGE_KEY = 'sb_open';
+
+      function getOpenSet() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+      }
+
+      function saveOpenSet(set) {
+        try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(set)); } catch (e) {}
+      }
+
+      function findItems(toggle) {
+        var node = toggle.nextSibling;
+        while (node) {
+          if (node.nodeType === 1 && node.classList.contains('nav-section-items'))
+            return node;
+          node = node.nextSibling;
+        }
+        return null;
+      }
+
+      function toggleKey(toggle, index) {
+        var label = (toggle.querySelector('.nav-toggle-text') || toggle).textContent.trim().replace(/\s+/g, ' ');
+        return index + ':' + label;
+      }
+
+      function openSection(toggle, items, key, set) {
+        toggle.classList.add('open');
+        items.classList.add('open');
+        if (set) set[key] = true;
+      }
+
+      function closeSection(toggle, items, key, set) {
+        toggle.classList.remove('open');
+        items.classList.remove('open');
+        if (set) set[key] = false;
+      }
+
+      function init() {
+        var sidebar = document.getElementById('wiki-sidebar');
+        var toggles = Array.prototype.slice.call(
+          document.querySelectorAll('.nav-section-toggle')
+        );
+
+        var savedSet = getOpenSet();
+        var openSet = savedSet || {};
+
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+
+          var key = toggleKey(toggle, idx);
+          var shouldOpen = openSet[key] === true;
+
+          if (shouldOpen) {
+            toggle.classList.add('open');
+            items.classList.add('open');
+          }
+
+          toggle.addEventListener('click', function () {
+            var nowOpen = toggle.classList.contains('open');
+            if (nowOpen) {
+              closeSection(toggle, items, key, openSet);
+            } else {
+              openSection(toggle, items, key, openSet);
+            }
+            saveOpenSet(openSet);
+          });
+        });
+
+        saveOpenSet(openSet);
+
+        /* Restore sidebar scroll position after sections are expanded so the
+           scroll height is correct when we apply scrollTop. */
+        if (sidebar) {
+          try {
+            var savedScroll = sessionStorage.getItem('sb_scroll');
+            if (savedScroll !== null) { sidebar.scrollTop = parseInt(savedScroll, 10) || 0; }
+          } catch (_e) {}
+        }
+
+        window.addEventListener('pagehide', function () {
+          saveOpenSet(openSet);
+          if (sidebar) {
+            try { sessionStorage.setItem('sb_scroll', String(sidebar.scrollTop)); } catch (_e) {}
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+    </script>
+</body>
+</html>

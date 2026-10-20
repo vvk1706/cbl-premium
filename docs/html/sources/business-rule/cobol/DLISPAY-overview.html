@@ -1,0 +1,522 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLISPAY-overview</title>
+    <link rel="stylesheet" href="../../../assets/style.css">
+    <script src="../../../assets/mermaid.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+
+    <!-- Prism.js for syntax highlighting (bundled — no CDN required) -->
+    <link rel="stylesheet" href="../../../assets/prism-tomorrow.css">
+    <script src="../../../assets/prism-core.js"></script>
+    <script src="../../../assets/prism-languages.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="header-app-name"><a href="../../../../index.html" style="color: inherit; text-decoration: none;">Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</a></span>
+        </div>
+        <div class="header-right">
+        </div>
+    </header>
+    <div class="shell">
+        <aside class="sidebar" id="wiki-sidebar">
+            <nav>
+                
+        <div class="nav-home-wrap">
+            <a href="../../../../index.html" class="nav-home">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 6.5L8 2l6 4.5V14a1 1 0 01-1 1H3a1 1 0 01-1-1V6.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M6 15V9h4v6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                Home
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Application Documentation</div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Overview</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/system-overview.html" class="nav-link" data-page-id="system-overview">DLIS System Overview</a>
+                <a href="../../../pages/main-menu-navigation.html" class="nav-link" data-page-id="main-menu-navigation">Main Menu &amp; Navigation (DL01)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Candidate &amp; Application Intake</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/candidate-management.html" class="nav-link" data-page-id="candidate-management">Candidate Maintenance (DL02)</a>
+                <a href="../../../pages/license-application-entry.html" class="nav-link" data-page-id="license-application-entry">License Application Entry (DL03)</a>
+                <a href="../../../pages/application-status-inquiry.html" class="nav-link" data-page-id="application-status-inquiry">Application Status Inquiry (DL04)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Verification &amp; Payment</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/eligibility-check.html" class="nav-link" data-page-id="eligibility-check">Eligibility Check (DL05)</a>
+                <a href="../../../pages/driving-history-check.html" class="nav-link" data-page-id="driving-history-check">Driving History Check (DL06)</a>
+                <a href="../../../pages/payment-processing.html" class="nav-link" data-page-id="payment-processing">Payment Entry &amp; Processing (DL07)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Approval &amp; License Issuance</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/first-level-approval.html" class="nav-link" data-page-id="first-level-approval">First-Level Authority Approval (DL08)</a>
+                <a href="../../../pages/second-level-approval.html" class="nav-link" data-page-id="second-level-approval">Second-Level Authority Approval (DL09)</a>
+                <a href="../../../pages/license-issuance.html" class="nav-link" data-page-id="license-issuance">License Issuance (DL10)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Architecture</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/application-lifecycle-flow.html" class="nav-link" data-page-id="application-lifecycle-flow">Application Lifecycle &amp; Status Flow</a>
+                <a href="../../../pages/data-architecture.html" class="nav-link" data-page-id="data-architecture">Data Architecture (DB2)</a>
+                <a href="../../../pages/cics-integration-patterns.html" class="nav-link" data-page-id="cics-integration-patterns">CICS Integration Patterns</a>
+            </div>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Program Documentation</div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">program</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../sources/program/cobol/DLISPAY.html" class="nav-link">DLISPAY</a>
+                <a href="../../../sources/program/cobol/DLISSTAT.html" class="nav-link">DLISSTAT</a>
+                <a href="../../../sources/program/cobol/DLISMENU.html" class="nav-link">DLISMENU</a>
+                <a href="../../../sources/program/cobol/DLISELIG.html" class="nav-link">DLISELIG</a>
+                <a href="../../../sources/program/cobol/DLISCAND.html" class="nav-link">DLISCAND</a>
+                <a href="../../../sources/program/cobol/DLISAPPL.html" class="nav-link">DLISAPPL</a>
+                <a href="../../../sources/program/cobol/DLISISSU.html" class="nav-link">DLISISSU</a>
+                <a href="../../../sources/program/cobol/DLISAP2.html" class="nav-link">DLISAP2</a>
+                <a href="../../../sources/program/cobol/DLISHIST.html" class="nav-link">DLISHIST</a>
+                <a href="../../../sources/program/cobol/DLISAP1.html" class="nav-link">DLISAP1</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="nav-section">
+        <button class="nav-section-toggle open" type="button">
+            <span class="nav-toggle-text">business-rule</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items open">
+        <div class="nav-section">
+            <button class="nav-section-toggle open" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items open">
+                <a href="../../../sources/business-rule/cobol/DLISELIG-overview.html" class="nav-link">DLISELIG-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-inventory.html" class="nav-link">DLISPAY-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-overview.html" class="nav-link">DLISCAND-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-inventory.html" class="nav-link">DLISAP2-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-inventory.html" class="nav-link">DLISHIST-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-inventory.html" class="nav-link">DLISMENU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISELIG-inventory.html" class="nav-link">DLISELIG-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-overview.html" class="nav-link active">DLISPAY-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-overview.html" class="nav-link">DLISSTAT-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-overview.html" class="nav-link">DLISHIST-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-overview.html" class="nav-link">DLISAPPL-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-inventory.html" class="nav-link">DLISISSU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-inventory.html" class="nav-link">DLISAPPL-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-inventory.html" class="nav-link">DLISSTAT-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-overview.html" class="nav-link">DLISAP1-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-inventory.html" class="nav-link">DLISCAND-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-overview.html" class="nav-link">DLISAP2-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-overview.html" class="nav-link">DLISISSU-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-inventory.html" class="nav-link">DLISAP1-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-overview.html" class="nav-link">DLISMENU-overview</a>
+            </div>
+        </div>
+        </div>
+    </div>
+            </nav>
+        </aside>
+        <main class="main">
+            <div class="prog-container">
+                <div id="wiki-breadcrumb"></div>
+                <div class="content-layout">
+                    <article class="prose">
+                        <h1 id="business-rules-overview" tabindex="-1">Business rules: Overview</h1>
+<p><strong>Program:</strong> DLISPAY</p>
+<h2 id="1-purpose" tabindex="-1">1. Purpose</h2>
+<p>This document presents a program-level functional view of the business logic in DLISPAY. Business rules are organised into a Function → SubFunction → Business Rule hierarchy representing the business functions performed in the program. Semantically related rules are consolidated into named SubFunctions that group related business capabilities, and purely technical or setup logic is excluded. Each rule documents its purpose, ordered execution steps with conditions, actions, and outcomes, references to the contributing source paragraphs, and the business significance of each rule.</p>
+<h2 id="2-function-license-application-classification" tabindex="-1">2. Function: License Application Classification</h2>
+<h3 id="21-subfunction-license-category-identification" tabindex="-1">2.1 SubFunction: License Category Identification</h3>
+<h4 id="211-business-rule-derive-license-type-description" tabindex="-1">2.1.1 Business Rule: Derive License Type Description</h4>
+<h5 id="2111-purpose" tabindex="-1">2.1.1.1 Purpose</h5>
+<p>Translates the single-character license type code held on the application into its business-facing category name. This lets the application and downstream processing refer to the license category (Learner, Probation or Open) in consistent, readable terms rather than by internal code.</p>
+<h5 id="2112-rule-steps" tabindex="-1">2.1.1.2 Rule Steps</h5>
+<ol>
+<li>Classify the license type code into its descriptive category name
+<ul>
+<li>Conditions: <code>LICENSE-TYPE</code> = ‘L’ → LEARNER; <code>LICENSE-TYPE</code> = ‘P’ → PROBATION; <code>LICENSE-TYPE</code> = ‘O’ → OPEN. The input does not define any behavior for other values.</li>
+<li>Actions: Assign the matching description (LEARNER, PROBATION or OPEN) to the application’s license type description.</li>
+<li>Outcomes: The application carries a human-readable license category aligned with its type code.</li>
+<li>Relevant Paragraphs: LOAD-APPLICATION (variable: <code>LICENSE-TYPE</code>)</li>
+</ul>
+</li>
+</ol>
+<h5 id="2113-business-significance" tabindex="-1">2.1.1.3 Business Significance</h5>
+<p>If the mapping is wrong or incomplete, the application can be shown or treated under the wrong license category. That can lead to wrong fee or eligibility interpretation, misleading information for operators and applicants, and an unlabeled category when an unrecognized code is encountered, since no fallback is defined.</p>
+<hr>
+<h2 id="3-function-license-fee-payment-processing" tabindex="-1">3. Function: License Fee Payment Processing</h2>
+<h3 id="31-subfunction-payment-eligibility-control" tabindex="-1">3.1 SubFunction: Payment Eligibility Control</h3>
+<h4 id="311-business-rule-enforce-payment-preconditions" tabindex="-1">3.1.1 Business Rule: Enforce Payment Preconditions</h4>
+<h5 id="3111-purpose" tabindex="-1">3.1.1.1 Purpose</h5>
+<p>Ensures a payment is accepted only when the applicant is eligible to pay and the application has not already been paid. This combines the mandatory background-check prerequisite with duplicate-payment protection so that fees are collected only once, and only for applicants who have cleared screening.</p>
+<h5 id="3112-rule-steps" tabindex="-1">3.1.1.2 Rule Steps</h5>
+<ol>
+<li>Verify the background history check has been passed
+<ul>
+<li>Conditions: <code>HIST-CHECK-STATUS</code> must equal ‘P’ (Passed); any other status fails the check.</li>
+<li>Actions: Block payment processing when the status is not ‘P’.</li>
+<li>Outcomes: Applicants who have not passed the background check cannot pay.</li>
+<li>Relevant Paragraphs: PROCESS-PAYMENT (variable: <code>HIST-CHECK-STATUS</code>)</li>
+</ul>
+</li>
+<li>Prevent payment on an application already paid
+<ul>
+<li>Conditions: <code>PAYMENT-STATUS</code> = ‘P’ (Paid) means a payment is already recorded.</li>
+<li>Actions: Halt payment processing so no second payment is recorded.</li>
+<li>Outcomes: Each application can have only one initial fee payment recorded.</li>
+<li>Relevant Paragraphs: PROCESS-PAYMENT (variable: <code>PAYMENT-STATUS</code>)</li>
+</ul>
+</li>
+</ol>
+<h5 id="3113-business-significance" tabindex="-1">3.1.1.3 Business Significance</h5>
+<p>Skipping the background-check prerequisite would let applicants progress, and pay, before required screening is complete, which is a compliance and regulatory risk. Skipping the duplicate check could produce double charges, duplicate receipts, revenue and reconciliation errors, and refund handling.</p>
+<h3 id="32-subfunction-payment-recording-and-receipting" tabindex="-1">3.2 SubFunction: Payment Recording and Receipting</h3>
+<h4 id="321-business-rule-issue-standardized-payment-receipt-number" tabindex="-1">3.2.1 Business Rule: Issue Standardized Payment Receipt Number</h4>
+<h5 id="3211-purpose" tabindex="-1">3.2.1.1 Purpose</h5>
+<p>Creates a unique, traceable receipt identifier for each accepted payment, built from a fixed prefix, the processing date and the application ID.</p>
+<h5 id="3212-rule-steps" tabindex="-1">3.2.1.2 Rule Steps</h5>
+<ol>
+<li>Build the receipt number
+<ul>
+<li>Conditions: Applies once the payment passes the eligibility checks.</li>
+<li>Actions: Concatenate the literal ‘RCP’, the current 8-digit date (YYYYMMDD, <code>WS-RECEIPT-DATE</code>) and the application ID, and store the result in <code>WS-RECEIPT-NUMBER</code>.</li>
+<li>Outcomes: A standardized receipt number that ties the payment to its date and application.</li>
+<li>Relevant Paragraphs: PROCESS-PAYMENT (variables: <code>WS-RECEIPT-DATE</code>, <code>WS-RECEIPT-NUMBER</code>, <code>APPLICATION-ID</code>)</li>
+</ul>
+</li>
+</ol>
+<h5 id="3213-business-significance" tabindex="-1">3.2.1.3 Business Significance</h5>
+<p>The receipt number is the customer-facing and audit reference for the payment. A malformed or non-unique value undermines proof of payment, reconciliation with finance, and dispute resolution.</p>
+<h4 id="322-business-rule-record-initial-fee-payment-transaction" tabindex="-1">3.2.2 Business Rule: Record Initial Fee Payment Transaction</h4>
+<h5 id="3221-purpose" tabindex="-1">3.2.2.1 Purpose</h5>
+<p>Persists a payment record for the application’s initial license fee, capturing who paid, how, how much, and who processed it, so the financial transaction has a permanent audit trail.</p>
+<h5 id="3222-rule-steps" tabindex="-1">3.2.2.2 Rule Steps</h5>
+<ol>
+<li>Create the payment record with successful initial-fee attributes
+<ul>
+<li>Conditions: Payment passed the eligibility checks and a receipt number has been generated.</li>
+<li>Actions: Insert a PAYMENT row with status ‘S’ (Successful) and fee type ‘IF’ (Initial Fee). Populate it with <code>APPLICATION-ID</code>, <code>CANDIDATE-ID</code>, <code>LICENSE-TYPE</code>, <code>PAYMENT-AMOUNT</code> (from <code>WS-FEE-AMOUNT</code>), <code>PAYMENT-METHOD</code>, <code>PAYMENT-REFERENCE</code>, <code>WS-RECEIPT-NUMBER</code> and <code>PROCESSED-BY</code>.</li>
+<li>Outcomes: A complete, auditable record of the initial fee payment exists, linked to the application, candidate and operator.</li>
+<li>Relevant Paragraphs: PROCESS-PAYMENT</li>
+</ul>
+</li>
+</ol>
+<h5 id="3223-business-significance" tabindex="-1">3.2.2.3 Business Significance</h5>
+<p>This record is the financial source of truth for the fee. Missing or incorrect amount, fee type, status or operator data affects revenue reporting, reconciliation, audit and refund handling.</p>
+<h3 id="33-subfunction-application-status-advancement" tabindex="-1">3.3 SubFunction: Application Status Advancement</h3>
+<h4 id="331-business-rule-mark-application-as-paid-and-payment-approved" tabindex="-1">3.3.1 Business Rule: Mark Application as Paid and Payment Approved</h4>
+<h5 id="3311-purpose" tabindex="-1">3.3.1.1 Purpose</h5>
+<p>Moves the license application forward in its lifecycle once the payment is recorded, keeping the application state consistent with the payment record and enabling later processing stages.</p>
+<h5 id="3312-rule-steps" tabindex="-1">3.3.1.2 Rule Steps</h5>
+<ol>
+<li>Update application payment and processing status
+<ul>
+<li>Conditions: The payment has been successfully recorded.</li>
+<li>Actions: Set <code>PAYMENT_STATUS</code> to ‘P’ (Paid); store <code>PAYMENT-REFERENCE</code>; advance <code>APPLICATION_STATUS</code> to ‘PA’ (Payment Approved); update the audit timestamp and operator ID (<code>PROCESSED-BY</code>) on the record identified by <code>APPLICATION-ID</code>.</li>
+<li>Outcomes: The application is flagged paid, advances to Payment Approved, and carries audit details of the update.</li>
+<li>Relevant Paragraphs: PROCESS-PAYMENT (variables: <code>PAYMENT-REFERENCE</code>, <code>PROCESSED-BY</code>, <code>APPLICATION-ID</code>)</li>
+</ul>
+</li>
+</ol>
+<h5 id="3313-business-significance" tabindex="-1">3.3.1.3 Business Significance</h5>
+<p>If the application is not updated consistently with the payment record, a paid application could stay unprocessed, stalling the applicant. Conversely, the duplicate-payment check (rule 2.1.1) relies on <code>PAYMENT_STATUS</code> being set, so a failed update could allow a second payment. A missing audit stamp weakens accountability for the status change.</p>
+
+                    </article>
+                    <nav class="toc-panel" aria-label="On this page">
+  <span class="toc-panel-label">On this page</span>
+  <ul class="toc-list">
+<li class="toc-level-2"><a href="#1-purpose">1. Purpose</a></li>
+<li class="toc-level-2"><a href="#2-function-license-application-classification">2. Function: License Application Classification</a>
+<ul>
+<li class="toc-level-3"><a href="#21-subfunction-license-category-identification">2.1 SubFunction: License Category Identification</a>
+<ul>
+<li class="toc-level-4"><a href="#211-business-rule-derive-license-type-description">2.1.1 Business Rule: Derive License Type Description</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#3-function-license-fee-payment-processing">3. Function: License Fee Payment Processing</a>
+<ul>
+<li class="toc-level-3"><a href="#31-subfunction-payment-eligibility-control">3.1 SubFunction: Payment Eligibility Control</a>
+<ul>
+<li class="toc-level-4"><a href="#311-business-rule-enforce-payment-preconditions">3.1.1 Business Rule: Enforce Payment Preconditions</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#32-subfunction-payment-recording-and-receipting">3.2 SubFunction: Payment Recording and Receipting</a>
+<ul>
+<li class="toc-level-4"><a href="#321-business-rule-issue-standardized-payment-receipt-number">3.2.1 Business Rule: Issue Standardized Payment Receipt Number</a></li>
+<li class="toc-level-4"><a href="#322-business-rule-record-initial-fee-payment-transaction">3.2.2 Business Rule: Record Initial Fee Payment Transaction</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#33-subfunction-application-status-advancement">3.3 SubFunction: Application Status Advancement</a>
+<ul>
+<li class="toc-level-4"><a href="#331-business-rule-mark-application-as-paid-and-payment-approved">3.3.1 Business Rule: Mark Application as Paid and Payment Approved</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</nav>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="wiki-footer">Made by IBM Bob Premium Package for Z</footer>
+    <script>
+    /* toc-spy.js — highlights the active heading in the TOC panel on scroll */
+    (function () {
+      function init() {
+        var panel = document.querySelector('.toc-panel');
+        if (!panel) return;
+        var links = Array.prototype.slice.call(panel.querySelectorAll('a[href^="#"]'));
+        if (!links.length) return;
+
+        var headingIds = links.map(function (a) { return a.getAttribute('href').slice(1); });
+        var headings = headingIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+        function clearActive() {
+          panel.querySelectorAll('.toc-active').forEach(function (el) { el.classList.remove('toc-active'); });
+          panel.querySelectorAll('.toc-parent-active').forEach(function (el) { el.classList.remove('toc-parent-active'); });
+        }
+
+        function setActive(id) {
+          clearActive();
+          var link = panel.querySelector('a[href="#' + id + '"]');
+          if (!link) return;
+          link.classList.add('toc-active');
+          var li = link.closest('li');
+          if (li) {
+            var parentLi = li.parentElement && li.parentElement.closest('li');
+            if (parentLi) parentLi.classList.add('toc-parent-active');
+          }
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+        headings.forEach(function (h) { observer.observe(h); });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
+    <script>
+    /* breadcrumb.js — reads sessionStorage['wiki_referrer'] and renders breadcrumb.
+       Only fires when the referrer was set by clicking a link inside the Source Files
+       disclosure on a wiki page; clears after rendering so stale state never lingers. */
+    (function () {
+      var raw;
+      try { raw = sessionStorage.getItem('wiki_referrer'); } catch (_e) {}
+      if (!raw) return;
+      /* Consume immediately — prevents the breadcrumb re-appearing on the next visit. */
+      try { sessionStorage.removeItem('wiki_referrer'); } catch (_e) {}
+      var ref;
+      try { ref = JSON.parse(raw); } catch (_e) { return; }
+      if (!ref || !ref.href) return;
+      var bc = document.getElementById('wiki-breadcrumb');
+      if (!bc) return;
+      bc.className = 'wiki-breadcrumb';
+      bc.innerHTML =
+        '<a href="' + ref.href + '">' + (ref.title || 'Back') + '</a>' +
+        '<span class="wiki-breadcrumb-sep"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' +
+        '<span class="wiki-breadcrumb-current">DLISPAY-overview</span>';
+    })();
+    </script>
+    <script>
+    /* sidebar toggle — same as main wiki pages */
+    (function () {
+
+      var STORAGE_KEY = 'sb_open';
+
+      function getOpenSet() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+      }
+
+      function saveOpenSet(set) {
+        try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(set)); } catch (e) {}
+      }
+
+      function findItems(toggle) {
+        var node = toggle.nextSibling;
+        while (node) {
+          if (node.nodeType === 1 && node.classList.contains('nav-section-items'))
+            return node;
+          node = node.nextSibling;
+        }
+        return null;
+      }
+
+      function toggleKey(toggle, index) {
+        var label = (toggle.querySelector('.nav-toggle-text') || toggle).textContent.trim().replace(/\s+/g, ' ');
+        return index + ':' + label;
+      }
+
+      function openSection(toggle, items, key, set) {
+        toggle.classList.add('open');
+        items.classList.add('open');
+        if (set) set[key] = true;
+      }
+
+      function closeSection(toggle, items, key, set) {
+        toggle.classList.remove('open');
+        items.classList.remove('open');
+        if (set) set[key] = false;
+      }
+
+      function init() {
+        var sidebar = document.getElementById('wiki-sidebar');
+        var toggles = Array.prototype.slice.call(
+          document.querySelectorAll('.nav-section-toggle')
+        );
+
+        var savedSet = getOpenSet();
+        var openSet = savedSet || {};
+
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+
+          var key = toggleKey(toggle, idx);
+          var shouldOpen = openSet[key] === true;
+
+          if (shouldOpen) {
+            toggle.classList.add('open');
+            items.classList.add('open');
+          }
+
+          toggle.addEventListener('click', function () {
+            var nowOpen = toggle.classList.contains('open');
+            if (nowOpen) {
+              closeSection(toggle, items, key, openSet);
+            } else {
+              openSection(toggle, items, key, openSet);
+            }
+            saveOpenSet(openSet);
+          });
+        });
+
+        saveOpenSet(openSet);
+
+        /* Restore sidebar scroll position after sections are expanded so the
+           scroll height is correct when we apply scrollTop. */
+        if (sidebar) {
+          try {
+            var savedScroll = sessionStorage.getItem('sb_scroll');
+            if (savedScroll !== null) { sidebar.scrollTop = parseInt(savedScroll, 10) || 0; }
+          } catch (_e) {}
+        }
+
+        window.addEventListener('pagehide', function () {
+          saveOpenSet(openSet);
+          if (sidebar) {
+            try { sessionStorage.setItem('sb_scroll', String(sidebar.scrollTop)); } catch (_e) {}
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+    </script>
+</body>
+</html>

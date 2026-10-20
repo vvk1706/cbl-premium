@@ -1,0 +1,716 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLISHIST-overview</title>
+    <link rel="stylesheet" href="../../../assets/style.css">
+    <script src="../../../assets/mermaid.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+
+    <!-- Prism.js for syntax highlighting (bundled — no CDN required) -->
+    <link rel="stylesheet" href="../../../assets/prism-tomorrow.css">
+    <script src="../../../assets/prism-core.js"></script>
+    <script src="../../../assets/prism-languages.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="header-app-name"><a href="../../../../index.html" style="color: inherit; text-decoration: none;">Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</a></span>
+        </div>
+        <div class="header-right">
+        </div>
+    </header>
+    <div class="shell">
+        <aside class="sidebar" id="wiki-sidebar">
+            <nav>
+                
+        <div class="nav-home-wrap">
+            <a href="../../../../index.html" class="nav-home">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 6.5L8 2l6 4.5V14a1 1 0 01-1 1H3a1 1 0 01-1-1V6.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M6 15V9h4v6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                Home
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Application Documentation</div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Overview</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/system-overview.html" class="nav-link" data-page-id="system-overview">DLIS System Overview</a>
+                <a href="../../../pages/main-menu-navigation.html" class="nav-link" data-page-id="main-menu-navigation">Main Menu &amp; Navigation (DL01)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Candidate &amp; Application Intake</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/candidate-management.html" class="nav-link" data-page-id="candidate-management">Candidate Maintenance (DL02)</a>
+                <a href="../../../pages/license-application-entry.html" class="nav-link" data-page-id="license-application-entry">License Application Entry (DL03)</a>
+                <a href="../../../pages/application-status-inquiry.html" class="nav-link" data-page-id="application-status-inquiry">Application Status Inquiry (DL04)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Verification &amp; Payment</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/eligibility-check.html" class="nav-link" data-page-id="eligibility-check">Eligibility Check (DL05)</a>
+                <a href="../../../pages/driving-history-check.html" class="nav-link" data-page-id="driving-history-check">Driving History Check (DL06)</a>
+                <a href="../../../pages/payment-processing.html" class="nav-link" data-page-id="payment-processing">Payment Entry &amp; Processing (DL07)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Approval &amp; License Issuance</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/first-level-approval.html" class="nav-link" data-page-id="first-level-approval">First-Level Authority Approval (DL08)</a>
+                <a href="../../../pages/second-level-approval.html" class="nav-link" data-page-id="second-level-approval">Second-Level Authority Approval (DL09)</a>
+                <a href="../../../pages/license-issuance.html" class="nav-link" data-page-id="license-issuance">License Issuance (DL10)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Architecture</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/application-lifecycle-flow.html" class="nav-link" data-page-id="application-lifecycle-flow">Application Lifecycle &amp; Status Flow</a>
+                <a href="../../../pages/data-architecture.html" class="nav-link" data-page-id="data-architecture">Data Architecture (DB2)</a>
+                <a href="../../../pages/cics-integration-patterns.html" class="nav-link" data-page-id="cics-integration-patterns">CICS Integration Patterns</a>
+            </div>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Program Documentation</div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">program</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../sources/program/cobol/DLISPAY.html" class="nav-link">DLISPAY</a>
+                <a href="../../../sources/program/cobol/DLISSTAT.html" class="nav-link">DLISSTAT</a>
+                <a href="../../../sources/program/cobol/DLISMENU.html" class="nav-link">DLISMENU</a>
+                <a href="../../../sources/program/cobol/DLISELIG.html" class="nav-link">DLISELIG</a>
+                <a href="../../../sources/program/cobol/DLISCAND.html" class="nav-link">DLISCAND</a>
+                <a href="../../../sources/program/cobol/DLISAPPL.html" class="nav-link">DLISAPPL</a>
+                <a href="../../../sources/program/cobol/DLISISSU.html" class="nav-link">DLISISSU</a>
+                <a href="../../../sources/program/cobol/DLISAP2.html" class="nav-link">DLISAP2</a>
+                <a href="../../../sources/program/cobol/DLISHIST.html" class="nav-link">DLISHIST</a>
+                <a href="../../../sources/program/cobol/DLISAP1.html" class="nav-link">DLISAP1</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="nav-section">
+        <button class="nav-section-toggle open" type="button">
+            <span class="nav-toggle-text">business-rule</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items open">
+        <div class="nav-section">
+            <button class="nav-section-toggle open" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items open">
+                <a href="../../../sources/business-rule/cobol/DLISELIG-overview.html" class="nav-link">DLISELIG-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-inventory.html" class="nav-link">DLISPAY-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-overview.html" class="nav-link">DLISCAND-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-inventory.html" class="nav-link">DLISAP2-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-inventory.html" class="nav-link">DLISHIST-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-inventory.html" class="nav-link">DLISMENU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISELIG-inventory.html" class="nav-link">DLISELIG-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-overview.html" class="nav-link">DLISPAY-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-overview.html" class="nav-link">DLISSTAT-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-overview.html" class="nav-link active">DLISHIST-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-overview.html" class="nav-link">DLISAPPL-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-inventory.html" class="nav-link">DLISISSU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-inventory.html" class="nav-link">DLISAPPL-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-inventory.html" class="nav-link">DLISSTAT-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-overview.html" class="nav-link">DLISAP1-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-inventory.html" class="nav-link">DLISCAND-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-overview.html" class="nav-link">DLISAP2-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-overview.html" class="nav-link">DLISISSU-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-inventory.html" class="nav-link">DLISAP1-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-overview.html" class="nav-link">DLISMENU-overview</a>
+            </div>
+        </div>
+        </div>
+    </div>
+            </nav>
+        </aside>
+        <main class="main">
+            <div class="prog-container">
+                <div id="wiki-breadcrumb"></div>
+                <div class="content-layout">
+                    <article class="prose">
+                        <h1 id="business-rules-overview" tabindex="-1">Business rules: Overview</h1>
+<p><strong>Program:</strong> DLISHIST</p>
+<h2 id="1-purpose" tabindex="-1">1. Purpose</h2>
+<p>This document presents a program-level functional view of the business logic in DLISHIST. Business rules are organised into a Function → SubFunction → Business Rule hierarchy representing the business functions performed in the program. Semantically related rules are consolidated into named SubFunctions that group related business capabilities, and purely technical or setup logic is excluded. Each rule documents its purpose, ordered execution steps with conditions, actions, and outcomes, references to the contributing source paragraphs, and the business significance of each rule.</p>
+<h2 id="2-function-transaction-session-and-user-interaction-control" tabindex="-1">2. Function: Transaction Session and User Interaction Control</h2>
+<h3 id="21-subfunction-session-navigation-and-action-routing" tabindex="-1">2.1 SubFunction: Session Navigation and Action Routing</h3>
+<h4 id="211-business-rule-initial-vs-returning-session-handling" tabindex="-1">2.1.1 Business Rule: Initial vs. Returning Session Handling</h4>
+<h5 id="2111-purpose" tabindex="-1">2.1.1.1 Purpose</h5>
+<p>Determines whether the driving history transaction is being started for the first time or continued from a previous interaction. This keeps the multi-turn, stateful conversation coherent: a new session starts with a fresh screen, and a returning session restores prior state and processes the user’s input.</p>
+<h5 id="2112-rule-steps" tabindex="-1">2.1.1.2 Rule Steps</h5>
+<ol>
+<li>Detect whether prior session state exists
+<ul>
+<li>Conditions: Session state area length is zero (EIBCALEN = 0) means a first-time invocation; otherwise state exists.</li>
+<li>Actions: For a first invocation, initialise the screen. For a returning invocation, restore the saved state and process the user’s input.</li>
+<li>Outcomes: The user sees a clean initial screen on first entry, or continues the in-progress interaction on later entries.</li>
+<li>Relevant Paragraphs: MAIN-LOGIC, PROCESS-INPUT</li>
+</ul>
+</li>
+</ol>
+<h5 id="2113-business-significance" tabindex="-1">2.1.1.3 Business Significance</h5>
+<p>If the session type is misidentified, the user could lose in-progress application and history context, or stale data could be displayed against a new request. This leads to incorrect or confusing history review.</p>
+<h4 id="212-business-rule-function-key-action-routing" tabindex="-1">2.1.2 Business Rule: Function Key Action Routing</h4>
+<h5 id="2121-purpose" tabindex="-1">2.1.2.1 Purpose</h5>
+<p>Maps each user key press to a specific business action in the driving history workflow. This gives users a controlled set of operations: run the check, load an application, scroll the history list, or exit.</p>
+<h5 id="2122-rule-steps" tabindex="-1">2.1.2.2 Rule Steps</h5>
+<ol>
+<li>Route the key press to the matching business action
+<ul>
+<li>Conditions: F1 = run history check; F3 = load application and its history; F7 = scroll backward; F8 = scroll forward; F12 = exit; any other key.</li>
+<li>Actions: Invoke the history check, application load, or history display, or end the transaction. For an unrecognised key, show usage guidance.</li>
+<li>Outcomes: Only supported operations are executed; invalid keys are redirected with guidance.</li>
+<li>Relevant Paragraphs: PROCESS-INPUT, RUN-HISTORY-CHECK, LOAD-APPLICATION, DISPLAY-HISTORY</li>
+</ul>
+</li>
+<li>Apply scroll paging rules to the history list
+<ul>
+<li>Conditions: F7 scrolls back by 7 rows and cannot go below position 1. F8 scrolls forward by 7 rows.</li>
+<li>Actions: Adjust the scroll position by 7 rows in the requested direction, applying a floor of 1 when scrolling backward, then redisplay the history.</li>
+<li>Outcomes: Users can page through up to 50 retained incidents without moving to an invalid position.</li>
+<li>Relevant Paragraphs: PROCESS-INPUT, DISPLAY-HISTORY</li>
+</ul>
+</li>
+</ol>
+<h5 id="2123-business-significance" tabindex="-1">2.1.2.3 Business Significance</h5>
+<p>Incorrect routing could trigger a history check or status update when the user intended only to browse, or could block users from reviewing the incident list that supports the decision. An invalid scroll position could cause display errors.</p>
+<h2 id="3-function-application-intake-and-candidate-identification" tabindex="-1">3. Function: Application Intake and Candidate Identification</h2>
+<h3 id="31-subfunction-application-lookup-and-presentation" tabindex="-1">3.1 SubFunction: Application Lookup and Presentation</h3>
+<h4 id="311-business-rule-application-id-required" tabindex="-1">3.1.1 Business Rule: Application ID Required</h4>
+<h5 id="3111-purpose" tabindex="-1">3.1.1.1 Purpose</h5>
+<p>Ensures that every load or history-check action targets a specific license application. An absent application ID (zero) cannot be used to identify a record, so processing is stopped and the user is prompted.</p>
+<h5 id="3112-rule-steps" tabindex="-1">3.1.1.2 Rule Steps</h5>
+<ol>
+<li>Validate that an application ID has been entered
+<ul>
+<li>Conditions: APPLICATION-ID equals zero.</li>
+<li>Actions: Prompt the user to enter an application ID and stop processing for that request. This applies to both the load action and the history check action.</li>
+<li>Outcomes: No database lookup or status change is attempted without an identifiable application.</li>
+<li>Relevant Paragraphs: LOAD-APPLICATION, RUN-HISTORY-CHECK</li>
+</ul>
+</li>
+</ol>
+<h5 id="3113-business-significance" tabindex="-1">3.1.1.3 Business Significance</h5>
+<p>Without this guard, queries could return no or wrong records, and a history outcome could be recorded against the wrong or no application, undermining the licensing audit trail.</p>
+<h4 id="312-business-rule-retrieve-and-display-application-and-candidate-details" tabindex="-1">3.1.2 Business Rule: Retrieve and Display Application and Candidate Details</h4>
+<h5 id="3121-purpose" tabindex="-1">3.1.2.1 Purpose</h5>
+<p>Locates the license application and its candidate and shows the applicant’s identity and license category, so the reviewer is confident which applicant’s driving history is being assessed.</p>
+<h5 id="3122-rule-steps" tabindex="-1">3.1.2.2 Rule Steps</h5>
+<ol>
+<li>Retrieve the application and joined candidate record
+<ul>
+<li>Conditions: The application ID is used as the key to join the license application and candidate records. If no match exists, the application is not found.</li>
+<li>Actions: Obtain CANDIDATE-ID, LICENSE-TYPE, and the candidate first and last name. If not found, notify the user and stop.</li>
+<li>Outcomes: Application and candidate context is loaded, or the user is told the application does not exist.</li>
+<li>Relevant Paragraphs: LOAD-APPLICATION</li>
+</ul>
+</li>
+<li>Format applicant identity for the screen
+<ul>
+<li>Conditions: Application and candidate data have been retrieved.</li>
+<li>Actions: Build the candidate display name as first name, a single space, then last name. Copy LICENSE-TYPE to the screen output field.</li>
+<li>Outcomes: The reviewer sees the applicant’s full name and license category.</li>
+<li>Relevant Paragraphs: LOAD-APPLICATION</li>
+</ul>
+</li>
+</ol>
+<h5 id="3123-business-significance" tabindex="-1">3.1.2.3 Business Significance</h5>
+<p>Misidentifying the applicant or license type could cause a history decision to be reviewed or applied to the wrong person or license category, creating compliance and customer-service risk.</p>
+<h2 id="4-function-driving-history-assessment" tabindex="-1">4. Function: Driving History Assessment</h2>
+<h3 id="41-subfunction-incident-analysis-and-risk-indicator-derivation" tabindex="-1">4.1 SubFunction: Incident Analysis and Risk Indicator Derivation</h3>
+<h4 id="411-business-rule-demerit-point-accumulation-and-incident-retention" tabindex="-1">4.1.1 Business Rule: Demerit Point Accumulation and Incident Retention</h4>
+<h5 id="4111-purpose" tabindex="-1">4.1.1.1 Purpose</h5>
+<p>Collects the candidate’s driving incidents for review and totals demerit points across all of them, producing the figure used for the demerit threshold test.</p>
+<h5 id="4112-rule-steps" tabindex="-1">4.1.1.2 Rule Steps</h5>
+<ol>
+<li>Retain incidents for display
+<ul>
+<li>Conditions: Each fetched history incident, up to 50 rows.</li>
+<li>Actions: Store INCIDENT-DATE, INCIDENT-TYPE, description, and DEMERIT-POINTS in the history display table.</li>
+<li>Outcomes: A scrollable incident list is available to the reviewer.</li>
+<li>Relevant Paragraphs: LOAD-HISTORY-TABLE</li>
+</ul>
+</li>
+<li>Accumulate demerit points
+<ul>
+<li>Conditions: Every fetched incident, including those beyond the 50 retained rows.</li>
+<li>Actions: Add DEMERIT-POINTS to WS-DEMERIT-TOTAL.</li>
+<li>Outcomes: A complete demerit total reflects the full driving record.</li>
+<li>Relevant Paragraphs: LOAD-HISTORY-TABLE</li>
+</ul>
+</li>
+</ol>
+<h5 id="4113-business-significance" tabindex="-1">4.1.1.3 Business Significance</h5>
+<p>An understated demerit total could allow a candidate with excessive points to pass. Truncating the total at the 50-row display limit would have the same effect.</p>
+<h4 id="412-business-rule-active-suspension-or-disqualification-detection" tabindex="-1">4.1.2 Business Rule: Active Suspension or Disqualification Detection</h4>
+<h5 id="4121-purpose" tabindex="-1">4.1.2.1 Purpose</h5>
+<p>Identifies candidates who are currently suspended or disqualified, which is a disqualifying condition for progressing the license application.</p>
+<h5 id="4122-rule-steps" tabindex="-1">4.1.2.2 Rule Steps</h5>
+<ol>
+<li>Restrict evaluation to suspension and disqualification incidents
+<ul>
+<li>Conditions: INCIDENT-TYPE is ‘SU’ or ‘DQ’.</li>
+<li>Actions: Evaluate only these incidents for active status.</li>
+<li>Outcomes: Other incident types do not affect the suspension indicator.</li>
+<li>Relevant Paragraphs: LOAD-HISTORY-TABLE</li>
+</ul>
+</li>
+<li>Determine whether the sanction is still active
+<ul>
+<li>Conditions: SUSP-END-DATE is on or after today’s date, or is blank (open-ended).</li>
+<li>Actions: Set WS-SUSP-FLAG to ‘Y’.</li>
+<li>Outcomes: The candidate is flagged for history check failure due to a current suspension or disqualification.</li>
+<li>Relevant Paragraphs: LOAD-HISTORY-TABLE</li>
+</ul>
+</li>
+</ol>
+<h5 id="4123-business-significance" tabindex="-1">4.1.2.3 Business Significance</h5>
+<p>Missing an active suspension or disqualification (especially open-ended ones) could lead to licensing a person who is legally barred from driving.</p>
+<h4 id="413-business-rule-outstanding-unpaid-fine-detection" tabindex="-1">4.1.3 Business Rule: Outstanding Unpaid Fine Detection</h4>
+<h5 id="4131-purpose" tabindex="-1">4.1.3.1 Purpose</h5>
+<p>Identifies candidates with fines still owing, which prevents the history check from passing.</p>
+<h5 id="4132-rule-steps" tabindex="-1">4.1.3.2 Rule Steps</h5>
+<ol>
+<li>Evaluate fined incidents for payment status
+<ul>
+<li>Conditions: FINE-AMOUNT is greater than zero and FINE-PAID-STATUS is ‘N’.</li>
+<li>Actions: Set WS-FINE-FLAG to ‘Y’.</li>
+<li>Outcomes: The candidate is flagged for history check failure due to unpaid fines.</li>
+<li>Relevant Paragraphs: LOAD-HISTORY-TABLE</li>
+</ul>
+</li>
+</ol>
+<h5 id="4133-business-significance" tabindex="-1">4.1.3.3 Business Significance</h5>
+<p>Failing to detect unpaid fines allows candidates with outstanding financial obligations to progress, resulting in lost revenue and inconsistent enforcement.</p>
+<h4 id="414-business-rule-summary-indicators-shown-for-review" tabindex="-1">4.1.4 Business Rule: Summary Indicators Shown for Review</h4>
+<h5 id="4141-purpose" tabindex="-1">4.1.4.1 Purpose</h5>
+<p>Presents the derived risk indicators to the reviewer before the formal check is run, supporting informed decisions.</p>
+<h5 id="4142-rule-steps" tabindex="-1">4.1.4.2 Rule Steps</h5>
+<ol>
+<li>Surface summary indicators on screen
+<ul>
+<li>Conditions: History loading has completed.</li>
+<li>Actions: Move WS-DEMERIT-TOTAL, WS-SUSP-FLAG, and WS-FINE-FLAG to the screen output fields.</li>
+<li>Outcomes: The reviewer sees total demerit points, suspension status, and outstanding fine status.</li>
+<li>Relevant Paragraphs: LOAD-HISTORY-TABLE</li>
+</ul>
+</li>
+</ol>
+<h5 id="4143-business-significance" tabindex="-1">4.1.4.3 Business Significance</h5>
+<p>If indicators are missing or inconsistent with what the check uses, the reviewer cannot anticipate or verify the outcome, which weakens transparency and complicates dispute handling.</p>
+<h2 id="5-function-driving-history-check-decisioning-and-application-status-management" tabindex="-1">5. Function: Driving History Check Decisioning and Application Status Management</h2>
+<h3 id="51-subfunction-history-check-eligibility-gating" tabindex="-1">5.1 SubFunction: History Check Eligibility Gating</h3>
+<h4 id="511-business-rule-eligibility-must-be-passed-before-history-check" tabindex="-1">5.1.1 Business Rule: Eligibility Must Be Passed Before History Check</h4>
+<h5 id="5111-purpose" tabindex="-1">5.1.1.1 Purpose</h5>
+<p>Enforces the licensing process sequence: the driving history check may only run after the applicant has passed the eligibility check.</p>
+<h5 id="5112-rule-steps" tabindex="-1">5.1.1.2 Rule Steps</h5>
+<ol>
+<li>Retrieve eligibility status
+<ul>
+<li>Conditions: A valid APPLICATION-ID has been entered.</li>
+<li>Actions: Read ELIG-CHECK-STATUS from the license application record.</li>
+<li>Outcomes: The current eligibility result is available for the gate.</li>
+<li>Relevant Paragraphs: RUN-HISTORY-CHECK</li>
+</ul>
+</li>
+<li>Block the check when eligibility has not been passed
+<ul>
+<li>Conditions: ELIG-CHECK-STATUS is not ‘P’.</li>
+<li>Actions: Stop the history check and show a message requiring eligibility to be completed first.</li>
+<li>Outcomes: Only eligibility-passed applications proceed to history evaluation.</li>
+<li>Relevant Paragraphs: RUN-HISTORY-CHECK</li>
+</ul>
+</li>
+</ol>
+<h5 id="5113-business-significance" tabindex="-1">5.1.1.3 Business Significance</h5>
+<p>Bypassing this gate could let ineligible applicants progress, breaking the prescribed workflow and producing application status inconsistencies.</p>
+<h3 id="52-subfunction-history-check-passfail-determination" tabindex="-1">5.2 SubFunction: History Check Pass/Fail Determination</h3>
+<h4 id="521-business-rule-prioritised-failure-condition-evaluation" tabindex="-1">5.2.1 Business Rule: Prioritised Failure Condition Evaluation</h4>
+<h5 id="5211-purpose" tabindex="-1">5.2.1.1 Purpose</h5>
+<p>Determines whether the driving history fails by applying three criteria in strict priority order, recording only the first failure reason for the user and the record.</p>
+<h5 id="5212-rule-steps" tabindex="-1">5.2.1.2 Rule Steps</h5>
+<ol>
+<li>Test for active suspension or disqualification (highest priority)
+<ul>
+<li>Conditions: WS-SUSP-FLAG = ‘Y’.</li>
+<li>Actions: Set the fail flag and record the suspension failure message.</li>
+<li>Outcomes: History check fails with a suspension reason.</li>
+<li>Relevant Paragraphs: RUN-HISTORY-CHECK</li>
+</ul>
+</li>
+<li>Test for excessive demerit points
+<ul>
+<li>Conditions: No prior failure and WS-DEMERIT-TOTAL &gt; 12.</li>
+<li>Actions: Set the fail flag and record the demerit failure message.</li>
+<li>Outcomes: History check fails with a demerit reason.</li>
+<li>Relevant Paragraphs: RUN-HISTORY-CHECK</li>
+</ul>
+</li>
+<li>Test for outstanding unpaid fines
+<ul>
+<li>Conditions: No prior failure and WS-FINE-FLAG = ‘Y’.</li>
+<li>Actions: Set the fail flag and record the unpaid fines failure message.</li>
+<li>Outcomes: History check fails with an unpaid fines reason; if no condition triggers, the check passes.</li>
+<li>Relevant Paragraphs: RUN-HISTORY-CHECK</li>
+</ul>
+</li>
+</ol>
+<h5 id="5213-business-significance" tabindex="-1">5.2.1.3 Business Significance</h5>
+<p>Incorrect thresholds or priority order would change who passes, and which reason is reported to the applicant, causing wrongful approvals or rejections and inconsistent explanations.</p>
+<h3 id="53-subfunction-outcome-recording-and-application-lifecycle-update" tabindex="-1">5.3 SubFunction: Outcome Recording and Application Lifecycle Update</h3>
+<h4 id="531-business-rule-assign-outcome-and-advance-application-status" tabindex="-1">5.3.1 Business Rule: Assign Outcome and Advance Application Status</h4>
+<h5 id="5311-purpose" tabindex="-1">5.3.1.1 Purpose</h5>
+<p>Converts the pass/fail decision into a persisted history result and moves the application to the next lifecycle state.</p>
+<h5 id="5312-rule-steps" tabindex="-1">5.3.1.2 Rule Steps</h5>
+<ol>
+<li>Assign history result and application status
+<ul>
+<li>Conditions: Failure results in WS-HISTORY-STATUS = ‘F’; a pass results in ‘P’.</li>
+<li>Actions: Set APPLICATION-STATUS to ‘RE’ (referred) on failure or ‘HC’ (history check complete) on pass.</li>
+<li>Outcomes: The application advances to the state corresponding to the result.</li>
+<li>Relevant Paragraphs: RUN-HISTORY-CHECK</li>
+</ul>
+</li>
+<li>Persist the outcome
+<ul>
+<li>Conditions: The result and status have been determined for the APPLICATION-ID.</li>
+<li>Actions: Update the license application with the history result, check date, failure notes, and new application status.</li>
+<li>Outcomes: The decision and its reason are durably recorded for downstream processing and audit.</li>
+<li>Relevant Paragraphs: RUN-HISTORY-CHECK</li>
+</ul>
+</li>
+</ol>
+<h5 id="5313-business-significance" tabindex="-1">5.3.1.3 Business Significance</h5>
+<p>A wrong or unrecorded status would stall or misroute the application, such as allowing a failed applicant to proceed or leaving a passed applicant stuck. It would also leave no audit trail.</p>
+<h4 id="532-business-rule-present-final-history-check-result" tabindex="-1">5.3.2 Business Rule: Present Final History Check Result</h4>
+<h5 id="5321-purpose" tabindex="-1">5.3.2.1 Purpose</h5>
+<p>Informs the user of the outcome, showing a simple confirmation on a pass and the specific reason on a failure.</p>
+<h5 id="5322-rule-steps" tabindex="-1">5.3.2.2 Rule Steps</h5>
+<ol>
+<li>Select the message by outcome
+<ul>
+<li>Conditions: WS-HISTORY-STATUS = ‘P’ versus any other value.</li>
+<li>Actions: Display ‘HISTORY CHECK PASSED’ for a pass; otherwise display the recorded failure reason.</li>
+<li>Outcomes: The user understands the result and, if failed, the reason.</li>
+<li>Relevant Paragraphs: RUN-HISTORY-CHECK</li>
+</ul>
+</li>
+</ol>
+<h5 id="5323-business-significance" tabindex="-1">5.3.2.3 Business Significance</h5>
+<p>Unclear or incorrect messages could mislead staff about the applicant’s status and lead to incorrect communication with applicants or unnecessary escalations.</p>
+
+                    </article>
+                    <nav class="toc-panel" aria-label="On this page">
+  <span class="toc-panel-label">On this page</span>
+  <ul class="toc-list">
+<li class="toc-level-2"><a href="#1-purpose">1. Purpose</a></li>
+<li class="toc-level-2"><a href="#2-function-transaction-session-and-user-interaction-control">2. Function: Transaction Session and User Interaction Control</a>
+<ul>
+<li class="toc-level-3"><a href="#21-subfunction-session-navigation-and-action-routing">2.1 SubFunction: Session Navigation and Action Routing</a>
+<ul>
+<li class="toc-level-4"><a href="#211-business-rule-initial-vs-returning-session-handling">2.1.1 Business Rule: Initial vs. Returning Session Handling</a></li>
+<li class="toc-level-4"><a href="#212-business-rule-function-key-action-routing">2.1.2 Business Rule: Function Key Action Routing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#3-function-application-intake-and-candidate-identification">3. Function: Application Intake and Candidate Identification</a>
+<ul>
+<li class="toc-level-3"><a href="#31-subfunction-application-lookup-and-presentation">3.1 SubFunction: Application Lookup and Presentation</a>
+<ul>
+<li class="toc-level-4"><a href="#311-business-rule-application-id-required">3.1.1 Business Rule: Application ID Required</a></li>
+<li class="toc-level-4"><a href="#312-business-rule-retrieve-and-display-application-and-candidate-details">3.1.2 Business Rule: Retrieve and Display Application and Candidate Details</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#4-function-driving-history-assessment">4. Function: Driving History Assessment</a>
+<ul>
+<li class="toc-level-3"><a href="#41-subfunction-incident-analysis-and-risk-indicator-derivation">4.1 SubFunction: Incident Analysis and Risk Indicator Derivation</a>
+<ul>
+<li class="toc-level-4"><a href="#411-business-rule-demerit-point-accumulation-and-incident-retention">4.1.1 Business Rule: Demerit Point Accumulation and Incident Retention</a></li>
+<li class="toc-level-4"><a href="#412-business-rule-active-suspension-or-disqualification-detection">4.1.2 Business Rule: Active Suspension or Disqualification Detection</a></li>
+<li class="toc-level-4"><a href="#413-business-rule-outstanding-unpaid-fine-detection">4.1.3 Business Rule: Outstanding Unpaid Fine Detection</a></li>
+<li class="toc-level-4"><a href="#414-business-rule-summary-indicators-shown-for-review">4.1.4 Business Rule: Summary Indicators Shown for Review</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#5-function-driving-history-check-decisioning-and-application-status-management">5. Function: Driving History Check Decisioning and Application Status Management</a>
+<ul>
+<li class="toc-level-3"><a href="#51-subfunction-history-check-eligibility-gating">5.1 SubFunction: History Check Eligibility Gating</a>
+<ul>
+<li class="toc-level-4"><a href="#511-business-rule-eligibility-must-be-passed-before-history-check">5.1.1 Business Rule: Eligibility Must Be Passed Before History Check</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#52-subfunction-history-check-passfail-determination">5.2 SubFunction: History Check Pass/Fail Determination</a>
+<ul>
+<li class="toc-level-4"><a href="#521-business-rule-prioritised-failure-condition-evaluation">5.2.1 Business Rule: Prioritised Failure Condition Evaluation</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#53-subfunction-outcome-recording-and-application-lifecycle-update">5.3 SubFunction: Outcome Recording and Application Lifecycle Update</a>
+<ul>
+<li class="toc-level-4"><a href="#531-business-rule-assign-outcome-and-advance-application-status">5.3.1 Business Rule: Assign Outcome and Advance Application Status</a></li>
+<li class="toc-level-4"><a href="#532-business-rule-present-final-history-check-result">5.3.2 Business Rule: Present Final History Check Result</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</nav>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="wiki-footer">Made by IBM Bob Premium Package for Z</footer>
+    <script>
+    /* toc-spy.js — highlights the active heading in the TOC panel on scroll */
+    (function () {
+      function init() {
+        var panel = document.querySelector('.toc-panel');
+        if (!panel) return;
+        var links = Array.prototype.slice.call(panel.querySelectorAll('a[href^="#"]'));
+        if (!links.length) return;
+
+        var headingIds = links.map(function (a) { return a.getAttribute('href').slice(1); });
+        var headings = headingIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+        function clearActive() {
+          panel.querySelectorAll('.toc-active').forEach(function (el) { el.classList.remove('toc-active'); });
+          panel.querySelectorAll('.toc-parent-active').forEach(function (el) { el.classList.remove('toc-parent-active'); });
+        }
+
+        function setActive(id) {
+          clearActive();
+          var link = panel.querySelector('a[href="#' + id + '"]');
+          if (!link) return;
+          link.classList.add('toc-active');
+          var li = link.closest('li');
+          if (li) {
+            var parentLi = li.parentElement && li.parentElement.closest('li');
+            if (parentLi) parentLi.classList.add('toc-parent-active');
+          }
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+        headings.forEach(function (h) { observer.observe(h); });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
+    <script>
+    /* breadcrumb.js — reads sessionStorage['wiki_referrer'] and renders breadcrumb.
+       Only fires when the referrer was set by clicking a link inside the Source Files
+       disclosure on a wiki page; clears after rendering so stale state never lingers. */
+    (function () {
+      var raw;
+      try { raw = sessionStorage.getItem('wiki_referrer'); } catch (_e) {}
+      if (!raw) return;
+      /* Consume immediately — prevents the breadcrumb re-appearing on the next visit. */
+      try { sessionStorage.removeItem('wiki_referrer'); } catch (_e) {}
+      var ref;
+      try { ref = JSON.parse(raw); } catch (_e) { return; }
+      if (!ref || !ref.href) return;
+      var bc = document.getElementById('wiki-breadcrumb');
+      if (!bc) return;
+      bc.className = 'wiki-breadcrumb';
+      bc.innerHTML =
+        '<a href="' + ref.href + '">' + (ref.title || 'Back') + '</a>' +
+        '<span class="wiki-breadcrumb-sep"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' +
+        '<span class="wiki-breadcrumb-current">DLISHIST-overview</span>';
+    })();
+    </script>
+    <script>
+    /* sidebar toggle — same as main wiki pages */
+    (function () {
+
+      var STORAGE_KEY = 'sb_open';
+
+      function getOpenSet() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+      }
+
+      function saveOpenSet(set) {
+        try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(set)); } catch (e) {}
+      }
+
+      function findItems(toggle) {
+        var node = toggle.nextSibling;
+        while (node) {
+          if (node.nodeType === 1 && node.classList.contains('nav-section-items'))
+            return node;
+          node = node.nextSibling;
+        }
+        return null;
+      }
+
+      function toggleKey(toggle, index) {
+        var label = (toggle.querySelector('.nav-toggle-text') || toggle).textContent.trim().replace(/\s+/g, ' ');
+        return index + ':' + label;
+      }
+
+      function openSection(toggle, items, key, set) {
+        toggle.classList.add('open');
+        items.classList.add('open');
+        if (set) set[key] = true;
+      }
+
+      function closeSection(toggle, items, key, set) {
+        toggle.classList.remove('open');
+        items.classList.remove('open');
+        if (set) set[key] = false;
+      }
+
+      function init() {
+        var sidebar = document.getElementById('wiki-sidebar');
+        var toggles = Array.prototype.slice.call(
+          document.querySelectorAll('.nav-section-toggle')
+        );
+
+        var savedSet = getOpenSet();
+        var openSet = savedSet || {};
+
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+
+          var key = toggleKey(toggle, idx);
+          var shouldOpen = openSet[key] === true;
+
+          if (shouldOpen) {
+            toggle.classList.add('open');
+            items.classList.add('open');
+          }
+
+          toggle.addEventListener('click', function () {
+            var nowOpen = toggle.classList.contains('open');
+            if (nowOpen) {
+              closeSection(toggle, items, key, openSet);
+            } else {
+              openSection(toggle, items, key, openSet);
+            }
+            saveOpenSet(openSet);
+          });
+        });
+
+        saveOpenSet(openSet);
+
+        /* Restore sidebar scroll position after sections are expanded so the
+           scroll height is correct when we apply scrollTop. */
+        if (sidebar) {
+          try {
+            var savedScroll = sessionStorage.getItem('sb_scroll');
+            if (savedScroll !== null) { sidebar.scrollTop = parseInt(savedScroll, 10) || 0; }
+          } catch (_e) {}
+        }
+
+        window.addEventListener('pagehide', function () {
+          saveOpenSet(openSet);
+          if (sidebar) {
+            try { sessionStorage.setItem('sb_scroll', String(sidebar.scrollTop)); } catch (_e) {}
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+    </script>
+</body>
+</html>

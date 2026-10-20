@@ -1,0 +1,16 @@
+Generate application documentation
+
+Generate an HTML site that focused on application functionalities. Use the Generate application documentation workflow to compile generated program documentation into structured, browsable site with diagrams and cross-referenced pages. Run the Generate application documentation workflow to get started.
+
+Overview
+Generate browsable HTML application documentation from program documentation files in your /docs folder. Run the Generate program documentation or Extract business rules workflow first to populate your /docs folder with program documentation or business rule Markdown files.
+
+This workflow helps you:
+
+Create an easy to navigate HTML site complete with diagrams and cross-referenced pages
+Structures content based upon application functionalities
+Prepare
+Locate the /docs folder and reference the available program documentation
+
+Generate application documentation
+Create HTML application documentation by using the program documentation markdown available.

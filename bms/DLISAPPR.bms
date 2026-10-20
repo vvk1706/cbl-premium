@@ -1,0 +1,293 @@
+         TITLE 'DLIS BMS MAPSETS - APPROVAL AUTH1, AUTH2, LICENSE ISSUE, STATUS'
+***================================================================***
+*** BMS Mapset : DLISA1 - FIRST AUTHORITY APPROVAL                 ***
+*** Map        : DLISA1M01  Trans: DL08                            ***
+***================================================================***
+DLISA1   DFHMSD TYPE=&SYSPARM,                                         X
+               LANG=COBOL,MODE=INOUT,TERM=3270-2,                      X
+               CTRL=FREEKB,STORAGE=AUTO,TIOAPFX=YES
+
+DLISA1M01 DFHMDI SIZE=(24,80),LINE=1,COLUMN=1
+
+         DFHMDF POS=(1,1),LENGTH=80,ATTRB=(PROT,BRT),                 X
+               INITIAL='DLIS            FIRST AUTHORITY APPROVAL'
+DA1DATE  DFHMDF POS=(1,72),LENGTH=10,ATTRB=(PROT,NORM)
+         DFHMDF POS=(2,1),LENGTH=80,ATTRB=(PROT,NORM),                X
+               INITIAL='--------------------------------------------------------------------------------'
+
+         DFHMDF POS=(4,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='APPLICATION ID  : '
+DA1AID   DFHMDF POS=(4,20),LENGTH=10,ATTRB=(NUM,UNPROT,IC)
+         DFHMDF POS=(5,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='CANDIDATE NAME  : '
+DA1CNAM  DFHMDF POS=(5,20),LENGTH=60,ATTRB=(PROT,NORM)
+         DFHMDF POS=(6,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='LICENSE TYPE    : '
+DA1LTYP  DFHMDF POS=(6,20),LENGTH=1,ATTRB=(PROT,NORM)
+DA1LDSC  DFHMDF POS=(6,22),LENGTH=20,ATTRB=(PROT,NORM)
+         DFHMDF POS=(7,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='APP STATUS      : '
+DA1ASTT  DFHMDF POS=(7,20),LENGTH=2,ATTRB=(PROT,NORM)
+DA1ADSC  DFHMDF POS=(7,23),LENGTH=40,ATTRB=(PROT,NORM)
+         DFHMDF POS=(8,1),LENGTH=80,ATTRB=(PROT,NORM),                X
+               INITIAL='--------------------------------------------------------------------------------'
+         DFHMDF POS=(9,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='ELIG CHECK      : '
+DA1ELIG  DFHMDF POS=(9,20),LENGTH=1,ATTRB=(PROT,BRT)
+DA1ELNT  DFHMDF POS=(9,22),LENGTH=40,ATTRB=(PROT,NORM)
+         DFHMDF POS=(10,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='HISTORY CHECK   : '
+DA1HIST  DFHMDF POS=(10,20),LENGTH=1,ATTRB=(PROT,BRT)
+DA1HSNT  DFHMDF POS=(10,22),LENGTH=40,ATTRB=(PROT,NORM)
+         DFHMDF POS=(11,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='PAYMENT         : '
+DA1PAY   DFHMDF POS=(11,20),LENGTH=1,ATTRB=(PROT,BRT)
+DA1PYRF  DFHMDF POS=(11,22),LENGTH=20,ATTRB=(PROT,NORM)
+         DFHMDF POS=(12,1),LENGTH=80,ATTRB=(PROT,NORM),               X
+               INITIAL='--------------------------------------------------------------------------------'
+         DFHMDF POS=(13,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='AUTHORITY CODE  : '
+DA1AUCO  DFHMDF POS=(13,20),LENGTH=20,ATTRB=(UNPROT)
+         DFHMDF POS=(14,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='AUTHORITY NAME  : '
+DA1AUNM  DFHMDF POS=(14,20),LENGTH=50,ATTRB=(PROT,NORM)
+         DFHMDF POS=(15,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='DECISION        : '
+DA1DEC   DFHMDF POS=(15,20),LENGTH=1,ATTRB=(UNPROT)
+         DFHMDF POS=(15,22),LENGTH=22,ATTRB=(PROT,NORM),              X
+               INITIAL='(A=APPROVE  R=REJECT)'
+         DFHMDF POS=(16,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='DECISION NOTES  : '
+DA1DCNT  DFHMDF POS=(16,20),LENGTH=60,ATTRB=(UNPROT)
+DA1MSG   DFHMDF POS=(22,2),LENGTH=76,ATTRB=(PROT,NORM)
+         DFHMDF POS=(23,1),LENGTH=80,ATTRB=(PROT,NORM),               X
+               INITIAL='--------------------------------------------------------------------------------'
+         DFHMDF POS=(24,2),LENGTH=76,ATTRB=(PROT,NORM),               X
+               INITIAL='F1=SUBMIT DECISION  F3=LOAD APP  F4=VALIDATE AUTHORITY  F12=EXIT'
+
+         DFHMSD TYPE=FINAL
+         END
+
+***================================================================***
+*** BMS Mapset : DLISA2 - SECOND AUTHORITY APPROVAL                ***
+*** Map        : DLISA2M01  Trans: DL09                            ***
+***================================================================***
+DLISA2   DFHMSD TYPE=&SYSPARM,                                         X
+               LANG=COBOL,MODE=INOUT,TERM=3270-2,                      X
+               CTRL=FREEKB,STORAGE=AUTO,TIOAPFX=YES
+
+DLISA2M01 DFHMDI SIZE=(24,80),LINE=1,COLUMN=1
+
+         DFHMDF POS=(1,1),LENGTH=80,ATTRB=(PROT,BRT),                 X
+               INITIAL='DLIS           SECOND AUTHORITY APPROVAL'
+DA2DATE  DFHMDF POS=(1,72),LENGTH=10,ATTRB=(PROT,NORM)
+         DFHMDF POS=(2,1),LENGTH=80,ATTRB=(PROT,NORM),                X
+               INITIAL='--------------------------------------------------------------------------------'
+
+         DFHMDF POS=(4,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='APPLICATION ID  : '
+DA2AID   DFHMDF POS=(4,20),LENGTH=10,ATTRB=(NUM,UNPROT,IC)
+         DFHMDF POS=(5,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='CANDIDATE NAME  : '
+DA2CNAM  DFHMDF POS=(5,20),LENGTH=60,ATTRB=(PROT,NORM)
+         DFHMDF POS=(6,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='LICENSE TYPE    : '
+DA2LTYP  DFHMDF POS=(6,20),LENGTH=1,ATTRB=(PROT,NORM)
+DA2LDSC  DFHMDF POS=(6,22),LENGTH=20,ATTRB=(PROT,NORM)
+         DFHMDF POS=(7,1),LENGTH=80,ATTRB=(PROT,NORM),                X
+               INITIAL='--------------------------------------------------------------------------------'
+         DFHMDF POS=(8,2),LENGTH=12,ATTRB=(PROT,NORM),                X
+               INITIAL='PRIOR CHECKS:'
+         DFHMDF POS=(9,4),LENGTH=15,ATTRB=(PROT,NORM),                X
+               INITIAL='ELIGIBILITY  : '
+DA2ELIG  DFHMDF POS=(9,20),LENGTH=1,ATTRB=(PROT,BRT)
+         DFHMDF POS=(10,4),LENGTH=15,ATTRB=(PROT,NORM),               X
+               INITIAL='HISTORY      : '
+DA2HIST  DFHMDF POS=(10,20),LENGTH=1,ATTRB=(PROT,BRT)
+         DFHMDF POS=(11,4),LENGTH=15,ATTRB=(PROT,NORM),               X
+               INITIAL='PAYMENT      : '
+DA2PAY   DFHMDF POS=(11,20),LENGTH=1,ATTRB=(PROT,BRT)
+         DFHMDF POS=(12,4),LENGTH=15,ATTRB=(PROT,NORM),               X
+               INITIAL='FIRST AUTH   : '
+DA2A1ST  DFHMDF POS=(12,20),LENGTH=1,ATTRB=(PROT,BRT)
+         DFHMDF POS=(12,22),LENGTH=4,ATTRB=(PROT,NORM),               X
+               INITIAL='BY: '
+DA2A1NM  DFHMDF POS=(12,26),LENGTH=40,ATTRB=(PROT,NORM)
+         DFHMDF POS=(13,1),LENGTH=80,ATTRB=(PROT,NORM),               X
+               INITIAL='--------------------------------------------------------------------------------'
+         DFHMDF POS=(14,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='AUTHORITY CODE  : '
+DA2AUCO  DFHMDF POS=(14,20),LENGTH=20,ATTRB=(UNPROT)
+         DFHMDF POS=(15,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='AUTHORITY NAME  : '
+DA2AUNM  DFHMDF POS=(15,20),LENGTH=50,ATTRB=(PROT,NORM)
+         DFHMDF POS=(16,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='DECISION        : '
+DA2DEC   DFHMDF POS=(16,20),LENGTH=1,ATTRB=(UNPROT)
+         DFHMDF POS=(16,22),LENGTH=22,ATTRB=(PROT,NORM),              X
+               INITIAL='(A=APPROVE  R=REJECT)'
+         DFHMDF POS=(17,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='DECISION NOTES  : '
+DA2DCNT  DFHMDF POS=(17,20),LENGTH=60,ATTRB=(UNPROT)
+DA2MSG   DFHMDF POS=(22,2),LENGTH=76,ATTRB=(PROT,NORM)
+         DFHMDF POS=(23,1),LENGTH=80,ATTRB=(PROT,NORM),               X
+               INITIAL='--------------------------------------------------------------------------------'
+         DFHMDF POS=(24,2),LENGTH=76,ATTRB=(PROT,NORM),               X
+               INITIAL='F1=SUBMIT DECISION  F3=LOAD APP  F4=VALIDATE AUTHORITY  F12=EXIT'
+
+         DFHMSD TYPE=FINAL
+         END
+
+***================================================================***
+*** BMS Mapset : DLISLI - LICENSE ISSUE                            ***
+*** Map        : DLISLIM01  Trans: DL10                            ***
+***================================================================***
+DLISLI   DFHMSD TYPE=&SYSPARM,                                         X
+               LANG=COBOL,MODE=INOUT,TERM=3270-2,                      X
+               CTRL=FREEKB,STORAGE=AUTO,TIOAPFX=YES
+
+DLISLIM01 DFHMDI SIZE=(24,80),LINE=1,COLUMN=1
+
+         DFHMDF POS=(1,1),LENGTH=80,ATTRB=(PROT,BRT),                 X
+               INITIAL='DLIS                  LICENSE ISSUANCE'
+DLIDATE  DFHMDF POS=(1,72),LENGTH=10,ATTRB=(PROT,NORM)
+         DFHMDF POS=(2,1),LENGTH=80,ATTRB=(PROT,NORM),                X
+               INITIAL='--------------------------------------------------------------------------------'
+
+         DFHMDF POS=(4,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='APPLICATION ID  : '
+DLIAID   DFHMDF POS=(4,20),LENGTH=10,ATTRB=(NUM,UNPROT,IC)
+         DFHMDF POS=(5,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='CANDIDATE NAME  : '
+DLICNAM  DFHMDF POS=(5,20),LENGTH=60,ATTRB=(PROT,NORM)
+         DFHMDF POS=(6,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='LICENSE TYPE    : '
+DLILTYP  DFHMDF POS=(6,20),LENGTH=1,ATTRB=(PROT,NORM)
+DLILDSC  DFHMDF POS=(6,22),LENGTH=20,ATTRB=(PROT,NORM)
+         DFHMDF POS=(7,1),LENGTH=80,ATTRB=(PROT,NORM),                X
+               INITIAL='--------------------------------------------------------------------------------'
+         DFHMDF POS=(8,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='APPROVAL STATUS :'
+         DFHMDF POS=(9,4),LENGTH=16,ATTRB=(PROT,NORM),                X
+               INITIAL='ELIGIBILITY     :'
+DLIELIG  DFHMDF POS=(9,21),LENGTH=6,ATTRB=(PROT,BRT)
+         DFHMDF POS=(10,4),LENGTH=16,ATTRB=(PROT,NORM),               X
+               INITIAL='HISTORY         :'
+DLIHIST  DFHMDF POS=(10,21),LENGTH=6,ATTRB=(PROT,BRT)
+         DFHMDF POS=(11,4),LENGTH=16,ATTRB=(PROT,NORM),               X
+               INITIAL='PAYMENT         :'
+DLIPAY   DFHMDF POS=(11,21),LENGTH=6,ATTRB=(PROT,BRT)
+         DFHMDF POS=(12,4),LENGTH=16,ATTRB=(PROT,NORM),               X
+               INITIAL='FIRST AUTH      :'
+DLIAU1   DFHMDF POS=(12,21),LENGTH=6,ATTRB=(PROT,BRT)
+         DFHMDF POS=(13,4),LENGTH=16,ATTRB=(PROT,NORM),               X
+               INITIAL='SECOND AUTH     :'
+DLIAU2   DFHMDF POS=(13,21),LENGTH=6,ATTRB=(PROT,BRT)
+         DFHMDF POS=(14,1),LENGTH=80,ATTRB=(PROT,NORM),               X
+               INITIAL='--------------------------------------------------------------------------------'
+         DFHMDF POS=(15,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='VEHICLE CLASS   : '
+DLIVCLS  DFHMDF POS=(15,20),LENGTH=2,ATTRB=(UNPROT)
+         DFHMDF POS=(15,23),LENGTH=37,ATTRB=(PROT,NORM),              X
+               INITIAL='(A=Motorcycle B=Light C=Heavy D=Bus)'
+         DFHMDF POS=(16,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='RESTRICTIONS    : '
+DLIRST   DFHMDF POS=(16,20),LENGTH=60,ATTRB=(UNPROT)
+         DFHMDF POS=(17,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='ISSUING OFFICER : '
+DLIOFCR  DFHMDF POS=(17,20),LENGTH=50,ATTRB=(UNPROT)
+         DFHMDF POS=(18,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='ISSUING AUTH    : '
+DLIAUTH  DFHMDF POS=(18,20),LENGTH=50,ATTRB=(UNPROT)
+         DFHMDF POS=(19,1),LENGTH=80,ATTRB=(PROT,NORM),               X
+               INITIAL='--------------------------------------------------------------------------------'
+         DFHMDF POS=(20,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='LICENSE NUMBER  : '
+DLILNUM  DFHMDF POS=(20,20),LENGTH=20,ATTRB=(PROT,BRT)
+         DFHMDF POS=(21,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='EXPIRY DATE     : '
+DLIEXP   DFHMDF POS=(21,20),LENGTH=10,ATTRB=(PROT,BRT)
+DLIMSG   DFHMDF POS=(22,2),LENGTH=76,ATTRB=(PROT,NORM)
+         DFHMDF POS=(23,1),LENGTH=80,ATTRB=(PROT,NORM),               X
+               INITIAL='--------------------------------------------------------------------------------'
+         DFHMDF POS=(24,2),LENGTH=76,ATTRB=(PROT,NORM),               X
+               INITIAL='F1=ISSUE LICENSE  F3=LOAD APP  F6=PRINT LICENSE  F12=EXIT'
+
+         DFHMSD TYPE=FINAL
+         END
+
+***================================================================***
+*** BMS Mapset : DLISST - APPLICATION STATUS INQUIRY               ***
+*** Map        : DLISST01  Trans: DL04                             ***
+***================================================================***
+DLISST   DFHMSD TYPE=&SYSPARM,                                         X
+               LANG=COBOL,MODE=INOUT,TERM=3270-2,                      X
+               CTRL=FREEKB,STORAGE=AUTO,TIOAPFX=YES
+
+DLISST01 DFHMDI SIZE=(24,80),LINE=1,COLUMN=1
+
+         DFHMDF POS=(1,1),LENGTH=80,ATTRB=(PROT,BRT),                 X
+               INITIAL='DLIS           APPLICATION STATUS INQUIRY'
+DSTDATE  DFHMDF POS=(1,72),LENGTH=10,ATTRB=(PROT,NORM)
+         DFHMDF POS=(2,1),LENGTH=80,ATTRB=(PROT,NORM),                X
+               INITIAL='--------------------------------------------------------------------------------'
+         DFHMDF POS=(4,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='APPLICATION ID  : '
+DSTAID   DFHMDF POS=(4,20),LENGTH=10,ATTRB=(NUM,UNPROT,IC)
+         DFHMDF POS=(5,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='LICENSE TYPE    : '
+DSTLTYP  DFHMDF POS=(5,20),LENGTH=1,ATTRB=(PROT,NORM)
+DSTLDSC  DFHMDF POS=(5,22),LENGTH=20,ATTRB=(PROT,NORM)
+         DFHMDF POS=(6,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='OVERALL STATUS  : '
+DSTASTT  DFHMDF POS=(6,20),LENGTH=2,ATTRB=(PROT,BRT)
+DSTADSC  DFHMDF POS=(6,23),LENGTH=50,ATTRB=(PROT,NORM)
+         DFHMDF POS=(7,1),LENGTH=80,ATTRB=(PROT,NORM),                X
+               INITIAL='--------------------------------------------------------------------------------'
+         DFHMDF POS=(8,2),LENGTH=76,ATTRB=(PROT,NORM),                X
+               INITIAL='STEP                   STATUS  DATE        NOTES'
+         DFHMDF POS=(9,2),LENGTH=76,ATTRB=(PROT,NORM),                X
+               INITIAL='----------------------------------------------------------------------------'
+         DFHMDF POS=(10,2),LENGTH=23,ATTRB=(PROT,NORM),               X
+               INITIAL='1. ELIGIBILITY CHECK : '
+DST1STS  DFHMDF POS=(10,25),LENGTH=6,ATTRB=(PROT,BRT)
+DST1DAT  DFHMDF POS=(10,32),LENGTH=10,ATTRB=(PROT,NORM)
+DST1NTS  DFHMDF POS=(10,43),LENGTH=30,ATTRB=(PROT,NORM)
+         DFHMDF POS=(11,2),LENGTH=23,ATTRB=(PROT,NORM),               X
+               INITIAL='2. HISTORY CHECK    : '
+DST2STS  DFHMDF POS=(11,25),LENGTH=6,ATTRB=(PROT,BRT)
+DST2DAT  DFHMDF POS=(11,32),LENGTH=10,ATTRB=(PROT,NORM)
+DST2NTS  DFHMDF POS=(11,43),LENGTH=30,ATTRB=(PROT,NORM)
+         DFHMDF POS=(12,2),LENGTH=23,ATTRB=(PROT,NORM),               X
+               INITIAL='3. PAYMENT          : '
+DST3STS  DFHMDF POS=(12,25),LENGTH=6,ATTRB=(PROT,BRT)
+DST3REF  DFHMDF POS=(12,32),LENGTH=20,ATTRB=(PROT,NORM)
+         DFHMDF POS=(13,2),LENGTH=23,ATTRB=(PROT,NORM),               X
+               INITIAL='4. FIRST APPROVAL   : '
+DST4STS  DFHMDF POS=(13,25),LENGTH=6,ATTRB=(PROT,BRT)
+DST4DAT  DFHMDF POS=(13,32),LENGTH=10,ATTRB=(PROT,NORM)
+DST4AUT  DFHMDF POS=(13,43),LENGTH=30,ATTRB=(PROT,NORM)
+         DFHMDF POS=(14,2),LENGTH=23,ATTRB=(PROT,NORM),               X
+               INITIAL='5. SECOND APPROVAL  : '
+DST5STS  DFHMDF POS=(14,25),LENGTH=6,ATTRB=(PROT,BRT)
+DST5DAT  DFHMDF POS=(14,32),LENGTH=10,ATTRB=(PROT,NORM)
+DST5AUT  DFHMDF POS=(14,43),LENGTH=30,ATTRB=(PROT,NORM)
+         DFHMDF POS=(15,1),LENGTH=80,ATTRB=(PROT,NORM),               X
+               INITIAL='--------------------------------------------------------------------------------'
+         DFHMDF POS=(16,2),LENGTH=23,ATTRB=(PROT,NORM),               X
+               INITIAL='6. LICENSE ISSUED   : '
+DST6FLG  DFHMDF POS=(16,25),LENGTH=6,ATTRB=(PROT,BRT)
+         DFHMDF POS=(17,2),LENGTH=23,ATTRB=(PROT,NORM),               X
+               INITIAL='   LICENSE NUMBER   : '
+DST6NUM  DFHMDF POS=(17,25),LENGTH=20,ATTRB=(PROT,BRT)
+         DFHMDF POS=(18,2),LENGTH=23,ATTRB=(PROT,NORM),               X
+               INITIAL='   EXPIRY DATE      : '
+DST6EXP  DFHMDF POS=(18,25),LENGTH=10,ATTRB=(PROT,NORM)
+DSTMSG   DFHMDF POS=(22,2),LENGTH=76,ATTRB=(PROT,NORM)
+         DFHMDF POS=(23,1),LENGTH=80,ATTRB=(PROT,NORM),               X
+               INITIAL='--------------------------------------------------------------------------------'
+         DFHMDF POS=(24,2),LENGTH=76,ATTRB=(PROT,NORM),               X
+               INITIAL='ENTER=INQUIRE  F12=EXIT'
+
+         DFHMSD TYPE=FINAL
+         END

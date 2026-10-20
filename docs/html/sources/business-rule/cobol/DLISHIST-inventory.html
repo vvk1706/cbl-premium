@@ -1,0 +1,1078 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLISHIST-inventory</title>
+    <link rel="stylesheet" href="../../../assets/style.css">
+    <script src="../../../assets/mermaid.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+
+    <!-- Prism.js for syntax highlighting (bundled — no CDN required) -->
+    <link rel="stylesheet" href="../../../assets/prism-tomorrow.css">
+    <script src="../../../assets/prism-core.js"></script>
+    <script src="../../../assets/prism-languages.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="header-app-name"><a href="../../../../index.html" style="color: inherit; text-decoration: none;">Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</a></span>
+        </div>
+        <div class="header-right">
+        </div>
+    </header>
+    <div class="shell">
+        <aside class="sidebar" id="wiki-sidebar">
+            <nav>
+                
+        <div class="nav-home-wrap">
+            <a href="../../../../index.html" class="nav-home">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 6.5L8 2l6 4.5V14a1 1 0 01-1 1H3a1 1 0 01-1-1V6.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M6 15V9h4v6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                Home
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Application Documentation</div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Overview</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/system-overview.html" class="nav-link" data-page-id="system-overview">DLIS System Overview</a>
+                <a href="../../../pages/main-menu-navigation.html" class="nav-link" data-page-id="main-menu-navigation">Main Menu &amp; Navigation (DL01)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Candidate &amp; Application Intake</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/candidate-management.html" class="nav-link" data-page-id="candidate-management">Candidate Maintenance (DL02)</a>
+                <a href="../../../pages/license-application-entry.html" class="nav-link" data-page-id="license-application-entry">License Application Entry (DL03)</a>
+                <a href="../../../pages/application-status-inquiry.html" class="nav-link" data-page-id="application-status-inquiry">Application Status Inquiry (DL04)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Verification &amp; Payment</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/eligibility-check.html" class="nav-link" data-page-id="eligibility-check">Eligibility Check (DL05)</a>
+                <a href="../../../pages/driving-history-check.html" class="nav-link" data-page-id="driving-history-check">Driving History Check (DL06)</a>
+                <a href="../../../pages/payment-processing.html" class="nav-link" data-page-id="payment-processing">Payment Entry &amp; Processing (DL07)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Approval &amp; License Issuance</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/first-level-approval.html" class="nav-link" data-page-id="first-level-approval">First-Level Authority Approval (DL08)</a>
+                <a href="../../../pages/second-level-approval.html" class="nav-link" data-page-id="second-level-approval">Second-Level Authority Approval (DL09)</a>
+                <a href="../../../pages/license-issuance.html" class="nav-link" data-page-id="license-issuance">License Issuance (DL10)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Architecture</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/application-lifecycle-flow.html" class="nav-link" data-page-id="application-lifecycle-flow">Application Lifecycle &amp; Status Flow</a>
+                <a href="../../../pages/data-architecture.html" class="nav-link" data-page-id="data-architecture">Data Architecture (DB2)</a>
+                <a href="../../../pages/cics-integration-patterns.html" class="nav-link" data-page-id="cics-integration-patterns">CICS Integration Patterns</a>
+            </div>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Program Documentation</div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">program</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../sources/program/cobol/DLISPAY.html" class="nav-link">DLISPAY</a>
+                <a href="../../../sources/program/cobol/DLISSTAT.html" class="nav-link">DLISSTAT</a>
+                <a href="../../../sources/program/cobol/DLISMENU.html" class="nav-link">DLISMENU</a>
+                <a href="../../../sources/program/cobol/DLISELIG.html" class="nav-link">DLISELIG</a>
+                <a href="../../../sources/program/cobol/DLISCAND.html" class="nav-link">DLISCAND</a>
+                <a href="../../../sources/program/cobol/DLISAPPL.html" class="nav-link">DLISAPPL</a>
+                <a href="../../../sources/program/cobol/DLISISSU.html" class="nav-link">DLISISSU</a>
+                <a href="../../../sources/program/cobol/DLISAP2.html" class="nav-link">DLISAP2</a>
+                <a href="../../../sources/program/cobol/DLISHIST.html" class="nav-link">DLISHIST</a>
+                <a href="../../../sources/program/cobol/DLISAP1.html" class="nav-link">DLISAP1</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="nav-section">
+        <button class="nav-section-toggle open" type="button">
+            <span class="nav-toggle-text">business-rule</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items open">
+        <div class="nav-section">
+            <button class="nav-section-toggle open" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items open">
+                <a href="../../../sources/business-rule/cobol/DLISELIG-overview.html" class="nav-link">DLISELIG-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-inventory.html" class="nav-link">DLISPAY-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-overview.html" class="nav-link">DLISCAND-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-inventory.html" class="nav-link">DLISAP2-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-inventory.html" class="nav-link active">DLISHIST-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-inventory.html" class="nav-link">DLISMENU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISELIG-inventory.html" class="nav-link">DLISELIG-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-overview.html" class="nav-link">DLISPAY-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-overview.html" class="nav-link">DLISSTAT-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-overview.html" class="nav-link">DLISHIST-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-overview.html" class="nav-link">DLISAPPL-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-inventory.html" class="nav-link">DLISISSU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-inventory.html" class="nav-link">DLISAPPL-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-inventory.html" class="nav-link">DLISSTAT-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-overview.html" class="nav-link">DLISAP1-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-inventory.html" class="nav-link">DLISCAND-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-overview.html" class="nav-link">DLISAP2-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-overview.html" class="nav-link">DLISISSU-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-inventory.html" class="nav-link">DLISAP1-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-overview.html" class="nav-link">DLISMENU-overview</a>
+            </div>
+        </div>
+        </div>
+    </div>
+            </nav>
+        </aside>
+        <main class="main">
+            <div class="prog-container">
+                <div id="wiki-breadcrumb"></div>
+                <div class="content-layout">
+                    <article class="prose">
+                        <h1 id="business-rules-inventory" tabindex="-1">Business rules: Inventory</h1>
+<p><strong>Program:</strong> DLISHIST</p>
+<p><strong>Total rules extracted:</strong> 14</p>
+<h2 id="1-purpose" tabindex="-1">1. Purpose</h2>
+<p>This document is an inventory of all business rules extracted from DLISHIST, organised at the Paragraph level. Each Paragraph contributes one or more named rule blocks, where each block captures a discrete business policy with its title, decision logic, conditions, actions, outcomes, and the exact source code that realises it. Key variables, when available, are annotated with their role (input or output) and their specific purpose within the rule. References to related Paragraphs called or invoked by each rule are also recorded.</p>
+<h2 id="2-rule-inventory" tabindex="-1">2. Rule Inventory</h2>
+<h3 id="21-paragraph-process-input" tabindex="-1">2.1 Paragraph: PROCESS-INPUT</h3>
+<h4 id="211-function-key-routing-for-history-check-actions" tabindex="-1">2.1.1 Function Key Routing for History Check Actions</h4>
+<p><strong>Description:</strong> Routes the user’s key press to the appropriate business action. F1 triggers the history check, F3 loads an application, F7 scrolls the history list backward by 7 rows (with a floor of 1), F8 scrolls forward by 7 rows, F12 exits the transaction, and any other key presents a usage guidance message.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>F1 initiates the driving history check process</li>
+<li>F3 loads an application and its driving history for review</li>
+<li>F7 scrolls backward through the history list by 7 rows, preventing scroll position below 1</li>
+<li>F8 scrolls forward through the history list by 7 rows</li>
+<li>F12 exits the transaction</li>
+<li>Any unrecognised key results in a user guidance message</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EVALUATE TRUE
+               WHEN EIBAID = DFHPF1   PERFORM RUN-HISTORY-CHECK
+               WHEN EIBAID = DFHPF3   PERFORM LOAD-APPLICATION
+               WHEN EIBAID = DFHPF7
+                   SUBTRACT 7 FROM WS-SCROLL-TOP
+                   IF WS-SCROLL-TOP &lt; 1 MOVE 1 TO WS-SCROLL-TOP
+                   PERFORM DISPLAY-HISTORY
+               WHEN EIBAID = DFHPF8
+                   ADD 7 TO WS-SCROLL-TOP
+                   PERFORM DISPLAY-HISTORY
+               WHEN EIBAID = DFHPF12
+                   EXEC CICS RETURN END-EXEC
+               OTHER
+                   MOVE &#039;USE F1 F3 F7 F8 OR F12&#039; TO DHCMSG
+           END-EVALUATE</code></pre>
+</div>
+<p><strong>Paragraphs:</strong></p>
+<ul>
+<li>RUN-HISTORY-CHECK</li>
+<li>LOAD-APPLICATION</li>
+<li>DISPLAY-HISTORY</li>
+</ul>
+<h3 id="22-paragraph-main-logic" tabindex="-1">2.2 Paragraph: MAIN-LOGIC</h3>
+<h4 id="221-initial-session-vs-returning-session-routing" tabindex="-1">2.2.1 Initial Session vs. Returning Session Routing</h4>
+<p><strong>Description:</strong> Determines whether this is the first invocation of the transaction or a subsequent one. A zero commarea length means no prior session state exists, so the screen is initialised fresh. Otherwise, the commarea is restored and the user’s input is processed, enabling stateful multi-turn interaction.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>If no commarea is present (EIBCALEN = 0), the transaction is starting fresh and the screen must be initialised</li>
+<li>If a commarea exists, prior session state is restored and user input is processed</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF EIBCALEN = 0
+               PERFORM INIT-SCREEN
+           ELSE
+               MOVE DFHCOMMAREA TO DLIS-COMMAREA
+               PERFORM PROCESS-INPUT
+           END-IF</code></pre>
+</div>
+<p><strong>Paragraphs:</strong></p>
+<ul>
+<li>INIT-SCREEN</li>
+<li>PROCESS-INPUT</li>
+</ul>
+<h3 id="23-paragraph-load-application" tabindex="-1">2.3 Paragraph: LOAD-APPLICATION</h3>
+<h4 id="231-application-id-presence-validation" tabindex="-1">2.3.1 Application ID Presence Validation</h4>
+<p><strong>Description:</strong> Enforces that an application ID must be entered before the application can be loaded. If no ID is provided, the user is prompted to supply one and processing stops.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>An application ID of zero is treated as absent; the user is prompted to enter one and no further processing occurs</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF DHCAIDI = ZEROS
+               MOVE &#039;ENTER APPLICATION ID&#039; TO DHCMSG
+               GO TO LOAD-APP-EXIT
+           END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>APPLICATION-ID</code></td>
+<td>input</td>
+<td>Checked for a zero value to determine whether the user has supplied an application ID before attempting to load the application record</td>
+</tr>
+</tbody>
+</table>
+<h4 id="232-retrieve-application-and-candidate-details" tabindex="-1">2.3.2 Retrieve Application and Candidate Details</h4>
+<p><strong>Description:</strong> Retrieves the candidate ID, license type, and candidate name for the entered application ID by joining the license application and candidate tables. If no matching application is found, the user is informed and processing stops.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>The application ID entered on screen is used as the key to retrieve application and candidate details</li>
+<li>If no application exists for the given ID, the user is notified and no further processing occurs</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE DHCAIDI TO APPLICATION-ID OF DCLDLIS-LICENSE-APPL
+           EXEC SQL
+               SELECT A.CANDIDATE_ID, A.LICENSE_TYPE,
+                      C.FIRST_NAME, C.LAST_NAME
+               INTO   :CANDIDATE-ID OF DCLDLIS-LICENSE-APPL,
+                      :LICENSE-TYPE OF DCLDLIS-LICENSE-APPL,
+                      :FIRST-NAME, :LAST-NAME OF DCLDLIS-CANDIDATE
+               FROM   DLIS.LICENSE_APPLICATION A
+               JOIN   DLIS.CANDIDATE C
+                  ON  A.CANDIDATE_ID = C.CANDIDATE_ID
+               WHERE  A.APPLICATION_ID = :APPLICATION-ID
+                                         OF DCLDLIS-LICENSE-APPL
+           END-EXEC
+           IF SQLCODE = 100
+               MOVE &#039;APPLICATION NOT FOUND&#039; TO DHCMSG
+               GO TO LOAD-APP-EXIT
+           END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>APPLICATION-ID</code></td>
+<td>input</td>
+<td>Used as the WHERE clause key to locate the matching license application and joined candidate record</td>
+</tr>
+<tr>
+<td><code>CANDIDATE-ID</code></td>
+<td>output</td>
+<td>Populated with the candidate identifier retrieved from the license application record</td>
+</tr>
+<tr>
+<td><code>LICENSE-TYPE</code></td>
+<td>output</td>
+<td>Populated with the license category retrieved from the license application record and subsequently shown on screen</td>
+</tr>
+</tbody>
+</table>
+<h4 id="233-display-candidate-name-and-license-type-on-screen" tabindex="-1">2.3.3 Display Candidate Name and License Type on Screen</h4>
+<p><strong>Description:</strong> Formats the candidate’s full name by concatenating first name and last name with a space delimiter, and copies the license type to the corresponding screen output fields, making the applicant’s identity and license category visible to the user.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>First name and last name are concatenated with a single space to form the displayed candidate name</li>
+<li>License type is copied directly to the screen output field</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">STRING FIRST-NAME OF DCLDLIS-CANDIDATE DELIMITED SPACE
+                  &#039; &#039; DELIMITED SIZE
+                  LAST-NAME  OF DCLDLIS-CANDIDATE DELIMITED SPACE
+               INTO DHCCNAMO
+           MOVE LICENSE-TYPE OF DCLDLIS-LICENSE-APPL TO DHCLTYO</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LICENSE-TYPE</code></td>
+<td>input</td>
+<td>Read from the application record and moved to the screen output field to display the category of license applied for</td>
+</tr>
+</tbody>
+</table>
+<h3 id="24-paragraph-load-history-table" tabindex="-1">2.4 Paragraph: LOAD-HISTORY-TABLE</h3>
+<h4 id="241-accumulate-demerit-points-across-all-history-incidents" tabindex="-1">2.4.1 Accumulate Demerit Points Across All History Incidents</h4>
+<p><strong>Description:</strong> For each successfully fetched driving history incident, the incident details (date, type, description, demerit points) are stored in the display table up to a maximum of 50 rows, and the demerit points are cumulatively added to the running total used for the threshold check.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>Up to 50 history incidents are retained in the display table for scrollable presentation</li>
+<li>Demerit points from every fetched incident are accumulated into a running total for the history check threshold evaluation</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF SQLCODE = 0
+                   ADD 1 TO WS-ROW-COUNT
+                   IF WS-ROW-COUNT &lt;= 50
+                       MOVE INCIDENT-DATE  OF DCLDLIS-DRIVING-HIST
+                           TO WS-HR-DATE(WS-ROW-COUNT)
+                       MOVE INCIDENT-TYPE  OF DCLDLIS-DRIVING-HIST
+                           TO WS-HR-TYPE(WS-ROW-COUNT)
+                       MOVE INCIDENT-DESC  OF DCLDLIS-DRIVING-HIST
+                           TO WS-HR-DESC(WS-ROW-COUNT)
+                       MOVE DEMERIT-POINTS OF DCLDLIS-DRIVING-HIST
+                           TO WS-HR-DMRT(WS-ROW-COUNT)
+                       ADD DEMERIT-POINTS  OF DCLDLIS-DRIVING-HIST
+                           TO WS-DEMERIT-TOTAL
+                   END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DEMERIT-POINTS</code></td>
+<td>input</td>
+<td>Read from each fetched history incident and added to the cumulative demerit total used to evaluate the threshold check</td>
+</tr>
+<tr>
+<td><code>INCIDENT-DATE</code></td>
+<td>input</td>
+<td>Stored in the history display table row for presentation in the scrollable incident list</td>
+</tr>
+<tr>
+<td><code>INCIDENT-TYPE</code></td>
+<td>input</td>
+<td>Stored in the history display table row and used to identify suspension or disqualification incidents</td>
+</tr>
+<tr>
+<td><code>WS-DEMERIT-TOTAL</code></td>
+<td>output</td>
+<td>Accumulates the total demerit points across all fetched incidents, used later in the history check threshold decision</td>
+</tr>
+</tbody>
+</table>
+<h4 id="242-detect-active-suspension-or-disqualification" tabindex="-1">2.4.2 Detect Active Suspension or Disqualification</h4>
+<p><strong>Description:</strong> For each incident of type suspension (‘SU’) or disqualification (‘DQ’), checks whether the suspension is still active by testing if the end date is today or later, or is blank. If active, sets the suspension flag to ‘Y’, which will cause the history check to fail.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>Only incidents of type ‘SU’ (suspension) or ‘DQ’ (disqualification) are evaluated for active status</li>
+<li>A suspension or disqualification is considered active if its end date is on or after today, or if the end date is blank</li>
+<li>An active suspension or disqualification sets the suspension flag to ‘Y’, which will cause the history check to fail</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF INCIDENT-TYPE OF DCLDLIS-DRIVING-HIST
+                                    IN (&#039;SU&#039;,&#039;DQ&#039;)
+                       IF SUSP-END-DATE OF DCLDLIS-DRIVING-HIST &gt;= CURRE        
+                          OR SUSP-END-DATE OF DCLDLIS-DRIVING-HIST = SPA        
+                           MOVE &#039;Y&#039; TO WS-SUSP-FLAG
+                       END-IF
+                   END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>INCIDENT-TYPE</code></td>
+<td>input</td>
+<td>Checked against values ‘SU’ and ‘DQ’ to identify incidents that may represent an active suspension or disqualification</td>
+</tr>
+<tr>
+<td><code>SUSP-END-DATE</code></td>
+<td>input</td>
+<td>Evaluated to determine whether a suspension or disqualification is still active based on comparison to the current date or blank value</td>
+</tr>
+<tr>
+<td><code>WS-SUSP-FLAG</code></td>
+<td>output</td>
+<td>Set to ‘Y’ when an active suspension or disqualification is found, flagging the candidate for a history check failure</td>
+</tr>
+</tbody>
+</table>
+<h4 id="243-detect-outstanding-unpaid-fines" tabindex="-1">2.4.3 Detect Outstanding Unpaid Fines</h4>
+<p><strong>Description:</strong> For each incident with a fine amount greater than zero, checks whether the fine is unpaid. If both conditions are met, sets the outstanding fine flag to ‘Y’, which will cause the history check to fail.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>An incident is only assessed for outstanding fines when its fine amount is greater than zero</li>
+<li>A fine is considered unpaid when the paid status is ‘N’</li>
+<li>An unpaid fine sets the outstanding fine flag to ‘Y’, which will cause the history check to fail</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF FINE-AMOUNT OF DCLDLIS-DRIVING-HIST &gt; 0
+                       IF FINE-PAID-STATUS OF DCLDLIS-DRIVING-HIST = &#039;N&#039;        
+                           MOVE &#039;Y&#039; TO WS-FINE-FLAG
+                       END-IF
+                   END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FINE-AMOUNT</code></td>
+<td>input</td>
+<td>Checked to be greater than zero before evaluating payment status, ensuring only fined incidents trigger the unpaid fine check</td>
+</tr>
+<tr>
+<td><code>FINE-PAID-STATUS</code></td>
+<td>input</td>
+<td>Checked for value ‘N’ to determine whether a non-zero fine remains unpaid</td>
+</tr>
+<tr>
+<td><code>WS-FINE-FLAG</code></td>
+<td>output</td>
+<td>Set to ‘Y’ when an incident has a positive fine amount that is unpaid, flagging the candidate for a history check failure</td>
+</tr>
+</tbody>
+</table>
+<h4 id="244-propagate-summary-check-indicators-to-screen" tabindex="-1">2.4.4 Propagate Summary Check Indicators to Screen</h4>
+<p><strong>Description:</strong> Copies the accumulated demerit total, suspension flag, and fine flag to the corresponding screen output fields, making the driving history summary visible to the user for review before the formal check is executed.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>The total demerit points, suspension status, and outstanding fine status are all surfaced on screen after history loading</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE WS-DEMERIT-TOTAL TO DHCDMRTO
+           MOVE WS-SUSP-FLAG     TO DHCSUSPO
+           MOVE WS-FINE-FLAG     TO DHCFINEO.</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>WS-DEMERIT-TOTAL</code></td>
+<td>input</td>
+<td>Moved to the screen output field to display the candidate’s accumulated demerit points</td>
+</tr>
+<tr>
+<td><code>WS-SUSP-FLAG</code></td>
+<td>input</td>
+<td>Moved to the screen output field to indicate whether an active suspension or disqualification was detected</td>
+</tr>
+<tr>
+<td><code>WS-FINE-FLAG</code></td>
+<td>input</td>
+<td>Moved to the screen output field to indicate whether outstanding unpaid fines were detected</td>
+</tr>
+</tbody>
+</table>
+<h3 id="25-paragraph-run-history-check" tabindex="-1">2.5 Paragraph: RUN-HISTORY-CHECK</h3>
+<h4 id="251-application-id-presence-validation-for-history-check" tabindex="-1">2.5.1 Application ID Presence Validation for History Check</h4>
+<p><strong>Description:</strong> Enforces that an application ID must be entered before the history check can be run. If none is provided, the user is prompted and the check is aborted.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>The history check cannot proceed without an application ID; a zero value is treated as absent and processing stops</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF DHCAIDI = ZEROS
+               MOVE &#039;ENTER APPLICATION ID FIRST&#039; TO DHCMSG
+               GO TO RUN-HIST-EXIT
+           END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>APPLICATION-ID</code></td>
+<td>input</td>
+<td>Checked for a zero value to enforce that the user has supplied an application ID before attempting to run the history check</td>
+</tr>
+</tbody>
+</table>
+<h4 id="252-eligibility-check-must-be-passed-before-history-check" tabindex="-1">2.5.2 Eligibility Check Must Be Passed Before History Check</h4>
+<p><strong>Description:</strong> Enforces the business policy that the driving history check can only be executed after the eligibility check has been passed. The eligibility check status is retrieved from the application record, and if it is not ‘P’ (passed), the history check is blocked with an explanatory message.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>The driving history check is only permitted when the eligibility check status on the application is ‘P’ (passed)</li>
+<li>Any other eligibility status blocks the history check and requires the user to complete eligibility first</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">*    Check eligibility was passed first
+           EXEC SQL
+               SELECT ELIG_CHECK_STATUS
+               INTO   :ELIG-CHECK-STATUS OF DCLDLIS-LICENSE-APPL
+               FROM   DLIS.LICENSE_APPLICATION
+               WHERE  APPLICATION_ID = :APPLICATION-ID
+                                       OF DCLDLIS-LICENSE-APPL
+           END-EXEC
+           IF ELIG-CHECK-STATUS OF DCLDLIS-LICENSE-APPL NOT = &#039;P&#039;
+               MOVE &#039;ELIGIBILITY CHECK MUST BE PASSED FIRST&#039; TO DHCMSG
+               GO TO RUN-HIST-EXIT
+           END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>APPLICATION-ID</code></td>
+<td>input</td>
+<td>Used as the WHERE clause key to retrieve the eligibility check status from the license application record</td>
+</tr>
+<tr>
+<td><code>ELIG-CHECK-STATUS</code></td>
+<td>input</td>
+<td>Retrieved from the database and tested against ‘P’ to enforce the prerequisite that eligibility must be passed before the history check can run</td>
+</tr>
+</tbody>
+</table>
+<h4 id="253-evaluate-driving-history-failure-conditions" tabindex="-1">2.5.3 Evaluate Driving History Failure Conditions</h4>
+<p><strong>Description:</strong> Applies the three driving history failure criteria in priority order: (1) active suspension or disqualification, (2) total demerit points exceeding 12, and (3) outstanding unpaid fines. The first failing condition sets the fail flag and records the reason message; subsequent conditions are only checked if no prior failure was detected.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>An active suspension or disqualification is the highest-priority failure condition</li>
+<li>Demerit points exceeding 12 is the second failure condition, checked only if no suspension failure was found</li>
+<li>Outstanding unpaid fines is the third failure condition, checked only if neither prior condition failed</li>
+<li>Only the first detected failure reason is recorded as the history check failure message</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE SPACES TO WS-HIST-FAIL-MSG
+           MOVE &#039;N&#039;    TO WS-FAIL-FLAG
+           IF WS-SUSP-FLAG = &#039;Y&#039;
+               MOVE &#039;Y&#039; TO WS-FAIL-FLAG
+               MOVE &#039;ACTIVE SUSPENSION OR DISQUALIFICATION ON FILE&#039;
+                   TO WS-HIST-FAIL-MSG
+           END-IF
+           IF WS-DEMERIT-TOTAL &gt; 12 AND WS-FAIL-FLAG = &#039;N&#039;
+               MOVE &#039;Y&#039; TO WS-FAIL-FLAG
+               MOVE &#039;TOTAL DEMERIT POINTS EXCEED THRESHOLD OF 12&#039;
+                   TO WS-HIST-FAIL-MSG
+           END-IF
+           IF WS-FINE-FLAG = &#039;Y&#039; AND WS-FAIL-FLAG = &#039;N&#039;
+               MOVE &#039;Y&#039; TO WS-FAIL-FLAG
+               MOVE &#039;OUTSTANDING UNPAID FINES ON FILE&#039;
+                   TO WS-HIST-FAIL-MSG
+           END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>WS-SUSP-FLAG</code></td>
+<td>input</td>
+<td>Tested as the first and highest-priority failure condition; a value of ‘Y’ immediately sets the fail flag and records the suspension failure message</td>
+</tr>
+<tr>
+<td><code>WS-DEMERIT-TOTAL</code></td>
+<td>input</td>
+<td>Compared against the threshold of 12 as the second failure condition to determine whether accumulated demerit points cause a history check failure</td>
+</tr>
+<tr>
+<td><code>WS-FINE-FLAG</code></td>
+<td>input</td>
+<td>Tested as the third failure condition; a value of ‘Y’ sets the fail flag and records the unpaid fines failure message if no prior failure was detected</td>
+</tr>
+</tbody>
+</table>
+<h4 id="254-assign-history-check-outcome-and-update-application-status" tabindex="-1">2.5.4 Assign History Check Outcome and Update Application Status</h4>
+<p><strong>Description:</strong> Sets the history check result to ‘F’ (fail) or ‘P’ (pass) and advances the application lifecycle status accordingly: ‘RE’ (referred/rejected) on failure or ‘HC’ (history check complete) on pass. The outcome, date, notes, and updated application status are then written back to the license application record.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>A failed history check sets the history status to ‘F’ and advances application status to ‘RE’ (referred)</li>
+<li>A passed history check sets the history status to ‘P’ and advances application status to ‘HC’ (history check complete)</li>
+<li>The outcome, check date, failure notes, and new application status are persisted to the license application record</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF WS-FAIL-FLAG = &#039;Y&#039;
+               MOVE &#039;F&#039;  TO WS-HISTORY-STATUS
+               MOVE &#039;FAIL&#039; TO DHCHSTSO
+               MOVE WS-HIST-FAIL-MSG TO DHCHSDSO
+               MOVE &#039;RE&#039; TO APPLICATION-STATUS OF DCLDLIS-LICENSE-APPL
+           ELSE
+               MOVE &#039;P&#039;  TO WS-HISTORY-STATUS
+               MOVE &#039;PASS&#039; TO DHCHSTSO
+               MOVE SPACES  TO DHCHSDSO
+               MOVE &#039;HC&#039; TO APPLICATION-STATUS OF DCLDLIS-LICENSE-APPL
+           END-IF
+
+           EXEC SQL
+               UPDATE DLIS.LICENSE_APPLICATION SET
+                   HIST_CHECK_STATUS  = :WS-HISTORY-STATUS,
+                   HIST_CHECK_DATE    = CURRENT DATE,
+                   HIST_CHECK_NOTES   = :WS-HIST-FAIL-MSG,
+                   APPLICATION_STATUS = :APPLICATION-STATUS
+                                        OF DCLDLIS-LICENSE-APPL,
+                   LAST_UPDATED_DATE  = CURRENT DATE,
+                   LAST_UPDATED_BY    = EIBTRMID
+               WHERE APPLICATION_ID   = :APPLICATION-ID
+                                        OF DCLDLIS-LICENSE-APPL
+           END-EXEC</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>WS-HISTORY-STATUS</code></td>
+<td>output</td>
+<td>Set to ‘F’ or ‘P’ based on the overall history check outcome and written to the application record as the history check result</td>
+</tr>
+<tr>
+<td><code>APPLICATION-STATUS</code></td>
+<td>output</td>
+<td>Set to ‘RE’ on failure or ‘HC’ on pass to advance the application’s processing lifecycle status, then written back to the database</td>
+</tr>
+<tr>
+<td><code>APPLICATION-ID</code></td>
+<td>input</td>
+<td>Used as the WHERE clause key to identify the correct application record to update with the history check outcome</td>
+</tr>
+</tbody>
+</table>
+<h4 id="255-display-final-history-check-result-message" tabindex="-1">2.5.5 Display Final History Check Result Message</h4>
+<p><strong>Description:</strong> Presents the final outcome of the history check to the user. A passed check shows a generic success message, while a failed check shows the specific failure reason previously determined.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>A passed history check displays the message ‘HISTORY CHECK PASSED’</li>
+<li>A failed history check displays the specific failure reason message on screen</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF WS-HISTORY-STATUS = &#039;P&#039;
+               MOVE &#039;HISTORY CHECK PASSED&#039; TO DHCMSG
+           ELSE
+               MOVE WS-HIST-FAIL-MSG TO DHCMSG
+           END-IF.</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>WS-HISTORY-STATUS</code></td>
+<td>input</td>
+<td>Tested against ‘P’ to choose between displaying the pass confirmation message or the failure reason</td>
+</tr>
+</tbody>
+</table>
+
+                    </article>
+                    <nav class="toc-panel" aria-label="On this page">
+  <span class="toc-panel-label">On this page</span>
+  <ul class="toc-list">
+<li class="toc-level-2"><a href="#1-purpose">1. Purpose</a></li>
+<li class="toc-level-2"><a href="#2-rule-inventory">2. Rule Inventory</a>
+<ul>
+<li class="toc-level-3"><a href="#21-paragraph-process-input">2.1 Paragraph: PROCESS-INPUT</a>
+<ul>
+<li class="toc-level-4"><a href="#211-function-key-routing-for-history-check-actions">2.1.1 Function Key Routing for History Check Actions</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#22-paragraph-main-logic">2.2 Paragraph: MAIN-LOGIC</a>
+<ul>
+<li class="toc-level-4"><a href="#221-initial-session-vs-returning-session-routing">2.2.1 Initial Session vs. Returning Session Routing</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#23-paragraph-load-application">2.3 Paragraph: LOAD-APPLICATION</a>
+<ul>
+<li class="toc-level-4"><a href="#231-application-id-presence-validation">2.3.1 Application ID Presence Validation</a></li>
+<li class="toc-level-4"><a href="#232-retrieve-application-and-candidate-details">2.3.2 Retrieve Application and Candidate Details</a></li>
+<li class="toc-level-4"><a href="#233-display-candidate-name-and-license-type-on-screen">2.3.3 Display Candidate Name and License Type on Screen</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#24-paragraph-load-history-table">2.4 Paragraph: LOAD-HISTORY-TABLE</a>
+<ul>
+<li class="toc-level-4"><a href="#241-accumulate-demerit-points-across-all-history-incidents">2.4.1 Accumulate Demerit Points Across All History Incidents</a></li>
+<li class="toc-level-4"><a href="#242-detect-active-suspension-or-disqualification">2.4.2 Detect Active Suspension or Disqualification</a></li>
+<li class="toc-level-4"><a href="#243-detect-outstanding-unpaid-fines">2.4.3 Detect Outstanding Unpaid Fines</a></li>
+<li class="toc-level-4"><a href="#244-propagate-summary-check-indicators-to-screen">2.4.4 Propagate Summary Check Indicators to Screen</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#25-paragraph-run-history-check">2.5 Paragraph: RUN-HISTORY-CHECK</a>
+<ul>
+<li class="toc-level-4"><a href="#251-application-id-presence-validation-for-history-check">2.5.1 Application ID Presence Validation for History Check</a></li>
+<li class="toc-level-4"><a href="#252-eligibility-check-must-be-passed-before-history-check">2.5.2 Eligibility Check Must Be Passed Before History Check</a></li>
+<li class="toc-level-4"><a href="#253-evaluate-driving-history-failure-conditions">2.5.3 Evaluate Driving History Failure Conditions</a></li>
+<li class="toc-level-4"><a href="#254-assign-history-check-outcome-and-update-application-status">2.5.4 Assign History Check Outcome and Update Application Status</a></li>
+<li class="toc-level-4"><a href="#255-display-final-history-check-result-message">2.5.5 Display Final History Check Result Message</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</nav>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="wiki-footer">Made by IBM Bob Premium Package for Z</footer>
+    <script>
+    /* toc-spy.js — highlights the active heading in the TOC panel on scroll */
+    (function () {
+      function init() {
+        var panel = document.querySelector('.toc-panel');
+        if (!panel) return;
+        var links = Array.prototype.slice.call(panel.querySelectorAll('a[href^="#"]'));
+        if (!links.length) return;
+
+        var headingIds = links.map(function (a) { return a.getAttribute('href').slice(1); });
+        var headings = headingIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+        function clearActive() {
+          panel.querySelectorAll('.toc-active').forEach(function (el) { el.classList.remove('toc-active'); });
+          panel.querySelectorAll('.toc-parent-active').forEach(function (el) { el.classList.remove('toc-parent-active'); });
+        }
+
+        function setActive(id) {
+          clearActive();
+          var link = panel.querySelector('a[href="#' + id + '"]');
+          if (!link) return;
+          link.classList.add('toc-active');
+          var li = link.closest('li');
+          if (li) {
+            var parentLi = li.parentElement && li.parentElement.closest('li');
+            if (parentLi) parentLi.classList.add('toc-parent-active');
+          }
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+        headings.forEach(function (h) { observer.observe(h); });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
+    <script>
+    /* breadcrumb.js — reads sessionStorage['wiki_referrer'] and renders breadcrumb.
+       Only fires when the referrer was set by clicking a link inside the Source Files
+       disclosure on a wiki page; clears after rendering so stale state never lingers. */
+    (function () {
+      var raw;
+      try { raw = sessionStorage.getItem('wiki_referrer'); } catch (_e) {}
+      if (!raw) return;
+      /* Consume immediately — prevents the breadcrumb re-appearing on the next visit. */
+      try { sessionStorage.removeItem('wiki_referrer'); } catch (_e) {}
+      var ref;
+      try { ref = JSON.parse(raw); } catch (_e) { return; }
+      if (!ref || !ref.href) return;
+      var bc = document.getElementById('wiki-breadcrumb');
+      if (!bc) return;
+      bc.className = 'wiki-breadcrumb';
+      bc.innerHTML =
+        '<a href="' + ref.href + '">' + (ref.title || 'Back') + '</a>' +
+        '<span class="wiki-breadcrumb-sep"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' +
+        '<span class="wiki-breadcrumb-current">DLISHIST-inventory</span>';
+    })();
+    </script>
+    <script>
+    /* sidebar toggle — same as main wiki pages */
+    (function () {
+
+      var STORAGE_KEY = 'sb_open';
+
+      function getOpenSet() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+      }
+
+      function saveOpenSet(set) {
+        try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(set)); } catch (e) {}
+      }
+
+      function findItems(toggle) {
+        var node = toggle.nextSibling;
+        while (node) {
+          if (node.nodeType === 1 && node.classList.contains('nav-section-items'))
+            return node;
+          node = node.nextSibling;
+        }
+        return null;
+      }
+
+      function toggleKey(toggle, index) {
+        var label = (toggle.querySelector('.nav-toggle-text') || toggle).textContent.trim().replace(/\s+/g, ' ');
+        return index + ':' + label;
+      }
+
+      function openSection(toggle, items, key, set) {
+        toggle.classList.add('open');
+        items.classList.add('open');
+        if (set) set[key] = true;
+      }
+
+      function closeSection(toggle, items, key, set) {
+        toggle.classList.remove('open');
+        items.classList.remove('open');
+        if (set) set[key] = false;
+      }
+
+      function init() {
+        var sidebar = document.getElementById('wiki-sidebar');
+        var toggles = Array.prototype.slice.call(
+          document.querySelectorAll('.nav-section-toggle')
+        );
+
+        var savedSet = getOpenSet();
+        var openSet = savedSet || {};
+
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+
+          var key = toggleKey(toggle, idx);
+          var shouldOpen = openSet[key] === true;
+
+          if (shouldOpen) {
+            toggle.classList.add('open');
+            items.classList.add('open');
+          }
+
+          toggle.addEventListener('click', function () {
+            var nowOpen = toggle.classList.contains('open');
+            if (nowOpen) {
+              closeSection(toggle, items, key, openSet);
+            } else {
+              openSection(toggle, items, key, openSet);
+            }
+            saveOpenSet(openSet);
+          });
+        });
+
+        saveOpenSet(openSet);
+
+        /* Restore sidebar scroll position after sections are expanded so the
+           scroll height is correct when we apply scrollTop. */
+        if (sidebar) {
+          try {
+            var savedScroll = sessionStorage.getItem('sb_scroll');
+            if (savedScroll !== null) { sidebar.scrollTop = parseInt(savedScroll, 10) || 0; }
+          } catch (_e) {}
+        }
+
+        window.addEventListener('pagehide', function () {
+          saveOpenSet(openSet);
+          if (sidebar) {
+            try { sessionStorage.setItem('sb_scroll', String(sidebar.scrollTop)); } catch (_e) {}
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+    </script>
+</body>
+</html>

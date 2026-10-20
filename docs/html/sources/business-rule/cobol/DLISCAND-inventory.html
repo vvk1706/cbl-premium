@@ -1,0 +1,1283 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLISCAND-inventory</title>
+    <link rel="stylesheet" href="../../../assets/style.css">
+    <script src="../../../assets/mermaid.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+
+    <!-- Prism.js for syntax highlighting (bundled — no CDN required) -->
+    <link rel="stylesheet" href="../../../assets/prism-tomorrow.css">
+    <script src="../../../assets/prism-core.js"></script>
+    <script src="../../../assets/prism-languages.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="header-app-name"><a href="../../../../index.html" style="color: inherit; text-decoration: none;">Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</a></span>
+        </div>
+        <div class="header-right">
+        </div>
+    </header>
+    <div class="shell">
+        <aside class="sidebar" id="wiki-sidebar">
+            <nav>
+                
+        <div class="nav-home-wrap">
+            <a href="../../../../index.html" class="nav-home">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 6.5L8 2l6 4.5V14a1 1 0 01-1 1H3a1 1 0 01-1-1V6.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M6 15V9h4v6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                Home
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Application Documentation</div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Overview</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/system-overview.html" class="nav-link" data-page-id="system-overview">DLIS System Overview</a>
+                <a href="../../../pages/main-menu-navigation.html" class="nav-link" data-page-id="main-menu-navigation">Main Menu &amp; Navigation (DL01)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Candidate &amp; Application Intake</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/candidate-management.html" class="nav-link" data-page-id="candidate-management">Candidate Maintenance (DL02)</a>
+                <a href="../../../pages/license-application-entry.html" class="nav-link" data-page-id="license-application-entry">License Application Entry (DL03)</a>
+                <a href="../../../pages/application-status-inquiry.html" class="nav-link" data-page-id="application-status-inquiry">Application Status Inquiry (DL04)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Verification &amp; Payment</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/eligibility-check.html" class="nav-link" data-page-id="eligibility-check">Eligibility Check (DL05)</a>
+                <a href="../../../pages/driving-history-check.html" class="nav-link" data-page-id="driving-history-check">Driving History Check (DL06)</a>
+                <a href="../../../pages/payment-processing.html" class="nav-link" data-page-id="payment-processing">Payment Entry &amp; Processing (DL07)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Approval &amp; License Issuance</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/first-level-approval.html" class="nav-link" data-page-id="first-level-approval">First-Level Authority Approval (DL08)</a>
+                <a href="../../../pages/second-level-approval.html" class="nav-link" data-page-id="second-level-approval">Second-Level Authority Approval (DL09)</a>
+                <a href="../../../pages/license-issuance.html" class="nav-link" data-page-id="license-issuance">License Issuance (DL10)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Architecture</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/application-lifecycle-flow.html" class="nav-link" data-page-id="application-lifecycle-flow">Application Lifecycle &amp; Status Flow</a>
+                <a href="../../../pages/data-architecture.html" class="nav-link" data-page-id="data-architecture">Data Architecture (DB2)</a>
+                <a href="../../../pages/cics-integration-patterns.html" class="nav-link" data-page-id="cics-integration-patterns">CICS Integration Patterns</a>
+            </div>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Program Documentation</div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">program</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../sources/program/cobol/DLISPAY.html" class="nav-link">DLISPAY</a>
+                <a href="../../../sources/program/cobol/DLISSTAT.html" class="nav-link">DLISSTAT</a>
+                <a href="../../../sources/program/cobol/DLISMENU.html" class="nav-link">DLISMENU</a>
+                <a href="../../../sources/program/cobol/DLISELIG.html" class="nav-link">DLISELIG</a>
+                <a href="../../../sources/program/cobol/DLISCAND.html" class="nav-link">DLISCAND</a>
+                <a href="../../../sources/program/cobol/DLISAPPL.html" class="nav-link">DLISAPPL</a>
+                <a href="../../../sources/program/cobol/DLISISSU.html" class="nav-link">DLISISSU</a>
+                <a href="../../../sources/program/cobol/DLISAP2.html" class="nav-link">DLISAP2</a>
+                <a href="../../../sources/program/cobol/DLISHIST.html" class="nav-link">DLISHIST</a>
+                <a href="../../../sources/program/cobol/DLISAP1.html" class="nav-link">DLISAP1</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="nav-section">
+        <button class="nav-section-toggle open" type="button">
+            <span class="nav-toggle-text">business-rule</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items open">
+        <div class="nav-section">
+            <button class="nav-section-toggle open" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items open">
+                <a href="../../../sources/business-rule/cobol/DLISELIG-overview.html" class="nav-link">DLISELIG-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-inventory.html" class="nav-link">DLISPAY-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-overview.html" class="nav-link">DLISCAND-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-inventory.html" class="nav-link">DLISAP2-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-inventory.html" class="nav-link">DLISHIST-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-inventory.html" class="nav-link">DLISMENU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISELIG-inventory.html" class="nav-link">DLISELIG-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-overview.html" class="nav-link">DLISPAY-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-overview.html" class="nav-link">DLISSTAT-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-overview.html" class="nav-link">DLISHIST-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-overview.html" class="nav-link">DLISAPPL-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-inventory.html" class="nav-link">DLISISSU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-inventory.html" class="nav-link">DLISAPPL-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-inventory.html" class="nav-link">DLISSTAT-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-overview.html" class="nav-link">DLISAP1-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-inventory.html" class="nav-link active">DLISCAND-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-overview.html" class="nav-link">DLISAP2-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-overview.html" class="nav-link">DLISISSU-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-inventory.html" class="nav-link">DLISAP1-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-overview.html" class="nav-link">DLISMENU-overview</a>
+            </div>
+        </div>
+        </div>
+    </div>
+            </nav>
+        </aside>
+        <main class="main">
+            <div class="prog-container">
+                <div id="wiki-breadcrumb"></div>
+                <div class="content-layout">
+                    <article class="prose">
+                        <h1 id="business-rules-inventory" tabindex="-1">Business rules: Inventory</h1>
+<p><strong>Program:</strong> DLISCAND</p>
+<p><strong>Total rules extracted:</strong> 13</p>
+<h2 id="1-purpose" tabindex="-1">1. Purpose</h2>
+<p>This document is an inventory of all business rules extracted from DLISCAND, organised at the Paragraph level. Each Paragraph contributes one or more named rule blocks, where each block captures a discrete business policy with its title, decision logic, conditions, actions, outcomes, and the exact source code that realises it. Key variables, when available, are annotated with their role (input or output) and their specific purpose within the rule. References to related Paragraphs called or invoked by each rule are also recorded.</p>
+<h2 id="2-rule-inventory" tabindex="-1">2. Rule Inventory</h2>
+<h3 id="21-paragraph-process-input" tabindex="-1">2.1 Paragraph: PROCESS-INPUT</h3>
+<h4 id="211-function-key-routing-to-business-operations" tabindex="-1">2.1.1 Function Key Routing to Business Operations</h4>
+<p><strong>Description:</strong> Routes user requests to the appropriate candidate management operation based on the function key pressed. F1 creates a candidate, F2 updates, F3 inquires, F4 deactivates, F12 exits the transaction, and any other key results in an invalid key message.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>F1 initiates candidate creation</li>
+<li>F2 initiates candidate update</li>
+<li>F3 initiates candidate inquiry</li>
+<li>F4 initiates candidate deactivation</li>
+<li>F12 terminates the transaction</li>
+<li>Any other key press is rejected with an invalid key message</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EVALUATE TRUE
+               WHEN EIBAID = DFHPF1
+                   PERFORM CREATE-CANDIDATE
+               WHEN EIBAID = DFHPF2
+                   PERFORM UPDATE-CANDIDATE
+               WHEN EIBAID = DFHPF3
+                   PERFORM INQUIRE-CANDIDATE
+               WHEN EIBAID = DFHPF4
+                   PERFORM DEACTIVATE-CANDIDATE
+               WHEN EIBAID = DFHPF12
+                   EXEC CICS RETURN END-EXEC
+               OTHER
+                   MOVE &#039;INVALID KEY - USE F1-F4 OR F12&#039; TO DCMMSG
+           END-EVALUATE</code></pre>
+</div>
+<p><strong>Paragraphs:</strong></p>
+<ul>
+<li>CREATE-CANDIDATE</li>
+<li>UPDATE-CANDIDATE</li>
+<li>INQUIRE-CANDIDATE</li>
+<li>DEACTIVATE-CANDIDATE</li>
+</ul>
+<h3 id="22-paragraph-main-logic" tabindex="-1">2.2 Paragraph: MAIN-LOGIC</h3>
+<h4 id="221-first-time-entry-vs-return-entry-routing" tabindex="-1">2.2.1 First-Time Entry vs. Return Entry Routing</h4>
+<p><strong>Description:</strong> Determines whether the transaction is being entered for the first time or returning from a prior interaction. On first entry (no commarea), the screen is initialised. On subsequent entries, the commarea is restored and user input is processed.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>If commarea length is zero, the transaction is starting fresh and the screen is initialised</li>
+<li>If commarea length is non-zero, the existing commarea data is restored and input processing continues</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF EIBCALEN = 0
+               PERFORM INIT-SCREEN
+           ELSE
+               MOVE DFHCOMMAREA  TO DLIS-COMMAREA
+               PERFORM PROCESS-INPUT
+           END-IF</code></pre>
+</div>
+<p><strong>Paragraphs:</strong></p>
+<ul>
+<li>INIT-SCREEN</li>
+<li>PROCESS-INPUT</li>
+</ul>
+<h3 id="23-paragraph-create-candidate" tabindex="-1">2.3 Paragraph: CREATE-CANDIDATE</h3>
+<h4 id="231-required-field-validation-for-candidate-creation" tabindex="-1">2.3.1 Required Field Validation for Candidate Creation</h4>
+<p><strong>Description:</strong> Enforces that First Name, Last Name, and National ID are all mandatory fields before a candidate record can be created. If any of these fields is missing, processing is halted and an appropriate error message is returned to the user.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>First Name is a mandatory field for candidate creation</li>
+<li>Last Name is a mandatory field for candidate creation</li>
+<li>National ID is a mandatory field for candidate creation</li>
+<li>Any missing required field prevents creation and displays a specific error message</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF DCMFNAMI = SPACES OR DCMFNAMI = LOW-VALUES
+               MOVE &#039;FIRST NAME IS REQUIRED&#039; TO DCMMSG
+               GO TO CREATE-CANDIDATE-EXIT
+           END-IF
+           IF DCMLNAMI = SPACES OR DCMLNAMI = LOW-VALUES
+               MOVE &#039;LAST NAME IS REQUIRED&#039; TO DCMMSG
+               GO TO CREATE-CANDIDATE-EXIT
+           END-IF
+           IF DCMIDNOI = SPACES OR DCMIDNOI = LOW-VALUES
+               MOVE &#039;NATIONAL ID IS REQUIRED&#039; TO DCMMSG
+               GO TO CREATE-CANDIDATE-EXIT
+           END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FIRST-NAME</code></td>
+<td>output</td>
+<td>Validated as a required field; creation is blocked if First Name is absent</td>
+</tr>
+<tr>
+<td><code>LAST-NAME</code></td>
+<td>output</td>
+<td>Validated as a required field; creation is blocked if Last Name is absent</td>
+</tr>
+<tr>
+<td><code>ID-NUMBER</code></td>
+<td>output</td>
+<td>Validated as a required field; creation is blocked if National ID is absent</td>
+</tr>
+</tbody>
+</table>
+<h4 id="232-duplicate-active-candidate-check-by-national-id" tabindex="-1">2.3.2 Duplicate Active Candidate Check by National ID</h4>
+<p><strong>Description:</strong> Prevents creation of a duplicate candidate by checking whether an active candidate record with the same National ID already exists in the database. If a match is found, creation is blocked and the user is informed.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>A candidate with the same National ID and an active status (‘A’) cannot be created again</li>
+<li>Duplicate detection is scoped to active records only; inactive records with the same ID do not block creation</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE DCMIDNOI TO ID-NUMBER OF DCLDLIS-CANDIDATE
+           EXEC SQL
+               SELECT CANDIDATE_ID INTO :CANDIDATE-ID OF DCLDLIS-CANDIDA        
+               FROM DLIS.CANDIDATE
+               WHERE ID_NUMBER = :ID-NUMBER OF DCLDLIS-CANDIDATE
+               AND   RECORD_STATUS = &#039;A&#039;
+           END-EXEC
+           IF SQLCODE = 0
+               MOVE &#039;CANDIDATE WITH THIS ID NUMBER ALREADY EXISTS&#039;
+                   TO DCMMSG
+               GO TO CREATE-CANDIDATE-EXIT
+           END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ID-NUMBER</code></td>
+<td>input</td>
+<td>Used as the search key to detect whether an active candidate with the same National ID already exists</td>
+</tr>
+<tr>
+<td><code>CANDIDATE-ID</code></td>
+<td>output</td>
+<td>Retrieved from the database to confirm existence of a duplicate active candidate</td>
+</tr>
+<tr>
+<td><code>RECORD-STATUS</code></td>
+<td>input</td>
+<td>Filtered to ‘A’ (active) to ensure only active duplicates block candidate creation</td>
+</tr>
+</tbody>
+</table>
+<h4 id="233-insert-new-candidate-record" tabindex="-1">2.3.3 Insert New Candidate Record</h4>
+<p><strong>Description:</strong> Creates a new candidate record in the database with all provided personal and contact details. The record is set to active status (‘A’) and stamped with the creating terminal identifier for audit purposes.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>A new candidate record is created with status ‘A’ (active)</li>
+<li>The creating terminal identifier is recorded as the audit creator</li>
+<li>All personal details including name, date of birth, National ID, address, phone, and email are persisted</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE DCMFNAMI  TO FIRST-NAME   OF DCLDLIS-CANDIDATE
+           MOVE DCMLNAMI  TO LAST-NAME    OF DCLDLIS-CANDIDATE
+           MOVE DCMDOBI   TO DATE-OF-BIRTH OF DCLDLIS-CANDIDATE
+           MOVE DCMIDNOI  TO ID-NUMBER    OF DCLDLIS-CANDIDATE
+           MOVE DCMADR1I  TO ADDRESS-LINE-1 OF DCLDLIS-CANDIDATE
+           MOVE DCMADR2I  TO ADDRESS-LINE-2 OF DCLDLIS-CANDIDATE
+           MOVE DCMCITYI  TO CITY         OF DCLDLIS-CANDIDATE
+           MOVE DCMSTATI  TO STATE-PROVINCE OF DCLDLIS-CANDIDATE
+           MOVE DCMPOSTI  TO POSTAL-CODE  OF DCLDLIS-CANDIDATE
+           MOVE DCMCTRYI  TO COUNTRY      OF DCLDLIS-CANDIDATE
+           MOVE DCMPHNI   TO PHONE-NUMBER OF DCLDLIS-CANDIDATE
+           MOVE DCMEMLI   TO EMAIL-ADDRESS OF DCLDLIS-CANDIDATE
+           MOVE &#039;A&#039;       TO RECORD-STATUS OF DCLDLIS-CANDIDATE
+           MOVE EIBTRMID  TO CREATED-BY   OF DCLDLIS-CANDIDATE
+           EXEC SQL
+               INSERT INTO DLIS.CANDIDATE
+                  (FIRST_NAME, LAST_NAME, DATE_OF_BIRTH, ID_NUMBER,
+                   ADDRESS_LINE_1, ADDRESS_LINE_2, CITY,
+                   STATE_PROVINCE, POSTAL_CODE, COUNTRY,
+                   PHONE_NUMBER, EMAIL_ADDRESS, RECORD_STATUS, CREATED_B        
+               VALUES
+                  (:FIRST-NAME, :LAST-NAME, :DATE-OF-BIRTH, :ID-NUMBER,
+                   :ADDRESS-LINE-1, :ADDRESS-LINE-2, :CITY,
+                   :STATE-PROVINCE, :POSTAL-CODE, :COUNTRY,
+                   :PHONE-NUMBER, :EMAIL-ADDRESS, :RECORD-STATUS,
+                   :CREATED-BY)
+               OF DCLDLIS-CANDIDATE
+           END-EXEC</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FIRST-NAME</code></td>
+<td>output</td>
+<td>Populated from the screen input and inserted into the candidate record as the given name</td>
+</tr>
+<tr>
+<td><code>LAST-NAME</code></td>
+<td>output</td>
+<td>Populated from the screen input and inserted into the candidate record as the family name</td>
+</tr>
+<tr>
+<td><code>DATE-OF-BIRTH</code></td>
+<td>output</td>
+<td>Populated from the screen input and stored as the candidate’s birth date</td>
+</tr>
+<tr>
+<td><code>ID-NUMBER</code></td>
+<td>output</td>
+<td>Populated from the screen input and stored as the candidate’s National ID</td>
+</tr>
+<tr>
+<td><code>ADDRESS-LINE-1</code></td>
+<td>output</td>
+<td>Populated from the screen input and stored as the first line of the candidate’s address</td>
+</tr>
+<tr>
+<td><code>ADDRESS-LINE-2</code></td>
+<td>output</td>
+<td>Populated from the screen input and stored as the second line of the candidate’s address</td>
+</tr>
+<tr>
+<td><code>CITY</code></td>
+<td>output</td>
+<td>Populated from the screen input and stored as the candidate’s city</td>
+</tr>
+<tr>
+<td><code>STATE-PROVINCE</code></td>
+<td>output</td>
+<td>Populated from the screen input and stored as the candidate’s state or province</td>
+</tr>
+<tr>
+<td><code>POSTAL-CODE</code></td>
+<td>output</td>
+<td>Populated from the screen input and stored as the candidate’s postal code</td>
+</tr>
+<tr>
+<td><code>COUNTRY</code></td>
+<td>output</td>
+<td>Populated from the screen input and stored as the candidate’s country</td>
+</tr>
+<tr>
+<td><code>PHONE-NUMBER</code></td>
+<td>output</td>
+<td>Populated from the screen input and stored as the candidate’s telephone number</td>
+</tr>
+<tr>
+<td><code>EMAIL-ADDRESS</code></td>
+<td>output</td>
+<td>Populated from the screen input and stored as the candidate’s email address</td>
+</tr>
+<tr>
+<td><code>RECORD-STATUS</code></td>
+<td>output</td>
+<td>Set to ‘A’ to mark the newly created candidate record as active</td>
+</tr>
+<tr>
+<td><code>CREATED-BY</code></td>
+<td>output</td>
+<td>Set from the terminal identifier to record who created the candidate for audit purposes</td>
+</tr>
+</tbody>
+</table>
+<h4 id="234-retrieve-and-display-system-generated-candidate-id-after-creation" tabindex="-1">2.3.4 Retrieve and Display System-Generated Candidate ID After Creation</h4>
+<p><strong>Description:</strong> Retrieves the system-generated unique identifier assigned to the newly created candidate record and displays it on the screen along with a success confirmation message.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>The system-generated candidate ID is retrieved immediately after a successful insert and shown to the user</li>
+<li>A success message confirms the candidate was created</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EXEC SQL
+               SELECT IDENTITY_VAL_LOCAL()
+               INTO :CANDIDATE-ID OF DCLDLIS-CANDIDATE
+               FROM SYSIBM.SYSDUMMY1
+           END-EXEC
+           MOVE CANDIDATE-ID OF DCLDLIS-CANDIDATE TO DCMCIDO
+           MOVE &#039;CANDIDATE CREATED SUCCESSFULLY&#039; TO DCMMSG</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CANDIDATE-ID</code></td>
+<td>output</td>
+<td>Receives the system-generated identifier of the newly inserted candidate record and is displayed on the screen</td>
+</tr>
+</tbody>
+</table>
+<h3 id="24-paragraph-update-candidate" tabindex="-1">2.4 Paragraph: UPDATE-CANDIDATE</h3>
+<h4 id="241-candidate-id-required-validation-for-update" tabindex="-1">2.4.1 Candidate ID Required Validation for Update</h4>
+<p><strong>Description:</strong> Enforces that a Candidate ID must be provided before an update operation can proceed. If the ID is absent, the update is blocked and an error message is returned.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>Candidate ID is mandatory to perform an update; absence blocks the operation</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF DCMCIDI = ZEROS OR DCMCIDI = LOW-VALUES
+               MOVE &#039;CANDIDATE ID IS REQUIRED FOR UPDATE&#039; TO DCMMSG
+               GO TO UPDATE-CANDIDATE-EXIT
+           END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CANDIDATE-ID</code></td>
+<td>input</td>
+<td>Checked for presence to ensure an update target is identified before proceeding</td>
+</tr>
+</tbody>
+</table>
+<h4 id="242-update-candidate-record-details" tabindex="-1">2.4.2 Update Candidate Record Details</h4>
+<p><strong>Description:</strong> Updates personal and contact details for the identified candidate record, including name, address, phone, email, and record status. The outcome is communicated to the user: success, not found, or database error.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>All updatable candidate fields including name, address, contact details, and record status are modified in a single operation</li>
+<li>If no matching candidate is found, the user is notified with a ‘not found’ message</li>
+<li>A successful update is confirmed to the user</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE DCMCIDI TO CANDIDATE-ID OF DCLDLIS-CANDIDATE
+           EXEC SQL
+               UPDATE DLIS.CANDIDATE SET
+                  FIRST_NAME       = :FIRST-NAME,
+                  LAST_NAME        = :LAST-NAME,
+                  ADDRESS_LINE_1   = :ADDRESS-LINE-1,
+                  ADDRESS_LINE_2   = :ADDRESS-LINE-2,
+                  CITY             = :CITY,
+                  STATE_PROVINCE   = :STATE-PROVINCE,
+                  POSTAL_CODE      = :POSTAL-CODE,
+                  COUNTRY          = :COUNTRY,
+                  PHONE_NUMBER     = :PHONE-NUMBER,
+                  EMAIL_ADDRESS    = :EMAIL-ADDRESS,
+                  RECORD_STATUS    = :RECORD-STATUS
+               WHERE CANDIDATE_ID  = :CANDIDATE-ID
+               OF DCLDLIS-CANDIDATE
+           END-EXEC
+           IF SQLCODE = 100
+               MOVE &#039;CANDIDATE NOT FOUND&#039; TO DCMMSG
+           ELSE IF SQLCODE NOT = 0
+               MOVE &#039;DATABASE ERROR ON UPDATE&#039; TO DCMMSG
+           ELSE
+               MOVE &#039;CANDIDATE UPDATED SUCCESSFULLY&#039; TO DCMMSG
+           END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CANDIDATE-ID</code></td>
+<td>input</td>
+<td>Used as the key to identify which candidate record to update</td>
+</tr>
+<tr>
+<td><code>FIRST-NAME</code></td>
+<td>output</td>
+<td>Updated in the candidate record with the new first name value</td>
+</tr>
+<tr>
+<td><code>LAST-NAME</code></td>
+<td>output</td>
+<td>Updated in the candidate record with the new last name value</td>
+</tr>
+<tr>
+<td><code>ADDRESS-LINE-1</code></td>
+<td>output</td>
+<td>Updated in the candidate record with the new first address line</td>
+</tr>
+<tr>
+<td><code>ADDRESS-LINE-2</code></td>
+<td>output</td>
+<td>Updated in the candidate record with the new second address line</td>
+</tr>
+<tr>
+<td><code>CITY</code></td>
+<td>output</td>
+<td>Updated in the candidate record with the new city value</td>
+</tr>
+<tr>
+<td><code>STATE-PROVINCE</code></td>
+<td>output</td>
+<td>Updated in the candidate record with the new state or province value</td>
+</tr>
+<tr>
+<td><code>POSTAL-CODE</code></td>
+<td>output</td>
+<td>Updated in the candidate record with the new postal code</td>
+</tr>
+<tr>
+<td><code>COUNTRY</code></td>
+<td>output</td>
+<td>Updated in the candidate record with the new country value</td>
+</tr>
+<tr>
+<td><code>PHONE-NUMBER</code></td>
+<td>output</td>
+<td>Updated in the candidate record with the new telephone number</td>
+</tr>
+<tr>
+<td><code>EMAIL-ADDRESS</code></td>
+<td>output</td>
+<td>Updated in the candidate record with the new email address</td>
+</tr>
+<tr>
+<td><code>RECORD-STATUS</code></td>
+<td>output</td>
+<td>Updated in the candidate record to reflect the new lifecycle status</td>
+</tr>
+</tbody>
+</table>
+<h3 id="25-paragraph-inquire-candidate" tabindex="-1">2.5 Paragraph: INQUIRE-CANDIDATE</h3>
+<h4 id="251-search-key-requirement-validation-for-inquiry" tabindex="-1">2.5.1 Search Key Requirement Validation for Inquiry</h4>
+<p><strong>Description:</strong> Enforces that at least one search key — either Candidate ID or National ID — must be provided before an inquiry can be performed. If neither is supplied, the inquiry is blocked and a prompt message is returned.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>At least one of Candidate ID or National ID must be provided to perform a candidate inquiry</li>
+<li>If neither search key is present, the operation is halted and the user is prompted to supply one</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF DCMCIDI = ZEROS AND DCMIDNOI = SPACES
+               MOVE &#039;ENTER CANDIDATE ID OR NATIONAL ID&#039; TO DCMMSG
+               GO TO INQUIRE-CANDIDATE-EXIT
+           END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CANDIDATE-ID</code></td>
+<td>input</td>
+<td>Checked for presence as one of two valid search keys for candidate inquiry</td>
+</tr>
+<tr>
+<td><code>ID-NUMBER</code></td>
+<td>input</td>
+<td>Checked for presence as the alternate search key for candidate inquiry</td>
+</tr>
+</tbody>
+</table>
+<h4 id="252-retrieve-candidate-record-by-id-or-national-id" tabindex="-1">2.5.2 Retrieve Candidate Record by ID or National ID</h4>
+<p><strong>Description:</strong> Looks up a candidate record using either the Candidate ID or the National ID as alternative search keys. If no matching record is found, a ‘not found’ message is returned and inquiry processing ends.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>A candidate can be located by either their Candidate ID or their National ID</li>
+<li>If no record matches either key, the user is informed and inquiry is terminated</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE DCMCIDI  TO CANDIDATE-ID OF DCLDLIS-CANDIDATE
+           MOVE DCMIDNOI TO ID-NUMBER    OF DCLDLIS-CANDIDATE
+           EXEC SQL
+               SELECT CANDIDATE_ID, FIRST_NAME, LAST_NAME,
+                      DATE_OF_BIRTH, ID_NUMBER, ADDRESS_LINE_1,
+                      ADDRESS_LINE_2, CITY, STATE_PROVINCE,
+                      POSTAL_CODE, COUNTRY, PHONE_NUMBER,
+                      EMAIL_ADDRESS, RECORD_STATUS
+               INTO   :CANDIDATE-ID, :FIRST-NAME, :LAST-NAME,
+                      :DATE-OF-BIRTH, :ID-NUMBER, :ADDRESS-LINE-1,
+                      :ADDRESS-LINE-2, :CITY, :STATE-PROVINCE,
+                      :POSTAL-CODE, :COUNTRY, :PHONE-NUMBER,
+                      :EMAIL-ADDRESS, :RECORD-STATUS
+               OF DCLDLIS-CANDIDATE
+               FROM DLIS.CANDIDATE
+               WHERE CANDIDATE_ID = :CANDIDATE-ID
+                  OR ID_NUMBER    = :ID-NUMBER
+               OF DCLDLIS-CANDIDATE
+               FETCH FIRST 1 ROW ONLY
+           END-EXEC
+           IF SQLCODE = 100
+               MOVE &#039;CANDIDATE NOT FOUND&#039; TO DCMMSG
+               GO TO INQUIRE-CANDIDATE-EXIT
+           END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CANDIDATE-ID</code></td>
+<td>input</td>
+<td>Used as the primary search key to locate the candidate record</td>
+</tr>
+<tr>
+<td><code>ID-NUMBER</code></td>
+<td>input</td>
+<td>Used as the alternate search key to locate the candidate record when Candidate ID is not provided</td>
+</tr>
+<tr>
+<td><code>FIRST-NAME</code></td>
+<td>output</td>
+<td>Retrieved from the database as part of the candidate record returned by the inquiry</td>
+</tr>
+<tr>
+<td><code>LAST-NAME</code></td>
+<td>output</td>
+<td>Retrieved from the database as part of the candidate record returned by the inquiry</td>
+</tr>
+<tr>
+<td><code>DATE-OF-BIRTH</code></td>
+<td>output</td>
+<td>Retrieved from the database as part of the candidate record returned by the inquiry</td>
+</tr>
+<tr>
+<td><code>ADDRESS-LINE-1</code></td>
+<td>output</td>
+<td>Retrieved from the database as the first address line of the candidate</td>
+</tr>
+<tr>
+<td><code>ADDRESS-LINE-2</code></td>
+<td>output</td>
+<td>Retrieved from the database as the second address line of the candidate</td>
+</tr>
+<tr>
+<td><code>CITY</code></td>
+<td>output</td>
+<td>Retrieved from the database as the candidate’s city</td>
+</tr>
+<tr>
+<td><code>STATE-PROVINCE</code></td>
+<td>output</td>
+<td>Retrieved from the database as the candidate’s state or province</td>
+</tr>
+<tr>
+<td><code>POSTAL-CODE</code></td>
+<td>output</td>
+<td>Retrieved from the database as the candidate’s postal code</td>
+</tr>
+<tr>
+<td><code>COUNTRY</code></td>
+<td>output</td>
+<td>Retrieved from the database as the candidate’s country</td>
+</tr>
+<tr>
+<td><code>PHONE-NUMBER</code></td>
+<td>output</td>
+<td>Retrieved from the database as the candidate’s telephone number</td>
+</tr>
+<tr>
+<td><code>EMAIL-ADDRESS</code></td>
+<td>output</td>
+<td>Retrieved from the database as the candidate’s email address</td>
+</tr>
+<tr>
+<td><code>RECORD-STATUS</code></td>
+<td>output</td>
+<td>Retrieved from the database to reflect the current lifecycle status of the candidate</td>
+</tr>
+</tbody>
+</table>
+<h4 id="253-display-retrieved-candidate-details-on-screen" tabindex="-1">2.5.3 Display Retrieved Candidate Details on Screen</h4>
+<p><strong>Description:</strong> Populates all screen output fields with the retrieved candidate’s full profile, including identity, contact, address details, and record status, and confirms a successful find with a message.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>All candidate profile fields are presented to the user upon a successful inquiry</li>
+<li>The current record status is displayed to indicate whether the candidate is active or inactive</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE CANDIDATE-ID   OF DCLDLIS-CANDIDATE TO DCMCIDO
+           MOVE FIRST-NAME     OF DCLDLIS-CANDIDATE TO DCMFNAMO
+           MOVE LAST-NAME      OF DCLDLIS-CANDIDATE TO DCMLNAMO
+           MOVE DATE-OF-BIRTH  OF DCLDLIS-CANDIDATE TO DCMDOBO
+           MOVE ID-NUMBER      OF DCLDLIS-CANDIDATE TO DCMIDNOO
+           MOVE ADDRESS-LINE-1 OF DCLDLIS-CANDIDATE TO DCMADR1O
+           MOVE ADDRESS-LINE-2 OF DCLDLIS-CANDIDATE TO DCMADR2O
+           MOVE CITY           OF DCLDLIS-CANDIDATE TO DCMCITYO
+           MOVE STATE-PROVINCE OF DCLDLIS-CANDIDATE TO DCMSTATO
+           MOVE POSTAL-CODE    OF DCLDLIS-CANDIDATE TO DCMPOSTO
+           MOVE COUNTRY        OF DCLDLIS-CANDIDATE TO DCMCTRYO
+           MOVE PHONE-NUMBER   OF DCLDLIS-CANDIDATE TO DCMPHNO
+           MOVE EMAIL-ADDRESS  OF DCLDLIS-CANDIDATE TO DCMEMLO
+           MOVE RECORD-STATUS  OF DCLDLIS-CANDIDATE TO DCMSTSO
+           MOVE &#039;CANDIDATE FOUND&#039; TO DCMMSG</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CANDIDATE-ID</code></td>
+<td>input</td>
+<td>Moved to the screen output field to display the candidate’s unique identifier</td>
+</tr>
+<tr>
+<td><code>FIRST-NAME</code></td>
+<td>input</td>
+<td>Moved to the screen output field to display the candidate’s first name</td>
+</tr>
+<tr>
+<td><code>LAST-NAME</code></td>
+<td>input</td>
+<td>Moved to the screen output field to display the candidate’s last name</td>
+</tr>
+<tr>
+<td><code>DATE-OF-BIRTH</code></td>
+<td>input</td>
+<td>Moved to the screen output field to display the candidate’s date of birth</td>
+</tr>
+<tr>
+<td><code>ID-NUMBER</code></td>
+<td>input</td>
+<td>Moved to the screen output field to display the candidate’s National ID</td>
+</tr>
+<tr>
+<td><code>ADDRESS-LINE-1</code></td>
+<td>input</td>
+<td>Moved to the screen output field to display the first line of the candidate’s address</td>
+</tr>
+<tr>
+<td><code>ADDRESS-LINE-2</code></td>
+<td>input</td>
+<td>Moved to the screen output field to display the second line of the candidate’s address</td>
+</tr>
+<tr>
+<td><code>CITY</code></td>
+<td>input</td>
+<td>Moved to the screen output field to display the candidate’s city</td>
+</tr>
+<tr>
+<td><code>STATE-PROVINCE</code></td>
+<td>input</td>
+<td>Moved to the screen output field to display the candidate’s state or province</td>
+</tr>
+<tr>
+<td><code>POSTAL-CODE</code></td>
+<td>input</td>
+<td>Moved to the screen output field to display the candidate’s postal code</td>
+</tr>
+<tr>
+<td><code>COUNTRY</code></td>
+<td>input</td>
+<td>Moved to the screen output field to display the candidate’s country</td>
+</tr>
+<tr>
+<td><code>PHONE-NUMBER</code></td>
+<td>input</td>
+<td>Moved to the screen output field to display the candidate’s telephone number</td>
+</tr>
+<tr>
+<td><code>EMAIL-ADDRESS</code></td>
+<td>input</td>
+<td>Moved to the screen output field to display the candidate’s email address</td>
+</tr>
+<tr>
+<td><code>RECORD-STATUS</code></td>
+<td>input</td>
+<td>Moved to the screen output field to display the candidate’s current lifecycle status</td>
+</tr>
+</tbody>
+</table>
+<h3 id="26-paragraph-deactivate-candidate" tabindex="-1">2.6 Paragraph: DEACTIVATE-CANDIDATE</h3>
+<h4 id="261-candidate-id-required-validation-for-deactivation" tabindex="-1">2.6.1 Candidate ID Required Validation for Deactivation</h4>
+<p><strong>Description:</strong> Enforces that a Candidate ID must be supplied before a deactivation operation can proceed. If no ID is provided, the operation is blocked and the user is prompted.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>Candidate ID is mandatory to perform deactivation; absence prevents the operation</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF DCMCIDI = ZEROS
+               MOVE &#039;CANDIDATE ID IS REQUIRED TO DEACTIVATE&#039; TO DCMMSG
+               GO TO DEACTIVATE-CANDIDATE-EXIT
+           END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CANDIDATE-ID</code></td>
+<td>input</td>
+<td>Checked for presence to ensure a deactivation target is identified before proceeding</td>
+</tr>
+</tbody>
+</table>
+<h4 id="262-deactivate-candidate-by-setting-status-to-inactive" tabindex="-1">2.6.2 Deactivate Candidate by Setting Status to Inactive</h4>
+<p><strong>Description:</strong> Sets the candidate’s record status to ‘I’ (inactive) in the database, effectively deactivating the candidate. The outcome is communicated to the user: success with the updated status displayed, not found, or database error.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>Deactivation is achieved by setting record status to ‘I’ (inactive)</li>
+<li>If no matching candidate is found, the user is notified</li>
+<li>On successful deactivation, the screen status field is updated to ‘I’ and a confirmation message is shown</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE DCMCIDI TO CANDIDATE-ID OF DCLDLIS-CANDIDATE
+           EXEC SQL
+               UPDATE DLIS.CANDIDATE
+               SET    RECORD_STATUS = &#039;I&#039;
+               WHERE  CANDIDATE_ID  = :CANDIDATE-ID OF DCLDLIS-CANDIDATE        
+           END-EXEC
+           IF SQLCODE = 100
+               MOVE &#039;CANDIDATE NOT FOUND&#039; TO DCMMSG
+           ELSE IF SQLCODE NOT = 0
+               MOVE &#039;DATABASE ERROR ON DEACTIVATE&#039; TO DCMMSG
+           ELSE
+               MOVE &#039;I&#039; TO DCMSTSO
+               MOVE &#039;CANDIDATE DEACTIVATED&#039; TO DCMMSG
+           END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CANDIDATE-ID</code></td>
+<td>input</td>
+<td>Used as the key to identify which candidate record to deactivate</td>
+</tr>
+<tr>
+<td><code>RECORD-STATUS</code></td>
+<td>output</td>
+<td>Set to ‘I’ in the database to mark the candidate as inactive</td>
+</tr>
+</tbody>
+</table>
+
+                    </article>
+                    <nav class="toc-panel" aria-label="On this page">
+  <span class="toc-panel-label">On this page</span>
+  <ul class="toc-list">
+<li class="toc-level-2"><a href="#1-purpose">1. Purpose</a></li>
+<li class="toc-level-2"><a href="#2-rule-inventory">2. Rule Inventory</a>
+<ul>
+<li class="toc-level-3"><a href="#21-paragraph-process-input">2.1 Paragraph: PROCESS-INPUT</a>
+<ul>
+<li class="toc-level-4"><a href="#211-function-key-routing-to-business-operations">2.1.1 Function Key Routing to Business Operations</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#22-paragraph-main-logic">2.2 Paragraph: MAIN-LOGIC</a>
+<ul>
+<li class="toc-level-4"><a href="#221-first-time-entry-vs-return-entry-routing">2.2.1 First-Time Entry vs. Return Entry Routing</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#23-paragraph-create-candidate">2.3 Paragraph: CREATE-CANDIDATE</a>
+<ul>
+<li class="toc-level-4"><a href="#231-required-field-validation-for-candidate-creation">2.3.1 Required Field Validation for Candidate Creation</a></li>
+<li class="toc-level-4"><a href="#232-duplicate-active-candidate-check-by-national-id">2.3.2 Duplicate Active Candidate Check by National ID</a></li>
+<li class="toc-level-4"><a href="#233-insert-new-candidate-record">2.3.3 Insert New Candidate Record</a></li>
+<li class="toc-level-4"><a href="#234-retrieve-and-display-system-generated-candidate-id-after-creation">2.3.4 Retrieve and Display System-Generated Candidate ID After Creation</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#24-paragraph-update-candidate">2.4 Paragraph: UPDATE-CANDIDATE</a>
+<ul>
+<li class="toc-level-4"><a href="#241-candidate-id-required-validation-for-update">2.4.1 Candidate ID Required Validation for Update</a></li>
+<li class="toc-level-4"><a href="#242-update-candidate-record-details">2.4.2 Update Candidate Record Details</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#25-paragraph-inquire-candidate">2.5 Paragraph: INQUIRE-CANDIDATE</a>
+<ul>
+<li class="toc-level-4"><a href="#251-search-key-requirement-validation-for-inquiry">2.5.1 Search Key Requirement Validation for Inquiry</a></li>
+<li class="toc-level-4"><a href="#252-retrieve-candidate-record-by-id-or-national-id">2.5.2 Retrieve Candidate Record by ID or National ID</a></li>
+<li class="toc-level-4"><a href="#253-display-retrieved-candidate-details-on-screen">2.5.3 Display Retrieved Candidate Details on Screen</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#26-paragraph-deactivate-candidate">2.6 Paragraph: DEACTIVATE-CANDIDATE</a>
+<ul>
+<li class="toc-level-4"><a href="#261-candidate-id-required-validation-for-deactivation">2.6.1 Candidate ID Required Validation for Deactivation</a></li>
+<li class="toc-level-4"><a href="#262-deactivate-candidate-by-setting-status-to-inactive">2.6.2 Deactivate Candidate by Setting Status to Inactive</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</nav>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="wiki-footer">Made by IBM Bob Premium Package for Z</footer>
+    <script>
+    /* toc-spy.js — highlights the active heading in the TOC panel on scroll */
+    (function () {
+      function init() {
+        var panel = document.querySelector('.toc-panel');
+        if (!panel) return;
+        var links = Array.prototype.slice.call(panel.querySelectorAll('a[href^="#"]'));
+        if (!links.length) return;
+
+        var headingIds = links.map(function (a) { return a.getAttribute('href').slice(1); });
+        var headings = headingIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+        function clearActive() {
+          panel.querySelectorAll('.toc-active').forEach(function (el) { el.classList.remove('toc-active'); });
+          panel.querySelectorAll('.toc-parent-active').forEach(function (el) { el.classList.remove('toc-parent-active'); });
+        }
+
+        function setActive(id) {
+          clearActive();
+          var link = panel.querySelector('a[href="#' + id + '"]');
+          if (!link) return;
+          link.classList.add('toc-active');
+          var li = link.closest('li');
+          if (li) {
+            var parentLi = li.parentElement && li.parentElement.closest('li');
+            if (parentLi) parentLi.classList.add('toc-parent-active');
+          }
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+        headings.forEach(function (h) { observer.observe(h); });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
+    <script>
+    /* breadcrumb.js — reads sessionStorage['wiki_referrer'] and renders breadcrumb.
+       Only fires when the referrer was set by clicking a link inside the Source Files
+       disclosure on a wiki page; clears after rendering so stale state never lingers. */
+    (function () {
+      var raw;
+      try { raw = sessionStorage.getItem('wiki_referrer'); } catch (_e) {}
+      if (!raw) return;
+      /* Consume immediately — prevents the breadcrumb re-appearing on the next visit. */
+      try { sessionStorage.removeItem('wiki_referrer'); } catch (_e) {}
+      var ref;
+      try { ref = JSON.parse(raw); } catch (_e) { return; }
+      if (!ref || !ref.href) return;
+      var bc = document.getElementById('wiki-breadcrumb');
+      if (!bc) return;
+      bc.className = 'wiki-breadcrumb';
+      bc.innerHTML =
+        '<a href="' + ref.href + '">' + (ref.title || 'Back') + '</a>' +
+        '<span class="wiki-breadcrumb-sep"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' +
+        '<span class="wiki-breadcrumb-current">DLISCAND-inventory</span>';
+    })();
+    </script>
+    <script>
+    /* sidebar toggle — same as main wiki pages */
+    (function () {
+
+      var STORAGE_KEY = 'sb_open';
+
+      function getOpenSet() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+      }
+
+      function saveOpenSet(set) {
+        try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(set)); } catch (e) {}
+      }
+
+      function findItems(toggle) {
+        var node = toggle.nextSibling;
+        while (node) {
+          if (node.nodeType === 1 && node.classList.contains('nav-section-items'))
+            return node;
+          node = node.nextSibling;
+        }
+        return null;
+      }
+
+      function toggleKey(toggle, index) {
+        var label = (toggle.querySelector('.nav-toggle-text') || toggle).textContent.trim().replace(/\s+/g, ' ');
+        return index + ':' + label;
+      }
+
+      function openSection(toggle, items, key, set) {
+        toggle.classList.add('open');
+        items.classList.add('open');
+        if (set) set[key] = true;
+      }
+
+      function closeSection(toggle, items, key, set) {
+        toggle.classList.remove('open');
+        items.classList.remove('open');
+        if (set) set[key] = false;
+      }
+
+      function init() {
+        var sidebar = document.getElementById('wiki-sidebar');
+        var toggles = Array.prototype.slice.call(
+          document.querySelectorAll('.nav-section-toggle')
+        );
+
+        var savedSet = getOpenSet();
+        var openSet = savedSet || {};
+
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+
+          var key = toggleKey(toggle, idx);
+          var shouldOpen = openSet[key] === true;
+
+          if (shouldOpen) {
+            toggle.classList.add('open');
+            items.classList.add('open');
+          }
+
+          toggle.addEventListener('click', function () {
+            var nowOpen = toggle.classList.contains('open');
+            if (nowOpen) {
+              closeSection(toggle, items, key, openSet);
+            } else {
+              openSection(toggle, items, key, openSet);
+            }
+            saveOpenSet(openSet);
+          });
+        });
+
+        saveOpenSet(openSet);
+
+        /* Restore sidebar scroll position after sections are expanded so the
+           scroll height is correct when we apply scrollTop. */
+        if (sidebar) {
+          try {
+            var savedScroll = sessionStorage.getItem('sb_scroll');
+            if (savedScroll !== null) { sidebar.scrollTop = parseInt(savedScroll, 10) || 0; }
+          } catch (_e) {}
+        }
+
+        window.addEventListener('pagehide', function () {
+          saveOpenSet(openSet);
+          if (sidebar) {
+            try { sessionStorage.setItem('sb_scroll', String(sidebar.scrollTop)); } catch (_e) {}
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+    </script>
+</body>
+</html>

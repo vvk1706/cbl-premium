@@ -1,0 +1,12 @@
+prompt:
+/init than convert a summary report into file reports/01-create-agents-md-file.html
+
+
+Tools awaiting approval:
+Update Todo List
+Edit
+Check for existing AGENTS.md and AI rule files in workspace
+Analyze codebase (languages, build/test tooling, Z/COBOL programs, docs, data dictionary)
+Display configuration overview and confirm settings
+Create/update main AGENTS.md file
+Generate summary report HTML in reports/01-create-agents-md-file.html

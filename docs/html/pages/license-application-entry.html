@@ -1,0 +1,1419 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>License Application Entry (DL03) - Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script src="../assets/mermaid.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+
+    <!-- Prism.js for syntax highlighting (bundled — no CDN required) -->
+    <link rel="stylesheet" href="../assets/prism-tomorrow.css">
+    <script src="../assets/prism-core.js"></script>
+    <script src="../assets/prism-languages.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="header-app-name"><a href="../../index.html" style="color: inherit; text-decoration: none;">Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</a></span>
+        </div>
+        <div class="header-right">
+        </div>
+    </header>
+    <div class="shell">
+        <aside class="sidebar" id="wiki-sidebar">
+            <nav>
+                
+        <div class="nav-home-wrap">
+            <a href="../../index.html" class="nav-home">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 6.5L8 2l6 4.5V14a1 1 0 01-1 1H3a1 1 0 01-1-1V6.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M6 15V9h4v6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                Home
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Application Documentation</div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Overview</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="system-overview.html" class="nav-link" data-page-id="system-overview">DLIS System Overview</a>
+                <a href="main-menu-navigation.html" class="nav-link" data-page-id="main-menu-navigation">Main Menu &amp; Navigation (DL01)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle open" type="button">
+                <span class="nav-toggle-text">Candidate &amp; Application Intake</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items open">
+                <a href="candidate-management.html" class="nav-link" data-page-id="candidate-management">Candidate Maintenance (DL02)</a>
+                <a href="license-application-entry.html" class="nav-link active" data-page-id="license-application-entry">License Application Entry (DL03)</a>
+                <a href="application-status-inquiry.html" class="nav-link" data-page-id="application-status-inquiry">Application Status Inquiry (DL04)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Verification &amp; Payment</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="eligibility-check.html" class="nav-link" data-page-id="eligibility-check">Eligibility Check (DL05)</a>
+                <a href="driving-history-check.html" class="nav-link" data-page-id="driving-history-check">Driving History Check (DL06)</a>
+                <a href="payment-processing.html" class="nav-link" data-page-id="payment-processing">Payment Entry &amp; Processing (DL07)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Approval &amp; License Issuance</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="first-level-approval.html" class="nav-link" data-page-id="first-level-approval">First-Level Authority Approval (DL08)</a>
+                <a href="second-level-approval.html" class="nav-link" data-page-id="second-level-approval">Second-Level Authority Approval (DL09)</a>
+                <a href="license-issuance.html" class="nav-link" data-page-id="license-issuance">License Issuance (DL10)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Architecture</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="application-lifecycle-flow.html" class="nav-link" data-page-id="application-lifecycle-flow">Application Lifecycle &amp; Status Flow</a>
+                <a href="data-architecture.html" class="nav-link" data-page-id="data-architecture">Data Architecture (DB2)</a>
+                <a href="cics-integration-patterns.html" class="nav-link" data-page-id="cics-integration-patterns">CICS Integration Patterns</a>
+            </div>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Program Documentation</div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">program</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../sources/program/cobol/DLISPAY.html" class="nav-link">DLISPAY</a>
+                <a href="../sources/program/cobol/DLISSTAT.html" class="nav-link">DLISSTAT</a>
+                <a href="../sources/program/cobol/DLISMENU.html" class="nav-link">DLISMENU</a>
+                <a href="../sources/program/cobol/DLISELIG.html" class="nav-link">DLISELIG</a>
+                <a href="../sources/program/cobol/DLISCAND.html" class="nav-link">DLISCAND</a>
+                <a href="../sources/program/cobol/DLISAPPL.html" class="nav-link">DLISAPPL</a>
+                <a href="../sources/program/cobol/DLISISSU.html" class="nav-link">DLISISSU</a>
+                <a href="../sources/program/cobol/DLISAP2.html" class="nav-link">DLISAP2</a>
+                <a href="../sources/program/cobol/DLISHIST.html" class="nav-link">DLISHIST</a>
+                <a href="../sources/program/cobol/DLISAP1.html" class="nav-link">DLISAP1</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">business-rule</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../sources/business-rule/cobol/DLISELIG-overview.html" class="nav-link">DLISELIG-overview</a>
+                <a href="../sources/business-rule/cobol/DLISPAY-inventory.html" class="nav-link">DLISPAY-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISCAND-overview.html" class="nav-link">DLISCAND-overview</a>
+                <a href="../sources/business-rule/cobol/DLISAP2-inventory.html" class="nav-link">DLISAP2-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISHIST-inventory.html" class="nav-link">DLISHIST-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISMENU-inventory.html" class="nav-link">DLISMENU-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISELIG-inventory.html" class="nav-link">DLISELIG-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISPAY-overview.html" class="nav-link">DLISPAY-overview</a>
+                <a href="../sources/business-rule/cobol/DLISSTAT-overview.html" class="nav-link">DLISSTAT-overview</a>
+                <a href="../sources/business-rule/cobol/DLISHIST-overview.html" class="nav-link">DLISHIST-overview</a>
+                <a href="../sources/business-rule/cobol/DLISAPPL-overview.html" class="nav-link">DLISAPPL-overview</a>
+                <a href="../sources/business-rule/cobol/DLISISSU-inventory.html" class="nav-link">DLISISSU-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISAPPL-inventory.html" class="nav-link">DLISAPPL-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISSTAT-inventory.html" class="nav-link">DLISSTAT-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISAP1-overview.html" class="nav-link">DLISAP1-overview</a>
+                <a href="../sources/business-rule/cobol/DLISCAND-inventory.html" class="nav-link">DLISCAND-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISAP2-overview.html" class="nav-link">DLISAP2-overview</a>
+                <a href="../sources/business-rule/cobol/DLISISSU-overview.html" class="nav-link">DLISISSU-overview</a>
+                <a href="../sources/business-rule/cobol/DLISAP1-inventory.html" class="nav-link">DLISAP1-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISMENU-overview.html" class="nav-link">DLISMENU-overview</a>
+            </div>
+        </div>
+        </div>
+    </div>
+            </nav>
+        </aside>
+        <main class="main">
+            <div class="page-container">
+                <div class="content-layout">
+                    <div class="prose">
+                        <details class="source-files-disclosure">
+            <summary>
+                <svg class="sf-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Source Files
+                <span style="margin-left:4px;font-size:11px;color:var(--fg-subtle)">(3)</span>
+            </summary>
+            <div class="source-files-body">
+                <ul class="source-files-list">
+            <li><a href="../sources/program/cobol/DLISAPPL.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISAPPL
+            </a></li>
+            <li><a href="../sources/business-rule/cobol/DLISAPPL-overview.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISAPPL-overview
+            </a></li>
+            <li><a href="../sources/business-rule/cobol/DLISAPPL-inventory.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISAPPL-inventory
+            </a></li>
+                </ul>
+            </div>
+        </details>
+                        <h1 id="license-application-entry-dl03" tabindex="-1">License Application Entry (DL03)</h1>
+<hr>
+<h2 id="1-overview" tabindex="-1">1. Overview</h2>
+<p><strong>DLISAPPL</strong> is a CICS pseudo-conversational COBOL program that drives transaction <strong>DL03</strong> — the <em>License Application Entry</em> screen in a driver licensing information system. It provides licensing office clerks with a structured, interactive screen to:</p>
+<ul>
+<li><strong>Look up a candidate</strong> by ID to verify identity and active standing (F3)</li>
+<li><strong>Retrieve the current initial-issue fee</strong> for a chosen license type — Learner (<code>L</code>), Probation (<code>P</code>), or Open (<code>O</code>) — from the active fee schedule (F5)</li>
+<li><strong>Submit a new pending license application</strong> for a verified candidate (F1), with automatic duplicate open-application detection</li>
+</ul>
+<p>The program uses BMS map <code>DLISAE01</code> (mapset <code>DLISAE</code>) for all screen I/O and interfaces with three IBM Db2 tables in the <code>DLIS</code> schema. It is the <strong>sole entry point</strong> for new license applications in the system; every downstream workflow step — eligibility checking, driving-history review, payment processing, dual approvals, and license issuance — depends on the application record this program creates.</p>
+<p>Each user interaction is a discrete CICS task. State is preserved across key presses via a 350-byte <code>COMMAREA</code> passed through <code>EXEC CICS RETURN TRANSID('DL03')</code>. Pressing <strong>F12</strong> ends the conversation cleanly.</p>
+<hr>
+<h2 id="2-system-architecture" tabindex="-1">2. System Architecture</h2>
+<p>DLISAPPL sits at the intersection of the CICS terminal layer, BMS screen management, and the Db2 database back end. The diagram below shows the principal components and their relationships.</p>
+<div class="mermaid">
+graph TD
+    subgraph Terminal["3270 Terminal — Clerk Workstation"]
+        T[BMS Map DLISAE01\nMapset DLISAE]
+    end
+
+    subgraph CICS["CICS Region — Transaction DL03"]
+        EIB[Execute Interface Block\nEIBCALEN · EIBAID · EIBTRNID · EIBTRMID]
+        CA[COMMAREA DLIS-COMMAREA\n350 bytes]
+        PGM[DLISAPPL\nCOBOL Program]
+        BMS[BMS Services\nSEND MAP · RECEIVE MAP]
+    end
+
+    subgraph Copybooks["Copybook Dependencies"]
+        WS[DLISWS.cpy\nWorking Storage]
+        CSEC[DLISCSEC.cpy\nCOMMAREA Layouts]
+        DCLG[DLISDCLG.cpy\nDb2 DCLGEN Host Variables]
+    end
+
+    subgraph DB2["IBM Db2 — DLIS Schema"]
+        CAND[DLIS.CANDIDATE\nFirst/Last Name · Record Status]
+        FEE[DLIS.LICENSE_FEE_SCHEDULE\nFee Amount · Currency · Dates]
+        APPL[DLIS.LICENSE_APPLICATION\nCandidate ID · Type · Status · Audit]
+        SYS[SYSIBM.SYSDUMMY1\nIDENTITY_VAL_LOCAL]
+    end
+
+    T -- "User key press / screen data" --> CICS
+    CICS -- "Refreshed map data + messages" --> T
+
+    EIB --> PGM
+    CA --> PGM
+    BMS --> PGM
+    PGM --> BMS
+
+    WS --> PGM
+    CSEC --> PGM
+    DCLG --> PGM
+
+    PGM -- "SELECT FIRST_NAME, LAST_NAME,\nRECORD_STATUS" --> CAND
+    PGM -- "SELECT FEE_AMOUNT, CURRENCY_CODE\n(FEE_TYPE='IF', ACTIVE_STATUS='A')" --> FEE
+    PGM -- "SELECT COUNT(*) — duplicate check\nINSERT — new application" --> APPL
+    PGM -- "SELECT IDENTITY_VAL_LOCAL()" --> SYS
+</div>
+<p>The clerk interacts exclusively through the BMS map. DLISAPPL receives each key press, applies business rules, performs the necessary Db2 operations, and refreshes the screen with results or error messages — all within a single, short-lived CICS task.</p>
+<hr>
+<h2 id="3-processing-logic" tabindex="-1">3. Processing Logic</h2>
+<h3 id="31-high-level-execution-flow" tabindex="-1">3.1 High-Level Execution Flow</h3>
+<p>On every invocation DLISAPPL first checks <code>EIBCALEN</code> to decide whether this is a <strong>first entry</strong> (blank screen) or a <strong>returning entry</strong> (user pressed a key). The diagram below captures the full decision tree.</p>
+<div class="mermaid">
+graph TD
+    A([Start — DL03 Invoked]) --> B[Save EIBTRNID → CA-TRANSACTION-ID]
+    B --> C{EIBCALEN = 0?\nFirst entry}
+
+    C -- Yes --> D[Set DAEDATE = CURRENT-DATE 1:10]
+    D --> E[SEND MAP DLISAE01\nERASE FREEKB]
+    E --> F([RETURN TRANSID DL03\nwith COMMAREA])
+
+    C -- No --> G[MOVE DFHCOMMAREA → DLIS-COMMAREA]
+    G --> H[RECEIVE MAP DLISAE01]
+    H --> I{EIBAID — which\nkey was pressed?}
+
+    I -- F3 --> K[LOOKUP-CANDIDATE]
+    I -- F5 --> L[CALC-FEE]
+    I -- F1 --> J[SUBMIT-APPLICATION]
+    I -- F12 --> M([RETURN — end session])
+    I -- Other --> N[DAEMSG = 'USE F1 F3 F5 OR F12']
+
+    K --> P[SEND MAP DATAONLY FREEKB]
+    L --> P
+    J --> P
+    N --> P
+
+    P --> Q([RETURN TRANSID DL03\nwith COMMAREA])
+
+    classDef startEnd fill:#b5ead7,stroke:#5a9e82,color:#000
+    classDef decision fill:#ffd6a5,stroke:#c8874a,color:#000
+    classDef process fill:#c7ceea,stroke:#6272b0,color:#000
+    classDef ioStep fill:#fff1ba,stroke:#b8960c,color:#000
+    classDef exitStep fill:#e2d9f3,stroke:#7c5cbf,color:#000
+
+    class A,F,M,Q startEnd
+    class C,I decision
+    class K,L,J,N process
+    class D,E,G,H,P ioStep
+    class M,Q exitStep
+</div>
+<h3 id="32-candidate-lookup--f3-lookup-candidate" tabindex="-1">3.2 Candidate Lookup — F3 (LOOKUP-CANDIDATE)</h3>
+<p>Pressing <strong>F3</strong> triggers a database lookup on <code>DLIS.CANDIDATE</code>. The sequence below shows the exact interactions between the clerk, the program, and Db2.</p>
+<div class="mermaid">
+sequenceDiagram
+    actor Clerk
+    participant PGM as DLISAPPL
+    participant DB2 as DLIS.CANDIDATE
+
+    Clerk->>PGM: Press F3 with Candidate ID
+    PGM->>PGM: Check DAECIDI ≠ ZEROS
+    alt Candidate ID is zero
+        PGM-->>Clerk: DAEMSG = 'ENTER CANDIDATE ID'
+    else Candidate ID provided
+        PGM->>DB2: SELECT FIRST_NAME, LAST_NAME, RECORD_STATUS\nWHERE CANDIDATE_ID = :CANDIDATE-ID
+        DB2-->>PGM: Row / SQLCODE 100 / error
+        alt SQLCODE = 100 — not found
+            PGM-->>Clerk: DAEMSG = 'CANDIDATE NOT FOUND'
+        else RECORD_STATUS = 'I' — inactive
+            PGM-->>Clerk: DAEMSG = 'CANDIDATE RECORD IS INACTIVE'
+        else Active candidate found
+            PGM->>PGM: STRING FIRST-NAME ' ' LAST-NAME → DAECNAMO
+            PGM-->>Clerk: DAECNAMO = full name\nDAEMSG = 'CANDIDATE FOUND'
+        end
+    end
+</div>
+<p><strong>Key code — candidate name formatting:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">STRING FIRST-NAME OF DCLDLIS-CANDIDATE DELIMITED SPACE
+                  &#039; &#039;        DELIMITED SIZE
+                  LAST-NAME  OF DCLDLIS-CANDIDATE DELIMITED SPACE
+               INTO DAECNAMO
+           MOVE &#039;CANDIDATE FOUND&#039; TO DAEMSG.</code></pre>
+</div>
+<p><strong>Key code — existence and status checks:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF DAECIDI = ZEROS
+               MOVE &#039;ENTER CANDIDATE ID&#039; TO DAEMSG
+               GO TO LOOKUP-CANDIDATE-EXIT
+           END-IF
+
+           IF SQLCODE = 100
+               MOVE &#039;CANDIDATE NOT FOUND&#039; TO DAEMSG
+               GO TO LOOKUP-CANDIDATE-EXIT
+           END-IF
+
+           IF RECORD-STATUS OF DCLDLIS-CANDIDATE = &#039;I&#039;
+               MOVE &#039;CANDIDATE RECORD IS INACTIVE&#039; TO DAEMSG
+               GO TO LOOKUP-CANDIDATE-EXIT
+           END-IF</code></pre>
+</div>
+<blockquote>
+<p><strong>Note:</strong> Only <code>SQLCODE = 100</code> is explicitly handled. Other negative SQLCODEs (e.g., deadlock, authority errors) are not intercepted and the program will continue with undefined host-variable content.</p>
+</blockquote>
+<hr>
+<h3 id="33-fee-calculation--f5-calc-fee" tabindex="-1">3.3 Fee Calculation — F5 (CALC-FEE)</h3>
+<p>Pressing <strong>F5</strong> retrieves the current <strong>initial-issue fee</strong> (<code>FEE_TYPE = 'IF'</code>) for the selected license type from the active, date-effective fee schedule.</p>
+<div class="mermaid">
+sequenceDiagram
+    actor Clerk
+    participant PGM as DLISAPPL
+    participant DB2 as DLIS.LICENSE_FEE_SCHEDULE
+
+    Clerk->>PGM: Press F5 with License Type (L / P / O)
+    PGM->>PGM: Check DAELTYPI ≠ SPACES or LOW-VALUES
+    alt License type blank
+        PGM-->>Clerk: DAEMSG = 'SELECT LICENSE TYPE FIRST'
+    else License type entered
+        PGM->>DB2: SELECT FEE_AMOUNT, CURRENCY_CODE\nWHERE LICENSE_TYPE = :type\nAND FEE_TYPE = 'IF'\nAND ACTIVE_STATUS = 'A'\nAND EFFECTIVE_DATE <= CURRENT DATE\nAND (EXPIRY_DATE IS NULL OR EXPIRY_DATE >= CURRENT DATE)\nFETCH FIRST 1 ROW ONLY
+        DB2-->>PGM: Row / SQLCODE 100
+        alt SQLCODE = 100 — no schedule
+            PGM-->>Clerk: DAEMSG = 'NO FEE SCHEDULE FOR THIS LICENSE TYPE'
+        else Fee schedule found
+            PGM->>PGM: Format FEE-AMOUNT → WS-FEE-AMOUNT-D (ZZZ,ZZ9.99)
+            PGM-->>Clerk: DAEFEEO = formatted amount\nDAECURRO = currency code\nDAEMSG = 'FEE RETRIEVED SUCCESSFULLY'
+        end
+    end
+</div>
+<p><strong>Key code — fee retrieval SQL:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE DAELTYPI TO LICENSE-TYPE OF DCLDLIS-FEE-SCHED
+           EXEC SQL
+               SELECT FEE_AMOUNT, CURRENCY_CODE
+               INTO   :FEE-AMOUNT, :CURRENCY-CODE
+               OF DCLDLIS-FEE-SCHED
+               FROM   DLIS.LICENSE_FEE_SCHEDULE
+               WHERE  LICENSE_TYPE  = :LICENSE-TYPE OF DCLDLIS-FEE-SCHED
+               AND    FEE_TYPE      = &#039;IF&#039;
+               AND    ACTIVE_STATUS = &#039;A&#039;
+               AND    EFFECTIVE_DATE &lt;= CURRENT DATE
+               AND    (EXPIRY_DATE IS NULL OR EXPIRY_DATE &gt;= CURRENT DATE)
+               FETCH FIRST 1 ROW ONLY
+           END-EXEC</code></pre>
+</div>
+<p><strong>Key code — fee formatting:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE FEE-AMOUNT    OF DCLDLIS-FEE-SCHED TO WS-FEE-AMOUNT
+           MOVE WS-FEE-AMOUNT TO WS-FEE-AMOUNT-D
+           MOVE WS-FEE-AMOUNT-D TO DAEFEEO
+           MOVE CURRENCY-CODE OF DCLDLIS-FEE-SCHED TO DAECURRO
+           MOVE &#039;FEE RETRIEVED SUCCESSFULLY&#039; TO DAEMSG.</code></pre>
+</div>
+<blockquote>
+<p><code>WS-FEE-AMOUNT-D</code> has picture <code>ZZZ,ZZ9.99</code>, accommodating fees up to 999,999.99. Fees of 1,000,000 or more would be silently truncated on display.</p>
+</blockquote>
+<hr>
+<h3 id="34-application-submission--f1-submit-application" tabindex="-1">3.4 Application Submission — F1 (SUBMIT-APPLICATION)</h3>
+<p>Pressing <strong>F1</strong> is the core transactional operation. It runs three ordered validations, a duplicate-application check, a Db2 <code>INSERT</code>, and finally retrieves the system-generated application ID.</p>
+<p><strong>Key code — input validations:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF DAECIDI = ZEROS
+               MOVE &#039;CANDIDATE ID IS REQUIRED&#039; TO DAEMSG
+               GO TO SUBMIT-APPLICATION-EXIT
+           END-IF
+           IF DAELTYPI = SPACES OR DAELTYPI = LOW-VALUES
+               MOVE &#039;LICENSE TYPE IS REQUIRED&#039; TO DAEMSG
+               GO TO SUBMIT-APPLICATION-EXIT
+           END-IF
+           IF DAELTYPI NOT = &#039;L&#039; AND DAELTYPI NOT = &#039;P&#039;
+                               AND DAELTYPI NOT = &#039;O&#039;
+               MOVE &#039;LICENSE TYPE MUST BE L P OR O&#039; TO DAEMSG
+               GO TO SUBMIT-APPLICATION-EXIT
+           END-IF</code></pre>
+</div>
+<p><strong>Key code — duplicate application check:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE DAECIDI  TO CANDIDATE-ID  OF DCLDLIS-LICENSE-APPL
+           MOVE DAELTYPI TO LICENSE-TYPE  OF DCLDLIS-LICENSE-APPL
+           EXEC SQL
+               SELECT COUNT(*) INTO :APPLICATION-ID OF DCLDLIS-LICENSE-APPL
+               FROM   DLIS.LICENSE_APPLICATION
+               WHERE  CANDIDATE_ID   = :CANDIDATE-ID   OF DCLDLIS-LICENSE-APPL
+               AND    LICENSE_TYPE   = :LICENSE-TYPE   OF DCLDLIS-LICENSE-APPL
+               AND    APPLICATION_STATUS NOT IN (&#039;RE&#039;,&#039;IS&#039;)
+           END-EXEC
+           IF APPLICATION-ID OF DCLDLIS-LICENSE-APPL &gt; 0
+               MOVE &#039;ACTIVE APPLICATION ALREADY EXISTS FOR THIS TYPE&#039;
+                   TO DAEMSG
+               GO TO SUBMIT-APPLICATION-EXIT
+           END-IF</code></pre>
+</div>
+<p><strong>Key code — application insert and identity retrieval:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE EIBTRMID TO CREATED-BY OF DCLDLIS-LICENSE-APPL
+           EXEC SQL
+               INSERT INTO DLIS.LICENSE_APPLICATION
+                  (CANDIDATE_ID, LICENSE_TYPE, APPLICATION_STATUS,
+                   CREATED_BY, LAST_UPDATED_BY)
+               VALUES
+                  (:CANDIDATE-ID, :LICENSE-TYPE, &#039;PE&#039;,
+                   :CREATED-BY, :CREATED-BY)
+               OF DCLDLIS-LICENSE-APPL
+           END-EXEC
+
+           EXEC SQL
+               SELECT IDENTITY_VAL_LOCAL()
+               INTO   :APPLICATION-ID OF DCLDLIS-LICENSE-APPL
+               FROM   SYSIBM.SYSDUMMY1
+           END-EXEC
+
+           MOVE APPLICATION-ID OF DCLDLIS-LICENSE-APPL TO DAEAIDO
+           MOVE &#039;PE&#039;           TO DAEASTTO
+           MOVE CURRENT-DATE(1:10) TO DAEADATO
+           MOVE &#039;APPLICATION SUBMITTED SUCCESSFULLY&#039; TO DAEMSG.</code></pre>
+</div>
+<p><strong>Key code — function key dispatch (PROCESS-INPUT):</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EVALUATE TRUE
+               WHEN EIBAID = DFHPF1   PERFORM SUBMIT-APPLICATION
+               WHEN EIBAID = DFHPF3   PERFORM LOOKUP-CANDIDATE
+               WHEN EIBAID = DFHPF5   PERFORM CALC-FEE
+               WHEN EIBAID = DFHPF12  EXEC CICS RETURN END-EXEC
+               OTHER
+                   MOVE &#039;USE F1 F3 F5 OR F12&#039; TO DAEMSG
+           END-EVALUATE</code></pre>
+</div>
+<hr>
+<h2 id="4-data-model" tabindex="-1">4. Data Model</h2>
+<h3 id="41-database-tables-and-relationships" tabindex="-1">4.1 Database Tables and Relationships</h3>
+<p>The following entity-relationship diagram shows the three Db2 tables that DLISAPPL reads from and writes to, together with the system table used for identity retrieval.</p>
+<div class="mermaid">
+erDiagram
+    CANDIDATE {
+        int CANDIDATE_ID PK
+        string FIRST_NAME
+        string LAST_NAME
+        string RECORD_STATUS
+    }
+    LICENSE_FEE_SCHEDULE {
+        string LICENSE_TYPE
+        string FEE_TYPE
+        decimal FEE_AMOUNT
+        string CURRENCY_CODE
+        string ACTIVE_STATUS
+        date EFFECTIVE_DATE
+        date EXPIRY_DATE
+    }
+    LICENSE_APPLICATION {
+        int APPLICATION_ID PK
+        int CANDIDATE_ID FK
+        string LICENSE_TYPE
+        string APPLICATION_STATUS
+        string CREATED_BY
+        string LAST_UPDATED_BY
+    }
+
+    CANDIDATE ||--o{ LICENSE_APPLICATION : "applies for"
+    LICENSE_FEE_SCHEDULE ||--o{ LICENSE_APPLICATION : "prices license type"
+</div>
+<h3 id="42-database-operations-summary" tabindex="-1">4.2 Database Operations Summary</h3>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Table</th>
+<th>Trigger</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SELECT</code></td>
+<td><code>DLIS.CANDIDATE</code></td>
+<td>F3</td>
+<td>Retrieve name and active status by Candidate ID</td>
+</tr>
+<tr>
+<td><code>SELECT</code></td>
+<td><code>DLIS.LICENSE_FEE_SCHEDULE</code></td>
+<td>F5</td>
+<td>Retrieve active initial-issue fee and currency</td>
+</tr>
+<tr>
+<td><code>SELECT COUNT(*)</code></td>
+<td><code>DLIS.LICENSE_APPLICATION</code></td>
+<td>F1</td>
+<td>Count open applications for duplicate check</td>
+</tr>
+<tr>
+<td><code>INSERT</code></td>
+<td><code>DLIS.LICENSE_APPLICATION</code></td>
+<td>F1</td>
+<td>Create new pending application (<code>status = 'PE'</code>)</td>
+</tr>
+<tr>
+<td><code>SELECT IDENTITY_VAL_LOCAL()</code></td>
+<td><code>SYSIBM.SYSDUMMY1</code></td>
+<td>F1</td>
+<td>Retrieve system-generated Application ID</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="5-inputs" tabindex="-1">5. Inputs</h2>
+<h3 id="51-cics-execute-interface-block-eib" tabindex="-1">5.1 CICS Execute Interface Block (EIB)</h3>
+<table>
+<thead>
+<tr>
+<th>EIB Field</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>EIBCALEN</code></td>
+<td><code>= 0</code> → first entry (show blank screen); <code>&gt; 0</code> → returning entry (process input)</td>
+</tr>
+<tr>
+<td><code>EIBAID</code></td>
+<td>Attention key pressed: <code>DFHPF1</code> / <code>DFHPF3</code> / <code>DFHPF5</code> / <code>DFHPF12</code></td>
+</tr>
+<tr>
+<td><code>EIBTRNID</code></td>
+<td>Current transaction ID (<code>DL03</code>), stored in <code>CA-TRANSACTION-ID</code></td>
+</tr>
+<tr>
+<td><code>EIBTRMID</code></td>
+<td>Terminal ID of the submitting workstation; written to <code>CREATED_BY</code> and <code>LAST_UPDATED_BY</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="52-commarea" tabindex="-1">5.2 COMMAREA</h3>
+<p><code>DFHCOMMAREA</code> is declared as <code>PIC X(350)</code> in the linkage section. On every re-entry it is moved into <code>DLIS-COMMAREA</code> to restore conversational state. The program always returns with <code>COMMAREA(DLIS-COMMAREA) LENGTH(350)</code>.</p>
+<h3 id="53-bms-screen-fields-map-dlisae01" tabindex="-1">5.3 BMS Screen Fields (Map DLISAE01)</h3>
+<table>
+<thead>
+<tr>
+<th>Map Field</th>
+<th>Description</th>
+<th>Used By</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DAECIDI</code></td>
+<td>Candidate ID (numeric) entered by the clerk</td>
+<td>F3 Lookup, F1 Submit</td>
+</tr>
+<tr>
+<td><code>DAELTYPI</code></td>
+<td>License type: <code>L</code>, <code>P</code>, or <code>O</code></td>
+<td>F5 Fee, F1 Submit</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="6-outputs" tabindex="-1">6. Outputs</h2>
+<h3 id="61-bms-screen-fields-updated-by-the-program" tabindex="-1">6.1 BMS Screen Fields Updated by the Program</h3>
+<table>
+<thead>
+<tr>
+<th>Map Field</th>
+<th>Content</th>
+<th>Set By</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DAEDATE</code></td>
+<td>Current date (<code>CURRENT-DATE(1:10)</code>)</td>
+<td>First entry — INIT-SCREEN</td>
+</tr>
+<tr>
+<td><code>DAECNAMO</code></td>
+<td>Candidate full name (First + Last)</td>
+<td>F3 Lookup success</td>
+</tr>
+<tr>
+<td><code>DAEFEEO</code></td>
+<td>Formatted fee amount (<code>ZZZ,ZZ9.99</code>)</td>
+<td>F5 Fee success</td>
+</tr>
+<tr>
+<td><code>DAECURRO</code></td>
+<td>Fee currency code (3 characters)</td>
+<td>F5 Fee success</td>
+</tr>
+<tr>
+<td><code>DAEAIDO</code></td>
+<td>System-generated Application ID</td>
+<td>F1 Submit success</td>
+</tr>
+<tr>
+<td><code>DAEASTTO</code></td>
+<td>Application status (<code>PE</code>)</td>
+<td>F1 Submit success</td>
+</tr>
+<tr>
+<td><code>DAEADATO</code></td>
+<td>Application date (<code>CURRENT-DATE(1:10)</code>)</td>
+<td>F1 Submit success</td>
+</tr>
+<tr>
+<td><code>DAEMSG</code></td>
+<td>Status / error message for the clerk</td>
+<td>All paths</td>
+</tr>
+</tbody>
+</table>
+<h3 id="62-status-messages-reference" tabindex="-1">6.2 Status Messages Reference</h3>
+<table>
+<thead>
+<tr>
+<th>Message</th>
+<th>Trigger</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>USE F1 F3 F5 OR F12</code></td>
+<td>Unrecognised key</td>
+</tr>
+<tr>
+<td><code>ENTER CANDIDATE ID</code></td>
+<td>F3 pressed with zero Candidate ID</td>
+</tr>
+<tr>
+<td><code>CANDIDATE NOT FOUND</code></td>
+<td>No row for Candidate ID (SQLCODE 100)</td>
+</tr>
+<tr>
+<td><code>CANDIDATE RECORD IS INACTIVE</code></td>
+<td><code>RECORD_STATUS = 'I'</code></td>
+</tr>
+<tr>
+<td><code>CANDIDATE FOUND</code></td>
+<td>Successful lookup</td>
+</tr>
+<tr>
+<td><code>SELECT LICENSE TYPE FIRST</code></td>
+<td>F5 pressed with blank License Type</td>
+</tr>
+<tr>
+<td><code>NO FEE SCHEDULE FOR THIS LICENSE TYPE</code></td>
+<td>No active fee row (SQLCODE 100)</td>
+</tr>
+<tr>
+<td><code>FEE RETRIEVED SUCCESSFULLY</code></td>
+<td>Successful fee retrieval</td>
+</tr>
+<tr>
+<td><code>CANDIDATE ID IS REQUIRED</code></td>
+<td>F1 pressed with zero Candidate ID</td>
+</tr>
+<tr>
+<td><code>LICENSE TYPE IS REQUIRED</code></td>
+<td>F1 pressed with blank License Type</td>
+</tr>
+<tr>
+<td><code>LICENSE TYPE MUST BE L P OR O</code></td>
+<td>License type not <code>L</code>, <code>P</code>, or <code>O</code></td>
+</tr>
+<tr>
+<td><code>ACTIVE APPLICATION ALREADY EXISTS FOR THIS TYPE</code></td>
+<td>Duplicate open application found</td>
+</tr>
+<tr>
+<td><code>DATABASE ERROR ON APPLICATION INSERT</code></td>
+<td>INSERT SQLCODE ≠ 0</td>
+</tr>
+<tr>
+<td><code>APPLICATION SUBMITTED SUCCESSFULLY</code></td>
+<td>Successful insert and ID retrieval</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="7-business-rules" tabindex="-1">7. Business Rules</h2>
+<h3 id="71-candidate-eligibility" tabindex="-1">7.1 Candidate Eligibility</h3>
+<ul>
+<li>A candidate ID of zero is always rejected before any database access.</li>
+<li>Only candidates with an existing row in <code>DLIS.CANDIDATE</code> are accepted.</li>
+<li>Candidates with <code>RECORD_STATUS = 'I'</code> (inactive) are blocked from any further processing.</li>
+</ul>
+<h3 id="72-license-type-domain" tabindex="-1">7.2 License Type Domain</h3>
+<ul>
+<li>Valid license types for new applications are <strong><code>L</code></strong> (Learner), <strong><code>P</code></strong> (Probation), and <strong><code>O</code></strong> (Open) only.</li>
+<li>This rule is enforced independently in both the fee calculation and the submission paths.</li>
+</ul>
+<h3 id="73-fee-schedule-selection" tabindex="-1">7.3 Fee Schedule Selection</h3>
+<ul>
+<li>Only fee rows with <code>FEE_TYPE = 'IF'</code> (initial fee) and <code>ACTIVE_STATUS = 'A'</code> qualify.</li>
+<li>The row must be currently effective: <code>EFFECTIVE_DATE &lt;= CURRENT DATE</code> and <code>EXPIRY_DATE IS NULL OR EXPIRY_DATE &gt;= CURRENT DATE</code>.</li>
+<li><code>FETCH FIRST 1 ROW ONLY</code> ensures a single result when multiple qualifying rows exist.</li>
+</ul>
+<h3 id="74-duplicate-application-prevention" tabindex="-1">7.4 Duplicate Application Prevention</h3>
+<ul>
+<li>A candidate may hold <strong>at most one active application</strong> per license type at any given time.</li>
+<li>Applications with status <code>RE</code> (rejected) or <code>IS</code> (issued) are <strong>excluded</strong> from the active count — they are considered terminal states.</li>
+<li>Any other status (e.g., <code>PE</code> — pending) counts as active and blocks a new submission.</li>
+</ul>
+<h3 id="75-initial-application-state" tabindex="-1">7.5 Initial Application State</h3>
+<ul>
+<li>Every new application is created with status <strong><code>PE</code></strong> (Pending) — this is hard-coded.</li>
+<li>The submitting terminal ID (<code>EIBTRMID</code>) is recorded in both <code>CREATED_BY</code> and <code>LAST_UPDATED_BY</code> for audit purposes.</li>
+<li>The application ID is system-generated by Db2 (identity column) and retrieved via <code>IDENTITY_VAL_LOCAL()</code>.</li>
+</ul>
+<h3 id="76-commit-behaviour" tabindex="-1">7.6 Commit Behaviour</h3>
+<ul>
+<li>There is <strong>no explicit <code>SYNCPOINT</code></strong>. The <code>INSERT</code> is committed implicitly when the CICS task ends via <code>EXEC CICS RETURN</code>. A failed insert is not explicitly rolled back; recovery depends on the CICS task-end default.</li>
+</ul>
+<hr>
+<h2 id="8-error-handling" tabindex="-1">8. Error Handling</h2>
+<h3 id="81-error-handling-strategy" tabindex="-1">8.1 Error Handling Strategy</h3>
+<div class="mermaid">
+graph TD
+    ERR[Error or Validation Failure Detected] --> MSG[Move specific text to DAEMSG]
+    MSG --> EXIT[GO TO paragraph EXIT label]
+    EXIT --> SEND[SEND MAP DLISAE01 DATAONLY FREEKB]
+    SEND --> RET[RETURN TRANSID DL03 with COMMAREA]
+    RET --> CLK([Clerk sees message — corrects input — retries])
+
+    classDef error fill:#ffb3ba,stroke:#c0394b,color:#000
+    classDef process fill:#c7ceea,stroke:#6272b0,color:#000
+    classDef ioStep fill:#fff1ba,stroke:#b8960c,color:#000
+    classDef startEnd fill:#b5ead7,stroke:#5a9e82,color:#000
+
+    class ERR error
+    class MSG,EXIT process
+    class SEND,RET ioStep
+    class CLK startEnd
+</div>
+<p>All errors follow a consistent pattern: set <code>DAEMSG</code>, branch to the paragraph’s exit label via <code>GO TO</code>, refresh the screen with <code>DATAONLY</code>, and return the transaction for another cycle. Only the <strong>first</strong> failing rule in each paragraph is reported per interaction.</p>
+<h3 id="82-known-gaps-in-error-coverage" tabindex="-1">8.2 Known Gaps in Error Coverage</h3>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Gap</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Candidate <code>SELECT</code></td>
+<td>Only <code>SQLCODE = 100</code> is handled; other negative SQLCODEs (deadlock, authority) are silently ignored</td>
+</tr>
+<tr>
+<td>Fee <code>SELECT</code></td>
+<td>Same — only <code>SQLCODE = 100</code> is handled</td>
+</tr>
+<tr>
+<td>Duplicate-count <code>SELECT</code></td>
+<td>SQLCODE is <strong>not checked at all</strong>; a failed query leaves the count unreliable</td>
+</tr>
+<tr>
+<td><code>IDENTITY_VAL_LOCAL()</code> retrieval</td>
+<td>SQLCODE is <strong>not checked</strong>; a failure could display a wrong ID with a success message</td>
+</tr>
+<tr>
+<td>CICS SEND/RECEIVE MAP</td>
+<td><code>RESP(WS-RESP1)</code> is captured but <strong>never tested</strong>; BMS errors are silently ignored</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="9-dependencies" tabindex="-1">9. Dependencies</h2>
+<h3 id="91-database-dependencies-ibm-db2" tabindex="-1">9.1 Database Dependencies (IBM Db2)</h3>
+<table>
+<thead>
+<tr>
+<th>Table / Object</th>
+<th>Access Type</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DLIS.CANDIDATE</code></td>
+<td><code>SELECT</code></td>
+<td>Validate existence and active status; retrieve display name</td>
+</tr>
+<tr>
+<td><code>DLIS.LICENSE_FEE_SCHEDULE</code></td>
+<td><code>SELECT</code></td>
+<td>Retrieve current initial-issue fee and currency</td>
+</tr>
+<tr>
+<td><code>DLIS.LICENSE_APPLICATION</code></td>
+<td><code>SELECT COUNT(*)</code> + <code>INSERT</code></td>
+<td>Duplicate check and new application creation</td>
+</tr>
+<tr>
+<td><code>SYSIBM.SYSDUMMY1</code></td>
+<td><code>SELECT</code></td>
+<td>Retrieve system-generated Application ID via <code>IDENTITY_VAL_LOCAL()</code></td>
+</tr>
+<tr>
+<td><code>SQLCA</code></td>
+<td>Included</td>
+<td>Provides <code>SQLCODE</code> for DB2 return-status checking</td>
+</tr>
+</tbody>
+</table>
+<h3 id="92-cics-and-middleware-dependencies" tabindex="-1">9.2 CICS and Middleware Dependencies</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Transaction <code>DL03</code></td>
+<td>CICS transaction code under which DLISAPPL executes</td>
+</tr>
+<tr>
+<td>BMS Mapset <code>DLISAE</code> / Map <code>DLISAE01</code></td>
+<td>Full screen paint (<code>ERASE</code>) and field refresh (<code>DATAONLY</code>)</td>
+</tr>
+<tr>
+<td><code>EXEC CICS RETURN TRANSID('DL03')</code></td>
+<td>Pseudo-conversational continuation with COMMAREA</td>
+</tr>
+<tr>
+<td>EIB fields</td>
+<td>Drive first-entry detection, key routing, terminal ID capture</td>
+</tr>
+</tbody>
+</table>
+<h3 id="93-copybook-dependencies" tabindex="-1">9.3 Copybook Dependencies</h3>
+<table>
+<thead>
+<tr>
+<th>Copybook</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DLISWS.cpy</code></td>
+<td>Shared working-storage areas, domain entity structures</td>
+</tr>
+<tr>
+<td><code>DLISCSEC.cpy</code></td>
+<td><code>DLIS-COMMAREA</code> and specialised COMMAREA layouts; CICS response code holders</td>
+</tr>
+<tr>
+<td><code>DLISDCLG.cpy</code></td>
+<td>Db2 DCLGEN host variable declarations for all accessed tables</td>
+</tr>
+<tr>
+<td><code>DLISAE</code> (BMS symbolic map)</td>
+<td>Screen field definitions for map <code>DLISAE01</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="10-constraints-and-limitations" tabindex="-1">10. Constraints and Limitations</h2>
+<h3 id="101-pseudo-conversational-design" tabindex="-1">10.1 Pseudo-Conversational Design</h3>
+<ul>
+<li><code>DFHCOMMAREA</code> is fixed at <code>PIC X(350)</code>. No state exceeding 350 bytes can be carried between interactions.</li>
+<li>The COMMAREA is moved from <code>DFHCOMMAREA</code> without a length check; the program assumes a compatible layout from the caller.</li>
+</ul>
+<h3 id="102-candidate-name-formatting" tabindex="-1">10.2 Candidate Name Formatting</h3>
+<ul>
+<li><code>STRING ... DELIMITED SPACE</code> truncates each name component at its first embedded space. Multi-word first or last names are cut short.</li>
+<li>There is no <code>ON OVERFLOW</code> clause on the <code>STRING</code> statement; overflow is silently truncated.</li>
+</ul>
+<h3 id="103-fee-display" tabindex="-1">10.3 Fee Display</h3>
+<ul>
+<li><code>WS-FEE-AMOUNT-D</code> (<code>ZZZ,ZZ9.99</code>) supports at most six integer digits. Fees ≥ 1,000,000 are silently truncated.</li>
+</ul>
+<h3 id="104-duplicate-check-race-condition" tabindex="-1">10.4 Duplicate Check Race Condition</h3>
+<ul>
+<li>The duplicate-count <code>SELECT</code> and the <code>INSERT</code> are two separate statements with no intervening lock. Two concurrent F1 presses for the same candidate and type could both pass the count check before either insert completes.</li>
+</ul>
+<h3 id="105-submit-does-not-re-verify-candidate" tabindex="-1">10.5 Submit Does Not Re-verify Candidate</h3>
+<ul>
+<li><code>SUBMIT-APPLICATION</code> does <strong>not</strong> check that the candidate exists or is active. That check is only performed during the F3 lookup. A clerk can submit an application without having first performed a lookup; integrity is then enforced only by database referential constraints.</li>
+</ul>
+<h3 id="106-no-logging" tabindex="-1">10.6 No Logging</h3>
+<ul>
+<li>The program writes no error logs, no CICS temporary storage entries, and no console messages. <code>SQLCODE</code> and CICS response values are not recorded for diagnostics.</li>
+</ul>
+<hr>
+<h2 id="11-examples" tabindex="-1">11. Examples</h2>
+<h3 id="111-successful-end-to-end-flow" tabindex="-1">11.1 Successful End-to-End Flow</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Key</th>
+<th>Screen Input</th>
+<th>Expected Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Open screen</td>
+<td>—</td>
+<td>First invocation</td>
+<td>Blank map with today’s date in <code>DAEDATE</code></td>
+</tr>
+<tr>
+<td>Lookup candidate</td>
+<td>F3</td>
+<td><code>DAECIDI = 0000000123</code></td>
+<td><code>DAECNAMO = JOHN SMITH</code>, <code>DAEMSG = CANDIDATE FOUND</code></td>
+</tr>
+<tr>
+<td>Retrieve fee</td>
+<td>F5</td>
+<td><code>DAELTYPI = P</code></td>
+<td><code>DAEFEEO = 85.50</code>, <code>DAECURRO = USD</code>, <code>DAEMSG = FEE RETRIEVED SUCCESSFULLY</code></td>
+</tr>
+<tr>
+<td>Submit application</td>
+<td>F1</td>
+<td><code>DAECIDI = 0000000123</code>, <code>DAELTYPI = P</code></td>
+<td><code>DAEAIDO = 1001</code>, <code>DAEASTTO = PE</code>, <code>DAEADATO = 2024-06-15</code>, <code>DAEMSG = APPLICATION SUBMITTED SUCCESSFULLY</code></td>
+</tr>
+<tr>
+<td>Exit</td>
+<td>F12</td>
+<td>—</td>
+<td>Transaction ends</td>
+</tr>
+</tbody>
+</table>
+<h3 id="112-candidate-lookup-error-cases-f3" tabindex="-1">11.2 Candidate Lookup Error Cases (F3)</h3>
+<table>
+<thead>
+<tr>
+<th>Candidate ID</th>
+<th>Scenario</th>
+<th>Message Shown</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0000000000</code></td>
+<td>Field left blank</td>
+<td><code>ENTER CANDIDATE ID</code></td>
+</tr>
+<tr>
+<td><code>0000009999</code></td>
+<td>No row in CANDIDATE table</td>
+<td><code>CANDIDATE NOT FOUND</code></td>
+</tr>
+<tr>
+<td><code>0000000456</code></td>
+<td><code>RECORD_STATUS = 'I'</code></td>
+<td><code>CANDIDATE RECORD IS INACTIVE</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="113-fee-calculation-error-cases-f5" tabindex="-1">11.3 Fee Calculation Error Cases (F5)</h3>
+<table>
+<thead>
+<tr>
+<th>License Type</th>
+<th>Scenario</th>
+<th>Message Shown</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>(blank)</em></td>
+<td>Field not entered</td>
+<td><code>SELECT LICENSE TYPE FIRST</code></td>
+</tr>
+<tr>
+<td><code>L</code></td>
+<td>No active <code>IF</code> schedule row in date range</td>
+<td><code>NO FEE SCHEDULE FOR THIS LICENSE TYPE</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="114-application-submission-error-cases-f1" tabindex="-1">11.4 Application Submission Error Cases (F1)</h3>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Message Shown</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Candidate ID = <code>0</code></td>
+<td><code>CANDIDATE ID IS REQUIRED</code></td>
+</tr>
+<tr>
+<td>License Type blank</td>
+<td><code>LICENSE TYPE IS REQUIRED</code></td>
+</tr>
+<tr>
+<td>License Type = <code>X</code></td>
+<td><code>LICENSE TYPE MUST BE L P OR O</code></td>
+</tr>
+<tr>
+<td>Candidate 123 + type <code>L</code> with existing <code>PE</code> application</td>
+<td><code>ACTIVE APPLICATION ALREADY EXISTS FOR THIS TYPE</code></td>
+</tr>
+<tr>
+<td><code>INSERT</code> returns SQLCODE ≠ 0</td>
+<td><code>DATABASE ERROR ON APPLICATION INSERT</code></td>
+</tr>
+</tbody>
+</table>
+
+                        <div class="related-pages">
+                            <p class="related-pages-title">Related Pages</p>
+                            <div class="card-grid">
+                                
+            <a href="candidate-management.html" class="card">
+                <span class="card-title">Candidate Maintenance (DL02)</span>
+                <span class="card-description">DLISCAND: creating, updating, inquiring on and deactivating candidate records through function keys on a single 3270 screen, including validation of required fields and duplicate national ID checks.</span>
+            </a>
+            <a href="eligibility-check.html" class="card">
+                <span class="card-title">Eligibility Check (DL05)</span>
+                <span class="card-description">DLISELIG: evaluates whether a candidate qualifies for the requested license type based on minimum age and prerequisite active license, and records the result, failure reason, officer and resulting application status.</span>
+            </a>
+            <a href="application-status-inquiry.html" class="card">
+                <span class="card-title">Application Status Inquiry (DL04)</span>
+                <span class="card-description">DLISSTAT: read-only inquiry that displays each workflow stage of an application (eligibility, history, payment, two approvals), the overall status description and issued license details.</span>
+            </a>
+                            </div>
+                        </div>
+                    </div>
+                    <nav class="toc-panel" aria-label="On this page">
+  <span class="toc-panel-label">On this page</span>
+  <ul class="toc-list">
+<li class="toc-level-2"><a href="#1-overview">1. Overview</a></li>
+<li class="toc-level-2"><a href="#2-system-architecture">2. System Architecture</a></li>
+<li class="toc-level-2"><a href="#3-processing-logic">3. Processing Logic</a>
+<ul>
+<li class="toc-level-3"><a href="#31-high-level-execution-flow">3.1 High-Level Execution Flow</a></li>
+<li class="toc-level-3"><a href="#32-candidate-lookup--f3-lookup-candidate">3.2 Candidate Lookup — F3 (LOOKUP-CANDIDATE)</a></li>
+<li class="toc-level-3"><a href="#33-fee-calculation--f5-calc-fee">3.3 Fee Calculation — F5 (CALC-FEE)</a></li>
+<li class="toc-level-3"><a href="#34-application-submission--f1-submit-application">3.4 Application Submission — F1 (SUBMIT-APPLICATION)</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#4-data-model">4. Data Model</a>
+<ul>
+<li class="toc-level-3"><a href="#41-database-tables-and-relationships">4.1 Database Tables and Relationships</a></li>
+<li class="toc-level-3"><a href="#42-database-operations-summary">4.2 Database Operations Summary</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#5-inputs">5. Inputs</a>
+<ul>
+<li class="toc-level-3"><a href="#51-cics-execute-interface-block-eib">5.1 CICS Execute Interface Block (EIB)</a></li>
+<li class="toc-level-3"><a href="#52-commarea">5.2 COMMAREA</a></li>
+<li class="toc-level-3"><a href="#53-bms-screen-fields-map-dlisae01">5.3 BMS Screen Fields (Map DLISAE01)</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#6-outputs">6. Outputs</a>
+<ul>
+<li class="toc-level-3"><a href="#61-bms-screen-fields-updated-by-the-program">6.1 BMS Screen Fields Updated by the Program</a></li>
+<li class="toc-level-3"><a href="#62-status-messages-reference">6.2 Status Messages Reference</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#7-business-rules">7. Business Rules</a>
+<ul>
+<li class="toc-level-3"><a href="#71-candidate-eligibility">7.1 Candidate Eligibility</a></li>
+<li class="toc-level-3"><a href="#72-license-type-domain">7.2 License Type Domain</a></li>
+<li class="toc-level-3"><a href="#73-fee-schedule-selection">7.3 Fee Schedule Selection</a></li>
+<li class="toc-level-3"><a href="#74-duplicate-application-prevention">7.4 Duplicate Application Prevention</a></li>
+<li class="toc-level-3"><a href="#75-initial-application-state">7.5 Initial Application State</a></li>
+<li class="toc-level-3"><a href="#76-commit-behaviour">7.6 Commit Behaviour</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#8-error-handling">8. Error Handling</a>
+<ul>
+<li class="toc-level-3"><a href="#81-error-handling-strategy">8.1 Error Handling Strategy</a></li>
+<li class="toc-level-3"><a href="#82-known-gaps-in-error-coverage">8.2 Known Gaps in Error Coverage</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#9-dependencies">9. Dependencies</a>
+<ul>
+<li class="toc-level-3"><a href="#91-database-dependencies-ibm-db2">9.1 Database Dependencies (IBM Db2)</a></li>
+<li class="toc-level-3"><a href="#92-cics-and-middleware-dependencies">9.2 CICS and Middleware Dependencies</a></li>
+<li class="toc-level-3"><a href="#93-copybook-dependencies">9.3 Copybook Dependencies</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#10-constraints-and-limitations">10. Constraints and Limitations</a>
+<ul>
+<li class="toc-level-3"><a href="#101-pseudo-conversational-design">10.1 Pseudo-Conversational Design</a></li>
+<li class="toc-level-3"><a href="#102-candidate-name-formatting">10.2 Candidate Name Formatting</a></li>
+<li class="toc-level-3"><a href="#103-fee-display">10.3 Fee Display</a></li>
+<li class="toc-level-3"><a href="#104-duplicate-check-race-condition">10.4 Duplicate Check Race Condition</a></li>
+<li class="toc-level-3"><a href="#105-submit-does-not-re-verify-candidate">10.5 Submit Does Not Re-verify Candidate</a></li>
+<li class="toc-level-3"><a href="#106-no-logging">10.6 No Logging</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#11-examples">11. Examples</a>
+<ul>
+<li class="toc-level-3"><a href="#111-successful-end-to-end-flow">11.1 Successful End-to-End Flow</a></li>
+<li class="toc-level-3"><a href="#112-candidate-lookup-error-cases-f3">11.2 Candidate Lookup Error Cases (F3)</a></li>
+<li class="toc-level-3"><a href="#113-fee-calculation-error-cases-f5">11.3 Fee Calculation Error Cases (F5)</a></li>
+<li class="toc-level-3"><a href="#114-application-submission-error-cases-f1">11.4 Application Submission Error Cases (F1)</a></li>
+</ul>
+</li>
+</ul>
+
+</nav>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+    /* toc-spy.js — highlights the active heading in the TOC panel on scroll */
+    (function () {
+      function init() {
+        var panel = document.querySelector('.toc-panel');
+        if (!panel) return;
+        var links = Array.prototype.slice.call(panel.querySelectorAll('a[href^="#"]'));
+        if (!links.length) return;
+
+        var headingIds = links.map(function (a) { return a.getAttribute('href').slice(1); });
+        var headings = headingIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+        function clearActive() {
+          panel.querySelectorAll('.toc-active').forEach(function (el) { el.classList.remove('toc-active'); });
+          panel.querySelectorAll('.toc-parent-active').forEach(function (el) { el.classList.remove('toc-parent-active'); });
+        }
+
+        function setActive(id) {
+          clearActive();
+          var link = panel.querySelector('a[href="#' + id + '"]');
+          if (!link) return;
+          link.classList.add('toc-active');
+          var li = link.closest('li');
+          if (li) {
+            var parentLi = li.parentElement && li.parentElement.closest('li');
+            if (parentLi) parentLi.classList.add('toc-parent-active');
+          }
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+        headings.forEach(function (h) { observer.observe(h); });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
+    <script>
+    /* sidebar-toggle.js — persists open/closed state across navigation */
+    (function () {
+
+      var STORAGE_KEY = 'sb_open';
+
+      function getOpenSet() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+      }
+
+      function saveOpenSet(set) {
+        try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(set)); } catch (e) {}
+      }
+
+      function findItems(toggle) {
+        var node = toggle.nextSibling;
+        while (node) {
+          if (node.nodeType === 1 && node.classList.contains('nav-section-items'))
+            return node;
+          node = node.nextSibling;
+        }
+        return null;
+      }
+
+      function toggleKey(toggle, index) {
+        var label = (toggle.querySelector('.nav-toggle-text') || toggle).textContent.trim().replace(/\s+/g, ' ');
+        return index + ':' + label;
+      }
+
+      function openSection(toggle, items, key, set) {
+        toggle.classList.add('open');
+        items.classList.add('open');
+        if (set) set[key] = true;
+      }
+
+      function closeSection(toggle, items, key, set) {
+        toggle.classList.remove('open');
+        items.classList.remove('open');
+        if (set) set[key] = false;
+      }
+
+      function init() {
+        var sidebar = document.getElementById('wiki-sidebar');
+        var toggles = Array.prototype.slice.call(
+          document.querySelectorAll('.nav-section-toggle')
+        );
+
+        var activeIdx = -1;
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+          if (items.querySelector('.nav-link.active')) {
+            activeIdx = idx;
+          }
+        });
+
+        var savedSet = getOpenSet();
+        var openSet = savedSet || {};
+
+        if (activeIdx !== -1) {
+          openSet[toggleKey(toggles[activeIdx], activeIdx)] = true;
+        }
+
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+
+          var key = toggleKey(toggle, idx);
+          var shouldOpen = openSet[key] === true;
+
+          if (shouldOpen) {
+            toggle.classList.add('open');
+            items.classList.add('open');
+          }
+
+          toggle.addEventListener('click', function () {
+            var nowOpen = toggle.classList.contains('open');
+            if (nowOpen) {
+              closeSection(toggle, items, key, openSet);
+            } else {
+              openSection(toggle, items, key, openSet);
+            }
+            saveOpenSet(openSet);
+          });
+        });
+
+        saveOpenSet(openSet);
+
+        /* Restore sidebar scroll position after sections are expanded so the
+           scroll height is correct when we apply scrollTop. */
+        if (sidebar) {
+          try {
+            var savedScroll = sessionStorage.getItem('sb_scroll');
+            if (savedScroll !== null) { sidebar.scrollTop = parseInt(savedScroll, 10) || 0; }
+          } catch (_e) {}
+        }
+
+        window.addEventListener('pagehide', function () {
+          saveOpenSet(openSet);
+          if (sidebar) {
+            try { sessionStorage.setItem('sb_scroll', String(sidebar.scrollTop)); } catch (_e) {}
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+    </script>
+    <script>
+    /* nav-tracking.js — only stamps sessionStorage when clicking a source-file link
+       that lives inside the "Source Files" disclosure section, not from sidebar or cards. */
+    (function () {
+      document.addEventListener('click', function (e) {
+        var link = e.target.closest('a[href]');
+        if (!link) return;
+        var href = link.getAttribute('href');
+        if (!href || href.indexOf('sources/') === -1) return;
+        /* Only set referrer when the click originates from inside the Source Files
+           disclosure (.source-files-disclosure). Any other path — sidebar, cards,
+           direct navigation — must not set a referrer. */
+        if (!link.closest('.source-files-disclosure')) return;
+        try {
+          sessionStorage.setItem('wiki_referrer', JSON.stringify({
+            href: location.href,
+            title: document.title,
+            file: location.pathname.split('/').pop()
+          }));
+        } catch (_e) {}
+      });
+    })();
+    </script>
+    <footer class="wiki-footer">Made by IBM Bob Premium Package for Z</footer>
+</body>
+</html>

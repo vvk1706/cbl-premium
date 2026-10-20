@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generate Application Documentation – Run Summary</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #1a1a2e;
+      background: #f5f6fa;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: #1a1a2e;
+      color: #fff;
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .header svg { flex-shrink: 0; }
+    .header-title { font-size: 16px; font-weight: 600; }
+    .header-sub  { font-size: 12px; color: #a0aec0; margin-top: 1px; }
+
+    /* ── Layout ── */
+    .page { max-width: 960px; margin: 32px auto; padding: 0 20px 60px; }
+
+    /* ── Hero card ── */
+    .hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+      color: #fff;
+      border-radius: 12px;
+      padding: 32px 36px;
+      margin-bottom: 28px;
+    }
+    .hero h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+    .hero p  { font-size: 13px; color: #a0c4ff; max-width: 680px; }
+    .badge {
+      display: inline-block;
+      background: #0f3460;
+      border: 1px solid #3a7bd5;
+      color: #a0c4ff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+    }
+
+    /* ── Section headings ── */
+    h2 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin: 28px 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    h3 { font-size: 13px; font-weight: 600; color: #2d3748; margin: 16px 0 8px; }
+
+    /* ── Card grid ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 18px 20px;
+      transition: box-shadow .15s;
+    }
+    .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+    .card-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .card h3 { margin-top: 0; font-size: 13px; }
+    .card p  { font-size: 12px; color: #718096; margin-top: 4px; }
+    .card a  { font-size: 12px; color: #3a7bd5; text-decoration: none; font-weight: 500; }
+    .card a:hover { text-decoration: underline; }
+
+    /* ── Step list ── */
+    .step-list { list-style: none; }
+    .step-list li {
+      display: flex;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid #edf2f7;
+    }
+    .step-list li:last-child { border-bottom: none; }
+    .step-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #1a1a2e;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-body strong { display: block; font-size: 13px; color: #1a1a2e; }
+    .step-body span   { font-size: 12px; color: #718096; }
+
+    /* ── Pages table ── */
+    .pages-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    .pages-table th {
+      text-align: left;
+      background: #f7f8fc;
+      padding: 8px 12px;
+      font-weight: 600;
+      color: #4a5568;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    .pages-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #edf2f7;
+      vertical-align: top;
+    }
+    .pages-table tr:last-child td { border-bottom: none; }
+    .pages-table a { color: #3a7bd5; text-decoration: none; }
+    .pages-table a:hover { text-decoration: underline; }
+    .tag {
+      display: inline-block;
+      background: #ebf4ff;
+      color: #2b6cb0;
+      font-size: 10.5px;
+      font-weight: 600;
+      padding: 1px 7px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .tag.green { background: #e6ffed; color: #276749; }
+    .tag.purple { background: #faf5ff; color: #6b46c1; }
+
+    /* ── Info box ── */
+    .info-box {
+      background: #ebf8ff;
+      border: 1px solid #bee3f8;
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 13px;
+      color: #2c5282;
+      margin-bottom: 20px;
+    }
+    .info-box strong { display: block; margin-bottom: 3px; }
+
+    /* ── CTA link ── */
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: #3a7bd5;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 9px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      margin-top: 8px;
+      transition: background .15s;
+    }
+    .cta:hover { background: #2563c4; }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a0c4ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="3" width="18" height="18" rx="2"/>
+    <path d="M3 9h18M9 21V9"/>
+  </svg>
+  <div>
+    <div class="header-title">Generate Application Documentation</div>
+    <div class="header-sub">DLIS – Driver License Information System · Run Summary</div>
+  </div>
+</header>
+
+<!-- Page body -->
+<div class="page">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="badge">Workflow complete</div>
+    <h1>Application Documentation Generated</h1>
+    <p>
+      The <em>Generate application documentation</em> workflow compiled program-level Markdown files from
+      <code>/docs</code> into a fully structured, browsable HTML knowledge base covering the DLIS
+      CICS/COBOL application suite.
+    </p>
+    <a class="cta" href="../docs/index.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+      </svg>
+      Open docs/index.html
+    </a>
+  </div>
+
+  <!-- What this workflow does -->
+  <h2>What this workflow does</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon" style="background:#ebf4ff">📐</div>
+      <h3>Determines structure</h3>
+      <p>Analyses available Markdown files and organises content into functional sections and pages.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:#e6ffed">📝</div>
+      <h3>Generates rich pages</h3>
+      <p>Produces detailed HTML pages per topic — architecture diagrams, business rules, code excerpts, examples.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:#faf5ff">🔗</div>
+      <h3>Cross-references pages</h3>
+      <p>Builds a sidebar and inline links so readers can navigate the knowledge base without searching.</p>
+    </div>
+  </div>
+
+  <!-- How it ran -->
+  <h2>How the workflow ran</h2>
+  <ul class="step-list">
+    <li>
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <strong>Prepare – Locate source documentation</strong>
+        <span>Scanned <code>/docs/program/cobol/</code>, <code>/docs/business-rule/cobol/</code> and <code>/docs/explain/</code> for DLIS Markdown files.</span>
+      </div>
+    </li>
+    <li>
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <strong>Generate knowledge base structure</strong>
+        <span>Produced a 14-page / 4-section site plan covering system overview, application intake, verification &amp; payment, approval &amp; issuance, and architecture.</span>
+      </div>
+    </li>
+    <li>
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <strong>Generate content pages (13 pages)</strong>
+        <span>Each page was authored independently with prose, Mermaid diagrams, tables, code snippets, examples, and business rules.</span>
+      </div>
+    </li>
+    <li>
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <strong>Assemble HTML site</strong>
+        <span>All pages written to <code>docs/html/pages/</code>; CSS and sidebar written to <code>docs/html/assets/</code>; root index at <code>docs/index.html</code>.</span>
+      </div>
+    </li>
+  </ul>
+
+  <!-- Generated pages -->
+  <h2>Generated pages</h2>
+  <div class="info-box">
+    <strong>13 pages across 4 functional sections</strong>
+    All pages are in <code>docs/html/pages/</code> and are reachable from the sidebar in <code>docs/index.html</code>.
+  </div>
+
+  <table class="pages-table">
+    <thead>
+      <tr>
+        <th>Section</th>
+        <th>Page title</th>
+        <th>Key content</th>
+        <th>Link</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td rowspan="2"><span class="tag">Overview</span></td>
+        <td>DLIS System Overview</td>
+        <td>End-to-end lifecycle, status state machine, transaction inventory (DL01–DL10), ER diagram</td>
+        <td><a href="../docs/html/pages/system-overview.html">open</a></td>
+      </tr>
+      <tr>
+        <td>Main Menu &amp; Navigation (DL01)</td>
+        <td>Pseudo-conversational hub, XCTL routing, COMMAREA, AID key policy</td>
+        <td><a href="../docs/html/pages/main-menu-navigation.html">open</a></td>
+      </tr>
+      <tr>
+        <td rowspan="3"><span class="tag green">Intake</span></td>
+        <td>Candidate Maintenance (DL02)</td>
+        <td>Create/Update/Inquire/Deactivate, duplicate national-ID check, soft-delete pattern</td>
+        <td><a href="../docs/html/pages/candidate-management.html">open</a></td>
+      </tr>
+      <tr>
+        <td>License Application Entry (DL03)</td>
+        <td>Candidate lookup, fee schedule query, duplicate-application guard, INSERT + identity retrieval</td>
+        <td><a href="../docs/html/pages/license-application-entry.html">open</a></td>
+      </tr>
+      <tr>
+        <td>Application Status Inquiry (DL04)</td>
+        <td>Read-only lifecycle view, five-stage display, conditional issued-license lookup</td>
+        <td><a href="../docs/html/pages/application-status-inquiry.html">open</a></td>
+      </tr>
+      <tr>
+        <td rowspan="3"><span class="tag purple">Verification &amp; Payment</span></td>
+        <td>Eligibility Check (DL05)</td>
+        <td>Minimum-age rules (L/P/O), prerequisite license check, pass/fail persistence</td>
+        <td><a href="../docs/html/pages/eligibility-check.html">open</a></td>
+      </tr>
+      <tr>
+        <td>Driving History Check (DL06)</td>
+        <td>Cursor-driven incident scan, suspension/demerit/fine rules, scrollable 7-row grid</td>
+        <td><a href="../docs/html/pages/driving-history-check.html">open</a></td>
+      </tr>
+      <tr>
+        <td>Payment Entry &amp; Processing (DL07)</td>
+        <td>Fee lookup, payment insert, receipt number generation, LINK to DLISRPRT</td>
+        <td><a href="../docs/html/pages/payment-processing.html">open</a></td>
+      </tr>
+      <tr>
+        <td rowspan="3"><span class="tag" style="background:#fff5f5;color:#c53030">Approval &amp; Issuance</span></td>
+        <td>First-Level Authority Approval (DL08)</td>
+        <td>Level-1 authority validation, payment gate, license-type scope, status → A2 or RE</td>
+        <td><a href="../docs/html/pages/first-level-approval.html">open</a></td>
+      </tr>
+      <tr>
+        <td>Second-Level Authority Approval (DL09)</td>
+        <td>Segregation-of-duties enforcement, level-2 validation, status → AP or RE</td>
+        <td><a href="../docs/html/pages/second-level-approval.html">open</a></td>
+      </tr>
+      <tr>
+        <td>License Issuance (DL10)</td>
+        <td>Expiry calculation by type, license number generation, INSERT + UPDATE, LINK to DLISLPRT</td>
+        <td><a href="../docs/html/pages/license-issuance.html">open</a></td>
+      </tr>
+      <tr>
+        <td rowspan="3"><span class="tag" style="background:#fefce8;color:#92400e">Architecture</span></td>
+        <td>Application Lifecycle &amp; Status Flow</td>
+        <td>Full state machine (PE → EC → HC → PA → A2 → AP → IS / RE), gating conditions per step</td>
+        <td><a href="../docs/html/pages/application-lifecycle-flow.html">open</a></td>
+      </tr>
+      <tr>
+        <td>Data Architecture (DB2)</td>
+        <td>7 tables, ER diagram, read/write matrix, DCLGEN structures, bind details</td>
+        <td><a href="../docs/html/pages/data-architecture.html">open</a></td>
+      </tr>
+      <tr>
+        <td>CICS Integration Patterns</td>
+        <td>Pseudo-conversational model, BMS map strategy, COMMAREA contract, XCTL vs LINK</td>
+        <td><a href="../docs/html/pages/cics-integration-patterns.html">open</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Output -->
+  <h2>Output location</h2>
+  <div class="card-grid">
+    <div class="card">
+      <h3>📄 docs/index.html</h3>
+      <p>Root entry point — sidebar navigation to all 13 pages.</p>
+      <a href="../docs/index.html">Open →</a>
+    </div>
+    <div class="card">
+      <h3>📁 docs/html/pages/</h3>
+      <p>14 individual HTML page files (one per knowledge-base topic).</p>
+    </div>
+    <div class="card">
+      <h3>🎨 docs/html/assets/</h3>
+      <p>Shared CSS stylesheet used by all pages.</p>
+    </div>
+  </div>
+
+</div><!-- /page -->
+</body>
+</html>

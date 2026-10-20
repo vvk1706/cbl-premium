@@ -1,0 +1,15 @@
+Overview
+Generate documentation for your program(s) that includes details about structure, program logic, and data usage.
+
+This workflow helps you:
+
+Generate program documentation for COBOL, PL/I, HLASM programs, or JCL jobs
+
+Build a foundation for generating application documentation using the Generate application documentation workflow
+
+Selection confirmed.
+
+Generating documentation
+Generate program documentation for selected program(s).
+
+Processing program DLISMENU.cbl - and other *.cbl    

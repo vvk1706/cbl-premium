@@ -1,0 +1,542 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLISMENU-overview</title>
+    <link rel="stylesheet" href="../../../assets/style.css">
+    <script src="../../../assets/mermaid.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+
+    <!-- Prism.js for syntax highlighting (bundled — no CDN required) -->
+    <link rel="stylesheet" href="../../../assets/prism-tomorrow.css">
+    <script src="../../../assets/prism-core.js"></script>
+    <script src="../../../assets/prism-languages.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="header-app-name"><a href="../../../../index.html" style="color: inherit; text-decoration: none;">Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</a></span>
+        </div>
+        <div class="header-right">
+        </div>
+    </header>
+    <div class="shell">
+        <aside class="sidebar" id="wiki-sidebar">
+            <nav>
+                
+        <div class="nav-home-wrap">
+            <a href="../../../../index.html" class="nav-home">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 6.5L8 2l6 4.5V14a1 1 0 01-1 1H3a1 1 0 01-1-1V6.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M6 15V9h4v6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                Home
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Application Documentation</div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Overview</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/system-overview.html" class="nav-link" data-page-id="system-overview">DLIS System Overview</a>
+                <a href="../../../pages/main-menu-navigation.html" class="nav-link" data-page-id="main-menu-navigation">Main Menu &amp; Navigation (DL01)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Candidate &amp; Application Intake</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/candidate-management.html" class="nav-link" data-page-id="candidate-management">Candidate Maintenance (DL02)</a>
+                <a href="../../../pages/license-application-entry.html" class="nav-link" data-page-id="license-application-entry">License Application Entry (DL03)</a>
+                <a href="../../../pages/application-status-inquiry.html" class="nav-link" data-page-id="application-status-inquiry">Application Status Inquiry (DL04)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Verification &amp; Payment</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/eligibility-check.html" class="nav-link" data-page-id="eligibility-check">Eligibility Check (DL05)</a>
+                <a href="../../../pages/driving-history-check.html" class="nav-link" data-page-id="driving-history-check">Driving History Check (DL06)</a>
+                <a href="../../../pages/payment-processing.html" class="nav-link" data-page-id="payment-processing">Payment Entry &amp; Processing (DL07)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Approval &amp; License Issuance</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/first-level-approval.html" class="nav-link" data-page-id="first-level-approval">First-Level Authority Approval (DL08)</a>
+                <a href="../../../pages/second-level-approval.html" class="nav-link" data-page-id="second-level-approval">Second-Level Authority Approval (DL09)</a>
+                <a href="../../../pages/license-issuance.html" class="nav-link" data-page-id="license-issuance">License Issuance (DL10)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Architecture</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/application-lifecycle-flow.html" class="nav-link" data-page-id="application-lifecycle-flow">Application Lifecycle &amp; Status Flow</a>
+                <a href="../../../pages/data-architecture.html" class="nav-link" data-page-id="data-architecture">Data Architecture (DB2)</a>
+                <a href="../../../pages/cics-integration-patterns.html" class="nav-link" data-page-id="cics-integration-patterns">CICS Integration Patterns</a>
+            </div>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Program Documentation</div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">program</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../sources/program/cobol/DLISPAY.html" class="nav-link">DLISPAY</a>
+                <a href="../../../sources/program/cobol/DLISSTAT.html" class="nav-link">DLISSTAT</a>
+                <a href="../../../sources/program/cobol/DLISMENU.html" class="nav-link">DLISMENU</a>
+                <a href="../../../sources/program/cobol/DLISELIG.html" class="nav-link">DLISELIG</a>
+                <a href="../../../sources/program/cobol/DLISCAND.html" class="nav-link">DLISCAND</a>
+                <a href="../../../sources/program/cobol/DLISAPPL.html" class="nav-link">DLISAPPL</a>
+                <a href="../../../sources/program/cobol/DLISISSU.html" class="nav-link">DLISISSU</a>
+                <a href="../../../sources/program/cobol/DLISAP2.html" class="nav-link">DLISAP2</a>
+                <a href="../../../sources/program/cobol/DLISHIST.html" class="nav-link">DLISHIST</a>
+                <a href="../../../sources/program/cobol/DLISAP1.html" class="nav-link">DLISAP1</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="nav-section">
+        <button class="nav-section-toggle open" type="button">
+            <span class="nav-toggle-text">business-rule</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items open">
+        <div class="nav-section">
+            <button class="nav-section-toggle open" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items open">
+                <a href="../../../sources/business-rule/cobol/DLISELIG-overview.html" class="nav-link">DLISELIG-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-inventory.html" class="nav-link">DLISPAY-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-overview.html" class="nav-link">DLISCAND-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-inventory.html" class="nav-link">DLISAP2-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-inventory.html" class="nav-link">DLISHIST-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-inventory.html" class="nav-link">DLISMENU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISELIG-inventory.html" class="nav-link">DLISELIG-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-overview.html" class="nav-link">DLISPAY-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-overview.html" class="nav-link">DLISSTAT-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-overview.html" class="nav-link">DLISHIST-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-overview.html" class="nav-link">DLISAPPL-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-inventory.html" class="nav-link">DLISISSU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-inventory.html" class="nav-link">DLISAPPL-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-inventory.html" class="nav-link">DLISSTAT-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-overview.html" class="nav-link">DLISAP1-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-inventory.html" class="nav-link">DLISCAND-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-overview.html" class="nav-link">DLISAP2-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-overview.html" class="nav-link">DLISISSU-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-inventory.html" class="nav-link">DLISAP1-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-overview.html" class="nav-link active">DLISMENU-overview</a>
+            </div>
+        </div>
+        </div>
+    </div>
+            </nav>
+        </aside>
+        <main class="main">
+            <div class="prog-container">
+                <div id="wiki-breadcrumb"></div>
+                <div class="content-layout">
+                    <article class="prose">
+                        <h1 id="business-rules-overview" tabindex="-1">Business rules: Overview</h1>
+<p><strong>Program:</strong> DLISMENU</p>
+<h2 id="1-purpose" tabindex="-1">1. Purpose</h2>
+<p>This document presents a program-level functional view of the business logic in DLISMENU. Business rules are organised into a Function → SubFunction → Business Rule hierarchy representing the business functions performed in the program. Semantically related rules are consolidated into named SubFunctions that group related business capabilities, and purely technical or setup logic is excluded. Each rule documents its purpose, ordered execution steps with conditions, actions, and outcomes, references to the contributing source paragraphs, and the business significance of each rule.</p>
+<h2 id="2-function-menu-session-management" tabindex="-1">2. Function: Menu Session Management</h2>
+<h3 id="21-subfunction-session-entry-and-context-continuity" tabindex="-1">2.1 SubFunction: Session Entry and Context Continuity</h3>
+<h4 id="211-business-rule-initial-session-detection-and-communication-area-restoration" tabindex="-1">2.1.1 Business Rule: Initial Session Detection and Communication Area Restoration</h4>
+<h5 id="2111-purpose" tabindex="-1">2.1.1.1 Purpose</h5>
+<p>Decides whether the user is entering the DLIS menu transaction for the first time or returning to it. This determines whether a fresh menu is presented or the user’s input is processed with the session context carried over from the earlier interaction. It keeps session state intact across pseudo-conversational interactions.</p>
+<h5 id="2112-rule-steps" tabindex="-1">2.1.1.2 Rule Steps</h5>
+<ol>
+<li>
+<p>Detect new versus returning session</p>
+<ul>
+<li>Conditions: Communication area length (EIBCALEN) equals 0 means a new session. A non-zero value means a returning session.</li>
+<li>Actions: On a new session, initialize and display the menu screen. On a returning session, continue to input processing.</li>
+<li>Outcomes: The user sees a fresh menu on first entry, or the transaction continues from the prior interaction on re-entry.</li>
+<li>Relevant Paragraphs: MAIN-LOGIC, INIT-SCREEN, PROCESS-INPUT</li>
+</ul>
+</li>
+<li>
+<p>Restore session context on re-entry</p>
+<ul>
+<li>Conditions: EIBCALEN is non-zero.</li>
+<li>Actions: Copy the passed context (DFHCOMMAREA) into the working-storage communication area (DLIS-COMMAREA) before the user’s input is evaluated.</li>
+<li>Outcomes: Session and context data is available to the input validation and routing logic, so continuity is preserved.</li>
+<li>Relevant Paragraphs: MAIN-LOGIC, PROCESS-INPUT</li>
+</ul>
+</li>
+</ol>
+<h5 id="2113-business-significance" tabindex="-1">2.1.1.3 Business Significance</h5>
+<p>If a first-time entry is mistaken for a re-entry, the user would be processed against missing or empty context. If context is not restored on re-entry, downstream programs would receive lost or corrupted session state. Users could then lose their place in the workflow or act with the wrong context.</p>
+<h2 id="3-function-menu-input-validation" tabindex="-1">3. Function: Menu Input Validation</h2>
+<h3 id="31-subfunction-attention-key-validation" tabindex="-1">3.1 SubFunction: Attention Key Validation</h3>
+<h4 id="311-business-rule-invalid-key-press-validation--require-enter-or-pf12" tabindex="-1">3.1.1 Business Rule: Invalid Key Press Validation — Require ENTER or PF12</h4>
+<h5 id="3111-purpose" tabindex="-1">3.1.1.1 Purpose</h5>
+<p>Restricts the menu screen to two valid user actions, ENTER (submit selection) and PF12. Any other attention key is rejected, so the user cannot trigger unintended navigation or processing from the menu.</p>
+<h5 id="3112-rule-steps" tabindex="-1">3.1.1.2 Rule Steps</h5>
+<ol>
+<li>Check the attention key pressed
+<ul>
+<li>Conditions: The key pressed is neither ENTER nor PF12.</li>
+<li>Actions: Set a guidance message telling the user which keys are valid, then redisplay the menu.</li>
+<li>Outcomes: Invalid keys are rejected without processing the option field or routing the user. Valid keys move on to option validation.</li>
+<li>Relevant Paragraphs: PROCESS-INPUT, REDISPLAY-MENU</li>
+</ul>
+</li>
+</ol>
+<h5 id="3113-business-significance" tabindex="-1">3.1.1.3 Business Significance</h5>
+<p>Without this control, stray function keys could cause unintended transfers, abnormal terminations, or processing of incomplete input. This would disrupt the user experience and risk the integrity of the transaction flow.</p>
+<h3 id="32-subfunction-menu-option-entry-validation" tabindex="-1">3.2 SubFunction: Menu Option Entry Validation</h3>
+<h4 id="321-business-rule-mandatory-option-selection-validation" tabindex="-1">3.2.1 Business Rule: Mandatory Option Selection Validation</h4>
+<h5 id="3211-purpose" tabindex="-1">3.2.1.1 Purpose</h5>
+<p>Requires the user to enter a menu option before the transaction can proceed. An empty selection is treated as an error, and the user is told to choose a value from 1 to 10.</p>
+<h5 id="3212-rule-steps" tabindex="-1">3.2.1.2 Rule Steps</h5>
+<ol>
+<li>Verify that an option was entered
+<ul>
+<li>Conditions: The option field is blank (spaces) or contains low-values, meaning nothing was entered.</li>
+<li>Actions: Set a message prompting the user to select an option between 1 and 10, then redisplay the menu.</li>
+<li>Outcomes: Empty submissions are blocked and no routing occurs. Populated selections proceed to routing.</li>
+<li>Relevant Paragraphs: PROCESS-INPUT, REDISPLAY-MENU</li>
+</ul>
+</li>
+</ol>
+<h5 id="3213-business-significance" tabindex="-1">3.2.1.3 Business Significance</h5>
+<p>Without this check, empty submissions would fall through to routing and produce misleading invalid-option errors or undefined behavior. Users would get unclear guidance and the number of unproductive transactions would rise.</p>
+<h2 id="4-function-business-function-navigation" tabindex="-1">4. Function: Business Function Navigation</h2>
+<h3 id="41-subfunction-menu-option-routing" tabindex="-1">4.1 SubFunction: Menu Option Routing</h3>
+<h4 id="411-business-rule-menu-option-routing-to-business-functions" tabindex="-1">4.1.1 Business Rule: Menu Option Routing to Business Functions</h4>
+<h5 id="4111-purpose" tabindex="-1">4.1.1.1 Purpose</h5>
+<p>Maps each valid menu selection (1–10) to the DLIS business program that handles it, and transfers control to that program with the current session context. This makes the menu the single entry point to candidate management, application processing, status inquiry, eligibility, history, payments, appeals, and issuance. Unrecognized selections are rejected with an error.</p>
+<h5 id="4112-rule-steps" tabindex="-1">4.1.1.2 Rule Steps</h5>
+<ol>
+<li>
+<p>Map the selected option to the target program</p>
+<ul>
+<li>Conditions: The option value matches one of the supported selections:
+<ul>
+<li>1 or 2 → DLISCAND (candidate)</li>
+<li>3 → DLISAPPL (application)</li>
+<li>4 → DLISSTAT (status)</li>
+<li>5 → DLISELIG (eligibility)</li>
+<li>6 → DLISHIST (history)</li>
+<li>7 → DLISPAY (payments)</li>
+<li>8 → DLISAP1 (first appeals)</li>
+<li>9 → DLISAP2 (second appeals)</li>
+<li>10 → DLISISSU (issuance)</li>
+</ul>
+</li>
+<li>Actions: Select the program that corresponds to the option.</li>
+<li>Outcomes: Each valid option resolves to exactly one business function program. Options 1 and 2 both resolve to the candidate program.</li>
+<li>Relevant Paragraphs: PROCESS-INPUT</li>
+</ul>
+</li>
+<li>
+<p>Transfer control with session context</p>
+<ul>
+<li>Conditions: A valid option has been mapped to a target program.</li>
+<li>Actions: Pass the 350-byte communication area (DLIS-COMMAREA) to the selected program when control is transferred.</li>
+<li>Outcomes: The target program receives the session state and can continue the user’s workflow.</li>
+<li>Relevant Paragraphs: PROCESS-INPUT</li>
+</ul>
+</li>
+<li>
+<p>Reject unrecognized options</p>
+<ul>
+<li>Conditions: The option value is outside 1–10.</li>
+<li>Actions: Set an error message indicating an invalid option and redisplay the menu.</li>
+<li>Outcomes: No transfer occurs and the user can correct the selection.</li>
+<li>Relevant Paragraphs: PROCESS-INPUT, REDISPLAY-MENU</li>
+</ul>
+</li>
+</ol>
+<h5 id="4113-business-significance" tabindex="-1">4.1.1.3 Business Significance</h5>
+<p>Incorrect mapping would send users to the wrong business function. For example, a payment request could land in appeals or issuance, which creates operational and compliance risk. Failing to pass the communication area would break session continuity in the target program. Failing to reject invalid options could cause transfer failures or abends.</p>
+
+                    </article>
+                    <nav class="toc-panel" aria-label="On this page">
+  <span class="toc-panel-label">On this page</span>
+  <ul class="toc-list">
+<li class="toc-level-2"><a href="#1-purpose">1. Purpose</a></li>
+<li class="toc-level-2"><a href="#2-function-menu-session-management">2. Function: Menu Session Management</a>
+<ul>
+<li class="toc-level-3"><a href="#21-subfunction-session-entry-and-context-continuity">2.1 SubFunction: Session Entry and Context Continuity</a>
+<ul>
+<li class="toc-level-4"><a href="#211-business-rule-initial-session-detection-and-communication-area-restoration">2.1.1 Business Rule: Initial Session Detection and Communication Area Restoration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#3-function-menu-input-validation">3. Function: Menu Input Validation</a>
+<ul>
+<li class="toc-level-3"><a href="#31-subfunction-attention-key-validation">3.1 SubFunction: Attention Key Validation</a>
+<ul>
+<li class="toc-level-4"><a href="#311-business-rule-invalid-key-press-validation--require-enter-or-pf12">3.1.1 Business Rule: Invalid Key Press Validation — Require ENTER or PF12</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#32-subfunction-menu-option-entry-validation">3.2 SubFunction: Menu Option Entry Validation</a>
+<ul>
+<li class="toc-level-4"><a href="#321-business-rule-mandatory-option-selection-validation">3.2.1 Business Rule: Mandatory Option Selection Validation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#4-function-business-function-navigation">4. Function: Business Function Navigation</a>
+<ul>
+<li class="toc-level-3"><a href="#41-subfunction-menu-option-routing">4.1 SubFunction: Menu Option Routing</a>
+<ul>
+<li class="toc-level-4"><a href="#411-business-rule-menu-option-routing-to-business-functions">4.1.1 Business Rule: Menu Option Routing to Business Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</nav>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="wiki-footer">Made by IBM Bob Premium Package for Z</footer>
+    <script>
+    /* toc-spy.js — highlights the active heading in the TOC panel on scroll */
+    (function () {
+      function init() {
+        var panel = document.querySelector('.toc-panel');
+        if (!panel) return;
+        var links = Array.prototype.slice.call(panel.querySelectorAll('a[href^="#"]'));
+        if (!links.length) return;
+
+        var headingIds = links.map(function (a) { return a.getAttribute('href').slice(1); });
+        var headings = headingIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+        function clearActive() {
+          panel.querySelectorAll('.toc-active').forEach(function (el) { el.classList.remove('toc-active'); });
+          panel.querySelectorAll('.toc-parent-active').forEach(function (el) { el.classList.remove('toc-parent-active'); });
+        }
+
+        function setActive(id) {
+          clearActive();
+          var link = panel.querySelector('a[href="#' + id + '"]');
+          if (!link) return;
+          link.classList.add('toc-active');
+          var li = link.closest('li');
+          if (li) {
+            var parentLi = li.parentElement && li.parentElement.closest('li');
+            if (parentLi) parentLi.classList.add('toc-parent-active');
+          }
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+        headings.forEach(function (h) { observer.observe(h); });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
+    <script>
+    /* breadcrumb.js — reads sessionStorage['wiki_referrer'] and renders breadcrumb.
+       Only fires when the referrer was set by clicking a link inside the Source Files
+       disclosure on a wiki page; clears after rendering so stale state never lingers. */
+    (function () {
+      var raw;
+      try { raw = sessionStorage.getItem('wiki_referrer'); } catch (_e) {}
+      if (!raw) return;
+      /* Consume immediately — prevents the breadcrumb re-appearing on the next visit. */
+      try { sessionStorage.removeItem('wiki_referrer'); } catch (_e) {}
+      var ref;
+      try { ref = JSON.parse(raw); } catch (_e) { return; }
+      if (!ref || !ref.href) return;
+      var bc = document.getElementById('wiki-breadcrumb');
+      if (!bc) return;
+      bc.className = 'wiki-breadcrumb';
+      bc.innerHTML =
+        '<a href="' + ref.href + '">' + (ref.title || 'Back') + '</a>' +
+        '<span class="wiki-breadcrumb-sep"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' +
+        '<span class="wiki-breadcrumb-current">DLISMENU-overview</span>';
+    })();
+    </script>
+    <script>
+    /* sidebar toggle — same as main wiki pages */
+    (function () {
+
+      var STORAGE_KEY = 'sb_open';
+
+      function getOpenSet() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+      }
+
+      function saveOpenSet(set) {
+        try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(set)); } catch (e) {}
+      }
+
+      function findItems(toggle) {
+        var node = toggle.nextSibling;
+        while (node) {
+          if (node.nodeType === 1 && node.classList.contains('nav-section-items'))
+            return node;
+          node = node.nextSibling;
+        }
+        return null;
+      }
+
+      function toggleKey(toggle, index) {
+        var label = (toggle.querySelector('.nav-toggle-text') || toggle).textContent.trim().replace(/\s+/g, ' ');
+        return index + ':' + label;
+      }
+
+      function openSection(toggle, items, key, set) {
+        toggle.classList.add('open');
+        items.classList.add('open');
+        if (set) set[key] = true;
+      }
+
+      function closeSection(toggle, items, key, set) {
+        toggle.classList.remove('open');
+        items.classList.remove('open');
+        if (set) set[key] = false;
+      }
+
+      function init() {
+        var sidebar = document.getElementById('wiki-sidebar');
+        var toggles = Array.prototype.slice.call(
+          document.querySelectorAll('.nav-section-toggle')
+        );
+
+        var savedSet = getOpenSet();
+        var openSet = savedSet || {};
+
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+
+          var key = toggleKey(toggle, idx);
+          var shouldOpen = openSet[key] === true;
+
+          if (shouldOpen) {
+            toggle.classList.add('open');
+            items.classList.add('open');
+          }
+
+          toggle.addEventListener('click', function () {
+            var nowOpen = toggle.classList.contains('open');
+            if (nowOpen) {
+              closeSection(toggle, items, key, openSet);
+            } else {
+              openSection(toggle, items, key, openSet);
+            }
+            saveOpenSet(openSet);
+          });
+        });
+
+        saveOpenSet(openSet);
+
+        /* Restore sidebar scroll position after sections are expanded so the
+           scroll height is correct when we apply scrollTop. */
+        if (sidebar) {
+          try {
+            var savedScroll = sessionStorage.getItem('sb_scroll');
+            if (savedScroll !== null) { sidebar.scrollTop = parseInt(savedScroll, 10) || 0; }
+          } catch (_e) {}
+        }
+
+        window.addEventListener('pagehide', function () {
+          saveOpenSet(openSet);
+          if (sidebar) {
+            try { sessionStorage.setItem('sb_scroll', String(sidebar.scrollTop)); } catch (_e) {}
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+         TITLE 'DLIS BMS MAPSET - APPLICATION ENTRY'
+***================================================================***
+*** BMS Mapset : DLISAE                                            ***
+*** Map        : DLISAE01                                          ***
+*** Screen     : SCR-APPLICATION-ENTRY                             ***
+*** Trans      : DL03                                              ***
+***================================================================***
+DLISAE   DFHMSD TYPE=&SYSPARM,                                         X
+               LANG=COBOL,                                             X
+               MODE=INOUT,                                             X
+               TERM=3270-2,                                            X
+               CTRL=FREEKB,                                            X
+               STORAGE=AUTO,                                           X
+               TIOAPFX=YES
+
+DLISAE01 DFHMDI SIZE=(24,80),                                          X
+               LINE=1,                                                 X
+               COLUMN=1
+
+         DFHMDF POS=(1,1),LENGTH=80,ATTRB=(PROT,BRT),                 X
+               INITIAL='DLIS            LICENSE APPLICATION ENTRY'
+         DFHMDF POS=(1,66),LENGTH=6,ATTRB=(PROT,NORM),                X
+               INITIAL='DATE: '
+DAEDATE  DFHMDF POS=(1,72),LENGTH=10,ATTRB=(PROT,NORM)
+         DFHMDF POS=(2,1),LENGTH=80,ATTRB=(PROT,NORM),                X
+               INITIAL='--------------------------------------------------------------------------------'
+
+         DFHMDF POS=(4,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='APPLICATION ID  : '
+DAEAID   DFHMDF POS=(4,20),LENGTH=10,ATTRB=(PROT,NORM)
+
+         DFHMDF POS=(5,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='CANDIDATE ID    : '
+DAECID   DFHMDF POS=(5,20),LENGTH=10,ATTRB=(NUM,UNPROT,IC)
+
+         DFHMDF POS=(6,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='CANDIDATE NAME  : '
+DAECNAM  DFHMDF POS=(6,20),LENGTH=60,ATTRB=(PROT,NORM)
+
+         DFHMDF POS=(8,2),LENGTH=18,ATTRB=(PROT,NORM),                X
+               INITIAL='LICENSE TYPE    : '
+DAELTYP  DFHMDF POS=(8,20),LENGTH=1,ATTRB=(UNPROT)
+         DFHMDF POS=(8,22),LENGTH=34,ATTRB=(PROT,NORM),               X
+               INITIAL='(L=LEARNER  P=PROBATION  O=OPEN)'
+
+         DFHMDF POS=(10,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='APPLICATION DATE: '
+DAEADAT  DFHMDF POS=(10,20),LENGTH=10,ATTRB=(PROT,NORM)
+
+         DFHMDF POS=(11,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='STATUS          : '
+DAEASTT  DFHMDF POS=(11,20),LENGTH=2,ATTRB=(PROT,NORM)
+
+         DFHMDF POS=(13,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='FEE APPLICABLE  : '
+DAEFEE   DFHMDF POS=(13,20),LENGTH=14,ATTRB=(PROT,NORM)
+
+         DFHMDF POS=(14,2),LENGTH=18,ATTRB=(PROT,NORM),               X
+               INITIAL='CURRENCY        : '
+DAECURR  DFHMDF POS=(14,20),LENGTH=3,ATTRB=(PROT,NORM)
+
+DAEMSG   DFHMDF POS=(22,2),LENGTH=76,ATTRB=(PROT,NORM)
+
+         DFHMDF POS=(23,1),LENGTH=80,ATTRB=(PROT,NORM),               X
+               INITIAL='--------------------------------------------------------------------------------'
+         DFHMDF POS=(24,2),LENGTH=76,ATTRB=(PROT,NORM),               X
+               INITIAL='F1=SUBMIT  F3=LOOKUP CANDIDATE  F5=CALC FEE  F12=EXIT'
+
+         DFHMSD TYPE=FINAL
+         END

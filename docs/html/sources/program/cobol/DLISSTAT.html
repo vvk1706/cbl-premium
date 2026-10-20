@@ -1,0 +1,1428 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLISSTAT</title>
+    <link rel="stylesheet" href="../../../assets/style.css">
+    <script src="../../../assets/mermaid.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+
+    <!-- Prism.js for syntax highlighting (bundled — no CDN required) -->
+    <link rel="stylesheet" href="../../../assets/prism-tomorrow.css">
+    <script src="../../../assets/prism-core.js"></script>
+    <script src="../../../assets/prism-languages.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="header-app-name"><a href="../../../../index.html" style="color: inherit; text-decoration: none;">Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</a></span>
+        </div>
+        <div class="header-right">
+        </div>
+    </header>
+    <div class="shell">
+        <aside class="sidebar" id="wiki-sidebar">
+            <nav>
+                
+        <div class="nav-home-wrap">
+            <a href="../../../../index.html" class="nav-home">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 6.5L8 2l6 4.5V14a1 1 0 01-1 1H3a1 1 0 01-1-1V6.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M6 15V9h4v6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                Home
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Application Documentation</div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Overview</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/system-overview.html" class="nav-link" data-page-id="system-overview">DLIS System Overview</a>
+                <a href="../../../pages/main-menu-navigation.html" class="nav-link" data-page-id="main-menu-navigation">Main Menu &amp; Navigation (DL01)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Candidate &amp; Application Intake</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/candidate-management.html" class="nav-link" data-page-id="candidate-management">Candidate Maintenance (DL02)</a>
+                <a href="../../../pages/license-application-entry.html" class="nav-link" data-page-id="license-application-entry">License Application Entry (DL03)</a>
+                <a href="../../../pages/application-status-inquiry.html" class="nav-link" data-page-id="application-status-inquiry">Application Status Inquiry (DL04)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Verification &amp; Payment</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/eligibility-check.html" class="nav-link" data-page-id="eligibility-check">Eligibility Check (DL05)</a>
+                <a href="../../../pages/driving-history-check.html" class="nav-link" data-page-id="driving-history-check">Driving History Check (DL06)</a>
+                <a href="../../../pages/payment-processing.html" class="nav-link" data-page-id="payment-processing">Payment Entry &amp; Processing (DL07)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Approval &amp; License Issuance</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/first-level-approval.html" class="nav-link" data-page-id="first-level-approval">First-Level Authority Approval (DL08)</a>
+                <a href="../../../pages/second-level-approval.html" class="nav-link" data-page-id="second-level-approval">Second-Level Authority Approval (DL09)</a>
+                <a href="../../../pages/license-issuance.html" class="nav-link" data-page-id="license-issuance">License Issuance (DL10)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Architecture</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/application-lifecycle-flow.html" class="nav-link" data-page-id="application-lifecycle-flow">Application Lifecycle &amp; Status Flow</a>
+                <a href="../../../pages/data-architecture.html" class="nav-link" data-page-id="data-architecture">Data Architecture (DB2)</a>
+                <a href="../../../pages/cics-integration-patterns.html" class="nav-link" data-page-id="cics-integration-patterns">CICS Integration Patterns</a>
+            </div>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Program Documentation</div>
+    <div class="nav-section">
+        <button class="nav-section-toggle open" type="button">
+            <span class="nav-toggle-text">program</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items open">
+        <div class="nav-section">
+            <button class="nav-section-toggle open" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items open">
+                <a href="../../../sources/program/cobol/DLISPAY.html" class="nav-link">DLISPAY</a>
+                <a href="../../../sources/program/cobol/DLISSTAT.html" class="nav-link active">DLISSTAT</a>
+                <a href="../../../sources/program/cobol/DLISMENU.html" class="nav-link">DLISMENU</a>
+                <a href="../../../sources/program/cobol/DLISELIG.html" class="nav-link">DLISELIG</a>
+                <a href="../../../sources/program/cobol/DLISCAND.html" class="nav-link">DLISCAND</a>
+                <a href="../../../sources/program/cobol/DLISAPPL.html" class="nav-link">DLISAPPL</a>
+                <a href="../../../sources/program/cobol/DLISISSU.html" class="nav-link">DLISISSU</a>
+                <a href="../../../sources/program/cobol/DLISAP2.html" class="nav-link">DLISAP2</a>
+                <a href="../../../sources/program/cobol/DLISHIST.html" class="nav-link">DLISHIST</a>
+                <a href="../../../sources/program/cobol/DLISAP1.html" class="nav-link">DLISAP1</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">business-rule</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../sources/business-rule/cobol/DLISELIG-overview.html" class="nav-link">DLISELIG-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-inventory.html" class="nav-link">DLISPAY-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-overview.html" class="nav-link">DLISCAND-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-inventory.html" class="nav-link">DLISAP2-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-inventory.html" class="nav-link">DLISHIST-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-inventory.html" class="nav-link">DLISMENU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISELIG-inventory.html" class="nav-link">DLISELIG-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-overview.html" class="nav-link">DLISPAY-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-overview.html" class="nav-link">DLISSTAT-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-overview.html" class="nav-link">DLISHIST-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-overview.html" class="nav-link">DLISAPPL-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-inventory.html" class="nav-link">DLISISSU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-inventory.html" class="nav-link">DLISAPPL-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-inventory.html" class="nav-link">DLISSTAT-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-overview.html" class="nav-link">DLISAP1-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-inventory.html" class="nav-link">DLISCAND-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-overview.html" class="nav-link">DLISAP2-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-overview.html" class="nav-link">DLISISSU-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-inventory.html" class="nav-link">DLISAP1-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-overview.html" class="nav-link">DLISMENU-overview</a>
+            </div>
+        </div>
+        </div>
+    </div>
+            </nav>
+        </aside>
+        <main class="main">
+            <div class="prog-container">
+                <div id="wiki-breadcrumb"></div>
+                <div class="content-layout">
+                    <article class="prose">
+                        <h2 id="1-purpose" tabindex="-1">1. Purpose</h2>
+<p>DLISSTAT is a CICS/COBOL interactive inquiry program (transaction DL04) that allows users to look up the real-time processing status of a driver’s license application within the Driver License Information System (DLIS). Given an application ID entered on screen, it queries the DB2 <code>DLIS.LICENSE_APPLICATION</code> table to retrieve and display each stage of the application workflow — eligibility check, history check, payment, and both levels of authority approval — along with a human-readable description of the overall application status. If the application has been fully issued, the program additionally retrieves the assigned license number and expiry date from the <code>DLIS.ISSUED_LICENSE</code> table and presents them on the inquiry screen.</p>
+<h2 id="2-inputs" tabindex="-1">2. Inputs</h2>
+<h3 id="21-user-interface--screen-inputs-bms-map-dlisst01--cics-eib" tabindex="-1">2.1 User Interface &amp; Screen Inputs (BMS Map <code>DLISST01</code> / CICS EIB)</h3>
+<ul>
+<li><strong>Attention Identifier (<code>EIBAID</code>)</strong>
+<ul>
+<li>Identifies the terminal key pressed by the user (e.g., <code>DFHENTER</code> to initiate an inquiry or <code>DFHPF12</code> to exit the transaction), directing the control flow in the evaluation logic.</li>
+</ul>
+</li>
+<li><strong>Application ID (<code>DSTAIDI</code>)</strong>
+<ul>
+<li>Captures the numeric application identifier entered by the operator on the BMS screen map (<code>DLISST01</code>), serving as the search key for database inquiries.</li>
+</ul>
+</li>
+</ul>
+<h3 id="22-inter-program-communication-area-cics-commarea" tabindex="-1">2.2 Inter-Program Communication Area (CICS COMMAREA)</h3>
+<ul>
+<li><strong><code>DFHCOMMAREA</code></strong>
+<ul>
+<li>Represents the 350-byte CICS communication area received in the <code>LINKAGE SECTION</code>.</li>
+<li>Transferred into the working-storage structure <code>DLIS-COMMAREA</code> when <code>EIBCALEN</code> is greater than zero to maintain session state across pseudo-conversational transaction cycles.</li>
+</ul>
+</li>
+</ul>
+<h3 id="23-external-database-inputs-ibm-db2" tabindex="-1">2.3 External Database Inputs (IBM Db2)</h3>
+<ul>
+<li>
+<p><strong><code>DLIS.LICENSE_APPLICATION</code> Table Records</strong></p>
+<ul>
+<li>Retrieved via SQL <code>SELECT</code> using <code>APPLICATION_ID</code> as the primary key:
+<ul>
+<li><strong><code>LICENSE-TYPE</code></strong>: Classification code of the driver’s license requested.</li>
+<li><strong><code>APPLICATION-STATUS</code></strong>: Current lifecycle processing code (e.g., <code>PE</code>, <code>EC</code>, <code>HC</code>, <code>PA</code>, <code>A2</code>, <code>AP</code>, <code>IS</code>, <code>RE</code>) used to determine descriptive text and subsequent querying.</li>
+<li><strong><code>ELIG-CHECK-STATUS</code></strong>, <strong><code>ELIG-CHECK-DATE</code></strong>, <strong><code>ELIG-CHECK-NOTES</code></strong>: Status, completion date, and remarks for the eligibility verification stage.</li>
+<li><strong><code>HIST-CHECK-STATUS</code></strong>, <strong><code>HIST-CHECK-DATE</code></strong>, <strong><code>HIST-CHECK-NOTES</code></strong>: Status, completion date, and remarks for the driving history verification stage.</li>
+<li><strong><code>PAYMENT-STATUS</code></strong>, <strong><code>PAYMENT-REFERENCE</code></strong>: Payment settlement status and payment reference identifier.</li>
+<li><strong><code>APPROVAL-1-STATUS</code></strong>, <strong><code>APPROVAL-1-DATE</code></strong>, <strong><code>APPROVAL-1-AUTHORITY</code></strong>: Decision status, approval date, and authorizing officer/role for the primary authority approval.</li>
+<li><strong><code>APPROVAL-2-STATUS</code></strong>, <strong><code>APPROVAL-2-DATE</code></strong>, <strong><code>APPROVAL-2-AUTHORITY</code></strong>: Decision status, approval date, and authorizing officer/role for the secondary authority approval.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><code>DLIS.ISSUED_LICENSE</code> Table Records</strong></p>
+<ul>
+<li>Conditionally retrieved when <code>APPLICATION-STATUS</code> equals <code>'IS'</code> (Issued):
+<ul>
+<li><strong><code>LICENSE-NUMBER</code></strong>: The unique driver license number issued to the applicant.</li>
+<li><strong><code>EXPIRY-DATE</code></strong>: The date when the issued license expires.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="24-system--runtime-environment-inputs" tabindex="-1">2.4 System &amp; Runtime Environment Inputs</h3>
+<ul>
+<li><strong>Current System Date (<code>CURRENT-DATE(1:10)</code>)</strong>
+<ul>
+<li>An intrinsic COBOL date function supplying the current calendar date to initialize the date field (<code>DSTDATE</code>) on the screen header.</li>
+</ul>
+</li>
+<li><strong>Communication Area Length (<code>EIBCALEN</code>)</strong>
+<ul>
+<li>CICS Exec Interface Block field that provides the length of the incoming COMMAREA to distinguish between an initial transaction entry (<code>EIBCALEN = 0</code>) and conversational user input.</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-outputs" tabindex="-1">3. Outputs</h2>
+<h3 id="31-cics-screen-output-bms-map-dlisst01" tabindex="-1">3.1 CICS Screen Output (BMS Map DLISST01)</h3>
+<ul>
+<li><code>DSTDATE</code>: Transmits the current system date (<code>CURRENT-DATE(1:10)</code>) formatted on the screen header during initial screen rendering.</li>
+<li><code>DSTLTYO</code>: Displays the license classification type (retrieved from <code>LICENSE-TYPE</code>).</li>
+<li><code>DSTASTTO</code>: Displays the two-character application status code (retrieved from <code>APPLICATION-STATUS</code>).</li>
+<li><code>DSTADSO</code>: Displays the resolved human-readable description for the application status (e.g., ‘PENDING - AWAITING ELIGIBILITY CHECK’, ‘LICENSE ISSUED’, ‘REJECTED’).</li>
+<li><code>DST1STSO</code>: Displays the eligibility check stage status flag (retrieved from <code>ELIG-CHECK-STATUS</code>).</li>
+<li><code>DST1DATO</code>: Displays the date when the eligibility check was performed (retrieved from <code>ELIG-CHECK-DATE</code>).</li>
+<li><code>DST1NTSO</code>: Displays notes or comments recorded during the eligibility check stage (retrieved from <code>ELIG-CHECK-NOTES</code>).</li>
+<li><code>DST2STSO</code>: Displays the driving history check stage status flag (retrieved from <code>HIST-CHECK-STATUS</code>).</li>
+<li><code>DST2DATO</code>: Displays the date when the history check was performed (retrieved from <code>HIST-CHECK-DATE</code>).</li>
+<li><code>DST2NTSO</code>: Displays notes or comments recorded during the history check stage (retrieved from <code>HIST-CHECK-NOTES</code>).</li>
+<li><code>DST3STSO</code>: Displays the payment transaction status flag (retrieved from <code>PAYMENT-STATUS</code>).</li>
+<li><code>DST3REFO</code>: Displays the payment reference identifier (retrieved from <code>PAYMENT-REFERENCE</code>).</li>
+<li><code>DST4STSO</code>: Displays the first authority approval status flag (retrieved from <code>APPROVAL-1-STATUS</code>).</li>
+<li><code>DST4DATO</code>: Displays the date of first authority approval action (retrieved from <code>APPROVAL-1-DATE</code>).</li>
+<li><code>DST4AUTO</code>: Displays the authority ID or name that processed the first approval stage (retrieved from <code>APPROVAL-1-AUTHORITY</code>).</li>
+<li><code>DST5STSO</code>: Displays the second authority approval status flag (retrieved from <code>APPROVAL-2-STATUS</code>).</li>
+<li><code>DST5DATO</code>: Displays the date of second authority approval action (retrieved from <code>APPROVAL-2-DATE</code>).</li>
+<li><code>DST5AUTO</code>: Displays the authority ID or name that processed the second approval stage (retrieved from <code>APPROVAL-2-AUTHORITY</code>).</li>
+<li><code>DST6FLGO</code>: Displays an issuance indicator flag (‘YES’ if the license has been issued, ‘NO’ otherwise).</li>
+<li><code>DST6NUMO</code>: Displays the issued license number (retrieved from <code>LICENSE-NUMBER</code> when the application status is ‘IS’).</li>
+<li><code>DST6EXPO</code>: Displays the expiry date of the issued license (retrieved from <code>EXPIRY-DATE</code> when the application status is ‘IS’).</li>
+<li><code>DSTMSG</code>: Transmits operational, informational, and error messages to the user (e.g., ‘PRESS ENTER TO INQUIRE OR F12 TO EXIT’, ‘ENTER APPLICATION ID’, ‘APPLICATION NOT FOUND’, ‘INQUIRY SUCCESSFUL’).</li>
+</ul>
+<h3 id="32-inter-program-and-session-state-outputs" tabindex="-1">3.2 Inter-Program and Session State Outputs</h3>
+<ul>
+<li><code>DLIS-COMMAREA</code>: Preserves session context and transaction state across pseudo-conversational invocations by passing the 350-byte communication area via <code>EXEC CICS RETURN TRANSID('DL04') COMMAREA(...)</code>.</li>
+</ul>
+<h2 id="4-processing-logic" tabindex="-1">4. Processing Logic</h2>
+<h3 id="41-mermaid-flow-diagram" tabindex="-1">4.1 Mermaid Flow Diagram</h3>
+<div class="mermaid">
+graph TD
+    classDef startEnd fill:#b5ead7,stroke:#4caf7d,color:#000
+    classDef process fill:#c7ceea,stroke:#7986cb,color:#000
+    classDef decision fill:#ffdac1,stroke:#f4a261,color:#000
+    classDef ioOp fill:#e2f0cb,stroke:#81c784,color:#000
+    classDef dbOp fill:#fce1e4,stroke:#e57373,color:#000
+
+    A([Program Start - DL04 invoked]):::startEnd
+    B{{EIBCALEN = 0<br>First invocation}}:::decision
+    C[INIT-SCREEN<br>Set current date<br>Send blank map DLISST01<br>with ERASE]:::ioOp
+    D[Return to CICS<br>TRANSID=DL04<br>with COMMAREA]:::process
+    E[PROCESS-INPUT<br>Receive map DLISST01<br>from terminal]:::ioOp
+    F{{EIBAID check<br>Which key was pressed}}:::decision
+    G[INQUIRE-STATUS<br>Process inquiry]:::process
+    H[Return to CICS<br>TRANSID=DL04<br>with COMMAREA]:::process
+    I([End - Final CICS RETURN<br>no TRANSID - F12 Exit]):::startEnd
+    J[Set message<br>PRESS ENTER TO INQUIRE<br>OR F12 TO EXIT]:::process
+
+    K{{Application ID<br>entered by user}}:::decision
+    L[Set message<br>ENTER APPLICATION ID]:::process
+    M[Exit - INQUIRE-EXIT]:::process
+    N[SQL SELECT from<br>DLIS.LICENSE_APPLICATION<br>by APPLICATION_ID]:::dbOp
+    O{{SQLCODE = 100<br>Not Found}}:::decision
+    P[Set message<br>APPLICATION NOT FOUND]:::process
+    Q[Populate map fields<br>License Type<br>Status Code<br>Status Description]:::process
+    R{{APPLICATION-STATUS<br>= IS - Issued}}:::decision
+    S[SQL SELECT from<br>DLIS.ISSUED_LICENSE<br>License Number and Expiry Date]:::dbOp
+    T{{SQLCODE = 0<br>License found}}:::decision
+    U[Display License Number<br>Expiry Date<br>Set issued flag YES]:::ioOp
+    V[Set issued flag NO]:::ioOp
+    W[Set message<br>INQUIRY SUCCESSFUL]:::process
+    X[Send map DLISST01<br>DATAONLY to terminal]:::ioOp
+
+    A --> B
+    B -- Yes --> C
+    C --> D
+    B -- No --> E
+    E --> F
+    F -- ENTER --> G
+    F -- PF12 --> I
+    F -- Other --> J
+    J --> X
+    G --> K
+    K -- No --> L
+    L --> M
+    M --> X
+    K -- Yes --> N
+    N --> O
+    O -- Yes --> P
+    P --> M
+    O -- No --> Q
+    Q --> R
+    R -- Yes --> S
+    S --> T
+    T -- Yes --> U
+    T -- No --> X
+    U --> W
+    R -- No --> V
+    V --> W
+    W --> M
+    X --> H
+</div>
+<hr>
+<h3 id="42-processing-logic-description" tabindex="-1">4.2 Processing Logic Description</h3>
+<h4 id="421-high-level-summary" tabindex="-1">4.2.1 High-level Summary</h4>
+<p>DLISSTAT is a CICS pseudo-conversational COBOL program running under transaction <strong>DL04</strong>. Its purpose is to allow an operator to inquire on the full processing status of a driver license application by entering an Application ID. The program retrieves all workflow stage details from the DB2 database and presents them on screen, including eligibility check, history check, payment, dual-authority approvals, and — if the license has been issued — the license number and expiry date.</p>
+<hr>
+<h4 id="422-execution-flow" tabindex="-1">4.2.2 Execution Flow</h4>
+<p><strong>Step 1 — Entry Point: MAIN-LOGIC</strong></p>
+<p>The program checks <code>EIBCALEN</code>, the CICS Execute Interface Block field that holds the length of the COMMAREA passed from the prior invocation:</p>
+<ul>
+<li><code>EIBCALEN = 0</code> → this is the <strong>first invocation</strong> (user typed <code>DL04</code> at the terminal); perform <code>INIT-SCREEN</code>.</li>
+<li><code>EIBCALEN ≠ 0</code> → a COMMAREA exists from a previous invocation; the prior session state is restored from <code>DFHCOMMAREA</code> into <code>DLIS-COMMAREA</code>, then <code>PROCESS-INPUT</code> is performed.</li>
+</ul>
+<hr>
+<p><strong>Step 2 — INIT-SCREEN (First invocation)</strong></p>
+<ul>
+<li>The current date (<code>CURRENT-DATE</code>) is moved to the map date field <code>DSTDATE</code>.</li>
+<li><code>EXEC CICS SEND MAP('DLISST01') MAPSET('DLISST') ERASE FREEKB</code> sends the blank inquiry screen to the terminal. <code>ERASE</code> clears the entire screen before writing; <code>FREEKB</code> unlocks the keyboard so the user can type.</li>
+<li><code>EXEC CICS RETURN TRANSID('DL04') COMMAREA(DLIS-COMMAREA) LENGTH(350)</code> returns control to CICS, instructing it to re-invoke transaction DL04 when the user next presses a key, passing the 350-byte COMMAREA to preserve session state. This is the standard pseudo-conversational pattern.</li>
+</ul>
+<hr>
+<p><strong>Step 3 — PROCESS-INPUT (Subsequent invocations)</strong></p>
+<ul>
+<li><code>EXEC CICS RECEIVE MAP('DLISST01') MAPSET('DLISST')</code> reads any data keyed by the operator from the terminal screen into the symbolic map fields.</li>
+<li>An <code>EVALUATE TRUE</code> block inspects <code>EIBAID</code> (the attention identifier indicating which key was pressed):
+<ul>
+<li><strong>DFHENTER (Enter key):</strong> Perform <code>INQUIRE-STATUS</code> to carry out the database lookup.</li>
+<li><strong>DFHPF12 (PF12 key):</strong> Execute <code>EXEC CICS RETURN</code> with no TRANSID — this terminates the transaction cleanly (exit).</li>
+<li><strong>Any other key:</strong> Move the guidance message <code>'PRESS ENTER TO INQUIRE OR F12 TO EXIT'</code> to <code>DSTMSG</code>.</li>
+</ul>
+</li>
+<li>After the evaluation (except for PF12), the updated map is sent back to the terminal using <code>EXEC CICS SEND MAP DATAONLY FREEKB</code> — <code>DATAONLY</code> refreshes only the variable data fields without re-sending the static labels, which is more efficient.</li>
+<li>Finally, <code>EXEC CICS RETURN TRANSID('DL04') COMMAREA(...)</code> keeps the pseudo-conversational loop alive.</li>
+</ul>
+<hr>
+<p><strong>Step 4 — INQUIRE-STATUS: Input Validation</strong></p>
+<ul>
+<li>If the Application ID input field <code>DSTAIDI</code> is zero (blank/not entered), the message <code>'ENTER APPLICATION ID'</code> is moved to <code>DSTMSG</code> and the program exits to <code>INQUIRE-EXIT</code> immediately without touching the database.</li>
+</ul>
+<hr>
+<p><strong>Step 5 — INQUIRE-STATUS: Primary DB2 Query</strong></p>
+<p>The entered Application ID is moved into the DCLGEN host variable <code>APPLICATION-ID OF DCLDLIS-LICENSE-APPL</code> and a <code>SELECT</code> is issued against <strong><code>DLIS.LICENSE_APPLICATION</code></strong>, retrieving:</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LICENSE_TYPE</td>
+<td>Type of license applied for</td>
+</tr>
+<tr>
+<td>APPLICATION_STATUS</td>
+<td>Current overall two-character status code</td>
+</tr>
+<tr>
+<td>ELIG_CHECK_STATUS / DATE / NOTES</td>
+<td>Eligibility stage results</td>
+</tr>
+<tr>
+<td>HIST_CHECK_STATUS / DATE / NOTES</td>
+<td>History check stage results</td>
+</tr>
+<tr>
+<td>PAYMENT_STATUS / REFERENCE</td>
+<td>Payment stage results</td>
+</tr>
+<tr>
+<td>APPROVAL_1_STATUS / DATE / AUTHORITY</td>
+<td>First authority approval</td>
+</tr>
+<tr>
+<td>APPROVAL_2_STATUS / DATE / AUTHORITY</td>
+<td>Second authority approval</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>SQLCODE = 100</code> (row not found) → set message <code>'APPLICATION NOT FOUND'</code> and exit to <code>INQUIRE-EXIT</code>.</li>
+</ul>
+<hr>
+<p><strong>Step 6 — INQUIRE-STATUS: Status Code to Description Mapping</strong></p>
+<p>The raw two-character <code>APPLICATION-STATUS</code> code is translated to a human-readable description placed in the map output field <code>DSTADSO</code> via an <code>EVALUATE</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PE</code></td>
+<td>PENDING - AWAITING ELIGIBILITY CHECK</td>
+</tr>
+<tr>
+<td><code>EC</code></td>
+<td>ELIGIBILITY CHECKED - AWAITING HISTORY</td>
+</tr>
+<tr>
+<td><code>HC</code></td>
+<td>HISTORY CHECKED - AWAITING PAYMENT</td>
+</tr>
+<tr>
+<td><code>PA</code></td>
+<td>PAYMENT APPROVED - AWAITING AUTH 1</td>
+</tr>
+<tr>
+<td><code>A2</code></td>
+<td>AWAITING SECOND AUTHORITY APPROVAL</td>
+</tr>
+<tr>
+<td><code>AP</code></td>
+<td>FULLY APPROVED - READY FOR ISSUE</td>
+</tr>
+<tr>
+<td><code>IS</code></td>
+<td>LICENSE ISSUED</td>
+</tr>
+<tr>
+<td><code>RE</code></td>
+<td>REJECTED</td>
+</tr>
+<tr>
+<td>Other</td>
+<td>UNKNOWN STATUS</td>
+</tr>
+</tbody>
+</table>
+<p>This status code sequence reflects the complete lifecycle of a driver license application through the DLIS workflow.</p>
+<hr>
+<p><strong>Step 7 — INQUIRE-STATUS: Map Population</strong></p>
+<p>All retrieved fields are moved to their corresponding BMS map output fields:</p>
+<ul>
+<li>Eligibility check status/date/notes → <code>DST1STSO</code>, <code>DST1DATO</code>, <code>DST1NTSO</code></li>
+<li>History check status/date/notes → <code>DST2STSO</code>, <code>DST2DATO</code>, <code>DST2NTSO</code></li>
+<li>Payment status/reference → <code>DST3STSO</code>, <code>DST3REFO</code></li>
+<li>Approval 1 status/date/authority → <code>DST4STSO</code>, <code>DST4DATO</code>, <code>DST4AUTO</code></li>
+<li>Approval 2 status/date/authority → <code>DST5STSO</code>, <code>DST5DATO</code>, <code>DST5AUTO</code></li>
+</ul>
+<hr>
+<p><strong>Step 8 — INQUIRE-STATUS: Conditional License Lookup</strong></p>
+<p>A key business rule is applied:</p>
+<ul>
+<li><strong>If</strong> <code>APPLICATION-STATUS = 'IS'</code> (license has been issued), a <strong>second SQL query</strong> is executed against <strong><code>DLIS.ISSUED_LICENSE</code></strong> to fetch <code>LICENSE_NUMBER</code> and <code>EXPIRY_DATE</code> for the same <code>APPLICATION_ID</code>.
+<ul>
+<li>If <code>SQLCODE = 0</code> (record found): the license number and expiry date are placed in map fields <code>DST6NUMO</code> and <code>DST6EXPO</code>, and the issued flag <code>DST6FLGO</code> is set to <code>'YES'</code>.</li>
+</ul>
+</li>
+<li><strong>Otherwise</strong> (application still in progress): <code>DST6FLGO</code> is set to <code>'NO'</code> — the license number and expiry fields remain blank.</li>
+</ul>
+<p>This ensures that license details are only displayed when a physical license actually exists.</p>
+<hr>
+<p><strong>Step 9 — Successful Completion</strong></p>
+<p><code>'INQUIRY SUCCESSFUL'</code> is moved to <code>DSTMSG</code>, control returns to <code>INQUIRE-EXIT</code>, and the flow returns to <code>PROCESS-INPUT</code>, which sends the fully populated map back to the terminal and issues <code>EXEC CICS RETURN</code> to await the next operator action.</p>
+<hr>
+<h4 id="423-external-interactions" tabindex="-1">4.2.3 External Interactions</h4>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Operation</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CICS BMS</td>
+<td><code>SEND MAP</code> DLISST01 with ERASE</td>
+<td>Display blank inquiry screen on first entry</td>
+</tr>
+<tr>
+<td>CICS BMS</td>
+<td><code>RECEIVE MAP</code> DLISST01</td>
+<td>Accept Application ID and key input from operator</td>
+</tr>
+<tr>
+<td>CICS BMS</td>
+<td><code>SEND MAP</code> DLISST01 DATAONLY</td>
+<td>Refresh data fields with inquiry results</td>
+</tr>
+<tr>
+<td>CICS COMMAREA</td>
+<td><code>RETURN TRANSID('DL04')</code></td>
+<td>Maintain pseudo-conversational state between invocations</td>
+</tr>
+<tr>
+<td>DB2 — <code>DLIS.LICENSE_APPLICATION</code></td>
+<td><code>SELECT</code> by APPLICATION_ID</td>
+<td>Retrieve full workflow status and stage details</td>
+</tr>
+<tr>
+<td>DB2 — <code>DLIS.ISSUED_LICENSE</code></td>
+<td><code>SELECT</code> by APPLICATION_ID</td>
+<td>Retrieve license number and expiry date (only when status = ‘IS’)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h4 id="424-plain-language-summary" tabindex="-1">4.2.4 Plain Language Summary</h4>
+<p>When a user types transaction <code>DL04</code> at a terminal, they are presented with a blank inquiry screen. They type an Application ID and press <strong>Enter</strong>. The program looks up that application in the database and displays the full processing history on screen — whether the eligibility check passed, what the history check found, whether payment was received, and the outcome of up to two authority approvals. If the application has reached the final “Issued” stage, the actual license number and its expiry date are also retrieved and shown. Pressing <strong>PF12</strong> exits the transaction. The program uses a pseudo-conversational technique, meaning it releases all CICS resources between each user interaction and only resumes when the user presses a key, making it highly efficient on the mainframe.</p>
+<hr>
+<h3 id="43-database-tables" tabindex="-1">4.3 Database Tables</h3>
+<div class="mermaid">
+erDiagram
+    LICENSE_APPLICATION {
+        int APPLICATION_ID "Primary key"
+        int CANDIDATE_ID "Foreign key to CANDIDATE"
+        string LICENSE_TYPE "1 char - type of license"
+        date APPLICATION_DATE "Date application submitted"
+        string APPLICATION_STATUS "2 char - PE EC HC PA A2 AP IS RE"
+        string ELIG_CHECK_STATUS "1 char - eligibility result"
+        date ELIG_CHECK_DATE "Date eligibility checked"
+        string ELIG_CHECK_NOTES "200 chars - eligibility notes"
+        string HIST_CHECK_STATUS "1 char - history result"
+        date HIST_CHECK_DATE "Date history checked"
+        string HIST_CHECK_NOTES "200 chars - history notes"
+        string PAYMENT_STATUS "1 char - payment state"
+        string PAYMENT_REFERENCE "20 chars - payment ref"
+        string APPROVAL_1_STATUS "1 char - first approval"
+        string APPROVAL_1_AUTHORITY "50 chars - approving authority"
+        date APPROVAL_1_DATE "Date of first approval"
+        string APPROVAL_1_NOTES "200 chars - approval notes"
+        string APPROVAL_2_STATUS "1 char - second approval"
+        string APPROVAL_2_AUTHORITY "50 chars - approving authority"
+        date APPROVAL_2_DATE "Date of second approval"
+        string APPROVAL_2_NOTES "200 chars - approval notes"
+        string REJECTION_REASON "300 chars"
+        date CREATED_DATE "Record creation date"
+        date LAST_UPDATED_DATE "Last update date"
+        string CREATED_BY "20 chars"
+        string LAST_UPDATED_BY "20 chars"
+    }
+
+    ISSUED_LICENSE {
+        int LICENSE_ID "Primary key"
+        int APPLICATION_ID "Foreign key to LICENSE_APPLICATION"
+        int CANDIDATE_ID "Foreign key to CANDIDATE"
+        string LICENSE_NUMBER "20 chars - issued license number"
+        string LICENSE_TYPE "1 char"
+        date ISSUE_DATE "Date license was issued"
+        date EXPIRY_DATE "Date license expires"
+        string LICENSE_STATUS "1 char"
+        string VEHICLE_CLASS "2 chars"
+        string RESTRICTIONS "200 chars"
+        int DEMERIT_BALANCE "Current demerit points"
+        string ISSUED_BY_AUTH "50 chars - issuing authority"
+        string ISSUED_BY_OFFICER "50 chars - issuing officer"
+        int RENEWAL_COUNT "Number of renewals"
+        int PREV_LICENSE_ID "Prior license reference"
+        string NOTES "300 chars"
+    }
+
+    LICENSE_APPLICATION ||--o| ISSUED_LICENSE : "generates when status IS"
+</div>
+<h2 id="5-paragraphs" tabindex="-1">5. Paragraphs</h2>
+<p><strong>MAIN-LOGIC</strong></p>
+<ul>
+<li>Entry point and dispatcher for the CICS pseudo-conversational transaction DL04.</li>
+<li>Control flow:
+<ul>
+<li>If <code>EIBCALEN = 0</code>, this is the first invocation, so it performs <code>INIT-SCREEN</code>.</li>
+<li>Otherwise it copies <code>DFHCOMMAREA</code> into <code>DLIS-COMMAREA</code> and performs <code>PROCESS-INPUT</code>.</li>
+<li>It ends with <code>STOP RUN</code>.</li>
+</ul>
+</li>
+<li>External interaction: none directly. It relies on the CICS-supplied <code>EIBCALEN</code> and <code>DFHCOMMAREA</code>.</li>
+</ul>
+<p><strong>INIT-SCREEN</strong></p>
+<ul>
+<li>Purpose: show the blank Application Status Inquiry screen on the first entry.</li>
+<li>Operations:
+<ul>
+<li>Moves the first 10 characters of <code>CURRENT-DATE</code> to the map field <code>DSTDATE</code>.</li>
+<li>Sends map <code>DLISST01</code> from mapset <code>DLISST</code> with <code>ERASE</code> and <code>FREEKB</code>. The response goes to <code>WS-RESP1</code>.</li>
+<li>Issues <code>EXEC CICS RETURN TRANSID('DL04')</code> with <code>DLIS-COMMAREA</code> (length 350), so the transaction restarts on the next user input.</li>
+</ul>
+</li>
+<li>Control flow: sequential, with no branching. <code>WS-RESP1</code> is captured but never checked.</li>
+<li>External interaction: CICS BMS terminal output and a CICS RETURN that passes the COMMAREA.</li>
+</ul>
+<p><strong>PROCESS-INPUT</strong></p>
+<ul>
+<li>Purpose: handle the user’s response on later invocations.</li>
+<li>Operations:
+<ul>
+<li>Receives map <code>DLISST01</code> from mapset <code>DLISST</code>, with the response in <code>WS-RESP1</code>.</li>
+<li>Uses <code>EVALUATE TRUE</code> on the attention key (<code>EIBAID</code>):
+<ul>
+<li><code>DFHENTER</code> performs <code>INQUIRE-STATUS</code>.</li>
+<li><code>DFHPF12</code> issues <code>EXEC CICS RETURN</code> with no TRANSID, which ends the conversation.</li>
+<li>Any other key moves “PRESS ENTER TO INQUIRE OR F12 TO EXIT” to <code>DSTMSG</code>.</li>
+</ul>
+</li>
+<li>Sends the map again with <code>DATAONLY</code> and <code>FREEKB</code>, so only the changed data is sent.</li>
+<li>Returns with <code>TRANSID('DL04')</code> and the COMMAREA, so the next input restarts the transaction.</li>
+</ul>
+</li>
+<li>Control flow: a multi-way <code>EVALUATE</code> for key handling. The PF12 branch exits without going through the send and return.</li>
+<li>External interaction: CICS BMS receive and send, and CICS RETURN. Via <code>INQUIRE-STATUS</code>, it also reaches DB2.</li>
+</ul>
+<p><strong>INQUIRE-STATUS</strong></p>
+<ul>
+<li>Purpose: look up a license application by ID and fill the output screen fields with its processing status. If the license has been issued, it also fills in the license details.</li>
+<li>Operations:
+<ul>
+<li><strong>Validation</strong>:
+<ul>
+<li>If <code>DSTAIDI</code> is zeros, it sets the message “ENTER APPLICATION ID” and jumps to <code>INQUIRE-EXIT</code> with <code>GO TO</code>.</li>
+</ul>
+</li>
+<li><strong>Main query</strong>:
+<ul>
+<li>Moves <code>DSTAIDI</code> to <code>APPLICATION-ID</code> in <code>DCLDLIS-LICENSE-APPL</code>.</li>
+<li>Runs a singleton <code>SELECT ... INTO</code> on <code>DLIS.LICENSE_APPLICATION</code> where <code>APPLICATION_ID</code> matches.</li>
+<li>The columns retrieved are:
+<ul>
+<li>license type and application status</li>
+<li>eligibility check status, date and notes</li>
+<li>history check status, date and notes</li>
+<li>payment status and reference</li>
+<li>first and second approval status, date and authority</li>
+</ul>
+</li>
+<li>If <code>SQLCODE = 100</code>, it sets “APPLICATION NOT FOUND” and jumps to <code>INQUIRE-EXIT</code>.</li>
+<li>Other SQL errors are not checked.</li>
+</ul>
+</li>
+<li><strong>Screen population</strong>:
+<ul>
+<li>Moves the license type (<code>DSTLTYO</code>) and the status code (<code>DSTASTTO</code>) to the screen.</li>
+<li>Uses <code>EVALUATE</code> on <code>APPLICATION-STATUS</code> to set the description <code>DSTADSO</code>:
+<ul>
+<li><code>PE</code>: pending, awaiting eligibility check</li>
+<li><code>EC</code>: eligibility checked, awaiting history</li>
+<li><code>HC</code>: history checked, awaiting payment</li>
+<li><code>PA</code>: payment approved, awaiting authority 1</li>
+<li><code>A2</code>: awaiting second authority approval</li>
+<li><code>AP</code>: fully approved, ready for issue</li>
+<li><code>IS</code>: license issued</li>
+<li><code>RE</code>: rejected</li>
+<li>any other value: “UNKNOWN STATUS”</li>
+</ul>
+</li>
+<li>Moves the stage fields to the output fields: eligibility (<code>DST1*</code>), history (<code>DST2*</code>), payment (<code>DST3*</code>), first approval (<code>DST4*</code>) and second approval (<code>DST5*</code>).</li>
+</ul>
+</li>
+<li><strong>Issued license lookup</strong>:
+<ul>
+<li>If the status is <code>IS</code>, it runs a second <code>SELECT</code> on <code>DLIS.ISSUED_LICENSE</code> for <code>LICENSE_NUMBER</code> and <code>EXPIRY_DATE</code>, matched on the same application ID.</li>
+<li>If <code>SQLCODE = 0</code>, it moves the license number (<code>DST6NUMO</code>) and expiry date (<code>DST6EXPO</code>) to the screen and sets <code>DST6FLGO</code> to ‘YES’.</li>
+<li>If the status is not <code>IS</code>, it sets <code>DST6FLGO</code> to ‘NO’.</li>
+<li>If the status is <code>IS</code> but the second query finds no row, <code>DST6FLGO</code> is not set.</li>
+</ul>
+</li>
+<li>Sets the message “INQUIRY SUCCESSFUL” in <code>DSTMSG</code>.</li>
+</ul>
+</li>
+<li>Control flow: an <code>IF</code> for input validation, <code>IF</code> checks on <code>SQLCODE</code>, an <code>EVALUATE</code> for status text, and a conditional second query. There are two early <code>GO TO INQUIRE-EXIT</code> branches.</li>
+<li>External interaction: DB2 reads from <code>DLIS.LICENSE_APPLICATION</code> and, for issued licenses, <code>DLIS.ISSUED_LICENSE</code>. It also writes to BMS map output fields.</li>
+</ul>
+<p><strong>INQUIRE-EXIT</strong></p>
+<ul>
+<li>Purpose: common exit point for <code>INQUIRE-STATUS</code>, the target of its <code>GO TO</code> branches.</li>
+<li>Operations: contains only <code>EXIT</code>, so control returns to the caller (<code>PROCESS-INPUT</code>), which then sends the map.</li>
+<li>External interaction: none.</li>
+</ul>
+<h2 id="6-dependencies" tabindex="-1">6. Dependencies</h2>
+<h3 id="61-cics-resources" tabindex="-1">6.1 CICS Resources</h3>
+<ul>
+<li><strong>Transaction <code>DL04</code></strong> — The CICS transaction identifier under which <code>DLISSTAT</code> executes; defined in <code>csd/DLISCSD.csd</code> within group <code>DLISGRP</code>. The program is invoked when a terminal user initiates transaction <code>DL04</code> and continues to re-attach itself to this transaction ID via pseudo-conversational <code>EXEC CICS RETURN TRANSID('DL04')</code>.</li>
+<li><strong>CICS DB2ENTRY <code>DLISDB2E</code></strong> — The CICS-to-DB2 connection entry defined in <code>csd/DLISCSD.csd</code>, binding the program to DB2 plan <code>DLISPLAN</code> under subsystem <code>DSN1</code>. Provides the thread pool (up to 10 threads) used for all embedded SQL calls.</li>
+<li><strong>CICS Profile <code>DFHCICST</code></strong> — The standard CICS transaction profile applied to transaction <code>DL04</code> via the CSD definition, governing terminal I/O and security settings.</li>
+</ul>
+<h3 id="62-bms-map" tabindex="-1">6.2 BMS Map</h3>
+<ul>
+<li><strong>Mapset <code>DLISST</code> / Map <code>DLISST01</code></strong> — Defined in <code>bms/DLISAPPR.bms</code>. The 24×80 3270 screen used for all user interaction:
+<ul>
+<li><code>DSTAID</code> — Input field for the Application ID entered by the user; read via <code>EXEC CICS RECEIVE MAP</code>.</li>
+<li><code>DSTLTYP</code>, <code>DSTADSC</code>, <code>DSTASTT</code> — Output fields displaying license type, overall status code, and human-readable status description.</li>
+<li><code>DST1STS</code>/<code>DST1DAT</code>/<code>DST1NTS</code> through <code>DST5STS</code>/<code>DST5DAT</code>/<code>DST5AUT</code> — Output fields displaying the status, date, and notes/authority for each of the five processing stages (eligibility check, history check, payment, first approval, second approval).</li>
+<li><code>DST6FLG</code>, <code>DST6NUM</code>, <code>DST6EXP</code> — Output fields indicating whether a license has been issued and showing its number and expiry date.</li>
+<li><code>DSTMSG</code> — Message line used for operator feedback (e.g., “INQUIRY SUCCESSFUL”, “APPLICATION NOT FOUND”).</li>
+<li><code>DSTDATE</code> — Date field populated with the current system date on screen initialisation.</li>
+</ul>
+</li>
+</ul>
+<h3 id="63-db2-tables" tabindex="-1">6.3 DB2 Tables</h3>
+<ul>
+<li><strong><code>DLIS.LICENSE_APPLICATION</code></strong> — Primary table queried in <code>INQUIRE-STATUS</code>. Supplies all workflow-stage data for a given <code>APPLICATION_ID</code>: license type, overall application status, eligibility check status/date/notes, history check status/date/notes, payment status/reference, first-approval status/date/authority, and second-approval status/date/authority.</li>
+<li><strong><code>DLIS.ISSUED_LICENSE</code></strong> — Secondary table queried when <code>APPLICATION-STATUS = 'IS'</code> (Issued). Provides the <code>LICENSE_NUMBER</code> and <code>EXPIRY_DATE</code> to display in the license-issued section of the screen.</li>
+</ul>
+<h3 id="64-db2-bind-artifacts" tabindex="-1">6.4 DB2 Bind Artifacts</h3>
+<ul>
+<li><strong>DB2 Plan <code>DLISPLAN</code></strong> — The bound DB2 application plan (collection <code>DLISPKG</code>, subsystem <code>DSN1</code>) that packages the static SQL issued by <code>DLISSTAT</code>. Created by submitting <code>jcl/DLISBIND.jcl</code>.</li>
+<li><strong>SQLCA (SQL Communication Area)</strong> — Included twice via <code>EXEC SQL INCLUDE SQLCA END-EXEC</code>; provides <code>SQLCODE</code> and related fields used to detect “not found” (100) and success (0) conditions after each SQL <code>SELECT</code>.</li>
+</ul>
+<h3 id="65-copybooks" tabindex="-1">6.5 Copybooks</h3>
+<ul>
+<li><strong><code>DLISWS</code> (<code>copybook/DLISWS.cpy</code>)</strong> — Common working-storage definitions expanded inline; supplies <code>WS-COMMON-AREA</code>, <code>WS-APPLICATION</code>, <code>WS-CANDIDATE</code>, <code>WS-PAYMENT</code>, <code>WS-ELIGIBILITY</code>, <code>WS-HISTORY</code>, <code>WS-APPROVAL</code>, <code>WS-LICENSE</code>, and <code>WS-NULL-INDICATORS</code>.</li>
+<li><strong><code>DLISCSEC</code> (<code>copybook/DLISCSEC.cpy</code>)</strong> — CICS COMMAREA layouts expanded inline; supplies <code>DLIS-COMMAREA</code> (main 350-byte navigation COMMAREA), <code>DLIS-CAND-COMMAREA</code>, <code>DLIS-APPL-COMMAREA</code>, and <code>WS-CICS-RESPONSE</code> (holding <code>WS-RESP1</code>/<code>WS-RESP2</code>).</li>
+<li><strong><code>DLISDCLG</code> (<code>copybook/DLISDCLG.cpy</code>)</strong> — DB2 DCLGEN host-variable structures expanded inline; supplies:
+<ul>
+<li><code>DCLDLIS-CANDIDATE</code> — Host structure for <code>DLIS.CANDIDATE</code>.</li>
+<li><code>DCLDLIS-LICENSE-APPL</code> — Host structure for <code>DLIS.LICENSE_APPLICATION</code>; the primary SELECT target.</li>
+<li><code>DCLDLIS-DRIVING-HIST</code> — Host structure for <code>DLIS.DRIVING_HISTORY</code>.</li>
+<li><code>DCLDLIS-PAYMENT</code> — Host structure for <code>DLIS.PAYMENT</code>.</li>
+<li><code>DCLDLIS-ISSUED-LIC</code> — Host structure for <code>DLIS.ISSUED_LICENSE</code>; used in the secondary SELECT when a license has been issued.</li>
+<li><code>DCLDLIS-AUTH-USER</code> — Host structure for <code>DLIS.AUTHORITY_USER</code>.</li>
+<li><code>DCLDLIS-FEE-SCHED</code> — Host structure for <code>DLIS.LICENSE_FEE_SCHEDULE</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="66-cics-runtime-eib-fields" tabindex="-1">6.6 CICS Runtime EIB Fields</h3>
+<ul>
+<li><strong><code>EIBCALEN</code></strong> — Examined at program entry to determine whether a COMMAREA was passed (non-zero = returning invocation; zero = first entry requiring screen initialisation).</li>
+<li><strong><code>EIBAID</code></strong> — Compared against <code>DFHENTER</code> and <code>DFHPF12</code> in <code>PROCESS-INPUT</code> to route the user’s attention-key action to the correct paragraph (inquiry or exit).</li>
+</ul>
+<h3 id="67-cics-commarea" tabindex="-1">6.7 CICS COMMAREA</h3>
+<ul>
+<li><strong><code>DFHCOMMAREA</code> (Linkage Section, 350 bytes)</strong> — Receives the COMMAREA passed from the prior pseudo-conversational cycle. On re-entry its content is moved into <code>DLIS-COMMAREA</code> to restore session state (transaction ID, candidate/application/license/payment IDs, user ID, message text, and action code).</li>
+</ul>
+<h3 id="68-build-and-deployment-artefacts" tabindex="-1">6.8 Build and Deployment Artefacts</h3>
+<ul>
+<li><strong><code>jcl/DLISCOMP.jcl</code></strong> — JCL to DB2-precompile (<code>DSNHPC</code>) and compile (<code>IGYCRCTL</code>) the program, producing a load module in <code>DLIS.LOADLIB</code>.</li>
+<li><strong><code>jcl/DLISBIND.jcl</code></strong> — JCL to bind the DBRM into plan <code>DLISPLAN</code> / collection <code>DLISPKG</code> under DB2 subsystem <code>DSN1</code>.</li>
+<li><strong><code>jcl/DLISBMS.jcl</code></strong> — JCL to assemble the <code>DLISST</code> mapset from <code>bms/DLISAPPR.bms</code>, producing the load module and symbolic DSECT copybooks in <code>DLIS.LOADLIB</code> / <code>DLIS.COPYBOOK</code>.</li>
+<li><strong><code>csd/DLISCSD.csd</code></strong> — DFHCSDUP batch input that registers program <code>DLISSTAT</code>, mapset <code>DLISST</code>, transaction <code>DL04</code>, and DB2ENTRY <code>DLISDB2E</code> into CICS CSD group <code>DLISGRP</code>.</li>
+</ul>
+<h2 id="7-constraints" tabindex="-1">7. Constraints</h2>
+<ul>
+<li>
+<p><strong>Input validation rules</strong></p>
+</li>
+<li>
+<p>An application ID is required before any lookup.</p>
+<ul>
+<li><code>INQUIRE-STATUS</code> tests <code>IF DSTAIDI = ZEROS</code>. If true, it sets <code>DSTMSG</code> to ‘ENTER APPLICATION ID’ and does <code>GO TO INQUIRE-EXIT</code>, so no SQL runs.</li>
+</ul>
+</li>
+<li>
+<p>The application ID is the only search key.</p>
+<ul>
+<li><code>DSTAIDI</code> is moved to <code>APPLICATION-ID OF DCLDLIS-LICENSE-APPL</code>. Both SQL statements use it in <code>WHERE APPLICATION_ID = :APPLICATION-ID</code>.</li>
+<li>The program does no numeric class check, range check or length check on the ID beyond the zero test.</li>
+</ul>
+</li>
+<li>
+<p>The data types and sizes of the fields limit what the program accepts and returns.</p>
+<ul>
+<li><code>APPLICATION-ID</code> is <code>PIC S9(10) COMP-3</code>, so it holds at most 10 digits.</li>
+<li><code>LICENSE-TYPE</code> is 1 character.</li>
+<li><code>APPLICATION-STATUS</code> is 2 characters.</li>
+<li>The check and approval status fields are 1 character each.</li>
+<li><code>PAYMENT-REFERENCE</code> is 20 characters.</li>
+<li>The notes fields are 200 characters each.</li>
+<li>The authority fields are 50 characters each.</li>
+<li>The date fields are 10 characters each.</li>
+</ul>
+</li>
+<li>
+<p>Only the listed key presses are valid.</p>
+<ul>
+<li><code>EVALUATE TRUE</code> accepts <code>DFHENTER</code> and <code>DFHPF12</code>.</li>
+<li>Any other attention key (<code>OTHER</code>) sets <code>DSTMSG</code> to ‘PRESS ENTER TO INQUIRE OR F12 TO EXIT’.</li>
+</ul>
+</li>
+<li>
+<p><strong>Data existence and lookup rules</strong></p>
+<ul>
+<li>The application must exist in <code>DLIS.LICENSE_APPLICATION</code>.
+<ul>
+<li>After the <code>SELECT ... INTO</code>, <code>IF SQLCODE = 100</code> sets ‘APPLICATION NOT FOUND’ and jumps to <code>INQUIRE-EXIT</code>.</li>
+<li>The program only checks for 100, so other negative <code>SQLCODE</code> values (errors) are not handled. The program then continues with whatever is in the host variables.</li>
+</ul>
+</li>
+<li>Each lookup is a singleton <code>SELECT</code>.
+<ul>
+<li>The <code>WHERE</code> clause matches one application ID and uses no cursor.</li>
+<li>If a duplicate-key condition returned several rows, the program would not handle that case, because it does not check for it.</li>
+</ul>
+</li>
+<li>The issued license lookup applies only to issued applications.
+<ul>
+<li>The <code>SELECT</code> on <code>DLIS.ISSUED_LICENSE</code> runs only when <code>APPLICATION-STATUS = 'IS'</code>.</li>
+<li>The license number and expiry date are shown only when <code>SQLCODE = 0</code> on that second query.</li>
+<li>If the second query does not return <code>SQLCODE = 0</code>, <code>DST6FLGO</code> is not set and the license number and expiry date fields are left unpopulated.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Conditional processing and status rules</strong></p>
+<ul>
+<li>The status code maps to a fixed description through <code>EVALUATE APPLICATION-STATUS</code>.
+<ul>
+<li>‘PE’ = pending, awaiting eligibility check.</li>
+<li>‘EC’ = eligibility checked, awaiting history.</li>
+<li>‘HC’ = history checked, awaiting payment.</li>
+<li>‘PA’ = payment approved, awaiting authority 1.</li>
+<li>‘A2’ = awaiting second authority approval.</li>
+<li>‘AP’ = fully approved, ready for issue.</li>
+<li>‘IS’ = license issued.</li>
+<li>‘RE’ = rejected.</li>
+<li>Any other value gives ‘UNKNOWN STATUS’.</li>
+</ul>
+</li>
+<li>The license-issued indicator depends on the status.
+<ul>
+<li><code>DST6FLGO</code> is ‘YES’ only when the status is ‘IS’ and the issued-license row is found.</li>
+<li>It is ‘NO’ when the status is not ‘IS’.</li>
+</ul>
+</li>
+<li>The inquiry is read-only.
+<ul>
+<li>The program issues only <code>SELECT</code> statements and does not update any table.</li>
+</ul>
+</li>
+<li>On success, <code>DSTMSG</code> is set to ‘INQUIRY SUCCESSFUL’.
+<ul>
+<li>This message is set at the end of the paragraph.</li>
+<li>It is also set when the second query fails or returns no row, because the program does not check that case.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Sequencing and flow constraints</strong></p>
+<ul>
+<li>The first invocation must display the map before any input is processed.
+<ul>
+<li><code>MAIN-LOGIC</code> tests <code>IF EIBCALEN = 0</code>. If true, <code>INIT-SCREEN</code> sends <code>DLISST01</code> with <code>ERASE FREEKB</code> and returns with <code>TRANSID('DL04')</code>.</li>
+<li><code>INIT-SCREEN</code> first does <code>MOVE CURRENT-DATE(1:10) TO DSTDATE</code>.</li>
+</ul>
+</li>
+<li>Later invocations restore state and then process the input.
+<ul>
+<li>If <code>EIBCALEN</code> is not 0, <code>DFHCOMMAREA</code> is moved to <code>DLIS-COMMAREA</code> and <code>PROCESS-INPUT</code> runs.</li>
+<li><code>PROCESS-INPUT</code> always receives the map before it evaluates the attention key.</li>
+</ul>
+</li>
+<li>The inquiry must complete before the screen is redisplayed.
+<ul>
+<li><code>PERFORM INQUIRE-STATUS</code> finishes before the second <code>SEND MAP ... DATAONLY FREEKB</code>.</li>
+<li>The <code>SEND</code> is followed by <code>RETURN TRANSID('DL04')</code>.</li>
+<li><code>DATAONLY</code> sends only the changed data and keeps the existing screen layout.</li>
+</ul>
+</li>
+<li>The transaction is pseudo-conversational.
+<ul>
+<li>Each interaction ends with <code>EXEC CICS RETURN TRANSID('DL04') COMMAREA(DLIS-COMMAREA) LENGTH(350)</code>. The program does not hold any resources between interactions.</li>
+</ul>
+</li>
+<li>F12 ends the session.
+<ul>
+<li>On <code>DFHPF12</code>, <code>EXEC CICS RETURN END-EXEC</code> runs with no <code>TRANSID</code>, so the transaction ends.</li>
+<li>This <code>RETURN</code> happens inside the <code>EVALUATE</code>, before the redisplay <code>SEND MAP</code>, so no further send occurs.</li>
+</ul>
+</li>
+<li>On early-exit paths, <code>GO TO INQUIRE-EXIT</code> skips the rest of the inquiry. This covers a missing ID and an application that is not found.
+<ul>
+<li>The screen is still redisplayed with the message.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Resource and size limits</strong></p>
+<ul>
+<li>The COMMAREA is fixed at 350 bytes.
+<ul>
+<li><code>DFHCOMMAREA</code> is <code>PIC X(350)</code>, and every <code>RETURN</code> uses <code>LENGTH(350)</code>.</li>
+<li>The <code>DLIS-COMMAREA</code> structure is much shorter than 350 bytes.</li>
+<li><code>MOVE DFHCOMMAREA TO DLIS-COMMAREA</code> truncates anything beyond the structure length.</li>
+</ul>
+</li>
+<li>Each lookup returns a single row. There is no multi-row retrieval, so record counts are bounded at one.</li>
+<li>The screen is limited to the fields of map <code>DLISST01</code> in mapset <code>DLISST</code>. The inquiry output is limited to the license type, status, description, the check and approval stages, and the issued license number, expiry date and flag.</li>
+</ul>
+</li>
+<li>
+<p><strong>Error handling constraints</strong></p>
+<ul>
+<li>CICS responses are captured in <code>WS-RESP1</code> but never tested.
+<ul>
+<li>Failures of <code>SEND MAP</code>, <code>RECEIVE MAP</code> (for example <code>MAPFAIL</code>) are not acted on.</li>
+<li>If <code>RECEIVE MAP</code> fails, the program carries on with the input fields as they are.</li>
+</ul>
+</li>
+<li><code>SQLCODE</code> handling is limited to 100 (application not found) and 0 (issued license found). Other SQL errors are not handled.</li>
+<li>The program provides no authorization or user identity checks. Any user who can run transaction DL04 can inquire on any application ID.</li>
+</ul>
+</li>
+<li>
+<p><strong>Output and display constraints</strong></p>
+<ul>
+<li>All messages go through the single map field <code>DSTMSG</code>.
+<ul>
+<li>Only one message appears at a time. The last one assigned is the one shown.</li>
+</ul>
+</li>
+<li>Output fields are limited to those defined for map <code>DLISST01</code>.
+<ul>
+<li>Nothing is displayed beyond the map’s output fields, for example the notes and the approval 2 authority, which are shown only through their mapped fields.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="8-error-handling" tabindex="-1">8. Error Handling</h2>
+<h3 id="81-user-input-validation" tabindex="-1">8.1 User Input Validation</h3>
+<ul>
+<li>
+<p>Application Identifier Validation</p>
+<ul>
+<li>Evaluates whether the user-supplied application ID map field contains zeros or is blank.</li>
+<li>If invalid or unpopulated, populates an informative message on the screen requesting a valid application ID and bypasses database querying via an immediate branch to the exit paragraph.</li>
+</ul>
+</li>
+<li>
+<p>Unrecognized Attention Identifier (AID) Key Handling</p>
+<ul>
+<li>An evaluation structure inspects the incoming terminal attention identifier against allowed operational keys.</li>
+<li>While designated keys handle status inquiry execution and program termination, any other key triggers a fallback notification informing the user of valid key options before redisplaying the map.</li>
+</ul>
+</li>
+</ul>
+<h3 id="82-database-error-handling-and-status-checking" tabindex="-1">8.2 Database Error Handling and Status Checking</h3>
+<ul>
+<li>
+<p>Primary Application Record Not Found Check</p>
+<ul>
+<li>Following the SQL query against the license application table, the program inspects the database return code.</li>
+<li>If a code representing record absence is encountered, the program captures this condition, updates the screen message area to indicate that the requested application was not found, and branches to the exit routine to avoid processing nonexistent data.</li>
+</ul>
+</li>
+<li>
+<p>Unhandled Query Return Codes</p>
+<ul>
+<li>The program checks for missing records following the primary query, but negative status codes indicative of catastrophic database failures (e.g., deadlock, connection failure, syntax errors) fall through into normal display processing without dedicated abend or recovery routines.</li>
+</ul>
+</li>
+<li>
+<p>Issued License Retrieval Verification</p>
+<ul>
+<li>When querying the issued license table for completed applications, the program verifies that the database operation completed successfully before transferring license numbers and expiry dates to the output display fields.</li>
+<li>If the issued license record is not found or encounters an error, the update to license detail fields is bypassed silently without raising an error message.</li>
+</ul>
+</li>
+<li>
+<p>Unrecognized Application Status Fallback</p>
+<ul>
+<li>An evaluation block maps application status codes to descriptive textual descriptions.</li>
+<li>If an unrecognized status code is retrieved from the database, the fallback branch assigns a default label to indicate an unknown status.</li>
+</ul>
+</li>
+</ul>
+<h3 id="83-cics-communication-and-screen-control-handling" tabindex="-1">8.3 CICS Communication and Screen Control Handling</h3>
+<ul>
+<li>
+<p>CICS Map Command Response Code Capture</p>
+<ul>
+<li>Screen mapping commands use response tracking parameters to capture execution status codes into designated working-storage response fields.</li>
+<li>Although the response code fields are allocated and populated by CICS command execution, explicit condition evaluations on these fields are omitted, allowing CICS default condition handling to manage severe terminal or BMS failures.</li>
+</ul>
+</li>
+<li>
+<p>Session State Initialization</p>
+<ul>
+<li>Checks the communication area length upon entry to determine whether the transaction represents an initial invocation or a pseudo-conversational response.</li>
+<li>If invoked without prior context, the program initializes the screen map and sets the transaction identifier for subsequent interactions.</li>
+</ul>
+</li>
+</ul>
+<h2 id="9-examples" tabindex="-1">9. Examples</h2>
+<h3 id="91-example-1-issued-license-found" tabindex="-1">9.1 Example 1: Issued license found</h3>
+<p><strong>Input</strong></p>
+<ul>
+<li>Screen: DLISST01 (transaction DL04), <code>DSTAIDI</code> = <code>0000001234</code></li>
+<li>Key pressed: ENTER</li>
+<li><code>DLIS.LICENSE_APPLICATION</code> row for application 1234:
+<ul>
+<li><code>LICENSE_TYPE</code> = <code>C</code></li>
+<li><code>APPLICATION_STATUS</code> = <code>IS</code></li>
+<li><code>ELIG_CHECK_STATUS</code> = <code>P</code>, <code>ELIG_CHECK_DATE</code> = <code>2024-03-01</code></li>
+<li><code>HIST_CHECK_STATUS</code> = <code>P</code>, <code>HIST_CHECK_DATE</code> = <code>2024-03-02</code></li>
+<li><code>PAYMENT_STATUS</code> = <code>P</code>, <code>PAYMENT_REFERENCE</code> = <code>PAY-998877</code></li>
+<li><code>APPROVAL_1_STATUS</code> = <code>A</code>, <code>APPROVAL_1_DATE</code> = <code>2024-03-05</code>, <code>APPROVAL_1_AUTHORITY</code> = <code>J. SMITH</code></li>
+<li><code>APPROVAL_2_STATUS</code> = <code>A</code>, <code>APPROVAL_2_DATE</code> = <code>2024-03-07</code>, <code>APPROVAL_2_AUTHORITY</code> = <code>M. JONES</code></li>
+</ul>
+</li>
+<li><code>DLIS.ISSUED_LICENSE</code> row for application 1234: <code>LICENSE_NUMBER</code> = <code>DL-2024-000123</code>, <code>EXPIRY_DATE</code> = <code>2029-03-10</code></li>
+</ul>
+<p><strong>Output (map fields)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DSTLTYO</code></td>
+<td><code>C</code></td>
+</tr>
+<tr>
+<td><code>DSTASTTO</code></td>
+<td><code>IS</code></td>
+</tr>
+<tr>
+<td><code>DSTADSO</code></td>
+<td><code>LICENSE ISSUED</code></td>
+</tr>
+<tr>
+<td><code>DST1STSO</code> / <code>DST1DATO</code></td>
+<td><code>P</code> / <code>2024-03-01</code></td>
+</tr>
+<tr>
+<td><code>DST2STSO</code> / <code>DST2DATO</code></td>
+<td><code>P</code> / <code>2024-03-02</code></td>
+</tr>
+<tr>
+<td><code>DST3STSO</code> / <code>DST3REFO</code></td>
+<td><code>P</code> / <code>PAY-998877</code></td>
+</tr>
+<tr>
+<td><code>DST4STSO</code> / <code>DST4DATO</code> / <code>DST4AUTO</code></td>
+<td><code>A</code> / <code>2024-03-05</code> / <code>J. SMITH</code></td>
+</tr>
+<tr>
+<td><code>DST5STSO</code> / <code>DST5DATO</code> / <code>DST5AUTO</code></td>
+<td><code>A</code> / <code>2024-03-07</code> / <code>M. JONES</code></td>
+</tr>
+<tr>
+<td><code>DST6NUMO</code></td>
+<td><code>DL-2024-000123</code></td>
+</tr>
+<tr>
+<td><code>DST6EXPO</code></td>
+<td><code>2029-03-10</code></td>
+</tr>
+<tr>
+<td><code>DST6FLGO</code></td>
+<td><code>YES</code></td>
+</tr>
+<tr>
+<td><code>DSTMSG</code></td>
+<td><code>INQUIRY SUCCESSFUL</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Explanation:</strong> <code>EIBAID</code> is ENTER, so <code>INQUIRE-STATUS</code> runs. The application ID is non-zero, so the program selects the application row. The status <code>IS</code> maps to <code>LICENSE ISSUED</code>. Because the status is <code>IS</code>, a second query reads <code>DLIS.ISSUED_LICENSE</code>. It returns <code>SQLCODE</code> 0, so the license number and expiry date are shown and the flag is set to <code>YES</code>. The map is then re-sent with <code>DATAONLY</code>, and the program returns to transaction <code>DL04</code>.</p>
+<h3 id="92-example-2-application-still-in-progress" tabindex="-1">9.2 Example 2: Application still in progress</h3>
+<p><strong>Input</strong></p>
+<ul>
+<li><code>DSTAIDI</code> = <code>0000005678</code>, key pressed: ENTER</li>
+<li>Application row: <code>APPLICATION_STATUS</code> = <code>HC</code>, <code>LICENSE_TYPE</code> = <code>M</code></li>
+<li>The eligibility and history checks are completed.</li>
+<li>The payment, approval 1 and approval 2 fields are blank or not yet set.</li>
+</ul>
+<p><strong>Output</strong></p>
+<ul>
+<li><code>DSTASTTO</code> = <code>HC</code></li>
+<li><code>DSTADSO</code> = <code>HISTORY CHECKED - AWAITING PAYMENT</code></li>
+<li><code>DST1…</code> and <code>DST2…</code> show the eligibility and history results.</li>
+<li><code>DST3…</code>, <code>DST4…</code> and <code>DST5…</code> are blank.</li>
+<li><code>DST6FLGO</code> = <code>NO</code></li>
+<li><code>DSTMSG</code> = <code>INQUIRY SUCCESSFUL</code></li>
+</ul>
+<p><strong>Explanation:</strong> The status is not <code>IS</code>, so the <code>ISSUED_LICENSE</code> table is not queried. The program sets the license flag to <code>NO</code> and leaves the license number and expiry fields untouched.</p>
+<h3 id="93-example-3-input-validation-and-error-cases" tabindex="-1">9.3 Example 3: Input validation and error cases</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Result</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ENTER with <code>DSTAIDI</code> = zeros</td>
+<td><code>DSTMSG</code> = <code>ENTER APPLICATION ID</code></td>
+<td>The zero check fails before any SQL is run.</td>
+</tr>
+<tr>
+<td>ENTER with an ID that has no row (<code>SQLCODE</code> = 100)</td>
+<td><code>DSTMSG</code> = <code>APPLICATION NOT FOUND</code></td>
+<td>No row matches, and the detail fields are not populated.</td>
+</tr>
+<tr>
+<td>Any other key, such as PF3</td>
+<td><code>DSTMSG</code> = <code>PRESS ENTER TO INQUIRE OR F12 TO EXIT</code></td>
+<td><code>EVALUATE</code> falls to <code>OTHER</code>.</td>
+</tr>
+<tr>
+<td>PF12</td>
+<td>The transaction ends with <code>EXEC CICS RETURN</code> and no map is re-sent.</td>
+<td>This is the exit key.</td>
+</tr>
+<tr>
+<td>Status not in the known list, such as <code>XX</code></td>
+<td><code>DSTADSO</code> = <code>UNKNOWN STATUS</code></td>
+<td>The <code>OTHER</code> branch of the status <code>EVALUATE</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="94-example-4-first-invocation" tabindex="-1">9.4 Example 4: First invocation</h3>
+<p><strong>Input:</strong> The transaction <code>DL04</code> starts with <code>EIBCALEN</code> = 0, so there is no COMMAREA.</p>
+<p><strong>Output:</strong> The blank screen DLISST01 is displayed with the current date in <code>DSTDATE</code>. The program then returns to <code>DL04</code> with a 350-byte COMMAREA.</p>
+<p><strong>Explanation:</strong> <code>MAIN-LOGIC</code> takes the <code>INIT-SCREEN</code> path. Later invocations have a non-zero <code>EIBCALEN</code>. They copy <code>DFHCOMMAREA</code> into <code>DLIS-COMMAREA</code> and run <code>PROCESS-INPUT</code>.</p>
+
+                    </article>
+                    <nav class="toc-panel" aria-label="On this page">
+  <span class="toc-panel-label">On this page</span>
+  <ul class="toc-list">
+<li class="toc-level-2"><a href="#1-purpose">1. Purpose</a></li>
+<li class="toc-level-2"><a href="#2-inputs">2. Inputs</a>
+<ul>
+<li class="toc-level-3"><a href="#21-user-interface--screen-inputs-bms-map-dlisst01--cics-eib">2.1 User Interface &amp;amp; Screen Inputs (BMS Map DLISST01 / CICS EIB)</a></li>
+<li class="toc-level-3"><a href="#22-inter-program-communication-area-cics-commarea">2.2 Inter-Program Communication Area (CICS COMMAREA)</a></li>
+<li class="toc-level-3"><a href="#23-external-database-inputs-ibm-db2">2.3 External Database Inputs (IBM Db2)</a></li>
+<li class="toc-level-3"><a href="#24-system--runtime-environment-inputs">2.4 System &amp;amp; Runtime Environment Inputs</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#3-outputs">3. Outputs</a>
+<ul>
+<li class="toc-level-3"><a href="#31-cics-screen-output-bms-map-dlisst01">3.1 CICS Screen Output (BMS Map DLISST01)</a></li>
+<li class="toc-level-3"><a href="#32-inter-program-and-session-state-outputs">3.2 Inter-Program and Session State Outputs</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#4-processing-logic">4. Processing Logic</a>
+<ul>
+<li class="toc-level-3"><a href="#41-mermaid-flow-diagram">4.1 Mermaid Flow Diagram</a></li>
+<li class="toc-level-3"><a href="#42-processing-logic-description">4.2 Processing Logic Description</a>
+<ul>
+<li class="toc-level-4"><a href="#421-high-level-summary">4.2.1 High-level Summary</a></li>
+<li class="toc-level-4"><a href="#422-execution-flow">4.2.2 Execution Flow</a></li>
+<li class="toc-level-4"><a href="#423-external-interactions">4.2.3 External Interactions</a></li>
+<li class="toc-level-4"><a href="#424-plain-language-summary">4.2.4 Plain Language Summary</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#43-database-tables">4.3 Database Tables</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#5-paragraphs">5. Paragraphs</a></li>
+<li class="toc-level-2"><a href="#6-dependencies">6. Dependencies</a>
+<ul>
+<li class="toc-level-3"><a href="#61-cics-resources">6.1 CICS Resources</a></li>
+<li class="toc-level-3"><a href="#62-bms-map">6.2 BMS Map</a></li>
+<li class="toc-level-3"><a href="#63-db2-tables">6.3 DB2 Tables</a></li>
+<li class="toc-level-3"><a href="#64-db2-bind-artifacts">6.4 DB2 Bind Artifacts</a></li>
+<li class="toc-level-3"><a href="#65-copybooks">6.5 Copybooks</a></li>
+<li class="toc-level-3"><a href="#66-cics-runtime-eib-fields">6.6 CICS Runtime EIB Fields</a></li>
+<li class="toc-level-3"><a href="#67-cics-commarea">6.7 CICS COMMAREA</a></li>
+<li class="toc-level-3"><a href="#68-build-and-deployment-artefacts">6.8 Build and Deployment Artefacts</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#7-constraints">7. Constraints</a></li>
+<li class="toc-level-2"><a href="#8-error-handling">8. Error Handling</a>
+<ul>
+<li class="toc-level-3"><a href="#81-user-input-validation">8.1 User Input Validation</a></li>
+<li class="toc-level-3"><a href="#82-database-error-handling-and-status-checking">8.2 Database Error Handling and Status Checking</a></li>
+<li class="toc-level-3"><a href="#83-cics-communication-and-screen-control-handling">8.3 CICS Communication and Screen Control Handling</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#9-examples">9. Examples</a>
+<ul>
+<li class="toc-level-3"><a href="#91-example-1-issued-license-found">9.1 Example 1: Issued license found</a></li>
+<li class="toc-level-3"><a href="#92-example-2-application-still-in-progress">9.2 Example 2: Application still in progress</a></li>
+<li class="toc-level-3"><a href="#93-example-3-input-validation-and-error-cases">9.3 Example 3: Input validation and error cases</a></li>
+<li class="toc-level-3"><a href="#94-example-4-first-invocation">9.4 Example 4: First invocation</a></li>
+</ul>
+</li>
+</ul>
+
+</nav>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="wiki-footer">Made by IBM Bob Premium Package for Z</footer>
+    <script>
+    /* toc-spy.js — highlights the active heading in the TOC panel on scroll */
+    (function () {
+      function init() {
+        var panel = document.querySelector('.toc-panel');
+        if (!panel) return;
+        var links = Array.prototype.slice.call(panel.querySelectorAll('a[href^="#"]'));
+        if (!links.length) return;
+
+        var headingIds = links.map(function (a) { return a.getAttribute('href').slice(1); });
+        var headings = headingIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+        function clearActive() {
+          panel.querySelectorAll('.toc-active').forEach(function (el) { el.classList.remove('toc-active'); });
+          panel.querySelectorAll('.toc-parent-active').forEach(function (el) { el.classList.remove('toc-parent-active'); });
+        }
+
+        function setActive(id) {
+          clearActive();
+          var link = panel.querySelector('a[href="#' + id + '"]');
+          if (!link) return;
+          link.classList.add('toc-active');
+          var li = link.closest('li');
+          if (li) {
+            var parentLi = li.parentElement && li.parentElement.closest('li');
+            if (parentLi) parentLi.classList.add('toc-parent-active');
+          }
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+        headings.forEach(function (h) { observer.observe(h); });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
+    <script>
+    /* breadcrumb.js — reads sessionStorage['wiki_referrer'] and renders breadcrumb.
+       Only fires when the referrer was set by clicking a link inside the Source Files
+       disclosure on a wiki page; clears after rendering so stale state never lingers. */
+    (function () {
+      var raw;
+      try { raw = sessionStorage.getItem('wiki_referrer'); } catch (_e) {}
+      if (!raw) return;
+      /* Consume immediately — prevents the breadcrumb re-appearing on the next visit. */
+      try { sessionStorage.removeItem('wiki_referrer'); } catch (_e) {}
+      var ref;
+      try { ref = JSON.parse(raw); } catch (_e) { return; }
+      if (!ref || !ref.href) return;
+      var bc = document.getElementById('wiki-breadcrumb');
+      if (!bc) return;
+      bc.className = 'wiki-breadcrumb';
+      bc.innerHTML =
+        '<a href="' + ref.href + '">' + (ref.title || 'Back') + '</a>' +
+        '<span class="wiki-breadcrumb-sep"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' +
+        '<span class="wiki-breadcrumb-current">DLISSTAT</span>';
+    })();
+    </script>
+    <script>
+    /* sidebar toggle — same as main wiki pages */
+    (function () {
+
+      var STORAGE_KEY = 'sb_open';
+
+      function getOpenSet() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+      }
+
+      function saveOpenSet(set) {
+        try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(set)); } catch (e) {}
+      }
+
+      function findItems(toggle) {
+        var node = toggle.nextSibling;
+        while (node) {
+          if (node.nodeType === 1 && node.classList.contains('nav-section-items'))
+            return node;
+          node = node.nextSibling;
+        }
+        return null;
+      }
+
+      function toggleKey(toggle, index) {
+        var label = (toggle.querySelector('.nav-toggle-text') || toggle).textContent.trim().replace(/\s+/g, ' ');
+        return index + ':' + label;
+      }
+
+      function openSection(toggle, items, key, set) {
+        toggle.classList.add('open');
+        items.classList.add('open');
+        if (set) set[key] = true;
+      }
+
+      function closeSection(toggle, items, key, set) {
+        toggle.classList.remove('open');
+        items.classList.remove('open');
+        if (set) set[key] = false;
+      }
+
+      function init() {
+        var sidebar = document.getElementById('wiki-sidebar');
+        var toggles = Array.prototype.slice.call(
+          document.querySelectorAll('.nav-section-toggle')
+        );
+
+        var savedSet = getOpenSet();
+        var openSet = savedSet || {};
+
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+
+          var key = toggleKey(toggle, idx);
+          var shouldOpen = openSet[key] === true;
+
+          if (shouldOpen) {
+            toggle.classList.add('open');
+            items.classList.add('open');
+          }
+
+          toggle.addEventListener('click', function () {
+            var nowOpen = toggle.classList.contains('open');
+            if (nowOpen) {
+              closeSection(toggle, items, key, openSet);
+            } else {
+              openSection(toggle, items, key, openSet);
+            }
+            saveOpenSet(openSet);
+          });
+        });
+
+        saveOpenSet(openSet);
+
+        /* Restore sidebar scroll position after sections are expanded so the
+           scroll height is correct when we apply scrollTop. */
+        if (sidebar) {
+          try {
+            var savedScroll = sessionStorage.getItem('sb_scroll');
+            if (savedScroll !== null) { sidebar.scrollTop = parseInt(savedScroll, 10) || 0; }
+          } catch (_e) {}
+        }
+
+        window.addEventListener('pagehide', function () {
+          saveOpenSet(openSet);
+          if (sidebar) {
+            try { sessionStorage.setItem('sb_scroll', String(sidebar.scrollTop)); } catch (_e) {}
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+    </script>
+</body>
+</html>

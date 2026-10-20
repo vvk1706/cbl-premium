@@ -1,0 +1,228 @@
+--*================================================================*
+--* DB2 DDL - Driver License Issuance System (DLIS)
+--* Member  : DLIS0001-CREATE-TABLES
+--* Desc    : Create all application tables
+--*================================================================*
+
+------------------------------------------------------------------
+-- TABLESPACE definitions
+------------------------------------------------------------------
+CREATE TABLESPACE DLISTS01
+    IN DLISDB
+    USING STOGROUP SYSDEFLT
+    PRIQTY 720 SECQTY 360
+    BUFFERPOOL BP0
+    LOCKSIZE ROW
+    CLOSE NO;
+
+CREATE TABLESPACE DLISTS02
+    IN DLISDB
+    USING STOGROUP SYSDEFLT
+    PRIQTY 720 SECQTY 360
+    BUFFERPOOL BP0
+    LOCKSIZE ROW
+    CLOSE NO;
+
+------------------------------------------------------------------
+-- TABLE: DLIS.CANDIDATE
+------------------------------------------------------------------
+CREATE TABLE DLIS.CANDIDATE
+   (CANDIDATE_ID        DECIMAL(10,0)   NOT NULL
+                        GENERATED ALWAYS AS IDENTITY
+                        (START WITH 1, INCREMENT BY 1)
+   ,FIRST_NAME          CHAR(30)        NOT NULL
+   ,LAST_NAME           CHAR(30)        NOT NULL
+   ,DATE_OF_BIRTH       DATE            NOT NULL
+   ,ID_NUMBER           CHAR(20)        NOT NULL
+   ,ADDRESS_LINE_1      CHAR(50)        NOT NULL
+   ,ADDRESS_LINE_2      CHAR(50)
+   ,CITY                CHAR(30)        NOT NULL
+   ,STATE_PROVINCE      CHAR(30)        NOT NULL
+   ,POSTAL_CODE         CHAR(10)
+   ,COUNTRY             CHAR(30)        NOT NULL
+   ,PHONE_NUMBER        CHAR(15)
+   ,EMAIL_ADDRESS       CHAR(60)
+   ,CREATED_DATE        DATE            NOT NULL WITH DEFAULT CURRENT DATE
+   ,RECORD_STATUS       CHAR(1)         NOT NULL WITH DEFAULT 'A'
+   ,CONSTRAINT CAND_PK  PRIMARY KEY (CANDIDATE_ID)
+   ,CONSTRAINT CAND_IDX UNIQUE      (ID_NUMBER)
+   ,CONSTRAINT CAND_ST  CHECK (RECORD_STATUS IN ('A','I'))
+   ) IN DLISDB.DLISTS01;
+
+------------------------------------------------------------------
+-- TABLE: DLIS.LICENSE_APPLICATION
+------------------------------------------------------------------
+CREATE TABLE DLIS.LICENSE_APPLICATION
+   (APPLICATION_ID         DECIMAL(10,0)   NOT NULL
+                           GENERATED ALWAYS AS IDENTITY
+                           (START WITH 1, INCREMENT BY 1)
+   ,CANDIDATE_ID           DECIMAL(10,0)   NOT NULL
+   ,LICENSE_TYPE           CHAR(1)         NOT NULL
+   ,APPLICATION_DATE       DATE            NOT NULL WITH DEFAULT CURRENT DATE
+   ,APPLICATION_STATUS     CHAR(2)         NOT NULL WITH DEFAULT 'PE'
+   ,ELIG_CHECK_STATUS      CHAR(1)         NOT NULL WITH DEFAULT 'U'
+   ,ELIG_CHECK_DATE        DATE
+   ,ELIG_CHECK_NOTES       CHAR(200)
+   ,HIST_CHECK_STATUS      CHAR(1)         NOT NULL WITH DEFAULT 'U'
+   ,HIST_CHECK_DATE        DATE
+   ,HIST_CHECK_NOTES       CHAR(200)
+   ,PAYMENT_STATUS         CHAR(1)         NOT NULL WITH DEFAULT 'U'
+   ,PAYMENT_REFERENCE      CHAR(20)
+   ,APPROVAL_1_STATUS      CHAR(1)         NOT NULL WITH DEFAULT 'U'
+   ,APPROVAL_1_AUTHORITY   CHAR(50)
+   ,APPROVAL_1_DATE        DATE
+   ,APPROVAL_1_NOTES       CHAR(200)
+   ,APPROVAL_2_STATUS      CHAR(1)         NOT NULL WITH DEFAULT 'U'
+   ,APPROVAL_2_AUTHORITY   CHAR(50)
+   ,APPROVAL_2_DATE        DATE
+   ,APPROVAL_2_NOTES       CHAR(200)
+   ,REJECTION_REASON       CHAR(300)
+   ,CREATED_DATE           DATE            NOT NULL WITH DEFAULT CURRENT DATE
+   ,LAST_UPDATED_DATE      DATE            NOT NULL WITH DEFAULT CURRENT DATE
+   ,CREATED_BY             CHAR(20)        NOT NULL
+   ,LAST_UPDATED_BY        CHAR(20)        NOT NULL
+   ,CONSTRAINT APPL_PK     PRIMARY KEY (APPLICATION_ID)
+   ,CONSTRAINT APPL_CAND   FOREIGN KEY (CANDIDATE_ID)
+                           REFERENCES DLIS.CANDIDATE (CANDIDATE_ID)
+   ,CONSTRAINT APPL_LT     CHECK (LICENSE_TYPE IN ('L','P','O'))
+   ,CONSTRAINT APPL_ST     CHECK (APPLICATION_STATUS
+                           IN ('PE','EC','HC','PA','A1','A2','AP','RE','IS'))
+   ,CONSTRAINT APPL_ES     CHECK (ELIG_CHECK_STATUS  IN ('P','F','U'))
+   ,CONSTRAINT APPL_HS     CHECK (HIST_CHECK_STATUS  IN ('P','F','U'))
+   ,CONSTRAINT APPL_PS     CHECK (PAYMENT_STATUS     IN ('P','U','W'))
+   ,CONSTRAINT APPL_A1     CHECK (APPROVAL_1_STATUS  IN ('A','R','U'))
+   ,CONSTRAINT APPL_A2     CHECK (APPROVAL_2_STATUS  IN ('A','R','U'))
+   ) IN DLISDB.DLISTS01;
+
+------------------------------------------------------------------
+-- TABLE: DLIS.DRIVING_HISTORY
+------------------------------------------------------------------
+CREATE TABLE DLIS.DRIVING_HISTORY
+   (HISTORY_ID          DECIMAL(10,0)   NOT NULL
+                        GENERATED ALWAYS AS IDENTITY
+                        (START WITH 1, INCREMENT BY 1)
+   ,CANDIDATE_ID        DECIMAL(10,0)   NOT NULL
+   ,INCIDENT_DATE       DATE            NOT NULL
+   ,INCIDENT_TYPE       CHAR(2)         NOT NULL
+   ,INCIDENT_DESC       CHAR(300)
+   ,DEMERIT_POINTS      DECIMAL(3,0)
+   ,FINE_AMOUNT         DECIMAL(10,2)
+   ,FINE_PAID_STATUS    CHAR(1)
+   ,SUSP_START_DATE     DATE
+   ,SUSP_END_DATE       DATE
+   ,COURT_CASE_NUMBER   CHAR(20)
+   ,RECORDED_BY_AUTH    CHAR(50)
+   ,RECORD_STATUS       CHAR(1)         NOT NULL WITH DEFAULT 'A'
+   ,CONSTRAINT HIST_PK  PRIMARY KEY (HISTORY_ID)
+   ,CONSTRAINT HIST_CAND FOREIGN KEY (CANDIDATE_ID)
+                        REFERENCES DLIS.CANDIDATE (CANDIDATE_ID)
+   ,CONSTRAINT HIST_IT  CHECK (INCIDENT_TYPE IN ('OF','AC','SU','DQ'))
+   ,CONSTRAINT HIST_FP  CHECK (FINE_PAID_STATUS IN ('Y','N'))
+   ,CONSTRAINT HIST_ST  CHECK (RECORD_STATUS IN ('A','I'))
+   ) IN DLISDB.DLISTS01;
+
+------------------------------------------------------------------
+-- TABLE: DLIS.PAYMENT
+------------------------------------------------------------------
+CREATE TABLE DLIS.PAYMENT
+   (PAYMENT_ID          DECIMAL(10,0)   NOT NULL
+                        GENERATED ALWAYS AS IDENTITY
+                        (START WITH 1, INCREMENT BY 1)
+   ,APPLICATION_ID      DECIMAL(10,0)   NOT NULL
+   ,CANDIDATE_ID        DECIMAL(10,0)   NOT NULL
+   ,PAYMENT_DATE        DATE            NOT NULL WITH DEFAULT CURRENT DATE
+   ,PAYMENT_AMOUNT      DECIMAL(10,2)   NOT NULL
+   ,PAYMENT_METHOD      CHAR(2)         NOT NULL
+   ,PAYMENT_REFERENCE   CHAR(30)        NOT NULL
+   ,PAYMENT_STATUS      CHAR(1)         NOT NULL WITH DEFAULT 'P'
+   ,LICENSE_TYPE        CHAR(1)         NOT NULL
+   ,FEE_TYPE            CHAR(2)         NOT NULL
+   ,RECEIPT_NUMBER      CHAR(20)
+   ,PROCESSED_BY        CHAR(20)
+   ,NOTES               CHAR(200)
+   ,CONSTRAINT PAY_PK   PRIMARY KEY (PAYMENT_ID)
+   ,CONSTRAINT PAY_APPL FOREIGN KEY (APPLICATION_ID)
+                        REFERENCES DLIS.LICENSE_APPLICATION (APPLICATION_ID)
+   ,CONSTRAINT PAY_CAND FOREIGN KEY (CANDIDATE_ID)
+                        REFERENCES DLIS.CANDIDATE (CANDIDATE_ID)
+   ,CONSTRAINT PAY_PM   CHECK (PAYMENT_METHOD IN ('CC','DC','EF','CS','CH'))
+   ,CONSTRAINT PAY_PS   CHECK (PAYMENT_STATUS IN ('S','F','R','P'))
+   ,CONSTRAINT PAY_LT   CHECK (LICENSE_TYPE IN ('L','P','O'))
+   ,CONSTRAINT PAY_FT   CHECK (FEE_TYPE IN ('IF','RF','LF','PF'))
+   ) IN DLISDB.DLISTS02;
+
+------------------------------------------------------------------
+-- TABLE: DLIS.ISSUED_LICENSE
+------------------------------------------------------------------
+CREATE TABLE DLIS.ISSUED_LICENSE
+   (LICENSE_ID          DECIMAL(10,0)   NOT NULL
+                        GENERATED ALWAYS AS IDENTITY
+                        (START WITH 1, INCREMENT BY 1)
+   ,APPLICATION_ID      DECIMAL(10,0)   NOT NULL
+   ,CANDIDATE_ID        DECIMAL(10,0)   NOT NULL
+   ,LICENSE_NUMBER      CHAR(20)        NOT NULL
+   ,LICENSE_TYPE        CHAR(1)         NOT NULL
+   ,ISSUE_DATE          DATE            NOT NULL WITH DEFAULT CURRENT DATE
+   ,EXPIRY_DATE         DATE            NOT NULL
+   ,LICENSE_STATUS      CHAR(1)         NOT NULL WITH DEFAULT 'A'
+   ,VEHICLE_CLASS       CHAR(2)         NOT NULL
+   ,RESTRICTIONS        CHAR(200)
+   ,DEMERIT_BALANCE     DECIMAL(3,0)    WITH DEFAULT 12
+   ,ISSUED_BY_AUTH      CHAR(50)        NOT NULL
+   ,ISSUED_BY_OFFICER   CHAR(50)        NOT NULL
+   ,RENEWAL_COUNT       DECIMAL(3,0)    WITH DEFAULT 0
+   ,PREV_LICENSE_ID     DECIMAL(10,0)
+   ,NOTES               CHAR(300)
+   ,CONSTRAINT LIC_PK   PRIMARY KEY (LICENSE_ID)
+   ,CONSTRAINT LIC_UNIQ UNIQUE (LICENSE_NUMBER)
+   ,CONSTRAINT LIC_APPL FOREIGN KEY (APPLICATION_ID)
+                        REFERENCES DLIS.LICENSE_APPLICATION (APPLICATION_ID)
+   ,CONSTRAINT LIC_CAND FOREIGN KEY (CANDIDATE_ID)
+                        REFERENCES DLIS.CANDIDATE (CANDIDATE_ID)
+   ,CONSTRAINT LIC_LT   CHECK (LICENSE_TYPE IN ('L','P','O'))
+   ,CONSTRAINT LIC_LS   CHECK (LICENSE_STATUS IN ('A','S','E','C','R'))
+   ,CONSTRAINT LIC_VC   CHECK (VEHICLE_CLASS IN ('A','B','C','D'))
+   ) IN DLISDB.DLISTS02;
+
+------------------------------------------------------------------
+-- TABLE: DLIS.AUTHORITY_USER
+------------------------------------------------------------------
+CREATE TABLE DLIS.AUTHORITY_USER
+   (AUTHORITY_USER_ID   DECIMAL(10,0)   NOT NULL
+                        GENERATED ALWAYS AS IDENTITY
+                        (START WITH 1, INCREMENT BY 1)
+   ,USER_CODE           CHAR(20)        NOT NULL
+   ,USER_NAME           CHAR(60)        NOT NULL
+   ,AUTHORITY_NAME      CHAR(50)        NOT NULL
+   ,AUTHORITY_LEVEL     CHAR(1)         NOT NULL
+   ,DEPARTMENT          CHAR(50)
+   ,PHONE_NUMBER        CHAR(15)
+   ,EMAIL_ADDRESS       CHAR(60)
+   ,ACTIVE_STATUS       CHAR(1)         NOT NULL WITH DEFAULT 'A'
+   ,LIC_TYPES_AUTH      CHAR(3)
+   ,CONSTRAINT AUTH_PK  PRIMARY KEY (AUTHORITY_USER_ID)
+   ,CONSTRAINT AUTH_UC  UNIQUE (USER_CODE)
+   ,CONSTRAINT AUTH_LVL CHECK (AUTHORITY_LEVEL IN ('1','2'))
+   ,CONSTRAINT AUTH_AS  CHECK (ACTIVE_STATUS IN ('A','I'))
+   ) IN DLISDB.DLISTS02;
+
+------------------------------------------------------------------
+-- TABLE: DLIS.LICENSE_FEE_SCHEDULE
+------------------------------------------------------------------
+CREATE TABLE DLIS.LICENSE_FEE_SCHEDULE
+   (FEE_SCHEDULE_ID     DECIMAL(10,0)   NOT NULL
+                        GENERATED ALWAYS AS IDENTITY
+                        (START WITH 1, INCREMENT BY 1)
+   ,LICENSE_TYPE        CHAR(1)         NOT NULL
+   ,FEE_TYPE            CHAR(2)         NOT NULL
+   ,FEE_AMOUNT          DECIMAL(10,2)   NOT NULL
+   ,EFFECTIVE_DATE      DATE            NOT NULL
+   ,EXPIRY_DATE         DATE
+   ,CURRENCY_CODE       CHAR(3)         NOT NULL
+   ,DESCRIPTION         CHAR(200)
+   ,ACTIVE_STATUS       CHAR(1)         NOT NULL WITH DEFAULT 'A'
+   ,CONSTRAINT FEE_PK   PRIMARY KEY (FEE_SCHEDULE_ID)
+   ,CONSTRAINT FEE_LT   CHECK (LICENSE_TYPE IN ('L','P','O'))
+   ,CONSTRAINT FEE_FT   CHECK (FEE_TYPE IN ('IF','RF','LF','PF'))
+   ,CONSTRAINT FEE_AS   CHECK (ACTIVE_STATUS IN ('A','I'))
+   ) IN DLISDB.DLISTS02;

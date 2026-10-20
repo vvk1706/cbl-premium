@@ -1,0 +1,1211 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLISMENU</title>
+    <link rel="stylesheet" href="../../../assets/style.css">
+    <script src="../../../assets/mermaid.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+
+    <!-- Prism.js for syntax highlighting (bundled — no CDN required) -->
+    <link rel="stylesheet" href="../../../assets/prism-tomorrow.css">
+    <script src="../../../assets/prism-core.js"></script>
+    <script src="../../../assets/prism-languages.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="header-app-name"><a href="../../../../index.html" style="color: inherit; text-decoration: none;">Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</a></span>
+        </div>
+        <div class="header-right">
+        </div>
+    </header>
+    <div class="shell">
+        <aside class="sidebar" id="wiki-sidebar">
+            <nav>
+                
+        <div class="nav-home-wrap">
+            <a href="../../../../index.html" class="nav-home">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 6.5L8 2l6 4.5V14a1 1 0 01-1 1H3a1 1 0 01-1-1V6.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M6 15V9h4v6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                Home
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Application Documentation</div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Overview</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/system-overview.html" class="nav-link" data-page-id="system-overview">DLIS System Overview</a>
+                <a href="../../../pages/main-menu-navigation.html" class="nav-link" data-page-id="main-menu-navigation">Main Menu &amp; Navigation (DL01)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Candidate &amp; Application Intake</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/candidate-management.html" class="nav-link" data-page-id="candidate-management">Candidate Maintenance (DL02)</a>
+                <a href="../../../pages/license-application-entry.html" class="nav-link" data-page-id="license-application-entry">License Application Entry (DL03)</a>
+                <a href="../../../pages/application-status-inquiry.html" class="nav-link" data-page-id="application-status-inquiry">Application Status Inquiry (DL04)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Verification &amp; Payment</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/eligibility-check.html" class="nav-link" data-page-id="eligibility-check">Eligibility Check (DL05)</a>
+                <a href="../../../pages/driving-history-check.html" class="nav-link" data-page-id="driving-history-check">Driving History Check (DL06)</a>
+                <a href="../../../pages/payment-processing.html" class="nav-link" data-page-id="payment-processing">Payment Entry &amp; Processing (DL07)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Approval &amp; License Issuance</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/first-level-approval.html" class="nav-link" data-page-id="first-level-approval">First-Level Authority Approval (DL08)</a>
+                <a href="../../../pages/second-level-approval.html" class="nav-link" data-page-id="second-level-approval">Second-Level Authority Approval (DL09)</a>
+                <a href="../../../pages/license-issuance.html" class="nav-link" data-page-id="license-issuance">License Issuance (DL10)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Architecture</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/application-lifecycle-flow.html" class="nav-link" data-page-id="application-lifecycle-flow">Application Lifecycle &amp; Status Flow</a>
+                <a href="../../../pages/data-architecture.html" class="nav-link" data-page-id="data-architecture">Data Architecture (DB2)</a>
+                <a href="../../../pages/cics-integration-patterns.html" class="nav-link" data-page-id="cics-integration-patterns">CICS Integration Patterns</a>
+            </div>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Program Documentation</div>
+    <div class="nav-section">
+        <button class="nav-section-toggle open" type="button">
+            <span class="nav-toggle-text">program</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items open">
+        <div class="nav-section">
+            <button class="nav-section-toggle open" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items open">
+                <a href="../../../sources/program/cobol/DLISPAY.html" class="nav-link">DLISPAY</a>
+                <a href="../../../sources/program/cobol/DLISSTAT.html" class="nav-link">DLISSTAT</a>
+                <a href="../../../sources/program/cobol/DLISMENU.html" class="nav-link active">DLISMENU</a>
+                <a href="../../../sources/program/cobol/DLISELIG.html" class="nav-link">DLISELIG</a>
+                <a href="../../../sources/program/cobol/DLISCAND.html" class="nav-link">DLISCAND</a>
+                <a href="../../../sources/program/cobol/DLISAPPL.html" class="nav-link">DLISAPPL</a>
+                <a href="../../../sources/program/cobol/DLISISSU.html" class="nav-link">DLISISSU</a>
+                <a href="../../../sources/program/cobol/DLISAP2.html" class="nav-link">DLISAP2</a>
+                <a href="../../../sources/program/cobol/DLISHIST.html" class="nav-link">DLISHIST</a>
+                <a href="../../../sources/program/cobol/DLISAP1.html" class="nav-link">DLISAP1</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">business-rule</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../sources/business-rule/cobol/DLISELIG-overview.html" class="nav-link">DLISELIG-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-inventory.html" class="nav-link">DLISPAY-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-overview.html" class="nav-link">DLISCAND-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-inventory.html" class="nav-link">DLISAP2-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-inventory.html" class="nav-link">DLISHIST-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-inventory.html" class="nav-link">DLISMENU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISELIG-inventory.html" class="nav-link">DLISELIG-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-overview.html" class="nav-link">DLISPAY-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-overview.html" class="nav-link">DLISSTAT-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-overview.html" class="nav-link">DLISHIST-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-overview.html" class="nav-link">DLISAPPL-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-inventory.html" class="nav-link">DLISISSU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-inventory.html" class="nav-link">DLISAPPL-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-inventory.html" class="nav-link">DLISSTAT-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-overview.html" class="nav-link">DLISAP1-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-inventory.html" class="nav-link">DLISCAND-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-overview.html" class="nav-link">DLISAP2-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-overview.html" class="nav-link">DLISISSU-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-inventory.html" class="nav-link">DLISAP1-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-overview.html" class="nav-link">DLISMENU-overview</a>
+            </div>
+        </div>
+        </div>
+    </div>
+            </nav>
+        </aside>
+        <main class="main">
+            <div class="prog-container">
+                <div id="wiki-breadcrumb"></div>
+                <div class="content-layout">
+                    <article class="prose">
+                        <h2 id="1-purpose" tabindex="-1">1. Purpose</h2>
+<p>DLISMENU is a CICS pseudo-conversational main menu program for the Driver License Information System (DLIS), running under transaction ID <code>DL01</code>. It presents users with a numbered menu screen (BMS map <code>DLISMM01</code>) that serves as the central navigation hub for the entire application, routing operator selections to one of ten downstream transactions — covering candidate maintenance, license application entry, application status inquiry, eligibility checking, driving history review, payment processing, first and second authority approvals, and license issuance — by transferring control via <code>EXEC CICS XCTL</code> with a shared communication area that carries session context between programs.</p>
+<h2 id="2-inputs" tabindex="-1">2. Inputs</h2>
+<h3 id="21-cics-communication-area-dfhcommarea--dlis-commarea" tabindex="-1">2.1 CICS Communication Area (DFHCOMMAREA / DLIS-COMMAREA)</h3>
+<ul>
+<li><strong>DFHCOMMAREA</strong> — 350-byte Linkage Section area passed into the program by CICS on every pseudo-conversational re-entry (i.e., when <code>EIBCALEN &gt; 0</code>). It carries the session state from the previous transaction cycle and is immediately moved into <code>DLIS-COMMAREA</code> for processing.
+<ul>
+<li><strong>CA-TRANSACTION-ID</strong> — The 4-character CICS transaction ID of the originating or returning transaction.</li>
+<li><strong>CA-RETURN-SCREEN</strong> — The 8-character program name identifying which screen to return to after navigation.</li>
+<li><strong>CA-CANDIDATE-ID</strong> — Packed-decimal identifier of the candidate record being processed in the current session.</li>
+<li><strong>CA-APPLICATION-ID</strong> — Packed-decimal identifier of the license application record in context.</li>
+<li><strong>CA-LICENSE-ID</strong> — Packed-decimal identifier of the issued license record in context.</li>
+<li><strong>CA-PAYMENT-ID</strong> — Packed-decimal identifier of the payment record in context.</li>
+<li><strong>CA-USER-ID</strong> — 8-character ID of the CICS user currently operating the session.</li>
+<li><strong>CA-RETURN-CODE</strong> — Numeric return code set by a previously executed program to signal success or error status back to the menu.</li>
+<li><strong>CA-MSG-TEXT</strong> — 78-character message text passed back from a previously executed program for display on the menu screen.</li>
+<li><strong>CA-MSG-COLOR</strong> — 5-character display color attribute accompanying the message text.</li>
+<li><strong>CA-ACTION</strong> — Single-character action code indicating the operation requested or last performed.</li>
+</ul>
+</li>
+</ul>
+<h3 id="22-bms-map-input-exec-cics-receive-map" tabindex="-1">2.2 BMS Map Input (EXEC CICS RECEIVE MAP)</h3>
+<ul>
+<li><strong>DMMOPTI</strong> (map field <code>DMMOPT</code> on map <code>DLISMM01</code>, mapset <code>DLISMM</code>) — The user-entered menu option (values <code>'1'</code> through <code>'10'</code>), received from the 3270 terminal screen via <code>EXEC CICS RECEIVE MAP</code>. This is the primary user selection that drives all routing logic, determining which downstream CICS program (<code>DLISCAND</code>, <code>DLISAPPL</code>, <code>DLISSTAT</code>, <code>DLISELIG</code>, <code>DLISHIST</code>, <code>DLISPAY</code>, <code>DLISAP1</code>, <code>DLISAP2</code>, or <code>DLISISSU</code>) receives control via <code>EXEC CICS XCTL</code>.</li>
+</ul>
+<h3 id="23-cics-execution-interface-block-eib" tabindex="-1">2.3 CICS Execution Interface Block (EIB)</h3>
+<ul>
+<li><strong>EIBCALEN</strong> — CICS-provided field indicating the length of the passed COMMAREA. Used on entry to distinguish between the first invocation of the transaction (<code>EIBCALEN = 0</code>, triggers <code>INIT-SCREEN</code>) and a pseudo-conversational re-entry (<code>EIBCALEN &gt; 0</code>, triggers <code>PROCESS-INPUT</code>).</li>
+<li><strong>EIBAID</strong> — CICS-provided attention identifier key pressed by the user. The program tests this against:
+<ul>
+<li><code>DFHPF12</code> — PF12 key press; causes an immediate <code>EXEC CICS RETURN</code> to exit the transaction.</li>
+<li><code>DFHENTER</code> — Enter key press; the only key that allows menu option processing to proceed.</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-outputs" tabindex="-1">3. Outputs</h2>
+<h3 id="31-user-interface-and-map-outputs" tabindex="-1">3.1 User Interface and Map Outputs</h3>
+<ul>
+<li><code>DMMDATE</code>
+<ul>
+<li>Formatted current system date placed onto the BMS map header field (<code>DLISMM01</code>) during initial screen display (<code>INIT-SCREEN</code>).</li>
+</ul>
+</li>
+<li><code>DMMMSG</code>
+<ul>
+<li>Status and error notification field on the BMS screen (<code>DLISMM01</code>). It transmits informational messages, operational prompts (e.g., prompting for Enter/F12 or valid menu choices), and validation error notifications to the end user.</li>
+</ul>
+</li>
+<li>BMS Screen Transmission (<code>DLISMM</code> / <code>DLISMM01</code>)
+<ul>
+<li>Screen rendering via <code>EXEC CICS SEND MAP</code> commands:
+<ul>
+<li>Initial screen presentation using mapset <code>DLISMM</code> with <code>ERASE</code> and <code>FREEKB</code> options.</li>
+<li>Redisplay of modified fields (<code>DMMMSG</code>) using <code>DATAONLY</code> and <code>FREEKB</code> options upon input errors or invalid selections.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="32-cics-navigation-and-program-control-outputs" tabindex="-1">3.2 CICS Navigation and Program Control Outputs</h3>
+<ul>
+<li><code>DLIS-COMMAREA</code>
+<ul>
+<li>Inter-program communication area passed as payload data across CICS transactions and program transfers:
+<ul>
+<li>Retained across pseudo-conversational cycles via <code>EXEC CICS RETURN TRANSID('DL01') COMMAREA(...) LENGTH(350)</code>.</li>
+<li>Passed to target child programs via <code>EXEC CICS XCTL</code> based on the user’s selected menu option (<code>1</code> through <code>10</code>).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Target Program Control Routing (<code>EXEC CICS XCTL</code>)
+<ul>
+<li>Program execution transfer to specific subsystem modules based on selection:
+<ul>
+<li><code>DLISCAND</code>: Transferred for Option 1 (Candidate Registration) and Option 2 (Candidate Search / Maintenance).</li>
+<li><code>DLISAPPL</code>: Transferred for Option 3 (License Application Entry).</li>
+<li><code>DLISSTAT</code>: Transferred for Option 4 (Application Status Inquiry).</li>
+<li><code>DLISELIG</code>: Transferred for Option 5 (Eligibility Check).</li>
+<li><code>DLISHIST</code>: Transferred for Option 6 (Driving History Check).</li>
+<li><code>DLISPAY</code>: Transferred for Option 7 (Payment Processing).</li>
+<li><code>DLISAP1</code>: Transferred for Option 8 (Authority 1 Approval).</li>
+<li><code>DLISAP2</code>: Transferred for Option 9 (Authority 2 Approval).</li>
+<li><code>DLISISSU</code>: Transferred for Option 10 (License Issuance).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Session Termination (<code>EXEC CICS RETURN</code>)
+<ul>
+<li>Termination of the CICS transaction returning control directly back to CICS without re-queuing a transaction ID when the user presses <code>PF12</code>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-processing-logic" tabindex="-1">4. Processing Logic</h2>
+<h3 id="41-mermaid-flow-diagram" tabindex="-1">4.1 Mermaid Flow Diagram</h3>
+<div class="mermaid">
+graph TD
+    classDef startEnd fill:#d5e8d4,stroke:#82b366,color:#000
+    classDef process fill:#dae8fc,stroke:#6c8ebf,color:#000
+    classDef decision fill:#fff2cc,stroke:#d6b656,color:#000
+    classDef redisplay fill:#ffe6cc,stroke:#d79b00,color:#000
+    classDef xctl fill:#e1d5e7,stroke:#9673a6,color:#000
+
+    A([Start - Transaction DL01 initiated]):::startEnd
+    B{{EIBCALEN = 0<br>First invocation}}:::decision
+    C[INIT-SCREEN<br>Set date on map<br>Clear message field]:::process
+    D[SEND MAP DLISMM01<br>with ERASE FREEKB]:::process
+    E[RETURN TRANSID DL01<br>with COMMAREA]:::process
+    F([End - Waiting for user input]):::startEnd
+
+    G[PROCESS-INPUT<br>Move DFHCOMMAREA to<br>DLIS-COMMAREA]:::process
+    H[RECEIVE MAP DLISMM01]:::process
+    I{{EIBAID = DFHPF12<br>PF12 pressed}}:::decision
+    J([CICS RETURN - Exit program]):::startEnd
+
+    K{{EIBAID not = DFHENTER<br>Invalid key pressed}}:::decision
+    L[Set message - PRESS ENTER<br>TO SELECT OR F12 TO EXIT]:::redisplay
+
+    M{{DMMOPTI = SPACES<br>or LOW-VALUES}}:::decision
+    N[Set message - PLEASE<br>SELECT AN OPTION 1-10]:::redisplay
+
+    O[REDISPLAY-MENU<br>SEND MAP DATAONLY FREEKB]:::redisplay
+    P[RETURN TRANSID DL01<br>with COMMAREA]:::redisplay
+    Q([End - Waiting for user re-entry]):::startEnd
+
+    R{{EVALUATE DMMOPTI<br>Option selected}}:::decision
+    S1[XCTL to DLISCAND<br>Option 1 - New Candidate]:::xctl
+    S2[XCTL to DLISCAND<br>Option 2 - Search Candidate]:::xctl
+    S3[XCTL to DLISAPPL<br>Option 3 - Application]:::xctl
+    S4[XCTL to DLISSTAT<br>Option 4 - Status]:::xctl
+    S5[XCTL to DLISELIG<br>Option 5 - Eligibility]:::xctl
+    S6[XCTL to DLISHIST<br>Option 6 - History]:::xctl
+    S7[XCTL to DLISPAY<br>Option 7 - Payment]:::xctl
+    S8[XCTL to DLISAP1<br>Option 8 - Approval 1]:::xctl
+    S9[XCTL to DLISAP2<br>Option 9 - Approval 2]:::xctl
+    S10[XCTL to DLISISSU<br>Option 10 - Issue License]:::xctl
+    SOther[Set message - INVALID OPTION<br>PLEASE SELECT 1-10]:::redisplay
+
+    A --> B
+    B -- Yes --> C
+    C --> D
+    D --> E
+    E --> F
+
+    B -- No --> G
+    G --> H
+    H --> I
+    I -- Yes --> J
+    I -- No --> K
+    K -- Yes --> L
+    L --> O
+    K -- No --> M
+    M -- Yes --> N
+    N --> O
+    O --> P
+    P --> Q
+
+    M -- No --> R
+    R -- 1 --> S1
+    R -- 2 --> S2
+    R -- 3 --> S3
+    R -- 4 --> S4
+    R -- 5 --> S5
+    R -- 6 --> S6
+    R -- 7 --> S7
+    R -- 8 --> S8
+    R -- 9 --> S9
+    R -- 10 --> S10
+    R -- Other --> SOther
+    SOther --> O
+</div>
+<hr>
+<h3 id="42-processing-logic-description" tabindex="-1">4.2 Processing Logic Description</h3>
+<h4 id="421-high-level-summary" tabindex="-1">4.2.1 High-level Summary</h4>
+<p><strong>DLISMENU</strong> is the main menu program of the <strong>Driver License Information System (DLIS)</strong>. Running under CICS transaction <code>DL01</code>, it displays a BMS map (<code>DLISMM01</code> / mapset <code>DLISMM</code>) that presents up to 10 functional options to a terminal operator. Based on the option selected, it routes control to one of the specialized DLIS sub-programs using CICS <code>XCTL</code>. It follows the <strong>pseudo-conversational</strong> CICS programming model — the program terminates after each interaction and is re-invoked when the operator presses a key, conserving system resources.</p>
+<hr>
+<h4 id="422-execution-flow" tabindex="-1">4.2.2 Execution Flow</h4>
+<p><strong>Step 1 — Entry point: <code>MAIN-LOGIC</code></strong></p>
+<p>The program begins at <code>MAIN-LOGIC</code> and immediately inspects the CICS Execute Interface Block (EIB) field <code>EIBCALEN</code>, which holds the length of any COMMAREA passed by the previous invocation:</p>
+<ul>
+<li><strong><code>EIBCALEN = 0</code></strong> → No COMMAREA present; this is the <strong>first (cold) invocation</strong> of the transaction. Control passes to <code>INIT-SCREEN</code>.</li>
+<li><strong><code>EIBCALEN &gt; 0</code></strong> → A COMMAREA exists, meaning the terminal operator has already seen the menu and has pressed a key. The program maps the 350-byte <code>DFHCOMMAREA</code> into <code>DLIS-COMMAREA</code> and calls <code>PROCESS-INPUT</code>.</li>
+</ul>
+<hr>
+<p><strong>Step 2 — First invocation: <code>INIT-SCREEN</code></strong></p>
+<ol>
+<li>The current date is moved into the map field <code>DMMDATE</code> for display.</li>
+<li>The message field <code>DMMMSG</code> is cleared to spaces.</li>
+<li><strong><code>EXEC CICS SEND MAP</code></strong> is issued with <code>ERASE FREEKB</code>:
+<ul>
+<li><code>ERASE</code> clears the 3270 terminal screen before painting the menu — mandatory on the first output of a pseudo-conversational sequence.</li>
+<li><code>FREEKB</code> unlocks the keyboard so the operator can type.</li>
+</ul>
+</li>
+<li><strong><code>EXEC CICS RETURN TRANSID('DL01') COMMAREA(DLIS-COMMAREA) LENGTH(350)</code></strong> is issued. This terminates the current task, but instructs CICS to re-invoke transaction <code>DL01</code> (i.e., this same program) when the operator next presses an AID key, passing the 350-byte COMMAREA back in. From the operator’s perspective, the menu simply appears and waits.</li>
+</ol>
+<hr>
+<p><strong>Step 3 — Subsequent invocation: <code>PROCESS-INPUT</code></strong></p>
+<ol>
+<li><strong><code>EXEC CICS RECEIVE MAP</code></strong> reads back the operator’s input from the 3270 terminal into the map symbolic description area (DMMOPTI etc.).</li>
+<li><strong>PF12 check</strong> — <code>EIBAID</code> is compared to <code>DFHPF12</code>. If the operator pressed PF12 (the designated exit key), an unconditional <code>EXEC CICS RETURN</code> is issued with no TRANSID or COMMAREA — the transaction ends cleanly.</li>
+<li><strong>Enter key check</strong> — <code>EIBAID</code> is compared to <code>DFHENTER</code>. If any other AID key was pressed (e.g., a PF key other than PF12), the program sets the message <code>'PRESS ENTER TO SELECT OR F12 TO EXIT'</code> and calls <code>REDISPLAY-MENU</code>.</li>
+<li><strong>Blank option check</strong> — If <code>DMMOPTI</code> (the option field typed by the operator) is SPACES or LOW-VALUES (i.e., nothing was entered), the message <code>'PLEASE SELECT AN OPTION (1-10)'</code> is set and <code>REDISPLAY-MENU</code> is called.</li>
+<li><strong>Option routing</strong> — An <code>EVALUATE</code> statement inspects <code>DMMOPTI</code> and routes control to the appropriate sub-program via <code>EXEC CICS XCTL</code>:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Target Program</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>DLISCAND</td>
+<td>Candidate registration (new)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>DLISCAND</td>
+<td>Candidate lookup/search</td>
+</tr>
+<tr>
+<td>3</td>
+<td>DLISAPPL</td>
+<td>License application entry</td>
+</tr>
+<tr>
+<td>4</td>
+<td>DLISSTAT</td>
+<td>Application status inquiry</td>
+</tr>
+<tr>
+<td>5</td>
+<td>DLISELIG</td>
+<td>Eligibility check</td>
+</tr>
+<tr>
+<td>6</td>
+<td>DLISHIST</td>
+<td>Driving history review</td>
+</tr>
+<tr>
+<td>7</td>
+<td>DLISPAY</td>
+<td>Fee payment processing</td>
+</tr>
+<tr>
+<td>8</td>
+<td>DLISAP1</td>
+<td>First-level approval</td>
+</tr>
+<tr>
+<td>9</td>
+<td>DLISAP2</td>
+<td>Second-level approval</td>
+</tr>
+<tr>
+<td>10</td>
+<td>DLISISSU</td>
+<td>License issuance</td>
+</tr>
+<tr>
+<td>Other</td>
+<td>—</td>
+<td>Error message + redisplay</td>
+</tr>
+</tbody>
+</table>
+<p><code>EXEC CICS XCTL</code> transfers control at the <strong>same logical level</strong> — the calling program (DLISMENU) is released from storage and does not regain control. The <code>DLIS-COMMAREA</code> (350 bytes) is passed to each target program, carrying the session context (candidate ID, application ID, user ID, messages, etc.).</p>
+<hr>
+<p><strong>Step 4 — Error redisplay: <code>REDISPLAY-MENU</code></strong></p>
+<p>When validation fails (invalid AID key, no option entered, or invalid option value):</p>
+<ol>
+<li><strong><code>EXEC CICS SEND MAP DATAONLY FREEKB</code></strong> — refreshes only the data fields of the screen (not the static labels/attributes), displaying the error message set by the caller. <code>DATAONLY</code> is more efficient than <code>ERASE</code> because it avoids repainting the entire screen.</li>
+<li><strong><code>EXEC CICS RETURN TRANSID('DL01') COMMAREA(DLIS-COMMAREA) LENGTH(350)</code></strong> — re-arms the pseudo-conversational cycle so the operator can correct their input.</li>
+</ol>
+<hr>
+<h4 id="423-external-interactions" tabindex="-1">4.2.3 External Interactions</h4>
+<table>
+<thead>
+<tr>
+<th>Interaction</th>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BMS Terminal (3270)</td>
+<td><code>EXEC CICS SEND MAP … ERASE FREEKB</code></td>
+<td>Initial display of the main menu</td>
+</tr>
+<tr>
+<td>BMS Terminal (3270)</td>
+<td><code>EXEC CICS SEND MAP … DATAONLY FREEKB</code></td>
+<td>Refresh menu with error message</td>
+</tr>
+<tr>
+<td>BMS Terminal (3270)</td>
+<td><code>EXEC CICS RECEIVE MAP</code></td>
+<td>Read operator’s option selection and AID key</td>
+</tr>
+<tr>
+<td>CICS Pseudo-conv.</td>
+<td><code>EXEC CICS RETURN TRANSID COMMAREA</code></td>
+<td>Suspend and re-queue the transaction, preserving session state</td>
+</tr>
+<tr>
+<td>Sub-program routing</td>
+<td><code>EXEC CICS XCTL PROGRAM … COMMAREA</code></td>
+<td>Transfer control to the chosen DLIS functional program</td>
+</tr>
+</tbody>
+</table>
+<p>There are <strong>no direct database (DB2/SQL) interactions</strong> within this menu program. The SQLCA and null indicators included via the shared copybook DLISWS are present for completeness across the DLIS suite but are not exercised here.</p>
+<hr>
+<h4 id="424-plain-language-summary" tabindex="-1">4.2.4 Plain Language Summary</h4>
+<p>When a DLIS operator starts transaction <code>DL01</code> at their terminal for the first time, the menu screen appears with today’s date and a list of 10 functions (e.g., register a new candidate, check eligibility, process payment, issue a license). The program then steps back and waits — it does not stay running in memory.</p>
+<p>When the operator types a number and presses Enter, the program wakes back up, reads what was typed, and immediately hands control to the right sub-program — for example, typing <code>7</code> sends the operator to the payment screen. If the operator presses PF12, the session ends. If they press a wrong key or leave the option blank, a helpful error message appears and the menu is shown again. The session context (who the operator is, which candidate or application is being worked on) travels along with every handoff in a small shared data area (COMMAREA), keeping all screens in sync.</p>
+<hr>
+<h3 id="43-database-tables" tabindex="-1">4.3 Database Tables</h3>
+<p>No database tables are directly accessed in DLISMENU. The program performs no <code>EXEC SQL</code> statements; it acts purely as a navigation hub routing to other programs that handle data persistence.</p>
+<h2 id="5-paragraphs" tabindex="-1">5. Paragraphs</h2>
+<ul>
+<li>
+<p><strong>MAIN-LOGIC</strong></p>
+<ul>
+<li><strong>Purpose:</strong> Acts as the primary entry point and high-level controller for the pseudo-conversational execution flow of the menu program.</li>
+<li><strong>Operations:</strong> Checks the length of the incoming communication area (<code>EIBCALEN</code>) to determine transaction state, populates <code>DLIS-COMMAREA</code> from <code>DFHCOMMAREA</code> when conversational data exists, delegates execution to initialization or input processing routines, and halts program execution with <code>STOP RUN</code>.</li>
+<li><strong>Control Flow:</strong> Uses an <code>IF-ELSE-END-IF</code> construct based on <code>EIBCALEN = 0</code> to branch between initial map presentation (<code>PERFORM INIT-SCREEN</code>) and subsequent user interaction processing (<code>PERFORM PROCESS-INPUT</code>).</li>
+<li><strong>Interactions:</strong> Interacts with the CICS runtime environment via the EXEC Interface Block (<code>EIBCALEN</code>) and Linkage Section communication area (<code>DFHCOMMAREA</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>INIT-SCREEN</strong></p>
+<ul>
+<li><strong>Purpose:</strong> Initializes and displays the initial DLIS main menu screen for first-time transaction invocation.</li>
+<li><strong>Operations:</strong> Extracts the current system date formatted into the map date field (<code>DMMDATE</code>), clears the map message field (<code>DMMMSG</code>), transmits the complete menu map to the terminal, and sets up pseudo-conversational re-entry.</li>
+<li><strong>Control Flow:</strong> Sequential execution terminating with a CICS pseudo-conversational return.</li>
+<li><strong>Interactions:</strong> Issues <code>EXEC CICS SEND MAP('DLISMM01') MAPSET('DLISMM') ERASE FREEKB</code> to write to the 3270 terminal and <code>EXEC CICS RETURN TRANSID('DL01') COMMAREA(...)</code> to pass control back to CICS while awaiting next terminal input.</li>
+</ul>
+</li>
+<li>
+<p><strong>PROCESS-INPUT</strong></p>
+<ul>
+<li><strong>Purpose:</strong> Receives user input from the terminal map, validates attention identifier (AID) keys and selected menu options, and transfers control to the corresponding target application program.</li>
+<li><strong>Operations:</strong> Receives formatted screen inputs into symbolic map variables, evaluates AID keys (<code>EIBAID</code>), validates the entered menu selection (<code>DMMOPTI</code>), sets error messages when input is missing or invalid, and transfers control along with <code>DLIS-COMMAREA</code> to target subprograms based on selected option codes (<code>1</code> through <code>10</code>).</li>
+<li><strong>Control Flow:</strong>
+<ul>
+<li>Evaluates <code>EIBAID = DFHPF12</code> to terminate the session via <code>EXEC CICS RETURN</code>.</li>
+<li>Uses <code>IF</code> conditions to check for non-Enter key presses or empty menu options (<code>SPACES</code> or <code>LOW-VALUES</code>), invoking <code>PERFORM REDISPLAY-MENU</code>.</li>
+<li>Uses an <code>EVALUATE</code> statement to branch across menu choices (<code>1</code>–<code>10</code>) or route unexpected values through the <code>OTHER</code> branch to <code>PERFORM REDISPLAY-MENU</code>.</li>
+</ul>
+</li>
+<li><strong>Interactions:</strong>
+<ul>
+<li>Communicates with CICS terminal services using <code>EXEC CICS RECEIVE MAP('DLISMM01') MAPSET('DLISMM')</code>.</li>
+<li>Performs program control transfers using <code>EXEC CICS XCTL PROGRAM(...)</code> with <code>COMMAREA</code> to route execution to <code>DLISCAND</code> (Options 1 and 2), <code>DLISAPPL</code> (Option 3), <code>DLISSTAT</code> (Option 4), <code>DLISELIG</code> (Option 5), <code>DLISHIST</code> (Option 6), <code>DLISPAY</code> (Option 7), <code>DLISAP1</code> (Option 8), <code>DLISAP2</code> (Option 9), and <code>DLISISSU</code> (Option 10).</li>
+<li>Terminates transaction flow via <code>EXEC CICS RETURN</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>REDISPLAY-MENU</strong></p>
+<ul>
+<li><strong>Purpose:</strong> Refreshes the terminal screen with updated dynamic content, such as validation error messages, while retaining static screen elements.</li>
+<li><strong>Operations:</strong> Sends map data back to the terminal using the <code>DATAONLY</code> option and returns control to CICS to await subsequent operator input under the <code>DL01</code> transaction ID.</li>
+<li><strong>Control Flow:</strong> Sequential execution ending with a CICS pseudo-conversational return.</li>
+<li><strong>Interactions:</strong> Issues <code>EXEC CICS SEND MAP('DLISMM01') MAPSET('DLISMM') DATAONLY FREEKB</code> for terminal output and <code>EXEC CICS RETURN TRANSID('DL01') COMMAREA(...)</code> to preserve conversational state.</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-dependencies" tabindex="-1">6. Dependencies</h2>
+<h3 id="61-cics-resources" tabindex="-1">6.1 CICS Resources</h3>
+<ul>
+<li><strong>Transaction <code>DL01</code></strong> — The CICS transaction ID under which <code>DLISMENU</code> runs; registered in the CICS CSD (<code>csd/DLISCSD.csd</code>) under group <code>DLISGRP</code>. Used in every <code>EXEC CICS RETURN TRANSID('DL01')</code> to re-queue the pseudo-conversational transaction.</li>
+<li><strong>BMS Map Set <code>DLISMM</code> / Map <code>DLISMM01</code></strong> — The Basic Mapping Support map set defined in <code>bms/DLISMM.bms</code>. Used by:
+<ul>
+<li><code>EXEC CICS SEND MAP('DLISMM01') MAPSET('DLISMM')</code> — renders the main menu screen to the terminal.</li>
+<li><code>EXEC CICS RECEIVE MAP('DLISMM01') MAPSET('DLISMM')</code> — reads user input fields (<code>DMMOPTI</code>, <code>DMMMSG</code>, <code>DMMDATE</code>) from the terminal.</li>
+</ul>
+</li>
+<li><strong>CICS EIB (Execute Interface Block)</strong> — Implicitly provided by CICS at runtime. The program reads:
+<ul>
+<li><code>EIBCALEN</code> — determines whether this is an initial entry (= 0) or a returning pseudo-conversational invocation.</li>
+<li><code>EIBAID</code> — identifies the attention identifier key pressed (<code>DFHPF12</code> for exit, <code>DFHENTER</code> for selection).</li>
+</ul>
+</li>
+<li><strong>CICS CSD Group <code>DLISGRP</code></strong> (<code>csd/DLISCSD.csd</code>) — Registers the <code>DLISMENU</code> program and <code>DL01</code> transaction definition so CICS can load and route the program.</li>
+</ul>
+<h3 id="62-copybooks" tabindex="-1">6.2 Copybooks</h3>
+<ul>
+<li><strong><code>DLISWS.cpy</code></strong> (<code>copybook/DLISWS.cpy</code>) — Inlined into Working-Storage. Provides shared data structures used across all DLIS programs:
+<ul>
+<li><code>WS-COMMON-AREA</code> — return codes, messages, user ID, current date.</li>
+<li><code>WS-CANDIDATE</code>, <code>WS-APPLICATION</code>, <code>WS-PAYMENT</code>, <code>WS-ELIGIBILITY</code>, <code>WS-HISTORY</code>, <code>WS-APPROVAL</code>, <code>WS-LICENSE</code> — shared working-storage groups for all entity types.</li>
+<li><code>WS-NULL-INDICATORS</code> — DB2 null indicator array.</li>
+<li><code>EXEC SQL INCLUDE SQLCA END-EXEC</code> — SQL Communication Area embedded within this copybook.</li>
+</ul>
+</li>
+<li><strong><code>DLISCSEC.cpy</code></strong> (<code>copybook/DLISCSEC.cpy</code>) — Inlined into Working-Storage. Provides CICS COMMAREA layout structures:
+<ul>
+<li><code>DLIS-COMMAREA</code> — primary 350-byte navigation commarea passed on every <code>EXEC CICS RETURN</code> and <code>EXEC CICS XCTL</code>, carrying transaction ID, candidate/application/license/payment IDs, user ID, return code, message, and action flag.</li>
+<li><code>DLIS-CAND-COMMAREA</code> — candidate screen data commarea layout.</li>
+<li><code>DLIS-APPL-COMMAREA</code> — application status data commarea layout.</li>
+<li><code>WS-CICS-RESPONSE</code> — holds <code>WS-RESP1</code>, <code>WS-RESP2</code>, and EIB save fields for CICS command response checking.</li>
+</ul>
+</li>
+</ul>
+<h3 id="63-linkage--communication-area" tabindex="-1">6.3 Linkage / Communication Area</h3>
+<ul>
+<li><strong><code>DFHCOMMAREA</code></strong> (<code>LINKAGE SECTION</code>, <code>PIC X(350)</code>) — Standard CICS communication area passed in by CICS on each pseudo-conversational re-entry. Its content is moved into <code>DLIS-COMMAREA</code> for structured processing when <code>EIBCALEN &gt; 0</code>.</li>
+</ul>
+<h3 id="64-external-programs-xctl-targets" tabindex="-1">6.4 External Programs (XCTL Targets)</h3>
+<ul>
+<li><strong><code>DLISCAND</code></strong> — Candidate Maintenance program (options 1 and 2); receives <code>DLIS-COMMAREA</code> via <code>EXEC CICS XCTL</code>.</li>
+<li><strong><code>DLISAPPL</code></strong> — License Application Entry program (option 3); receives <code>DLIS-COMMAREA</code> via <code>EXEC CICS XCTL</code>.</li>
+<li><strong><code>DLISSTAT</code></strong> — Application Status Inquiry program (option 4); receives <code>DLIS-COMMAREA</code> via <code>EXEC CICS XCTL</code>.</li>
+<li><strong><code>DLISELIG</code></strong> — Eligibility Check program (option 5); receives <code>DLIS-COMMAREA</code> via <code>EXEC CICS XCTL</code>.</li>
+<li><strong><code>DLISHIST</code></strong> — Driving History Check program (option 6); receives <code>DLIS-COMMAREA</code> via <code>EXEC CICS XCTL</code>.</li>
+<li><strong><code>DLISPAY</code></strong> — Payment Entry &amp; Processing program (option 7); receives <code>DLIS-COMMAREA</code> via <code>EXEC CICS XCTL</code>.</li>
+<li><strong><code>DLISAP1</code></strong> — First Authority Approval program (option 8); receives <code>DLIS-COMMAREA</code> via <code>EXEC CICS XCTL</code>.</li>
+<li><strong><code>DLISAP2</code></strong> — Second Authority Approval program (option 9); receives <code>DLIS-COMMAREA</code> via <code>EXEC CICS XCTL</code>.</li>
+<li><strong><code>DLISISSU</code></strong> — License Issuance program (option 10); receives <code>DLIS-COMMAREA</code> via <code>EXEC CICS XCTL</code>.</li>
+</ul>
+<h3 id="65-db2--sql" tabindex="-1">6.5 DB2 / SQL</h3>
+<ul>
+<li><strong>SQLCA (<code>EXEC SQL INCLUDE SQLCA END-EXEC</code>)</strong> — The SQL Communication Area is included (via <code>DLISWS.cpy</code>) in Working-Storage. Although <code>DLISMENU</code> itself performs no SQL statements, the SQLCA structure is compiled into the program through the shared copybook and the DB2 precompiler (<code>DSNHPC</code>) processes it during compilation.</li>
+</ul>
+<h3 id="66-build--runtime-infrastructure" tabindex="-1">6.6 Build &amp; Runtime Infrastructure</h3>
+<ul>
+<li><strong>DB2 Precompiler <code>DSNHPC</code></strong> — Processes the <code>EXEC SQL INCLUDE SQLCA</code> embedded in <code>DLISWS.cpy</code>; part of the compile step in <code>jcl/DLISCOMP.jcl</code>.</li>
+<li><strong>IGYCRCTL (Enterprise COBOL Compiler)</strong> — Compiles the program with options <code>RENT,APOST,LIB,NOSEQ,NOTERM</code> as defined in <code>proc/DLISCLNK.proc</code>.</li>
+<li><strong>IEWL Link Editor</strong> — Links the compiled object with <code>AMODE(31),RMODE(ANY)</code> into <code>DLIS.LOADLIB</code>.</li>
+<li><strong><code>jcl/DLISCOMP.jcl</code></strong> / <strong><code>proc/DLISCLNK.proc</code></strong> — JCL and procedure used to compile and link-edit the program.</li>
+<li><strong><code>csd/DLISCSD.csd</code></strong> (DFHCSDUP) — Defines and installs the <code>DL01</code> transaction and <code>DLISMENU</code> program resource definitions into CICS group <code>DLISGRP</code>.</li>
+</ul>
+<h2 id="7-constraints" tabindex="-1">7. Constraints</h2>
+<h3 id="71-invocation--session-lifecycle" tabindex="-1">7.1 Invocation &amp; Session Lifecycle</h3>
+<ul>
+<li>
+<p><strong>First-invocation detection via <code>EIBCALEN</code>:</strong> The program checks <code>EIBCALEN = 0</code> at the start of <code>MAIN-LOGIC</code> (line 233). When <code>EIBCALEN</code> is zero, no COMMAREA was passed, meaning this is the first time the transaction is entered. Only then is the <code>INIT-SCREEN</code> routine performed. Any subsequent invocation must carry a non-zero <code>EIBCALEN</code>; without one, the program bypasses all input processing and goes directly to screen initialisation.</p>
+</li>
+<li>
+<p><strong>Pseudo-conversational continuity requirement:</strong> <code>INIT-SCREEN</code> issues <code>EXEC CICS RETURN TRANSID('DL01') COMMAREA(DLIS-COMMAREA) LENGTH(350)</code> (lines 247–249). Every re-entry of the transaction must therefore arrive under transaction id <code>DL01</code> with a 350-byte COMMAREA. If the transaction is restarted under any other transaction id, or without a COMMAREA, <code>EIBCALEN</code> will be zero and the menu will be re-initialised, discarding any in-flight session state.</p>
+</li>
+<li>
+<p><strong>COMMAREA must be mapped before use:</strong> On any non-initial invocation (line 236), <code>DFHCOMMAREA</code> (defined as <code>PIC X(350)</code>) is moved into <code>DLIS-COMMAREA</code> before <code>PROCESS-INPUT</code> is called. This move must happen first; no input processing occurs without it. The fixed length of 350 bytes is hardcoded in all three <code>EXEC CICS RETURN</code> calls and all ten <code>EXEC CICS XCTL</code> calls, constraining the COMMAREA contract between DLISMENU and every downstream program.</p>
+</li>
+</ul>
+<hr>
+<h3 id="72-terminal-input--aid-key-validation" tabindex="-1">7.2 Terminal Input / AID Key Validation</h3>
+<ul>
+<li>
+<p><strong>PF12 is the only accepted exit key:</strong> In <code>PROCESS-INPUT</code> (lines 255–257), if <code>EIBAID = DFHPF12</code> the program immediately returns to CICS with <code>EXEC CICS RETURN</code>, terminating the transaction cleanly. No other PF key is recognized as a valid exit.</p>
+</li>
+<li>
+<p><strong>ENTER is the only accepted action key:</strong> If <code>EIBAID</code> is anything other than <code>DFHENTER</code> (lines 258–261), the program sets message <code>'PRESS ENTER TO SELECT OR F12 TO EXIT'</code> and re-displays the menu. All other AID values (PA keys, PF1–PF11, PF13–PF24, Clear, etc.) are therefore rejected and loop the user back to the menu.</p>
+</li>
+<li>
+<p><strong>These two AID checks are sequential and unconditional:</strong> The PF12 check runs first. If that is not satisfied, the DFHENTER check runs second. Only when both pass does processing continue to option validation.</p>
+</li>
+</ul>
+<hr>
+<h3 id="73-menu-option-input-validation" tabindex="-1">7.3 Menu Option Input Validation</h3>
+<ul>
+<li>
+<p><strong>Option field must not be empty:</strong> If <code>DMMOPTI</code> is <code>SPACES</code> or <code>LOW-VALUES</code> (line 262), the program sets message <code>'PLEASE SELECT AN OPTION (1-10)'</code> and re-displays the menu. A blank or null option field is an absolute rejection; no routing occurs.</p>
+</li>
+<li>
+<p><strong>Option value must be a valid single character or two-character code ‘1’–‘10’:</strong> The <code>EVALUATE DMMOPTI</code> block (lines 267–301) accepts exactly ten literal values: <code>'1'</code> through <code>'10'</code>. Any value outside this set triggers the <code>OTHER</code> branch, which sets message <code>'INVALID OPTION. PLEASE SELECT 1-10'</code> and re-displays the menu. There is no tolerance for leading spaces, lowercase, or non-numeric characters.</p>
+</li>
+<li>
+<p><strong>Option ‘1’ and option ‘2’ route to the same program:</strong> Both <code>WHEN '1'</code> and <code>WHEN '2'</code> issue <code>EXEC CICS XCTL PROGRAM('DLISCAND')</code> (lines 268–273). This is a structural constraint: two distinct menu choices are functionally indistinguishable at routing time.</p>
+</li>
+</ul>
+<hr>
+<h3 id="74-control-transfer--program-routing" tabindex="-1">7.4 Control-Transfer &amp; Program Routing</h3>
+<ul>
+<li>
+<p><strong><code>XCTL</code> is one-way and non-returning:</strong> All ten routing paths use <code>EXEC CICS XCTL</code> (lines 268–297). Per CICS semantics, XCTL releases the transferring program; control never returns to DLISMENU. Once a valid option is selected, DLISMENU ceases to exist in memory. Consequently, all session state that downstream programs need must be carried forward in the 350-byte COMMAREA passed on each <code>XCTL</code>.</p>
+</li>
+<li>
+<p><strong>Every <code>XCTL</code> passes exactly 350 bytes:</strong> <code>COMMAREA(DLIS-COMMAREA) LENGTH(350)</code> is specified identically on all ten <code>EXEC CICS XCTL</code> calls (lines 269, 272, 275, 278, 281, 284, 287, 290, 293, 296). This constrains all receiving programs to expect and consume exactly this COMMAREA layout and length.</p>
+</li>
+<li>
+<p><strong><code>STOP RUN</code> is the only local termination point after routing:</strong> After the <code>EVALUATE</code> block in <code>PROCESS-INPUT</code> (line 302) and at the end of <code>MAIN-LOGIC</code> (line 239), <code>STOP RUN</code> is coded. Because all valid <code>WHEN</code> branches execute <code>XCTL</code> before reaching <code>STOP RUN</code>, the <code>STOP RUN</code> in <code>PROCESS-INPUT</code> is only reachable if the <code>EVALUATE</code> falls through abnormally; under normal operation, control is transferred before it executes.</p>
+</li>
+</ul>
+<hr>
+<h3 id="75-screen-redisplay-loop-constraints" tabindex="-1">7.5 Screen Redisplay Loop Constraints</h3>
+<ul>
+<li>
+<p><strong><code>REDISPLAY-MENU</code> always follows with <code>EXEC CICS RETURN TRANSID('DL01')</code>:</strong> Every error path (invalid AID, blank option, invalid option value) calls <code>REDISPLAY-MENU</code> (lines 304–310), which sends the map with <code>DATAONLY FREEKB</code> and then issues <code>EXEC CICS RETURN TRANSID('DL01') COMMAREA(DLIS-COMMAREA) LENGTH(350)</code>. This means the error response is always a full pseudo-conversational cycle — the program terminates and waits for the next terminal input. It is not possible to loop inline within a single task invocation.</p>
+</li>
+<li>
+<p><strong>Error messages are set before calling <code>REDISPLAY-MENU</code> but the routine itself does not set any message:</strong> The message field <code>DMMMSG</code> is populated at the call site (lines 259, 263, 299). <code>REDISPLAY-MENU</code> only sends the map and returns. This means if <code>REDISPLAY-MENU</code> were ever called without a preceding message assignment, the map would display whatever was last in <code>DMMMSG</code>.</p>
+</li>
+</ul>
+<hr>
+<h3 id="76-data-structure--field-size-constraints" tabindex="-1">7.6 Data Structure &amp; Field-Size Constraints</h3>
+<ul>
+<li>
+<p><strong>COMMAREA fixed at 350 bytes (<code>DFHCOMMAREA PIC X(350)</code>):</strong> The Linkage Section defines <code>DFHCOMMAREA</code> as exactly 350 characters (line 229). The logical overlay <code>DLIS-COMMAREA</code> (lines 171–182) and all <code>EXEC CICS RETURN</code>/<code>XCTL</code> calls use the same 350-byte length, establishing a hard maximum for inter-program data exchange via COMMAREA in this system.</p>
+</li>
+<li>
+<p><strong><code>CA-TRANSACTION-ID</code> limited to 4 characters</strong> (<code>PIC X(4)</code>, line 172), matching the 4-character CICS transaction id constraint.</p>
+</li>
+<li>
+<p><strong><code>CA-USER-ID</code> and <code>WS-USER-ID</code> limited to 8 characters</strong> (<code>PIC X(8)</code>, lines 178, 34), matching the maximum CICS userid length.</p>
+</li>
+<li>
+<p><strong><code>CA-MSG-TEXT</code> limited to 78 characters</strong> (<code>PIC X(78)</code>, line 180), constraining the length of any user-facing message that can be communicated through the COMMAREA.</p>
+</li>
+<li>
+<p><strong><code>WS-RESP1</code> initialized to 0</strong> (<code>PIC S9(8) COMP VALUE 0</code>, line 223): The CICS response code field is pre-zeroed. However, the program performs no explicit check of <code>WS-RESP1</code> after <code>SEND MAP</code> or <code>RECEIVE MAP</code> — if either CICS command fails, the error is silently ignored and processing continues as if it succeeded.</p>
+</li>
+</ul>
+<h2 id="8-error-handling" tabindex="-1">8. Error Handling</h2>
+<h3 id="81-input-validation-and-user-notification" tabindex="-1">8.1 Input validation and user notification</h3>
+<ul>
+<li>Function key validation
+<ul>
+<li>After the map is received, the program checks which attention key (AID) was pressed.</li>
+<li>PF12 is treated as a normal exit. The program issues a CICS RETURN without a transaction ID, which ends the conversation.</li>
+<li>Any key other than ENTER is rejected. The program sets the message “PRESS ENTER TO SELECT OR F12 TO EXIT” in the map message field and redisplays the menu.</li>
+</ul>
+</li>
+<li>Missing selection check
+<ul>
+<li>If the option field is spaces or low-values, the user has not selected anything.</li>
+<li>The program sets the message “PLEASE SELECT AN OPTION (1-10)” and redisplays the menu.</li>
+</ul>
+</li>
+<li>Invalid option handling
+<ul>
+<li>The option is evaluated against the values 1 through 10, and each valid value transfers control to its target program.</li>
+<li>Any other value goes to the fallback branch, which sets the message “INVALID OPTION. PLEASE SELECT 1-10” and redisplays the menu.</li>
+<li>This branch is written as a bare OTHER, not WHEN OTHER. That is non-standard COBOL syntax and could cause a compile problem or stop the fallback from working as intended.</li>
+</ul>
+</li>
+<li>Message delivery
+<ul>
+<li>All user-facing errors are shown through the single message field on the menu map (DMMMSG).</li>
+<li>The message field is cleared on the first display of the screen, so no stale text carries over.</li>
+</ul>
+</li>
+</ul>
+<h3 id="82-recovery-and-fallback-logic" tabindex="-1">8.2 Recovery and fallback logic</h3>
+<ul>
+<li>Redisplay and re-enter the dialog
+<ul>
+<li>The redisplay routine sends the map with the DATAONLY and FREEKB options.
+<ul>
+<li>DATAONLY refreshes only the changed data and keeps the screen layout.</li>
+<li>FREEKB unlocks the keyboard so the user can correct the input.</li>
+</ul>
+</li>
+<li>It then issues a CICS RETURN with the DL01 transaction ID and the communication area. This makes the transaction pseudo-conversational, and the user can retry with the session context preserved.</li>
+<li>Because each validation failure ends in this routine, the later checks and the option dispatch are not reached. This works only because the routine ends in a RETURN.</li>
+</ul>
+</li>
+<li>First-entry handling
+<ul>
+<li>If no communication area was passed (length zero), the program treats the call as the first invocation. It displays a clean menu with the current date and an empty message, then returns with the same transaction ID.</li>
+<li>If a communication area was passed, the program restores it into the working copy and processes the user’s input. This is the normal path for a returning user.</li>
+</ul>
+</li>
+</ul>
+<h3 id="83-cics-response-handling" tabindex="-1">8.3 CICS response handling</h3>
+<ul>
+<li>Response code capture
+<ul>
+<li>The SEND MAP and RECEIVE MAP commands specify a response field (WS-RESP1). This suppresses the default CICS abend on conditions such as MAPFAIL, so an error response would not abend the transaction.</li>
+<li>The program never tests this field after any command.
+<ul>
+<li>A MAPFAIL or other receive error is not detected or reported.</li>
+<li>The program continues processing and tests the attention key and the option field, which may hold unexpected content.</li>
+<li>Errors on send operations are also silently ignored.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Unused error-support fields
+<ul>
+<li>The shared working storage defines further fields that are not referenced in this program’s logic:
+<ul>
+<li>WS-RESP2.</li>
+<li>Saved EIB response and EIB length fields.</li>
+<li>A common return code, message and message color.</li>
+<li>The SQL communication area.</li>
+<li>The return code, message text and message color in the communication area.</li>
+</ul>
+</li>
+<li>These fields are designed for common error propagation but are not used here.</li>
+</ul>
+</li>
+</ul>
+<h3 id="84-transfer-of-control-and-abnormal-conditions" tabindex="-1">8.4 Transfer of control and abnormal conditions</h3>
+<ul>
+<li>Program transfer commands
+<ul>
+<li>The XCTL commands to the target transaction programs have no RESP option and no HANDLE CONDITION or HANDLE ABEND.</li>
+<li>If a target program is not found or not enabled, CICS applies its default behavior and abends the task. The program has no recovery or user-friendly message for this case.</li>
+</ul>
+</li>
+<li>Termination
+<ul>
+<li>The program ends with STOP RUN after the main logic and after the option dispatch. Under CICS this normally ends the task.</li>
+<li>The paths that precede it end in a CICS RETURN, which ends the task before the STOP RUN is reached.</li>
+<li>There is no explicit abort or abend routine and no logging.</li>
+</ul>
+</li>
+</ul>
+<h3 id="85-gaps-and-limitations" tabindex="-1">8.5 Gaps and limitations</h3>
+<ul>
+<li>Validation is limited to the attention key and the option field. No further sanity checks are made on the communication area content or length beyond the zero-length test.</li>
+<li>The communication area length passed on RETURN and XCTL is a fixed 350 bytes. No check confirms that this matches the actual structure size.</li>
+<li>The 10-option check compares against a literal that may not fit the one-character option field. Option 10 may therefore be unreachable, and “10” could be treated as invalid, depending on the map field definition.</li>
+<li>The program contains no retry counters, no error logging or queue writing, and no database or file error handling. The SQL communication area is declared but no SQL is executed.</li>
+<li>No MQ operations are present in this program.</li>
+</ul>
+<h2 id="9-examples" tabindex="-1">9. Examples</h2>
+<h3 id="91-example-1-first-entry-to-transaction-dl01" tabindex="-1">9.1 Example 1: First entry to transaction DL01</h3>
+<p><strong>Input</strong></p>
+<ul>
+<li>Transaction <code>DL01</code> is started from a blank terminal.</li>
+<li><code>EIBCALEN = 0</code>, so there is no COMMAREA.</li>
+</ul>
+<p><strong>Expected output</strong></p>
+<ul>
+<li>The <code>DLISMM01</code> menu is displayed with the screen erased and the keyboard freed.</li>
+<li>The date field <code>DMMDATE</code> shows the first 10 characters of <code>CURRENT-DATE</code>.</li>
+<li>The message line <code>DMMMSG</code> is blank.</li>
+<li>The task ends with <code>RETURN TRANSID('DL01')</code>, passing <code>DLIS-COMMAREA</code> with length 350. The next Enter key press restarts <code>DL01</code> with a COMMAREA.</li>
+</ul>
+<p><strong>Explanation</strong>
+<code>MAIN-LOGIC</code> sees <code>EIBCALEN = 0</code> and performs <code>INIT-SCREEN</code>. That paragraph sends the map and returns pseudo-conversationally.</p>
+<h3 id="92-example-2-valid-option-selected" tabindex="-1">9.2 Example 2: Valid option selected</h3>
+<p><strong>Input</strong></p>
+<ul>
+<li>The user types <code>3</code> in <code>DMMOPT</code> (the “SELECT OPTION” field) and presses ENTER.</li>
+<li><code>EIBCALEN = 350</code>.</li>
+</ul>
+<p><strong>Expected output</strong></p>
+<ul>
+<li>Control transfers with <code>XCTL PROGRAM('DLISAPPL')</code>. The 350-byte <code>DLIS-COMMAREA</code> is passed along.</li>
+<li>The user sees the New License Application screen.</li>
+</ul>
+<p><strong>Explanation</strong></p>
+<ul>
+<li><code>DFHCOMMAREA</code> is moved to <code>DLIS-COMMAREA</code>, and <code>PROCESS-INPUT</code> receives the map.</li>
+<li><code>EIBAID = DFHENTER</code> and the option is not blank, so <code>EVALUATE DMMOPTI</code> is reached.</li>
+<li><code>WHEN '3'</code> selects <code>DLISAPPL</code>.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Target program</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1, 2</td>
+<td><code>DLISCAND</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>DLISAPPL</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>DLISSTAT</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>DLISELIG</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>DLISHIST</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>DLISPAY</code></td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>DLISAP1</code></td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>DLISAP2</code></td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>DLISISSU</code></td>
+</tr>
+</tbody>
+</table>
+<p>Options 1 (Candidate Maintenance) and 2 (Candidate Inquiry) both go to <code>DLISCAND</code>. The menu does not set anything in the COMMAREA to tell them apart.</p>
+<h3 id="93-example-3-blank-or-invalid-selection" tabindex="-1">9.3 Example 3: Blank or invalid selection</h3>
+<p><strong>Input A</strong></p>
+<ul>
+<li>The user leaves the option blank and presses ENTER.</li>
+</ul>
+<p><strong>Output A</strong></p>
+<ul>
+<li>The menu is redisplayed with <code>PLEASE SELECT AN OPTION (1-10)</code> in the message line.</li>
+</ul>
+<p><strong>Input B</strong></p>
+<ul>
+<li>The user enters <code>42</code> and presses ENTER.</li>
+</ul>
+<p><strong>Output B</strong></p>
+<ul>
+<li>The menu is redisplayed with <code>INVALID OPTION. PLEASE SELECT 1-10</code>.</li>
+</ul>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>For a blank or low-values option, the program moves the “please select” text to <code>DMMMSG</code> and performs <code>REDISPLAY-MENU</code>.</li>
+<li>For <code>42</code>, no <code>WHEN</code> matches. The <code>OTHER</code> branch sets the error text and performs <code>REDISPLAY-MENU</code>.</li>
+<li><code>REDISPLAY-MENU</code> sends only the changed data (<code>DATAONLY</code>) and issues <code>RETURN TRANSID('DL01')</code>, so the user stays on the menu.</li>
+</ul>
+<h3 id="94-example-4-function-keys" tabindex="-1">9.4 Example 4: Function keys</h3>
+<p><strong>Input A</strong></p>
+<ul>
+<li>The user presses PF12.</li>
+</ul>
+<p><strong>Output A</strong></p>
+<ul>
+<li><code>EXEC CICS RETURN</code> ends the transaction without a <code>TRANSID</code>. The conversation with the menu stops.</li>
+</ul>
+<p><strong>Input B</strong></p>
+<ul>
+<li>The user presses any other AID key, such as PF3 or CLEAR.</li>
+</ul>
+<p><strong>Output B</strong></p>
+<ul>
+<li>The menu is redisplayed with <code>PRESS ENTER TO SELECT OR F12 TO EXIT</code>.</li>
+</ul>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>PF12 is tested first, right after <code>RECEIVE MAP</code>.</li>
+<li>Any key other than ENTER or PF12 produces the hint text and a redisplay, and the task returns to transaction <code>DL01</code>.</li>
+</ul>
+
+                    </article>
+                    <nav class="toc-panel" aria-label="On this page">
+  <span class="toc-panel-label">On this page</span>
+  <ul class="toc-list">
+<li class="toc-level-2"><a href="#1-purpose">1. Purpose</a></li>
+<li class="toc-level-2"><a href="#2-inputs">2. Inputs</a>
+<ul>
+<li class="toc-level-3"><a href="#21-cics-communication-area-dfhcommarea--dlis-commarea">2.1 CICS Communication Area (DFHCOMMAREA / DLIS-COMMAREA)</a></li>
+<li class="toc-level-3"><a href="#22-bms-map-input-exec-cics-receive-map">2.2 BMS Map Input (EXEC CICS RECEIVE MAP)</a></li>
+<li class="toc-level-3"><a href="#23-cics-execution-interface-block-eib">2.3 CICS Execution Interface Block (EIB)</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#3-outputs">3. Outputs</a>
+<ul>
+<li class="toc-level-3"><a href="#31-user-interface-and-map-outputs">3.1 User Interface and Map Outputs</a></li>
+<li class="toc-level-3"><a href="#32-cics-navigation-and-program-control-outputs">3.2 CICS Navigation and Program Control Outputs</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#4-processing-logic">4. Processing Logic</a>
+<ul>
+<li class="toc-level-3"><a href="#41-mermaid-flow-diagram">4.1 Mermaid Flow Diagram</a></li>
+<li class="toc-level-3"><a href="#42-processing-logic-description">4.2 Processing Logic Description</a>
+<ul>
+<li class="toc-level-4"><a href="#421-high-level-summary">4.2.1 High-level Summary</a></li>
+<li class="toc-level-4"><a href="#422-execution-flow">4.2.2 Execution Flow</a></li>
+<li class="toc-level-4"><a href="#423-external-interactions">4.2.3 External Interactions</a></li>
+<li class="toc-level-4"><a href="#424-plain-language-summary">4.2.4 Plain Language Summary</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#43-database-tables">4.3 Database Tables</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#5-paragraphs">5. Paragraphs</a></li>
+<li class="toc-level-2"><a href="#6-dependencies">6. Dependencies</a>
+<ul>
+<li class="toc-level-3"><a href="#61-cics-resources">6.1 CICS Resources</a></li>
+<li class="toc-level-3"><a href="#62-copybooks">6.2 Copybooks</a></li>
+<li class="toc-level-3"><a href="#63-linkage--communication-area">6.3 Linkage / Communication Area</a></li>
+<li class="toc-level-3"><a href="#64-external-programs-xctl-targets">6.4 External Programs (XCTL Targets)</a></li>
+<li class="toc-level-3"><a href="#65-db2--sql">6.5 DB2 / SQL</a></li>
+<li class="toc-level-3"><a href="#66-build--runtime-infrastructure">6.6 Build &amp;amp; Runtime Infrastructure</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#7-constraints">7. Constraints</a>
+<ul>
+<li class="toc-level-3"><a href="#71-invocation--session-lifecycle">7.1 Invocation &amp;amp; Session Lifecycle</a></li>
+<li class="toc-level-3"><a href="#72-terminal-input--aid-key-validation">7.2 Terminal Input / AID Key Validation</a></li>
+<li class="toc-level-3"><a href="#73-menu-option-input-validation">7.3 Menu Option Input Validation</a></li>
+<li class="toc-level-3"><a href="#74-control-transfer--program-routing">7.4 Control-Transfer &amp;amp; Program Routing</a></li>
+<li class="toc-level-3"><a href="#75-screen-redisplay-loop-constraints">7.5 Screen Redisplay Loop Constraints</a></li>
+<li class="toc-level-3"><a href="#76-data-structure--field-size-constraints">7.6 Data Structure &amp;amp; Field-Size Constraints</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#8-error-handling">8. Error Handling</a>
+<ul>
+<li class="toc-level-3"><a href="#81-input-validation-and-user-notification">8.1 Input validation and user notification</a></li>
+<li class="toc-level-3"><a href="#82-recovery-and-fallback-logic">8.2 Recovery and fallback logic</a></li>
+<li class="toc-level-3"><a href="#83-cics-response-handling">8.3 CICS response handling</a></li>
+<li class="toc-level-3"><a href="#84-transfer-of-control-and-abnormal-conditions">8.4 Transfer of control and abnormal conditions</a></li>
+<li class="toc-level-3"><a href="#85-gaps-and-limitations">8.5 Gaps and limitations</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#9-examples">9. Examples</a>
+<ul>
+<li class="toc-level-3"><a href="#91-example-1-first-entry-to-transaction-dl01">9.1 Example 1: First entry to transaction DL01</a></li>
+<li class="toc-level-3"><a href="#92-example-2-valid-option-selected">9.2 Example 2: Valid option selected</a></li>
+<li class="toc-level-3"><a href="#93-example-3-blank-or-invalid-selection">9.3 Example 3: Blank or invalid selection</a></li>
+<li class="toc-level-3"><a href="#94-example-4-function-keys">9.4 Example 4: Function keys</a></li>
+</ul>
+</li>
+</ul>
+
+</nav>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="wiki-footer">Made by IBM Bob Premium Package for Z</footer>
+    <script>
+    /* toc-spy.js — highlights the active heading in the TOC panel on scroll */
+    (function () {
+      function init() {
+        var panel = document.querySelector('.toc-panel');
+        if (!panel) return;
+        var links = Array.prototype.slice.call(panel.querySelectorAll('a[href^="#"]'));
+        if (!links.length) return;
+
+        var headingIds = links.map(function (a) { return a.getAttribute('href').slice(1); });
+        var headings = headingIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+        function clearActive() {
+          panel.querySelectorAll('.toc-active').forEach(function (el) { el.classList.remove('toc-active'); });
+          panel.querySelectorAll('.toc-parent-active').forEach(function (el) { el.classList.remove('toc-parent-active'); });
+        }
+
+        function setActive(id) {
+          clearActive();
+          var link = panel.querySelector('a[href="#' + id + '"]');
+          if (!link) return;
+          link.classList.add('toc-active');
+          var li = link.closest('li');
+          if (li) {
+            var parentLi = li.parentElement && li.parentElement.closest('li');
+            if (parentLi) parentLi.classList.add('toc-parent-active');
+          }
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+        headings.forEach(function (h) { observer.observe(h); });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
+    <script>
+    /* breadcrumb.js — reads sessionStorage['wiki_referrer'] and renders breadcrumb.
+       Only fires when the referrer was set by clicking a link inside the Source Files
+       disclosure on a wiki page; clears after rendering so stale state never lingers. */
+    (function () {
+      var raw;
+      try { raw = sessionStorage.getItem('wiki_referrer'); } catch (_e) {}
+      if (!raw) return;
+      /* Consume immediately — prevents the breadcrumb re-appearing on the next visit. */
+      try { sessionStorage.removeItem('wiki_referrer'); } catch (_e) {}
+      var ref;
+      try { ref = JSON.parse(raw); } catch (_e) { return; }
+      if (!ref || !ref.href) return;
+      var bc = document.getElementById('wiki-breadcrumb');
+      if (!bc) return;
+      bc.className = 'wiki-breadcrumb';
+      bc.innerHTML =
+        '<a href="' + ref.href + '">' + (ref.title || 'Back') + '</a>' +
+        '<span class="wiki-breadcrumb-sep"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' +
+        '<span class="wiki-breadcrumb-current">DLISMENU</span>';
+    })();
+    </script>
+    <script>
+    /* sidebar toggle — same as main wiki pages */
+    (function () {
+
+      var STORAGE_KEY = 'sb_open';
+
+      function getOpenSet() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+      }
+
+      function saveOpenSet(set) {
+        try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(set)); } catch (e) {}
+      }
+
+      function findItems(toggle) {
+        var node = toggle.nextSibling;
+        while (node) {
+          if (node.nodeType === 1 && node.classList.contains('nav-section-items'))
+            return node;
+          node = node.nextSibling;
+        }
+        return null;
+      }
+
+      function toggleKey(toggle, index) {
+        var label = (toggle.querySelector('.nav-toggle-text') || toggle).textContent.trim().replace(/\s+/g, ' ');
+        return index + ':' + label;
+      }
+
+      function openSection(toggle, items, key, set) {
+        toggle.classList.add('open');
+        items.classList.add('open');
+        if (set) set[key] = true;
+      }
+
+      function closeSection(toggle, items, key, set) {
+        toggle.classList.remove('open');
+        items.classList.remove('open');
+        if (set) set[key] = false;
+      }
+
+      function init() {
+        var sidebar = document.getElementById('wiki-sidebar');
+        var toggles = Array.prototype.slice.call(
+          document.querySelectorAll('.nav-section-toggle')
+        );
+
+        var savedSet = getOpenSet();
+        var openSet = savedSet || {};
+
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+
+          var key = toggleKey(toggle, idx);
+          var shouldOpen = openSet[key] === true;
+
+          if (shouldOpen) {
+            toggle.classList.add('open');
+            items.classList.add('open');
+          }
+
+          toggle.addEventListener('click', function () {
+            var nowOpen = toggle.classList.contains('open');
+            if (nowOpen) {
+              closeSection(toggle, items, key, openSet);
+            } else {
+              openSection(toggle, items, key, openSet);
+            }
+            saveOpenSet(openSet);
+          });
+        });
+
+        saveOpenSet(openSet);
+
+        /* Restore sidebar scroll position after sections are expanded so the
+           scroll height is correct when we apply scrollTop. */
+        if (sidebar) {
+          try {
+            var savedScroll = sessionStorage.getItem('sb_scroll');
+            if (savedScroll !== null) { sidebar.scrollTop = parseInt(savedScroll, 10) || 0; }
+          } catch (_e) {}
+        }
+
+        window.addEventListener('pagehide', function () {
+          saveOpenSet(openSet);
+          if (sidebar) {
+            try { sessionStorage.setItem('sb_scroll', String(sidebar.scrollTop)); } catch (_e) {}
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+    </script>
+</body>
+</html>

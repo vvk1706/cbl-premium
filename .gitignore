@@ -1,0 +1,17 @@
+# Bob Z Extension - Local data dictionary
+DD.json
+
+# Excluded reports
+reports/step-by-step.html
+reports/step-by-step.pdf
+reports/step-by-step.fld/
+.DS_Store
+~$*
+docs/html/pages/application-lifecycle-flow.html
+docs/html/sources/program/cobol/DLISELIG.html
+
+# Local tooling / agent files
+.bob/
+.bobz/
+zapp.yaml
+AGENTS.md

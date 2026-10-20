@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DLIS Application - AGENTS.md Creation Summary Report</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f7f8fa;
+      --border: #e5e7eb;
+      --text: #1f2328;
+      --muted: #57606a;
+      --accent: #3b82d4;
+      --success: #1a7f37;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: var(--bg);
+      padding: 32px 16px;
+    }
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    header {
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    h1 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      font-size: 12px;
+      font-weight: 500;
+      border-radius: 4px;
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      margin-top: 8px;
+    }
+    .badge.status-ok {
+      color: var(--success);
+      border-color: #bbf7d0;
+      background-color: #f0fdf4;
+    }
+    section {
+      margin-bottom: 24px;
+    }
+    h2 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    .card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    .card-title {
+      font-weight: 600;
+      font-size: 13px;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    ul {
+      list-style-type: disc;
+      padding-left: 20px;
+      margin-bottom: 8px;
+    }
+    li {
+      margin-bottom: 4px;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 12px;
+      background-color: rgba(175, 184, 193, 0.2);
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+    th, td {
+      text-align: left;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+    }
+    th {
+      background-color: var(--surface);
+      font-weight: 600;
+    }
+    footer {
+      margin-top: 36px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>AGENTS.md Generation Summary</h1>
+      <p class="subtitle">Driver License Issuance System (DLIS) &bull; IBM Z Mainframe Architecture</p>
+      <span class="badge status-ok">&#10003; Initialization &amp; Setup Completed</span>
+    </header>
+
+    <section>
+      <h2>Workspace Profile</h2>
+      <div class="card">
+        <div class="grid">
+          <div>
+            <strong>Application Platform:</strong> IBM Z<br>
+            <strong>Environment:</strong> CICS TS / IBM Db2 for z/OS<br>
+            <strong>Primary Language:</strong> IBM Enterprise COBOL for z/OS
+          </div>
+          <div>
+            <strong>UI / Screen Definition:</strong> BMS (HLASM macros)<br>
+            <strong>Job Control &amp; Procedures:</strong> JCL, PROCs<br>
+            <strong>Schema &amp; Grants:</strong> DB2 SQL DDL
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Build, Execution &amp; Resource Flow</h2>
+      <div class="card">
+        <ul>
+          <li><code>jcl/DLISBMS.jcl</code> &mdash; Assembles BMS mapsets (Phase 1 binary to load library, Phase 2 symbolic DSECT copybooks) using procedure <code>proc/DLISBASM.proc</code>.</li>
+          <li><code>jcl/DLISCOMP.jcl</code> &mdash; Precompiles DB2 SQL via <code>DSNHPC</code>, compiles COBOL via <code>IGYCRCTL</code>, links modules via <code>IEWL</code> using procedure <code>proc/DLISCLNK.proc</code>.</li>
+          <li><code>jcl/DLISBIND.jcl</code> &mdash; Binds compiled DBRMs into DB2 collection <code>DLISPKG</code> and plan <code>DLISPLAN</code> on subsystem <code>DSN1</code>.</li>
+          <li><code>jcl/DLISDB2.jcl</code> &mdash; Executes DDL tables, indexes, and grant statements in sequence.</li>
+          <li><code>csd/DLISCSD.csd</code> &mdash; CICS CSD definitions registering transactions <code>DL01</code>&ndash;<code>DL10</code> and programs in group <code>DLISGRP</code>.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Key Architectural Conventions</h2>
+      <div class="card">
+        <ul>
+          <li><strong>Pseudo-Conversational Flow:</strong> All transactions evaluate <code>EIBCALEN</code> for initial setup vs conversational processing and return control via <code>EXEC CICS RETURN TRANSID(...) COMMAREA(...)</code>.</li>
+          <li><strong>Communication Area:</strong> Inter-program commareas defined in <code>copybook/DLISCSEC.cpy</code> (350-byte layout).</li>
+          <li><strong>Common Data &amp; Status:</strong> Return codes and shared storage centralized in <code>copybook/DLISWS.cpy</code>.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>COBOL Programs &amp; Component Map</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Program</th>
+            <th>Related Artifacts</th>
+            <th>Functional Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>cobol/DLISMENU.cbl</code></td>
+            <td><code>csd/DLISCSD.csd</code>, <code>bms/DLISMM.bms</code></td>
+            <td>Main Menu Routing (Trans: DL01)</td>
+          </tr>
+          <tr>
+            <td><code>cobol/DLISCAND.cbl</code></td>
+            <td><code>csd/DLISCSD.csd</code>, <code>bms/DLISCM.bms</code>, DB2 SQL</td>
+            <td>Candidate Maintenance (Trans: DL02)</td>
+          </tr>
+          <tr>
+            <td><code>cobol/DLISAPPL.cbl</code></td>
+            <td><code>csd/DLISCSD.csd</code>, <code>bms/DLISAE.bms</code>, DB2 SQL</td>
+            <td>License Application Entry (Trans: DL03)</td>
+          </tr>
+          <tr>
+            <td><code>cobol/DLISELIG.cbl</code></td>
+            <td><code>csd/DLISCSD.csd</code>, <code>bms/DLISECHPE.bms</code>, DB2 SQL</td>
+            <td>Eligibility Checking (Trans: DL04)</td>
+          </tr>
+          <tr>
+            <td><code>cobol/DLISHIST.cbl</code></td>
+            <td><code>csd/DLISCSD.csd</code>, <code>bms/DLISECHPE.bms</code>, DB2 SQL</td>
+            <td>Driving History Verification (Trans: DL05)</td>
+          </tr>
+          <tr>
+            <td><code>cobol/DLISPAY.cbl</code></td>
+            <td><code>csd/DLISCSD.csd</code>, <code>bms/DLISECHPE.bms</code>, DB2 SQL</td>
+            <td>Payment Entry &amp; Processing (Trans: DL06)</td>
+          </tr>
+          <tr>
+            <td><code>cobol/DLISAP1.cbl</code></td>
+            <td><code>csd/DLISCSD.csd</code>, <code>bms/DLISAPPR.bms</code>, DB2 SQL</td>
+            <td>First Authority Approval (Trans: DL07)</td>
+          </tr>
+          <tr>
+            <td><code>cobol/DLISAP2.cbl</code></td>
+            <td><code>csd/DLISCSD.csd</code>, <code>bms/DLISAPPR.bms</code>, DB2 SQL</td>
+            <td>Second Authority Approval (Trans: DL08)</td>
+          </tr>
+          <tr>
+            <td><code>cobol/DLISISSU.cbl</code></td>
+            <td><code>csd/DLISCSD.csd</code>, <code>bms/DLISAPPR.bms</code>, DB2 SQL</td>
+            <td>License Issuance (Trans: DL09)</td>
+          </tr>
+          <tr>
+            <td><code>cobol/DLISSTAT.cbl</code></td>
+            <td><code>csd/DLISCSD.csd</code>, <code>bms/DLISAPPR.bms</code>, DB2 SQL</td>
+            <td>Status Inquiry (Trans: DL10)</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer>
+      Made with IBM Bob
+    </footer>
+  </div>
+</body>
+</html>

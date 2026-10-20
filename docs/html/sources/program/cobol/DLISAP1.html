@@ -1,0 +1,1576 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLISAP1</title>
+    <link rel="stylesheet" href="../../../assets/style.css">
+    <script src="../../../assets/mermaid.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+
+    <!-- Prism.js for syntax highlighting (bundled — no CDN required) -->
+    <link rel="stylesheet" href="../../../assets/prism-tomorrow.css">
+    <script src="../../../assets/prism-core.js"></script>
+    <script src="../../../assets/prism-languages.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="header-app-name"><a href="../../../../index.html" style="color: inherit; text-decoration: none;">Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</a></span>
+        </div>
+        <div class="header-right">
+        </div>
+    </header>
+    <div class="shell">
+        <aside class="sidebar" id="wiki-sidebar">
+            <nav>
+                
+        <div class="nav-home-wrap">
+            <a href="../../../../index.html" class="nav-home">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 6.5L8 2l6 4.5V14a1 1 0 01-1 1H3a1 1 0 01-1-1V6.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M6 15V9h4v6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                Home
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Application Documentation</div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Overview</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/system-overview.html" class="nav-link" data-page-id="system-overview">DLIS System Overview</a>
+                <a href="../../../pages/main-menu-navigation.html" class="nav-link" data-page-id="main-menu-navigation">Main Menu &amp; Navigation (DL01)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Candidate &amp; Application Intake</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/candidate-management.html" class="nav-link" data-page-id="candidate-management">Candidate Maintenance (DL02)</a>
+                <a href="../../../pages/license-application-entry.html" class="nav-link" data-page-id="license-application-entry">License Application Entry (DL03)</a>
+                <a href="../../../pages/application-status-inquiry.html" class="nav-link" data-page-id="application-status-inquiry">Application Status Inquiry (DL04)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Verification &amp; Payment</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/eligibility-check.html" class="nav-link" data-page-id="eligibility-check">Eligibility Check (DL05)</a>
+                <a href="../../../pages/driving-history-check.html" class="nav-link" data-page-id="driving-history-check">Driving History Check (DL06)</a>
+                <a href="../../../pages/payment-processing.html" class="nav-link" data-page-id="payment-processing">Payment Entry &amp; Processing (DL07)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Approval &amp; License Issuance</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/first-level-approval.html" class="nav-link" data-page-id="first-level-approval">First-Level Authority Approval (DL08)</a>
+                <a href="../../../pages/second-level-approval.html" class="nav-link" data-page-id="second-level-approval">Second-Level Authority Approval (DL09)</a>
+                <a href="../../../pages/license-issuance.html" class="nav-link" data-page-id="license-issuance">License Issuance (DL10)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Architecture</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/application-lifecycle-flow.html" class="nav-link" data-page-id="application-lifecycle-flow">Application Lifecycle &amp; Status Flow</a>
+                <a href="../../../pages/data-architecture.html" class="nav-link" data-page-id="data-architecture">Data Architecture (DB2)</a>
+                <a href="../../../pages/cics-integration-patterns.html" class="nav-link" data-page-id="cics-integration-patterns">CICS Integration Patterns</a>
+            </div>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Program Documentation</div>
+    <div class="nav-section">
+        <button class="nav-section-toggle open" type="button">
+            <span class="nav-toggle-text">program</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items open">
+        <div class="nav-section">
+            <button class="nav-section-toggle open" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items open">
+                <a href="../../../sources/program/cobol/DLISPAY.html" class="nav-link">DLISPAY</a>
+                <a href="../../../sources/program/cobol/DLISSTAT.html" class="nav-link">DLISSTAT</a>
+                <a href="../../../sources/program/cobol/DLISMENU.html" class="nav-link">DLISMENU</a>
+                <a href="../../../sources/program/cobol/DLISELIG.html" class="nav-link">DLISELIG</a>
+                <a href="../../../sources/program/cobol/DLISCAND.html" class="nav-link">DLISCAND</a>
+                <a href="../../../sources/program/cobol/DLISAPPL.html" class="nav-link">DLISAPPL</a>
+                <a href="../../../sources/program/cobol/DLISISSU.html" class="nav-link">DLISISSU</a>
+                <a href="../../../sources/program/cobol/DLISAP2.html" class="nav-link">DLISAP2</a>
+                <a href="../../../sources/program/cobol/DLISHIST.html" class="nav-link">DLISHIST</a>
+                <a href="../../../sources/program/cobol/DLISAP1.html" class="nav-link active">DLISAP1</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">business-rule</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../sources/business-rule/cobol/DLISELIG-overview.html" class="nav-link">DLISELIG-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-inventory.html" class="nav-link">DLISPAY-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-overview.html" class="nav-link">DLISCAND-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-inventory.html" class="nav-link">DLISAP2-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-inventory.html" class="nav-link">DLISHIST-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-inventory.html" class="nav-link">DLISMENU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISELIG-inventory.html" class="nav-link">DLISELIG-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-overview.html" class="nav-link">DLISPAY-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-overview.html" class="nav-link">DLISSTAT-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-overview.html" class="nav-link">DLISHIST-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-overview.html" class="nav-link">DLISAPPL-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-inventory.html" class="nav-link">DLISISSU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-inventory.html" class="nav-link">DLISAPPL-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-inventory.html" class="nav-link">DLISSTAT-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-overview.html" class="nav-link">DLISAP1-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-inventory.html" class="nav-link">DLISCAND-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-overview.html" class="nav-link">DLISAP2-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-overview.html" class="nav-link">DLISISSU-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-inventory.html" class="nav-link">DLISAP1-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-overview.html" class="nav-link">DLISMENU-overview</a>
+            </div>
+        </div>
+        </div>
+    </div>
+            </nav>
+        </aside>
+        <main class="main">
+            <div class="prog-container">
+                <div id="wiki-breadcrumb"></div>
+                <div class="content-layout">
+                    <article class="prose">
+                        <h2 id="1-purpose" tabindex="-1">1. Purpose</h2>
+<p>DLISAP1 is a CICS/COBOL interactive transaction (transaction ID DL08) that manages the <strong>first-level authority approval</strong> step in a driver’s license application workflow. An authority user loads a license application by its ID — which retrieves the applicant’s personal details, license type, eligibility and history check outcomes, and payment information — then validates their own identity and approval rights against the authority user database, confirming they are an active level-1 authority permitted to handle the given license type. Once all preconditions are satisfied (payment completed, authority validated, license type authorized), the user enters an approve or reject decision: an approval advances the application to status <code>A2</code> for second-level review, while a rejection closes it with status <code>RE</code>, and in both cases the decision, authority name, date, and any notes are written back to the license application record in DB2.</p>
+<h2 id="2-inputs" tabindex="-1">2. Inputs</h2>
+<h3 id="21-screen--map-inputs-cics-bms--map-dlisa1m01-mapset-dlisa1" tabindex="-1">2.1 Screen / Map Inputs (CICS BMS — Map <code>DLISA1M01</code>, Mapset <code>DLISA1</code>)</h3>
+<ul>
+<li><strong><code>DA1AIDI</code></strong> — Application ID entered by the user on the screen. Used as the key to retrieve the license application record from DB2 and to anchor the approval update.</li>
+<li><strong><code>DA1AUCOI</code></strong> — Authority user code entered on the screen. Used as the key to look up and validate the approving authority in the <code>DLIS.AUTHORITY_USER</code> table; also written to the <code>LAST_UPDATED_BY</code> column on update.</li>
+<li><strong><code>DA1DECI</code></strong> — Approver’s decision entered on the screen (<code>A</code> = Approve, <code>R</code> = Reject). Drives the new application status (<code>A2</code> or <code>RE</code>) and the approval outcome message.</li>
+<li><strong><code>DA1DCNTI</code></strong> — Decision notes entered on the screen. Written directly to the <code>APPROVAL_1_NOTES</code> column of the license application record.</li>
+</ul>
+<h3 id="22-cics-system-inputs" tabindex="-1">2.2 CICS System Inputs</h3>
+<ul>
+<li><strong><code>EIBCALEN</code></strong> — CICS Execute Interface Block field indicating the length of the passed COMMAREA. A value of <code>0</code> signals the first (cold) entry to the program, triggering screen initialisation; any non-zero value means the program has been re-entered after a user action.</li>
+<li><strong><code>EIBAID</code></strong> — CICS attention identifier indicating which PF key the user pressed (<code>PF1</code> = submit approval, <code>PF3</code> = load application, <code>PF4</code> = validate authority, <code>PF12</code> = exit). Controls the main processing branch.</li>
+<li><strong><code>DFHCOMMAREA</code></strong> — 350-byte CICS communication area passed back on each pseudo-conversational return. Mapped to <code>DLIS-COMMAREA</code>, it carries the transaction context (transaction ID, candidate/application/payment IDs, user ID, return code, and message) between conversational cycles.</li>
+</ul>
+<h3 id="23-db2-database-inputs" tabindex="-1">2.3 DB2 Database Inputs</h3>
+<ul>
+<li>
+<p><strong><code>DLIS.LICENSE_APPLICATION</code> table</strong> — Queried (via <code>LOAD-APPLICATION</code>) and updated (via <code>SUBMIT-APPROVAL1</code>) using <code>APPLICATION-ID</code> as the key. Columns read into the program:</p>
+<ul>
+<li><code>APPLICATION-STATUS</code> — current workflow status; must be a valid state for approval processing; updated to <code>A2</code> (approved) or <code>RE</code> (rejected).</li>
+<li><code>LICENSE-TYPE</code> — classification of the license being applied for; checked against the authority’s permitted types.</li>
+<li><code>ELIG-CHECK-STATUS</code> — outcome of the eligibility check; displayed to the approver.</li>
+<li><code>HIST-CHECK-STATUS</code> — outcome of the history check; displayed to the approver.</li>
+<li><code>PAYMENT-STATUS</code> — must equal <code>'P'</code> (payment completed) before the first approval can proceed.</li>
+<li><code>PAYMENT-REFERENCE</code> — payment reference identifier; displayed to the approver.</li>
+<li><code>ELIG-CHECK-NOTES</code> / <code>HIST-CHECK-NOTES</code> — supporting notes displayed to the approver.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>DLIS.CANDIDATE</code> table</strong> — Joined to <code>LICENSE_APPLICATION</code> during load. Columns read:</p>
+<ul>
+<li><code>FIRST-NAME</code> / <code>LAST-NAME</code> — applicant’s name; combined and displayed on screen to identify the candidate.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>DLIS.AUTHORITY_USER</code> table</strong> — Queried (via <code>VALIDATE-AUTHORITY</code>) using <code>USER-CODE</code> as the key, filtered to active (<code>ACTIVE_STATUS = 'A'</code>) level-1 authorities. Columns read:</p>
+<ul>
+<li><code>USER-NAME</code> — name of the authority user; displayed on screen.</li>
+<li><code>AUTHORITY-NAME</code> — formal authority name; displayed on screen and written to <code>APPROVAL_1_AUTHORITY</code> on update.</li>
+<li><code>AUTHORITY-LEVEL</code> — approval level; only level <code>'1'</code> users are accepted.</li>
+<li><code>LIC-TYPES-AUTH</code> — list of license types the authority is permitted to approve; the application’s license type must appear in this list.</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-outputs" tabindex="-1">3. Outputs</h2>
+<h3 id="31-screen-output-bms-map-dlisa1--dlisa1m01-sent-with-cics-send-map" tabindex="-1">3.1 Screen output (BMS map DLISA1 / DLISA1M01, sent with CICS SEND MAP)</h3>
+<ul>
+<li>Message line (<code>DA1MSG</code>): the main user feedback field. It shows one of these messages:
+<ul>
+<li>Prompts and validation errors:
+<ul>
+<li>“USE F1 F3 F4 OR F12” for any other key</li>
+<li>“ENTER APPLICATION ID”</li>
+<li>“ENTER AUTHORITY USER CODE”</li>
+<li>“AUTHORITY USER CODE IS REQUIRED”</li>
+<li>“DECISION MUST BE A=APPROVE OR R=REJECT”</li>
+</ul>
+</li>
+<li>Lookup results:
+<ul>
+<li>“APPLICATION LOADED”</li>
+<li>“APPLICATION NOT FOUND”</li>
+<li>“AUTHORITY USER VALIDATED”</li>
+<li>“AUTHORITY USER NOT FOUND OR NOT ACTIVE AT LEVEL 1”</li>
+</ul>
+</li>
+<li>Business-rule rejections:
+<ul>
+<li>“PAYMENT MUST BE COMPLETED BEFORE FIRST APPROVAL”</li>
+<li>“AUTHORITY NOT AUTHORISED FOR THIS LICENSE TYPE”</li>
+</ul>
+</li>
+<li>Approval outcomes:
+<ul>
+<li>“FIRST APPROVAL RECORDED - FORWARDED FOR 2ND APPROVAL” when the decision is <code>A</code></li>
+<li>“FIRST APPROVAL REJECTED - APPLICATION CLOSED” when the decision is <code>R</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Application details shown after a successful load (F3, or the load step inside F1):
+<ul>
+<li>Candidate full name (<code>DA1CNAMO</code>), built from <code>FIRST-NAME</code> and <code>LAST-NAME</code></li>
+<li>License type (<code>DA1LTYO</code>) from <code>LICENSE-TYPE</code></li>
+<li>Application status (<code>DA1ASTTO</code>) from <code>APPLICATION-STATUS</code></li>
+<li>Supporting check information for the approver:
+<ul>
+<li>Eligibility check status (<code>DA1ELIGO</code>) from <code>ELIG-CHECK-STATUS</code></li>
+<li>History check status (<code>DA1HISTO</code>) from <code>HIST-CHECK-STATUS</code></li>
+<li>Eligibility check notes (<code>DA1ELNTO</code>)</li>
+<li>History check notes (<code>DA1HSNTO</code>)</li>
+</ul>
+</li>
+<li>Payment information:
+<ul>
+<li>Payment status (<code>DA1PAYO</code>) from <code>PAYMENT-STATUS</code></li>
+<li>Payment reference (<code>DA1PYRFO</code>) from <code>PAYMENT-REFERENCE</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Authority user details shown after validation (F4, or the validation step inside F1):
+<ul>
+<li>Authority display field (<code>DA1AUNMO</code>). The program moves <code>USER-NAME</code> into it and then overwrites it with <code>AUTHORITY-NAME</code>, so the screen shows only the authority name.</li>
+</ul>
+</li>
+<li>Initial screen:
+<ul>
+<li>On first entry the program moves a date value to <code>DA1DATE</code>. It then sends the blank map with ERASE and FREEKB.</li>
+<li>On later interactions it sends the map with DATAONLY and FREEKB.</li>
+</ul>
+</li>
+</ul>
+<h3 id="32-database-updates-db2-table-dlislicense_application" tabindex="-1">3.2 Database updates (DB2 table DLIS.LICENSE_APPLICATION)</h3>
+<ul>
+<li>Performed once, when F1 (submit) passes all validations. The row is selected by <code>APPLICATION-ID</code>. These columns are written:
+<ul>
+<li>First-approval decision:
+<ul>
+<li><code>APPROVAL_1_STATUS</code> is set from <code>WS-DECISION</code> (<code>A</code> or <code>R</code>).</li>
+<li><code>APPROVAL_1_AUTHORITY</code> is set from <code>AUTHORITY-NAME</code>, the approving authority.</li>
+<li><code>APPROVAL_1_DATE</code> is set to the current date.</li>
+<li><code>APPROVAL_1_NOTES</code> is set from the decision notes entered on screen (<code>DA1DCNTI</code>).</li>
+</ul>
+</li>
+<li>Workflow status:
+<ul>
+<li><code>APPLICATION-STATUS</code> is set to <code>A2</code> when the decision is approve, which forwards the application for second approval.</li>
+<li><code>APPLICATION-STATUS</code> is set to <code>RE</code> when the decision is reject, which closes the application.</li>
+</ul>
+</li>
+<li>Audit fields:
+<ul>
+<li><code>LAST_UPDATED_DATE</code> is set to the current date.</li>
+<li><code>LAST_UPDATED_BY</code> is set from the authority user code entered on screen (<code>DA1AUCOI</code>).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The program does not check <code>SQLCODE</code> after the update. The success or rejection message is shown regardless of the update result.</li>
+<li>The program only reads from the <code>DLIS.CANDIDATE</code> and <code>DLIS.AUTHORITY_USER</code> tables. It does not write to them.</li>
+</ul>
+<h3 id="33-conditions-that-stop-the-update" tabindex="-1">3.3 Conditions that stop the update</h3>
+<ul>
+<li>The update is skipped, and only a message is shown, if any of these is true:
+<ul>
+<li>The application ID is missing.</li>
+<li>The authority user code is missing.</li>
+<li>The decision is not <code>A</code> or <code>R</code>.</li>
+<li>The application is not found.</li>
+<li><code>PAYMENT-STATUS</code> is not <code>P</code>.</li>
+<li>The authority user is not active at level <code>1</code>.</li>
+<li>The application’s license type is not in <code>LIC-TYPES-AUTH</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="34-transaction-control-and-session-state" tabindex="-1">3.4 Transaction control and session state</h3>
+<ul>
+<li>Pseudo-conversational return: after every interaction the program ends with CICS RETURN TRANSID(‘DL08’). It passes <code>DLIS-COMMAREA</code> with LENGTH(350) so the next key press restarts the same transaction.</li>
+<li>F12 exit: CICS RETURN with no transaction ID ends the conversation.</li>
+<li>The program checks <code>WS-RESP1</code> after the CICS calls but never acts on it.</li>
+</ul>
+<h3 id="35-not-produced" tabindex="-1">3.5 Not produced</h3>
+<ul>
+<li>The program writes no files, queues, or external API calls.</li>
+<li>It uses no MQ operations.</li>
+<li>It returns no function values.</li>
+</ul>
+<h2 id="4-processing-logic" tabindex="-1">4. Processing Logic</h2>
+<h3 id="41-mermaid-flow-diagram" tabindex="-1">4.1 Mermaid Flow Diagram</h3>
+<div class="mermaid">
+graph TD
+    A([Start DLISAP1 transaction DL08]) --> B{First entry<br>no COMMAREA}
+    B -- Yes --> C[Init screen<br>set date on map]
+    C --> D[Send map DLISA1M01<br>erase and free keyboard]
+    D --> E([Return to CICS with TRANSID DL08])
+    B -- No --> F[Copy DFHCOMMAREA<br>to working COMMAREA]
+    F --> G[Receive map DLISA1M01]
+    G --> H{Which key pressed}
+    H -- F1 --> I[Submit first approval]
+    H -- F3 --> J[Load application]
+    H -- F4 --> K[Validate authority]
+    H -- F12 --> L([Return to CICS and end])
+    H -- Other --> M[Message<br>use F1 F3 F4 or F12]
+    I --> N[Send map data only]
+    J --> N
+    K --> N
+    M --> N
+    N --> E
+
+    subgraph LOADAPP [Load application]
+        J1{Application ID entered}
+        J1 -- No --> J2[Message<br>enter application ID]
+        J1 -- Yes --> J3[Select application joined<br>with candidate from DB2]
+        J3 --> J4{Row found}
+        J4 -- No --> J5[Message<br>application not found]
+        J4 -- Yes --> J6[Build candidate full name<br>fill screen fields]
+        J6 --> J7[Message<br>application loaded]
+    end
+
+    subgraph VALAUTH [Validate authority]
+        K1{Authority user code entered}
+        K1 -- No --> K2[Message<br>enter authority user code]
+        K1 -- Yes --> K3[Select active level 1<br>authority user from DB2]
+        K3 --> K4{User found}
+        K4 -- No --> K5[Message<br>not found or not active at level 1]
+        K4 -- Yes --> K6[Show user name and authority name<br>on screen]
+        K6 --> K7[Message<br>authority user validated]
+    end
+
+    subgraph SUBMIT [Submit first approval]
+        S1{Application ID entered}
+        S1 -- No --> S1E[Message<br>enter application ID]
+        S1 -- Yes --> S2{Authority user code entered}
+        S2 -- No --> S2E[Message<br>authority user code required]
+        S2 -- Yes --> S3{Decision is A or R}
+        S3 -- No --> S3E[Message<br>decision must be A or R]
+        S3 -- Yes --> S4[Perform load application]
+        S4 --> S5{Application loaded OK}
+        S5 -- No --> S9([Exit submit])
+        S5 -- Yes --> S6{Payment status is P}
+        S6 -- No --> S6E[Message<br>payment must be completed]
+        S6 -- Yes --> S7[Perform validate authority]
+        S7 --> S8{Authority validated OK}
+        S8 -- No --> S9
+        S8 -- Yes --> S10{License type in<br>authorised types}
+        S10 -- No --> S10E[Message<br>authority not authorised for license type]
+        S10 -- Yes --> S11{Decision is Approve}
+        S11 -- Yes --> S12[Set status A2]
+        S11 -- No --> S13[Set status RE]
+        S12 --> S14[Update application with<br>approval 1 details and status]
+        S13 --> S14
+        S14 --> S15{Decision is Approve}
+        S15 -- Yes --> S16[Message<br>first approval recorded<br>forwarded for 2nd approval]
+        S15 -- No --> S17[Message<br>first approval rejected<br>application closed]
+    end
+
+    S1E --> S9
+    S2E --> S9
+    S3E --> S9
+    S6E --> S9
+    S10E --> S9
+    S16 --> S9
+    S17 --> S9
+    I -.-> S1
+    J -.-> J1
+    K -.-> K1
+
+    classDef start fill:#d4f1f4,stroke:#5aa9b5,color:#000
+    classDef process fill:#e6f2ff,stroke:#7aa7d9,color:#000
+    classDef decision fill:#fff2cc,stroke:#d6b656,color:#000
+    classDef error fill:#fde2e4,stroke:#d98a94,color:#000
+    classDef success fill:#d8f3dc,stroke:#74b98a,color:#000
+    classDef db fill:#e8dff5,stroke:#9d86c4,color:#000
+
+    class A,E,L,S9 start
+    class C,D,F,G,N,I,J,K,S4,S7,S12,S13,J6,K6 process
+    class B,H,J1,J4,K1,K4,S1,S2,S3,S5,S6,S8,S10,S11,S15 decision
+    class M,J2,J5,K2,K5,S1E,S2E,S3E,S6E,S10E,S17 error
+    class J7,K7,S16 success
+    class J3,K3,S14 db
+</div>
+<hr>
+<h3 id="42-processing-logic-description" tabindex="-1">4.2 Processing Logic Description</h3>
+<h4 id="421-high-level-summary" tabindex="-1">4.2.1 High-level Summary</h4>
+<p>DLISAP1 is a pseudo-conversational CICS COBOL program for transaction DL08. It uses map DLISA1M01 in mapset DLISA1, and it records the first authority approval of a driving license application. A level 1 authority officer can:</p>
+<ul>
+<li>load an application (F3),</li>
+<li>validate the authority user (F4),</li>
+<li>submit an approve or reject decision (F1).</li>
+</ul>
+<p>A successful approval moves the application to status <code>A2</code>, which is awaiting second approval. A rejection moves it to status <code>RE</code>, which is rejected. The program reads and updates the DB2 tables <code>DLIS.LICENSE_APPLICATION</code>, <code>DLIS.CANDIDATE</code> and <code>DLIS.AUTHORITY_USER</code>.</p>
+<h4 id="422-execution-flow" tabindex="-1">4.2.2 Execution Flow</h4>
+<p><strong>1. Entry (MAIN-LOGIC)</strong></p>
+<ul>
+<li>If <code>EIBCALEN = 0</code>, this is the first invocation, so the program performs <code>INIT-SCREEN</code>.
+<ul>
+<li>It places the current date in <code>DA1DATE</code>.</li>
+<li>It sends the map with <code>ERASE</code> and <code>FREEKB</code>.</li>
+<li>It returns to CICS with <code>TRANSID('DL08')</code> and a 350-byte COMMAREA, so the transaction restarts on the next key press.</li>
+</ul>
+</li>
+<li>Otherwise it copies <code>DFHCOMMAREA</code> to <code>DLIS-COMMAREA</code> and performs <code>PROCESS-INPUT</code>.</li>
+<li>The program ends with <code>STOP RUN</code>, but the CICS RETURN statements normally end the task first.</li>
+</ul>
+<p><strong>2. Input dispatch (PROCESS-INPUT)</strong></p>
+<ul>
+<li>The program receives the map, then branches on the attention key (<code>EIBAID</code>):
+<ul>
+<li><strong>F1</strong> performs <code>SUBMIT-APPROVAL1</code>.</li>
+<li><strong>F3</strong> performs <code>LOAD-APPLICATION</code>.</li>
+<li><strong>F4</strong> performs <code>VALIDATE-AUTHORITY</code>.</li>
+<li><strong>F12</strong> issues <code>EXEC CICS RETURN</code> with no transaction ID, which ends the conversation.</li>
+<li><strong>Any other key</strong> sets the message “USE F1 F3 F4 OR F12”.</li>
+</ul>
+</li>
+<li>The screen is then refreshed with <code>SEND MAP ... DATAONLY FREEKB</code>.</li>
+<li>The program returns with <code>TRANSID('DL08')</code> and the COMMAREA.</li>
+<li><code>RESP</code> is captured in <code>WS-RESP1</code> on the CICS calls, but it is never tested afterwards.</li>
+</ul>
+<p><strong>3. Load application (LOAD-APPLICATION, F3)</strong></p>
+<ul>
+<li>If the application ID field (<code>DA1AIDI</code>) is zero, the message is “ENTER APPLICATION ID” and the paragraph exits.</li>
+<li>Otherwise the application ID is moved to the host variable.</li>
+<li>A DB2 SELECT joins <code>LICENSE_APPLICATION</code> (A) to <code>CANDIDATE</code> © on <code>CANDIDATE_ID</code>. It reads:
+<ul>
+<li>license type,</li>
+<li>application status,</li>
+<li>eligibility check status and notes,</li>
+<li>history check status and notes,</li>
+<li>payment status and reference,</li>
+<li>candidate first and last name.</li>
+</ul>
+</li>
+<li>If <code>SQLCODE = 100</code>, the message is “APPLICATION NOT FOUND” and the paragraph exits. Other SQL errors are not checked.</li>
+<li>On success:
+<ul>
+<li>The candidate’s full name is built with STRING, as first name, a space, then last name, each trimmed at the first space, and placed in <code>DA1CNAMO</code>.</li>
+<li>The remaining fields go to the screen output fields: license type, status, eligibility and history status, payment status and reference, and the two notes.</li>
+<li>The message is “APPLICATION LOADED”.</li>
+</ul>
+</li>
+</ul>
+<p><strong>4. Validate authority (VALIDATE-AUTHORITY, F4)</strong></p>
+<ul>
+<li>If the authority user code (<code>DA1AUCOI</code>) is blank, the message is “ENTER AUTHORITY USER CODE” and the paragraph exits.</li>
+<li>A DB2 SELECT on <code>DLIS.AUTHORITY_USER</code> reads the user name, authority name, level and licence types authorised. It filters on:
+<ul>
+<li>the user code,</li>
+<li><code>ACTIVE_STATUS = 'A'</code>,</li>
+<li><code>AUTHORITY_LEVEL = '1'</code>.</li>
+</ul>
+</li>
+<li>If <code>SQLCODE = 100</code>, the message is “AUTHORITY USER NOT FOUND OR NOT ACTIVE AT LEVEL 1” and the paragraph exits. Only active level 1 authorities can pass.</li>
+<li>On success, the user name and then the authority name are both moved to <code>DA1AUNMO</code>. The second move overwrites the first, so the authority name is what remains on screen.</li>
+<li>The message is “AUTHORITY USER VALIDATED”.</li>
+</ul>
+<p><strong>5. Submit first approval (SUBMIT-APPROVAL1, F1)</strong>
+The checks run in this order, and any failure sets a message and exits:</p>
+<ol>
+<li>The application ID must be entered (“ENTER APPLICATION ID”).</li>
+<li>The authority user code must be entered (“AUTHORITY USER CODE IS REQUIRED”).</li>
+<li>The decision must be <code>A</code> (approve) or <code>R</code> (reject) (“DECISION MUST BE A=APPROVE OR R=REJECT”).</li>
+<li>The application is loaded by performing <code>LOAD-APPLICATION</code>. Processing continues only if the message is “APPLICATION LOADED”.</li>
+<li><strong>Payment rule:</strong> <code>PAYMENT-STATUS</code> must be <code>P</code>, otherwise the message is “PAYMENT MUST BE COMPLETED BEFORE FIRST APPROVAL”.</li>
+<li>The authority is validated by performing <code>VALIDATE-AUTHORITY</code>. Processing continues only if the message is “AUTHORITY USER VALIDATED”.</li>
+<li><strong>License type rule:</strong> the application’s license type (<code>DA1LTYO</code>) must appear in the authority’s <code>LIC-TYPES-AUTH</code>. Otherwise the message is “AUTHORITY NOT AUTHORISED FOR THIS LICENSE TYPE”.</li>
+</ol>
+<p>After all checks pass:</p>
+<ul>
+<li>The decision is stored in <code>WS-DECISION</code>.</li>
+<li>The new status is <code>A2</code> for approve (forwarded to second approval) or <code>RE</code> for reject.</li>
+<li>A DB2 UPDATE on <code>LICENSE_APPLICATION</code> sets:
+<ul>
+<li><code>APPROVAL_1_STATUS</code> to the decision,</li>
+<li><code>APPROVAL_1_AUTHORITY</code> to the authority name,</li>
+<li><code>APPROVAL_1_DATE</code> to <code>CURRENT DATE</code>,</li>
+<li><code>APPROVAL_1_NOTES</code> to the notes field (<code>DA1DCNTI</code>),</li>
+<li><code>APPLICATION_STATUS</code> to the new status,</li>
+<li><code>LAST_UPDATED_DATE</code> to <code>CURRENT DATE</code>,</li>
+<li><code>LAST_UPDATED_BY</code> to the authority user code.</li>
+</ul>
+</li>
+<li>The update is keyed by application ID.</li>
+<li>The final message is “FIRST APPROVAL RECORDED - FORWARDED FOR 2ND APPROVAL” for approve, or “FIRST APPROVAL REJECTED - APPLICATION CLOSED” for reject.</li>
+</ul>
+<p><strong>Observations</strong></p>
+<ul>
+<li>The <code>SQLCODE</code> of the UPDATE is not checked, so a failed update would still show a success message.</li>
+<li>There is no explicit <code>SYNCPOINT</code>. The commit happens when the CICS task ends with RETURN.</li>
+<li>The <code>IN</code> test on license types is written as a class-style comparison against the 3-character <code>LIC-TYPES-AUTH</code> field.</li>
+</ul>
+<h4 id="423-external-interactions" tabindex="-1">4.2.3 External Interactions</h4>
+<ul>
+<li><strong>CICS terminal I/O:</strong> <code>RECEIVE MAP</code> and <code>SEND MAP</code> on DLISA1M01 of mapset DLISA1, with pseudo-conversational <code>RETURN TRANSID('DL08')</code> and a COMMAREA of 350 bytes.</li>
+<li><strong>DB2 <code>DLIS.LICENSE_APPLICATION</code>:</strong>
+<ul>
+<li>Read to show application, eligibility, history and payment details.</li>
+<li>Updated to record the first approval.</li>
+</ul>
+</li>
+<li><strong>DB2 <code>DLIS.CANDIDATE</code>:</strong> Read-only. It is joined to supply the applicant’s name.</li>
+<li><strong>DB2 <code>DLIS.AUTHORITY_USER</code>:</strong> Read-only. It validates that the approver is active, at level 1, and authorised for the license type.</li>
+<li>There are no MQ operations in this program.</li>
+</ul>
+<h4 id="424-plain-language-summary" tabindex="-1">4.2.4 Plain Language Summary</h4>
+<p>A first-level approving officer uses a screen to review a driving license application. The officer enters the application number and their own user code, then presses a function key:</p>
+<ul>
+<li>F3 shows the applicant’s name, license type, check results and payment information.</li>
+<li>F4 confirms the officer is an active first-level authority.</li>
+<li>F1 submits the decision.</li>
+</ul>
+<p>On submit, the program checks that:</p>
+<ul>
+<li>all required fields are filled in,</li>
+<li>the decision is Approve or Reject,</li>
+<li>the application exists,</li>
+<li>the fee has been paid,</li>
+<li>the officer is valid,</li>
+<li>the officer may handle this license type.</li>
+</ul>
+<p>If everything is in order, it records who made the decision, when, and any notes. Approving sends the application on to the second approver. Rejecting closes the application. F12 leaves the screen.</p>
+<hr>
+<h3 id="43-database-tables" tabindex="-1">4.3 Database Tables</h3>
+<div class="mermaid">
+erDiagram
+    LICENSE_APPLICATION {
+        int APPLICATION_ID "key"
+        int CANDIDATE_ID "FK to CANDIDATE"
+        string LICENSE_TYPE "length 1"
+        string APPLICATION_STATUS "length 2"
+        string ELIG_CHECK_STATUS "length 1"
+        string ELIG_CHECK_NOTES "length 200"
+        string HIST_CHECK_STATUS "length 1"
+        string HIST_CHECK_NOTES "length 200"
+        string PAYMENT_STATUS "length 1"
+        string PAYMENT_REFERENCE "length 20"
+        string APPROVAL_1_STATUS "length 1"
+        string APPROVAL_1_AUTHORITY "length 50"
+        date APPROVAL_1_DATE
+        string APPROVAL_1_NOTES "length 200"
+        date LAST_UPDATED_DATE
+        string LAST_UPDATED_BY "length 20"
+    }
+    CANDIDATE {
+        int CANDIDATE_ID "key"
+        string FIRST_NAME "length 30"
+        string LAST_NAME "length 30"
+    }
+    AUTHORITY_USER {
+        string USER_CODE "length 20"
+        string USER_NAME "length 60"
+        string AUTHORITY_NAME "length 50"
+        string AUTHORITY_LEVEL "length 1"
+        string ACTIVE_STATUS "length 1"
+        string LIC_TYPES_AUTH "length 3"
+    }
+    CANDIDATE ||--o{ LICENSE_APPLICATION : "has"
+</div>
+<h2 id="5-paragraphs" tabindex="-1">5. Paragraphs</h2>
+<ul>
+<li>
+<p><strong>MAIN-LOGIC</strong></p>
+<ul>
+<li>Entry point of the pseudo-conversational CICS transaction (DL08).</li>
+<li>If <code>EIBCALEN = 0</code>, this is the first entry, so it performs <strong>INIT-SCREEN</strong>.</li>
+<li>Otherwise it copies <code>DFHCOMMAREA</code> into <code>DLIS-COMMAREA</code> and performs <strong>PROCESS-INPUT</strong>.</li>
+<li>Ends with <code>STOP RUN</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>INIT-SCREEN</strong></p>
+<ul>
+<li>Displays the empty approval screen on first entry.</li>
+<li>Moves the first 10 characters of <code>CURRENT-DATE</code> to the map date field <code>DA1DATE</code>.</li>
+<li>Sends map <code>DLISA1M01</code> from mapset <code>DLISA1</code> with <code>ERASE</code> and <code>FREEKB</code>, using <code>RESP(WS-RESP1)</code>.</li>
+<li>Issues <code>EXEC CICS RETURN TRANSID('DL08')</code> with <code>DLIS-COMMAREA</code> (length 350), so the next terminal input restarts the transaction.</li>
+<li>External interactions: CICS BMS terminal output and CICS task return.</li>
+</ul>
+</li>
+<li>
+<p><strong>PROCESS-INPUT</strong></p>
+<ul>
+<li>Handles each user interaction after the first screen.</li>
+<li>Receives map <code>DLISA1M01</code> with <code>RESP(WS-RESP1)</code>.</li>
+<li>Uses <code>EVALUATE TRUE</code> on the attention key (<code>EIBAID</code>):
+<ul>
+<li>F1 performs <strong>SUBMIT-APPROVAL1</strong>.</li>
+<li>F3 performs <strong>LOAD-APPLICATION</strong>.</li>
+<li>F4 performs <strong>VALIDATE-AUTHORITY</strong>.</li>
+<li>F12 issues <code>EXEC CICS RETURN</code> with no transaction, which ends the conversation.</li>
+<li>Any other key sets the message “USE F1 F3 F4 OR F12” in <code>DA1MSG</code>.</li>
+</ul>
+</li>
+<li>Re-sends the map with <code>DATAONLY</code> and <code>FREEKB</code>.</li>
+<li>Returns with <code>TRANSID('DL08')</code> and the COMMAREA to continue the pseudo-conversation.</li>
+<li>External interactions: CICS BMS input and output, CICS return.</li>
+</ul>
+</li>
+<li>
+<p><strong>LOAD-APPLICATION</strong></p>
+<ul>
+<li>Retrieves a license application and its candidate details, then displays them.</li>
+<li>Conditional logic:
+<ul>
+<li>If <code>DA1AIDI = ZEROS</code>, it sets “ENTER APPLICATION ID” and jumps to <strong>LOAD-APP-EXIT</strong> with <code>GO TO</code>.</li>
+<li>If <code>SQLCODE = 100</code>, it sets “APPLICATION NOT FOUND” and jumps to <strong>LOAD-APP-EXIT</strong>.</li>
+</ul>
+</li>
+<li>Moves the screen application ID into <code>APPLICATION-ID</code> of <code>DCLDLIS-LICENSE-APPL</code>.</li>
+<li>Runs a DB2 <code>SELECT ... INTO</code> that joins <code>DLIS.LICENSE_APPLICATION</code> (A) with <code>DLIS.CANDIDATE</code> © on <code>CANDIDATE_ID</code>. It filters on <code>APPLICATION_ID</code>.
+<ul>
+<li>From the application it reads <code>LICENSE-TYPE</code>, <code>APPLICATION-STATUS</code>, <code>ELIG-CHECK-STATUS</code>, <code>HIST-CHECK-STATUS</code>, <code>PAYMENT-STATUS</code>, <code>PAYMENT-REFERENCE</code>, <code>ELIG-CHECK-NOTES</code> and <code>HIST-CHECK-NOTES</code>.</li>
+<li>From the candidate it reads <code>FIRST-NAME</code> and <code>LAST-NAME</code>.</li>
+</ul>
+</li>
+<li>Builds the candidate full name with <code>STRING</code> (first name, a space, last name, each delimited by space) into <code>DA1CNAMO</code>.</li>
+<li>Moves the license type, application status, eligibility status, history status, payment status, payment reference, and eligibility and history notes to their output map fields.</li>
+<li>Sets the message “APPLICATION LOADED”.</li>
+<li>External interactions: DB2 read (join) and screen output fields.</li>
+</ul>
+</li>
+<li>
+<p><strong>LOAD-APP-EXIT</strong></p>
+<ul>
+<li>Exit point for <strong>LOAD-APPLICATION</strong>, containing only <code>EXIT</code>.</li>
+<li>It is the target of the early <code>GO TO</code> statements.</li>
+</ul>
+</li>
+<li>
+<p><strong>VALIDATE-AUTHORITY</strong></p>
+<ul>
+<li>Checks that the entered authority user exists, is active, and is a first-level approver.</li>
+<li>Conditional logic:
+<ul>
+<li>If <code>DA1AUCOI = SPACES</code>, it sets “ENTER AUTHORITY USER CODE” and jumps to <strong>VALIDATE-AUTH-EXIT</strong>.</li>
+<li>If <code>SQLCODE = 100</code>, it sets “AUTHORITY USER NOT FOUND OR NOT ACTIVE AT LEVEL 1” and jumps to <strong>VALIDATE-AUTH-EXIT</strong>.</li>
+</ul>
+</li>
+<li>Moves the screen user code into <code>USER-CODE</code> of <code>DCLDLIS-AUTH-USER</code>.</li>
+<li>Runs a DB2 <code>SELECT ... INTO</code> on <code>DLIS.AUTHORITY_USER</code>. It reads <code>USER-NAME</code>, <code>AUTHORITY-NAME</code>, <code>AUTHORITY-LEVEL</code> and <code>LIC-TYPES-AUTH</code>. It filters on <code>USER_CODE</code>, <code>ACTIVE_STATUS = 'A'</code> and <code>AUTHORITY_LEVEL = '1'</code>.</li>
+<li>Moves <code>USER-NAME</code> and then <code>AUTHORITY-NAME</code> to <code>DA1AUNMO</code>. The second move overwrites the first, so the screen shows the authority name.</li>
+<li>Sets the message “AUTHORITY USER VALIDATED”.</li>
+<li>External interactions: DB2 read and screen output.</li>
+</ul>
+</li>
+<li>
+<p><strong>VALIDATE-AUTH-EXIT</strong></p>
+<ul>
+<li>Exit point for <strong>VALIDATE-AUTHORITY</strong>, containing only <code>EXIT</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>SUBMIT-APPROVAL1</strong></p>
+<ul>
+<li>Records the first-level approval or rejection of an application. It is the main business routine.</li>
+<li>Each of the following checks sets an error message in <code>DA1MSG</code> and jumps to <strong>SUBMIT-A1-EXIT</strong> on failure:
+<ul>
+<li>The application ID must not be zero.</li>
+<li>The authority user code must not be spaces.</li>
+<li>The decision (<code>DA1DECI</code>) must be ‘A’ or ‘R’.</li>
+<li><strong>LOAD-APPLICATION</strong> is performed, and <code>DA1MSG</code> must equal “APPLICATION LOADED”.</li>
+<li><code>PAYMENT-STATUS</code> must be ‘P’. Otherwise the message is “PAYMENT MUST BE COMPLETED BEFORE FIRST APPROVAL”.</li>
+<li><strong>VALIDATE-AUTHORITY</strong> is performed, and <code>DA1MSG</code> must equal “AUTHORITY USER VALIDATED”.</li>
+<li>The loaded license type (<code>DA1LTYO</code>) must appear in <code>LIC-TYPES-AUTH</code>. Otherwise the message is “AUTHORITY NOT AUTHORISED FOR THIS LICENSE TYPE”.</li>
+</ul>
+</li>
+<li>Moves <code>DA1DECI</code> to <code>WS-DECISION</code>.
+<ul>
+<li>If the decision is ‘A’, <code>APPLICATION-STATUS</code> is set to ‘A2’ (forwarded for second approval).</li>
+<li>Otherwise it is set to ‘RE’ (rejected).</li>
+</ul>
+</li>
+<li>Runs a DB2 <code>UPDATE</code> on <code>DLIS.LICENSE_APPLICATION</code>. It sets:
+<ul>
+<li><code>APPROVAL_1_STATUS</code> to <code>WS-DECISION</code>.</li>
+<li><code>APPROVAL_1_AUTHORITY</code> to the authority name.</li>
+<li><code>APPROVAL_1_DATE</code> to <code>CURRENT DATE</code>.</li>
+<li><code>APPROVAL_1_NOTES</code> to <code>DA1DCNTI</code>.</li>
+<li><code>APPLICATION_STATUS</code> to the new status.</li>
+<li><code>LAST_UPDATED_DATE</code> to <code>CURRENT DATE</code>.</li>
+<li><code>LAST_UPDATED_BY</code> to <code>DA1AUCOI</code>.</li>
+<li>The row is selected by <code>APPLICATION_ID</code>.</li>
+</ul>
+</li>
+<li>It does not check <code>SQLCODE</code> after the update.</li>
+<li>Sets the final message:
+<ul>
+<li>“FIRST APPROVAL RECORDED - FORWARDED FOR 2ND APPROVAL” if approved.</li>
+<li>“FIRST APPROVAL REJECTED - APPLICATION CLOSED” if rejected.</li>
+</ul>
+</li>
+<li>External interactions: DB2 update (through the performed paragraphs, also DB2 reads) and screen messages.</li>
+</ul>
+</li>
+<li>
+<p><strong>SUBMIT-A1-EXIT</strong></p>
+<ul>
+<li>Exit point for <strong>SUBMIT-APPROVAL1</strong>, containing only <code>EXIT</code>.</li>
+<li>It is the target of all the validation <code>GO TO</code> statements.</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-dependencies" tabindex="-1">6. Dependencies</h2>
+<h3 id="61-cics-transaction--screen-map" tabindex="-1">6.1 CICS Transaction &amp; Screen Map</h3>
+<ul>
+<li><strong>Transaction ID: <code>DL08</code></strong>
+<ul>
+<li>The CICS transaction identifier under which this program executes; used in <code>EXEC CICS RETURN TRANSID('DL08')</code> to ensure pseudo-conversational control returns to this program after each user interaction</li>
+</ul>
+</li>
+<li><strong>BMS Map: <code>DLISA1M01</code> / Mapset: <code>DLISA1</code></strong>
+<ul>
+<li>The BMS (Basic Mapping Support) screen map used for all terminal I/O (<code>EXEC CICS SEND MAP</code> / <code>EXEC CICS RECEIVE MAP</code>); defines every field visible on the first-authority approval screen (application ID, authority user code, decision, candidate name, status fields, message area, etc.)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="62-db2-tables" tabindex="-1">6.2 DB2 Tables</h3>
+<ul>
+<li><strong><code>DLIS.LICENSE_APPLICATION</code></strong>
+<ul>
+<li>The central table for license applications; queried (via a JOIN to <code>DLIS.CANDIDATE</code>) to load application details such as status, license type, eligibility/history check results, and payment information; updated at the end of the approval workflow to record the first-approval decision, authority, date, notes, and new application status</li>
+</ul>
+</li>
+<li><strong><code>DLIS.CANDIDATE</code></strong>
+<ul>
+<li>Joined to <code>DLIS.LICENSE_APPLICATION</code> during the load step to retrieve the applicant’s first and last name for display on screen</li>
+</ul>
+</li>
+<li><strong><code>DLIS.AUTHORITY_USER</code></strong>
+<ul>
+<li>Queried to validate the approving authority by user code; the query filters for active (<code>ACTIVE_STATUS = 'A'</code>) level-1 (<code>AUTHORITY_LEVEL = '1'</code>) users and returns the user name, authority name, and the list of license types the authority is permitted to approve</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="63-db2-host-variable-copybooks-dclgen" tabindex="-1">6.3 DB2 Host-Variable Copybooks (DCLGEN)</h3>
+<ul>
+<li><strong><code>DLISDCLG</code></strong> (expanded inline)
+<ul>
+<li>Container copybook that includes the DCLGEN host-variable layouts for all tables used by the DLIS system; the following individual members are embedded:
+<ul>
+<li><strong><code>DLISCAND</code></strong> — host-variable layout for <code>DLIS.CANDIDATE</code> (<code>DCLDLIS-CANDIDATE</code>)</li>
+<li><strong><code>DLISAPPL</code></strong> — host-variable layout for <code>DLIS.LICENSE_APPLICATION</code> (<code>DCLDLIS-LICENSE-APPL</code>)</li>
+<li><strong><code>DLISHIST</code></strong> — host-variable layout for <code>DLIS.DRIVING_HISTORY</code> (<code>DCLDLIS-DRIVING-HIST</code>; declared but not queried directly in this program)</li>
+<li><strong><code>DLISPAY</code></strong> — host-variable layout for the <code>PAYMENT</code> table (<code>DCLDLIS-PAYMENT</code>; declared but not queried directly in this program)</li>
+<li><strong><code>DLISLIC</code></strong> — host-variable layout for <code>DLIS.ISSUED_LICENSE</code> (<code>DCLDLIS-ISSUED-LIC</code>; declared but not queried directly in this program)</li>
+<li><strong><code>DLISAUTH</code></strong> — host-variable layout for <code>DLIS.AUTHORITY_USER</code> (<code>DCLDLIS-AUTH-USER</code>)</li>
+<li><strong><code>DLISFEE</code></strong> — host-variable layout for <code>LICENSE_FEE_SCHEDULE</code> (<code>DCLDLIS-FEE-SCHED</code>; declared but not queried directly in this program)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>SQLCA</code></strong> (<code>EXEC SQL INCLUDE SQLCA</code>)
+<ul>
+<li>DB2 SQL Communication Area; provides <code>SQLCODE</code> and related fields used after every SQL statement to detect <code>NOT FOUND</code> (100) and error conditions</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="64-common-working-storage-copybooks" tabindex="-1">6.4 Common Working-Storage Copybooks</h3>
+<ul>
+<li><strong><code>DLISWS</code></strong> (expanded inline)
+<ul>
+<li>Shared working-storage copybook providing common data areas used across all DLIS programs:
+<ul>
+<li><code>WS-COMMON-AREA</code> — return code, message text, user ID, current date, message colour</li>
+<li><code>WS-CANDIDATE</code>, <code>WS-APPLICATION</code>, <code>WS-PAYMENT</code>, <code>WS-ELIGIBILITY</code>, <code>WS-HISTORY</code>, <code>WS-APPROVAL</code>, <code>WS-LICENSE</code> — working-storage mirrors of the main business entities</li>
+<li><code>WS-NULL-INDICATORS</code> — null indicator variables for nullable DB2 columns</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>DLISCSEC</code></strong> (expanded inline)
+<ul>
+<li>CICS COMMAREA layout copybook; defines the structures passed between DLIS programs via <code>DFHCOMMAREA</code>:
+<ul>
+<li><code>DLIS-COMMAREA</code> — main navigation commarea (transaction ID, candidate/application/license/payment IDs, user ID, return code, message)</li>
+<li><code>DLIS-CAND-COMMAREA</code> — candidate screen data commarea</li>
+<li><code>DLIS-APPL-COMMAREA</code> — application status data commarea</li>
+<li><code>WS-CICS-RESPONSE</code> — CICS response code storage (<code>WS-RESP1</code>, <code>WS-RESP2</code>, <code>WS-EIBRESP-SAVE</code>, <code>WS-EIBCALEN-SAVE</code>)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="65-cics-runtime-components" tabindex="-1">6.5 CICS Runtime Components</h3>
+<ul>
+<li><strong><code>DFHCOMMAREA</code></strong> (Linkage Section, 350 bytes)
+<ul>
+<li>The standard CICS communication area passed on each pseudo-conversational return; carries the <code>DLIS-COMMAREA</code> structure between transaction invocations and from calling programs</li>
+</ul>
+</li>
+<li><strong>CICS EIB (Execute Interface Block)</strong>
+<ul>
+<li><code>EIBCALEN</code> — checked at entry to determine whether the program is being invoked for the first time (no commarea) or as a returning pseudo-conversational call</li>
+<li><code>EIBAID</code> — used in the <code>EVALUATE</code> to dispatch the correct function based on which PF key the user pressed (PF1 submit, PF3 load, PF4 validate, PF12 exit)</li>
+<li><code>DFHPF1</code>, <code>DFHPF3</code>, <code>DFHPF4</code>, <code>DFHPF12</code> — CICS-supplied attention identifier constants referenced in the key-handling logic</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="66-input-parameters--screen-fields" tabindex="-1">6.6 Input Parameters / Screen Fields</h3>
+<ul>
+<li><strong><code>DA1AIDI</code></strong> — Application ID entered by the user on the map; key for all database lookups and updates</li>
+<li><strong><code>DA1AUCOI</code></strong> — Authority user code entered on screen; used to validate the approving authority against <code>DLIS.AUTHORITY_USER</code></li>
+<li><strong><code>DA1DECI</code></strong> — Decision field entered on screen (<code>A</code> = Approve, <code>R</code> = Reject); drives the new application status and the approval message</li>
+<li><strong><code>DA1DCNTI</code></strong> — Decision notes entered on screen; stored as <code>APPROVAL_1_NOTES</code> in the database</li>
+</ul>
+<h2 id="7-constraints" tabindex="-1">7. Constraints</h2>
+<h3 id="71-transaction-and-navigation-constraints" tabindex="-1">7.1 Transaction and Navigation Constraints</h3>
+<ul>
+<li>Initial entry versus re-entry
+<ul>
+<li>If the commarea length is zero (<code>EIBCALEN = 0</code>), the program only sends the blank map (<code>INIT-SCREEN</code>). It does no business processing on this pass.</li>
+<li>If a commarea is present, it is copied into <code>DLIS-COMMAREA</code> and the screen input is processed.</li>
+</ul>
+</li>
+<li>Pseudo-conversational flow
+<ul>
+<li>Every pass ends with <code>EXEC CICS RETURN TRANSID('DL08')</code> and a 350-byte commarea. The program keeps no state between interactions except through the commarea.</li>
+<li>The <code>DFHCOMMAREA</code> linkage item is fixed at 350 bytes, and the <code>RETURN</code> passes <code>LENGTH(350)</code>.</li>
+</ul>
+</li>
+<li>Allowed function keys
+<ul>
+<li>F1 submits the approval, F3 loads the application, F4 validates the authority, and F12 exits.</li>
+<li>Any other attention key sets the message ‘USE F1 F3 F4 OR F12’ and performs no business action.</li>
+<li>F12 issues <code>EXEC CICS RETURN</code> without a transaction ID, which ends the conversation.</li>
+</ul>
+</li>
+<li>Screen specifics
+<ul>
+<li>The map <code>DLISA1M01</code> in mapset <code>DLISA1</code> is the only screen used.</li>
+<li>The first send uses <code>ERASE</code>. Later sends use <code>DATAONLY</code>, so only the changed data is sent.</li>
+</ul>
+</li>
+</ul>
+<h3 id="72-input-validation-rules" tabindex="-1">7.2 Input Validation Rules</h3>
+<ul>
+<li>Loading an application (F3, and also called from F1)
+<ul>
+<li>The application ID must be non-zero (<code>DA1AIDI = ZEROS</code>). Otherwise the message is ‘ENTER APPLICATION ID’ and processing stops.</li>
+<li>The application must exist. The join of <code>LICENSE_APPLICATION</code> to <code>CANDIDATE</code> returns SQLCODE 100 if there is no match, and the message is ‘APPLICATION NOT FOUND’.</li>
+<li>The application is only accepted if the candidate record also exists. The query is an inner join on <code>CANDIDATE_ID</code>.</li>
+</ul>
+</li>
+<li>Validating the authority (F4, and also called from F1)
+<ul>
+<li>The authority user code must not be spaces. Otherwise the message is ‘ENTER AUTHORITY USER CODE’.</li>
+<li>The user must exist in <code>AUTHORITY_USER</code> with <code>ACTIVE_STATUS = 'A'</code> and <code>AUTHORITY_LEVEL = '1'</code>.
+<ul>
+<li>If not, SQLCODE 100 produces ‘AUTHORITY USER NOT FOUND OR NOT ACTIVE AT LEVEL 1’.</li>
+<li>Inactive users and users at other authority levels are rejected.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Submitting the approval (F1)
+<ul>
+<li>The application ID must be non-zero. Otherwise the message is ‘ENTER APPLICATION ID’.</li>
+<li>The authority user code must not be spaces. Otherwise the message is ‘AUTHORITY USER CODE IS REQUIRED’.</li>
+<li>The decision must be ‘A’ (approve) or ‘R’ (reject). Spaces or any other value gives ‘DECISION MUST BE A=APPROVE OR R=REJECT’.</li>
+</ul>
+</li>
+</ul>
+<h3 id="73-business-rules-and-conditional-restrictions" tabindex="-1">7.3 Business Rules and Conditional Restrictions</h3>
+<ul>
+<li>Payment prerequisite
+<ul>
+<li>The payment status of the application must be ‘P’ (completed) before a first approval or rejection is recorded.</li>
+<li>Otherwise the message is ‘PAYMENT MUST BE COMPLETED BEFORE FIRST APPROVAL’.</li>
+<li>This applies to rejections as well as approvals, because the check happens before the decision is evaluated.</li>
+</ul>
+</li>
+<li>Authority-level restriction
+<ul>
+<li>Only active level-1 authorities can perform the first approval. This is enforced by the filter in the validation query.</li>
+</ul>
+</li>
+<li>License-type authorisation
+<ul>
+<li>The application’s license type (<code>DA1LTYO</code>) must appear in the authority’s <code>LIC-TYPES-AUTH</code> list.</li>
+<li>Otherwise the message is ‘AUTHORITY NOT AUTHORISED FOR THIS LICENSE TYPE’.</li>
+</ul>
+</li>
+<li>Decision-to-status mapping
+<ul>
+<li>Approve (‘A’) sets <code>APPLICATION-STATUS</code> to ‘A2’, which forwards the application for second approval. The message is ‘FIRST APPROVAL RECORDED - FORWARDED FOR 2ND APPROVAL’.</li>
+<li>Reject (‘R’) sets the status to ‘RE’, which closes the application. The message is ‘FIRST APPROVAL REJECTED - APPLICATION CLOSED’.</li>
+</ul>
+</li>
+<li>Data written on a decision
+<ul>
+<li>The update sets <code>APPROVAL_1_STATUS</code>, <code>APPROVAL_1_AUTHORITY</code> (the authority name), <code>APPROVAL_1_DATE</code> (current date), <code>APPROVAL_1_NOTES</code>, <code>APPLICATION_STATUS</code>, <code>LAST_UPDATED_DATE</code> and <code>LAST_UPDATED_BY</code> (the user code entered).</li>
+<li>The update targets exactly one application, through <code>WHERE APPLICATION_ID = :APPLICATION-ID</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="74-sequencing-constraints" tabindex="-1">7.4 Sequencing Constraints</h3>
+<ul>
+<li>Order of checks in the submit function (F1)
+<ul>
+<li>The checks run in this fixed order, and each failure exits through <code>SUBMIT-A1-EXIT</code>. The last failure message stays on screen.
+<ul>
+<li>Input fields: application ID, authority code, decision.</li>
+<li>Application load, which must return the message ‘APPLICATION LOADED’.</li>
+<li>Payment status check.</li>
+<li>Authority validation, which must return the message ‘AUTHORITY USER VALIDATED’.</li>
+<li>License-type authorisation.</li>
+<li>Status determination and database update.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Dependency on message text
+<ul>
+<li>Success of the load and validation steps is detected by comparing <code>DA1MSG</code> with the exact strings ‘APPLICATION LOADED’ and ‘AUTHORITY USER VALIDATED’.</li>
+<li>If those messages change, the sequencing breaks.</li>
+</ul>
+</li>
+<li>Reload before update
+<ul>
+<li>The F1 function reloads the application from the database each time. The payment status and license type are therefore current at the time of approval and are not taken from earlier screen data.</li>
+</ul>
+</li>
+<li>No explicit pre-status check
+<ul>
+<li>The program does not check that the current <code>APPLICATION-STATUS</code> is a state where first approval is appropriate. It also does not check that eligibility or history checks have passed. These values are only displayed.</li>
+<li>A first approval could therefore be re-submitted on an already processed application, as long as payment is ‘P’.</li>
+</ul>
+</li>
+</ul>
+<h3 id="75-data-format-and-size-limits" tabindex="-1">7.5 Data Format and Size Limits</h3>
+<ul>
+<li>Field sizes
+<ul>
+<li>The application ID and candidate ID are <code>S9(10)</code> packed.</li>
+<li>The status is 2 characters, the license type is 1 character, and the decision is 1 character.</li>
+<li>The user code is 20 characters.</li>
+<li>The authority name is 50 characters.</li>
+<li>The license types authorised field is <code>PIC X(3)</code>, so at most 3 license-type codes can be held.</li>
+<li>The approval notes are 200 characters and the rejection reason is 300.</li>
+<li>The payment reference is 20 characters in the application record.</li>
+</ul>
+</li>
+<li>Candidate name display
+<ul>
+<li>The first and last name are strung together, each delimited by the first space, with a single space between them. Names containing embedded spaces are truncated at the first space.</li>
+</ul>
+</li>
+<li>Authority display
+<ul>
+<li>The user name and the authority name are both moved to <code>DA1AUNMO</code>, so the authority name overwrites the user name on screen.</li>
+</ul>
+</li>
+<li>Commarea size
+<ul>
+<li>The transaction commarea is limited to 350 bytes.</li>
+</ul>
+</li>
+</ul>
+<h3 id="76-error-handling-limits" tabindex="-1">7.6 Error Handling Limits</h3>
+<ul>
+<li>SQL result handling
+<ul>
+<li>Only SQLCODE 100 (not found) is tested.
+<ul>
+<li>Other SQL errors, including errors on the update, are not checked.</li>
+<li>The success message can therefore be shown even if the update failed.</li>
+</ul>
+</li>
+<li>The program does not issue an explicit commit or rollback. It relies on the CICS task end (<code>RETURN</code>) to commit.</li>
+</ul>
+</li>
+<li>CICS responses
+<ul>
+<li><code>RESP(WS-RESP1)</code> is captured on <code>SEND</code> and <code>RECEIVE</code>, but the value is never tested.</li>
+<li>Map or terminal errors are therefore not handled, and processing continues with whatever is in the map fields.</li>
+</ul>
+</li>
+</ul>
+<h2 id="8-error-handling" tabindex="-1">8. Error Handling</h2>
+<h3 id="81-input-validation-field-level-checks" tabindex="-1">8.1 Input validation (field-level checks)</h3>
+<ul>
+<li>Application ID is required
+<ul>
+<li>The load routine checks that the application ID entered on the screen is not zero. If it is zero, the message “ENTER APPLICATION ID” is shown and the routine exits early.</li>
+<li>The submit routine runs the same check first, before it does any work.</li>
+</ul>
+</li>
+<li>Authority user code is required
+<ul>
+<li>The validate routine checks that the user code field is not blank. If it is blank, it shows “ENTER AUTHORITY USER CODE” and exits.</li>
+<li>The submit routine has its own check and shows “AUTHORITY USER CODE IS REQUIRED”.</li>
+</ul>
+</li>
+<li>Decision value check
+<ul>
+<li>The decision field must contain “A” (approve) or “R” (reject). A blank or any other value stops the submission with the message “DECISION MUST BE A=APPROVE OR R=REJECT”.</li>
+</ul>
+</li>
+<li>Invalid function key handling
+<ul>
+<li>The key dispatch handles F1, F3, F4 and F12. Any other attention key leaves the screen unchanged and shows “USE F1 F3 F4 OR F12”.</li>
+</ul>
+</li>
+</ul>
+<h3 id="82-business-rule-validation-guard-conditions-in-the-approval-flow" tabindex="-1">8.2 Business rule validation (guard conditions in the approval flow)</h3>
+<ul>
+<li>The submit routine runs its checks in a fixed order. It stops at the first failure by jumping to the routine’s exit paragraph, so later checks and the database update are skipped.</li>
+<li>Application existence and load check
+<ul>
+<li>Submit performs the load routine first. It continues only if the resulting message is exactly “APPLICATION LOADED”. Any other message, such as “APPLICATION NOT FOUND” or a prompt, ends the submission and is displayed as is.</li>
+<li>The message text is therefore used as a status flag between paragraphs.</li>
+</ul>
+</li>
+<li>Payment prerequisite
+<ul>
+<li>Payment status must be “P” (completed). Otherwise the message is “PAYMENT MUST BE COMPLETED BEFORE FIRST APPROVAL”.</li>
+</ul>
+</li>
+<li>Authority validation prerequisite
+<ul>
+<li>Submit performs the authority validation routine. It continues only if the message is exactly “AUTHORITY USER VALIDATED”. Any other outcome ends the submission.</li>
+</ul>
+</li>
+<li>Authority level and active status
+<ul>
+<li>The authority lookup query only accepts users that are active (“A”) and at authority level “1”. A user who is inactive or at another level is treated as not found.</li>
+</ul>
+</li>
+<li>License type authorisation
+<ul>
+<li>The application’s license type must appear in the authority user’s list of authorised license types. Otherwise the message is “AUTHORITY NOT AUTHORISED FOR THIS LICENSE TYPE” and no update is made.</li>
+</ul>
+</li>
+</ul>
+<h3 id="83-database-error-handling-db2" tabindex="-1">8.3 Database error handling (DB2)</h3>
+<ul>
+<li>Not-found handling (SQLCODE 100)
+<ul>
+<li>The application lookup tests for SQLCODE 100. If there is no match, it shows “APPLICATION NOT FOUND” and exits without populating the screen fields.</li>
+<li>The authority lookup tests for SQLCODE 100. If there is no match, it shows “AUTHORITY USER NOT FOUND OR NOT ACTIVE AT LEVEL 1” and exits.</li>
+</ul>
+</li>
+<li>Gaps in database error handling
+<ul>
+<li>No other SQLCODE is checked after either SELECT. Negative codes such as deadlock, authorisation failure or connection problems fall through to the success path. The screen can then show “APPLICATION LOADED” or “AUTHORITY USER VALIDATED” with stale or empty host variable values.</li>
+<li>The UPDATE of the license application is not followed by any SQLCODE check. The user sees a success message (“FIRST APPROVAL RECORDED - FORWARDED FOR 2ND APPROVAL” or “FIRST APPROVAL REJECTED - APPLICATION CLOSED”) even if the update failed or affected no rows.</li>
+<li>The program has no explicit commit or rollback logic.</li>
+<li>The program does not check null indicators, although null indicator fields are defined in working storage.</li>
+</ul>
+</li>
+</ul>
+<h3 id="84-cics-error-handling" tabindex="-1">8.4 CICS error handling</h3>
+<ul>
+<li>RESP capture
+<ul>
+<li>The SEND MAP and RECEIVE MAP commands specify a RESP field (WS-RESP1) that captures the response code.</li>
+<li>The program never tests this value, so a failed map send or receive (for example a MAPFAIL when the user presses a key without entering data) is silently ignored.</li>
+<li>The initial SEND MAP and the final SEND MAP in the input-processing routine both capture RESP without testing it.</li>
+</ul>
+</li>
+<li>Commarea length check
+<ul>
+<li>On entry, the program tests whether the commarea length is zero. If it is, it treats the call as a first-time entry and sends the empty map. Otherwise it treats the call as a re-entry and processes the input.</li>
+<li>The commarea is a fixed 350 bytes. The program does not check the length it receives, so a commarea of a different size is not detected.</li>
+</ul>
+</li>
+<li>No abnormal-termination handling
+<ul>
+<li>The program has no HANDLE CONDITION, HANDLE ABEND or explicit ABEND logic.</li>
+<li>Unhandled CICS conditions would produce a default abend.</li>
+</ul>
+</li>
+<li>Normal exit path
+<ul>
+<li>F12 ends the conversation with a plain CICS RETURN, which is the intended exit rather than an error path.</li>
+<li>All other paths send the map again and return with the transaction ID DL08 and the commarea, so the dialog continues.</li>
+</ul>
+</li>
+</ul>
+<h3 id="85-user-notifications-and-feedback" tabindex="-1">8.5 User notifications and feedback</h3>
+<ul>
+<li>All errors and outcomes are reported to the user as text in a single message field on the screen (DA1MSG). The text is sent back with the map on a data-only refresh.</li>
+<li>Each failure replaces the message with a specific reason. Successful operations also use this field (“APPLICATION LOADED”, “AUTHORITY USER VALIDATED”, and the two approval outcome messages).</li>
+<li>The program does not write to a log, a queue or a transient data destination, so there is no audit trail of errors outside the screen.</li>
+<li>The message colour and return code fields from the shared working-storage areas are defined but never set in this program, so errors are not highlighted.</li>
+</ul>
+<h3 id="86-control-flow-and-recovery-behaviour" tabindex="-1">8.6 Control flow and recovery behaviour</h3>
+<ul>
+<li>Early-exit pattern
+<ul>
+<li>Each routine has a dedicated exit paragraph. Validation failures jump to it with GO TO, so the rest of the routine and the database update are bypassed.</li>
+<li>After a failure, control returns to the caller, and the screen is refreshed with the message.</li>
+</ul>
+</li>
+<li>No retry or fallback logic
+<ul>
+<li>The program has no retries, default values or alternate processing paths. Recovery means the user corrects the input and resubmits.</li>
+</ul>
+</li>
+<li>Application status changes
+<ul>
+<li>The status is set to “A2” on approval and “RE” on rejection only after all validations pass. It is written to the database in the same update that records the approval.</li>
+<li>No intermediate or failure status is stored if the update fails.</li>
+</ul>
+</li>
+<li>Potential data quality issue
+<ul>
+<li>The validation routine moves the user name and then the authority name into the same screen field, so the authority name overwrites the user name. The user never sees the user name.</li>
+</ul>
+</li>
+</ul>
+<h2 id="9-examples" tabindex="-1">9. Examples</h2>
+<h3 id="91-example-1-load-an-application-f3" tabindex="-1">9.1 Example 1: Load an application (F3)</h3>
+<p><strong>Input</strong></p>
+<ul>
+<li>Key pressed: F3</li>
+<li>Application ID (<code>DA1AIDI</code>): <code>1000000123</code></li>
+<li>Database row: license type <code>C</code>, status <code>A1</code>, eligibility <code>P</code>, history <code>P</code>, payment status <code>P</code>, payment reference <code>PAY-2024-0456</code>. The candidate is John Smith.</li>
+</ul>
+<p><strong>Output (screen)</strong></p>
+<ul>
+<li>Candidate name: <code>John Smith</code></li>
+<li>License type: <code>C</code></li>
+<li>Application status: <code>A1</code></li>
+<li>Eligibility: <code>P</code></li>
+<li>History: <code>P</code></li>
+<li>Payment status: <code>P</code></li>
+<li>Payment reference: <code>PAY-2024-0456</code></li>
+<li>Eligibility and history notes from the record</li>
+<li>Message: <code>APPLICATION LOADED</code></li>
+</ul>
+<p><strong>Explanation:</strong> F3 runs <code>LOAD-APPLICATION</code>. It joins <code>LICENSE_APPLICATION</code> to <code>CANDIDATE</code> on the application ID. It builds the full name from the first and last name, each cut at its first space. It then copies the status fields to the map.</p>
+<p>If the Application ID is zero, the message is <code>ENTER APPLICATION ID</code>. If no row is found (SQLCODE 100), the message is <code>APPLICATION NOT FOUND</code>.</p>
+<hr>
+<h3 id="92-example-2-validate-the-authority-user-f4" tabindex="-1">9.2 Example 2: Validate the authority user (F4)</h3>
+<p><strong>Input</strong></p>
+<ul>
+<li>Key pressed: F4</li>
+<li>Authority user code (<code>DA1AUCOI</code>): <code>AUTH001</code></li>
+<li>Database row: user <code>AUTH001</code> is active (<code>A</code>), level <code>1</code>, with authorised license types <code>CMB</code>.</li>
+</ul>
+<p><strong>Output</strong></p>
+<ul>
+<li>Message: <code>AUTHORITY USER VALIDATED</code></li>
+<li>The authority name field (<code>DA1AUNMO</code>) shows the authority name, for example <code>Regional Licensing Board</code>.</li>
+</ul>
+<p><strong>Explanation:</strong> F4 runs <code>VALIDATE-AUTHORITY</code>. The query accepts only users with <code>ACTIVE_STATUS = 'A'</code> and <code>AUTHORITY_LEVEL = '1'</code>.</p>
+<p>The program moves the user name and then the authority name into the same screen field, <code>DA1AUNMO</code>. The authority name overwrites the user name, so only the authority name appears.</p>
+<p>If the user is inactive, at another level, or not found, the message is <code>AUTHORITY USER NOT FOUND OR NOT ACTIVE AT LEVEL 1</code>.</p>
+<hr>
+<h3 id="93-example-3-successful-first-approval-f1-decision-a" tabindex="-1">9.3 Example 3: Successful first approval (F1, decision A)</h3>
+<p><strong>Input</strong></p>
+<ul>
+<li>Key pressed: F1</li>
+<li>Application ID: <code>1000000123</code>, with payment status <code>P</code> and license type <code>C</code></li>
+<li>Authority user code: <code>AUTH001</code>, active at level 1, authorised for <code>CMB</code></li>
+<li>Decision (<code>DA1DECI</code>): <code>A</code></li>
+<li>Notes (<code>DA1DCNTI</code>): <code>Documents verified</code></li>
+</ul>
+<p><strong>Output</strong></p>
+<ul>
+<li>Database update on the application:
+<ul>
+<li><code>APPROVAL_1_STATUS</code> = <code>A</code></li>
+<li><code>APPROVAL_1_AUTHORITY</code> = the authority name</li>
+<li><code>APPROVAL_1_DATE</code> = current date</li>
+<li><code>APPROVAL_1_NOTES</code> = <code>Documents verified</code></li>
+<li><code>APPLICATION_STATUS</code> = <code>A2</code></li>
+<li><code>LAST_UPDATED_BY</code> = <code>AUTH001</code></li>
+</ul>
+</li>
+<li>Message: <code>FIRST APPROVAL RECORDED - FORWARDED FOR 2ND APPROVAL</code></li>
+</ul>
+<p><strong>Explanation:</strong> <code>SUBMIT-APPROVAL1</code> runs these checks in order:</p>
+<ol>
+<li>The required fields are present and the decision is <code>A</code> or <code>R</code>.</li>
+<li>The application loads.</li>
+<li>Payment status is <code>P</code>.</li>
+<li>The authority is validated.</li>
+<li>The license type is in the authority’s authorised list.</li>
+</ol>
+<p>All checks pass, so the status becomes <code>A2</code> and the application moves on to second approval.</p>
+<hr>
+<h3 id="94-example-4-rejection-and-blocked-submissions-f1" tabindex="-1">9.4 Example 4: Rejection and blocked submissions (F1)</h3>
+<p><strong>Rejection</strong></p>
+<ul>
+<li>Input: the same valid application and authority as Example 3, with decision <code>R</code> and notes <code>Failed documentation</code>.</li>
+<li>Output: the application status is set to <code>RE</code>, <code>APPROVAL_1_STATUS</code> is set to <code>R</code>, and the message is <code>FIRST APPROVAL REJECTED - APPLICATION CLOSED</code>.</li>
+</ul>
+<p><strong>Blocked submissions</strong></p>
+<table>
+<thead>
+<tr>
+<th>Input condition</th>
+<th>Message</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Payment status is <code>N</code> (not paid)</td>
+<td><code>PAYMENT MUST BE COMPLETED BEFORE FIRST APPROVAL</code></td>
+</tr>
+<tr>
+<td>Decision is <code>X</code></td>
+<td><code>DECISION MUST BE A=APPROVE OR R=REJECT</code></td>
+</tr>
+<tr>
+<td>License type <code>T</code> is not in the authority’s list (for example <code>CMB</code>)</td>
+<td><code>AUTHORITY NOT AUTHORISED FOR THIS LICENSE TYPE</code></td>
+</tr>
+<tr>
+<td>Authority user code is blank</td>
+<td><code>AUTHORITY USER CODE IS REQUIRED</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Explanation:</strong> Each check jumps to <code>SUBMIT-A1-EXIT</code> on failure, so no database update is made.</p>
+<hr>
+<h3 id="95-example-5-navigation-and-exit" tabindex="-1">9.5 Example 5: Navigation and exit</h3>
+<ul>
+<li><strong>First entry (<code>EIBCALEN = 0</code>):</strong> the program sends the blank map <code>DLISA1M01</code> with the current date and returns to transaction <code>DL08</code>.</li>
+<li><strong>Any other key</strong> (for example F2): the message is <code>USE F1 F3 F4 OR F12</code>.</li>
+<li><strong>F12:</strong> the program ends with <code>EXEC CICS RETURN</code>.</li>
+</ul>
+
+                    </article>
+                    <nav class="toc-panel" aria-label="On this page">
+  <span class="toc-panel-label">On this page</span>
+  <ul class="toc-list">
+<li class="toc-level-2"><a href="#1-purpose">1. Purpose</a></li>
+<li class="toc-level-2"><a href="#2-inputs">2. Inputs</a>
+<ul>
+<li class="toc-level-3"><a href="#21-screen--map-inputs-cics-bms--map-dlisa1m01-mapset-dlisa1">2.1 Screen / Map Inputs (CICS BMS — Map DLISA1M01, Mapset DLISA1)</a></li>
+<li class="toc-level-3"><a href="#22-cics-system-inputs">2.2 CICS System Inputs</a></li>
+<li class="toc-level-3"><a href="#23-db2-database-inputs">2.3 DB2 Database Inputs</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#3-outputs">3. Outputs</a>
+<ul>
+<li class="toc-level-3"><a href="#31-screen-output-bms-map-dlisa1--dlisa1m01-sent-with-cics-send-map">3.1 Screen output (BMS map DLISA1 / DLISA1M01, sent with CICS SEND MAP)</a></li>
+<li class="toc-level-3"><a href="#32-database-updates-db2-table-dlislicense_application">3.2 Database updates (DB2 table DLIS.LICENSE_APPLICATION)</a></li>
+<li class="toc-level-3"><a href="#33-conditions-that-stop-the-update">3.3 Conditions that stop the update</a></li>
+<li class="toc-level-3"><a href="#34-transaction-control-and-session-state">3.4 Transaction control and session state</a></li>
+<li class="toc-level-3"><a href="#35-not-produced">3.5 Not produced</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#4-processing-logic">4. Processing Logic</a>
+<ul>
+<li class="toc-level-3"><a href="#41-mermaid-flow-diagram">4.1 Mermaid Flow Diagram</a></li>
+<li class="toc-level-3"><a href="#42-processing-logic-description">4.2 Processing Logic Description</a>
+<ul>
+<li class="toc-level-4"><a href="#421-high-level-summary">4.2.1 High-level Summary</a></li>
+<li class="toc-level-4"><a href="#422-execution-flow">4.2.2 Execution Flow</a></li>
+<li class="toc-level-4"><a href="#423-external-interactions">4.2.3 External Interactions</a></li>
+<li class="toc-level-4"><a href="#424-plain-language-summary">4.2.4 Plain Language Summary</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#43-database-tables">4.3 Database Tables</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#5-paragraphs">5. Paragraphs</a></li>
+<li class="toc-level-2"><a href="#6-dependencies">6. Dependencies</a>
+<ul>
+<li class="toc-level-3"><a href="#61-cics-transaction--screen-map">6.1 CICS Transaction &amp;amp; Screen Map</a></li>
+<li class="toc-level-3"><a href="#62-db2-tables">6.2 DB2 Tables</a></li>
+<li class="toc-level-3"><a href="#63-db2-host-variable-copybooks-dclgen">6.3 DB2 Host-Variable Copybooks (DCLGEN)</a></li>
+<li class="toc-level-3"><a href="#64-common-working-storage-copybooks">6.4 Common Working-Storage Copybooks</a></li>
+<li class="toc-level-3"><a href="#65-cics-runtime-components">6.5 CICS Runtime Components</a></li>
+<li class="toc-level-3"><a href="#66-input-parameters--screen-fields">6.6 Input Parameters / Screen Fields</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#7-constraints">7. Constraints</a>
+<ul>
+<li class="toc-level-3"><a href="#71-transaction-and-navigation-constraints">7.1 Transaction and Navigation Constraints</a></li>
+<li class="toc-level-3"><a href="#72-input-validation-rules">7.2 Input Validation Rules</a></li>
+<li class="toc-level-3"><a href="#73-business-rules-and-conditional-restrictions">7.3 Business Rules and Conditional Restrictions</a></li>
+<li class="toc-level-3"><a href="#74-sequencing-constraints">7.4 Sequencing Constraints</a></li>
+<li class="toc-level-3"><a href="#75-data-format-and-size-limits">7.5 Data Format and Size Limits</a></li>
+<li class="toc-level-3"><a href="#76-error-handling-limits">7.6 Error Handling Limits</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#8-error-handling">8. Error Handling</a>
+<ul>
+<li class="toc-level-3"><a href="#81-input-validation-field-level-checks">8.1 Input validation (field-level checks)</a></li>
+<li class="toc-level-3"><a href="#82-business-rule-validation-guard-conditions-in-the-approval-flow">8.2 Business rule validation (guard conditions in the approval flow)</a></li>
+<li class="toc-level-3"><a href="#83-database-error-handling-db2">8.3 Database error handling (DB2)</a></li>
+<li class="toc-level-3"><a href="#84-cics-error-handling">8.4 CICS error handling</a></li>
+<li class="toc-level-3"><a href="#85-user-notifications-and-feedback">8.5 User notifications and feedback</a></li>
+<li class="toc-level-3"><a href="#86-control-flow-and-recovery-behaviour">8.6 Control flow and recovery behaviour</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#9-examples">9. Examples</a>
+<ul>
+<li class="toc-level-3"><a href="#91-example-1-load-an-application-f3">9.1 Example 1: Load an application (F3)</a></li>
+<li class="toc-level-3"><a href="#92-example-2-validate-the-authority-user-f4">9.2 Example 2: Validate the authority user (F4)</a></li>
+<li class="toc-level-3"><a href="#93-example-3-successful-first-approval-f1-decision-a">9.3 Example 3: Successful first approval (F1, decision A)</a></li>
+<li class="toc-level-3"><a href="#94-example-4-rejection-and-blocked-submissions-f1">9.4 Example 4: Rejection and blocked submissions (F1)</a></li>
+<li class="toc-level-3"><a href="#95-example-5-navigation-and-exit">9.5 Example 5: Navigation and exit</a></li>
+</ul>
+</li>
+</ul>
+
+</nav>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="wiki-footer">Made by IBM Bob Premium Package for Z</footer>
+    <script>
+    /* toc-spy.js — highlights the active heading in the TOC panel on scroll */
+    (function () {
+      function init() {
+        var panel = document.querySelector('.toc-panel');
+        if (!panel) return;
+        var links = Array.prototype.slice.call(panel.querySelectorAll('a[href^="#"]'));
+        if (!links.length) return;
+
+        var headingIds = links.map(function (a) { return a.getAttribute('href').slice(1); });
+        var headings = headingIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+        function clearActive() {
+          panel.querySelectorAll('.toc-active').forEach(function (el) { el.classList.remove('toc-active'); });
+          panel.querySelectorAll('.toc-parent-active').forEach(function (el) { el.classList.remove('toc-parent-active'); });
+        }
+
+        function setActive(id) {
+          clearActive();
+          var link = panel.querySelector('a[href="#' + id + '"]');
+          if (!link) return;
+          link.classList.add('toc-active');
+          var li = link.closest('li');
+          if (li) {
+            var parentLi = li.parentElement && li.parentElement.closest('li');
+            if (parentLi) parentLi.classList.add('toc-parent-active');
+          }
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+        headings.forEach(function (h) { observer.observe(h); });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
+    <script>
+    /* breadcrumb.js — reads sessionStorage['wiki_referrer'] and renders breadcrumb.
+       Only fires when the referrer was set by clicking a link inside the Source Files
+       disclosure on a wiki page; clears after rendering so stale state never lingers. */
+    (function () {
+      var raw;
+      try { raw = sessionStorage.getItem('wiki_referrer'); } catch (_e) {}
+      if (!raw) return;
+      /* Consume immediately — prevents the breadcrumb re-appearing on the next visit. */
+      try { sessionStorage.removeItem('wiki_referrer'); } catch (_e) {}
+      var ref;
+      try { ref = JSON.parse(raw); } catch (_e) { return; }
+      if (!ref || !ref.href) return;
+      var bc = document.getElementById('wiki-breadcrumb');
+      if (!bc) return;
+      bc.className = 'wiki-breadcrumb';
+      bc.innerHTML =
+        '<a href="' + ref.href + '">' + (ref.title || 'Back') + '</a>' +
+        '<span class="wiki-breadcrumb-sep"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' +
+        '<span class="wiki-breadcrumb-current">DLISAP1</span>';
+    })();
+    </script>
+    <script>
+    /* sidebar toggle — same as main wiki pages */
+    (function () {
+
+      var STORAGE_KEY = 'sb_open';
+
+      function getOpenSet() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+      }
+
+      function saveOpenSet(set) {
+        try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(set)); } catch (e) {}
+      }
+
+      function findItems(toggle) {
+        var node = toggle.nextSibling;
+        while (node) {
+          if (node.nodeType === 1 && node.classList.contains('nav-section-items'))
+            return node;
+          node = node.nextSibling;
+        }
+        return null;
+      }
+
+      function toggleKey(toggle, index) {
+        var label = (toggle.querySelector('.nav-toggle-text') || toggle).textContent.trim().replace(/\s+/g, ' ');
+        return index + ':' + label;
+      }
+
+      function openSection(toggle, items, key, set) {
+        toggle.classList.add('open');
+        items.classList.add('open');
+        if (set) set[key] = true;
+      }
+
+      function closeSection(toggle, items, key, set) {
+        toggle.classList.remove('open');
+        items.classList.remove('open');
+        if (set) set[key] = false;
+      }
+
+      function init() {
+        var sidebar = document.getElementById('wiki-sidebar');
+        var toggles = Array.prototype.slice.call(
+          document.querySelectorAll('.nav-section-toggle')
+        );
+
+        var savedSet = getOpenSet();
+        var openSet = savedSet || {};
+
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+
+          var key = toggleKey(toggle, idx);
+          var shouldOpen = openSet[key] === true;
+
+          if (shouldOpen) {
+            toggle.classList.add('open');
+            items.classList.add('open');
+          }
+
+          toggle.addEventListener('click', function () {
+            var nowOpen = toggle.classList.contains('open');
+            if (nowOpen) {
+              closeSection(toggle, items, key, openSet);
+            } else {
+              openSection(toggle, items, key, openSet);
+            }
+            saveOpenSet(openSet);
+          });
+        });
+
+        saveOpenSet(openSet);
+
+        /* Restore sidebar scroll position after sections are expanded so the
+           scroll height is correct when we apply scrollTop. */
+        if (sidebar) {
+          try {
+            var savedScroll = sessionStorage.getItem('sb_scroll');
+            if (savedScroll !== null) { sidebar.scrollTop = parseInt(savedScroll, 10) || 0; }
+          } catch (_e) {}
+        }
+
+        window.addEventListener('pagehide', function () {
+          saveOpenSet(openSet);
+          if (sidebar) {
+            try { sessionStorage.setItem('sb_scroll', String(sidebar.scrollTop)); } catch (_e) {}
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+    </script>
+</body>
+</html>

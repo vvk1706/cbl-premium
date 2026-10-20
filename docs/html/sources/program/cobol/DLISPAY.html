@@ -1,0 +1,1599 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLISPAY</title>
+    <link rel="stylesheet" href="../../../assets/style.css">
+    <script src="../../../assets/mermaid.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+
+    <!-- Prism.js for syntax highlighting (bundled — no CDN required) -->
+    <link rel="stylesheet" href="../../../assets/prism-tomorrow.css">
+    <script src="../../../assets/prism-core.js"></script>
+    <script src="../../../assets/prism-languages.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="header-app-name"><a href="../../../../index.html" style="color: inherit; text-decoration: none;">Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</a></span>
+        </div>
+        <div class="header-right">
+        </div>
+    </header>
+    <div class="shell">
+        <aside class="sidebar" id="wiki-sidebar">
+            <nav>
+                
+        <div class="nav-home-wrap">
+            <a href="../../../../index.html" class="nav-home">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 6.5L8 2l6 4.5V14a1 1 0 01-1 1H3a1 1 0 01-1-1V6.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M6 15V9h4v6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                Home
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Application Documentation</div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Overview</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/system-overview.html" class="nav-link" data-page-id="system-overview">DLIS System Overview</a>
+                <a href="../../../pages/main-menu-navigation.html" class="nav-link" data-page-id="main-menu-navigation">Main Menu &amp; Navigation (DL01)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Candidate &amp; Application Intake</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/candidate-management.html" class="nav-link" data-page-id="candidate-management">Candidate Maintenance (DL02)</a>
+                <a href="../../../pages/license-application-entry.html" class="nav-link" data-page-id="license-application-entry">License Application Entry (DL03)</a>
+                <a href="../../../pages/application-status-inquiry.html" class="nav-link" data-page-id="application-status-inquiry">Application Status Inquiry (DL04)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Verification &amp; Payment</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/eligibility-check.html" class="nav-link" data-page-id="eligibility-check">Eligibility Check (DL05)</a>
+                <a href="../../../pages/driving-history-check.html" class="nav-link" data-page-id="driving-history-check">Driving History Check (DL06)</a>
+                <a href="../../../pages/payment-processing.html" class="nav-link" data-page-id="payment-processing">Payment Entry &amp; Processing (DL07)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Approval &amp; License Issuance</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/first-level-approval.html" class="nav-link" data-page-id="first-level-approval">First-Level Authority Approval (DL08)</a>
+                <a href="../../../pages/second-level-approval.html" class="nav-link" data-page-id="second-level-approval">Second-Level Authority Approval (DL09)</a>
+                <a href="../../../pages/license-issuance.html" class="nav-link" data-page-id="license-issuance">License Issuance (DL10)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Architecture</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/application-lifecycle-flow.html" class="nav-link" data-page-id="application-lifecycle-flow">Application Lifecycle &amp; Status Flow</a>
+                <a href="../../../pages/data-architecture.html" class="nav-link" data-page-id="data-architecture">Data Architecture (DB2)</a>
+                <a href="../../../pages/cics-integration-patterns.html" class="nav-link" data-page-id="cics-integration-patterns">CICS Integration Patterns</a>
+            </div>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Program Documentation</div>
+    <div class="nav-section">
+        <button class="nav-section-toggle open" type="button">
+            <span class="nav-toggle-text">program</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items open">
+        <div class="nav-section">
+            <button class="nav-section-toggle open" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items open">
+                <a href="../../../sources/program/cobol/DLISPAY.html" class="nav-link active">DLISPAY</a>
+                <a href="../../../sources/program/cobol/DLISSTAT.html" class="nav-link">DLISSTAT</a>
+                <a href="../../../sources/program/cobol/DLISMENU.html" class="nav-link">DLISMENU</a>
+                <a href="../../../sources/program/cobol/DLISELIG.html" class="nav-link">DLISELIG</a>
+                <a href="../../../sources/program/cobol/DLISCAND.html" class="nav-link">DLISCAND</a>
+                <a href="../../../sources/program/cobol/DLISAPPL.html" class="nav-link">DLISAPPL</a>
+                <a href="../../../sources/program/cobol/DLISISSU.html" class="nav-link">DLISISSU</a>
+                <a href="../../../sources/program/cobol/DLISAP2.html" class="nav-link">DLISAP2</a>
+                <a href="../../../sources/program/cobol/DLISHIST.html" class="nav-link">DLISHIST</a>
+                <a href="../../../sources/program/cobol/DLISAP1.html" class="nav-link">DLISAP1</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">business-rule</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../sources/business-rule/cobol/DLISELIG-overview.html" class="nav-link">DLISELIG-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-inventory.html" class="nav-link">DLISPAY-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-overview.html" class="nav-link">DLISCAND-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-inventory.html" class="nav-link">DLISAP2-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-inventory.html" class="nav-link">DLISHIST-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-inventory.html" class="nav-link">DLISMENU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISELIG-inventory.html" class="nav-link">DLISELIG-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-overview.html" class="nav-link">DLISPAY-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-overview.html" class="nav-link">DLISSTAT-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-overview.html" class="nav-link">DLISHIST-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-overview.html" class="nav-link">DLISAPPL-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-inventory.html" class="nav-link">DLISISSU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-inventory.html" class="nav-link">DLISAPPL-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-inventory.html" class="nav-link">DLISSTAT-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-overview.html" class="nav-link">DLISAP1-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-inventory.html" class="nav-link">DLISCAND-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-overview.html" class="nav-link">DLISAP2-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-overview.html" class="nav-link">DLISISSU-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-inventory.html" class="nav-link">DLISAP1-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-overview.html" class="nav-link">DLISMENU-overview</a>
+            </div>
+        </div>
+        </div>
+    </div>
+            </nav>
+        </aside>
+        <main class="main">
+            <div class="prog-container">
+                <div id="wiki-breadcrumb"></div>
+                <div class="content-layout">
+                    <article class="prose">
+                        <h2 id="1-purpose" tabindex="-1">1. Purpose</h2>
+<p>DLISPAY is a CICS/COBOL online payment entry and processing program for the Driver License Information System (DLIS), operating under transaction code DL07. It presents operators with an interactive payment screen (map DLISPE/DLISPE01) through which they can look up a license application, record a fee payment against it, and trigger receipt printing. When an application is loaded, the program retrieves the applicant’s details and applicable fee from the DB2 <code>LICENSE_APPLICATION</code>, <code>CANDIDATE</code>, and <code>LICENSE_FEE_SCHEDULE</code> tables and displays them on screen. Before accepting a payment, it enforces two key business rules: the applicant’s history check must have a passed status, and the application must not already carry a paid payment status. On successful payment, the program inserts a new row into the <code>PAYMENT</code> table — capturing the payment method, reference, amount, receipt number, and processing officer — and updates the <code>LICENSE_APPLICATION</code> record to reflect a paid status and a new application status of “PA”. A system-generated receipt number is constructed from the prefix “RCP”, the current date, and the application ID, and the DB2 <code>IDENTITY_VAL_LOCAL()</code> function is used to retrieve the newly assigned payment identifier for display. Operators may also trigger printing of the payment receipt, which is delegated to the linked program <code>DLISRPRT</code> via an <code>EXEC CICS LINK</code> call.</p>
+<h2 id="2-inputs" tabindex="-1">2. Inputs</h2>
+<h3 id="21-cics-communication-area-commarea--dfhcommarea" tabindex="-1">2.1 CICS Communication Area (COMMAREA / DFHCOMMAREA)</h3>
+<ul>
+<li><strong><code>DFHCOMMAREA</code></strong> — Standard CICS Linkage Section field (350 bytes) through which state is passed back into the program on every pseudo-conversational re-entry. Its content is moved into <code>DLIS-COMMAREA</code> at the start of each transaction cycle to restore the prior session context.
+<ul>
+<li><strong><code>CA-TRANSACTION-ID</code></strong> — Identifies the owning CICS transaction (<code>DL07</code>); used for routing and return control.</li>
+<li><strong><code>CA-CANDIDATE-ID</code></strong> — Candidate identifier carried across screen interactions to maintain context between calls.</li>
+<li><strong><code>CA-APPLICATION-ID</code></strong> — Application identifier carried across screen interactions, available for use by linked programs such as <code>DLISRPRT</code>.</li>
+<li><strong><code>CA-USER-ID</code></strong> — Operator user ID preserved in the COMMAREA for audit and context continuity.</li>
+<li><strong><code>CA-ACTION</code></strong> — Action code passed between pseudo-conversational cycles to indicate the next operation to perform.</li>
+</ul>
+</li>
+</ul>
+<h3 id="22-bms-map-input-fields-dlispe01--dlispe" tabindex="-1">2.2 BMS Map Input Fields (DLISPE01 / DLISPE)</h3>
+<p>Operator-entered fields received from the CICS map via <code>EXEC CICS RECEIVE MAP</code>:</p>
+<ul>
+<li><strong><code>DPEAIDI</code></strong> — Application ID entered by the operator. Used as the primary key to retrieve the license application record from <code>DLIS.LICENSE_APPLICATION</code> and as a component in generating the receipt number.</li>
+<li><strong><code>DPEMETHI</code></strong> — Payment method code entered by the operator (e.g., <code>CC</code>, <code>DC</code>, <code>EF</code>, <code>CS</code>, <code>CH</code>). Validated against allowed values before payment processing proceeds; inserted into <code>DLIS.PAYMENT</code>.</li>
+<li><strong><code>DPEREFI</code></strong> — Payment reference entered by the operator (e.g., a bank authorisation or reference code). Required before payment is accepted; inserted into both <code>DLIS.PAYMENT</code> and <code>DLIS.LICENSE_APPLICATION</code>.</li>
+<li><strong><code>DPEPRCBYI</code></strong> — Processed-by identifier entered by the operator. Identifies the staff member recording the payment; inserted into <code>DLIS.PAYMENT</code> and used to update <code>LAST_UPDATED_BY</code> in <code>DLIS.LICENSE_APPLICATION</code>.</li>
+<li><strong><code>DPERCTO</code></strong> — Receipt number field on the map. Checked during the Print Receipt action to confirm a payment has already been processed before dispatching to <code>DLISRPRT</code>.</li>
+</ul>
+<h3 id="23-db2-database-tables" tabindex="-1">2.3 DB2 Database Tables</h3>
+<ul>
+<li><strong><code>DLIS.LICENSE_APPLICATION</code></strong> — Primary source of application data. The program reads the following columns to drive processing logic:
+<ul>
+<li><strong><code>CANDIDATE_ID</code></strong> — Identifies the applicant associated with the application; propagated to the payment record.</li>
+<li><strong><code>LICENSE_TYPE</code></strong> — Classification of the license (<code>L</code>, <code>P</code>, <code>O</code>); drives fee schedule lookup and display labels.</li>
+<li><strong><code>HIST_CHECK_STATUS</code></strong> — History check outcome; must equal <code>'P'</code> (Passed) before payment is permitted.</li>
+<li><strong><code>PAYMENT_STATUS</code></strong> — Existing payment state; prevents duplicate payment if already <code>'P'</code> (Paid).</li>
+</ul>
+</li>
+<li><strong><code>DLIS.CANDIDATE</code></strong> — Joined to <code>LICENSE_APPLICATION</code> to retrieve the candidate’s name (<code>FIRST_NAME</code>, <code>LAST_NAME</code>) for display on the payment screen.</li>
+<li><strong><code>DLIS.LICENSE_FEE_SCHEDULE</code></strong> — Queried to obtain the applicable fee for the license type:
+<ul>
+<li><strong><code>FEE_AMOUNT</code></strong> — Monetary amount charged for the license application; used as the payment amount.</li>
+<li><strong><code>CURRENCY_CODE</code></strong> — Currency denomination of the fee; displayed alongside the fee amount on screen.</li>
+</ul>
+</li>
+</ul>
+<h3 id="24-cics-system-values" tabindex="-1">2.4 CICS System Values</h3>
+<ul>
+<li><strong><code>EIBCALEN</code></strong> — CICS Execute Interface Block field indicating the length of the passed COMMAREA. Tested at entry to determine whether the program is being invoked for the first time (initial screen) or re-entered after operator input.</li>
+<li><strong><code>EIBAID</code></strong> — CICS attention identifier reflecting which function key the operator pressed (<code>DFHPF1</code> to process payment, <code>DFHPF3</code> to look up an application, <code>DFHPF5</code> to print a receipt, <code>DFHPF12</code> to exit).</li>
+<li><strong><code>CURRENT-DATE</code></strong> — IBM COBOL intrinsic function value providing the system date; used to populate the screen date field and to construct the receipt number.</li>
+</ul>
+<h2 id="3-outputs" tabindex="-1">3. Outputs</h2>
+<h3 id="31-cics-screen-output-fields-map-dlispe01" tabindex="-1">3.1 CICS Screen Output Fields (Map <code>DLISPE01</code>)</h3>
+<p>The program writes data directly to the user’s terminal by updating specific output fields of map <code>DLISPE01</code> in mapset <code>DLISPE</code> to reflect screen updates:</p>
+<ul>
+<li><strong>Candidate and Application Details</strong>
+<ul>
+<li><code>DPECNAMO</code>: Displays the candidate’s formatted full name, constructed by concatenating their first and last name with a separating space.</li>
+<li><code>DPELTYO</code>: Displays the single-character license type code retrieved from the license application database record.</li>
+<li><code>DPELDSO</code>: Displays the user-friendly description of the license type based on its code (e.g., ‘LEARNER’, ‘PROBATION’, or ‘OPEN’).</li>
+</ul>
+</li>
+<li><strong>Financial Information</strong>
+<ul>
+<li><code>DPEFEEO</code>: Displays the formatted, decimal-aligned license fee amount retrieved from the active fee schedule.</li>
+<li><code>DPECURRO</code>: Displays the three-character currency code associated with the loaded fee schedule.</li>
+</ul>
+</li>
+<li><strong>Transaction Confirmation</strong>
+<ul>
+<li><code>DPEPIDO</code>: Displays the newly generated, system-assigned payment identifier retrieved from the database after a successful insertion.</li>
+<li><code>DPERCTO</code>: Displays the formatted receipt number generated for the successful payment.</li>
+<li><code>DPEPSTSO</code>: Displays the payment status indicator (set to ‘S’ on successful insertion) on the screen.</li>
+</ul>
+</li>
+<li><strong>Messages and System Fields</strong>
+<ul>
+<li><code>DPEMSG</code>: Displays status, success, and validation error messages (e.g., “PAYMENT RECORDED SUCCESSFULLY”, “APPLICATION NOT FOUND”, “HISTORY CHECK MUST BE PASSED BEFORE PAYMENT”, “PROCESS PAYMENT FIRST BEFORE PRINTING”).</li>
+<li><code>DPEDATE</code>: Displays the current system date, initialized when the map is first sent.</li>
+</ul>
+</li>
+</ul>
+<h3 id="32-database-records-db2-writes-and-updates" tabindex="-1">3.2 Database Records (DB2 Writes and Updates)</h3>
+<p>The program updates the relational database to write the transaction details and update the state of the license application:</p>
+<ul>
+<li><strong>DLIS.PAYMENT Table (Insert)</strong>
+<ul>
+<li><code>APPLICATION_ID</code>: References the license application for which the payment is made.</li>
+<li><code>CANDIDATE_ID</code>: Identifies the candidate performing the payment.</li>
+<li><code>PAYMENT_AMOUNT</code>: Records the fee amount charged for the application.</li>
+<li><code>PAYMENT_METHOD</code>: Records the verified payment method code (e.g., ‘CC’, ‘DC’, ‘EF’, ‘CS’, ‘CH’).</li>
+<li><code>PAYMENT_REFERENCE</code>: Records the externally provided reference code or authorization code.</li>
+<li><code>PAYMENT_STATUS</code>: Sets the database payment status (hardcoded to ‘S’).</li>
+<li><code>LICENSE_TYPE</code>: Identifies the classification of the license paid for.</li>
+<li><code>FEE_TYPE</code>: Identifies the type of fee being paid (hardcoded to ‘IF’).</li>
+<li><code>RECEIPT_NUMBER</code>: Stores the constructed receipt number.</li>
+<li><code>PROCESSED_BY</code>: Tracks the identifier of the operator who processed the payment.</li>
+</ul>
+</li>
+<li><strong>DLIS.LICENSE_APPLICATION Table (Update)</strong>
+<ul>
+<li><code>PAYMENT_STATUS</code>: Updated to ‘P’ (Paid) to indicate that payment has been successfully recorded.</li>
+<li><code>PAYMENT_REFERENCE</code>: Updated with the corresponding transaction reference code for financial auditing.</li>
+<li><code>APPLICATION_STATUS</code>: Updated to ‘PA’ (Payment Approved/Processed) to advance the application to the next workflow state.</li>
+<li><code>LAST_UPDATED_DATE</code>: Updated with the current DB2 date.</li>
+<li><code>LAST_UPDATED_BY</code>: Updated with the ID of the processing operator.</li>
+</ul>
+</li>
+</ul>
+<h3 id="33-cics-communication-and-navigation-commarea--links" tabindex="-1">3.3 CICS Communication and Navigation (COMMAREA &amp; Links)</h3>
+<p>The program maintains state across screen interactions and transfers context to downstream processing:</p>
+<ul>
+<li><strong>DLIS-COMMAREA</strong>
+<ul>
+<li>Passed via <code>EXEC CICS RETURN</code> to the transaction <code>DL07</code> to maintain business state across conversational steps.</li>
+<li>Passed as the communication area parameter in <code>EXEC CICS LINK</code> when invoking the receipt printing program <code>DLISRPRT</code>.</li>
+<li>Main outputs inside the communication area structure include:
+<ul>
+<li><code>CA-TRANSACTION-ID</code>: Carries the current transaction identifier.</li>
+<li><code>CA-CANDIDATE-ID</code>: Carries the candidate identifier.</li>
+<li><code>CA-APPLICATION-ID</code>: Carries the application identifier.</li>
+<li><code>CA-PAYMENT-ID</code>: Relays the newly created payment identifier to the print program so that the corresponding receipt can be retrieved and formatted.</li>
+<li><code>CA-USER-ID</code>: Tracks the active operator ID.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-processing-logic" tabindex="-1">4. Processing Logic</h2>
+<h3 id="41-mermaid-flow-diagram" tabindex="-1">4.1 Mermaid Flow Diagram</h3>
+<div class="mermaid">
+graph TD
+    A([Start DLISPAY transaction DL07]) --> B{First entry with no COMMAREA}
+    B -- Yes --> C[Set current date on map]
+    C --> D[Send payment entry map with erase]
+    D --> E([Return to CICS with transaction DL07])
+    B -- No --> F[Restore COMMAREA from DFHCOMMAREA]
+    F --> G[Receive map DLISPE01]
+    G --> H{Which key was pressed}
+    H -- F1 --> P1[Process payment]
+    H -- F3 --> L1[Load application]
+    H -- F5 --> R1[Print receipt]
+    H -- F12 --> X([Return to CICS and end])
+    H -- Other --> M1[Message use F1 F3 F5 or F12]
+    P1 --> S[Send map data only]
+    L1 --> S
+    R1 --> S
+    M1 --> S
+    S --> T([Return with transaction DL07 and COMMAREA])
+
+    L1 --> LA{Application ID entered}
+    LA -- No --> LB[Message enter application ID]
+    LA -- Yes --> LC[Select application and candidate data from DB2]
+    LC --> LD{Application found}
+    LD -- No --> LE[Message application not found]
+    LD -- Yes --> LF[Build candidate name and license type description]
+    LF --> LG[Select active initial fee from fee schedule]
+    LG --> LH{Fee found}
+    LH -- Yes --> LI[Display fee and currency]
+    LH -- No --> LJ[Skip fee display]
+    LI --> LK[Message application loaded]
+    LJ --> LK
+
+    P1 --> PA{Application ID entered}
+    PA -- No --> PZ[Message enter application ID]
+    PA -- Yes --> PB{Payment method entered}
+    PB -- No --> PY[Message method required]
+    PB -- Yes --> PC{Method is CC DC EF CS or CH}
+    PC -- No --> PX[Message invalid method]
+    PC -- Yes --> PD{Payment reference entered}
+    PD -- No --> PW[Message reference required]
+    PD -- Yes --> PE[Reload application and fee]
+    PE --> PF{Application loaded}
+    PF -- No --> PV[Exit with load message]
+    PF -- Yes --> PG{History check passed}
+    PG -- No --> PU[Message history check must pass first]
+    PG -- Yes --> PH{Payment already recorded}
+    PH -- Yes --> PT[Message payment already recorded]
+    PH -- No --> PI[Build receipt number RCP plus date plus application ID]
+    PI --> PJ[Insert payment row with status S]
+    PJ --> PK{Insert successful}
+    PK -- No --> PS[Message database error on insert]
+    PK -- Yes --> PL[Get generated payment ID]
+    PL --> PM[Update application to paid status PA]
+    PM --> PN[Show payment ID receipt and status]
+    PN --> PO[Message payment recorded successfully]
+
+    R1 --> RA{Receipt number present}
+    RA -- No --> RB[Message process payment first]
+    RA -- Yes --> RC[Link to DLISRPRT with COMMAREA]
+    RC --> RD[Message receipt sent to printer]
+
+    classDef start fill:#d4f1f4,stroke:#5a9ea6,color:#000
+    classDef proc fill:#e8f5e9,stroke:#6aa86e,color:#000
+    classDef dec fill:#fff9c4,stroke:#c9b84a,color:#000
+    classDef err fill:#fde2e4,stroke:#c98a90,color:#000
+    classDef db fill:#e6e0f8,stroke:#8b7fc2,color:#000
+
+    class A,E,X,T start
+    class B,H,LA,LD,LH,PA,PB,PC,PD,PF,PG,PH,PK,RA dec
+    class C,D,F,G,P1,L1,R1,S,LF,LI,LJ,LK,PI,PN,PO,RC,RD,PE proc
+    class M1,LB,LE,PZ,PY,PX,PW,PV,PU,PT,PS,RB err
+    class LC,LG,PJ,PL,PM db
+</div>
+<hr>
+<h3 id="42-processing-logic-description" tabindex="-1">4.2 Processing Logic Description</h3>
+<p><strong>High-level Summary</strong></p>
+<p>DLISPAY is a pseudo-conversational CICS/COBOL program for transaction DL07. It uses map DLISPE01 in mapset DLISPE, and operators use it to take a license application fee payment. Each function key does one job:</p>
+<ul>
+<li>F1 validates and records a payment.</li>
+<li>F3 looks up an application and shows the fee.</li>
+<li>F5 prints a receipt through program DLISRPRT.</li>
+<li>F12 exits.</li>
+</ul>
+<p>The program reads and updates DB2 tables for license applications, candidates, fee schedules and payments.</p>
+<p><strong>Execution Flow</strong></p>
+<ol>
+<li>
+<p><strong>Entry (MAIN-LOGIC)</strong></p>
+<ul>
+<li>If EIBCALEN is 0, this is the first invocation. The program runs INIT-SCREEN.</li>
+<li>INIT-SCREEN puts the current date on the map and sends the map with ERASE and FREEKB. It then issues a CICS RETURN to transaction DL07, passing the 350-byte COMMAREA.</li>
+<li>If a COMMAREA exists, DFHCOMMAREA is copied into DLIS-COMMAREA. The program then runs PROCESS-INPUT.</li>
+</ul>
+</li>
+<li>
+<p><strong>Input handling (PROCESS-INPUT)</strong></p>
+<ul>
+<li>The program receives map DLISPE01 and evaluates the attention key (AID):
+<ul>
+<li>F1 runs PROCESS-PAYMENT.</li>
+<li>F3 runs LOAD-APPLICATION.</li>
+<li>F5 runs PRINT-RECEIPT.</li>
+<li>F12 ends the transaction with a plain CICS RETURN.</li>
+<li>Any other key sets the message “USE F1 F3 F5 OR F12”.</li>
+</ul>
+</li>
+<li>The map is then re-sent with DATAONLY and FREEKB. The program returns to DL07 with the COMMAREA, which keeps the conversation going.</li>
+</ul>
+</li>
+<li>
+<p><strong>Load application (F3, LOAD-APPLICATION)</strong></p>
+<ul>
+<li>If the application ID is zero, the message is “ENTER APPLICATION ID” and the routine exits.</li>
+<li>A DB2 join of LICENSE_APPLICATION and CANDIDATE reads these fields:
+<ul>
+<li>candidate ID</li>
+<li>license type</li>
+<li>history check status</li>
+<li>payment status</li>
+<li>first and last name</li>
+</ul>
+</li>
+<li>If SQLCODE is 100, the message is “APPLICATION NOT FOUND” and the routine exits. No other SQLCODE is checked for this select.</li>
+<li>The program builds the candidate full name by joining first and last name with a space. It also sets the license type code and its description: L is LEARNER, P is PROBATION, O is OPEN.</li>
+<li>A second query reads the fee and currency from LICENSE_FEE_SCHEDULE. It filters on these conditions:
+<ul>
+<li>the license type matches</li>
+<li>the fee type is ‘IF’ (initial fee)</li>
+<li>the status is Active</li>
+<li>the effective date is on or before today</li>
+<li>only the first row is taken</li>
+</ul>
+</li>
+<li>If the fee is found, the program formats it with an edited picture and shows it with the currency code. If it isn’t found, nothing is shown and the load still succeeds.</li>
+<li>The message is “APPLICATION LOADED”.</li>
+</ul>
+</li>
+<li>
+<p><strong>Process payment (F1, PROCESS-PAYMENT)</strong></p>
+<ul>
+<li>Validations run in this order. Each failure sets a message and exits.
+<ol>
+<li>The application ID is entered.</li>
+<li>The payment method is entered.</li>
+<li>The method is one of CC, DC, EF, CS or CH.</li>
+<li>The payment reference is entered.</li>
+</ol>
+</li>
+<li>The program then runs LOAD-APPLICATION again to get the current data and fee. It continues only if the message is “APPLICATION LOADED”.</li>
+<li>Business rules:
+<ul>
+<li>The history check status must be ‘P’ (passed). Otherwise the message is “HISTORY CHECK MUST BE PASSED BEFORE PAYMENT”.</li>
+<li>The payment status must not already be ‘P’. Otherwise the message is “PAYMENT ALREADY RECORDED FOR THIS APPLICATION”.</li>
+</ul>
+</li>
+<li>The receipt number is built as ‘RCP’ + the date (YYYYMMDD) + the application ID entered on the screen.</li>
+<li>The program fills the payment host variables: method, reference, application ID, candidate ID, license type, amount (the looked-up fee), receipt number and processed-by.</li>
+<li>It inserts a row into DLIS.PAYMENT with payment status ‘S’ and fee type ‘IF’. If SQLCODE is not 0, the message is “DATABASE ERROR ON PAYMENT INSERT” and the routine exits.</li>
+<li>It reads the generated payment ID with IDENTITY_VAL_LOCAL().</li>
+<li>It updates LICENSE_APPLICATION:
+<ul>
+<li>payment status becomes ‘P’</li>
+<li>the payment reference is stored</li>
+<li>the application status becomes ‘PA’</li>
+<li>the last-updated date and last-updated-by fields are set</li>
+</ul>
+</li>
+<li>The update’s SQLCODE is not checked.</li>
+<li>The screen shows the payment ID, receipt number and payment status ‘S’, with the message “PAYMENT RECORDED SUCCESSFULLY”.</li>
+</ul>
+</li>
+<li>
+<p><strong>Print receipt (F5, PRINT-RECEIPT)</strong></p>
+<ul>
+<li>If the receipt field on the screen is blank, the message is “PROCESS PAYMENT FIRST BEFORE PRINTING”.</li>
+<li>Otherwise the program does an EXEC CICS LINK to DLISRPRT, passing the COMMAREA. The message is then “RECEIPT SENT TO PRINTER”.</li>
+</ul>
+</li>
+</ol>
+<p><strong>External Interactions</strong></p>
+<ul>
+<li><strong>CICS BMS:</strong> SEND MAP and RECEIVE MAP on DLISPE01 in mapset DLISPE. RETURN TRANSID(‘DL07’) with COMMAREA is used for pseudo-conversational flow.</li>
+<li><strong>CICS LINK:</strong> program DLISRPRT is called for receipt printing.</li>
+<li><strong>DB2 tables:</strong>
+<ul>
+<li>DLIS.LICENSE_APPLICATION: read, then updated with payment status.</li>
+<li>DLIS.CANDIDATE: read for the candidate name.</li>
+<li>DLIS.LICENSE_FEE_SCHEDULE: read for the fee and currency.</li>
+<li>DLIS.PAYMENT: a payment row is inserted.</li>
+<li>SYSIBM.SYSDUMMY1: used to get the generated payment ID.</li>
+</ul>
+</li>
+<li>There are no IBM MQ operations in this program.</li>
+</ul>
+<p><strong>Plain Language Summary</strong></p>
+<p>A clerk opens the payment screen and presses F3 after typing an application number. The program shows the applicant’s name, license type and fee. The clerk then enters the payment method and reference, and presses F1. The program only accepts payment if these checks pass:</p>
+<ul>
+<li>all required fields are filled</li>
+<li>the method is valid</li>
+<li>the background history check has passed</li>
+<li>the application hasn’t been paid already</li>
+</ul>
+<p>When the checks pass, the program issues a receipt number, saves the payment, and marks the application as paid. Pressing F5 sends the receipt to the printer, but only after a payment has been made. F12 exits.</p>
+<hr>
+<h3 id="43-database-tables" tabindex="-1">4.3 Database Tables</h3>
+<div class="mermaid">
+erDiagram
+    LICENSE_APPLICATION {
+        int APPLICATION_ID "primary key"
+        int CANDIDATE_ID
+        string LICENSE_TYPE "length 1"
+        string APPLICATION_STATUS "length 2"
+        string HIST_CHECK_STATUS "length 1"
+        string PAYMENT_STATUS "length 1"
+        string PAYMENT_REFERENCE
+        date LAST_UPDATED_DATE
+        string LAST_UPDATED_BY "length 20"
+    }
+    CANDIDATE {
+        int CANDIDATE_ID "primary key"
+        string FIRST_NAME "length 30"
+        string LAST_NAME "length 30"
+    }
+    LICENSE_FEE_SCHEDULE {
+        string LICENSE_TYPE "length 1"
+        string FEE_TYPE "length 2"
+        decimal FEE_AMOUNT
+        string CURRENCY_CODE "length 3"
+        string ACTIVE_STATUS "length 1"
+        date EFFECTIVE_DATE
+    }
+    PAYMENT {
+        int PAYMENT_ID "identity"
+        int APPLICATION_ID
+        int CANDIDATE_ID
+        decimal PAYMENT_AMOUNT
+        string PAYMENT_METHOD "length 2"
+        string PAYMENT_REFERENCE "length 30"
+        string PAYMENT_STATUS "length 1"
+        string LICENSE_TYPE "length 1"
+        string FEE_TYPE "length 2"
+        string RECEIPT_NUMBER "length 20"
+        string PROCESSED_BY "length 20"
+    }
+    CANDIDATE ||--o{ LICENSE_APPLICATION : has
+    LICENSE_APPLICATION ||--o{ PAYMENT : paid_by
+    LICENSE_FEE_SCHEDULE ||--o{ LICENSE_APPLICATION : prices
+</div>
+<h2 id="5-paragraphs" tabindex="-1">5. Paragraphs</h2>
+<p><strong>MAIN-LOGIC</strong></p>
+<ul>
+<li>Entry point and dispatcher of the pseudo-conversational CICS transaction DL07.</li>
+<li>Control flow:
+<ul>
+<li>If EIBCALEN = 0, this is the first invocation, so it performs INIT-SCREEN.</li>
+<li>Otherwise it moves DFHCOMMAREA into DLIS-COMMAREA to restore state and performs PROCESS-INPUT.</li>
+<li>It ends with STOP RUN.</li>
+</ul>
+</li>
+<li>External interaction: none directly. It reads the CICS EIB commarea length.</li>
+</ul>
+<p><strong>INIT-SCREEN</strong></p>
+<ul>
+<li>Sends the blank payment entry map on first entry.</li>
+<li>Operations:
+<ul>
+<li>Moves the first 10 characters of CURRENT-DATE to the map date field DPEDATE.</li>
+<li>Sends map DLISPE01 from mapset DLISPE with ERASE and FREEKB. The response goes to WS-RESP1.</li>
+<li>Issues EXEC CICS RETURN TRANSID(‘DL07’) with DLIS-COMMAREA (length 350), so the next terminal input restarts the transaction.</li>
+</ul>
+</li>
+<li>External interaction: CICS terminal I/O (SEND MAP) and CICS RETURN.</li>
+<li>Control flow: none. It is a straight sequence that ends the task.</li>
+</ul>
+<p><strong>PROCESS-INPUT</strong></p>
+<ul>
+<li>Handles every re-entry. It receives the screen and routes by the attention key.</li>
+<li>Operations:
+<ul>
+<li>Receives map DLISPE01 into the symbolic map fields, with the response in WS-RESP1.</li>
+<li>Evaluates EIBAID:
+<ul>
+<li>PF1 performs PROCESS-PAYMENT.</li>
+<li>PF3 performs LOAD-APPLICATION.</li>
+<li>PF5 performs PRINT-RECEIPT.</li>
+<li>PF12 issues EXEC CICS RETURN, which ends the transaction without a TRANSID.</li>
+<li>Any other key moves ‘USE F1 F3 F5 OR F12’ to DPEMSG.</li>
+</ul>
+</li>
+<li>Sends the map again with DATAONLY and FREEKB to refresh the data.</li>
+<li>Issues EXEC CICS RETURN TRANSID(‘DL07’) with the commarea to continue the pseudo-conversation.</li>
+</ul>
+</li>
+<li>Control flow: EVALUATE TRUE on the AID key.</li>
+<li>External interaction: CICS RECEIVE MAP, SEND MAP and RETURN. It calls the other paragraphs, which do the database work.</li>
+</ul>
+<p><strong>LOAD-APPLICATION</strong></p>
+<ul>
+<li>Looks up the license application and its candidate, shows the details, and retrieves the applicable initial fee.</li>
+<li>Operations:
+<ul>
+<li>Validation: if DPEAIDI is zeros, it sets ‘ENTER APPLICATION ID’ and does GO TO LOAD-APP-EXIT.</li>
+<li>Moves DPEAIDI to APPLICATION-ID in DCLDLIS-LICENSE-APPL.</li>
+<li>Runs a DB2 SELECT joining DLIS.LICENSE_APPLICATION and DLIS.CANDIDATE. It fetches CANDIDATE_ID, LICENSE_TYPE, HIST_CHECK_STATUS, PAYMENT_STATUS, FIRST_NAME and LAST_NAME.</li>
+<li>If SQLCODE = 100, it sets ‘APPLICATION NOT FOUND’ and exits.</li>
+<li>Builds the candidate full name (first name, a space, last name) with STRING into DPECNAMO. Each name is delimited by space.</li>
+<li>Moves the license type to DPELTYO.</li>
+<li>Maps the license type code to a description in DPELDSO: L is LEARNER, P is PROBATION, O is OPEN.</li>
+<li>Runs a second SELECT on DLIS.LICENSE_FEE_SCHEDULE for FEE_AMOUNT and CURRENCY_CODE. The filters are the license type, FEE_TYPE ‘IF’, ACTIVE_STATUS ‘A’ and EFFECTIVE_DATE &lt;= CURRENT DATE. It fetches only the first row.</li>
+<li>If SQLCODE = 0, it moves the fee to WS-FEE-AMOUNT, edits it into WS-FEE-AMOUNT-D, and shows the fee (DPEFEEO) and currency (DPECURRO).</li>
+<li>Sets DPEMSG to ‘APPLICATION LOADED’.</li>
+</ul>
+</li>
+<li>Control flow:
+<ul>
+<li>Early exits by GO TO LOAD-APP-EXIT.</li>
+<li>IF tests on the SQLCODE after each SELECT.</li>
+<li>EVALUATE on the license type.</li>
+<li>There is no loop.</li>
+<li>The SQLCODE is not checked for errors other than 100 after the first SELECT. A failed fee lookup is silently skipped.</li>
+</ul>
+</li>
+<li>External interaction: DB2 reads on the LICENSE_APPLICATION, CANDIDATE and LICENSE_FEE_SCHEDULE tables.</li>
+</ul>
+<p><strong>LOAD-APP-EXIT</strong></p>
+<ul>
+<li>Exit point for LOAD-APPLICATION. It contains only EXIT and is the target of the GO TO statements.</li>
+</ul>
+<p><strong>PROCESS-PAYMENT</strong></p>
+<ul>
+<li>Validates the input and the application state, then records the payment and updates the application.</li>
+<li>Operations:
+<ul>
+<li>Input validation, each failure setting DPEMSG and going to PROCESS-PAY-EXIT:
+<ul>
+<li>The application ID must not be zeros.</li>
+<li>The payment method (DPEMETHI) must not be blank.</li>
+<li>The payment method must be one of CC, DC, EF, CS or CH.</li>
+<li>The payment reference (DPEREFI) must not be blank.</li>
+</ul>
+</li>
+<li>Performs LOAD-APPLICATION to refresh the application and fee data. It exits if DPEMSG is not ‘APPLICATION LOADED’.</li>
+<li>Business-rule checks:
+<ul>
+<li>HIST-CHECK-STATUS must be ‘P’.</li>
+<li>PAYMENT-STATUS must not already be ‘P’, which prevents a duplicate payment.</li>
+</ul>
+</li>
+<li>Builds the receipt number from ‘RCP’, the first 8 characters of CURRENT-DATE (WS-RECEIPT-DATE) and the application ID (DPEAIDI), using STRING into WS-RECEIPT-NUMBER.</li>
+<li>Moves screen and application values into the DCLDLIS-PAYMENT host variables: method, reference, application ID, candidate ID, license type, amount (WS-FEE-AMOUNT), receipt number and processed-by (DPEPRCBYI).</li>
+<li>Runs a DB2 INSERT into DLIS.PAYMENT with payment status ‘S’ and fee type ‘IF’. If SQLCODE is not 0, it sets ‘DATABASE ERROR ON PAYMENT INSERT’ and exits.</li>
+<li>Runs SELECT IDENTITY_VAL_LOCAL() from SYSIBM.SYSDUMMY1 to get the generated PAYMENT-ID.</li>
+<li>Runs a DB2 UPDATE on DLIS.LICENSE_APPLICATION. It sets PAYMENT_STATUS to ‘P’, stores PAYMENT_REFERENCE, sets APPLICATION_STATUS to ‘PA’, and sets LAST_UPDATED_DATE and LAST_UPDATED_BY. The SQLCODE of this UPDATE and of the identity SELECT is not checked.</li>
+<li>Shows the payment ID (DPEPIDO), the receipt number (DPERCTO) and the status ‘S’ (DPEPSTSO), and sets ‘PAYMENT RECORDED SUCCESSFULLY’.</li>
+</ul>
+</li>
+<li>Control flow: a chain of IF guards that branch to PROCESS-PAY-EXIT by GO TO, and a nested PERFORM of LOAD-APPLICATION. There is no loop.</li>
+<li>External interaction: DB2 INSERT, SELECT and UPDATE on the PAYMENT, SYSDUMMY1 and LICENSE_APPLICATION tables. It also uses the data read by LOAD-APPLICATION.</li>
+</ul>
+<p><strong>PROCESS-PAY-EXIT</strong></p>
+<ul>
+<li>Exit point for PROCESS-PAYMENT. It contains only EXIT and is the target of the GO TO statements.</li>
+</ul>
+<p><strong>PRINT-RECEIPT</strong></p>
+<ul>
+<li>Prints the receipt for a payment that has already been processed.</li>
+<li>Operations:
+<ul>
+<li>If the receipt number field DPERCTO is blank, it sets ‘PROCESS PAYMENT FIRST BEFORE PRINTING’ and goes to PRINT-RECEIPT-EXIT.</li>
+<li>Otherwise it issues EXEC CICS LINK PROGRAM(‘DLISRPRT’) with DLIS-COMMAREA (length 350).</li>
+<li>It then sets ‘RECEIPT SENT TO PRINTER’.</li>
+</ul>
+</li>
+<li>Control flow: a single IF guard with an early exit.</li>
+<li>External interaction: a CICS LINK to the receipt-printing program DLISRPRT.</li>
+</ul>
+<p><strong>PRINT-RECEIPT-EXIT</strong></p>
+<ul>
+<li>Exit point for PRINT-RECEIPT. It contains only EXIT and is the target of the GO TO statement.</li>
+</ul>
+<h2 id="6-dependencies" tabindex="-1">6. Dependencies</h2>
+<ul>
+<li>
+<p><strong>Transaction and Runtime Environment (CICS)</strong></p>
+<ul>
+<li>Transaction <code>DL07</code> is the program’s own pseudo-conversational transaction ID.
+<ul>
+<li>It is used in <code>EXEC CICS RETURN TRANSID('DL07')</code> to re-invoke the program after each screen interaction.</li>
+<li>The workspace documentation (<code>AGENTS.md</code>) lists the payment transaction as <code>DL06</code>, while the program source uses <code>DL07</code>. The CSD definition should be checked for consistency.</li>
+</ul>
+</li>
+<li>CICS resource definitions in <code>csd/DLISCSD.csd</code> (group <code>DLISGRP</code>) register the program and transaction.</li>
+<li>The CICS Execute Interface Block (EIB) supplies runtime state:
+<ul>
+<li><code>EIBCALEN</code> distinguishes first entry (0) from re-entry.</li>
+<li><code>EIBAID</code> identifies the pressed key.</li>
+</ul>
+</li>
+<li>The attention-identifier constants <code>DFHPF1</code>, <code>DFHPF3</code>, <code>DFHPF5</code> and <code>DFHPF12</code> come from the CICS-supplied <code>DFHAID</code> definitions. They drive the function-key dispatch:
+<ul>
+<li>F1 processes the payment.</li>
+<li>F3 looks up the application.</li>
+<li>F5 prints the receipt.</li>
+<li>F12 exits.</li>
+</ul>
+</li>
+<li><code>DFHCOMMAREA</code> (350 bytes, LINKAGE SECTION) receives state from the prior invocation.
+<ul>
+<li>It is moved into <code>DLIS-COMMAREA</code> on re-entry.</li>
+<li><code>DLIS-COMMAREA</code> is passed back through <code>EXEC CICS RETURN COMMAREA(...) LENGTH(350)</code>.</li>
+</ul>
+</li>
+<li><code>WS-RESP1</code> receives the <code>RESP</code> option from CICS SEND and RECEIVE commands.</li>
+</ul>
+</li>
+<li>
+<p><strong>Screen and Presentation Dependencies (BMS)</strong></p>
+<ul>
+<li>Mapset <code>DLISPE</code> and map <code>DLISPE01</code> are used by <code>EXEC CICS SEND MAP</code> and <code>RECEIVE MAP</code>.
+<ul>
+<li>The BMS source is referenced in the workspace documentation as <code>bms/DLISECHPE.bms</code>.</li>
+<li>It must be assembled through <code>jcl/DLISBMS.jcl</code> and <code>proc/DLISBASM.proc</code> into <code>DLIS.LOADLIB</code>.</li>
+</ul>
+</li>
+<li>The symbolic map fields come from the BMS-generated copybook (<code>DLIS.COPYBOOK</code>). The program uses these fields but does not declare them. They must be provided at compile time.
+<ul>
+<li>Input fields:
+<ul>
+<li><code>DPEAIDI</code> (application ID)</li>
+<li><code>DPEMETHI</code> (payment method)</li>
+<li><code>DPEREFI</code> (payment reference)</li>
+<li><code>DPEPRCBYI</code> (processed by)</li>
+</ul>
+</li>
+<li>Output fields:
+<ul>
+<li><code>DPEMSG</code></li>
+<li><code>DPEDATE</code></li>
+<li><code>DPECNAMO</code></li>
+<li><code>DPELTYO</code></li>
+<li><code>DPELDSO</code></li>
+<li><code>DPEFEEO</code></li>
+<li><code>DPECURRO</code></li>
+<li><code>DPEPIDO</code></li>
+<li><code>DPERCTO</code></li>
+<li><code>DPEPSTSO</code></li>
+</ul>
+</li>
+<li>The receipt field <code>DPERCTO</code> is also read as a condition for printing.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Called Programs and Modules</strong></p>
+<ul>
+<li><code>DLISRPRT</code> is invoked through <code>EXEC CICS LINK PROGRAM('DLISRPRT')</code> with <code>DLIS-COMMAREA</code>, 350 bytes.
+<ul>
+<li>It handles receipt printing for the F5 function.</li>
+<li>It must be defined in CICS and available in the load library.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Database Dependencies (DB2)</strong></p>
+<ul>
+<li>The DB2 subsystem is <code>DSN1</code>.
+<ul>
+<li>The program needs a precompile with <code>DSNHPC</code> through <code>jcl/DLISCOMP.jcl</code>.</li>
+<li>It needs a bind of its DBRM into collection <code>DLISPKG</code> and plan <code>DLISPLAN</code> through <code>jcl/DLISBIND.jcl</code>.</li>
+</ul>
+</li>
+<li>Schema creation is in <code>db2/DLIS0001-CREATE-TABLES.sql</code>, <code>db2/DLIS0002-CREATE-INDEXES.sql</code> and <code>db2/DLIS0003-GRANTS.sql</code>, run through <code>jcl/DLISDB2.jcl</code>.
+<ul>
+<li>The grants must allow the CICS execution user to read and write the tables below.</li>
+</ul>
+</li>
+<li>Tables:
+<ul>
+<li><code>DLIS.LICENSE_APPLICATION</code>
+<ul>
+<li>Read for application details: <code>CANDIDATE_ID</code>, <code>LICENSE_TYPE</code>, <code>HIST_CHECK_STATUS</code> and <code>PAYMENT_STATUS</code>.</li>
+<li>Updated after payment to set <code>PAYMENT_STATUS='P'</code>, <code>PAYMENT_REFERENCE</code>, <code>APPLICATION_STATUS='PA'</code>, <code>LAST_UPDATED_DATE</code> and <code>LAST_UPDATED_BY</code>.</li>
+</ul>
+</li>
+<li><code>DLIS.CANDIDATE</code>
+<ul>
+<li>Joined to retrieve <code>FIRST_NAME</code> and <code>LAST_NAME</code> for display.</li>
+</ul>
+</li>
+<li><code>DLIS.LICENSE_FEE_SCHEDULE</code>
+<ul>
+<li>Read to get <code>FEE_AMOUNT</code> and <code>CURRENCY_CODE</code>.</li>
+<li>The filter is the license type, <code>FEE_TYPE='IF'</code>, <code>ACTIVE_STATUS='A'</code> and <code>EFFECTIVE_DATE &lt;= CURRENT DATE</code>.</li>
+</ul>
+</li>
+<li><code>DLIS.PAYMENT</code>
+<ul>
+<li>Receives the new payment row: application, candidate, amount, method, reference, status <code>'S'</code>, license type, fee type <code>'IF'</code>, receipt number and processed-by.</li>
+</ul>
+</li>
+<li><code>SYSIBM.SYSDUMMY1</code>
+<ul>
+<li>Used with <code>IDENTITY_VAL_LOCAL()</code> to retrieve the generated payment ID.</li>
+</ul>
+</li>
+<li>The <code>PAYMENT_ID</code> identity column must exist in the <code>DLIS.PAYMENT</code> table definition for this to work.</li>
+</ul>
+</li>
+<li>The SQL communication area comes from <code>EXEC SQL INCLUDE SQLCA</code>, which is used for <code>SQLCODE</code> checks (0 and 100).</li>
+<li>DB2 special register <code>CURRENT DATE</code> is used in the fee lookup and in the application update.</li>
+<li>Host variable structures come from DCLGEN-style layouts:
+<ul>
+<li><code>DCLDLIS-CANDIDATE</code></li>
+<li><code>DCLDLIS-LICENSE-APPL</code></li>
+<li><code>DCLDLIS-DRIVING-HIST</code></li>
+<li><code>DCLDLIS-PAYMENT</code></li>
+<li><code>DCLDLIS-ISSUED-LIC</code></li>
+<li><code>DCLDLIS-AUTH-USER</code></li>
+<li><code>DCLDLIS-FEE-SCHED</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Copybooks (Compile-Time Dependencies)</strong></p>
+<ul>
+<li><code>DLISWS</code> (<code>copybook/DLISWS.cpy</code>)
+<ul>
+<li>Holds common working storage: return codes, messages, and candidate, application, payment, eligibility, history, approval and license work areas.</li>
+<li>Also holds the null indicators.</li>
+</ul>
+</li>
+<li><code>DLISCSEC</code> (<code>copybook/DLISCSEC.cpy</code>)
+<ul>
+<li>Defines the COMMAREA layouts, including <code>DLIS-COMMAREA</code>, and the CICS response work area.</li>
+</ul>
+</li>
+<li><code>DLISDCLG</code> (<code>copybook/DLISDCLG.cpy</code>)
+<ul>
+<li>Defines the DB2 host variable structures for the CANDIDATE, LICENSE_APPLICATION, DRIVING_HISTORY, PAYMENT, ISSUED_LICENSE, AUTHORITY_USER and LICENSE_FEE_SCHEDULE tables.</li>
+</ul>
+</li>
+<li>The symbolic map copybook for <code>DLISPE</code> is generated from BMS and is not listed explicitly in the source.</li>
+</ul>
+</li>
+<li>
+<p><strong>Input Parameters and Data Sources</strong></p>
+<ul>
+<li>Terminal user input from map <code>DLISPE01</code>:
+<ul>
+<li>Application ID</li>
+<li>Payment method, which must be one of <code>CC</code>, <code>DC</code>, <code>EF</code>, <code>CS</code> or <code>CH</code></li>
+<li>Payment reference</li>
+<li>Processed-by identifier</li>
+<li>Function key pressed</li>
+</ul>
+</li>
+<li>COMMAREA content passed from the previous invocation. It is 350 bytes and uses the <code>DLIS-COMMAREA</code> layout.</li>
+<li>System date from <code>CURRENT-DATE</code>:
+<ul>
+<li>It is used for the screen date.</li>
+<li>Its first 8 characters form the receipt number.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Business Rule and Data Prerequisites</strong></p>
+<ul>
+<li>The history check on the application (<code>HIST_CHECK_STATUS</code>) must be <code>'P'</code> before payment is accepted. The program depends on the upstream history check transaction having been run.</li>
+<li><code>PAYMENT_STATUS</code> must not already be <code>'P'</code>, which prevents duplicate payment.</li>
+<li>A fee-schedule row of type <code>'IF'</code> and status <code>'A'</code> must exist for the license type, with an effective date on or before today. Otherwise no fee is displayed and the amount defaults to the working-storage value.</li>
+<li>The application and candidate records must exist.
+<ul>
+<li>They are created by upstream transactions such as candidate maintenance (<code>DLISCAND</code>) and application entry (<code>DLISAPPL</code>).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Build and Deployment Dependencies</strong></p>
+<ul>
+<li>Compile <code>jcl/DLISCOMP.jcl</code> using <code>proc/DLISCLNK.proc</code>.
+<ul>
+<li>The compiler is <code>IGYCRCTL</code> with options <code>RENT,APOST,LIB,NOSEQ,NOTERM</code>.</li>
+<li>The link-edit step uses <code>IEWL</code> with <code>AMODE(31),RMODE(ANY)</code>.</li>
+</ul>
+</li>
+<li>CICS run-time libraries are needed:
+<ul>
+<li>The CICS translator and stub are needed to process <code>EXEC CICS</code>.</li>
+<li>The DB2 language interface is needed for <code>EXEC SQL</code>.</li>
+</ul>
+</li>
+<li>Load library <code>DLIS.LOADLIB</code> holds the compiled program and BMS maps.</li>
+<li>The CICS CSD group <code>DLISGRP</code> (<code>csd/DLISCSD.csd</code>, run through <code>DFHCSDUP</code>) must define the program, the transaction, the mapset <code>DLISPE</code> and <code>DLISRPRT</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>IBM MQ</strong></p>
+<ul>
+<li>The program does not use MQ.</li>
+<li>It has no external file I/O (no <code>SELECT</code> or <code>FD</code> entries) and no environment variables.</li>
+</ul>
+</li>
+</ul>
+<h2 id="7-constraints" tabindex="-1">7. Constraints</h2>
+<h3 id="71-data-validation-constraints" tabindex="-1">7.1 Data Validation Constraints</h3>
+<ul>
+<li><strong>Application Identifier Required and Non-Zero</strong>
+<ul>
+<li><strong>Implementation</strong>: In both <code>LOAD-APPLICATION</code> (lines 66–69) and <code>PROCESS-PAYMENT</code> (lines 119–122), the program checks <code>IF DPEAIDI = ZEROS</code>. If true, processing terminates immediately, and error message <code>'ENTER APPLICATION ID'</code> is displayed in <code>DPEMSG</code>.</li>
+</ul>
+</li>
+<li><strong>Payment Method Mandatory</strong>
+<ul>
+<li><strong>Implementation</strong>: In <code>PROCESS-PAYMENT</code> (lines 123–126), the input is checked via <code>IF DPEMETHI = SPACES</code>. If empty, the transaction displays <code>'PAYMENT METHOD IS REQUIRED'</code> and exits the routine.</li>
+</ul>
+</li>
+<li><strong>Allowed Payment Method Code Values</strong>
+<ul>
+<li><strong>Implementation</strong>: In <code>PROCESS-PAYMENT</code> (lines 127–130), the value is validated against a discrete domain: <code>IF DPEMETHI NOT IN ('CC','DC','EF','CS','CH')</code>. An invalid code triggers error message <code>'INVALID PAYMENT METHOD'</code> and stops processing.</li>
+</ul>
+</li>
+<li><strong>Payment Reference Mandatory</strong>
+<ul>
+<li><strong>Implementation</strong>: In <code>PROCESS-PAYMENT</code> (lines 131–134), the input is checked via <code>IF DPEREFI = SPACES</code>. If missing, the program sets <code>DPEMSG</code> to <code>'PAYMENT REFERENCE IS REQUIRED'</code> and exits.</li>
+</ul>
+</li>
+<li><strong>Receipt Generation Format Specification</strong>
+<ul>
+<li><strong>Implementation</strong>: In <code>PROCESS-PAYMENT</code> (lines 150–152), the receipt number is formatted by concatenating the literal <code>'RCP'</code>, an 8-character current date (<code>CURRENT-DATE(1:8)</code>), and the 10-digit application ID (<code>DPEAIDI</code>) into <code>WS-RECEIPT-NUMBER</code> (<code>PIC X(20)</code>).</li>
+</ul>
+</li>
+</ul>
+<h3 id="72-business-rule-and-workflow-constraints" tabindex="-1">7.2 Business Rule and Workflow Constraints</h3>
+<ul>
+<li><strong>Application Record Existence</strong>
+<ul>
+<li><strong>Implementation</strong>: In <code>LOAD-APPLICATION</code> (lines 71–87), an SQL <code>SELECT</code> joins <code>DLIS.LICENSE_APPLICATION</code> and <code>DLIS.CANDIDATE</code> on <code>CANDIDATE_ID</code>. If <code>SQLCODE = 100</code>, the transaction halts with <code>'APPLICATION NOT FOUND'</code>.</li>
+</ul>
+</li>
+<li><strong>Prerequisite Driving History Check Status</strong>
+<ul>
+<li><strong>Implementation</strong>: In <code>PROCESS-PAYMENT</code> (lines 139–143), the application’s history check flag is evaluated via <code>IF HIST-CHECK-STATUS OF DCLDLIS-LICENSE-APPL NOT = 'P'</code>. Payment recording is blocked with <code>'HISTORY CHECK MUST BE PASSED BEFORE PAYMENT'</code> if the status is not <code>'P'</code> (Passed).</li>
+</ul>
+</li>
+<li><strong>Duplicate Payment Prevention</strong>
+<ul>
+<li><strong>Implementation</strong>: In <code>PROCESS-PAYMENT</code> (lines 144–148), the current payment flag is checked via <code>IF PAYMENT-STATUS OF DCLDLIS-LICENSE-APPL = 'P'</code>. If already marked as paid, execution is prevented with <code>'PAYMENT ALREADY RECORDED FOR THIS APPLICATION'</code>.</li>
+</ul>
+</li>
+<li><strong>Active Fee Schedule Lookup and Filtering</strong>
+<ul>
+<li><strong>Implementation</strong>: In <code>LOAD-APPLICATION</code> (lines 99–108), the fee amount is queried from <code>DLIS.LICENSE_FEE_SCHEDULE</code> matching <code>LICENSE_TYPE</code>, with hardcoded criteria <code>FEE_TYPE = 'IF'</code>, <code>ACTIVE_STATUS = 'A'</code>, and <code>EFFECTIVE_DATE &lt;= CURRENT DATE</code> (limited to <code>FETCH FIRST 1 ROW ONLY</code>).</li>
+</ul>
+</li>
+<li><strong>Payment Lifecycle State Updates</strong>
+<ul>
+<li><strong>Implementation</strong>: Upon recording a payment in <code>PROCESS-PAYMENT</code> (lines 165–195), the newly inserted payment record is explicitly assigned a status of <code>'S'</code> (Settled/Successful) with fee type <code>'IF'</code>. Concurrently, <code>DLIS.LICENSE_APPLICATION</code> is updated with <code>PAYMENT_STATUS = 'P'</code>, <code>APPLICATION_STATUS = 'PA'</code> (Payment Approved/Accepted), <code>LAST_UPDATED_DATE = CURRENT DATE</code>, and <code>LAST_UPDATED_BY</code> set to the operator ID.</li>
+</ul>
+</li>
+</ul>
+<h3 id="73-operational-and-sequencing-constraints" tabindex="-1">7.3 Operational and Sequencing Constraints</h3>
+<ul>
+<li><strong>Payment Requirement Before Receipt Printing</strong>
+<ul>
+<li><strong>Implementation</strong>: In <code>PRINT-RECEIPT</code> (lines 203–206), the routine checks <code>IF DPERCTO = SPACES</code>. If no receipt number is present on the screen, execution halts with <code>'PROCESS PAYMENT FIRST BEFORE PRINTING'</code>.</li>
+</ul>
+</li>
+<li><strong>Controlled Attention Identifier (AID) Key Navigation</strong>
+<ul>
+<li><strong>Implementation</strong>: In <code>PROCESS-INPUT</code> (lines 50–57), only specific function keys are permitted: <code>DFHPF1</code> (Process Payment), <code>DFHPF3</code> (Load/Lookup Application), <code>DFHPF5</code> (Print Receipt), and <code>DFHPF12</code> (Exit via <code>EXEC CICS RETURN</code>). Any other AID key generates the error message <code>'USE F1 F3 F5 OR F12'</code>.</li>
+</ul>
+</li>
+<li><strong>Application Reloading Prior to Payment Insertion</strong>
+<ul>
+<li><strong>Implementation</strong>: In <code>PROCESS-PAYMENT</code> (lines 135–138), <code>PERFORM LOAD-APPLICATION</code> is explicitly called to fetch the latest application state, verify record concurrency, and ensure <code>DPEMSG = 'APPLICATION LOADED'</code> before proceeding with SQL inserts.</li>
+</ul>
+</li>
+</ul>
+<h3 id="74-technical-and-resource-constraints" tabindex="-1">7.4 Technical and Resource Constraints</h3>
+<ul>
+<li><strong>CICS Pseudo-Conversational Communication Area Fixed Size</strong>
+<ul>
+<li><strong>Implementation</strong>: Across <code>INIT-SCREEN</code>, <code>PROCESS-INPUT</code>, and inter-program linkage in <code>PRINT-RECEIPT</code> (invoking <code>DLISRPRT</code>), <code>DFHCOMMAREA</code> and <code>DLIS-COMMAREA</code> are constrained to a fixed length of 350 bytes (<code>LENGTH(350)</code>).</li>
+</ul>
+</li>
+<li><strong>Database Transaction Integrity and Local Identity Retrieval</strong>
+<ul>
+<li><strong>Implementation</strong>: In <code>PROCESS-PAYMENT</code> (lines 175–183), the <code>INSERT</code> operation status is verified via <code>IF SQLCODE NOT = 0</code>, halting with <code>'DATABASE ERROR ON PAYMENT INSERT'</code>. The system-generated payment primary key must be obtained immediately after insertion using <code>SELECT IDENTITY_VAL_LOCAL() FROM SYSIBM.SYSDUMMY1</code>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="8-error-handling" tabindex="-1">8. Error Handling</h2>
+<ul>
+<li>
+<p>Input validation checks (PROCESS-PAYMENT)</p>
+</li>
+<li>
+<p>A missing application ID (zeros) stops processing and sets the message “ENTER APPLICATION ID”. Control then jumps to the paragraph exit.</p>
+</li>
+<li>
+<p>A blank payment method stops processing and sets “PAYMENT METHOD IS REQUIRED”.</p>
+</li>
+<li>
+<p>A payment method outside the allowed list (CC, DC, EF, CS, CH) sets “INVALID PAYMENT METHOD”.</p>
+</li>
+<li>
+<p>A blank payment reference stops processing and sets “PAYMENT REFERENCE IS REQUIRED”.</p>
+</li>
+<li>
+<p>Each failed check uses a GO TO to the exit paragraph. This works as a fail-fast guard sequence: the first failure ends the routine, and nothing is written to the database.</p>
+</li>
+<li>
+<p>Business-rule gate checks</p>
+<ul>
+<li>After the application is reloaded, payment proceeds only if the message equals “APPLICATION LOADED”. Any other message, such as “APPLICATION NOT FOUND” or “ENTER APPLICATION ID”, is carried through as the result and processing stops.</li>
+<li>The history check status must be “P” (Passed). Otherwise the message is “HISTORY CHECK MUST BE PASSED BEFORE PAYMENT” and the payment is blocked.</li>
+<li>If the payment status is already “P”, the message is “PAYMENT ALREADY RECORDED FOR THIS APPLICATION”. This prevents duplicate payments.</li>
+<li>PRINT-RECEIPT checks that a receipt number is present on the screen. If it is blank, the message is “PROCESS PAYMENT FIRST BEFORE PRINTING” and the LINK to the print program is skipped.</li>
+</ul>
+</li>
+<li>
+<p>Database error handling (DB2 SQLCODE checks)</p>
+<ul>
+<li>Application lookup (LOAD-APPLICATION):
+<ul>
+<li>SQLCODE 100 (no row found) sets “APPLICATION NOT FOUND” and exits.</li>
+<li>Other non-zero SQLCODEs (negative errors) are not tested. After a failed lookup, the program carries on with whatever values are in the host variables.</li>
+</ul>
+</li>
+<li>Fee schedule lookup:
+<ul>
+<li>The fee is moved to the screen only when SQLCODE is 0.</li>
+<li>If no fee is found or an error occurs, the fee and currency fields are silently left unpopulated. Loading still ends with “APPLICATION LOADED”.</li>
+<li>The SELECT uses FETCH FIRST 1 ROW ONLY, which avoids a multiple-row error (SQLCODE -811) if several fee rows match.</li>
+</ul>
+</li>
+<li>Payment INSERT:
+<ul>
+<li>Any non-zero SQLCODE sets “DATABASE ERROR ON PAYMENT INSERT” and exits before any further updates.</li>
+<li>This is the only general SQL failure check in the program.</li>
+</ul>
+</li>
+<li>Not checked:
+<ul>
+<li>The IDENTITY_VAL_LOCAL() retrieval after the insert has no SQLCODE check.</li>
+<li>The UPDATE of LICENSE_APPLICATION to set the payment status to “P” and the application status to “PA” has no SQLCODE check.</li>
+<li>The program contains no explicit rollback (CICS SYNCPOINT ROLLBACK) and no SQLCODE-based recovery. If the insert succeeds and the update fails, the data can become inconsistent.</li>
+<li>Sensitive SQL failures are never logged.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>CICS command and response handling</p>
+<ul>
+<li>The SEND MAP and RECEIVE MAP commands use the RESP option, so a CICS condition does not cause an abend.
+<ul>
+<li>The response is stored in a working-storage field.</li>
+<li>That field is never examined afterwards, so errors such as MAPFAIL are effectively ignored.</li>
+</ul>
+</li>
+<li>The LINK to DLISRPRT has no RESP or RESP2 option and no HANDLE CONDITION or HANDLE ABEND.
+<ul>
+<li>If the print program is not found or abends, the default CICS handling applies, which usually abends the task.</li>
+<li>The program still shows “RECEIPT SENT TO PRINTER” after the LINK returns. It does not confirm the outcome.</li>
+</ul>
+</li>
+<li>MAIN-LOGIC tests the length of the incoming communication area (EIBCALEN).
+<ul>
+<li>A length of zero is treated as the first entry into the transaction, so the program initialises the screen.</li>
+<li>A non-zero length restores the saved state and processes the user’s input.</li>
+<li>This is the only mechanism that distinguishes first entry from re-entry.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>User input and navigation control</p>
+<ul>
+<li>An unrecognised attention key (not F1, F3, F5 or F12) falls to the OTHER branch of the EVALUATE and shows “USE F1 F3 F5 OR F12”.</li>
+<li>F12 ends the transaction cleanly with a CICS RETURN and no further processing.</li>
+<li>After every action, the result message is shown on the screen with a SEND MAP (DATAONLY). The transaction then RETURNs with TRANSID DL07 and the communication area, so the user sees the outcome and can correct the input.</li>
+</ul>
+</li>
+<li>
+<p>Recovery and fallback logic</p>
+<ul>
+<li>Validation failures are recoverable: the screen is redisplayed with a message and the user can correct the input and retry. No retry loops or automatic retries exist.</li>
+<li>The license type description (EVALUATE) has no default branch for values other than L, P or O. The description field is left unchanged for unknown license types.</li>
+<li>The program uses default CICS error handling for all conditions it doesn’t test for.</li>
+</ul>
+</li>
+<li>
+<p>User and system notifications</p>
+<ul>
+<li>All errors and statuses are reported through a single message field on the screen (DPEMSG).
+<ul>
+<li>Messages include validation errors, business-rule violations, the database failure and the success message “PAYMENT RECORDED SUCCESSFULLY”.</li>
+</ul>
+</li>
+<li>The copybook defines a return code, message and colour fields (WS-RETURN-CODE, WS-RETURN-MSG, WS-MSG-COLOR). It also defines CICS response and abend working-storage areas.
+<ul>
+<li>The procedure logic never uses these fields.</li>
+<li>No message colour is set to distinguish errors from successes.</li>
+</ul>
+</li>
+<li>There is no logging, no abend call (EXEC CICS ABEND), no error-write to a TD queue and no operator notification.</li>
+</ul>
+</li>
+<li>
+<p>Control-flow safeguards</p>
+<ul>
+<li>Each routine has a dedicated exit paragraph (LOAD-APP-EXIT, PROCESS-PAY-EXIT, PRINT-RECEIPT-EXIT), reached by GO TO from an error condition. This gives each routine a single exit point.</li>
+<li>A GO TO from a failure inside LOAD-APPLICATION leaves only that routine. The caller PROCESS-PAYMENT then detects the failure by checking the message text.</li>
+<li>Detecting failure by comparing message text is fragile. Any change to the wording of the success message would break the check.</li>
+</ul>
+</li>
+</ul>
+<h2 id="9-examples" tabindex="-1">9. Examples</h2>
+<h3 id="91-example-1-f3-lookup-of-an-existing-application" tabindex="-1">9.1 Example 1: F3 lookup of an existing application</h3>
+<p><strong>Input (screen, F3 pressed)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Application ID (<code>DPEAIDI</code>)</td>
+<td><code>1234567</code></td>
+</tr>
+</tbody>
+</table>
+<p>DB2 data for this application:</p>
+<ul>
+<li>The application has candidate John Smith.</li>
+<li>License type is <code>L</code>.</li>
+<li>History check status is <code>P</code>.</li>
+<li>Payment status is <code>N</code>.</li>
+<li>The <code>LICENSE_FEE_SCHEDULE</code> row for <code>L</code> and fee type <code>IF</code> is active, with <code>FEE_AMOUNT</code> 25.00 and currency <code>USD</code>.</li>
+</ul>
+<p><strong>Expected output</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Candidate name</td>
+<td><code>John Smith</code></td>
+</tr>
+<tr>
+<td>License type</td>
+<td><code>L</code></td>
+</tr>
+<tr>
+<td>License description</td>
+<td><code>LEARNER</code></td>
+</tr>
+<tr>
+<td>Fee</td>
+<td><code>    25.00</code></td>
+</tr>
+<tr>
+<td>Currency</td>
+<td><code>USD</code></td>
+</tr>
+<tr>
+<td>Message</td>
+<td><code>APPLICATION LOADED</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Explanation:</strong> <code>EIBAID = DFHPF3</code> runs <code>LOAD-APPLICATION</code>. A join of <code>LICENSE_APPLICATION</code> and <code>CANDIDATE</code> returns the candidate’s name and license type. The name is built by <code>STRING</code> from the first and last names, each delimited by space. License type <code>L</code> maps to <code>LEARNER</code>. A second query reads the active <code>IF</code> fee. The fee is edited through <code>WS-FEE-AMOUNT-D</code> (<code>ZZZ,ZZ9.99</code>) for display. The program then re-sends the map and returns to transaction <code>DL07</code>.</p>
+<hr>
+<h3 id="92-example-2-f1-successful-payment" tabindex="-1">9.2 Example 2: F1 successful payment</h3>
+<p><strong>Input (screen, F1 pressed)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Application ID</td>
+<td><code>1234567</code></td>
+</tr>
+<tr>
+<td>Payment method (<code>DPEMETHI</code>)</td>
+<td><code>CC</code></td>
+</tr>
+<tr>
+<td>Payment reference (<code>DPEREFI</code>)</td>
+<td><code>BANKREF-98765</code></td>
+</tr>
+<tr>
+<td>Processed by (<code>DPEPRCBYI</code>)</td>
+<td><code>CLERK01</code></td>
+</tr>
+</tbody>
+</table>
+<p>The application has history check status <code>P</code> and payment status <code>N</code>. Today’s date is 2025-01-15.</p>
+<p><strong>Expected output</strong></p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Receipt number (<code>DPERCTO</code>)</td>
+<td><code>RCP202501151234567</code></td>
+</tr>
+<tr>
+<td>Payment ID (<code>DPEPIDO</code>)</td>
+<td>The identity value generated by DB2, for example <code>5001</code></td>
+</tr>
+<tr>
+<td>Payment status (<code>DPEPSTSO</code>)</td>
+<td><code>S</code></td>
+</tr>
+<tr>
+<td>Message</td>
+<td><code>PAYMENT RECORDED SUCCESSFULLY</code></td>
+</tr>
+</tbody>
+</table>
+<p>Database changes:</p>
+<ul>
+<li>A new <code>DLIS.PAYMENT</code> row is inserted with amount 25.00, method <code>CC</code>, status <code>S</code>, fee type <code>IF</code> and receipt <code>RCP202501151234567</code>.</li>
+<li><code>LICENSE_APPLICATION</code> is updated to <code>PAYMENT_STATUS='P'</code> and <code>APPLICATION_STATUS='PA'</code>.</li>
+<li>The update also sets the payment reference and <code>LAST_UPDATED_BY='CLERK01'</code>.</li>
+</ul>
+<p><strong>Explanation:</strong> <code>PROCESS-PAYMENT</code> first checks that the application ID, the method and the reference are present. The method must be one of <code>CC</code>, <code>DC</code>, <code>EF</code>, <code>CS</code> or <code>CH</code>. It then reloads the application, which also fetches the fee. The history check is <code>P</code> and payment is not already <code>P</code>, so it builds the receipt number as <code>'RCP'</code> + date (<code>YYYYMMDD</code>) + application ID. It inserts the payment and gets the new key with <code>IDENTITY_VAL_LOCAL()</code>. Finally it marks the application as paid.</p>
+<hr>
+<h3 id="93-example-3-f1-rejected-payments-validation-and-business-rules" tabindex="-1">9.3 Example 3: F1 rejected payments (validation and business rules)</h3>
+<table>
+<thead>
+<tr>
+<th>Input (F1)</th>
+<th>Condition</th>
+<th>Message shown</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Application ID <code>1234567</code>, method <code>XX</code>, reference <code>REF1</code></td>
+<td>Method is not in the allowed list</td>
+<td><code>INVALID PAYMENT METHOD</code></td>
+</tr>
+<tr>
+<td>Application ID <code>1234567</code>, method <code>CC</code>, reference blank</td>
+<td>Reference is missing</td>
+<td><code>PAYMENT REFERENCE IS REQUIRED</code></td>
+</tr>
+<tr>
+<td>Application ID <code>7654321</code>, method <code>CS</code>, reference <code>REF2</code>, history check status <code>F</code></td>
+<td>History check not passed</td>
+<td><code>HISTORY CHECK MUST BE PASSED BEFORE PAYMENT</code></td>
+</tr>
+<tr>
+<td>Application ID <code>1234567</code>, method <code>CC</code>, reference <code>REF3</code>, payment status already <code>P</code></td>
+<td>Duplicate payment</td>
+<td><code>PAYMENT ALREADY RECORDED FOR THIS APPLICATION</code></td>
+</tr>
+<tr>
+<td>Application ID <code>9999999</code>, method <code>CC</code>, reference <code>REF4</code>, no matching row</td>
+<td><code>SQLCODE = 100</code></td>
+<td><code>APPLICATION NOT FOUND</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Explanation:</strong> Each check uses <code>GO TO PROCESS-PAY-EXIT</code> to stop processing before the insert. No <code>PAYMENT</code> row is written and the application is not updated. Only the message field changes.</p>
+<hr>
+<h3 id="94-example-4-f5-receipt-printing" tabindex="-1">9.4 Example 4: F5 receipt printing</h3>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Input</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Receipt field is blank</td>
+<td>F5 pressed before any payment</td>
+<td><code>PROCESS PAYMENT FIRST BEFORE PRINTING</code></td>
+</tr>
+<tr>
+<td>Receipt field holds <code>RCP202501151234567</code></td>
+<td>F5 pressed after a successful payment</td>
+<td><code>DLISRPRT</code> is linked with the COMMAREA, then the message is <code>RECEIPT SENT TO PRINTER</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Explanation:</strong> <code>PRINT-RECEIPT</code> allows printing only when <code>DPERCTO</code> holds a receipt number. Otherwise it asks the operator to process the payment first.</p>
+<hr>
+<h3 id="95-example-5-other-keys-and-first-entry" tabindex="-1">9.5 Example 5: Other keys and first entry</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First entry to <code>DL07</code> (<code>EIBCALEN = 0</code>)</td>
+<td>The empty payment map <code>DLISPE01</code> is sent and the program returns with <code>TRANSID('DL07')</code>.</td>
+</tr>
+<tr>
+<td>Any other key, such as F2</td>
+<td><code>USE F1 F3 F5 OR F12</code></td>
+</tr>
+<tr>
+<td>F12</td>
+<td>The transaction ends with <code>EXEC CICS RETURN</code>.</td>
+</tr>
+</tbody>
+</table>
+
+                    </article>
+                    <nav class="toc-panel" aria-label="On this page">
+  <span class="toc-panel-label">On this page</span>
+  <ul class="toc-list">
+<li class="toc-level-2"><a href="#1-purpose">1. Purpose</a></li>
+<li class="toc-level-2"><a href="#2-inputs">2. Inputs</a>
+<ul>
+<li class="toc-level-3"><a href="#21-cics-communication-area-commarea--dfhcommarea">2.1 CICS Communication Area (COMMAREA / DFHCOMMAREA)</a></li>
+<li class="toc-level-3"><a href="#22-bms-map-input-fields-dlispe01--dlispe">2.2 BMS Map Input Fields (DLISPE01 / DLISPE)</a></li>
+<li class="toc-level-3"><a href="#23-db2-database-tables">2.3 DB2 Database Tables</a></li>
+<li class="toc-level-3"><a href="#24-cics-system-values">2.4 CICS System Values</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#3-outputs">3. Outputs</a>
+<ul>
+<li class="toc-level-3"><a href="#31-cics-screen-output-fields-map-dlispe01">3.1 CICS Screen Output Fields (Map DLISPE01)</a></li>
+<li class="toc-level-3"><a href="#32-database-records-db2-writes-and-updates">3.2 Database Records (DB2 Writes and Updates)</a></li>
+<li class="toc-level-3"><a href="#33-cics-communication-and-navigation-commarea--links">3.3 CICS Communication and Navigation (COMMAREA &amp;amp; Links)</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#4-processing-logic">4. Processing Logic</a>
+<ul>
+<li class="toc-level-3"><a href="#41-mermaid-flow-diagram">4.1 Mermaid Flow Diagram</a></li>
+<li class="toc-level-3"><a href="#42-processing-logic-description">4.2 Processing Logic Description</a></li>
+<li class="toc-level-3"><a href="#43-database-tables">4.3 Database Tables</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#5-paragraphs">5. Paragraphs</a></li>
+<li class="toc-level-2"><a href="#6-dependencies">6. Dependencies</a></li>
+<li class="toc-level-2"><a href="#7-constraints">7. Constraints</a>
+<ul>
+<li class="toc-level-3"><a href="#71-data-validation-constraints">7.1 Data Validation Constraints</a></li>
+<li class="toc-level-3"><a href="#72-business-rule-and-workflow-constraints">7.2 Business Rule and Workflow Constraints</a></li>
+<li class="toc-level-3"><a href="#73-operational-and-sequencing-constraints">7.3 Operational and Sequencing Constraints</a></li>
+<li class="toc-level-3"><a href="#74-technical-and-resource-constraints">7.4 Technical and Resource Constraints</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#8-error-handling">8. Error Handling</a></li>
+<li class="toc-level-2"><a href="#9-examples">9. Examples</a>
+<ul>
+<li class="toc-level-3"><a href="#91-example-1-f3-lookup-of-an-existing-application">9.1 Example 1: F3 lookup of an existing application</a></li>
+<li class="toc-level-3"><a href="#92-example-2-f1-successful-payment">9.2 Example 2: F1 successful payment</a></li>
+<li class="toc-level-3"><a href="#93-example-3-f1-rejected-payments-validation-and-business-rules">9.3 Example 3: F1 rejected payments (validation and business rules)</a></li>
+<li class="toc-level-3"><a href="#94-example-4-f5-receipt-printing">9.4 Example 4: F5 receipt printing</a></li>
+<li class="toc-level-3"><a href="#95-example-5-other-keys-and-first-entry">9.5 Example 5: Other keys and first entry</a></li>
+</ul>
+</li>
+</ul>
+
+</nav>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="wiki-footer">Made by IBM Bob Premium Package for Z</footer>
+    <script>
+    /* toc-spy.js — highlights the active heading in the TOC panel on scroll */
+    (function () {
+      function init() {
+        var panel = document.querySelector('.toc-panel');
+        if (!panel) return;
+        var links = Array.prototype.slice.call(panel.querySelectorAll('a[href^="#"]'));
+        if (!links.length) return;
+
+        var headingIds = links.map(function (a) { return a.getAttribute('href').slice(1); });
+        var headings = headingIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+        function clearActive() {
+          panel.querySelectorAll('.toc-active').forEach(function (el) { el.classList.remove('toc-active'); });
+          panel.querySelectorAll('.toc-parent-active').forEach(function (el) { el.classList.remove('toc-parent-active'); });
+        }
+
+        function setActive(id) {
+          clearActive();
+          var link = panel.querySelector('a[href="#' + id + '"]');
+          if (!link) return;
+          link.classList.add('toc-active');
+          var li = link.closest('li');
+          if (li) {
+            var parentLi = li.parentElement && li.parentElement.closest('li');
+            if (parentLi) parentLi.classList.add('toc-parent-active');
+          }
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+        headings.forEach(function (h) { observer.observe(h); });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
+    <script>
+    /* breadcrumb.js — reads sessionStorage['wiki_referrer'] and renders breadcrumb.
+       Only fires when the referrer was set by clicking a link inside the Source Files
+       disclosure on a wiki page; clears after rendering so stale state never lingers. */
+    (function () {
+      var raw;
+      try { raw = sessionStorage.getItem('wiki_referrer'); } catch (_e) {}
+      if (!raw) return;
+      /* Consume immediately — prevents the breadcrumb re-appearing on the next visit. */
+      try { sessionStorage.removeItem('wiki_referrer'); } catch (_e) {}
+      var ref;
+      try { ref = JSON.parse(raw); } catch (_e) { return; }
+      if (!ref || !ref.href) return;
+      var bc = document.getElementById('wiki-breadcrumb');
+      if (!bc) return;
+      bc.className = 'wiki-breadcrumb';
+      bc.innerHTML =
+        '<a href="' + ref.href + '">' + (ref.title || 'Back') + '</a>' +
+        '<span class="wiki-breadcrumb-sep"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' +
+        '<span class="wiki-breadcrumb-current">DLISPAY</span>';
+    })();
+    </script>
+    <script>
+    /* sidebar toggle — same as main wiki pages */
+    (function () {
+
+      var STORAGE_KEY = 'sb_open';
+
+      function getOpenSet() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+      }
+
+      function saveOpenSet(set) {
+        try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(set)); } catch (e) {}
+      }
+
+      function findItems(toggle) {
+        var node = toggle.nextSibling;
+        while (node) {
+          if (node.nodeType === 1 && node.classList.contains('nav-section-items'))
+            return node;
+          node = node.nextSibling;
+        }
+        return null;
+      }
+
+      function toggleKey(toggle, index) {
+        var label = (toggle.querySelector('.nav-toggle-text') || toggle).textContent.trim().replace(/\s+/g, ' ');
+        return index + ':' + label;
+      }
+
+      function openSection(toggle, items, key, set) {
+        toggle.classList.add('open');
+        items.classList.add('open');
+        if (set) set[key] = true;
+      }
+
+      function closeSection(toggle, items, key, set) {
+        toggle.classList.remove('open');
+        items.classList.remove('open');
+        if (set) set[key] = false;
+      }
+
+      function init() {
+        var sidebar = document.getElementById('wiki-sidebar');
+        var toggles = Array.prototype.slice.call(
+          document.querySelectorAll('.nav-section-toggle')
+        );
+
+        var savedSet = getOpenSet();
+        var openSet = savedSet || {};
+
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+
+          var key = toggleKey(toggle, idx);
+          var shouldOpen = openSet[key] === true;
+
+          if (shouldOpen) {
+            toggle.classList.add('open');
+            items.classList.add('open');
+          }
+
+          toggle.addEventListener('click', function () {
+            var nowOpen = toggle.classList.contains('open');
+            if (nowOpen) {
+              closeSection(toggle, items, key, openSet);
+            } else {
+              openSection(toggle, items, key, openSet);
+            }
+            saveOpenSet(openSet);
+          });
+        });
+
+        saveOpenSet(openSet);
+
+        /* Restore sidebar scroll position after sections are expanded so the
+           scroll height is correct when we apply scrollTop. */
+        if (sidebar) {
+          try {
+            var savedScroll = sessionStorage.getItem('sb_scroll');
+            if (savedScroll !== null) { sidebar.scrollTop = parseInt(savedScroll, 10) || 0; }
+          } catch (_e) {}
+        }
+
+        window.addEventListener('pagehide', function () {
+          saveOpenSet(openSet);
+          if (sidebar) {
+            try { sessionStorage.setItem('sb_scroll', String(sidebar.scrollTop)); } catch (_e) {}
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+    </script>
+</body>
+</html>

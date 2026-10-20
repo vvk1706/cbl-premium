@@ -1,0 +1,248 @@
+      *================================================================*
+      * CICS/COBOL Program                                           *
+      * Program : DLISCAND                                           *
+      * Trans   : DL02                                              *
+      * Map     : DLISCM / DLISCM01                                 *
+      * Desc    : Candidate Maintenance                              *
+      *           F1=Create  F2=Update  F3=Inquire  F4=Deactivate  *
+      *================================================================*
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. DLISCAND.
+
+       ENVIRONMENT DIVISION.
+
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+           COPY DLISWS.
+           COPY DLISCSEC.
+           COPY DLISDCLG.
+
+       01  WS-PFKEY                   PIC S9(4)  COMP VALUE 0.
+       01  WS-MAP-FLAG                PIC X(1)   VALUE 'N'.
+
+       EXEC SQL INCLUDE SQLCA       END-EXEC.
+
+       LINKAGE SECTION.
+       01  DFHCOMMAREA                PIC X(350).
+
+       PROCEDURE DIVISION.
+       MAIN-LOGIC.
+           MOVE EIBTRNID         TO CA-TRANSACTION-ID
+           MOVE EIBCALEN         TO WS-EIBCALEN-SAVE
+
+           IF EIBCALEN = 0
+               PERFORM INIT-SCREEN
+           ELSE
+               MOVE DFHCOMMAREA  TO DLIS-COMMAREA
+               PERFORM PROCESS-INPUT
+           END-IF
+           STOP RUN.
+
+       INIT-SCREEN.
+           MOVE SPACES TO DCMMSG
+           MOVE CURRENT-DATE(1:10) TO DCMDATE
+           EXEC CICS SEND MAP('DLISCM01') MAPSET('DLISCM')
+               ERASE FREEKB
+               RESP(WS-RESP1)
+           END-EXEC
+           EXEC CICS RETURN TRANSID('DL02')
+               COMMAREA(DLIS-COMMAREA) LENGTH(350)
+           END-EXEC.
+
+       PROCESS-INPUT.
+           EXEC CICS RECEIVE MAP('DLISCM01') MAPSET('DLISCM')
+               RESP(WS-RESP1)
+           END-EXEC
+
+           MOVE EIBAID TO WS-PFKEY
+           EVALUATE TRUE
+               WHEN EIBAID = DFHPF1
+                   PERFORM CREATE-CANDIDATE
+               WHEN EIBAID = DFHPF2
+                   PERFORM UPDATE-CANDIDATE
+               WHEN EIBAID = DFHPF3
+                   PERFORM INQUIRE-CANDIDATE
+               WHEN EIBAID = DFHPF4
+                   PERFORM DEACTIVATE-CANDIDATE
+               WHEN EIBAID = DFHPF12
+                   EXEC CICS RETURN END-EXEC
+               OTHER
+                   MOVE 'INVALID KEY - USE F1-F4 OR F12' TO DCMMSG
+           END-EVALUATE
+
+           EXEC CICS SEND MAP('DLISCM01') MAPSET('DLISCM')
+               DATAONLY FREEKB
+               RESP(WS-RESP1)
+           END-EXEC
+           EXEC CICS RETURN TRANSID('DL02')
+               COMMAREA(DLIS-COMMAREA) LENGTH(350)
+           END-EXEC.
+
+       CREATE-CANDIDATE.
+      *    Validate required fields
+           IF DCMFNAMI = SPACES OR DCMFNAMI = LOW-VALUES
+               MOVE 'FIRST NAME IS REQUIRED' TO DCMMSG
+               GO TO CREATE-CANDIDATE-EXIT
+           END-IF
+           IF DCMLNAMI = SPACES OR DCMLNAMI = LOW-VALUES
+               MOVE 'LAST NAME IS REQUIRED' TO DCMMSG
+               GO TO CREATE-CANDIDATE-EXIT
+           END-IF
+           IF DCMIDNOI = SPACES OR DCMIDNOI = LOW-VALUES
+               MOVE 'NATIONAL ID IS REQUIRED' TO DCMMSG
+               GO TO CREATE-CANDIDATE-EXIT
+           END-IF
+      *    Check duplicate ID
+           MOVE DCMIDNOI TO ID-NUMBER OF DCLDLIS-CANDIDATE
+           EXEC SQL
+               SELECT CANDIDATE_ID INTO :CANDIDATE-ID OF DCLDLIS-CANDIDATE
+               FROM DLIS.CANDIDATE
+               WHERE ID_NUMBER = :ID-NUMBER OF DCLDLIS-CANDIDATE
+               AND   RECORD_STATUS = 'A'
+           END-EXEC
+           IF SQLCODE = 0
+               MOVE 'CANDIDATE WITH THIS ID NUMBER ALREADY EXISTS'
+                   TO DCMMSG
+               GO TO CREATE-CANDIDATE-EXIT
+           END-IF
+      *    Insert new candidate
+           MOVE DCMFNAMI  TO FIRST-NAME   OF DCLDLIS-CANDIDATE
+           MOVE DCMLNAMI  TO LAST-NAME    OF DCLDLIS-CANDIDATE
+           MOVE DCMDOBI   TO DATE-OF-BIRTH OF DCLDLIS-CANDIDATE
+           MOVE DCMIDNOI  TO ID-NUMBER    OF DCLDLIS-CANDIDATE
+           MOVE DCMADR1I  TO ADDRESS-LINE-1 OF DCLDLIS-CANDIDATE
+           MOVE DCMADR2I  TO ADDRESS-LINE-2 OF DCLDLIS-CANDIDATE
+           MOVE DCMCITYI  TO CITY         OF DCLDLIS-CANDIDATE
+           MOVE DCMSTATI  TO STATE-PROVINCE OF DCLDLIS-CANDIDATE
+           MOVE DCMPOSTI  TO POSTAL-CODE  OF DCLDLIS-CANDIDATE
+           MOVE DCMCTRYI  TO COUNTRY      OF DCLDLIS-CANDIDATE
+           MOVE DCMPHNI   TO PHONE-NUMBER OF DCLDLIS-CANDIDATE
+           MOVE DCMEMLI   TO EMAIL-ADDRESS OF DCLDLIS-CANDIDATE
+           MOVE 'A'       TO RECORD-STATUS OF DCLDLIS-CANDIDATE
+           MOVE EIBTRMID  TO CREATED-BY   OF DCLDLIS-CANDIDATE
+           EXEC SQL
+               INSERT INTO DLIS.CANDIDATE
+                  (FIRST_NAME, LAST_NAME, DATE_OF_BIRTH, ID_NUMBER,
+                   ADDRESS_LINE_1, ADDRESS_LINE_2, CITY,
+                   STATE_PROVINCE, POSTAL_CODE, COUNTRY,
+                   PHONE_NUMBER, EMAIL_ADDRESS, RECORD_STATUS, CREATED_BY)
+               VALUES
+                  (:FIRST-NAME, :LAST-NAME, :DATE-OF-BIRTH, :ID-NUMBER,
+                   :ADDRESS-LINE-1, :ADDRESS-LINE-2, :CITY,
+                   :STATE-PROVINCE, :POSTAL-CODE, :COUNTRY,
+                   :PHONE-NUMBER, :EMAIL-ADDRESS, :RECORD-STATUS,
+                   :CREATED-BY)
+               OF DCLDLIS-CANDIDATE
+           END-EXEC
+           IF SQLCODE NOT = 0
+               MOVE 'DATABASE ERROR ON INSERT - CONTACT SUPPORT' TO DCMMSG
+               GO TO CREATE-CANDIDATE-EXIT
+           END-IF
+      *    Retrieve generated ID
+           EXEC SQL
+               SELECT IDENTITY_VAL_LOCAL()
+               INTO :CANDIDATE-ID OF DCLDLIS-CANDIDATE
+               FROM SYSIBM.SYSDUMMY1
+           END-EXEC
+           MOVE CANDIDATE-ID OF DCLDLIS-CANDIDATE TO DCMCIDO
+           MOVE 'CANDIDATE CREATED SUCCESSFULLY' TO DCMMSG
+           GO TO CREATE-CANDIDATE-EXIT.
+       CREATE-CANDIDATE-EXIT. EXIT.
+
+       UPDATE-CANDIDATE.
+           IF DCMCIDI = ZEROS OR DCMCIDI = LOW-VALUES
+               MOVE 'CANDIDATE ID IS REQUIRED FOR UPDATE' TO DCMMSG
+               GO TO UPDATE-CANDIDATE-EXIT
+           END-IF
+           MOVE DCMCIDI TO CANDIDATE-ID OF DCLDLIS-CANDIDATE
+           EXEC SQL
+               UPDATE DLIS.CANDIDATE SET
+                  FIRST_NAME       = :FIRST-NAME,
+                  LAST_NAME        = :LAST-NAME,
+                  ADDRESS_LINE_1   = :ADDRESS-LINE-1,
+                  ADDRESS_LINE_2   = :ADDRESS-LINE-2,
+                  CITY             = :CITY,
+                  STATE_PROVINCE   = :STATE-PROVINCE,
+                  POSTAL_CODE      = :POSTAL-CODE,
+                  COUNTRY          = :COUNTRY,
+                  PHONE_NUMBER     = :PHONE-NUMBER,
+                  EMAIL_ADDRESS    = :EMAIL-ADDRESS,
+                  RECORD_STATUS    = :RECORD-STATUS
+               WHERE CANDIDATE_ID  = :CANDIDATE-ID
+               OF DCLDLIS-CANDIDATE
+           END-EXEC
+           IF SQLCODE = 100
+               MOVE 'CANDIDATE NOT FOUND' TO DCMMSG
+           ELSE IF SQLCODE NOT = 0
+               MOVE 'DATABASE ERROR ON UPDATE' TO DCMMSG
+           ELSE
+               MOVE 'CANDIDATE UPDATED SUCCESSFULLY' TO DCMMSG
+           END-IF.
+       UPDATE-CANDIDATE-EXIT. EXIT.
+
+       INQUIRE-CANDIDATE.
+           IF DCMCIDI = ZEROS AND DCMIDNOI = SPACES
+               MOVE 'ENTER CANDIDATE ID OR NATIONAL ID' TO DCMMSG
+               GO TO INQUIRE-CANDIDATE-EXIT
+           END-IF
+           MOVE DCMCIDI  TO CANDIDATE-ID OF DCLDLIS-CANDIDATE
+           MOVE DCMIDNOI TO ID-NUMBER    OF DCLDLIS-CANDIDATE
+           EXEC SQL
+               SELECT CANDIDATE_ID, FIRST_NAME, LAST_NAME,
+                      DATE_OF_BIRTH, ID_NUMBER, ADDRESS_LINE_1,
+                      ADDRESS_LINE_2, CITY, STATE_PROVINCE,
+                      POSTAL_CODE, COUNTRY, PHONE_NUMBER,
+                      EMAIL_ADDRESS, RECORD_STATUS
+               INTO   :CANDIDATE-ID, :FIRST-NAME, :LAST-NAME,
+                      :DATE-OF-BIRTH, :ID-NUMBER, :ADDRESS-LINE-1,
+                      :ADDRESS-LINE-2, :CITY, :STATE-PROVINCE,
+                      :POSTAL-CODE, :COUNTRY, :PHONE-NUMBER,
+                      :EMAIL-ADDRESS, :RECORD-STATUS
+               OF DCLDLIS-CANDIDATE
+               FROM DLIS.CANDIDATE
+               WHERE CANDIDATE_ID = :CANDIDATE-ID
+                  OR ID_NUMBER    = :ID-NUMBER
+               OF DCLDLIS-CANDIDATE
+               FETCH FIRST 1 ROW ONLY
+           END-EXEC
+           IF SQLCODE = 100
+               MOVE 'CANDIDATE NOT FOUND' TO DCMMSG
+               GO TO INQUIRE-CANDIDATE-EXIT
+           END-IF
+           MOVE CANDIDATE-ID   OF DCLDLIS-CANDIDATE TO DCMCIDO
+           MOVE FIRST-NAME     OF DCLDLIS-CANDIDATE TO DCMFNAMO
+           MOVE LAST-NAME      OF DCLDLIS-CANDIDATE TO DCMLNAMO
+           MOVE DATE-OF-BIRTH  OF DCLDLIS-CANDIDATE TO DCMDOBO
+           MOVE ID-NUMBER      OF DCLDLIS-CANDIDATE TO DCMIDNOO
+           MOVE ADDRESS-LINE-1 OF DCLDLIS-CANDIDATE TO DCMADR1O
+           MOVE ADDRESS-LINE-2 OF DCLDLIS-CANDIDATE TO DCMADR2O
+           MOVE CITY           OF DCLDLIS-CANDIDATE TO DCMCITYO
+           MOVE STATE-PROVINCE OF DCLDLIS-CANDIDATE TO DCMSTATO
+           MOVE POSTAL-CODE    OF DCLDLIS-CANDIDATE TO DCMPOSTO
+           MOVE COUNTRY        OF DCLDLIS-CANDIDATE TO DCMCTRYO
+           MOVE PHONE-NUMBER   OF DCLDLIS-CANDIDATE TO DCMPHNO
+           MOVE EMAIL-ADDRESS  OF DCLDLIS-CANDIDATE TO DCMEMLO
+           MOVE RECORD-STATUS  OF DCLDLIS-CANDIDATE TO DCMSTSO
+           MOVE 'CANDIDATE FOUND' TO DCMMSG.
+       INQUIRE-CANDIDATE-EXIT. EXIT.
+
+       DEACTIVATE-CANDIDATE.
+           IF DCMCIDI = ZEROS
+               MOVE 'CANDIDATE ID IS REQUIRED TO DEACTIVATE' TO DCMMSG
+               GO TO DEACTIVATE-CANDIDATE-EXIT
+           END-IF
+           MOVE DCMCIDI TO CANDIDATE-ID OF DCLDLIS-CANDIDATE
+           EXEC SQL
+               UPDATE DLIS.CANDIDATE
+               SET    RECORD_STATUS = 'I'
+               WHERE  CANDIDATE_ID  = :CANDIDATE-ID OF DCLDLIS-CANDIDATE
+           END-EXEC
+           IF SQLCODE = 100
+               MOVE 'CANDIDATE NOT FOUND' TO DCMMSG
+           ELSE IF SQLCODE NOT = 0
+               MOVE 'DATABASE ERROR ON DEACTIVATE' TO DCMMSG
+           ELSE
+               MOVE 'I' TO DCMSTSO
+               MOVE 'CANDIDATE DEACTIVATED' TO DCMMSG
+           END-IF.
+       DEACTIVATE-CANDIDATE-EXIT. EXIT.

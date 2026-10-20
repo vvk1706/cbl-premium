@@ -1,0 +1,1018 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLISISSU-inventory</title>
+    <link rel="stylesheet" href="../../../assets/style.css">
+    <script src="../../../assets/mermaid.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+
+    <!-- Prism.js for syntax highlighting (bundled — no CDN required) -->
+    <link rel="stylesheet" href="../../../assets/prism-tomorrow.css">
+    <script src="../../../assets/prism-core.js"></script>
+    <script src="../../../assets/prism-languages.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="header-app-name"><a href="../../../../index.html" style="color: inherit; text-decoration: none;">Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</a></span>
+        </div>
+        <div class="header-right">
+        </div>
+    </header>
+    <div class="shell">
+        <aside class="sidebar" id="wiki-sidebar">
+            <nav>
+                
+        <div class="nav-home-wrap">
+            <a href="../../../../index.html" class="nav-home">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 6.5L8 2l6 4.5V14a1 1 0 01-1 1H3a1 1 0 01-1-1V6.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M6 15V9h4v6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                Home
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Application Documentation</div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Overview</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/system-overview.html" class="nav-link" data-page-id="system-overview">DLIS System Overview</a>
+                <a href="../../../pages/main-menu-navigation.html" class="nav-link" data-page-id="main-menu-navigation">Main Menu &amp; Navigation (DL01)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Candidate &amp; Application Intake</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/candidate-management.html" class="nav-link" data-page-id="candidate-management">Candidate Maintenance (DL02)</a>
+                <a href="../../../pages/license-application-entry.html" class="nav-link" data-page-id="license-application-entry">License Application Entry (DL03)</a>
+                <a href="../../../pages/application-status-inquiry.html" class="nav-link" data-page-id="application-status-inquiry">Application Status Inquiry (DL04)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Verification &amp; Payment</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/eligibility-check.html" class="nav-link" data-page-id="eligibility-check">Eligibility Check (DL05)</a>
+                <a href="../../../pages/driving-history-check.html" class="nav-link" data-page-id="driving-history-check">Driving History Check (DL06)</a>
+                <a href="../../../pages/payment-processing.html" class="nav-link" data-page-id="payment-processing">Payment Entry &amp; Processing (DL07)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Approval &amp; License Issuance</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/first-level-approval.html" class="nav-link" data-page-id="first-level-approval">First-Level Authority Approval (DL08)</a>
+                <a href="../../../pages/second-level-approval.html" class="nav-link" data-page-id="second-level-approval">Second-Level Authority Approval (DL09)</a>
+                <a href="../../../pages/license-issuance.html" class="nav-link" data-page-id="license-issuance">License Issuance (DL10)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Architecture</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/application-lifecycle-flow.html" class="nav-link" data-page-id="application-lifecycle-flow">Application Lifecycle &amp; Status Flow</a>
+                <a href="../../../pages/data-architecture.html" class="nav-link" data-page-id="data-architecture">Data Architecture (DB2)</a>
+                <a href="../../../pages/cics-integration-patterns.html" class="nav-link" data-page-id="cics-integration-patterns">CICS Integration Patterns</a>
+            </div>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Program Documentation</div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">program</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../sources/program/cobol/DLISPAY.html" class="nav-link">DLISPAY</a>
+                <a href="../../../sources/program/cobol/DLISSTAT.html" class="nav-link">DLISSTAT</a>
+                <a href="../../../sources/program/cobol/DLISMENU.html" class="nav-link">DLISMENU</a>
+                <a href="../../../sources/program/cobol/DLISELIG.html" class="nav-link">DLISELIG</a>
+                <a href="../../../sources/program/cobol/DLISCAND.html" class="nav-link">DLISCAND</a>
+                <a href="../../../sources/program/cobol/DLISAPPL.html" class="nav-link">DLISAPPL</a>
+                <a href="../../../sources/program/cobol/DLISISSU.html" class="nav-link">DLISISSU</a>
+                <a href="../../../sources/program/cobol/DLISAP2.html" class="nav-link">DLISAP2</a>
+                <a href="../../../sources/program/cobol/DLISHIST.html" class="nav-link">DLISHIST</a>
+                <a href="../../../sources/program/cobol/DLISAP1.html" class="nav-link">DLISAP1</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="nav-section">
+        <button class="nav-section-toggle open" type="button">
+            <span class="nav-toggle-text">business-rule</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items open">
+        <div class="nav-section">
+            <button class="nav-section-toggle open" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items open">
+                <a href="../../../sources/business-rule/cobol/DLISELIG-overview.html" class="nav-link">DLISELIG-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-inventory.html" class="nav-link">DLISPAY-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-overview.html" class="nav-link">DLISCAND-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-inventory.html" class="nav-link">DLISAP2-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-inventory.html" class="nav-link">DLISHIST-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-inventory.html" class="nav-link">DLISMENU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISELIG-inventory.html" class="nav-link">DLISELIG-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-overview.html" class="nav-link">DLISPAY-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-overview.html" class="nav-link">DLISSTAT-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-overview.html" class="nav-link">DLISHIST-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-overview.html" class="nav-link">DLISAPPL-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-inventory.html" class="nav-link active">DLISISSU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-inventory.html" class="nav-link">DLISAPPL-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-inventory.html" class="nav-link">DLISSTAT-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-overview.html" class="nav-link">DLISAP1-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-inventory.html" class="nav-link">DLISCAND-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-overview.html" class="nav-link">DLISAP2-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-overview.html" class="nav-link">DLISISSU-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-inventory.html" class="nav-link">DLISAP1-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-overview.html" class="nav-link">DLISMENU-overview</a>
+            </div>
+        </div>
+        </div>
+    </div>
+            </nav>
+        </aside>
+        <main class="main">
+            <div class="prog-container">
+                <div id="wiki-breadcrumb"></div>
+                <div class="content-layout">
+                    <article class="prose">
+                        <h1 id="business-rules-inventory" tabindex="-1">Business rules: Inventory</h1>
+<p><strong>Program:</strong> DLISISSU</p>
+<p><strong>Total rules extracted:</strong> 11</p>
+<h2 id="1-purpose" tabindex="-1">1. Purpose</h2>
+<p>This document is an inventory of all business rules extracted from DLISISSU, organised at the Paragraph level. Each Paragraph contributes one or more named rule blocks, where each block captures a discrete business policy with its title, decision logic, conditions, actions, outcomes, and the exact source code that realises it. Key variables, when available, are annotated with their role (input or output) and their specific purpose within the rule. References to related Paragraphs called or invoked by each rule are also recorded.</p>
+<h2 id="2-rule-inventory" tabindex="-1">2. Rule Inventory</h2>
+<h3 id="21-paragraph-process-input" tabindex="-1">2.1 Paragraph: PROCESS-INPUT</h3>
+<h4 id="211-function-key-routing-for-license-issuance-workflow" tabindex="-1">2.1.1 Function Key Routing for License Issuance Workflow</h4>
+<p><strong>Description:</strong> Routes the officer’s action to the appropriate business function based on the function key pressed: F1 triggers license issuance, F3 loads an application, F6 prints the license, F12 exits the transaction, and any other key displays a guidance message enforcing the allowed interaction model.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>F1 invokes the license issuance process</li>
+<li>F3 invokes the application loading process</li>
+<li>F6 invokes the license printing process</li>
+<li>F12 terminates the transaction</li>
+<li>Any unrecognised key results in a user guidance message restricting actions to the defined function keys</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EVALUATE TRUE
+               WHEN EIBAID = DFHPF1   PERFORM ISSUE-LICENSE
+               WHEN EIBAID = DFHPF3   PERFORM LOAD-APPLICATION
+               WHEN EIBAID = DFHPF6   PERFORM PRINT-LICENSE
+               WHEN EIBAID = DFHPF12  EXEC CICS RETURN END-EXEC
+               OTHER
+                   MOVE &#039;USE F1 F3 F6 OR F12&#039; TO DLIMSG
+           END-EVALUATE</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DLIS-COMMAREA</code></td>
+<td>output</td>
+<td>Passed back to CICS via EXEC CICS RETURN to maintain transaction state across the license issuance workflow after the selected business action is performed.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Paragraphs:</strong></p>
+<ul>
+<li>ISSUE-LICENSE</li>
+<li>LOAD-APPLICATION</li>
+<li>PRINT-LICENSE</li>
+</ul>
+<h3 id="22-paragraph-main-logic" tabindex="-1">2.2 Paragraph: MAIN-LOGIC</h3>
+<h4 id="221-first-entry-vs-returning-transaction-routing" tabindex="-1">2.2.1 First-Entry vs. Returning Transaction Routing</h4>
+<p><strong>Description:</strong> Determines whether the transaction is being entered for the first time or returning with an existing communication area. On first entry (no commarea), the screen is initialised for the officer. On a subsequent entry, the saved commarea is restored and user input is processed, preserving state across the license issuance workflow.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>If EIBCALEN is zero, this is a fresh transaction entry and the screen must be initialised</li>
+<li>If EIBCALEN is non-zero, the commarea from the previous transaction cycle is restored and input processing proceeds</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF EIBCALEN = 0
+               PERFORM INIT-SCREEN
+           ELSE
+               MOVE DFHCOMMAREA TO DLIS-COMMAREA
+               PERFORM PROCESS-INPUT
+           END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DLIS-COMMAREA</code></td>
+<td>output</td>
+<td>Populated from DFHCOMMAREA when returning to the transaction, restoring the prior workflow state before input processing begins.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Paragraphs:</strong></p>
+<ul>
+<li>INIT-SCREEN</li>
+<li>PROCESS-INPUT</li>
+</ul>
+<h3 id="23-paragraph-load-application" tabindex="-1">2.3 Paragraph: LOAD-APPLICATION</h3>
+<h4 id="231-application-id-presence-validation" tabindex="-1">2.3.1 Application ID Presence Validation</h4>
+<p><strong>Description:</strong> Enforces that an Application ID must be provided before any application can be loaded. If the field is blank or zero, the officer is prompted to enter it and further processing is halted.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>An Application ID is mandatory before an application can be loaded; absence halts the process</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF DLIAIDI = ZEROS
+               MOVE &#039;ENTER APPLICATION ID&#039; TO DLIMSG
+               GO TO LOAD-APP-EXIT
+           END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>APPLICATION-ID</code></td>
+<td>input</td>
+<td>The field being validated for presence; the process is blocked if no Application ID has been entered.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="232-display-application-eligibility-gate-statuses-to-officer" tabindex="-1">2.3.2 Display Application Eligibility Gate Statuses to Officer</h4>
+<p><strong>Description:</strong> Presents the full set of pre-issuance eligibility gate statuses — license type, eligibility check, history check, payment, and both approval levels — on the CICS map so that the issuing officer can assess whether all mandatory conditions are satisfied before proceeding to issue the license.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>The candidate’s full name, license type, eligibility check status, history check status, payment status, first-level approval status, and second-level approval status must all be visible to the officer before issuance</li>
+<li>A successful load is confirmed by setting the message to ‘APPLICATION LOADED’, which downstream logic (ISSUE-LICENSE) checks as a gate condition</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">STRING FIRST-NAME OF DCLDLIS-CANDIDATE DELIMITED SPACE
+                  &#039; &#039; DELIMITED SIZE
+                  LAST-NAME  OF DCLDLIS-CANDIDATE DELIMITED SPACE
+               INTO DLICNAMO
+           MOVE LICENSE-TYPE      OF DCLDLIS-LICENSE-APPL TO DLILTYO
+           MOVE ELIG-CHECK-STATUS OF DCLDLIS-LICENSE-APPL TO DLIELIG0
+           MOVE HIST-CHECK-STATUS OF DCLDLIS-LICENSE-APPL TO DLIHISTO
+           MOVE PAYMENT-STATUS    OF DCLDLIS-LICENSE-APPL TO DLIPAYO
+           MOVE APPROVAL-1-STATUS OF DCLDLIS-LICENSE-APPL TO DLIAU1O
+           MOVE APPROVAL-2-STATUS OF DCLDLIS-LICENSE-APPL TO DLIAU2O
+           MOVE &#039;APPLICATION LOADED&#039; TO DLIMSG.</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LICENSE-TYPE</code></td>
+<td>input</td>
+<td>Displayed on the map to inform the officer of the classification of the license application being reviewed.</td>
+</tr>
+<tr>
+<td><code>ELIG-CHECK-STATUS</code></td>
+<td>input</td>
+<td>Displayed on the map as one of the mandatory eligibility gate statuses the officer must review before issuing a license.</td>
+</tr>
+<tr>
+<td><code>HIST-CHECK-STATUS</code></td>
+<td>input</td>
+<td>Displayed on the map to show whether the driving history background check has been satisfied as a pre-issuance gate.</td>
+</tr>
+<tr>
+<td><code>PAYMENT-STATUS</code></td>
+<td>input</td>
+<td>Displayed on the map to indicate whether the required fees have been settled as part of the pre-issuance eligibility gates.</td>
+</tr>
+<tr>
+<td><code>APPROVAL-1-STATUS</code></td>
+<td>input</td>
+<td>Displayed on the map to show the first-level approval gate status within the dual-approval workflow.</td>
+</tr>
+<tr>
+<td><code>APPROVAL-2-STATUS</code></td>
+<td>input</td>
+<td>Displayed on the map to show the second-level approval gate status within the dual-approval workflow.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="24-paragraph-issue-license" tabindex="-1">2.4 Paragraph: ISSUE-LICENSE</h3>
+<h4 id="241-mandatory-input-field-validation-for-license-issuance" tabindex="-1">2.4.1 Mandatory Input Field Validation for License Issuance</h4>
+<p><strong>Description:</strong> Enforces that all mandatory inputs required to issue a license are present and valid before proceeding: the Application ID must be supplied, the vehicle class must be one of the permitted values (A, B, C, or D), the issuing officer must be identified, and the issuing authority must be provided. Failure on any gate halts the issuance with a descriptive message.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>Application ID is mandatory; absence blocks issuance</li>
+<li>Vehicle class must be one of the four permitted values A, B, C, or D; any other value or blank blocks issuance</li>
+<li>Issuing officer identity is mandatory; absence blocks issuance</li>
+<li>Issuing authority identity is mandatory; absence blocks issuance</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF DLIAIDI = ZEROS
+               MOVE &#039;ENTER APPLICATION ID&#039; TO DLIMSG
+               GO TO ISSUE-LIC-EXIT
+           END-IF
+           IF DLIVCLSI = SPACES OR DLIVCLSI NOT IN (&#039;A&#039;,&#039;B&#039;,&#039;C&#039;,&#039;D&#039;)
+               MOVE &#039;VEHICLE CLASS MUST BE A B C OR D&#039; TO DLIMSG
+               GO TO ISSUE-LIC-EXIT
+           END-IF
+           IF DLIOFCRI = SPACES
+               MOVE &#039;ISSUING OFFICER IS REQUIRED&#039; TO DLIMSG
+               GO TO ISSUE-LIC-EXIT
+           END-IF
+           IF DLIAUTHI = SPACES
+               MOVE &#039;ISSUING AUTHORITY IS REQUIRED&#039; TO DLIMSG
+               GO TO ISSUE-LIC-EXIT
+           END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>APPLICATION-ID</code></td>
+<td>input</td>
+<td>Validated for presence; the issuance process is blocked if no Application ID has been entered.</td>
+</tr>
+<tr>
+<td><code>VEHICLE-CLASS</code></td>
+<td>input</td>
+<td>Validated against the permitted set of vehicle classes (A, B, C, D); an invalid or missing value blocks issuance.</td>
+</tr>
+<tr>
+<td><code>ISSUED-BY-OFFICER</code></td>
+<td>input</td>
+<td>Validated for presence to ensure accountability for the issuance action is recorded.</td>
+</tr>
+<tr>
+<td><code>ISSUED-BY-AUTH</code></td>
+<td>input</td>
+<td>Validated for presence to ensure the issuing authority is identified before the license can be created.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="242-application-status-eligibility-gate-before-license-issuance" tabindex="-1">2.4.2 Application Status Eligibility Gate Before License Issuance</h4>
+<p><strong>Description:</strong> Enforces that a license can only be issued when the application has reached the fully-approved status (‘AP’). Any application that has not attained this status is ineligible for issuance, blocking the process and informing the officer.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>The application status must be ‘AP’ (Approved) for license issuance to proceed; any other status is a disqualifying condition</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">*    All five gates must be fully satisfied
+           IF APPLICATION-STATUS OF DCLDLIS-LICENSE-APPL NOT = &#039;AP&#039;
+               MOVE &#039;APPLICATION STATUS MUST BE AP BEFORE ISSUE&#039;
+                   TO DLIMSG
+               GO TO ISSUE-LIC-EXIT
+           END-IF</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>APPLICATION-STATUS</code></td>
+<td>input</td>
+<td>Checked against the required ‘AP’ value to enforce that only fully-approved applications can proceed to license issuance.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="243-license-expiry-date-calculation-and-prefix-assignment-by-license-type" tabindex="-1">2.4.3 License Expiry Date Calculation and Prefix Assignment by License Type</h4>
+<p><strong>Description:</strong> Calculates the expiry date and assigns the license number prefix based on license type: Learner licenses expire in 1 year with prefix ‘LRN’, Probationary licenses expire in 2 years with prefix ‘PRB’, and Open/Full licenses expire in 5 years with prefix ‘OPN’. The expiry date is assembled by combining the computed year with the current month and day.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>Learner (‘L’) licenses have a validity period of 1 year and carry the prefix ‘LRN’</li>
+<li>Probationary (‘P’) licenses have a validity period of 2 years and carry the prefix ‘PRB’</li>
+<li>Open/Full (‘O’) licenses have a validity period of 5 years and carry the prefix ‘OPN’</li>
+<li>Expiry date is constructed by appending the current month and day to the calculated expiry year</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE CURRENT-DATE(1:10) TO WS-ISSUE-DATE
+           MOVE CURRENT-DATE(1:4)  TO WS-EXPIRY-YYYY
+           MOVE CURRENT-DATE(5:6)  TO WS-EXPIRY-MMDD
+           EVALUATE LICENSE-TYPE OF DCLDLIS-LICENSE-APPL
+               WHEN &#039;L&#039;
+                   ADD 1 TO WS-EXPIRY-YYYY
+                   MOVE &#039;LRN&#039; TO WS-LIC-PREFIX
+               WHEN &#039;P&#039;
+                   ADD 2 TO WS-EXPIRY-YYYY
+                   MOVE &#039;PRB&#039; TO WS-LIC-PREFIX
+               WHEN &#039;O&#039;
+                   ADD 5 TO WS-EXPIRY-YYYY
+                   MOVE &#039;OPN&#039; TO WS-LIC-PREFIX
+           END-EVALUATE
+           STRING WS-EXPIRY-YYYY WS-EXPIRY-MMDD
+               INTO WS-EXPIRY-DATE</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LICENSE-TYPE</code></td>
+<td>input</td>
+<td>Drives the selection of validity period and license number prefix; each type maps to a distinct expiry duration and prefix code.</td>
+</tr>
+<tr>
+<td><code>WS-EXPIRY-DATE</code></td>
+<td>output</td>
+<td>Receives the fully assembled expiry date constructed from the calculated expiry year and current month/day.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="244-license-number-generation" tabindex="-1">2.4.4 License Number Generation</h4>
+<p><strong>Description:</strong> Constructs a unique license number by concatenating the license type prefix, vehicle class, candidate identifier, and application identifier. This number serves as the definitive identifier for the issued license.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>The license number is composed of four parts: the license type prefix, vehicle class, candidate ID, and application ID in sequence</li>
+<li>Each component contributes to uniqueness and encodes key attributes of the license and its holder</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">*    Generate license number
+           STRING WS-LIC-PREFIX DLIVCLSI
+                  CANDIDATE-ID OF DCLDLIS-LICENSE-APPL
+                  APPLICATION-ID OF DCLDLIS-LICENSE-APPL
+               INTO WS-LICENSE-NUMBER</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CANDIDATE-ID</code></td>
+<td>input</td>
+<td>Incorporated into the generated license number to associate the license with the specific candidate.</td>
+</tr>
+<tr>
+<td><code>APPLICATION-ID</code></td>
+<td>input</td>
+<td>Incorporated into the generated license number to tie it back to the originating application record.</td>
+</tr>
+<tr>
+<td><code>VEHICLE-CLASS</code></td>
+<td>input</td>
+<td>Incorporated into the generated license number to encode the vehicle classification into the license identifier.</td>
+</tr>
+<tr>
+<td><code>WS-LICENSE-NUMBER</code></td>
+<td>output</td>
+<td>Receives the fully assembled unique license number constructed from the prefix, vehicle class, candidate ID, and application ID.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="245-insert-issued-license-record-into-database" tabindex="-1">2.4.5 Insert Issued License Record into Database</h4>
+<p><strong>Description:</strong> Creates the official issued license domain record in DLIS.ISSUED_LICENSE, capturing all defining attributes: the linked application and candidate, the generated license number, license type, issue and expiry dates, an initial active status (‘A’), vehicle class, any restrictions, a starting demerit balance of 12, and the issuing officer and authority. This is the core business event that formally brings the license into existence.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>The license is created with an initial status of ‘A’ (Active)</li>
+<li>The demerit balance is initialised to 12 at the point of issuance</li>
+<li>All key issuance attributes — officer, authority, vehicle class, restrictions, expiry date, and license number — are permanently recorded against the issued license</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE DLIVCLSI  TO VEHICLE-CLASS    OF DCLDLIS-ISSUED-LIC
+           MOVE DLIOFCRI  TO ISSUED-BY-OFFICER OF DCLDLIS-ISSUED-LIC
+           MOVE DLIAUTHI  TO ISSUED-BY-AUTH   OF DCLDLIS-ISSUED-LIC
+           MOVE DLIRSTI   TO RESTRICTIONS     OF DCLDLIS-ISSUED-LIC
+           EXEC SQL
+               INSERT INTO DLIS.ISSUED_LICENSE
+                  (APPLICATION_ID, CANDIDATE_ID, LICENSE_NUMBER,
+                   LICENSE_TYPE, ISSUE_DATE, EXPIRY_DATE,
+                   LICENSE_STATUS, VEHICLE_CLASS, RESTRICTIONS,
+                   DEMERIT_BALANCE, ISSUED_BY_AUTH, ISSUED_BY_OFFICER)
+               VALUES
+                  (:APPLICATION-ID, :CANDIDATE-ID, :WS-LICENSE-NUMBER,
+                   :LICENSE-TYPE, CURRENT DATE, :WS-EXPIRY-DATE,
+                   &#039;A&#039;, :VEHICLE-CLASS, :RESTRICTIONS,
+                   12, :ISSUED-BY-AUTH, :ISSUED-BY-OFFICER)
+               OF DCLDLIS-ISSUED-LIC
+           END-EXEC</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>APPLICATION-ID</code></td>
+<td>input</td>
+<td>Inserted as a foreign key linking the issued license back to the originating application record.</td>
+</tr>
+<tr>
+<td><code>CANDIDATE-ID</code></td>
+<td>input</td>
+<td>Inserted to associate the issued license with the correct candidate individual.</td>
+</tr>
+<tr>
+<td><code>WS-LICENSE-NUMBER</code></td>
+<td>input</td>
+<td>Inserted as the unique identifier of the newly issued license.</td>
+</tr>
+<tr>
+<td><code>LICENSE-TYPE</code></td>
+<td>input</td>
+<td>Inserted to record the classification of the issued license (Learner, Probationary, or Open).</td>
+</tr>
+<tr>
+<td><code>WS-EXPIRY-DATE</code></td>
+<td>input</td>
+<td>Inserted as the computed expiry date determining when the issued license ceases to be valid.</td>
+</tr>
+<tr>
+<td><code>VEHICLE-CLASS</code></td>
+<td>input</td>
+<td>Inserted to record the vehicle classification for which the license is authorised.</td>
+</tr>
+<tr>
+<td><code>ISSUED-BY-OFFICER</code></td>
+<td>input</td>
+<td>Inserted to record the officer who authorised and issued the license for accountability purposes.</td>
+</tr>
+<tr>
+<td><code>ISSUED-BY-AUTH</code></td>
+<td>input</td>
+<td>Inserted to record the issuing authority organisation responsible for the license.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="246-update-application-status-to-issued" tabindex="-1">2.4.6 Update Application Status to Issued</h4>
+<p><strong>Description:</strong> Marks the license application as issued (‘IS’) in the LICENSE_APPLICATION table, recording the date and the officer responsible for the update. Simultaneously, the generated license number and expiry date are displayed on the CICS map and a success confirmation message is set, completing the license issuance business event.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>The application status is transitioned to ‘IS’ (Issued) upon successful license creation, closing the application workflow</li>
+<li>The issuing officer is recorded as the last updater on the application record for audit purposes</li>
+<li>The generated license number and expiry date are presented to the officer to confirm the outcome</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">*    Update application to IS=Issued
+           EXEC SQL
+               UPDATE DLIS.LICENSE_APPLICATION SET
+                   APPLICATION_STATUS = &#039;IS&#039;,
+                   LAST_UPDATED_DATE  = CURRENT DATE,
+                   LAST_UPDATED_BY    = :DLIOFCRI
+               WHERE APPLICATION_ID   = :APPLICATION-ID
+                                        OF DCLDLIS-LICENSE-APPL
+           END-EXEC
+           MOVE WS-LICENSE-NUMBER TO DLIILNUMO
+           MOVE WS-EXPIRY-DATE    TO DLIEXPO
+           MOVE &#039;DRIVER LICENSE ISSUED SUCCESSFULLY&#039; TO DLIMSG.</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>APPLICATION-ID</code></td>
+<td>input</td>
+<td>Used as the WHERE clause key to identify which application record must be updated to ‘IS’ status.</td>
+</tr>
+<tr>
+<td><code>APPLICATION-STATUS</code></td>
+<td>output</td>
+<td>Updated to ‘IS’ to formally mark the application as having resulted in an issued license.</td>
+</tr>
+<tr>
+<td><code>WS-LICENSE-NUMBER</code></td>
+<td>input</td>
+<td>Moved to the map output field to display the newly issued license number to the officer.</td>
+</tr>
+<tr>
+<td><code>WS-EXPIRY-DATE</code></td>
+<td>input</td>
+<td>Moved to the map output field to display the expiry date of the newly issued license to the officer.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="25-paragraph-print-license" tabindex="-1">2.5 Paragraph: PRINT-LICENSE</h3>
+<h4 id="251-license-print-eligibility-gate-and-print-invocation" tabindex="-1">2.5.1 License Print Eligibility Gate and Print Invocation</h4>
+<p><strong>Description:</strong> Enforces that a license must have been successfully issued (indicated by the presence of a license number on screen) before it can be printed. If this gate is passed, the print program DLISLPRT is invoked via CICS LINK with the current commarea, and a confirmation message is set.</p>
+<p><strong>Core decision logic:</strong></p>
+<ul>
+<li>Printing is blocked if no license number is present on the screen, enforcing the business rule that issuance must precede printing</li>
+<li>Upon successful gate passage, the license print program is invoked to produce the physical or electronic license document</li>
+</ul>
+<p><strong>Code:</strong></p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF DLIILNUMO = SPACES
+               MOVE &#039;ISSUE LICENSE FIRST BEFORE PRINTING&#039; TO DLIMSG
+               GO TO PRINT-LIC-EXIT
+           END-IF
+           EXEC CICS LINK PROGRAM(&#039;DLISLPRT&#039;)
+               COMMAREA(DLIS-COMMAREA) LENGTH(350)
+           END-EXEC
+           MOVE &#039;LICENSE SENT TO PRINTER&#039; TO DLIMSG.</code></pre>
+</div>
+<p><strong>Variables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable name</th>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DLIS-COMMAREA</code></td>
+<td>input</td>
+<td>Passed to the DLISLPRT print program via CICS LINK to provide the full license issuance context needed for printing.</td>
+</tr>
+</tbody>
+</table>
+
+                    </article>
+                    <nav class="toc-panel" aria-label="On this page">
+  <span class="toc-panel-label">On this page</span>
+  <ul class="toc-list">
+<li class="toc-level-2"><a href="#1-purpose">1. Purpose</a></li>
+<li class="toc-level-2"><a href="#2-rule-inventory">2. Rule Inventory</a>
+<ul>
+<li class="toc-level-3"><a href="#21-paragraph-process-input">2.1 Paragraph: PROCESS-INPUT</a>
+<ul>
+<li class="toc-level-4"><a href="#211-function-key-routing-for-license-issuance-workflow">2.1.1 Function Key Routing for License Issuance Workflow</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#22-paragraph-main-logic">2.2 Paragraph: MAIN-LOGIC</a>
+<ul>
+<li class="toc-level-4"><a href="#221-first-entry-vs-returning-transaction-routing">2.2.1 First-Entry vs. Returning Transaction Routing</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#23-paragraph-load-application">2.3 Paragraph: LOAD-APPLICATION</a>
+<ul>
+<li class="toc-level-4"><a href="#231-application-id-presence-validation">2.3.1 Application ID Presence Validation</a></li>
+<li class="toc-level-4"><a href="#232-display-application-eligibility-gate-statuses-to-officer">2.3.2 Display Application Eligibility Gate Statuses to Officer</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#24-paragraph-issue-license">2.4 Paragraph: ISSUE-LICENSE</a>
+<ul>
+<li class="toc-level-4"><a href="#241-mandatory-input-field-validation-for-license-issuance">2.4.1 Mandatory Input Field Validation for License Issuance</a></li>
+<li class="toc-level-4"><a href="#242-application-status-eligibility-gate-before-license-issuance">2.4.2 Application Status Eligibility Gate Before License Issuance</a></li>
+<li class="toc-level-4"><a href="#243-license-expiry-date-calculation-and-prefix-assignment-by-license-type">2.4.3 License Expiry Date Calculation and Prefix Assignment by License Type</a></li>
+<li class="toc-level-4"><a href="#244-license-number-generation">2.4.4 License Number Generation</a></li>
+<li class="toc-level-4"><a href="#245-insert-issued-license-record-into-database">2.4.5 Insert Issued License Record into Database</a></li>
+<li class="toc-level-4"><a href="#246-update-application-status-to-issued">2.4.6 Update Application Status to Issued</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#25-paragraph-print-license">2.5 Paragraph: PRINT-LICENSE</a>
+<ul>
+<li class="toc-level-4"><a href="#251-license-print-eligibility-gate-and-print-invocation">2.5.1 License Print Eligibility Gate and Print Invocation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</nav>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="wiki-footer">Made by IBM Bob Premium Package for Z</footer>
+    <script>
+    /* toc-spy.js — highlights the active heading in the TOC panel on scroll */
+    (function () {
+      function init() {
+        var panel = document.querySelector('.toc-panel');
+        if (!panel) return;
+        var links = Array.prototype.slice.call(panel.querySelectorAll('a[href^="#"]'));
+        if (!links.length) return;
+
+        var headingIds = links.map(function (a) { return a.getAttribute('href').slice(1); });
+        var headings = headingIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+        function clearActive() {
+          panel.querySelectorAll('.toc-active').forEach(function (el) { el.classList.remove('toc-active'); });
+          panel.querySelectorAll('.toc-parent-active').forEach(function (el) { el.classList.remove('toc-parent-active'); });
+        }
+
+        function setActive(id) {
+          clearActive();
+          var link = panel.querySelector('a[href="#' + id + '"]');
+          if (!link) return;
+          link.classList.add('toc-active');
+          var li = link.closest('li');
+          if (li) {
+            var parentLi = li.parentElement && li.parentElement.closest('li');
+            if (parentLi) parentLi.classList.add('toc-parent-active');
+          }
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+        headings.forEach(function (h) { observer.observe(h); });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
+    <script>
+    /* breadcrumb.js — reads sessionStorage['wiki_referrer'] and renders breadcrumb.
+       Only fires when the referrer was set by clicking a link inside the Source Files
+       disclosure on a wiki page; clears after rendering so stale state never lingers. */
+    (function () {
+      var raw;
+      try { raw = sessionStorage.getItem('wiki_referrer'); } catch (_e) {}
+      if (!raw) return;
+      /* Consume immediately — prevents the breadcrumb re-appearing on the next visit. */
+      try { sessionStorage.removeItem('wiki_referrer'); } catch (_e) {}
+      var ref;
+      try { ref = JSON.parse(raw); } catch (_e) { return; }
+      if (!ref || !ref.href) return;
+      var bc = document.getElementById('wiki-breadcrumb');
+      if (!bc) return;
+      bc.className = 'wiki-breadcrumb';
+      bc.innerHTML =
+        '<a href="' + ref.href + '">' + (ref.title || 'Back') + '</a>' +
+        '<span class="wiki-breadcrumb-sep"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' +
+        '<span class="wiki-breadcrumb-current">DLISISSU-inventory</span>';
+    })();
+    </script>
+    <script>
+    /* sidebar toggle — same as main wiki pages */
+    (function () {
+
+      var STORAGE_KEY = 'sb_open';
+
+      function getOpenSet() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+      }
+
+      function saveOpenSet(set) {
+        try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(set)); } catch (e) {}
+      }
+
+      function findItems(toggle) {
+        var node = toggle.nextSibling;
+        while (node) {
+          if (node.nodeType === 1 && node.classList.contains('nav-section-items'))
+            return node;
+          node = node.nextSibling;
+        }
+        return null;
+      }
+
+      function toggleKey(toggle, index) {
+        var label = (toggle.querySelector('.nav-toggle-text') || toggle).textContent.trim().replace(/\s+/g, ' ');
+        return index + ':' + label;
+      }
+
+      function openSection(toggle, items, key, set) {
+        toggle.classList.add('open');
+        items.classList.add('open');
+        if (set) set[key] = true;
+      }
+
+      function closeSection(toggle, items, key, set) {
+        toggle.classList.remove('open');
+        items.classList.remove('open');
+        if (set) set[key] = false;
+      }
+
+      function init() {
+        var sidebar = document.getElementById('wiki-sidebar');
+        var toggles = Array.prototype.slice.call(
+          document.querySelectorAll('.nav-section-toggle')
+        );
+
+        var savedSet = getOpenSet();
+        var openSet = savedSet || {};
+
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+
+          var key = toggleKey(toggle, idx);
+          var shouldOpen = openSet[key] === true;
+
+          if (shouldOpen) {
+            toggle.classList.add('open');
+            items.classList.add('open');
+          }
+
+          toggle.addEventListener('click', function () {
+            var nowOpen = toggle.classList.contains('open');
+            if (nowOpen) {
+              closeSection(toggle, items, key, openSet);
+            } else {
+              openSection(toggle, items, key, openSet);
+            }
+            saveOpenSet(openSet);
+          });
+        });
+
+        saveOpenSet(openSet);
+
+        /* Restore sidebar scroll position after sections are expanded so the
+           scroll height is correct when we apply scrollTop. */
+        if (sidebar) {
+          try {
+            var savedScroll = sessionStorage.getItem('sb_scroll');
+            if (savedScroll !== null) { sidebar.scrollTop = parseInt(savedScroll, 10) || 0; }
+          } catch (_e) {}
+        }
+
+        window.addEventListener('pagehide', function () {
+          saveOpenSet(openSet);
+          if (sidebar) {
+            try { sessionStorage.setItem('sb_scroll', String(sidebar.scrollTop)); } catch (_e) {}
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+    </script>
+</body>
+</html>

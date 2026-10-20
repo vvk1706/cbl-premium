@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DLIS Application - Generate Program Documentation Report</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f7f8fa;
+      --border: #e5e7eb;
+      --text: #1f2328;
+      --muted: #57606a;
+      --accent: #3b82d4;
+      --success: #1a7f37;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: var(--bg);
+      padding: 32px 16px;
+    }
+    .container { max-width: 960px; margin: 0 auto; }
+    header { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h1 { font-size: 20px; font-weight: 600; margin-bottom: 6px; }
+    h2 { font-size: 15px; font-weight: 600; margin-bottom: 12px; }
+    .subtitle { color: var(--muted); font-size: 13px; }
+    .badge {
+      display: inline-block; padding: 2px 8px; font-size: 12px; font-weight: 500;
+      border-radius: 4px; background-color: var(--surface); border: 1px solid var(--border);
+      color: var(--muted); margin: 8px 6px 0 0;
+    }
+    .badge.status-ok { color: var(--success); border-color: #bbf7d0; background-color: #f0fdf4; }
+    section { margin-bottom: 24px; }
+    .card {
+      background-color: var(--surface); border: 1px solid var(--border);
+      border-radius: 6px; padding: 16px; margin-bottom: 12px;
+    }
+    ul, ol { padding-left: 20px; }
+    li { margin-bottom: 4px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { background-color: var(--surface); font-weight: 600; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; background: var(--surface); padding: 1px 4px; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <h1>DLIS Application - Generate Program Documentation Report</h1>
+      <p class="subtitle">Program documentation workflow for the Driver License Information System (CICS / DB2 COBOL)</p>
+      <span class="badge status-ok">10 of 10 file(s) documented</span>
+      <span class="badge">Output: docs/program</span>
+    </header>
+
+    <section>
+      <h2>Overview</h2>
+      <div class="card">
+        <p>Generates documentation for the selected programs that includes details about structure, program logic, and data usage.</p>
+        <ul>
+          <li>Generate program documentation for COBOL, PL/I, HLASM programs, or JCL jobs</li>
+          <li>Build a foundation for generating application documentation using the Generate application documentation workflow</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Workflow steps</h2>
+      <div class="card">
+        <ol>
+          <li><strong>Select file(s)</strong> - 10 COBOL programs selected (all <code>DLIS*.cbl</code> transaction programs).</li>
+          <li><strong>Generating documentation</strong> - each program was processed and documented.</li>
+          <li><strong>Workflow complete</strong> - 10 of 10 file(s) documented, saved to <code>docs/program</code>.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section>
+      <h2>Results summary</h2>
+      <p class="subtitle" style="margin-bottom:8px;">For each program, the generated document provides detailed information about its structure, processing logic, and data usage.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Program</th>
+            <th>Document</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>DLISMENU.cbl</code></td><td><a href="../docs/program/cobol/DLISMENU.md">docs/program/cobol/DLISMENU.md</a></td><td>&#9989;</td></tr>
+          <tr><td><code>DLISSTAT.cbl</code></td><td><a href="../docs/program/cobol/DLISSTAT.md">docs/program/cobol/DLISSTAT.md</a></td><td>&#9989;</td></tr>
+          <tr><td><code>DLISISSU.cbl</code></td><td><a href="../docs/program/cobol/DLISISSU.md">docs/program/cobol/DLISISSU.md</a></td><td>&#9989;</td></tr>
+          <tr><td><code>DLISAP2.cbl</code></td><td><a href="../docs/program/cobol/DLISAP2.md">docs/program/cobol/DLISAP2.md</a></td><td>&#9989;</td></tr>
+          <tr><td><code>DLISAP1.cbl</code></td><td><a href="../docs/program/cobol/DLISAP1.md">docs/program/cobol/DLISAP1.md</a></td><td>&#9989;</td></tr>
+          <tr><td><code>DLISPAY.cbl</code></td><td><a href="../docs/program/cobol/DLISPAY.md">docs/program/cobol/DLISPAY.md</a></td><td>&#9989;</td></tr>
+          <tr><td><code>DLISHIST.cbl</code></td><td><a href="../docs/program/cobol/DLISHIST.md">docs/program/cobol/DLISHIST.md</a></td><td>&#9989;</td></tr>
+          <tr><td><code>DLISELIG.cbl</code></td><td><a href="../docs/program/cobol/DLISELIG.md">docs/program/cobol/DLISELIG.md</a></td><td>&#9989;</td></tr>
+          <tr><td><code>DLISAPPL.cbl</code></td><td><a href="../docs/program/cobol/DLISAPPL.md">docs/program/cobol/DLISAPPL.md</a></td><td>&#9989;</td></tr>
+          <tr><td><code>DLISCAND.cbl</code></td><td><a href="../docs/program/cobol/DLISCAND.md">docs/program/cobol/DLISCAND.md</a></td><td>&#9989;</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+  </div>
+</body>
+</html>

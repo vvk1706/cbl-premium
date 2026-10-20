@@ -1,0 +1,1697 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Maintenance (DL02) - Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script src="../assets/mermaid.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+
+    <!-- Prism.js for syntax highlighting (bundled — no CDN required) -->
+    <link rel="stylesheet" href="../assets/prism-tomorrow.css">
+    <script src="../assets/prism-core.js"></script>
+    <script src="../assets/prism-languages.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="header-app-name"><a href="../../index.html" style="color: inherit; text-decoration: none;">Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</a></span>
+        </div>
+        <div class="header-right">
+        </div>
+    </header>
+    <div class="shell">
+        <aside class="sidebar" id="wiki-sidebar">
+            <nav>
+                
+        <div class="nav-home-wrap">
+            <a href="../../index.html" class="nav-home">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 6.5L8 2l6 4.5V14a1 1 0 01-1 1H3a1 1 0 01-1-1V6.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M6 15V9h4v6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                Home
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Application Documentation</div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Overview</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="system-overview.html" class="nav-link" data-page-id="system-overview">DLIS System Overview</a>
+                <a href="main-menu-navigation.html" class="nav-link" data-page-id="main-menu-navigation">Main Menu &amp; Navigation (DL01)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle open" type="button">
+                <span class="nav-toggle-text">Candidate &amp; Application Intake</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items open">
+                <a href="candidate-management.html" class="nav-link active" data-page-id="candidate-management">Candidate Maintenance (DL02)</a>
+                <a href="license-application-entry.html" class="nav-link" data-page-id="license-application-entry">License Application Entry (DL03)</a>
+                <a href="application-status-inquiry.html" class="nav-link" data-page-id="application-status-inquiry">Application Status Inquiry (DL04)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Verification &amp; Payment</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="eligibility-check.html" class="nav-link" data-page-id="eligibility-check">Eligibility Check (DL05)</a>
+                <a href="driving-history-check.html" class="nav-link" data-page-id="driving-history-check">Driving History Check (DL06)</a>
+                <a href="payment-processing.html" class="nav-link" data-page-id="payment-processing">Payment Entry &amp; Processing (DL07)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Approval &amp; License Issuance</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="first-level-approval.html" class="nav-link" data-page-id="first-level-approval">First-Level Authority Approval (DL08)</a>
+                <a href="second-level-approval.html" class="nav-link" data-page-id="second-level-approval">Second-Level Authority Approval (DL09)</a>
+                <a href="license-issuance.html" class="nav-link" data-page-id="license-issuance">License Issuance (DL10)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Architecture</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="application-lifecycle-flow.html" class="nav-link" data-page-id="application-lifecycle-flow">Application Lifecycle &amp; Status Flow</a>
+                <a href="data-architecture.html" class="nav-link" data-page-id="data-architecture">Data Architecture (DB2)</a>
+                <a href="cics-integration-patterns.html" class="nav-link" data-page-id="cics-integration-patterns">CICS Integration Patterns</a>
+            </div>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Program Documentation</div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">program</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../sources/program/cobol/DLISPAY.html" class="nav-link">DLISPAY</a>
+                <a href="../sources/program/cobol/DLISSTAT.html" class="nav-link">DLISSTAT</a>
+                <a href="../sources/program/cobol/DLISMENU.html" class="nav-link">DLISMENU</a>
+                <a href="../sources/program/cobol/DLISELIG.html" class="nav-link">DLISELIG</a>
+                <a href="../sources/program/cobol/DLISCAND.html" class="nav-link">DLISCAND</a>
+                <a href="../sources/program/cobol/DLISAPPL.html" class="nav-link">DLISAPPL</a>
+                <a href="../sources/program/cobol/DLISISSU.html" class="nav-link">DLISISSU</a>
+                <a href="../sources/program/cobol/DLISAP2.html" class="nav-link">DLISAP2</a>
+                <a href="../sources/program/cobol/DLISHIST.html" class="nav-link">DLISHIST</a>
+                <a href="../sources/program/cobol/DLISAP1.html" class="nav-link">DLISAP1</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">business-rule</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../sources/business-rule/cobol/DLISELIG-overview.html" class="nav-link">DLISELIG-overview</a>
+                <a href="../sources/business-rule/cobol/DLISPAY-inventory.html" class="nav-link">DLISPAY-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISCAND-overview.html" class="nav-link">DLISCAND-overview</a>
+                <a href="../sources/business-rule/cobol/DLISAP2-inventory.html" class="nav-link">DLISAP2-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISHIST-inventory.html" class="nav-link">DLISHIST-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISMENU-inventory.html" class="nav-link">DLISMENU-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISELIG-inventory.html" class="nav-link">DLISELIG-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISPAY-overview.html" class="nav-link">DLISPAY-overview</a>
+                <a href="../sources/business-rule/cobol/DLISSTAT-overview.html" class="nav-link">DLISSTAT-overview</a>
+                <a href="../sources/business-rule/cobol/DLISHIST-overview.html" class="nav-link">DLISHIST-overview</a>
+                <a href="../sources/business-rule/cobol/DLISAPPL-overview.html" class="nav-link">DLISAPPL-overview</a>
+                <a href="../sources/business-rule/cobol/DLISISSU-inventory.html" class="nav-link">DLISISSU-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISAPPL-inventory.html" class="nav-link">DLISAPPL-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISSTAT-inventory.html" class="nav-link">DLISSTAT-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISAP1-overview.html" class="nav-link">DLISAP1-overview</a>
+                <a href="../sources/business-rule/cobol/DLISCAND-inventory.html" class="nav-link">DLISCAND-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISAP2-overview.html" class="nav-link">DLISAP2-overview</a>
+                <a href="../sources/business-rule/cobol/DLISISSU-overview.html" class="nav-link">DLISISSU-overview</a>
+                <a href="../sources/business-rule/cobol/DLISAP1-inventory.html" class="nav-link">DLISAP1-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISMENU-overview.html" class="nav-link">DLISMENU-overview</a>
+            </div>
+        </div>
+        </div>
+    </div>
+            </nav>
+        </aside>
+        <main class="main">
+            <div class="page-container">
+                <div class="content-layout">
+                    <div class="prose">
+                        <details class="source-files-disclosure">
+            <summary>
+                <svg class="sf-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Source Files
+                <span style="margin-left:4px;font-size:11px;color:var(--fg-subtle)">(3)</span>
+            </summary>
+            <div class="source-files-body">
+                <ul class="source-files-list">
+            <li><a href="../sources/program/cobol/DLISCAND.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISCAND
+            </a></li>
+            <li><a href="../sources/business-rule/cobol/DLISCAND-overview.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISCAND-overview
+            </a></li>
+            <li><a href="../sources/business-rule/cobol/DLISCAND-inventory.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISCAND-inventory
+            </a></li>
+                </ul>
+            </div>
+        </details>
+                        <h1 id="candidate-maintenance-dl02" tabindex="-1">Candidate Maintenance (DL02)</h1>
+<hr>
+<h2 id="1-overview" tabindex="-1">1. Overview</h2>
+<p>The <strong>Candidate Maintenance</strong> screen (transaction <strong>DL02</strong>) is a CICS/COBOL online application implemented by program <strong>DLISCAND</strong>. It provides a single 3270 terminal screen through which authorised users can create, update, inquire on, and deactivate candidate records held in the <strong>DLIS.CANDIDATE</strong> DB2 table.</p>
+<p>The transaction operates in a <strong>pseudo-conversational</strong> pattern: after each user action the program stores its state in a 350-byte COMMAREA, issues a <code>EXEC CICS RETURN TRANSID('DL02')</code>, and waits for the next key press. The user selects an operation entirely through function keys — no menu navigation is required. F1 creates, F2 updates, F3 inquires, F4 deactivates, and F12 exits.</p>
+<p>Before creating a record the program validates that first name, last name and national ID are all present, and checks that no active candidate already carries the same national ID. All outcomes — success, validation failure, duplicate detection, or database error — are communicated by a single message line on the same screen.</p>
+<hr>
+<h2 id="2-system-architecture" tabindex="-1">2. System Architecture</h2>
+<h3 id="21-component-overview" tabindex="-1">2.1 Component Overview</h3>
+<p>The diagram below shows how the major runtime components interact during a DL02 transaction.</p>
+<div class="mermaid">
+graph TD
+    USER["👤 3270 Terminal User"]
+    CICS["CICS Region\n(Transaction DL02)"]
+    DLISCAND["COBOL Program\nDLISCAND"]
+    BMS["BMS Mapset DLISCM\nMap DLISCM01"]
+    DB2["DB2 Subsystem DSN1\nPlan: DLISPLAN\nCollection: DLISPKG"]
+    CANDIDATE["DLIS.CANDIDATE\n(DB2 Table)"]
+    SYSDUMMY["SYSIBM.SYSDUMMY1\n(Identity Retrieval)"]
+    COMMAREA["DFHCOMMAREA\n350 bytes\nPseudo-conversational State"]
+    COPYBOOKS["Copybooks\nDLISWS / DLISCSEC / DLISDCLG"]
+    LOADLIB["DLIS.LOADLIB\n(Program + Map Load Modules)"]
+
+    USER -- "Key press + screen data" --> CICS
+    CICS -- "Invoke program" --> DLISCAND
+    DLISCAND -- "SEND MAP / RECEIVE MAP" --> BMS
+    BMS -- "Rendered screen" --> USER
+    DLISCAND -- "EXEC SQL" --> DB2
+    DB2 -- "SELECT / INSERT / UPDATE" --> CANDIDATE
+    DB2 -- "IDENTITY_VAL_LOCAL()" --> SYSDUMMY
+    DLISCAND -- "RETURN TRANSID DL02" --> COMMAREA
+    COMMAREA -- "Restored on re-entry" --> DLISCAND
+    COPYBOOKS -- "Working storage definitions" --> DLISCAND
+    LOADLIB -- "Load module" --> DLISCAND
+</div>
+<h3 id="22-deployment-dependencies" tabindex="-1">2.2 Deployment Dependencies</h3>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Component</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CICS</td>
+<td>Transaction</td>
+<td><code>DL02</code> defined in CSD group <code>DLISGRP</code></td>
+</tr>
+<tr>
+<td>CICS</td>
+<td>Program</td>
+<td><code>DLISCAND</code> in <code>DLIS.LOADLIB</code></td>
+</tr>
+<tr>
+<td>BMS</td>
+<td>Mapset / Map</td>
+<td><code>DLISCM</code> / <code>DLISCM01</code> in <code>DLIS.LOADLIB</code></td>
+</tr>
+<tr>
+<td>DB2</td>
+<td>Subsystem</td>
+<td><code>DSN1</code></td>
+</tr>
+<tr>
+<td>DB2</td>
+<td>Plan</td>
+<td><code>DLISPLAN</code> bound via <code>DLISBIND.jcl</code></td>
+</tr>
+<tr>
+<td>DB2</td>
+<td>Table</td>
+<td><code>DLIS.CANDIDATE</code></td>
+</tr>
+<tr>
+<td>Copybooks</td>
+<td>Working storage</td>
+<td><code>DLISWS</code>, <code>DLISCSEC</code>, <code>DLISDCLG</code> in <code>DLIS.COPYBOOK</code></td>
+</tr>
+<tr>
+<td>JCL</td>
+<td>BMS assembly</td>
+<td><code>DLISBMS.jcl</code> / <code>DLISBASM.proc</code></td>
+</tr>
+<tr>
+<td>JCL</td>
+<td>Compile &amp; link</td>
+<td><code>DLISCOMP.jcl</code> / <code>DLISCLNK.proc</code> (DB2 precompiler <code>DSNHPC</code>, compiler <code>IGYCRCTL</code>, linkage editor <code>IEWL AMODE(31) RMODE(ANY)</code>)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="3-processing-logic" tabindex="-1">3. Processing Logic</h2>
+<h3 id="31-high-level-flow" tabindex="-1">3.1 High-Level Flow</h3>
+<p>The following diagram illustrates the end-to-end execution path, from transaction entry through function-key dispatch to database interaction and screen refresh.</p>
+<div class="mermaid">
+graph TD
+    A([Start — Transaction DL02 invoked]) --> B{EIBCALEN = 0?}
+    B -- Yes: First entry --> C[INIT-SCREEN\nClear message, set date\nSend map with ERASE]
+    C --> D[RETURN TRANSID DL02\nwith COMMAREA]
+    B -- No: Return entry --> E[Copy DFHCOMMAREA\nto DLIS-COMMAREA]
+    E --> F[RECEIVE MAP DLISCM01]
+    F --> G{EIBAID — which key?}
+    G -- F1 --> H[CREATE-CANDIDATE]
+    G -- F2 --> I[UPDATE-CANDIDATE]
+    G -- F3 --> J[INQUIRE-CANDIDATE]
+    G -- F4 --> K[DEACTIVATE-CANDIDATE]
+    G -- F12 --> L([RETURN — end session])
+    G -- Other --> M[Set invalid key message]
+    H --> N[SEND MAP DATAONLY\nFREEKB]
+    I --> N
+    J --> N
+    K --> N
+    M --> N
+    N --> O[RETURN TRANSID DL02\nwith COMMAREA]
+    O --> Z([End of task])
+    D --> Z
+</div>
+<h3 id="32-pseudo-conversational-state" tabindex="-1">3.2 Pseudo-Conversational State</h3>
+<p>The program never holds a conversation open. On every interaction it persists its state to the 350-byte <code>DLIS-COMMAREA</code> and exits, allowing CICS to free resources. The next key press re-enters the transaction, restores the COMMAREA, and resumes processing.</p>
+<p>Key COMMAREA fields carried across interactions:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CA-TRANSACTION-ID</code></td>
+<td>Identifies the running transaction (<code>DL02</code>)</td>
+</tr>
+<tr>
+<td><code>CA-RETURN-SCREEN</code></td>
+<td>Target screen for navigation</td>
+</tr>
+<tr>
+<td><code>CA-CANDIDATE-ID</code></td>
+<td>Current candidate in context</td>
+</tr>
+<tr>
+<td><code>CA-USER-ID</code></td>
+<td>Operator identifier</td>
+</tr>
+<tr>
+<td><code>CA-MESSAGE</code></td>
+<td>Last message text</td>
+</tr>
+<tr>
+<td><code>CA-ACTION</code></td>
+<td>Last action performed</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="4-function-key-operations" tabindex="-1">4. Function Key Operations</h2>
+<h3 id="41-function-key-reference" tabindex="-1">4.1 Function Key Reference</h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Operation</th>
+<th>Program Paragraph</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F1</td>
+<td>Create candidate</td>
+<td><code>CREATE-CANDIDATE</code></td>
+</tr>
+<tr>
+<td>F2</td>
+<td>Update candidate</td>
+<td><code>UPDATE-CANDIDATE</code></td>
+</tr>
+<tr>
+<td>F3</td>
+<td>Inquire on candidate</td>
+<td><code>INQUIRE-CANDIDATE</code></td>
+</tr>
+<tr>
+<td>F4</td>
+<td>Deactivate candidate</td>
+<td><code>DEACTIVATE-CANDIDATE</code></td>
+</tr>
+<tr>
+<td>F12</td>
+<td>Exit session</td>
+<td><code>PROCESS-INPUT</code> (inline RETURN)</td>
+</tr>
+<tr>
+<td>Any other</td>
+<td>Invalid key message</td>
+<td><code>PROCESS-INPUT</code> (default branch)</td>
+</tr>
+</tbody>
+</table>
+<p>The dispatch is performed in <code>PROCESS-INPUT</code> using an <code>EVALUATE TRUE</code> on <code>EIBAID</code>:</p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EVALUATE TRUE
+               WHEN EIBAID = DFHPF1
+                   PERFORM CREATE-CANDIDATE
+               WHEN EIBAID = DFHPF2
+                   PERFORM UPDATE-CANDIDATE
+               WHEN EIBAID = DFHPF3
+                   PERFORM INQUIRE-CANDIDATE
+               WHEN EIBAID = DFHPF4
+                   PERFORM DEACTIVATE-CANDIDATE
+               WHEN EIBAID = DFHPF12
+                   EXEC CICS RETURN END-EXEC
+               OTHER
+                   MOVE &#039;INVALID KEY - USE F1-F4 OR F12&#039; TO DCMMSG
+           END-EVALUATE</code></pre>
+</div>
+<h3 id="42-session-entry-determination" tabindex="-1">4.2 Session Entry Determination</h3>
+<p>On every task start, <code>MAIN-LOGIC</code> checks <code>EIBCALEN</code> to decide whether to show a blank screen or process input:</p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF EIBCALEN = 0
+               PERFORM INIT-SCREEN
+           ELSE
+               MOVE DFHCOMMAREA  TO DLIS-COMMAREA
+               PERFORM PROCESS-INPUT
+           END-IF</code></pre>
+</div>
+<hr>
+<h2 id="5-create-candidate-f1" tabindex="-1">5. Create Candidate (F1)</h2>
+<h3 id="51-create-flow" tabindex="-1">5.1 Create Flow</h3>
+<h3 id="52-required-fields-for-create" tabindex="-1">5.2 Required Fields for Create</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Screen Input</th>
+<th>Validation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First Name</td>
+<td><code>DCMFNAMI</code></td>
+<td>Must not be SPACES or LOW-VALUES</td>
+</tr>
+<tr>
+<td>Last Name</td>
+<td><code>DCMLNAMI</code></td>
+<td>Must not be SPACES or LOW-VALUES</td>
+</tr>
+<tr>
+<td>National ID</td>
+<td><code>DCMIDNOI</code></td>
+<td>Must not be SPACES or LOW-VALUES</td>
+</tr>
+</tbody>
+</table>
+<h3 id="53-required-field-validation-code" tabindex="-1">5.3 Required Field Validation Code</h3>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF DCMFNAMI = SPACES OR DCMFNAMI = LOW-VALUES
+               MOVE &#039;FIRST NAME IS REQUIRED&#039; TO DCMMSG
+               GO TO CREATE-CANDIDATE-EXIT
+           END-IF
+           IF DCMLNAMI = SPACES OR DCMLNAMI = LOW-VALUES
+               MOVE &#039;LAST NAME IS REQUIRED&#039; TO DCMMSG
+               GO TO CREATE-CANDIDATE-EXIT
+           END-IF
+           IF DCMIDNOI = SPACES OR DCMIDNOI = LOW-VALUES
+               MOVE &#039;NATIONAL ID IS REQUIRED&#039; TO DCMMSG
+               GO TO CREATE-CANDIDATE-EXIT
+           END-IF</code></pre>
+</div>
+<h3 id="54-duplicate-active-candidate-check" tabindex="-1">5.4 Duplicate Active Candidate Check</h3>
+<p>Before inserting, the program checks for an existing active record with the same national ID:</p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE DCMIDNOI TO ID-NUMBER OF DCLDLIS-CANDIDATE
+           EXEC SQL
+               SELECT CANDIDATE_ID INTO :CANDIDATE-ID OF DCLDLIS-CANDIDATE
+               FROM DLIS.CANDIDATE
+               WHERE ID_NUMBER    = :ID-NUMBER OF DCLDLIS-CANDIDATE
+               AND   RECORD_STATUS = &#039;A&#039;
+           END-EXEC
+           IF SQLCODE = 0
+               MOVE &#039;CANDIDATE WITH THIS ID NUMBER ALREADY EXISTS&#039;
+                   TO DCMMSG
+               GO TO CREATE-CANDIDATE-EXIT
+           END-IF</code></pre>
+</div>
+<blockquote>
+<p><strong>Note:</strong> Only <strong>active</strong> records (<code>RECORD_STATUS = 'A'</code>) block re-registration. An inactive record with the same national ID does <strong>not</strong> prevent a new candidate from being created.</p>
+</blockquote>
+<h3 id="55-insert-and-identity-retrieval" tabindex="-1">5.5 Insert and Identity Retrieval</h3>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE DCMFNAMI  TO FIRST-NAME    OF DCLDLIS-CANDIDATE
+           MOVE DCMLNAMI  TO LAST-NAME     OF DCLDLIS-CANDIDATE
+           MOVE DCMDOBI   TO DATE-OF-BIRTH OF DCLDLIS-CANDIDATE
+           MOVE DCMIDNOI  TO ID-NUMBER     OF DCLDLIS-CANDIDATE
+           MOVE DCMADR1I  TO ADDRESS-LINE-1 OF DCLDLIS-CANDIDATE
+           MOVE DCMADR2I  TO ADDRESS-LINE-2 OF DCLDLIS-CANDIDATE
+           MOVE DCMCITYI  TO CITY          OF DCLDLIS-CANDIDATE
+           MOVE DCMSTATI  TO STATE-PROVINCE OF DCLDLIS-CANDIDATE
+           MOVE DCMPOSTI  TO POSTAL-CODE   OF DCLDLIS-CANDIDATE
+           MOVE DCMCTRYI  TO COUNTRY       OF DCLDLIS-CANDIDATE
+           MOVE DCMPHNI   TO PHONE-NUMBER  OF DCLDLIS-CANDIDATE
+           MOVE DCMEMLI   TO EMAIL-ADDRESS OF DCLDLIS-CANDIDATE
+           MOVE &#039;A&#039;       TO RECORD-STATUS OF DCLDLIS-CANDIDATE
+           MOVE EIBTRMID  TO CREATED-BY    OF DCLDLIS-CANDIDATE
+           EXEC SQL
+               INSERT INTO DLIS.CANDIDATE
+                  (FIRST_NAME, LAST_NAME, DATE_OF_BIRTH, ID_NUMBER,
+                   ADDRESS_LINE_1, ADDRESS_LINE_2, CITY,
+                   STATE_PROVINCE, POSTAL_CODE, COUNTRY,
+                   PHONE_NUMBER, EMAIL_ADDRESS, RECORD_STATUS, CREATED_BY)
+               VALUES
+                  (:FIRST-NAME, :LAST-NAME, :DATE-OF-BIRTH, :ID-NUMBER,
+                   :ADDRESS-LINE-1, :ADDRESS-LINE-2, :CITY,
+                   :STATE-PROVINCE, :POSTAL-CODE, :COUNTRY,
+                   :PHONE-NUMBER, :EMAIL-ADDRESS, :RECORD-STATUS,
+                   :CREATED-BY)
+               OF DCLDLIS-CANDIDATE
+           END-EXEC</code></pre>
+</div>
+<p>After a successful insert, the system-generated ID is retrieved and shown:</p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EXEC SQL
+               SELECT IDENTITY_VAL_LOCAL()
+               INTO :CANDIDATE-ID OF DCLDLIS-CANDIDATE
+               FROM SYSIBM.SYSDUMMY1
+           END-EXEC
+           MOVE CANDIDATE-ID OF DCLDLIS-CANDIDATE TO DCMCIDO
+           MOVE &#039;CANDIDATE CREATED SUCCESSFULLY&#039; TO DCMMSG</code></pre>
+</div>
+<hr>
+<h2 id="6-update-candidate-f2" tabindex="-1">6. Update Candidate (F2)</h2>
+<h3 id="61-update-flow" tabindex="-1">6.1 Update Flow</h3>
+<p>The update operation requires the <strong>Candidate ID</strong> as the target key. The program updates name, address, contact details and record status in a single SQL statement.</p>
+<div class="mermaid">
+graph TD
+    A([F2 pressed]) --> B{Candidate ID\nentered?}
+    B -- No --> ERR1[CANDIDATE ID IS REQUIRED\nFOR UPDATE → EXIT]
+    B -- Yes --> C[Move DCMCIDI to CANDIDATE-ID]
+    C --> D[UPDATE DLIS.CANDIDATE\nSET name, address, phone,\nemail, record_status\nWHERE CANDIDATE_ID = :CANDIDATE-ID]
+    D --> E{SQLCODE?}
+    E -- 100 --> MSG1[CANDIDATE NOT FOUND]
+    E -- Non-zero --> MSG2[DATABASE ERROR ON UPDATE]
+    E -- 0 --> MSG3[CANDIDATE UPDATED SUCCESSFULLY]
+</div>
+<h3 id="62-update-code" tabindex="-1">6.2 Update Code</h3>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE DCMCIDI TO CANDIDATE-ID OF DCLDLIS-CANDIDATE
+           EXEC SQL
+               UPDATE DLIS.CANDIDATE SET
+                  FIRST_NAME       = :FIRST-NAME,
+                  LAST_NAME        = :LAST-NAME,
+                  ADDRESS_LINE_1   = :ADDRESS-LINE-1,
+                  ADDRESS_LINE_2   = :ADDRESS-LINE-2,
+                  CITY             = :CITY,
+                  STATE_PROVINCE   = :STATE-PROVINCE,
+                  POSTAL_CODE      = :POSTAL-CODE,
+                  COUNTRY          = :COUNTRY,
+                  PHONE_NUMBER     = :PHONE-NUMBER,
+                  EMAIL_ADDRESS    = :EMAIL-ADDRESS,
+                  RECORD_STATUS    = :RECORD-STATUS
+               WHERE CANDIDATE_ID  = :CANDIDATE-ID
+               OF DCLDLIS-CANDIDATE
+           END-EXEC
+           IF SQLCODE = 100
+               MOVE &#039;CANDIDATE NOT FOUND&#039; TO DCMMSG
+           ELSE IF SQLCODE NOT = 0
+               MOVE &#039;DATABASE ERROR ON UPDATE&#039; TO DCMMSG
+           ELSE
+               MOVE &#039;CANDIDATE UPDATED SUCCESSFULLY&#039; TO DCMMSG
+           END-IF</code></pre>
+</div>
+<h3 id="63-updatable-fields" tabindex="-1">6.3 Updatable Fields</h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Host Variable</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FIRST_NAME</code></td>
+<td><code>:FIRST-NAME</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>LAST_NAME</code></td>
+<td><code>:LAST-NAME</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>ADDRESS_LINE_1</code></td>
+<td><code>:ADDRESS-LINE-1</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>ADDRESS_LINE_2</code></td>
+<td><code>:ADDRESS-LINE-2</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>CITY</code></td>
+<td><code>:CITY</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>STATE_PROVINCE</code></td>
+<td><code>:STATE-PROVINCE</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>POSTAL_CODE</code></td>
+<td><code>:POSTAL-CODE</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>COUNTRY</code></td>
+<td><code>:COUNTRY</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>PHONE_NUMBER</code></td>
+<td><code>:PHONE-NUMBER</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>EMAIL_ADDRESS</code></td>
+<td><code>:EMAIL-ADDRESS</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>RECORD_STATUS</code></td>
+<td><code>:RECORD-STATUS</code></td>
+<td>Can unintentionally overwrite status</td>
+</tr>
+<tr>
+<td><code>DATE_OF_BIRTH</code></td>
+<td>—</td>
+<td><strong>Never updated by F2</strong></td>
+</tr>
+<tr>
+<td><code>ID_NUMBER</code></td>
+<td>—</td>
+<td><strong>Never updated by F2</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️ <strong>Known defect:</strong> The UPDATE paragraph does not move screen input fields into host variables before executing SQL. The values written to the database are whatever the host variables already hold from a previous operation, not what the user typed on the screen.</p>
+</blockquote>
+<hr>
+<h2 id="7-inquire-candidate-f3" tabindex="-1">7. Inquire Candidate (F3)</h2>
+<h3 id="71-inquire-flow" tabindex="-1">7.1 Inquire Flow</h3>
+<div class="mermaid">
+graph TD
+    A([F3 pressed]) --> B{Candidate ID = 0\nAND National ID = spaces?}
+    B -- Yes --> ERR1[ENTER CANDIDATE ID\nOR NATIONAL ID → EXIT]
+    B -- No --> C[Move DCMCIDI → CANDIDATE-ID\nMove DCMIDNOI → ID-NUMBER]
+    C --> D["SELECT all columns\nFROM DLIS.CANDIDATE\nWHERE CANDIDATE_ID = :id\nOR ID_NUMBER = :nat_id\nFETCH FIRST 1 ROW ONLY"]
+    D --> E{SQLCODE?}
+    E -- 100 --> MSG1[CANDIDATE NOT FOUND → EXIT]
+    E -- 0 --> F[Move all columns to\nscreen output fields\nDCMCIDO, DCMFNAMO etc.]
+    F --> MSG2[CANDIDATE FOUND]
+</div>
+<h3 id="72-inquiry-sql" tabindex="-1">7.2 Inquiry SQL</h3>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE DCMCIDI  TO CANDIDATE-ID OF DCLDLIS-CANDIDATE
+           MOVE DCMIDNOI TO ID-NUMBER    OF DCLDLIS-CANDIDATE
+           EXEC SQL
+               SELECT CANDIDATE_ID, FIRST_NAME, LAST_NAME,
+                      DATE_OF_BIRTH, ID_NUMBER, ADDRESS_LINE_1,
+                      ADDRESS_LINE_2, CITY, STATE_PROVINCE,
+                      POSTAL_CODE, COUNTRY, PHONE_NUMBER,
+                      EMAIL_ADDRESS, RECORD_STATUS
+               INTO   :CANDIDATE-ID, :FIRST-NAME, :LAST-NAME,
+                      :DATE-OF-BIRTH, :ID-NUMBER, :ADDRESS-LINE-1,
+                      :ADDRESS-LINE-2, :CITY, :STATE-PROVINCE,
+                      :POSTAL-CODE, :COUNTRY, :PHONE-NUMBER,
+                      :EMAIL-ADDRESS, :RECORD-STATUS
+               OF DCLDLIS-CANDIDATE
+               FROM DLIS.CANDIDATE
+               WHERE CANDIDATE_ID = :CANDIDATE-ID
+                  OR ID_NUMBER    = :ID-NUMBER
+               OF DCLDLIS-CANDIDATE
+               FETCH FIRST 1 ROW ONLY
+           END-EXEC
+           IF SQLCODE = 100
+               MOVE &#039;CANDIDATE NOT FOUND&#039; TO DCMMSG
+               GO TO INQUIRE-CANDIDATE-EXIT
+           END-IF</code></pre>
+</div>
+<h3 id="73-inquiry-behaviour-notes" tabindex="-1">7.3 Inquiry Behaviour Notes</h3>
+<ul>
+<li>The search uses an <strong>OR</strong> condition: either Candidate ID or National ID can locate a record.</li>
+<li><code>FETCH FIRST 1 ROW ONLY</code> prevents a multi-row error when both keys match different rows.</li>
+<li>The query does <strong>not</strong> filter on <code>RECORD_STATUS</code>, so both <strong>active and inactive</strong> candidates are returned.</li>
+<li>The <code>DCMSTSO</code> screen field always reflects the true current status of the returned record.</li>
+</ul>
+<hr>
+<h2 id="8-deactivate-candidate-f4" tabindex="-1">8. Deactivate Candidate (F4)</h2>
+<h3 id="81-deactivate-flow" tabindex="-1">8.1 Deactivate Flow</h3>
+<p>Deactivation is a <strong>soft delete</strong>: the row is never removed from <code>DLIS.CANDIDATE</code>. Instead, <code>RECORD_STATUS</code> is set to <code>'I'</code> (inactive).</p>
+<div class="mermaid">
+graph TD
+    A([F4 pressed]) --> B{Candidate ID = 0?}
+    B -- Yes --> ERR1[CANDIDATE ID IS REQUIRED\nTO DEACTIVATE → EXIT]
+    B -- No --> C[Move DCMCIDI → CANDIDATE-ID]
+    C --> D[UPDATE DLIS.CANDIDATE\nSET RECORD_STATUS = 'I'\nWHERE CANDIDATE_ID = :id]
+    D --> E{SQLCODE?}
+    E -- 100 --> MSG1[CANDIDATE NOT FOUND]
+    E -- Non-zero --> MSG2[DATABASE ERROR ON DEACTIVATE]
+    E -- 0 --> F[Set DCMSTSO = 'I']
+    F --> MSG3[CANDIDATE DEACTIVATED]
+</div>
+<h3 id="82-deactivation-code" tabindex="-1">8.2 Deactivation Code</h3>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">MOVE DCMCIDI TO CANDIDATE-ID OF DCLDLIS-CANDIDATE
+           EXEC SQL
+               UPDATE DLIS.CANDIDATE
+               SET    RECORD_STATUS = &#039;I&#039;
+               WHERE  CANDIDATE_ID  = :CANDIDATE-ID OF DCLDLIS-CANDIDATE
+           END-EXEC
+           IF SQLCODE = 100
+               MOVE &#039;CANDIDATE NOT FOUND&#039; TO DCMMSG
+           ELSE IF SQLCODE NOT = 0
+               MOVE &#039;DATABASE ERROR ON DEACTIVATE&#039; TO DCMMSG
+           ELSE
+               MOVE &#039;I&#039; TO DCMSTSO
+               MOVE &#039;CANDIDATE DEACTIVATED&#039; TO DCMMSG
+           END-IF</code></pre>
+</div>
+<h3 id="83-deactivation-business-rules" tabindex="-1">8.3 Deactivation Business Rules</h3>
+<ul>
+<li><code>RECORD_STATUS = 'I'</code> is a logical delete — data is retained for audit and history.</li>
+<li>A deactivated candidate is <strong>excluded</strong> from the active-duplicate check on subsequent F1 creates with the same national ID.</li>
+<li>There is <strong>no dependency check</strong>: deactivation proceeds even if the candidate has linked applications, payments, or licences.</li>
+<li>Deactivating an already-inactive candidate succeeds silently (no status guard in the SQL WHERE clause).</li>
+</ul>
+<hr>
+<h2 id="9-database-design" tabindex="-1">9. Database Design</h2>
+<h3 id="91-dliscandidate-table" tabindex="-1">9.1 DLIS.CANDIDATE Table</h3>
+<div class="mermaid">
+erDiagram
+    DLIS_CANDIDATE {
+        decimal CANDIDATE_ID "PK — identity generated always, precision 10"
+        string FIRST_NAME "length 30"
+        string LAST_NAME "length 30"
+        date DATE_OF_BIRTH
+        string ID_NUMBER "length 20 — unique index"
+        string ADDRESS_LINE_1 "length 50"
+        string ADDRESS_LINE_2 "length 50, nullable"
+        string CITY "length 30"
+        string STATE_PROVINCE "length 30"
+        string POSTAL_CODE "length 10, nullable"
+        string COUNTRY "length 30"
+        string PHONE_NUMBER "length 15, nullable"
+        string EMAIL_ADDRESS "length 60, nullable"
+        date CREATED_DATE "default CURRENT DATE"
+        string CREATED_BY "terminal ID from EIBTRMID"
+        string RECORD_STATUS "A = active, I = inactive"
+    }
+    SYSIBM_SYSDUMMY1 {
+        string IBMREQD "single-row system table used for IDENTITY_VAL_LOCAL()"
+    }
+</div>
+<h3 id="92-sql-operations-summary" tabindex="-1">9.2 SQL Operations Summary</h3>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>SQL</th>
+<th>Triggered by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Duplicate check</td>
+<td><code>SELECT … WHERE ID_NUMBER = ? AND RECORD_STATUS = 'A'</code></td>
+<td>F1 (pre-insert)</td>
+</tr>
+<tr>
+<td>Create</td>
+<td><code>INSERT INTO DLIS.CANDIDATE (…) VALUES (…)</code></td>
+<td>F1</td>
+</tr>
+<tr>
+<td>Identity retrieval</td>
+<td><code>SELECT IDENTITY_VAL_LOCAL() FROM SYSIBM.SYSDUMMY1</code></td>
+<td>F1 (post-insert)</td>
+</tr>
+<tr>
+<td>Update</td>
+<td><code>UPDATE DLIS.CANDIDATE SET … WHERE CANDIDATE_ID = ?</code></td>
+<td>F2</td>
+</tr>
+<tr>
+<td>Inquire</td>
+<td><code>SELECT … WHERE CANDIDATE_ID = ? OR ID_NUMBER = ? FETCH FIRST 1 ROW ONLY</code></td>
+<td>F3</td>
+</tr>
+<tr>
+<td>Deactivate</td>
+<td><code>UPDATE DLIS.CANDIDATE SET RECORD_STATUS = 'I' WHERE CANDIDATE_ID = ?</code></td>
+<td>F4</td>
+</tr>
+</tbody>
+</table>
+<h3 id="93-record-status-values" tabindex="-1">9.3 Record Status Values</h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Meaning</th>
+<th>Set by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>'A'</code></td>
+<td>Active — participates in duplicate check</td>
+<td>F1 create (hard-coded)</td>
+</tr>
+<tr>
+<td><code>'I'</code></td>
+<td>Inactive — soft-deleted, excluded from duplicate check</td>
+<td>F4 deactivate</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="10-screen-interface" tabindex="-1">10. Screen Interface</h2>
+<h3 id="101-bms-map-fields" tabindex="-1">10.1 BMS Map Fields</h3>
+<p>The screen is implemented by BMS map <strong>DLISCM01</strong> in mapset <strong>DLISCM</strong>.</p>
+<h4 id="1011-input-fields-suffix-i" tabindex="-1">10.1.1 Input Fields (suffix <code>I</code>)</h4>
+<table>
+<thead>
+<tr>
+<th>Map Field</th>
+<th>Description</th>
+<th>Used by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DCMCIDI</code></td>
+<td>Candidate ID</td>
+<td>F2, F3, F4</td>
+</tr>
+<tr>
+<td><code>DCMIDNOI</code></td>
+<td>National ID number</td>
+<td>F1, F3</td>
+</tr>
+<tr>
+<td><code>DCMFNAMI</code></td>
+<td>First name</td>
+<td>F1</td>
+</tr>
+<tr>
+<td><code>DCMLNAMI</code></td>
+<td>Last name</td>
+<td>F1</td>
+</tr>
+<tr>
+<td><code>DCMDOBI</code></td>
+<td>Date of birth</td>
+<td>F1</td>
+</tr>
+<tr>
+<td><code>DCMADR1I</code></td>
+<td>Address line 1</td>
+<td>F1</td>
+</tr>
+<tr>
+<td><code>DCMADR2I</code></td>
+<td>Address line 2</td>
+<td>F1</td>
+</tr>
+<tr>
+<td><code>DCMCITYI</code></td>
+<td>City</td>
+<td>F1</td>
+</tr>
+<tr>
+<td><code>DCMSTATI</code></td>
+<td>State / province</td>
+<td>F1</td>
+</tr>
+<tr>
+<td><code>DCMPOSTI</code></td>
+<td>Postal code</td>
+<td>F1</td>
+</tr>
+<tr>
+<td><code>DCMCTRYI</code></td>
+<td>Country</td>
+<td>F1</td>
+</tr>
+<tr>
+<td><code>DCMPHNI</code></td>
+<td>Phone number</td>
+<td>F1</td>
+</tr>
+<tr>
+<td><code>DCMEMLI</code></td>
+<td>Email address</td>
+<td>F1</td>
+</tr>
+</tbody>
+</table>
+<h4 id="1012-output-fields-suffix-o" tabindex="-1">10.1.2 Output Fields (suffix <code>O</code>)</h4>
+<table>
+<thead>
+<tr>
+<th>Map Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DCMCIDO</code></td>
+<td>Generated / queried Candidate ID</td>
+</tr>
+<tr>
+<td><code>DCMFNAMO</code></td>
+<td>First name (inquiry result)</td>
+</tr>
+<tr>
+<td><code>DCMLNAMO</code></td>
+<td>Last name (inquiry result)</td>
+</tr>
+<tr>
+<td><code>DCMDOBO</code></td>
+<td>Date of birth (inquiry result)</td>
+</tr>
+<tr>
+<td><code>DCMIDNOO</code></td>
+<td>National ID (inquiry result)</td>
+</tr>
+<tr>
+<td><code>DCMADR1O</code></td>
+<td>Address line 1 (inquiry result)</td>
+</tr>
+<tr>
+<td><code>DCMADR2O</code></td>
+<td>Address line 2 (inquiry result)</td>
+</tr>
+<tr>
+<td><code>DCMCITYO</code></td>
+<td>City (inquiry result)</td>
+</tr>
+<tr>
+<td><code>DCMSTATO</code></td>
+<td>State / province (inquiry result)</td>
+</tr>
+<tr>
+<td><code>DCMPOSTO</code></td>
+<td>Postal code (inquiry result)</td>
+</tr>
+<tr>
+<td><code>DCMCTRYO</code></td>
+<td>Country (inquiry result)</td>
+</tr>
+<tr>
+<td><code>DCMPHNO</code></td>
+<td>Phone number (inquiry result)</td>
+</tr>
+<tr>
+<td><code>DCMEMLO</code></td>
+<td>Email address (inquiry result)</td>
+</tr>
+<tr>
+<td><code>DCMSTSO</code></td>
+<td>Record status (<code>A</code> / <code>I</code>)</td>
+</tr>
+<tr>
+<td><code>DCMMSG</code></td>
+<td>Operational message line</td>
+</tr>
+<tr>
+<td><code>DCMDATE</code></td>
+<td>Current system date (displayed on init)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="102-screen-send-strategy" tabindex="-1">10.2 Screen Send Strategy</h3>
+<table>
+<thead>
+<tr>
+<th>Invocation</th>
+<th>SEND MAP options</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First entry (<code>EIBCALEN = 0</code>)</td>
+<td><code>ERASE, FREEKB</code></td>
+<td>Clear terminal, show blank form</td>
+</tr>
+<tr>
+<td>Return entry (F1–F4, invalid key)</td>
+<td><code>DATAONLY, FREEKB</code></td>
+<td>Refresh data fields only, unlock keyboard</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="11-error-handling" tabindex="-1">11. Error Handling</h2>
+<h3 id="111-input-validation-messages" tabindex="-1">11.1 Input Validation Messages</h3>
+<table>
+<thead>
+<tr>
+<th>Condition</th>
+<th>Message Displayed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First name blank on create</td>
+<td><code>FIRST NAME IS REQUIRED</code></td>
+</tr>
+<tr>
+<td>Last name blank on create</td>
+<td><code>LAST NAME IS REQUIRED</code></td>
+</tr>
+<tr>
+<td>National ID blank on create</td>
+<td><code>NATIONAL ID IS REQUIRED</code></td>
+</tr>
+<tr>
+<td>No Candidate ID on update</td>
+<td><code>CANDIDATE ID IS REQUIRED FOR UPDATE</code></td>
+</tr>
+<tr>
+<td>No search key on inquire</td>
+<td><code>ENTER CANDIDATE ID OR NATIONAL ID</code></td>
+</tr>
+<tr>
+<td>No Candidate ID on deactivate</td>
+<td><code>CANDIDATE ID IS REQUIRED TO DEACTIVATE</code></td>
+</tr>
+<tr>
+<td>Unsupported function key</td>
+<td><code>INVALID KEY - USE F1-F4 OR F12</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="112-business-rule-and-database-messages" tabindex="-1">11.2 Business Rule and Database Messages</h3>
+<table>
+<thead>
+<tr>
+<th>Condition</th>
+<th>Message Displayed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Duplicate active national ID on create</td>
+<td><code>CANDIDATE WITH THIS ID NUMBER ALREADY EXISTS</code></td>
+</tr>
+<tr>
+<td>Insert fails (non-zero SQLCODE)</td>
+<td><code>DATABASE ERROR ON INSERT - CONTACT SUPPORT</code></td>
+</tr>
+<tr>
+<td>Record not found on update (SQLCODE 100)</td>
+<td><code>CANDIDATE NOT FOUND</code></td>
+</tr>
+<tr>
+<td>Update fails (non-zero SQLCODE)</td>
+<td><code>DATABASE ERROR ON UPDATE</code></td>
+</tr>
+<tr>
+<td>Record not found on inquire (SQLCODE 100)</td>
+<td><code>CANDIDATE NOT FOUND</code></td>
+</tr>
+<tr>
+<td>Record not found on deactivate (SQLCODE 100)</td>
+<td><code>CANDIDATE NOT FOUND</code></td>
+</tr>
+<tr>
+<td>Deactivate fails (non-zero SQLCODE)</td>
+<td><code>DATABASE ERROR ON DEACTIVATE</code></td>
+</tr>
+<tr>
+<td>Create successful</td>
+<td><code>CANDIDATE CREATED SUCCESSFULLY</code></td>
+</tr>
+<tr>
+<td>Update successful</td>
+<td><code>CANDIDATE UPDATED SUCCESSFULLY</code></td>
+</tr>
+<tr>
+<td>Inquire successful</td>
+<td><code>CANDIDATE FOUND</code></td>
+</tr>
+<tr>
+<td>Deactivate successful</td>
+<td><code>CANDIDATE DEACTIVATED</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="113-error-handling-gaps" tabindex="-1">11.3 Error Handling Gaps</h3>
+<p>The following limitations exist in the current implementation:</p>
+<ul>
+<li><strong>CICS RESP codes</strong> from <code>SEND MAP</code> and <code>RECEIVE MAP</code> are stored in <code>WS-RESP1</code> but never tested. A <code>MAPFAIL</code> condition (user pressed a key with no data) is silently ignored.</li>
+<li><strong>Negative SQLCODE values</strong> (deadlock, constraint violation, timeout) are not individually distinguished — all non-zero, non-100 codes produce a generic error message.</li>
+<li><strong>No explicit rollback</strong> is issued on failure. The program relies on the CICS syncpoint at task end.</li>
+<li><strong>IDENTITY_VAL_LOCAL() SQLCODE</strong> is not checked after the post-insert select.</li>
+<li><strong>No WHENEVER SQLERROR</strong> directive is present.</li>
+<li><strong>No audit logging</strong> to CICS TD/TS queues or error tables.</li>
+</ul>
+<hr>
+<h2 id="12-business-rules-summary" tabindex="-1">12. Business Rules Summary</h2>
+<h3 id="121-candidate-lifecycle-rules" tabindex="-1">12.1 Candidate Lifecycle Rules</h3>
+<div class="mermaid">
+stateDiagram-v2
+    [*] --> Active : F1 Create\n(RECORD_STATUS = 'A')
+    Active --> Active : F2 Update
+    Active --> Inactive : F4 Deactivate\n(RECORD_STATUS = 'I')
+    Inactive --> Active : F1 Re-create\n(new record, same National ID allowed)
+    Active --> Active : F3 Inquire (read-only)
+    Inactive --> Inactive : F3 Inquire (read-only)
+</div>
+<h3 id="122-consolidated-business-rules" tabindex="-1">12.2 Consolidated Business Rules</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Rule</th>
+<th>Enforcement Point</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BR-01</td>
+<td>First name is mandatory on create</td>
+<td><code>CREATE-CANDIDATE</code> — field validation</td>
+</tr>
+<tr>
+<td>BR-02</td>
+<td>Last name is mandatory on create</td>
+<td><code>CREATE-CANDIDATE</code> — field validation</td>
+</tr>
+<tr>
+<td>BR-03</td>
+<td>National ID is mandatory on create</td>
+<td><code>CREATE-CANDIDATE</code> — field validation</td>
+</tr>
+<tr>
+<td>BR-04</td>
+<td>Only one <strong>active</strong> candidate per national ID allowed</td>
+<td><code>CREATE-CANDIDATE</code> — duplicate SELECT</td>
+</tr>
+<tr>
+<td>BR-05</td>
+<td>New candidates are always created with status <code>'A'</code></td>
+<td><code>CREATE-CANDIDATE</code> — hard-coded MOVE</td>
+</tr>
+<tr>
+<td>BR-06</td>
+<td><code>CREATED_BY</code> is set from the CICS terminal ID (<code>EIBTRMID</code>)</td>
+<td><code>CREATE-CANDIDATE</code> — audit stamp</td>
+</tr>
+<tr>
+<td>BR-07</td>
+<td>Candidate ID is system-generated (identity column)</td>
+<td>DB2 — not user-supplied</td>
+</tr>
+<tr>
+<td>BR-08</td>
+<td>Update requires Candidate ID</td>
+<td><code>UPDATE-CANDIDATE</code> — field validation</td>
+</tr>
+<tr>
+<td>BR-09</td>
+<td><code>DATE_OF_BIRTH</code> and <code>ID_NUMBER</code> are never changed by update</td>
+<td><code>UPDATE-CANDIDATE</code> — columns excluded from SET</td>
+</tr>
+<tr>
+<td>BR-10</td>
+<td>Inquire requires at least one search key</td>
+<td><code>INQUIRE-CANDIDATE</code> — field validation</td>
+</tr>
+<tr>
+<td>BR-11</td>
+<td>Inquire returns both active and inactive candidates</td>
+<td><code>INQUIRE-CANDIDATE</code> — no status filter in WHERE</td>
+</tr>
+<tr>
+<td>BR-12</td>
+<td>Deactivate requires Candidate ID</td>
+<td><code>DEACTIVATE-CANDIDATE</code> — field validation</td>
+</tr>
+<tr>
+<td>BR-13</td>
+<td>Deactivation is a soft delete; data is retained</td>
+<td><code>DEACTIVATE-CANDIDATE</code> — UPDATE, not DELETE</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="13-usage-examples" tabindex="-1">13. Usage Examples</h2>
+<h3 id="131-example-create-a-candidate-f1" tabindex="-1">13.1 Example: Create a Candidate (F1)</h3>
+<p><strong>Screen input:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First Name</td>
+<td><code>JOHN</code></td>
+</tr>
+<tr>
+<td>Last Name</td>
+<td><code>SMITH</code></td>
+</tr>
+<tr>
+<td>Date of Birth</td>
+<td><code>1990-05-14</code></td>
+</tr>
+<tr>
+<td>National ID</td>
+<td><code>A1234567</code></td>
+</tr>
+<tr>
+<td>City</td>
+<td><code>BOSTON</code></td>
+</tr>
+<tr>
+<td>Country</td>
+<td><code>USA</code></td>
+</tr>
+<tr>
+<td>Terminal (<code>EIBTRMID</code>)</td>
+<td><code>T001</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Expected outcome:</strong></p>
+<ul>
+<li>Message: <code>CANDIDATE CREATED SUCCESSFULLY</code></li>
+<li>Candidate ID field (<code>DCMCIDO</code>): <code>1001</code> (system-generated)</li>
+<li>Row inserted into <code>DLIS.CANDIDATE</code> with <code>RECORD_STATUS = 'A'</code> and <code>CREATED_BY = 'T001'</code></li>
+</ul>
+<hr>
+<h3 id="132-example-create-rejected--missing-field" tabindex="-1">13.2 Example: Create Rejected — Missing Field</h3>
+<p><strong>Screen input:</strong> First Name <code>JANE</code>, Last Name <em>(blank)</em>, National ID <code>B7654321</code>, key F1.</p>
+<p><strong>Expected outcome:</strong></p>
+<ul>
+<li>Message: <code>LAST NAME IS REQUIRED</code></li>
+<li>No SQL executed.</li>
+</ul>
+<hr>
+<h3 id="133-example-create-rejected--duplicate-national-id" tabindex="-1">13.3 Example: Create Rejected — Duplicate National ID</h3>
+<p><strong>Screen input:</strong> First Name <code>JOHN</code>, Last Name <code>SMITH</code>, National ID <code>A1234567</code>, key F1.<br>
+An active record with <code>ID_NUMBER = 'A1234567'</code> already exists.</p>
+<p><strong>Expected outcome:</strong></p>
+<ul>
+<li>Message: <code>CANDIDATE WITH THIS ID NUMBER ALREADY EXISTS</code></li>
+<li>No INSERT executed.</li>
+</ul>
+<hr>
+<h3 id="134-example-inquire-by-candidate-id-f3" tabindex="-1">13.4 Example: Inquire by Candidate ID (F3)</h3>
+<p><strong>Screen input:</strong> Candidate ID <code>1001</code>, National ID <em>(blank)</em>, key F3.</p>
+<p><strong>Expected outcome:</strong></p>
+<ul>
+<li>Message: <code>CANDIDATE FOUND</code></li>
+<li>Screen fields populated: <code>JOHN</code>, <code>SMITH</code>, <code>1990-05-14</code>, <code>A1234567</code>, <code>BOSTON</code>, <code>USA</code>, Status <code>A</code></li>
+</ul>
+<hr>
+<h3 id="135-example-deactivate-a-candidate-f4" tabindex="-1">13.5 Example: Deactivate a Candidate (F4)</h3>
+<p><strong>Screen input:</strong> Candidate ID <code>1001</code>, key F4.</p>
+<p><strong>Expected outcome:</strong></p>
+<ul>
+<li>Message: <code>CANDIDATE DEACTIVATED</code></li>
+<li><code>DCMSTSO</code> on screen: <code>I</code></li>
+<li>DB2 row: <code>RECORD_STATUS = 'I'</code> for candidate 1001</li>
+<li>National ID <code>A1234567</code> is now free for re-registration.</li>
+</ul>
+<hr>
+<h3 id="136-example-other-key-behaviour" tabindex="-1">13.6 Example: Other Key Behaviour</h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F2 with Candidate ID <code>1001</code></td>
+<td><code>CANDIDATE UPDATED SUCCESSFULLY</code> (if found); <code>CANDIDATE NOT FOUND</code> (SQLCODE 100). Note: host variables may not reflect current screen input — see known defect in Section 6.</td>
+</tr>
+<tr>
+<td>F12</td>
+<td><code>EXEC CICS RETURN</code> — session ends immediately, no screen refresh.</td>
+</tr>
+<tr>
+<td>ENTER or any other key</td>
+<td><code>INVALID KEY - USE F1-F4 OR F12</code></td>
+</tr>
+<tr>
+<td>First entry (<code>EIBCALEN = 0</code>)</td>
+<td>Blank map sent with current date in <code>DCMDATE</code>; program awaits first key press.</td>
+</tr>
+</tbody>
+</table>
+
+                        <div class="related-pages">
+                            <p class="related-pages-title">Related Pages</p>
+                            <div class="card-grid">
+                                
+            <a href="license-application-entry.html" class="card">
+                <span class="card-title">License Application Entry (DL03)</span>
+                <span class="card-description">DLISAPPL: how clerks look up a candidate, retrieve the initial-issue fee for a license type (Learner, Probation, Open) and submit a new pending license application, with duplicate open-application checks.</span>
+            </a>
+            <a href="data-architecture.html" class="card">
+                <span class="card-title">Data Architecture (DB2)</span>
+                <span class="card-description">DB2 tables used across DLIS (CANDIDATE, LICENSE_APPLICATION, LICENSE_FEE_SCHEDULE, PAYMENT, ISSUED_LICENSE, authority user data, driving incidents) and which programs read or write them.</span>
+            </a>
+                            </div>
+                        </div>
+                    </div>
+                    <nav class="toc-panel" aria-label="On this page">
+  <span class="toc-panel-label">On this page</span>
+  <ul class="toc-list">
+<li class="toc-level-2"><a href="#1-overview">1. Overview</a></li>
+<li class="toc-level-2"><a href="#2-system-architecture">2. System Architecture</a>
+<ul>
+<li class="toc-level-3"><a href="#21-component-overview">2.1 Component Overview</a></li>
+<li class="toc-level-3"><a href="#22-deployment-dependencies">2.2 Deployment Dependencies</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#3-processing-logic">3. Processing Logic</a>
+<ul>
+<li class="toc-level-3"><a href="#31-high-level-flow">3.1 High-Level Flow</a></li>
+<li class="toc-level-3"><a href="#32-pseudo-conversational-state">3.2 Pseudo-Conversational State</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#4-function-key-operations">4. Function Key Operations</a>
+<ul>
+<li class="toc-level-3"><a href="#41-function-key-reference">4.1 Function Key Reference</a></li>
+<li class="toc-level-3"><a href="#42-session-entry-determination">4.2 Session Entry Determination</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#5-create-candidate-f1">5. Create Candidate (F1)</a>
+<ul>
+<li class="toc-level-3"><a href="#51-create-flow">5.1 Create Flow</a></li>
+<li class="toc-level-3"><a href="#52-required-fields-for-create">5.2 Required Fields for Create</a></li>
+<li class="toc-level-3"><a href="#53-required-field-validation-code">5.3 Required Field Validation Code</a></li>
+<li class="toc-level-3"><a href="#54-duplicate-active-candidate-check">5.4 Duplicate Active Candidate Check</a></li>
+<li class="toc-level-3"><a href="#55-insert-and-identity-retrieval">5.5 Insert and Identity Retrieval</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#6-update-candidate-f2">6. Update Candidate (F2)</a>
+<ul>
+<li class="toc-level-3"><a href="#61-update-flow">6.1 Update Flow</a></li>
+<li class="toc-level-3"><a href="#62-update-code">6.2 Update Code</a></li>
+<li class="toc-level-3"><a href="#63-updatable-fields">6.3 Updatable Fields</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#7-inquire-candidate-f3">7. Inquire Candidate (F3)</a>
+<ul>
+<li class="toc-level-3"><a href="#71-inquire-flow">7.1 Inquire Flow</a></li>
+<li class="toc-level-3"><a href="#72-inquiry-sql">7.2 Inquiry SQL</a></li>
+<li class="toc-level-3"><a href="#73-inquiry-behaviour-notes">7.3 Inquiry Behaviour Notes</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#8-deactivate-candidate-f4">8. Deactivate Candidate (F4)</a>
+<ul>
+<li class="toc-level-3"><a href="#81-deactivate-flow">8.1 Deactivate Flow</a></li>
+<li class="toc-level-3"><a href="#82-deactivation-code">8.2 Deactivation Code</a></li>
+<li class="toc-level-3"><a href="#83-deactivation-business-rules">8.3 Deactivation Business Rules</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#9-database-design">9. Database Design</a>
+<ul>
+<li class="toc-level-3"><a href="#91-dliscandidate-table">9.1 DLIS.CANDIDATE Table</a></li>
+<li class="toc-level-3"><a href="#92-sql-operations-summary">9.2 SQL Operations Summary</a></li>
+<li class="toc-level-3"><a href="#93-record-status-values">9.3 Record Status Values</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#10-screen-interface">10. Screen Interface</a>
+<ul>
+<li class="toc-level-3"><a href="#101-bms-map-fields">10.1 BMS Map Fields</a>
+<ul>
+<li class="toc-level-4"><a href="#1011-input-fields-suffix-i">10.1.1 Input Fields (suffix I)</a></li>
+<li class="toc-level-4"><a href="#1012-output-fields-suffix-o">10.1.2 Output Fields (suffix O)</a></li>
+</ul>
+</li>
+<li class="toc-level-3"><a href="#102-screen-send-strategy">10.2 Screen Send Strategy</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#11-error-handling">11. Error Handling</a>
+<ul>
+<li class="toc-level-3"><a href="#111-input-validation-messages">11.1 Input Validation Messages</a></li>
+<li class="toc-level-3"><a href="#112-business-rule-and-database-messages">11.2 Business Rule and Database Messages</a></li>
+<li class="toc-level-3"><a href="#113-error-handling-gaps">11.3 Error Handling Gaps</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#12-business-rules-summary">12. Business Rules Summary</a>
+<ul>
+<li class="toc-level-3"><a href="#121-candidate-lifecycle-rules">12.1 Candidate Lifecycle Rules</a></li>
+<li class="toc-level-3"><a href="#122-consolidated-business-rules">12.2 Consolidated Business Rules</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#13-usage-examples">13. Usage Examples</a>
+<ul>
+<li class="toc-level-3"><a href="#131-example-create-a-candidate-f1">13.1 Example: Create a Candidate (F1)</a></li>
+<li class="toc-level-3"><a href="#132-example-create-rejected--missing-field">13.2 Example: Create Rejected — Missing Field</a></li>
+<li class="toc-level-3"><a href="#133-example-create-rejected--duplicate-national-id">13.3 Example: Create Rejected — Duplicate National ID</a></li>
+<li class="toc-level-3"><a href="#134-example-inquire-by-candidate-id-f3">13.4 Example: Inquire by Candidate ID (F3)</a></li>
+<li class="toc-level-3"><a href="#135-example-deactivate-a-candidate-f4">13.5 Example: Deactivate a Candidate (F4)</a></li>
+<li class="toc-level-3"><a href="#136-example-other-key-behaviour">13.6 Example: Other Key Behaviour</a></li>
+</ul>
+</li>
+</ul>
+
+</nav>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+    /* toc-spy.js — highlights the active heading in the TOC panel on scroll */
+    (function () {
+      function init() {
+        var panel = document.querySelector('.toc-panel');
+        if (!panel) return;
+        var links = Array.prototype.slice.call(panel.querySelectorAll('a[href^="#"]'));
+        if (!links.length) return;
+
+        var headingIds = links.map(function (a) { return a.getAttribute('href').slice(1); });
+        var headings = headingIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+        function clearActive() {
+          panel.querySelectorAll('.toc-active').forEach(function (el) { el.classList.remove('toc-active'); });
+          panel.querySelectorAll('.toc-parent-active').forEach(function (el) { el.classList.remove('toc-parent-active'); });
+        }
+
+        function setActive(id) {
+          clearActive();
+          var link = panel.querySelector('a[href="#' + id + '"]');
+          if (!link) return;
+          link.classList.add('toc-active');
+          var li = link.closest('li');
+          if (li) {
+            var parentLi = li.parentElement && li.parentElement.closest('li');
+            if (parentLi) parentLi.classList.add('toc-parent-active');
+          }
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+        headings.forEach(function (h) { observer.observe(h); });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
+    <script>
+    /* sidebar-toggle.js — persists open/closed state across navigation */
+    (function () {
+
+      var STORAGE_KEY = 'sb_open';
+
+      function getOpenSet() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+      }
+
+      function saveOpenSet(set) {
+        try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(set)); } catch (e) {}
+      }
+
+      function findItems(toggle) {
+        var node = toggle.nextSibling;
+        while (node) {
+          if (node.nodeType === 1 && node.classList.contains('nav-section-items'))
+            return node;
+          node = node.nextSibling;
+        }
+        return null;
+      }
+
+      function toggleKey(toggle, index) {
+        var label = (toggle.querySelector('.nav-toggle-text') || toggle).textContent.trim().replace(/\s+/g, ' ');
+        return index + ':' + label;
+      }
+
+      function openSection(toggle, items, key, set) {
+        toggle.classList.add('open');
+        items.classList.add('open');
+        if (set) set[key] = true;
+      }
+
+      function closeSection(toggle, items, key, set) {
+        toggle.classList.remove('open');
+        items.classList.remove('open');
+        if (set) set[key] = false;
+      }
+
+      function init() {
+        var sidebar = document.getElementById('wiki-sidebar');
+        var toggles = Array.prototype.slice.call(
+          document.querySelectorAll('.nav-section-toggle')
+        );
+
+        var activeIdx = -1;
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+          if (items.querySelector('.nav-link.active')) {
+            activeIdx = idx;
+          }
+        });
+
+        var savedSet = getOpenSet();
+        var openSet = savedSet || {};
+
+        if (activeIdx !== -1) {
+          openSet[toggleKey(toggles[activeIdx], activeIdx)] = true;
+        }
+
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+
+          var key = toggleKey(toggle, idx);
+          var shouldOpen = openSet[key] === true;
+
+          if (shouldOpen) {
+            toggle.classList.add('open');
+            items.classList.add('open');
+          }
+
+          toggle.addEventListener('click', function () {
+            var nowOpen = toggle.classList.contains('open');
+            if (nowOpen) {
+              closeSection(toggle, items, key, openSet);
+            } else {
+              openSection(toggle, items, key, openSet);
+            }
+            saveOpenSet(openSet);
+          });
+        });
+
+        saveOpenSet(openSet);
+
+        /* Restore sidebar scroll position after sections are expanded so the
+           scroll height is correct when we apply scrollTop. */
+        if (sidebar) {
+          try {
+            var savedScroll = sessionStorage.getItem('sb_scroll');
+            if (savedScroll !== null) { sidebar.scrollTop = parseInt(savedScroll, 10) || 0; }
+          } catch (_e) {}
+        }
+
+        window.addEventListener('pagehide', function () {
+          saveOpenSet(openSet);
+          if (sidebar) {
+            try { sessionStorage.setItem('sb_scroll', String(sidebar.scrollTop)); } catch (_e) {}
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+    </script>
+    <script>
+    /* nav-tracking.js — only stamps sessionStorage when clicking a source-file link
+       that lives inside the "Source Files" disclosure section, not from sidebar or cards. */
+    (function () {
+      document.addEventListener('click', function (e) {
+        var link = e.target.closest('a[href]');
+        if (!link) return;
+        var href = link.getAttribute('href');
+        if (!href || href.indexOf('sources/') === -1) return;
+        /* Only set referrer when the click originates from inside the Source Files
+           disclosure (.source-files-disclosure). Any other path — sidebar, cards,
+           direct navigation — must not set a referrer. */
+        if (!link.closest('.source-files-disclosure')) return;
+        try {
+          sessionStorage.setItem('wiki_referrer', JSON.stringify({
+            href: location.href,
+            title: document.title,
+            file: location.pathname.split('/').pop()
+          }));
+        } catch (_e) {}
+      });
+    })();
+    </script>
+    <footer class="wiki-footer">Made by IBM Bob Premium Package for Z</footer>
+</body>
+</html>

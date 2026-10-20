@@ -1,0 +1,1541 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Entry & Processing (DL07) - Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script src="../assets/mermaid.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+
+    <!-- Prism.js for syntax highlighting (bundled — no CDN required) -->
+    <link rel="stylesheet" href="../assets/prism-tomorrow.css">
+    <script src="../assets/prism-core.js"></script>
+    <script src="../assets/prism-languages.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="header-app-name"><a href="../../index.html" style="color: inherit; text-decoration: none;">Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</a></span>
+        </div>
+        <div class="header-right">
+        </div>
+    </header>
+    <div class="shell">
+        <aside class="sidebar" id="wiki-sidebar">
+            <nav>
+                
+        <div class="nav-home-wrap">
+            <a href="../../index.html" class="nav-home">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 6.5L8 2l6 4.5V14a1 1 0 01-1 1H3a1 1 0 01-1-1V6.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M6 15V9h4v6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                Home
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Application Documentation</div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Overview</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="system-overview.html" class="nav-link" data-page-id="system-overview">DLIS System Overview</a>
+                <a href="main-menu-navigation.html" class="nav-link" data-page-id="main-menu-navigation">Main Menu &amp; Navigation (DL01)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Candidate &amp; Application Intake</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="candidate-management.html" class="nav-link" data-page-id="candidate-management">Candidate Maintenance (DL02)</a>
+                <a href="license-application-entry.html" class="nav-link" data-page-id="license-application-entry">License Application Entry (DL03)</a>
+                <a href="application-status-inquiry.html" class="nav-link" data-page-id="application-status-inquiry">Application Status Inquiry (DL04)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle open" type="button">
+                <span class="nav-toggle-text">Verification &amp; Payment</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items open">
+                <a href="eligibility-check.html" class="nav-link" data-page-id="eligibility-check">Eligibility Check (DL05)</a>
+                <a href="driving-history-check.html" class="nav-link" data-page-id="driving-history-check">Driving History Check (DL06)</a>
+                <a href="payment-processing.html" class="nav-link active" data-page-id="payment-processing">Payment Entry &amp; Processing (DL07)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Approval &amp; License Issuance</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="first-level-approval.html" class="nav-link" data-page-id="first-level-approval">First-Level Authority Approval (DL08)</a>
+                <a href="second-level-approval.html" class="nav-link" data-page-id="second-level-approval">Second-Level Authority Approval (DL09)</a>
+                <a href="license-issuance.html" class="nav-link" data-page-id="license-issuance">License Issuance (DL10)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Architecture</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="application-lifecycle-flow.html" class="nav-link" data-page-id="application-lifecycle-flow">Application Lifecycle &amp; Status Flow</a>
+                <a href="data-architecture.html" class="nav-link" data-page-id="data-architecture">Data Architecture (DB2)</a>
+                <a href="cics-integration-patterns.html" class="nav-link" data-page-id="cics-integration-patterns">CICS Integration Patterns</a>
+            </div>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Program Documentation</div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">program</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../sources/program/cobol/DLISPAY.html" class="nav-link">DLISPAY</a>
+                <a href="../sources/program/cobol/DLISSTAT.html" class="nav-link">DLISSTAT</a>
+                <a href="../sources/program/cobol/DLISMENU.html" class="nav-link">DLISMENU</a>
+                <a href="../sources/program/cobol/DLISELIG.html" class="nav-link">DLISELIG</a>
+                <a href="../sources/program/cobol/DLISCAND.html" class="nav-link">DLISCAND</a>
+                <a href="../sources/program/cobol/DLISAPPL.html" class="nav-link">DLISAPPL</a>
+                <a href="../sources/program/cobol/DLISISSU.html" class="nav-link">DLISISSU</a>
+                <a href="../sources/program/cobol/DLISAP2.html" class="nav-link">DLISAP2</a>
+                <a href="../sources/program/cobol/DLISHIST.html" class="nav-link">DLISHIST</a>
+                <a href="../sources/program/cobol/DLISAP1.html" class="nav-link">DLISAP1</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">business-rule</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../sources/business-rule/cobol/DLISELIG-overview.html" class="nav-link">DLISELIG-overview</a>
+                <a href="../sources/business-rule/cobol/DLISPAY-inventory.html" class="nav-link">DLISPAY-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISCAND-overview.html" class="nav-link">DLISCAND-overview</a>
+                <a href="../sources/business-rule/cobol/DLISAP2-inventory.html" class="nav-link">DLISAP2-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISHIST-inventory.html" class="nav-link">DLISHIST-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISMENU-inventory.html" class="nav-link">DLISMENU-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISELIG-inventory.html" class="nav-link">DLISELIG-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISPAY-overview.html" class="nav-link">DLISPAY-overview</a>
+                <a href="../sources/business-rule/cobol/DLISSTAT-overview.html" class="nav-link">DLISSTAT-overview</a>
+                <a href="../sources/business-rule/cobol/DLISHIST-overview.html" class="nav-link">DLISHIST-overview</a>
+                <a href="../sources/business-rule/cobol/DLISAPPL-overview.html" class="nav-link">DLISAPPL-overview</a>
+                <a href="../sources/business-rule/cobol/DLISISSU-inventory.html" class="nav-link">DLISISSU-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISAPPL-inventory.html" class="nav-link">DLISAPPL-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISSTAT-inventory.html" class="nav-link">DLISSTAT-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISAP1-overview.html" class="nav-link">DLISAP1-overview</a>
+                <a href="../sources/business-rule/cobol/DLISCAND-inventory.html" class="nav-link">DLISCAND-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISAP2-overview.html" class="nav-link">DLISAP2-overview</a>
+                <a href="../sources/business-rule/cobol/DLISISSU-overview.html" class="nav-link">DLISISSU-overview</a>
+                <a href="../sources/business-rule/cobol/DLISAP1-inventory.html" class="nav-link">DLISAP1-inventory</a>
+                <a href="../sources/business-rule/cobol/DLISMENU-overview.html" class="nav-link">DLISMENU-overview</a>
+            </div>
+        </div>
+        </div>
+    </div>
+            </nav>
+        </aside>
+        <main class="main">
+            <div class="page-container">
+                <div class="content-layout">
+                    <div class="prose">
+                        <details class="source-files-disclosure">
+            <summary>
+                <svg class="sf-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Source Files
+                <span style="margin-left:4px;font-size:11px;color:var(--fg-subtle)">(3)</span>
+            </summary>
+            <div class="source-files-body">
+                <ul class="source-files-list">
+            <li><a href="../sources/program/cobol/DLISPAY.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISPAY
+            </a></li>
+            <li><a href="../sources/business-rule/cobol/DLISPAY-inventory.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISPAY-inventory
+            </a></li>
+            <li><a href="../sources/business-rule/cobol/DLISPAY-overview.html">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                    <path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M10 2v4h4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                DLISPAY-overview
+            </a></li>
+                </ul>
+            </div>
+        </details>
+                        <h1 id="payment-entry--processing-dl07" tabindex="-1">Payment Entry &amp; Processing (DL07)</h1>
+<h2 id="1-overview" tabindex="-1">1. Overview</h2>
+<p>Payment Entry &amp; Processing is the online fee-collection function of the Driver License Information System (DLIS). It runs as CICS transaction <strong>DL07</strong> and is implemented by the COBOL program <strong>DLISPAY</strong>. Operators use BMS map <code>DLISPE01</code> (mapset <code>DLISPE</code>) to do three things:</p>
+<ul>
+<li>Look up a license application.</li>
+<li>Record the initial license fee payment.</li>
+<li>Print a receipt.</li>
+</ul>
+<p>The program covers these areas:</p>
+<table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fee lookup</td>
+<td>Reads the applicant’s details and the active initial fee (<code>FEE_TYPE = 'IF'</code>) for the license type from DB2.</td>
+</tr>
+<tr>
+<td>Payment recording</td>
+<td>Inserts a row into <code>DLIS.PAYMENT</code> with status <code>S</code> and fee type <code>IF</code>.</td>
+</tr>
+<tr>
+<td>Receipt number generation</td>
+<td>Builds the number as <code>'RCP'</code> + current date (<code>YYYYMMDD</code>) + application ID.</td>
+</tr>
+<tr>
+<td>Application status update</td>
+<td>Sets <code>PAYMENT_STATUS = 'P'</code> and <code>APPLICATION_STATUS = 'PA'</code> on <code>DLIS.LICENSE_APPLICATION</code>.</td>
+</tr>
+<tr>
+<td>Receipt printing</td>
+<td>Delegated to program <code>DLISRPRT</code> through <code>EXEC CICS LINK</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>Before a payment is accepted, two business rules must pass:</p>
+<ol>
+<li>The applicant’s history check must be passed (<code>HIST_CHECK_STATUS = 'P'</code>).</li>
+<li>The application must not already be paid (<code>PAYMENT_STATUS</code> must not be <code>'P'</code>).</li>
+</ol>
+<h3 id="11-function-keys" tabindex="-1">1.1 Function Keys</h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+<th>Paragraph</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F1</td>
+<td>Validate and record the payment</td>
+<td><code>PROCESS-PAYMENT</code></td>
+</tr>
+<tr>
+<td>F3</td>
+<td>Look up the application and show the fee</td>
+<td><code>LOAD-APPLICATION</code></td>
+</tr>
+<tr>
+<td>F5</td>
+<td>Print the receipt</td>
+<td><code>PRINT-RECEIPT</code></td>
+</tr>
+<tr>
+<td>F12</td>
+<td>Exit the transaction</td>
+<td><code>PROCESS-INPUT</code> (<code>EXEC CICS RETURN</code>)</td>
+</tr>
+<tr>
+<td>Other</td>
+<td>Show <code>USE F1 F3 F5 OR F12</code></td>
+<td><code>PROCESS-INPUT</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-system-architecture" tabindex="-1">2. System Architecture</h2>
+<h3 id="21-component-view" tabindex="-1">2.1 Component View</h3>
+<p>DLISPAY is a pseudo-conversational CICS/COBOL program. It uses BMS for terminal I/O and DB2 for persistence. It passes control to <code>DLISRPRT</code> for printing. State is carried between screen interactions in a 350-byte COMMAREA.</p>
+<div class="mermaid">
+graph TD
+    OP[Operator Terminal] --> BMS[BMS Map DLISPE01 / Mapset DLISPE]
+    BMS --> TX[CICS Transaction DL07]
+    TX --> PGM[DLISPAY COBOL Program]
+    PGM -->|EXEC CICS LINK| RPT[DLISRPRT Receipt Print Program]
+    PGM -->|EXEC SQL| DB2[(DB2 Subsystem DSN1)]
+    DB2 --> T1[DLIS.LICENSE_APPLICATION]
+    DB2 --> T2[DLIS.CANDIDATE]
+    DB2 --> T3[DLIS.LICENSE_FEE_SCHEDULE]
+    DB2 --> T4[DLIS.PAYMENT]
+    DB2 --> T5[SYSIBM.SYSDUMMY1]
+    PGM --> CA[DLIS-COMMAREA 350 bytes]
+    CA --> TX
+</div>
+<p>DLISPAY has no IBM MQ operations and no external file I/O.</p>
+<h3 id="22-layers-and-responsibilities" tabindex="-1">2.2 Layers and Responsibilities</h3>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Component</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Presentation</td>
+<td>BMS map <code>DLISPE01</code>, mapset <code>DLISPE</code></td>
+<td>Collects the application ID, payment method, reference and processed-by values. Displays the candidate, fee, receipt and message fields.</td>
+</tr>
+<tr>
+<td>Transaction control</td>
+<td>CICS transaction <code>DL07</code>, <code>EIBCALEN</code>, <code>EIBAID</code></td>
+<td>Separates first entry from re-entry and routes by function key.</td>
+</tr>
+<tr>
+<td>Business logic</td>
+<td>DLISPAY paragraphs</td>
+<td>Validation, eligibility rules, receipt generation, payment recording and status advancement.</td>
+</tr>
+<tr>
+<td>Data</td>
+<td>DB2 tables in schema <code>DLIS</code></td>
+<td>Stores applications, candidates, fees and payments.</td>
+</tr>
+<tr>
+<td>Output delegation</td>
+<td><code>DLISRPRT</code></td>
+<td>Formats and prints the receipt for the payment.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="23-program-structure" tabindex="-1">2.3 Program Structure</h3>
+<div class="mermaid">
+graph TD
+    ML[MAIN-LOGIC] -->|EIBCALEN = 0| IS[INIT-SCREEN]
+    ML -->|EIBCALEN > 0| PI[PROCESS-INPUT]
+    PI -->|PF1| PP[PROCESS-PAYMENT]
+    PI -->|PF3| LA[LOAD-APPLICATION]
+    PI -->|PF5| PR[PRINT-RECEIPT]
+    PI -->|PF12| EX([EXEC CICS RETURN])
+    PP -->|PERFORM| LA
+    LA --> LAE[LOAD-APP-EXIT]
+    PP --> PPE[PROCESS-PAY-EXIT]
+    PR --> PRE[PRINT-RECEIPT-EXIT]
+    PR -->|CICS LINK| DLISRPRT
+</div>
+<p>Each routine has a dedicated exit paragraph (<code>LOAD-APP-EXIT</code>, <code>PROCESS-PAY-EXIT</code>, <code>PRINT-RECEIPT-EXIT</code>). Errors reach it with <code>GO TO</code>, so each routine has a single exit point.</p>
+<h2 id="3-pseudo-conversational-control-flow" tabindex="-1">3. Pseudo-Conversational Control Flow</h2>
+<h3 id="31-entry-and-re-entry" tabindex="-1">3.1 Entry and Re-entry</h3>
+<p><code>MAIN-LOGIC</code> is the entry point.</p>
+<ul>
+<li><strong>First invocation</strong> (<code>EIBCALEN = 0</code>): <code>INIT-SCREEN</code> does the following.
+<ol>
+<li>Moves the first 10 characters of <code>CURRENT-DATE</code> to <code>DPEDATE</code>.</li>
+<li>Sends map <code>DLISPE01</code> with <code>ERASE</code> and <code>FREEKB</code>.</li>
+<li>Issues <code>EXEC CICS RETURN TRANSID('DL07')</code> with the 350-byte COMMAREA.</li>
+</ol>
+</li>
+<li><strong>Re-entry</strong> (<code>EIBCALEN &gt; 0</code>): <code>DFHCOMMAREA</code> is moved into <code>DLIS-COMMAREA</code>, and <code>PROCESS-INPUT</code> runs.</li>
+</ul>
+<p><code>PROCESS-INPUT</code> receives the map and evaluates <code>EIBAID</code>. After the selected routine finishes, it re-sends the map with <code>DATAONLY</code> and <code>FREEKB</code>. It then returns to <code>DL07</code> with the COMMAREA.</p>
+<h3 id="32-interaction-sequence" tabindex="-1">3.2 Interaction Sequence</h3>
+<div class="mermaid">
+sequenceDiagram
+    participant Op as Operator
+    participant CICS as CICS DL07
+    participant Pgm as DLISPAY
+    participant Db as DB2
+    participant Rpt as DLISRPRT
+
+    Op->>CICS: Start DL07
+    CICS->>Pgm: EIBCALEN = 0
+    Pgm-->>Op: Send empty map DLISPE01 with date
+    Op->>Pgm: Enter application ID, press F3
+    Pgm->>Db: SELECT application and candidate
+    Pgm->>Db: SELECT active IF fee
+    Pgm-->>Op: Name, license type, fee, APPLICATION LOADED
+    Op->>Pgm: Enter method, reference, processed by, press F1
+    Pgm->>Db: Reload application and fee
+    Pgm->>Db: INSERT PAYMENT
+    Pgm->>Db: SELECT IDENTITY_VAL_LOCAL
+    Pgm->>Db: UPDATE LICENSE_APPLICATION
+    Pgm-->>Op: Payment ID, receipt, PAYMENT RECORDED SUCCESSFULLY
+    Op->>Pgm: Press F5
+    Pgm->>Rpt: EXEC CICS LINK with COMMAREA
+    Rpt-->>Pgm: Return
+    Pgm-->>Op: RECEIPT SENT TO PRINTER
+</div>
+<h3 id="33-overall-processing-flow" tabindex="-1">3.3 Overall Processing Flow</h3>
+<div class="mermaid">
+graph TD
+    A([Start DL07]) --> B{EIBCALEN = 0}
+    B -- Yes --> C[INIT-SCREEN: send map with date]
+    C --> D([RETURN TRANSID DL07])
+    B -- No --> E[Restore COMMAREA]
+    E --> F[RECEIVE MAP DLISPE01]
+    F --> G{EIBAID}
+    G -- PF1 --> H[PROCESS-PAYMENT]
+    G -- PF3 --> I[LOAD-APPLICATION]
+    G -- PF5 --> J[PRINT-RECEIPT]
+    G -- PF12 --> K([RETURN and end])
+    G -- Other --> L[Message: USE F1 F3 F5 OR F12]
+    H --> M[SEND MAP DATAONLY]
+    I --> M
+    J --> M
+    L --> M
+    M --> N([RETURN TRANSID DL07 with COMMAREA])
+</div>
+<h2 id="4-inputs" tabindex="-1">4. Inputs</h2>
+<h3 id="41-commarea" tabindex="-1">4.1 COMMAREA</h3>
+<p><code>DFHCOMMAREA</code> is 350 bytes and is moved into <code>DLIS-COMMAREA</code> on every re-entry.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CA-TRANSACTION-ID</code></td>
+<td>Owning transaction (<code>DL07</code>)</td>
+</tr>
+<tr>
+<td><code>CA-CANDIDATE-ID</code></td>
+<td>Candidate carried across interactions</td>
+</tr>
+<tr>
+<td><code>CA-APPLICATION-ID</code></td>
+<td>Application carried across interactions, available to <code>DLISRPRT</code></td>
+</tr>
+<tr>
+<td><code>CA-USER-ID</code></td>
+<td>Operator ID for audit and context</td>
+</tr>
+<tr>
+<td><code>CA-ACTION</code></td>
+<td>Action code between cycles</td>
+</tr>
+<tr>
+<td><code>CA-PAYMENT-ID</code></td>
+<td>New payment identifier relayed to the print program</td>
+</tr>
+</tbody>
+</table>
+<h3 id="42-map-input-fields" tabindex="-1">4.2 Map Input Fields</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DPEAIDI</code></td>
+<td>Application ID. It is the primary key for the lookup and part of the receipt number.</td>
+</tr>
+<tr>
+<td><code>DPEMETHI</code></td>
+<td>Payment method: <code>CC</code>, <code>DC</code>, <code>EF</code>, <code>CS</code> or <code>CH</code>.</td>
+</tr>
+<tr>
+<td><code>DPEREFI</code></td>
+<td>Payment reference, such as a bank authorisation code.</td>
+</tr>
+<tr>
+<td><code>DPEPRCBYI</code></td>
+<td>Processed-by operator or staff identifier.</td>
+</tr>
+<tr>
+<td><code>DPERCTO</code></td>
+<td>Receipt number field. It is tested on F5 to confirm a payment was processed.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43-cics-system-values" tabindex="-1">4.3 CICS System Values</h3>
+<ul>
+<li><code>EIBCALEN</code> distinguishes first entry from re-entry.</li>
+<li><code>EIBAID</code> identifies the key pressed (<code>DFHPF1</code>, <code>DFHPF3</code>, <code>DFHPF5</code>, <code>DFHPF12</code>).</li>
+<li><code>CURRENT-DATE</code> supplies the screen date and the date part of the receipt number.</li>
+</ul>
+<h2 id="5-fee-lookup-f3--load-application" tabindex="-1">5. Fee Lookup (F3 – LOAD-APPLICATION)</h2>
+<h3 id="51-processing-steps" tabindex="-1">5.1 Processing Steps</h3>
+<ol>
+<li>If <code>DPEAIDI</code> is zeros, the message is <code>ENTER APPLICATION ID</code> and the routine exits.</li>
+<li>A DB2 join of <code>DLIS.LICENSE_APPLICATION</code> and <code>DLIS.CANDIDATE</code> retrieves <code>CANDIDATE_ID</code>, <code>LICENSE_TYPE</code>, <code>HIST_CHECK_STATUS</code>, <code>PAYMENT_STATUS</code>, <code>FIRST_NAME</code> and <code>LAST_NAME</code>.</li>
+<li>If <code>SQLCODE = 100</code>, the message is <code>APPLICATION NOT FOUND</code> and the routine exits.</li>
+<li>The full name is built with <code>STRING</code> (first name, space, last name) into <code>DPECNAMO</code>. The license type goes to <code>DPELTYO</code>, and its description goes to <code>DPELDSO</code>.</li>
+<li>A second <code>SELECT</code> reads the fee and currency from <code>DLIS.LICENSE_FEE_SCHEDULE</code>.</li>
+<li>If the fee is found (<code>SQLCODE = 0</code>), it is edited into <code>WS-FEE-AMOUNT-D</code> (<code>ZZZ,ZZ9.99</code>) and shown in <code>DPEFEEO</code> and <code>DPECURRO</code>.</li>
+<li>The message is <code>APPLICATION LOADED</code>.</li>
+</ol>
+<p>The fee lookup uses these filters:</p>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>License type</td>
+<td>Matches the application</td>
+</tr>
+<tr>
+<td><code>FEE_TYPE</code></td>
+<td><code>'IF'</code> (initial fee)</td>
+</tr>
+<tr>
+<td><code>ACTIVE_STATUS</code></td>
+<td><code>'A'</code></td>
+</tr>
+<tr>
+<td><code>EFFECTIVE_DATE</code></td>
+<td><code>&lt;= CURRENT DATE</code></td>
+</tr>
+<tr>
+<td>Row limit</td>
+<td><code>FETCH FIRST 1 ROW ONLY</code></td>
+</tr>
+</tbody>
+</table>
+<p>If no fee row is found, the fee fields stay empty and the load still succeeds.</p>
+<h3 id="52-license-type-description" tabindex="-1">5.2 License Type Description</h3>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EVALUATE LICENSE-TYPE OF DCLDLIS-LICENSE-APPL
+               WHEN &#039;L&#039; MOVE &#039;LEARNER&#039;   TO DPELDSO
+               WHEN &#039;P&#039; MOVE &#039;PROBATION&#039; TO DPELDSO
+               WHEN &#039;O&#039; MOVE &#039;OPEN&#039;      TO DPELDSO
+           END-EVALUATE</code></pre>
+</div>
+<p>There is no <code>WHEN OTHER</code> branch. For any other code, the description field is left unchanged.</p>
+<h3 id="53-lookup-flow" tabindex="-1">5.3 Lookup Flow</h3>
+<div class="mermaid">
+graph TD
+    A([F3 pressed]) --> B{Application ID entered}
+    B -- No --> B1[ENTER APPLICATION ID]
+    B -- Yes --> C[Join LICENSE_APPLICATION and CANDIDATE]
+    C --> D{SQLCODE = 100}
+    D -- Yes --> D1[APPLICATION NOT FOUND]
+    D -- No --> E[Build name and license description]
+    E --> F[Select active IF fee]
+    F --> G{SQLCODE = 0}
+    G -- Yes --> H[Show fee and currency]
+    G -- No --> I[Leave fee fields empty]
+    H --> J[APPLICATION LOADED]
+    I --> J
+</div>
+<h2 id="6-payment-recording-f1--process-payment" tabindex="-1">6. Payment Recording (F1 – PROCESS-PAYMENT)</h2>
+<h3 id="61-validation-sequence" tabindex="-1">6.1 Validation Sequence</h3>
+<p>Checks run in this order. The first failure sets <code>DPEMSG</code> and goes to <code>PROCESS-PAY-EXIT</code>, so nothing is written to the database.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Check</th>
+<th>Message on failure</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Application ID not zeros</td>
+<td><code>ENTER APPLICATION ID</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Payment method not blank</td>
+<td><code>PAYMENT METHOD IS REQUIRED</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Method in <code>CC</code>, <code>DC</code>, <code>EF</code>, <code>CS</code>, <code>CH</code></td>
+<td><code>INVALID PAYMENT METHOD</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Payment reference not blank</td>
+<td><code>PAYMENT REFERENCE IS REQUIRED</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>LOAD-APPLICATION</code> returns <code>APPLICATION LOADED</code></td>
+<td>The message set by <code>LOAD-APPLICATION</code> is kept</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>HIST-CHECK-STATUS = 'P'</code></td>
+<td><code>HISTORY CHECK MUST BE PASSED BEFORE PAYMENT</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>PAYMENT-STATUS</code> not <code>'P'</code></td>
+<td><code>PAYMENT ALREADY RECORDED FOR THIS APPLICATION</code></td>
+</tr>
+</tbody>
+</table>
+<p>The reload in step 5 gets the latest application state and the fee before the insert.</p>
+<h3 id="62-business-rule-code" tabindex="-1">6.2 Business Rule Code</h3>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF HIST-CHECK-STATUS OF DCLDLIS-LICENSE-APPL NOT = &#039;P&#039;
+               MOVE &#039;HISTORY CHECK MUST BE PASSED BEFORE PAYMENT&#039;
+                   TO DPEMSG
+               GO TO PROCESS-PAY-EXIT
+           END-IF</code></pre>
+</div>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">IF PAYMENT-STATUS OF DCLDLIS-LICENSE-APPL = &#039;P&#039;
+               MOVE &#039;PAYMENT ALREADY RECORDED FOR THIS APPLICATION&#039;
+                   TO DPEMSG
+               GO TO PROCESS-PAY-EXIT
+           END-IF</code></pre>
+</div>
+<h3 id="63-receipt-number-generation" tabindex="-1">6.3 Receipt Number Generation</h3>
+<p>The receipt number is <code>'RCP'</code> + <code>YYYYMMDD</code> + application ID, stored in <code>WS-RECEIPT-NUMBER</code> (<code>PIC X(20)</code>).</p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">*    Generate receipt number
+           MOVE CURRENT-DATE(1:8)  TO WS-RECEIPT-DATE
+           STRING &#039;RCP&#039; WS-RECEIPT-DATE DPEAIDI
+               INTO WS-RECEIPT-NUMBER</code></pre>
+</div>
+<p>For example, application <code>1234567</code> on 2025-01-15 gives <code>RCP202501151234567</code>.</p>
+<h3 id="64-payment-insert" tabindex="-1">6.4 Payment Insert</h3>
+<p>Screen and application values are moved into the <code>DCLDLIS-PAYMENT</code> host variables. The row is then inserted with payment status <code>'S'</code> and fee type <code>'IF'</code>.</p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">*    Insert payment
+           MOVE DPEMETHI TO PAYMENT-METHOD    OF DCLDLIS-PAYMENT
+           MOVE DPEREFI  TO PAYMENT-REFERENCE OF DCLDLIS-PAYMENT
+           MOVE DPEAIDI  TO APPLICATION-ID    OF DCLDLIS-PAYMENT
+           MOVE CANDIDATE-ID OF DCLDLIS-LICENSE-APPL
+                         TO CANDIDATE-ID      OF DCLDLIS-PAYMENT
+           MOVE LICENSE-TYPE OF DCLDLIS-LICENSE-APPL
+                         TO LICENSE-TYPE      OF DCLDLIS-PAYMENT
+           MOVE WS-FEE-AMOUNT TO PAYMENT-AMOUNT OF DCLDLIS-PAYMENT
+           MOVE WS-RECEIPT-NUMBER TO RECEIPT-NUMBER OF DCLDLIS-PAYMENT
+           MOVE DPEPRCBYI TO PROCESSED-BY OF DCLDLIS-PAYMENT
+           EXEC SQL
+               INSERT INTO DLIS.PAYMENT
+                  (APPLICATION_ID, CANDIDATE_ID, PAYMENT_AMOUNT,
+                   PAYMENT_METHOD, PAYMENT_REFERENCE, PAYMENT_STATUS,
+                   LICENSE_TYPE, FEE_TYPE, RECEIPT_NUMBER, PROCESSED_BY)
+               VALUES
+                  (:APPLICATION-ID, :CANDIDATE-ID, :PAYMENT-AMOUNT,
+                   :PAYMENT-METHOD, :PAYMENT-REFERENCE, &#039;S&#039;,
+                   :LICENSE-TYPE, &#039;IF&#039;, :RECEIPT-NUMBER, :PROCESSED-BY)
+               OF DCLDLIS-PAYMENT
+           END-EXEC</code></pre>
+</div>
+<p>If <code>SQLCODE</code> is not 0, the message is <code>DATABASE ERROR ON PAYMENT INSERT</code> and the routine exits before any update.</p>
+<h3 id="65-payment-id-retrieval" tabindex="-1">6.5 Payment ID Retrieval</h3>
+<p>After a successful insert, the generated identity value is read with <code>IDENTITY_VAL_LOCAL()</code> from <code>SYSIBM.SYSDUMMY1</code>. It is shown in <code>DPEPIDO</code> and carried to the print program as <code>CA-PAYMENT-ID</code>. This requires <code>PAYMENT_ID</code> to be an identity column in <code>DLIS.PAYMENT</code>.</p>
+<h3 id="66-application-status-update" tabindex="-1">6.6 Application Status Update</h3>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">*    Update application
+           EXEC SQL
+               UPDATE DLIS.LICENSE_APPLICATION SET
+                   PAYMENT_STATUS    = &#039;P&#039;,
+                   PAYMENT_REFERENCE = :PAYMENT-REFERENCE
+                                       OF DCLDLIS-PAYMENT,
+                   APPLICATION_STATUS= &#039;PA&#039;,
+                   LAST_UPDATED_DATE = CURRENT DATE,
+                   LAST_UPDATED_BY   = :PROCESSED-BY OF DCLDLIS-PAYMENT
+               WHERE APPLICATION_ID  = :APPLICATION-ID
+                                       OF DCLDLIS-PAYMENT
+           END-EXEC</code></pre>
+</div>
+<p>The screen then shows the payment ID (<code>DPEPIDO</code>), receipt number (<code>DPERCTO</code>) and status <code>S</code> (<code>DPEPSTSO</code>). The message is <code>PAYMENT RECORDED SUCCESSFULLY</code>.</p>
+<h3 id="67-payment-flow" tabindex="-1">6.7 Payment Flow</h3>
+<div class="mermaid">
+graph TD
+    A([F1 pressed]) --> B{ID, method, valid method, reference present}
+    B -- No --> B1[Message and exit]
+    B -- Yes --> C[PERFORM LOAD-APPLICATION]
+    C --> D{APPLICATION LOADED}
+    D -- No --> D1[Exit with load message]
+    D -- Yes --> E{History check = P}
+    E -- No --> E1[HISTORY CHECK MUST BE PASSED]
+    E -- Yes --> F{Payment status = P}
+    F -- Yes --> F1[PAYMENT ALREADY RECORDED]
+    F -- No --> G[Build RCP + date + application ID]
+    G --> H[INSERT PAYMENT status S, fee type IF]
+    H --> I{SQLCODE = 0}
+    I -- No --> I1[DATABASE ERROR ON PAYMENT INSERT]
+    I -- Yes --> J[IDENTITY_VAL_LOCAL]
+    J --> K[UPDATE application: PAYMENT_STATUS P, STATUS PA]
+    K --> L[Show payment ID, receipt, status S]
+    L --> M[PAYMENT RECORDED SUCCESSFULLY]
+</div>
+<h3 id="68-application-lifecycle-effect" tabindex="-1">6.8 Application Lifecycle Effect</h3>
+<div class="mermaid">
+stateDiagram-v2
+    [*] --> HistoryPassed: HIST_CHECK_STATUS = P
+    HistoryPassed --> PaymentRecorded: F1 payment accepted
+    PaymentRecorded --> [*]: PAYMENT_STATUS = P, APPLICATION_STATUS = PA
+    HistoryPassed --> HistoryPassed: Validation failure, no change
+</div>
+<h2 id="7-receipt-printing-f5--print-receipt" tabindex="-1">7. Receipt Printing (F5 – PRINT-RECEIPT)</h2>
+<p>Receipt formatting is delegated to <code>DLISRPRT</code>.</p>
+<ol>
+<li>If <code>DPERCTO</code> is blank, the message is <code>PROCESS PAYMENT FIRST BEFORE PRINTING</code>, and the LINK is skipped.</li>
+<li>Otherwise the program links to <code>DLISRPRT</code> with <code>DLIS-COMMAREA</code> (length 350).</li>
+<li>The message is <code>RECEIPT SENT TO PRINTER</code>.</li>
+</ol>
+<p>The command takes this form:</p>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">COBOL</span>
+    <button class="code-block-copy" type="button" onclick="(function(btn){var pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},2000)});})(this)">Copy</button>
+  </div>
+  <pre><code class="language-cobol">EXEC CICS LINK PROGRAM(&#039;DLISRPRT&#039;)
+                COMMAREA(DLIS-COMMAREA)
+                LENGTH(350)
+           END-EXEC</code></pre>
+</div>
+<p>The COMMAREA carries <code>CA-TRANSACTION-ID</code>, <code>CA-CANDIDATE-ID</code>, <code>CA-APPLICATION-ID</code>, <code>CA-PAYMENT-ID</code> and <code>CA-USER-ID</code>, so the print program can retrieve and format the receipt.</p>
+<div class="mermaid">
+sequenceDiagram
+    participant Op as Operator
+    participant Pay as DLISPAY
+    participant Prt as DLISRPRT
+    Op->>Pay: F5
+    alt Receipt number blank
+        Pay-->>Op: PROCESS PAYMENT FIRST BEFORE PRINTING
+    else Receipt number present
+        Pay->>Prt: LINK with DLIS-COMMAREA
+        Prt-->>Pay: Control returns
+        Pay-->>Op: RECEIPT SENT TO PRINTER
+    end
+</div>
+<p>The LINK has no <code>RESP</code> or <code>RESP2</code> option, so the success message is shown without confirming the print outcome.</p>
+<h2 id="8-data-model" tabindex="-1">8. Data Model</h2>
+<h3 id="81-entity-relationships" tabindex="-1">8.1 Entity Relationships</h3>
+<div class="mermaid">
+erDiagram
+    LICENSE_APPLICATION {
+        int APPLICATION_ID "primary key"
+        int CANDIDATE_ID
+        string LICENSE_TYPE "length 1"
+        string APPLICATION_STATUS "length 2"
+        string HIST_CHECK_STATUS "length 1"
+        string PAYMENT_STATUS "length 1"
+        string PAYMENT_REFERENCE
+        date LAST_UPDATED_DATE
+        string LAST_UPDATED_BY "length 20"
+    }
+    CANDIDATE {
+        int CANDIDATE_ID "primary key"
+        string FIRST_NAME "length 30"
+        string LAST_NAME "length 30"
+    }
+    LICENSE_FEE_SCHEDULE {
+        string LICENSE_TYPE "length 1"
+        string FEE_TYPE "length 2"
+        decimal FEE_AMOUNT
+        string CURRENCY_CODE "length 3"
+        string ACTIVE_STATUS "length 1"
+        date EFFECTIVE_DATE
+    }
+    PAYMENT {
+        int PAYMENT_ID "identity"
+        int APPLICATION_ID
+        int CANDIDATE_ID
+        decimal PAYMENT_AMOUNT
+        string PAYMENT_METHOD "length 2"
+        string PAYMENT_REFERENCE "length 30"
+        string PAYMENT_STATUS "length 1"
+        string LICENSE_TYPE "length 1"
+        string FEE_TYPE "length 2"
+        string RECEIPT_NUMBER "length 20"
+        string PROCESSED_BY "length 20"
+    }
+    CANDIDATE ||--o{ LICENSE_APPLICATION : has
+    LICENSE_APPLICATION ||--o{ PAYMENT : paid_by
+    LICENSE_FEE_SCHEDULE ||--o{ LICENSE_APPLICATION : prices
+</div>
+<h3 id="82-table-usage" tabindex="-1">8.2 Table Usage</h3>
+<table>
+<thead>
+<tr>
+<th>Table</th>
+<th>Access</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DLIS.LICENSE_APPLICATION</code></td>
+<td>Read, then update</td>
+<td>Reads candidate, license type, history check and payment status. Sets the paid and <code>PA</code> status after payment.</td>
+</tr>
+<tr>
+<td><code>DLIS.CANDIDATE</code></td>
+<td>Read (join)</td>
+<td>Provides first and last name for display.</td>
+</tr>
+<tr>
+<td><code>DLIS.LICENSE_FEE_SCHEDULE</code></td>
+<td>Read</td>
+<td>Provides <code>FEE_AMOUNT</code> and <code>CURRENCY_CODE</code>.</td>
+</tr>
+<tr>
+<td><code>DLIS.PAYMENT</code></td>
+<td>Insert</td>
+<td>Stores the payment transaction.</td>
+</tr>
+<tr>
+<td><code>SYSIBM.SYSDUMMY1</code></td>
+<td>Read</td>
+<td>Used with <code>IDENTITY_VAL_LOCAL()</code> to get the new payment ID.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="9-outputs" tabindex="-1">9. Outputs</h2>
+<h3 id="91-screen-output-fields-map-dlispe01" tabindex="-1">9.1 Screen Output Fields (Map DLISPE01)</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Field</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Candidate and application</td>
+<td><code>DPECNAMO</code></td>
+<td>Full name</td>
+</tr>
+<tr>
+<td></td>
+<td><code>DPELTYO</code></td>
+<td>License type code</td>
+</tr>
+<tr>
+<td></td>
+<td><code>DPELDSO</code></td>
+<td><code>LEARNER</code>, <code>PROBATION</code> or <code>OPEN</code></td>
+</tr>
+<tr>
+<td>Financial</td>
+<td><code>DPEFEEO</code></td>
+<td>Edited fee amount</td>
+</tr>
+<tr>
+<td></td>
+<td><code>DPECURRO</code></td>
+<td>Currency code</td>
+</tr>
+<tr>
+<td>Confirmation</td>
+<td><code>DPEPIDO</code></td>
+<td>Generated payment ID</td>
+</tr>
+<tr>
+<td></td>
+<td><code>DPERCTO</code></td>
+<td>Receipt number</td>
+</tr>
+<tr>
+<td></td>
+<td><code>DPEPSTSO</code></td>
+<td>Payment status (<code>S</code>)</td>
+</tr>
+<tr>
+<td>System</td>
+<td><code>DPEMSG</code></td>
+<td>Status, success and error messages</td>
+</tr>
+<tr>
+<td></td>
+<td><code>DPEDATE</code></td>
+<td>Current date, set when the map is first sent</td>
+</tr>
+</tbody>
+</table>
+<h3 id="92-database-and-navigation-outputs" tabindex="-1">9.2 Database and Navigation Outputs</h3>
+<ul>
+<li><strong><code>DLIS.PAYMENT</code> insert:</strong> application, candidate, amount, method, reference, status <code>S</code>, license type, fee type <code>IF</code>, receipt number and processed-by.</li>
+<li><strong><code>DLIS.LICENSE_APPLICATION</code> update:</strong> <code>PAYMENT_STATUS = 'P'</code>, <code>PAYMENT_REFERENCE</code>, <code>APPLICATION_STATUS = 'PA'</code>, <code>LAST_UPDATED_DATE</code> and <code>LAST_UPDATED_BY</code>.</li>
+<li><strong>COMMAREA:</strong> returned with <code>TRANSID('DL07')</code> and passed to <code>DLISRPRT</code> on F5.</li>
+</ul>
+<h2 id="10-error-handling" tabindex="-1">10. Error Handling</h2>
+<h3 id="101-summary" tabindex="-1">10.1 Summary</h3>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Input validation</td>
+<td>Fail-fast. The first failure sets a message and exits, with no database writes.</td>
+</tr>
+<tr>
+<td>Application lookup</td>
+<td>Only <code>SQLCODE = 100</code> is handled (<code>APPLICATION NOT FOUND</code>). Other SQL errors are not tested.</td>
+</tr>
+<tr>
+<td>Fee lookup</td>
+<td>The fee is shown only when <code>SQLCODE = 0</code>. A missing fee is silently skipped. <code>FETCH FIRST 1 ROW ONLY</code> avoids <code>SQLCODE -811</code>.</td>
+</tr>
+<tr>
+<td>Payment insert</td>
+<td>Any non-zero <code>SQLCODE</code> gives <code>DATABASE ERROR ON PAYMENT INSERT</code>, and the routine exits.</td>
+</tr>
+<tr>
+<td>Identity retrieval and application update</td>
+<td><code>SQLCODE</code> is not checked.</td>
+</tr>
+<tr>
+<td>CICS <code>SEND MAP</code> and <code>RECEIVE MAP</code></td>
+<td><code>RESP</code> is stored in <code>WS-RESP1</code> but never examined, so conditions such as <code>MAPFAIL</code> are ignored.</td>
+</tr>
+<tr>
+<td>CICS <code>LINK</code> to <code>DLISRPRT</code></td>
+<td>No <code>RESP</code> or <code>HANDLE</code>. Default CICS handling applies, which usually abends the task.</td>
+</tr>
+<tr>
+<td>Unknown AID key</td>
+<td>Shows <code>USE F1 F3 F5 OR F12</code>.</td>
+</tr>
+<tr>
+<td>Notifications</td>
+<td>All messages go to <code>DPEMSG</code>. There is no logging, <code>ABEND</code>, TD queue write or message colouring.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="102-known-risks" tabindex="-1">10.2 Known Risks</h3>
+<ul>
+<li><strong>Possible inconsistency.</strong> The program has no <code>SYNCPOINT ROLLBACK</code>. If the insert succeeds and the application update fails, the payment exists but the application is not marked paid. The duplicate-payment check relies on that status, so a second payment could then be accepted.</li>
+<li><strong>Fragile failure detection.</strong> <code>PROCESS-PAYMENT</code> detects a failed reload by comparing <code>DPEMSG</code> with the text <code>APPLICATION LOADED</code>. Changing that wording would break the check.</li>
+<li><strong>Receipt field length.</strong> The receipt is <code>3 + 8</code> characters plus the application ID, stored in a 20-character field. A 10-digit application ID would give 21 characters and be truncated.</li>
+</ul>
+<h2 id="11-dependencies" tabindex="-1">11. Dependencies</h2>
+<h3 id="111-runtime" tabindex="-1">11.1 Runtime</h3>
+<ul>
+<li><strong>CICS:</strong> transaction <code>DL07</code>, the <code>DFHAID</code> constants (<code>DFHPF1</code>, <code>DFHPF3</code>, <code>DFHPF5</code>, <code>DFHPF12</code>), and the EIB fields <code>EIBCALEN</code> and <code>EIBAID</code>.</li>
+<li><strong>BMS:</strong> mapset <code>DLISPE</code> and map <code>DLISPE01</code>. The symbolic map copybook is generated from the BMS source.</li>
+<li><strong>Called program:</strong> <code>DLISRPRT</code>, which must be defined in CICS and available in <code>DLIS.LOADLIB</code>.</li>
+<li><strong>DB2:</strong> subsystem <code>DSN1</code>, with <code>SQLCA</code>, <code>CURRENT DATE</code> and DCLGEN host structures. The CICS execution user needs read and write grants on the tables above.</li>
+</ul>
+<h3 id="112-copybooks" tabindex="-1">11.2 Copybooks</h3>
+<table>
+<thead>
+<tr>
+<th>Copybook</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DLISWS</code></td>
+<td>Common working storage, messages and null indicators</td>
+</tr>
+<tr>
+<td><code>DLISCSEC</code></td>
+<td><code>DLIS-COMMAREA</code> layouts and CICS response areas</td>
+</tr>
+<tr>
+<td><code>DLISDCLG</code></td>
+<td>DB2 host variable structures (<code>DCLDLIS-PAYMENT</code>, <code>DCLDLIS-LICENSE-APPL</code> and others)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="113-build-and-deployment" tabindex="-1">11.3 Build and Deployment</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Artifact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Compile and link</td>
+<td><code>jcl/DLISCOMP.jcl</code> with <code>proc/DLISCLNK.proc</code>. Compiler <code>IGYCRCTL</code> with <code>RENT,APOST,LIB,NOSEQ,NOTERM</code>. Link-edit with <code>IEWL</code> using <code>AMODE(31),RMODE(ANY)</code>.</td>
+</tr>
+<tr>
+<td>DB2 precompile and bind</td>
+<td><code>DSNHPC</code>, then <code>jcl/DLISBIND.jcl</code> (collection <code>DLISPKG</code>, plan <code>DLISPLAN</code>)</td>
+</tr>
+<tr>
+<td>BMS assembly</td>
+<td><code>jcl/DLISBMS.jcl</code> and <code>proc/DLISBASM.proc</code></td>
+</tr>
+<tr>
+<td>Schema</td>
+<td><code>db2/DLIS0001-CREATE-TABLES.sql</code>, <code>DLIS0002-CREATE-INDEXES.sql</code>, <code>DLIS0003-GRANTS.sql</code></td>
+</tr>
+<tr>
+<td>CICS definitions</td>
+<td><code>csd/DLISCSD.csd</code> (group <code>DLISGRP</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>The workspace documentation lists the payment transaction as <code>DL06</code>, but the program source uses <code>DL07</code>. Check the CSD definition for consistency.</p>
+<h3 id="114-data-prerequisites" tabindex="-1">11.4 Data Prerequisites</h3>
+<ul>
+<li>The application and candidate records must already exist (created by <code>DLISCAND</code> and <code>DLISAPPL</code>).</li>
+<li>The history check must have run and passed.</li>
+<li>An active <code>IF</code> fee row with an effective date on or before today must exist for the license type. Otherwise no fee is displayed, and the amount stays at its working-storage default.</li>
+</ul>
+<h2 id="12-business-rules-summary" tabindex="-1">12. Business Rules Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Rule</th>
+<th>Outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>License classification</td>
+<td>Map <code>L</code>, <code>P</code>, <code>O</code> to LEARNER, PROBATION, OPEN</td>
+<td>Readable license category on screen</td>
+</tr>
+<tr>
+<td>Eligibility</td>
+<td>History check must be <code>P</code></td>
+<td>Unscreened applicants cannot pay</td>
+</tr>
+<tr>
+<td>Eligibility</td>
+<td><code>PAYMENT_STATUS</code> must not be <code>P</code></td>
+<td>Prevents duplicate charges</td>
+</tr>
+<tr>
+<td>Receipting</td>
+<td><code>RCP</code> + <code>YYYYMMDD</code> + application ID</td>
+<td>Traceable receipt reference</td>
+</tr>
+<tr>
+<td>Payment recording</td>
+<td>Insert with status <code>S</code>, fee type <code>IF</code></td>
+<td>Auditable record of the initial fee</td>
+</tr>
+<tr>
+<td>Status advancement</td>
+<td>Application set to paid and <code>PA</code>, with audit stamp</td>
+<td>The application moves to the next lifecycle stage</td>
+</tr>
+</tbody>
+</table>
+<h2 id="13-examples" tabindex="-1">13. Examples</h2>
+<h3 id="131-f3-lookup" tabindex="-1">13.1 F3 Lookup</h3>
+<p><strong>Input:</strong> Application ID <code>1234567</code>. The candidate is John Smith, license type <code>L</code>, history check <code>P</code>, payment status <code>N</code>, and the active <code>IF</code> fee is 25.00 USD.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Candidate name</td>
+<td><code>John Smith</code></td>
+</tr>
+<tr>
+<td>License type / description</td>
+<td><code>L</code> / <code>LEARNER</code></td>
+</tr>
+<tr>
+<td>Fee / currency</td>
+<td><code>    25.00</code> / <code>USD</code></td>
+</tr>
+<tr>
+<td>Message</td>
+<td><code>APPLICATION LOADED</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="132-f1-successful-payment" tabindex="-1">13.2 F1 Successful Payment</h3>
+<p><strong>Input:</strong> Application <code>1234567</code>, method <code>CC</code>, reference <code>BANKREF-98765</code>, processed by <code>CLERK01</code>, date 2025-01-15.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Receipt number</td>
+<td><code>RCP202501151234567</code></td>
+</tr>
+<tr>
+<td>Payment ID</td>
+<td>DB2-generated, for example <code>5001</code></td>
+</tr>
+<tr>
+<td>Payment status</td>
+<td><code>S</code></td>
+</tr>
+<tr>
+<td>Message</td>
+<td><code>PAYMENT RECORDED SUCCESSFULLY</code></td>
+</tr>
+</tbody>
+</table>
+<p>The application is updated to <code>PAYMENT_STATUS = 'P'</code> and <code>APPLICATION_STATUS = 'PA'</code>, with <code>LAST_UPDATED_BY = 'CLERK01'</code>.</p>
+<h3 id="133-f1-rejected-payments" tabindex="-1">13.3 F1 Rejected Payments</h3>
+<table>
+<thead>
+<tr>
+<th>Condition</th>
+<th>Message</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Method <code>XX</code></td>
+<td><code>INVALID PAYMENT METHOD</code></td>
+</tr>
+<tr>
+<td>Reference blank</td>
+<td><code>PAYMENT REFERENCE IS REQUIRED</code></td>
+</tr>
+<tr>
+<td>History check status <code>F</code></td>
+<td><code>HISTORY CHECK MUST BE PASSED BEFORE PAYMENT</code></td>
+</tr>
+<tr>
+<td>Payment status already <code>P</code></td>
+<td><code>PAYMENT ALREADY RECORDED FOR THIS APPLICATION</code></td>
+</tr>
+<tr>
+<td>No matching application (<code>SQLCODE = 100</code>)</td>
+<td><code>APPLICATION NOT FOUND</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="134-f5-and-other-keys" tabindex="-1">13.4 F5 and Other Keys</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F5 with blank receipt</td>
+<td><code>PROCESS PAYMENT FIRST BEFORE PRINTING</code></td>
+</tr>
+<tr>
+<td>F5 with receipt <code>RCP202501151234567</code></td>
+<td><code>DLISRPRT</code> is linked, then <code>RECEIPT SENT TO PRINTER</code></td>
+</tr>
+<tr>
+<td>F2 or any other key</td>
+<td><code>USE F1 F3 F5 OR F12</code></td>
+</tr>
+<tr>
+<td>F12</td>
+<td>The transaction ends with <code>EXEC CICS RETURN</code></td>
+</tr>
+<tr>
+<td>First entry (<code>EIBCALEN = 0</code>)</td>
+<td>The empty map is sent and the program returns with <code>TRANSID('DL07')</code></td>
+</tr>
+</tbody>
+</table>
+
+                        <div class="related-pages">
+                            <p class="related-pages-title">Related Pages</p>
+                            <div class="card-grid">
+                                
+            <a href="driving-history-check.html" class="card">
+                <span class="card-title">Driving History Check (DL06)</span>
+                <span class="card-description">DLISHIST: retrieval and scrollable display of a candidate&#039;s active driving incidents and the pass/fail decision based on suspensions, demerit points and unpaid fines, gated by a passed eligibility check.</span>
+            </a>
+            <a href="first-level-approval.html" class="card">
+                <span class="card-title">First-Level Authority Approval (DL08)</span>
+                <span class="card-description">DLISAP1: authority user validation, level-1 approval rights and license type authorization, and the approve/reject decision that moves an application to second-level review (A2) or closes it (RE).</span>
+            </a>
+            <a href="cics-integration-patterns.html" class="card">
+                <span class="card-title">CICS Integration Patterns</span>
+                <span class="card-description">Common CICS design patterns in DLIS: pseudo-conversational processing, BMS maps, COMMAREA context passing, program-to-program control transfer with XCTL and LINK, and print program delegation.</span>
+            </a>
+            <a href="data-architecture.html" class="card">
+                <span class="card-title">Data Architecture (DB2)</span>
+                <span class="card-description">DB2 tables used across DLIS (CANDIDATE, LICENSE_APPLICATION, LICENSE_FEE_SCHEDULE, PAYMENT, ISSUED_LICENSE, authority user data, driving incidents) and which programs read or write them.</span>
+            </a>
+                            </div>
+                        </div>
+                    </div>
+                    <nav class="toc-panel" aria-label="On this page">
+  <span class="toc-panel-label">On this page</span>
+  <ul class="toc-list">
+<li class="toc-level-2"><a href="#1-overview">1. Overview</a>
+<ul>
+<li class="toc-level-3"><a href="#11-function-keys">1.1 Function Keys</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#2-system-architecture">2. System Architecture</a>
+<ul>
+<li class="toc-level-3"><a href="#21-component-view">2.1 Component View</a></li>
+<li class="toc-level-3"><a href="#22-layers-and-responsibilities">2.2 Layers and Responsibilities</a></li>
+<li class="toc-level-3"><a href="#23-program-structure">2.3 Program Structure</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#3-pseudo-conversational-control-flow">3. Pseudo-Conversational Control Flow</a>
+<ul>
+<li class="toc-level-3"><a href="#31-entry-and-re-entry">3.1 Entry and Re-entry</a></li>
+<li class="toc-level-3"><a href="#32-interaction-sequence">3.2 Interaction Sequence</a></li>
+<li class="toc-level-3"><a href="#33-overall-processing-flow">3.3 Overall Processing Flow</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#4-inputs">4. Inputs</a>
+<ul>
+<li class="toc-level-3"><a href="#41-commarea">4.1 COMMAREA</a></li>
+<li class="toc-level-3"><a href="#42-map-input-fields">4.2 Map Input Fields</a></li>
+<li class="toc-level-3"><a href="#43-cics-system-values">4.3 CICS System Values</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#5-fee-lookup-f3--load-application">5. Fee Lookup (F3 – LOAD-APPLICATION)</a>
+<ul>
+<li class="toc-level-3"><a href="#51-processing-steps">5.1 Processing Steps</a></li>
+<li class="toc-level-3"><a href="#52-license-type-description">5.2 License Type Description</a></li>
+<li class="toc-level-3"><a href="#53-lookup-flow">5.3 Lookup Flow</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#6-payment-recording-f1--process-payment">6. Payment Recording (F1 – PROCESS-PAYMENT)</a>
+<ul>
+<li class="toc-level-3"><a href="#61-validation-sequence">6.1 Validation Sequence</a></li>
+<li class="toc-level-3"><a href="#62-business-rule-code">6.2 Business Rule Code</a></li>
+<li class="toc-level-3"><a href="#63-receipt-number-generation">6.3 Receipt Number Generation</a></li>
+<li class="toc-level-3"><a href="#64-payment-insert">6.4 Payment Insert</a></li>
+<li class="toc-level-3"><a href="#65-payment-id-retrieval">6.5 Payment ID Retrieval</a></li>
+<li class="toc-level-3"><a href="#66-application-status-update">6.6 Application Status Update</a></li>
+<li class="toc-level-3"><a href="#67-payment-flow">6.7 Payment Flow</a></li>
+<li class="toc-level-3"><a href="#68-application-lifecycle-effect">6.8 Application Lifecycle Effect</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#7-receipt-printing-f5--print-receipt">7. Receipt Printing (F5 – PRINT-RECEIPT)</a></li>
+<li class="toc-level-2"><a href="#8-data-model">8. Data Model</a>
+<ul>
+<li class="toc-level-3"><a href="#81-entity-relationships">8.1 Entity Relationships</a></li>
+<li class="toc-level-3"><a href="#82-table-usage">8.2 Table Usage</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#9-outputs">9. Outputs</a>
+<ul>
+<li class="toc-level-3"><a href="#91-screen-output-fields-map-dlispe01">9.1 Screen Output Fields (Map DLISPE01)</a></li>
+<li class="toc-level-3"><a href="#92-database-and-navigation-outputs">9.2 Database and Navigation Outputs</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#10-error-handling">10. Error Handling</a>
+<ul>
+<li class="toc-level-3"><a href="#101-summary">10.1 Summary</a></li>
+<li class="toc-level-3"><a href="#102-known-risks">10.2 Known Risks</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#11-dependencies">11. Dependencies</a>
+<ul>
+<li class="toc-level-3"><a href="#111-runtime">11.1 Runtime</a></li>
+<li class="toc-level-3"><a href="#112-copybooks">11.2 Copybooks</a></li>
+<li class="toc-level-3"><a href="#113-build-and-deployment">11.3 Build and Deployment</a></li>
+<li class="toc-level-3"><a href="#114-data-prerequisites">11.4 Data Prerequisites</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#12-business-rules-summary">12. Business Rules Summary</a></li>
+<li class="toc-level-2"><a href="#13-examples">13. Examples</a>
+<ul>
+<li class="toc-level-3"><a href="#131-f3-lookup">13.1 F3 Lookup</a></li>
+<li class="toc-level-3"><a href="#132-f1-successful-payment">13.2 F1 Successful Payment</a></li>
+<li class="toc-level-3"><a href="#133-f1-rejected-payments">13.3 F1 Rejected Payments</a></li>
+<li class="toc-level-3"><a href="#134-f5-and-other-keys">13.4 F5 and Other Keys</a></li>
+</ul>
+</li>
+</ul>
+
+</nav>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+    /* toc-spy.js — highlights the active heading in the TOC panel on scroll */
+    (function () {
+      function init() {
+        var panel = document.querySelector('.toc-panel');
+        if (!panel) return;
+        var links = Array.prototype.slice.call(panel.querySelectorAll('a[href^="#"]'));
+        if (!links.length) return;
+
+        var headingIds = links.map(function (a) { return a.getAttribute('href').slice(1); });
+        var headings = headingIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+        function clearActive() {
+          panel.querySelectorAll('.toc-active').forEach(function (el) { el.classList.remove('toc-active'); });
+          panel.querySelectorAll('.toc-parent-active').forEach(function (el) { el.classList.remove('toc-parent-active'); });
+        }
+
+        function setActive(id) {
+          clearActive();
+          var link = panel.querySelector('a[href="#' + id + '"]');
+          if (!link) return;
+          link.classList.add('toc-active');
+          var li = link.closest('li');
+          if (li) {
+            var parentLi = li.parentElement && li.parentElement.closest('li');
+            if (parentLi) parentLi.classList.add('toc-parent-active');
+          }
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+        headings.forEach(function (h) { observer.observe(h); });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
+    <script>
+    /* sidebar-toggle.js — persists open/closed state across navigation */
+    (function () {
+
+      var STORAGE_KEY = 'sb_open';
+
+      function getOpenSet() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+      }
+
+      function saveOpenSet(set) {
+        try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(set)); } catch (e) {}
+      }
+
+      function findItems(toggle) {
+        var node = toggle.nextSibling;
+        while (node) {
+          if (node.nodeType === 1 && node.classList.contains('nav-section-items'))
+            return node;
+          node = node.nextSibling;
+        }
+        return null;
+      }
+
+      function toggleKey(toggle, index) {
+        var label = (toggle.querySelector('.nav-toggle-text') || toggle).textContent.trim().replace(/\s+/g, ' ');
+        return index + ':' + label;
+      }
+
+      function openSection(toggle, items, key, set) {
+        toggle.classList.add('open');
+        items.classList.add('open');
+        if (set) set[key] = true;
+      }
+
+      function closeSection(toggle, items, key, set) {
+        toggle.classList.remove('open');
+        items.classList.remove('open');
+        if (set) set[key] = false;
+      }
+
+      function init() {
+        var sidebar = document.getElementById('wiki-sidebar');
+        var toggles = Array.prototype.slice.call(
+          document.querySelectorAll('.nav-section-toggle')
+        );
+
+        var activeIdx = -1;
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+          if (items.querySelector('.nav-link.active')) {
+            activeIdx = idx;
+          }
+        });
+
+        var savedSet = getOpenSet();
+        var openSet = savedSet || {};
+
+        if (activeIdx !== -1) {
+          openSet[toggleKey(toggles[activeIdx], activeIdx)] = true;
+        }
+
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+
+          var key = toggleKey(toggle, idx);
+          var shouldOpen = openSet[key] === true;
+
+          if (shouldOpen) {
+            toggle.classList.add('open');
+            items.classList.add('open');
+          }
+
+          toggle.addEventListener('click', function () {
+            var nowOpen = toggle.classList.contains('open');
+            if (nowOpen) {
+              closeSection(toggle, items, key, openSet);
+            } else {
+              openSection(toggle, items, key, openSet);
+            }
+            saveOpenSet(openSet);
+          });
+        });
+
+        saveOpenSet(openSet);
+
+        /* Restore sidebar scroll position after sections are expanded so the
+           scroll height is correct when we apply scrollTop. */
+        if (sidebar) {
+          try {
+            var savedScroll = sessionStorage.getItem('sb_scroll');
+            if (savedScroll !== null) { sidebar.scrollTop = parseInt(savedScroll, 10) || 0; }
+          } catch (_e) {}
+        }
+
+        window.addEventListener('pagehide', function () {
+          saveOpenSet(openSet);
+          if (sidebar) {
+            try { sessionStorage.setItem('sb_scroll', String(sidebar.scrollTop)); } catch (_e) {}
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+    </script>
+    <script>
+    /* nav-tracking.js — only stamps sessionStorage when clicking a source-file link
+       that lives inside the "Source Files" disclosure section, not from sidebar or cards. */
+    (function () {
+      document.addEventListener('click', function (e) {
+        var link = e.target.closest('a[href]');
+        if (!link) return;
+        var href = link.getAttribute('href');
+        if (!href || href.indexOf('sources/') === -1) return;
+        /* Only set referrer when the click originates from inside the Source Files
+           disclosure (.source-files-disclosure). Any other path — sidebar, cards,
+           direct navigation — must not set a referrer. */
+        if (!link.closest('.source-files-disclosure')) return;
+        try {
+          sessionStorage.setItem('wiki_referrer', JSON.stringify({
+            href: location.href,
+            title: document.title,
+            file: location.pathname.split('/').pop()
+          }));
+        } catch (_e) {}
+      });
+    })();
+    </script>
+    <footer class="wiki-footer">Made by IBM Bob Premium Package for Z</footer>
+</body>
+</html>

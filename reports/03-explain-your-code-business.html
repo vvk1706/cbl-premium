@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DLISAPPL – Business Explanation</title>
+<style>
+  :root { --accent:#0f62fe; --bg:#f4f6f9; --card:#fff; --text:#161616; --muted:#525252; --border:#d0d5dd; }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); margin: 0; line-height: 1.55; }
+  header { background: #161616; color: #fff; padding: 28px 40px; }
+  header h1 { margin: 0 0 6px; font-size: 1.8rem; }
+  header p { margin: 0; color: #c6c6c6; }
+  nav { background: #262626; padding: 10px 40px; position: sticky; top: 0; z-index: 10; }
+  nav a { color: #78a9ff; text-decoration: none; margin-right: 18px; font-size: .9rem; }
+  nav a:hover { text-decoration: underline; }
+  main { max-width: 1100px; margin: 0 auto; padding: 24px 24px 60px; }
+  section { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 22px 28px; margin-bottom: 22px; }
+  h2 { margin-top: 0; border-bottom: 2px solid var(--accent); padding-bottom: 6px; font-size: 1.35rem; }
+  h3 { margin-bottom: 6px; font-size: 1.05rem; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: .92rem; }
+  th, td { border: 1px solid var(--border); padding: 7px 10px; text-align: left; vertical-align: top; }
+  th { background: #e8edf5; }
+  tr:nth-child(even) td { background: #fafbfc; }
+  code { background: #eef1f6; padding: 1px 5px; border-radius: 3px; font-family: Consolas, Menlo, monospace; font-size: .88em; }
+  .meta { display: flex; flex-wrap: wrap; gap: 12px; margin: 12px 0 0; }
+  .badge { background: #edf5ff; border: 1px solid #a6c8ff; color: #0043ce; padding: 3px 10px; border-radius: 14px; font-size: .82rem; }
+  .callout { border-left: 4px solid #f1c21b; background: #fcf4d6; padding: 10px 14px; margin: 12px 0; border-radius: 4px; }
+  .mermaid { text-align: center; overflow-x: auto; }
+  ul { padding-left: 22px; }
+  footer { text-align: center; color: var(--muted); font-size: .82rem; padding: 20px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>DLISAPPL – License Application Entry</h1>
+  <p>Business perspective explanation of <code>cobol/DLISAPPL.cbl</code> (CICS transaction DL03)</p>
+  <div class="meta">
+    <span class="badge">Enterprise COBOL for z/OS</span>
+    <span class="badge">CICS pseudo-conversational</span>
+    <span class="badge">Db2 embedded SQL</span>
+    <span class="badge">Business perspective</span>
+  </div>
+</header>
+
+<nav>
+  <a href="#purpose">1. Business purpose</a>
+  <a href="#interaction">2. User interaction</a>
+  <a href="#decisions">3. Business decisions</a>
+  <a href="#domain">4. Domain</a>
+  <a href="#criticality">5. Criticality</a>
+  <a href="#observations">6. Observations</a>
+  <a href="#diagram">Diagram</a>
+  <a href="#dictionary">Data dictionary</a>
+</nav>
+
+<main>
+
+<section id="purpose">
+  <h2>1. Business Purpose</h2>
+  <p>DLISAPPL is the data-entry screen that licensing office staff use to start a new license application for a candidate. The program runs under CICS as transaction <strong>DL03</strong>. It lets a clerk:</p>
+  <ul>
+    <li>check who a candidate is,</li>
+    <li>see what the license will cost,</li>
+    <li>file the application.</li>
+  </ul>
+  <p>It is the entry point of the license application workflow. Every later step starts from the application record it creates. Those steps are the eligibility check, the driving-history check, payment, the two approvals, and issuing the license.</p>
+</section>
+
+<section id="interaction">
+  <h2>2. How Users Interact With It</h2>
+  <p>The program is a single screen with function keys. After each key press the program gives control back, and the next key press picks up where the user left off.</p>
+  <table>
+    <thead><tr><th>Key</th><th>What it does for the user</th></tr></thead>
+    <tbody>
+      <tr><td><strong>F3 – Lookup Candidate</strong></td><td>The clerk enters a Candidate ID. The program shows the candidate's full name. It reports "Candidate not found" or "Candidate record is inactive" when the person can't be used.</td></tr>
+      <tr><td><strong>F5 – Calc Fee</strong></td><td>The clerk selects a license type. The program shows the current fee and its currency. If no fee is defined for that type, it says so.</td></tr>
+      <tr><td><strong>F1 – Submit</strong></td><td>The program checks the entries and creates the application. It then shows the new application number, the status "PE" (Pending) and the application date.</td></tr>
+      <tr><td><strong>F12</strong></td><td>Leaves the transaction.</td></tr>
+      <tr><td>Any other key</td><td>Prompts the user to use F1, F3, F5 or F12.</td></tr>
+    </tbody>
+  </table>
+  <p>On first entry the screen is shown blank except for today's date.</p>
+</section>
+
+<section id="decisions">
+  <h2>3. Business Decisions and Actions It Supports</h2>
+  <ul>
+    <li><strong>Confirming the applicant.</strong> Staff can verify the candidate's identity and active standing before taking an application. This guards against applications for unknown or deactivated people.</li>
+    <li><strong>Fee transparency.</strong> The fee comes from the official fee schedule. It uses the initial-fee ("IF") entry that is active and in effect today. The clerk can quote the exact cost before committing.</li>
+    <li><strong>Validating the request.</strong> Submission is refused unless both a Candidate ID and a license type are given. The type must be <strong>L</strong>, <strong>P</strong> or <strong>O</strong>.</li>
+    <li><strong>Preventing duplicates.</strong> An applicant cannot hold two live applications of the same license type. An application counts as live unless it is Rejected ("RE") or Issued ("IS"). A repeat attempt is stopped with a clear message.</li>
+    <li><strong>Starting the application.</strong> The program creates the application with status "Pending". It records the terminal that created it for audit purposes, and the database assigns the application number.</li>
+  </ul>
+</section>
+
+<section id="domain">
+  <h2>4. Business Domain</h2>
+  <p>Government or regulatory <strong>license administration</strong> (driver or vehicle licensing). The supporting data covers candidates, license applications, fee schedules, driving history, payments, approving authorities and issued licenses.</p>
+</section>
+
+<section id="criticality">
+  <h2>5. Criticality</h2>
+  <p>This is a <strong>core operational, front-line program</strong>. It is not a back-office utility. It is the only point where new applications enter the system, so if it is unavailable, no new applications can be taken. It also enforces key intake rules: valid candidate, valid license type and no duplicate live application. These rules protect the quality of data for every later step.</p>
+  <p>It does not itself approve anything, take payment or issue a license, so its direct business impact is limited to intake.</p>
+</section>
+
+<section id="observations">
+  <h2>6. Observations for Stakeholders</h2>
+  <div class="callout">The program does not check eligibility, driving history or payment at intake. Other steps in the workflow handle those.</div>
+  <div class="callout">The submit step does not require that the candidate was looked up or is active. It checks only that an ID and a valid type were entered.</div>
+  <div class="callout">The program does not confirm the database save beyond reporting an error. A change of mind after saving is not supported by this screen.</div>
+</section>
+
+<section id="diagram">
+  <h2>Program Flow Diagram</h2>
+  <div class="mermaid">
+flowchart TD
+    classDef startEnd fill:#b5ead7,stroke:#5a9e82,color:#000
+    classDef decision fill:#ffd6a5,stroke:#c8874a,color:#000
+    classDef process fill:#c7ceea,stroke:#6272b0,color:#000
+    classDef ioStep fill:#fff1ba,stroke:#b8960c,color:#000
+    classDef dbStep fill:#d4f1f9,stroke:#3a8fb5,color:#000
+    classDef errorStep fill:#ffb3ba,stroke:#c0394b,color:#000
+    classDef exitStep fill:#e2d9f3,stroke:#7c5cbf,color:#000
+
+    A([Transaction DL03 Invoked]):::startEnd
+    B{First invocation?<br/>EIBCALEN = 0}:::decision
+    C[Display blank License<br/>Application Entry screen]:::ioStep
+    D[Await next user input<br/>Return with TRANSID DL03]:::exitStep
+
+    E[Receive input from<br/>License Application screen]:::ioStep
+    F{Which function<br/>key was pressed?}:::decision
+
+    G[Lookup Candidate - F3]:::process
+    H[Calculate Fee - F5]:::process
+    I[Submit Application - F1]:::process
+    J[Exit - F12]:::exitStep
+    K["Show 'Use F1 F3 F5 or F12'<br/>hint message"]:::errorStep
+
+    G1{Candidate ID<br/>entered?}:::decision
+    G2[Query DB2 CANDIDATE<br/>table by Candidate ID]:::dbStep
+    G3{Candidate<br/>found?}:::decision
+    G4{Candidate<br/>record active?}:::decision
+    G5[Display candidate full<br/>name on screen]:::ioStep
+    GE1["Show 'Enter Candidate ID'<br/>error message"]:::errorStep
+    GE2["Show 'Candidate Not Found'<br/>error message"]:::errorStep
+    GE3["Show 'Candidate Record<br/>Is Inactive' error message"]:::errorStep
+
+    H1{License type<br/>selected?}:::decision
+    H2[Query DB2 LICENSE_FEE_SCHEDULE<br/>for active initial fee]:::dbStep
+    H3{Fee schedule<br/>found?}:::decision
+    H4[Display fee amount<br/>and currency on screen]:::ioStep
+    HE1["Show 'Select License<br/>Type First' error message"]:::errorStep
+    HE2["Show 'No Fee Schedule<br/>for This Type' error message"]:::errorStep
+
+    I1{Candidate ID<br/>provided?}:::decision
+    I2{License type<br/>provided?}:::decision
+    I3{License type is<br/>L, P, or O?}:::decision
+    I4[Check DB2 for existing<br/>active application of same type]:::dbStep
+    I5{Active application<br/>already exists?}:::decision
+    I6["Insert new application<br/>record into DB2<br/>with status 'PE' - Pending"]:::dbStep
+    I7{DB2 insert<br/>successful?}:::decision
+    I8[Retrieve new Application ID<br/>via IDENTITY_VAL_LOCAL]:::dbStep
+    I9[Display Application ID,<br/>status and date on screen]:::ioStep
+    IE1["Show 'Candidate ID<br/>Required' error message"]:::errorStep
+    IE2["Show 'License Type<br/>Required' error message"]:::errorStep
+    IE3["Show 'License Type Must<br/>Be L P or O' error message"]:::errorStep
+    IE4["Show 'Active Application<br/>Already Exists' error message"]:::errorStep
+    IE5["Show 'Database Error<br/>on Application Insert'"]:::errorStep
+
+    R[Refresh screen with<br/>updated data and messages]:::ioStep
+    S([Suspend and await<br/>next user action - Return DL03]):::startEnd
+
+    A --> B
+    B -- Yes, first invocation --> C
+    C --> D
+
+    B -- No, returning invocation --> E
+    E --> F
+
+    F -- F3 --> G
+    F -- F5 --> H
+    F -- F1 --> I
+    F -- F12 --> J
+    F -- Other key --> K
+
+    G --> G1
+    G1 -- No --> GE1
+    G1 -- Yes --> G2
+    G2 --> G3
+    G3 -- Not Found --> GE2
+    G3 -- Found --> G4
+    G4 -- Inactive --> GE3
+    G4 -- Active --> G5
+
+    H --> H1
+    H1 -- No --> HE1
+    H1 -- Yes --> H2
+    H2 --> H3
+    H3 -- Not Found --> HE2
+    H3 -- Found --> H4
+
+    I --> I1
+    I1 -- No --> IE1
+    I1 -- Yes --> I2
+    I2 -- No --> IE2
+    I2 -- Yes --> I3
+    I3 -- Invalid type --> IE3
+    I3 -- Valid type --> I4
+    I4 --> I5
+    I5 -- Yes --> IE4
+    I5 -- No --> I6
+    I6 --> I7
+    I7 -- Failed --> IE5
+    I7 -- Success --> I8
+    I8 --> I9
+
+    G5 --> R
+    GE1 --> R
+    GE2 --> R
+    GE3 --> R
+    H4 --> R
+    HE1 --> R
+    HE2 --> R
+    I9 --> R
+    IE1 --> R
+    IE2 --> R
+    IE3 --> R
+    IE4 --> R
+    IE5 --> R
+    K --> R
+
+    R --> S
+    J --> S
+  </div>
+</section>
+
+<section id="dictionary">
+  <h2>Extracted Data Dictionary (program DLISAPPL)</h2>
+  <table>
+    <thead><tr><th>Name</th><th>Short description</th><th>Long description</th></tr></thead>
+    <tbody>
+      <tr><td><code>CANDIDATE-ID</code></td><td>Candidate Identifier</td><td>Stores the unique identifier of a license candidate. It is used to look up the candidate record, to check whether an active application already exists, and as the candidate key when a new license application is created.</td></tr>
+      <tr><td><code>LICENSE-TYPE</code></td><td>License Type</td><td>Stores the classification code of the license being applied for. Valid application values are 'L', 'P' and 'O'. It is used to find the active fee schedule, to check for duplicate active applications, and to record the type on a new application.</td></tr>
+      <tr><td><code>APPLICATION-ID</code></td><td>Application Identifier</td><td>Stores the unique identifier of a license application. It first holds the count of existing active applications for the candidate and license type, and then holds the identity value generated for a newly inserted application. That value is shown back to the user.</td></tr>
+      <tr><td><code>FEE-AMOUNT</code></td><td>Fee Amount</td><td>Host variable that holds the license fee amount retrieved from the active license fee schedule for a given license type. It is the source for the fee amount shown on the screen.</td></tr>
+      <tr><td><code>CURRENCY-CODE</code></td><td>Currency Code</td><td>Host variable that holds the currency code in which the license fee is denominated. It is retrieved from the fee schedule along with the fee amount and displayed to the user.</td></tr>
+      <tr><td><code>RECORD-STATUS</code></td><td>Record Status</td><td>Host variable that holds the status of a candidate record. The value 'I' means the candidate is inactive. A candidate with that status is rejected during lookup.</td></tr>
+      <tr><td><code>FIRST-NAME</code></td><td>First Name</td><td>Host variable that holds the given name of a candidate, retrieved from the candidate table. It is combined with the last name to build the candidate's full name for display.</td></tr>
+      <tr><td><code>LAST-NAME</code></td><td>Last Name</td><td>Host variable that holds the family name (surname) of a candidate, retrieved from the candidate table. It is combined with the first name to build the candidate's full name for display.</td></tr>
+      <tr><td><code>CREATED-BY</code></td><td>Created By</td><td>Stores the identifier of the user or terminal that created the license application record. It is populated from the terminal ID and written to the application table on insert for audit purposes.</td></tr>
+      <tr><td><code>WS-FEE-AMOUNT</code></td><td>Working-Storage Fee Amount</td><td>Working-Storage field that holds the fee amount retrieved from the fee schedule. It is an intermediate value that is moved to an edited display field before being shown on the screen.</td></tr>
+      <tr><td><code>WS-FEE-AMOUNT-D</code></td><td>Working-Storage Fee Amount Display</td><td>Working-Storage field that holds the fee amount in display (edited) format. It is used to present the license fee on the application entry screen.</td></tr>
+      <tr><td><code>CA-TRANSACTION-ID</code></td><td>Communication Area Transaction Identifier</td><td>Field in the communication area that stores the identifier of the current CICS transaction. It is set from the transaction ID of the running task and is carried between pseudo-conversational interactions.</td></tr>
+      <tr><td><code>DLIS-COMMAREA</code></td><td>License System Communication Area</td><td>Working-Storage communication area structure that holds state passed between pseudo-conversational iterations of the license application transaction. It is loaded from the CICS-provided communication area on re-entry and passed back on return, with a length of 350 bytes.</td></tr>
+      <tr><td><code>DFHCOMMAREA</code></td><td>CICS Communication Area</td><td>Linkage Section 350-byte area through which CICS passes the communication area from the previous interaction of the transaction. When it is empty, the program treats the call as the first entry and initializes the screen. Otherwise its contents are copied into the working communication area.</td></tr>
+      <tr><td><code>WS-RESP1</code></td><td>Working-Storage Response Code 1</td><td>Working-Storage field that receives the CICS response code returned by screen map send and receive commands. It is used to check the outcome of those commands.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+</main>
+
+<footer>Generated by Bob – Explain code workflow (Business perspective).</footer>
+
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: true, securityLevel: "loose" });
+</script>
+</body>
+</html>

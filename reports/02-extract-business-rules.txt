@@ -1,0 +1,46 @@
+Extract business rules workflow
+
+Overview
+Extract and document business logic from your program that includes a functional overview and rules inventory document.
+
+This workflow helps you:
+
+Extract business rules from COBOL, PL/I or HLASM programs
+Analyze program structure and identify business-critical paragraphs
+Generate structured documentation of business rules for modernization, documentation, or analysis purposes
+Prepare
+Select the program(s) for business rules discovery.
+
+Select file(s)
+Select a COBOL, PL/I, or HLASM file(s) to generate business rules.
+*
+
+Browse files
+DLISMENU.cbl
+
+DLISSTAT.cbl
+
+DLISISSU.cbl
+
+DLISAP2.cbl
+
+DLISAP1.cbl
+
+DLISPAY.cbl
+
+DLISHIST.cbl
+
+DLISELIG.cbl
+
+DLISAPPL.cbl
+
+DLISCAND.cbl
+
+10 file(s) selected:
+
+
+Identify business rules
+Classify the code units and extract business rules from the program.
+
+Processing program DLISMENU.cbl - and other *.cbl 
+

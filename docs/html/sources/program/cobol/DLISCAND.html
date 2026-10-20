@@ -1,0 +1,1726 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLISCAND</title>
+    <link rel="stylesheet" href="../../../assets/style.css">
+    <script src="../../../assets/mermaid.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+
+    <!-- Prism.js for syntax highlighting (bundled — no CDN required) -->
+    <link rel="stylesheet" href="../../../assets/prism-tomorrow.css">
+    <script src="../../../assets/prism-core.js"></script>
+    <script src="../../../assets/prism-languages.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="header-app-name"><a href="../../../../index.html" style="color: inherit; text-decoration: none;">Driver License Information System (DLIS) – CICS/COBOL Knowledge Base</a></span>
+        </div>
+        <div class="header-right">
+        </div>
+    </header>
+    <div class="shell">
+        <aside class="sidebar" id="wiki-sidebar">
+            <nav>
+                
+        <div class="nav-home-wrap">
+            <a href="../../../../index.html" class="nav-home">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 6.5L8 2l6 4.5V14a1 1 0 01-1 1H3a1 1 0 01-1-1V6.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                    <path d="M6 15V9h4v6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                </svg>
+                Home
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Application Documentation</div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Overview</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/system-overview.html" class="nav-link" data-page-id="system-overview">DLIS System Overview</a>
+                <a href="../../../pages/main-menu-navigation.html" class="nav-link" data-page-id="main-menu-navigation">Main Menu &amp; Navigation (DL01)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Candidate &amp; Application Intake</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/candidate-management.html" class="nav-link" data-page-id="candidate-management">Candidate Maintenance (DL02)</a>
+                <a href="../../../pages/license-application-entry.html" class="nav-link" data-page-id="license-application-entry">License Application Entry (DL03)</a>
+                <a href="../../../pages/application-status-inquiry.html" class="nav-link" data-page-id="application-status-inquiry">Application Status Inquiry (DL04)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Verification &amp; Payment</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/eligibility-check.html" class="nav-link" data-page-id="eligibility-check">Eligibility Check (DL05)</a>
+                <a href="../../../pages/driving-history-check.html" class="nav-link" data-page-id="driving-history-check">Driving History Check (DL06)</a>
+                <a href="../../../pages/payment-processing.html" class="nav-link" data-page-id="payment-processing">Payment Entry &amp; Processing (DL07)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Approval &amp; License Issuance</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/first-level-approval.html" class="nav-link" data-page-id="first-level-approval">First-Level Authority Approval (DL08)</a>
+                <a href="../../../pages/second-level-approval.html" class="nav-link" data-page-id="second-level-approval">Second-Level Authority Approval (DL09)</a>
+                <a href="../../../pages/license-issuance.html" class="nav-link" data-page-id="license-issuance">License Issuance (DL10)</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">Architecture</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../pages/application-lifecycle-flow.html" class="nav-link" data-page-id="application-lifecycle-flow">Application Lifecycle &amp; Status Flow</a>
+                <a href="../../../pages/data-architecture.html" class="nav-link" data-page-id="data-architecture">Data Architecture (DB2)</a>
+                <a href="../../../pages/cics-integration-patterns.html" class="nav-link" data-page-id="cics-integration-patterns">CICS Integration Patterns</a>
+            </div>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-group-label">Program Documentation</div>
+    <div class="nav-section">
+        <button class="nav-section-toggle open" type="button">
+            <span class="nav-toggle-text">program</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items open">
+        <div class="nav-section">
+            <button class="nav-section-toggle open" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items open">
+                <a href="../../../sources/program/cobol/DLISPAY.html" class="nav-link">DLISPAY</a>
+                <a href="../../../sources/program/cobol/DLISSTAT.html" class="nav-link">DLISSTAT</a>
+                <a href="../../../sources/program/cobol/DLISMENU.html" class="nav-link">DLISMENU</a>
+                <a href="../../../sources/program/cobol/DLISELIG.html" class="nav-link">DLISELIG</a>
+                <a href="../../../sources/program/cobol/DLISCAND.html" class="nav-link active">DLISCAND</a>
+                <a href="../../../sources/program/cobol/DLISAPPL.html" class="nav-link">DLISAPPL</a>
+                <a href="../../../sources/program/cobol/DLISISSU.html" class="nav-link">DLISISSU</a>
+                <a href="../../../sources/program/cobol/DLISAP2.html" class="nav-link">DLISAP2</a>
+                <a href="../../../sources/program/cobol/DLISHIST.html" class="nav-link">DLISHIST</a>
+                <a href="../../../sources/program/cobol/DLISAP1.html" class="nav-link">DLISAP1</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="nav-section">
+        <button class="nav-section-toggle" type="button">
+            <span class="nav-toggle-text">business-rule</span>
+            <span class="nav-section-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        <div class="nav-section-items">
+        <div class="nav-section">
+            <button class="nav-section-toggle" type="button">
+                <span class="nav-toggle-text">cobol</span>
+                <span class="nav-section-chevron">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="nav-section-items">
+                <a href="../../../sources/business-rule/cobol/DLISELIG-overview.html" class="nav-link">DLISELIG-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-inventory.html" class="nav-link">DLISPAY-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-overview.html" class="nav-link">DLISCAND-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-inventory.html" class="nav-link">DLISAP2-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-inventory.html" class="nav-link">DLISHIST-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-inventory.html" class="nav-link">DLISMENU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISELIG-inventory.html" class="nav-link">DLISELIG-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISPAY-overview.html" class="nav-link">DLISPAY-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-overview.html" class="nav-link">DLISSTAT-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISHIST-overview.html" class="nav-link">DLISHIST-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-overview.html" class="nav-link">DLISAPPL-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-inventory.html" class="nav-link">DLISISSU-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAPPL-inventory.html" class="nav-link">DLISAPPL-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISSTAT-inventory.html" class="nav-link">DLISSTAT-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-overview.html" class="nav-link">DLISAP1-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISCAND-inventory.html" class="nav-link">DLISCAND-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP2-overview.html" class="nav-link">DLISAP2-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISISSU-overview.html" class="nav-link">DLISISSU-overview</a>
+                <a href="../../../sources/business-rule/cobol/DLISAP1-inventory.html" class="nav-link">DLISAP1-inventory</a>
+                <a href="../../../sources/business-rule/cobol/DLISMENU-overview.html" class="nav-link">DLISMENU-overview</a>
+            </div>
+        </div>
+        </div>
+    </div>
+            </nav>
+        </aside>
+        <main class="main">
+            <div class="prog-container">
+                <div id="wiki-breadcrumb"></div>
+                <div class="content-layout">
+                    <article class="prose">
+                        <h2 id="1-purpose" tabindex="-1">1. Purpose</h2>
+<p>DLISCAND is a CICS/COBOL online transaction (DL02) that lets users maintain candidate records for a licensing system through a single 3270 screen. Function keys select the action. F1 creates a new candidate, after checking that first name, last name and national ID are present and that no active candidate already has that national ID. F2 updates an existing candidate’s name, address, phone, email and status. F3 looks up a candidate by candidate ID or national ID and shows the details. F4 deactivates a candidate by setting its status to inactive instead of deleting it. F12 ends the session. The program stores and retrieves the data in the DLIS candidate database table. It shows success or error messages on the screen after each action and returns control to the same transaction so the user can keep working.</p>
+<h2 id="2-inputs" tabindex="-1">2. Inputs</h2>
+<ul>
+<li>
+<p><strong>Program invocation context (CICS)</strong></p>
+<ul>
+<li>DFHCOMMAREA / DLIS-COMMAREA
+<ul>
+<li>Pseudo-conversational communication area, 350 bytes, passed in by CICS on re-entry. It is copied into the program’s working area when EIBCALEN is greater than 0.</li>
+<li>The program treats a zero length as first entry and shows a blank screen.</li>
+<li>Fields such as the transaction ID, return screen, candidate ID, user ID, message text and action are carried across interactions.</li>
+</ul>
+</li>
+<li>EIBCALEN
+<ul>
+<li>Length of the COMMAREA received. It decides whether this is the initial entry or a reply.</li>
+</ul>
+</li>
+<li>EIBTRNID
+<ul>
+<li>ID of the running transaction (DL02). It is stored in the COMMAREA transaction ID field.</li>
+</ul>
+</li>
+<li>EIBTRMID
+<ul>
+<li>ID of the terminal. It is stored as the “created by” value on new candidate records.</li>
+</ul>
+</li>
+<li>EIBAID
+<ul>
+<li>Attention identifier of the key the user pressed. It selects the function:
+<ul>
+<li>F1 creates a candidate.</li>
+<li>F2 updates a candidate.</li>
+<li>F3 inquires about a candidate.</li>
+<li>F4 deactivates a candidate.</li>
+<li>F12 ends the transaction.</li>
+<li>Any other key gives an invalid-key message.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>User inputs from the BMS screen (map DLISCM01, mapset DLISCM)</strong></p>
+<ul>
+<li>Received through EXEC CICS RECEIVE MAP.</li>
+<li>Candidate identification
+<ul>
+<li>DCMCIDI: Candidate ID. It is required for update and deactivate. For inquiry it is an alternate key to the national ID.</li>
+<li>DCMIDNOI: National ID number. It is required on create and used for the duplicate check. It is an alternate search key on inquiry.</li>
+</ul>
+</li>
+<li>Personal details
+<ul>
+<li>DCMFNAMI: First name (required on create).</li>
+<li>DCMLNAMI: Last name (required on create).</li>
+<li>DCMDOBI: Date of birth.</li>
+</ul>
+</li>
+<li>Address details
+<ul>
+<li>DCMADR1I: Address line 1.</li>
+<li>DCMADR2I: Address line 2.</li>
+<li>DCMCITYI: City.</li>
+<li>DCMSTATI: State or province.</li>
+<li>DCMPOSTI: Postal code.</li>
+<li>DCMCTRYI: Country.</li>
+</ul>
+</li>
+<li>Contact details
+<ul>
+<li>DCMPHNI: Phone number.</li>
+<li>DCMEMLI: Email address.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>External data sources (DB2)</strong></p>
+<ul>
+<li>DLIS.CANDIDATE table
+<ul>
+<li>It is read for the duplicate-ID check on create, using ID_NUMBER and active status.</li>
+<li>It is read on inquiry, by candidate ID or ID number, returning the first matching row.</li>
+<li>It is the target of the insert, update and deactivate actions.</li>
+</ul>
+</li>
+<li>SYSIBM.SYSDUMMY1 with IDENTITY_VAL_LOCAL()
+<ul>
+<li>Supplies the system-generated candidate ID after an insert.</li>
+</ul>
+</li>
+<li>Host variables for the CANDIDATE row
+<ul>
+<li>These carry the values above to and from DB2: CANDIDATE-ID, RECORD-STATUS, ID-NUMBER, FIRST-NAME, LAST-NAME, DATE-OF-BIRTH, EMAIL-ADDRESS, PHONE-NUMBER, ADDRESS-LINE-1, ADDRESS-LINE-2, CITY, STATE-PROVINCE, POSTAL-CODE, COUNTRY, CREATED-BY.</li>
+<li>The update statement uses host variables that are not loaded from the screen in the update paragraph. They hold whatever values they had already, so they are not a reliable input.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>System-provided values</strong></p>
+<ul>
+<li>CURRENT-DATE
+<ul>
+<li>Used to populate the date field (DCMDATE) on the initial screen.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-outputs" tabindex="-1">3. Outputs</h2>
+<h3 id="31-database-outputs" tabindex="-1">3.1 Database Outputs</h3>
+<ul>
+<li>
+<p><strong>DLIS.CANDIDATE Table (Inserts)</strong></p>
+<ul>
+<li><code>FIRST-NAME</code> - Inserts the candidate’s first name into column <code>FIRST_NAME</code>.</li>
+<li><code>LAST-NAME</code> - Inserts the candidate’s last name into column <code>LAST_NAME</code>.</li>
+<li><code>DATE-OF-BIRTH</code> - Inserts the candidate’s date of birth into column <code>DATE_OF_BIRTH</code>.</li>
+<li><code>ID-NUMBER</code> - Inserts the national identification number into column <code>ID_NUMBER</code>.</li>
+<li><code>ADDRESS-LINE-1</code> - Inserts the primary address into column <code>ADDRESS_LINE_1</code>.</li>
+<li><code>ADDRESS-LINE-2</code> - Inserts the secondary address into column <code>ADDRESS_LINE_2</code>.</li>
+<li><code>CITY</code> - Inserts the city into column <code>CITY</code>.</li>
+<li><code>STATE-PROVINCE</code> - Inserts the state or province into column <code>STATE_PROVINCE</code>.</li>
+<li><code>POSTAL-CODE</code> - Inserts the postal code into column <code>POSTAL_CODE</code>.</li>
+<li><code>COUNTRY</code> - Inserts the country into column <code>COUNTRY</code>.</li>
+<li><code>PHONE-NUMBER</code> - Inserts the contact telephone number into column <code>PHONE_NUMBER</code>.</li>
+<li><code>EMAIL-ADDRESS</code> - Inserts the electronic mail address into column <code>EMAIL_ADDRESS</code>.</li>
+<li><code>RECORD-STATUS</code> - Inserts the active lifecycle status flag (<code>'A'</code>) into column <code>RECORD_STATUS</code>.</li>
+<li><code>CREATED-BY</code> - Inserts the originating CICS terminal ID (<code>EIBTRMID</code>) into column <code>CREATED_BY</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>DLIS.CANDIDATE Table (Updates)</strong></p>
+<ul>
+<li><code>FIRST-NAME</code> - Updates column <code>FIRST_NAME</code> for the specified candidate ID.</li>
+<li><code>LAST-NAME</code> - Updates column <code>LAST_NAME</code> for the specified candidate ID.</li>
+<li><code>ADDRESS-LINE-1</code> - Updates column <code>ADDRESS_LINE_1</code> for the specified candidate ID.</li>
+<li><code>ADDRESS-LINE-2</code> - Updates column <code>ADDRESS_LINE_2</code> for the specified candidate ID.</li>
+<li><code>CITY</code> - Updates column <code>CITY</code> for the specified candidate ID.</li>
+<li><code>STATE-PROVINCE</code> - Updates column <code>STATE_PROVINCE</code> for the specified candidate ID.</li>
+<li><code>POSTAL-CODE</code> - Updates column <code>POSTAL_CODE</code> for the specified candidate ID.</li>
+<li><code>COUNTRY</code> - Updates column <code>COUNTRY</code> for the specified candidate ID.</li>
+<li><code>PHONE-NUMBER</code> - Updates column <code>PHONE_NUMBER</code> for the specified candidate ID.</li>
+<li><code>EMAIL-ADDRESS</code> - Updates column <code>EMAIL_ADDRESS</code> for the specified candidate ID.</li>
+<li><code>RECORD-STATUS</code> - Updates column <code>RECORD_STATUS</code> during profile modifications or when setting the status flag to inactive (<code>'I'</code>) during candidate deactivation.</li>
+</ul>
+</li>
+</ul>
+<h3 id="32-user-interface--screen-outputs-bms-map-dliscm01" tabindex="-1">3.2 User Interface / Screen Outputs (BMS Map DLISCM01)</h3>
+<ul>
+<li>
+<p><strong>System and Informational Fields</strong></p>
+<ul>
+<li><code>DCMDATE</code> - Displays the current system date (<code>YYYY-MM-DD</code>) on screen initialization.</li>
+<li><code>DCMMSG</code> - Displays operational feedback, validation errors, duplicate detection warnings, and database execution error messages to the terminal user.</li>
+</ul>
+</li>
+<li>
+<p><strong>Candidate Display Fields</strong></p>
+<ul>
+<li><code>DCMCIDO</code> - Transmits the generated or queried candidate ID to the screen display.</li>
+<li><code>DCMFNAMO</code> - Transmits the candidate’s first name to the screen on inquiry.</li>
+<li><code>DCMLNAMO</code> - Transmits the candidate’s last name to the screen on inquiry.</li>
+<li><code>DCMDOBO</code> - Transmits the candidate’s date of birth to the screen on inquiry.</li>
+<li><code>DCMIDNOO</code> - Transmits the candidate’s national ID number to the screen on inquiry.</li>
+<li><code>DCMADR1O</code> - Transmits address line 1 to the screen on inquiry.</li>
+<li><code>DCMADR2O</code> - Transmits address line 2 to the screen on inquiry.</li>
+<li><code>DCMCITYO</code> - Transmits the city name to the screen on inquiry.</li>
+<li><code>DCMSTATO</code> - Transmits the state or province to the screen on inquiry.</li>
+<li><code>DCMPOSTO</code> - Transmits the postal code to the screen on inquiry.</li>
+<li><code>DCMCTRYO</code> - Transmits the country to the screen on inquiry.</li>
+<li><code>DCMPHNO</code> - Transmits the phone number to the screen on inquiry.</li>
+<li><code>DCMEMLO</code> - Transmits the email address to the screen on inquiry.</li>
+<li><code>DCMSTSO</code> - Transmits the candidate record status (<code>'A'</code> or <code>'I'</code>) to the screen on inquiry or upon successful deactivation.</li>
+</ul>
+</li>
+</ul>
+<h3 id="33-cics-communication-area-outputs" tabindex="-1">3.3 CICS Communication Area Outputs</h3>
+<ul>
+<li><strong>DLIS-COMMAREA</strong>
+<ul>
+<li><code>CA-TRANSACTION-ID</code> - Contains the transaction ID (<code>EIBTRNID</code> / <code>DL02</code>) passed across pseudo-conversational returns via <code>EXEC CICS RETURN TRANSID('DL02') COMMAREA(...)</code>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-processing-logic" tabindex="-1">4. Processing Logic</h2>
+<h3 id="41-mermaid-flow-diagram" tabindex="-1">4.1 Mermaid Flow Diagram</h3>
+<div class="mermaid">
+graph TD
+    A([Start DLISCAND transaction DL02]) --> B{Is COMMAREA length zero}
+    B -- Yes --> C[Clear message and set current date on map]
+    C --> D[Send candidate map with erase]
+    D --> E[Return to CICS with transaction DL02 and COMMAREA]
+    B -- No --> F[Copy DFHCOMMAREA to working COMMAREA]
+    F --> G[Receive candidate map]
+    G --> H{Which attention key was pressed}
+    H -- F1 --> I[Create candidate]
+    H -- F2 --> J[Update candidate]
+    H -- F3 --> K[Inquire candidate]
+    H -- F4 --> L[Deactivate candidate]
+    H -- F12 --> M([Return to CICS and end])
+    H -- Other --> N[Set message invalid key use F1 to F4 or F12]
+    I --> O[Send map with data only]
+    J --> O
+    K --> O
+    L --> O
+    N --> O
+    O --> P[Return to CICS with transaction DL02 and COMMAREA]
+    P --> Z([End])
+    E --> Z
+
+    I --> I1{First name last name and national ID all entered}
+    I1 -- No --> I2[Set required field message]
+    I1 -- Yes --> I3[Look up active candidate by ID number]
+    I3 --> I4{Active candidate already exists}
+    I4 -- Yes --> I5[Set duplicate candidate message]
+    I4 -- No --> I6[Move screen fields to host variables<br>status A and created by terminal]
+    I6 --> I7[Insert candidate row]
+    I7 --> I8{Insert successful}
+    I8 -- No --> I9[Set database error on insert message]
+    I8 -- Yes --> I10[Retrieve generated candidate ID]
+    I10 --> I11[Show candidate ID and success message]
+
+    J --> J1{Candidate ID entered}
+    J1 -- No --> J2[Set candidate ID required for update message]
+    J1 -- Yes --> J3[Update candidate row by ID]
+    J3 --> J4{SQL result}
+    J4 -- Not found --> J5[Set candidate not found message]
+    J4 -- Error --> J6[Set database error on update message]
+    J4 -- Success --> J7[Set updated successfully message]
+
+    K --> K1{Candidate ID or national ID entered}
+    K1 -- No --> K2[Set enter ID message]
+    K1 -- Yes --> K3[Select first candidate matching ID or national ID]
+    K3 --> K4{Candidate found}
+    K4 -- No --> K5[Set candidate not found message]
+    K4 -- Yes --> K6[Move candidate data to output map fields]
+    K6 --> K7[Set candidate found message]
+
+    L --> L1{Candidate ID entered}
+    L1 -- No --> L2[Set candidate ID required to deactivate message]
+    L1 -- Yes --> L3[Set record status to inactive]
+    L3 --> L4{SQL result}
+    L4 -- Not found --> L5[Set candidate not found message]
+    L4 -- Error --> L6[Set database error on deactivate message]
+    L4 -- Success --> L7[Show status I and deactivated message]
+
+    classDef start fill:#d4f1f4,stroke:#5aa9b5,color:#000
+    classDef process fill:#e6f0ff,stroke:#7a9fd4,color:#000
+    classDef decision fill:#fff4cc,stroke:#d4b85a,color:#000
+    classDef error fill:#ffd9d9,stroke:#d48a8a,color:#000
+    classDef success fill:#d9f5d9,stroke:#7fbf7f,color:#000
+
+    class A,M,Z start
+    class C,D,E,F,G,I,J,K,L,O,P,I3,I6,I7,I10,J3,K3,K6,L3 process
+    class B,H,I1,I4,I8,J1,J4,K1,K4,L1,L4 decision
+    class N,I2,I5,I9,J2,J5,J6,K2,K5,L2,L5,L6 error
+    class I11,J7,K7,L7 success
+</div>
+<h3 id="42-processing-logic-description" tabindex="-1">4.2 Processing Logic Description</h3>
+<p><strong>High-level Summary</strong></p>
+<p>DLISCAND is a pseudo-conversational CICS/COBOL program for transaction DL02. It maintains candidate records in the DB2 table DLIS.CANDIDATE through the BMS map DLISCM01 in mapset DLISCM. The user picks the function with a function key:</p>
+<ul>
+<li>F1 creates a candidate.</li>
+<li>F2 updates a candidate.</li>
+<li>F3 inquires about a candidate.</li>
+<li>F4 deactivates a candidate.</li>
+<li>F12 exits.</li>
+</ul>
+<p><strong>Execution Flow</strong></p>
+<ol>
+<li>
+<p><strong>Entry (MAIN-LOGIC)</strong></p>
+<ul>
+<li>The program copies the transaction ID (EIBTRNID) into the COMMAREA and saves EIBCALEN.</li>
+<li>If EIBCALEN is 0, this is the first entry, so it runs INIT-SCREEN.</li>
+<li>Otherwise it copies DFHCOMMAREA into DLIS-COMMAREA and runs PROCESS-INPUT.</li>
+</ul>
+</li>
+<li>
+<p><strong>INIT-SCREEN</strong></p>
+<ul>
+<li>It clears the message field (DCMMSG) and moves a date value into DCMDATE.</li>
+<li>It sends map DLISCM01 with ERASE and FREEKB.</li>
+<li>It issues <code>EXEC CICS RETURN TRANSID('DL02')</code> with the COMMAREA (length 350), so the next key press restarts the transaction.</li>
+</ul>
+</li>
+<li>
+<p><strong>PROCESS-INPUT</strong></p>
+<ul>
+<li>It receives map DLISCM01 and stores the AID key in WS-PFKEY.</li>
+<li>EVALUATE TRUE dispatches on the AID key:
+<ul>
+<li>F1 runs CREATE-CANDIDATE.</li>
+<li>F2 runs UPDATE-CANDIDATE.</li>
+<li>F3 runs INQUIRE-CANDIDATE.</li>
+<li>F4 runs DEACTIVATE-CANDIDATE.</li>
+<li>F12 issues <code>EXEC CICS RETURN</code> and ends the transaction without redisplaying the map.</li>
+<li>Any other key sets the message “INVALID KEY - USE F1-F4 OR F12”. The source writes this branch as <code>OTHER</code>, not the standard <code>WHEN OTHER</code>.</li>
+</ul>
+</li>
+<li>Afterwards the program sends the map with DATAONLY and FREEKB. It then returns with TRANSID DL02 and the COMMAREA.</li>
+</ul>
+</li>
+<li>
+<p><strong>CREATE-CANDIDATE (F1)</strong></p>
+<ul>
+<li>Validation: first name, last name, and national ID must each be neither spaces nor low-values. Each failure sets its own “… IS REQUIRED” message and exits.</li>
+<li>Duplicate check: it selects CANDIDATE_ID from DLIS.CANDIDATE where ID_NUMBER matches and RECORD_STATUS = ‘A’. If SQLCODE = 0, it reports “CANDIDATE WITH THIS ID NUMBER ALREADY EXISTS” and exits.</li>
+<li>Insert: it moves the map input fields into the host variables and sets RECORD_STATUS to ‘A’. It sets CREATED_BY from the terminal ID (EIBTRMID). It then inserts the row into DLIS.CANDIDATE.</li>
+<li>If the INSERT’s SQLCODE is not 0, it sets “DATABASE ERROR ON INSERT - CONTACT SUPPORT” and exits.</li>
+<li>On success it reads the new ID with <code>IDENTITY_VAL_LOCAL()</code> from SYSIBM.SYSDUMMY1. It puts the ID in DCMCIDO and shows “CANDIDATE CREATED SUCCESSFULLY”.</li>
+</ul>
+</li>
+<li>
+<p><strong>UPDATE-CANDIDATE (F2)</strong></p>
+<ul>
+<li>The candidate ID (DCMCIDI) must not be zeros or low-values. Otherwise it sets “CANDIDATE ID IS REQUIRED FOR UPDATE”.</li>
+<li>It updates the name, address, phone, email, and record status columns of the row with that CANDIDATE_ID.</li>
+<li>SQLCODE 100 gives “CANDIDATE NOT FOUND”. Any other non-zero code gives “DATABASE ERROR ON UPDATE”. Otherwise the message is “CANDIDATE UPDATED SUCCESSFULLY”.</li>
+<li>The program does not move the screen input fields (other than the ID) into the host variables before the UPDATE. The values written are whatever the host variables already hold.</li>
+<li>The UPDATE does not change DATE_OF_BIRTH or ID_NUMBER.</li>
+</ul>
+</li>
+<li>
+<p><strong>INQUIRE-CANDIDATE (F3)</strong></p>
+<ul>
+<li>At least one of the candidate ID or the national ID is required. If both are empty (zeros and spaces), it sets “ENTER CANDIDATE ID OR NATIONAL ID”.</li>
+<li>It selects one row (<code>FETCH FIRST 1 ROW ONLY</code>) where CANDIDATE_ID or ID_NUMBER matches.</li>
+<li>SQLCODE 100 gives “CANDIDATE NOT FOUND”. Other SQL errors are not specifically handled.</li>
+<li>If a row is found, all fields, including the status, are moved to the output map fields (DCMxxxO). The message is “CANDIDATE FOUND”.</li>
+</ul>
+</li>
+<li>
+<p><strong>DEACTIVATE-CANDIDATE (F4)</strong></p>
+<ul>
+<li>The candidate ID must not be zero. Otherwise it sets “CANDIDATE ID IS REQUIRED TO DEACTIVATE”.</li>
+<li>It performs a logical delete by setting RECORD_STATUS = ‘I’ for that CANDIDATE_ID.</li>
+<li>SQLCODE 100 gives “CANDIDATE NOT FOUND”. Any other non-zero code gives “DATABASE ERROR ON DEACTIVATE”. On success it shows status ‘I’ and “CANDIDATE DEACTIVATED”.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Business Rules</strong></p>
+<ul>
+<li>First name, last name, and national ID are mandatory when creating a candidate.</li>
+<li>Only one active candidate may exist per national ID. The database also enforces a unique constraint on ID_NUMBER.</li>
+<li>New candidates are created with status ‘A’. Deactivation sets status ‘I’, which is a soft delete.</li>
+<li>The creating terminal ID is stored as the audit field CREATED_BY.</li>
+<li>The candidate ID is system-generated through a DB2 identity column.</li>
+<li>Valid RECORD_STATUS values are ‘A’ and ‘I’, enforced by a check constraint.</li>
+</ul>
+<p><strong>Observations on the code</strong></p>
+<ul>
+<li>STOP RUN follows the paragraph PERFORMs in MAIN-LOGIC, but the CICS RETURN statements end the task before it is reached.</li>
+<li>The RESP values from SEND and RECEIVE are not checked.</li>
+<li>After CREATE, the program does not issue an explicit commit or rollback. It relies on the CICS syncpoint at task end.</li>
+<li>In UPDATE, the status is written from the host variable, which could overwrite the record status unintentionally.</li>
+<li>INQUIRE does not exclude inactive candidates.</li>
+</ul>
+<p><strong>External Interactions</strong></p>
+<ul>
+<li><strong>CICS terminal I/O:</strong> SEND MAP and RECEIVE MAP on DLISCM01 in mapset DLISCM present the screen and read user input.</li>
+<li><strong>CICS task control:</strong> RETURN TRANSID(‘DL02’) with a 350-byte COMMAREA keeps the pseudo-conversational dialog going. The EIBAID key drives function selection.</li>
+<li><strong>DB2:</strong> The program performs SELECT, INSERT, UPDATE, and <code>IDENTITY_VAL_LOCAL()</code> against DLIS.CANDIDATE. It checks SQLCODE after each statement, apart from the identity retrieval.</li>
+<li><strong>IBM MQ:</strong> The program has no MQ interactions.</li>
+</ul>
+<p><strong>Plain Language Summary</strong></p>
+<p>This screen lets a clerk manage people who apply for a driver’s license. The clerk presses F1 to add a new person, F2 to change their details, F3 to look someone up by candidate number or national ID, and F4 to mark someone as no longer active. F12 exits.</p>
+<p>Before adding a person, the program checks that names and national ID are filled in. It also checks that nobody active already has the same national ID. After each action it shows a message such as “CANDIDATE CREATED SUCCESSFULLY” or “CANDIDATE NOT FOUND”, and the screen waits for the next key press.</p>
+<h3 id="43-database-tables" tabindex="-1">4.3 Database Tables</h3>
+<div class="mermaid">
+erDiagram
+    DLIS_CANDIDATE {
+        decimal CANDIDATE_ID "PK identity generated always, precision 10"
+        string FIRST_NAME "length 30"
+        string LAST_NAME "length 30"
+        date DATE_OF_BIRTH
+        string ID_NUMBER "length 20, unique"
+        string ADDRESS_LINE_1 "length 50"
+        string ADDRESS_LINE_2 "length 50, nullable"
+        string CITY "length 30"
+        string STATE_PROVINCE "length 30"
+        string POSTAL_CODE "length 10, nullable"
+        string COUNTRY "length 30"
+        string PHONE_NUMBER "length 15, nullable"
+        string EMAIL_ADDRESS "length 60, nullable"
+        date CREATED_DATE "default current date"
+        string RECORD_STATUS "A active or I inactive"
+    }
+    SYSIBM_SYSDUMMY1 {
+        string IBMREQD "single row system table used for IDENTITY_VAL_LOCAL"
+    }
+</div>
+<h2 id="5-paragraphs" tabindex="-1">5. Paragraphs</h2>
+<p><strong>MAIN-LOGIC</strong></p>
+<ul>
+<li>Purpose: Entry point of the pseudo-conversational CICS transaction DL02 for candidate maintenance.</li>
+<li>Operations:
+<ul>
+<li>Copies the transaction ID (EIBTRNID) into CA-TRANSACTION-ID.</li>
+<li>Saves the commarea length (EIBCALEN) into WS-EIBCALEN-SAVE.</li>
+</ul>
+</li>
+<li>Control flow:
+<ul>
+<li>If EIBCALEN = 0, this is the first invocation, so it performs INIT-SCREEN.</li>
+<li>Otherwise it moves DFHCOMMAREA into DLIS-COMMAREA and performs PROCESS-INPUT.</li>
+<li>It ends with STOP RUN.</li>
+</ul>
+</li>
+<li>External interaction: None directly. It reads the CICS EIB fields and the commarea.</li>
+</ul>
+<p><strong>INIT-SCREEN</strong></p>
+<ul>
+<li>Purpose: Shows the blank candidate maintenance screen on first entry.</li>
+<li>Operations:
+<ul>
+<li>Clears the message field DCMMSG.</li>
+<li>Moves the first 10 characters of CURRENT-DATE into the date field DCMDATE.</li>
+<li>Issues EXEC CICS SEND MAP(‘DLISCM01’) MAPSET(‘DLISCM’) with ERASE and FREEKB.</li>
+<li>Issues EXEC CICS RETURN TRANSID(‘DL02’) with COMMAREA(DLIS-COMMAREA) LENGTH(350), so the next terminal input restarts the transaction.</li>
+</ul>
+</li>
+<li>Control flow: Straight-line. The RETURN ends the task.</li>
+<li>External interaction: CICS BMS terminal output and CICS RETURN. The response goes to WS-RESP1 but is not checked.</li>
+</ul>
+<p><strong>PROCESS-INPUT</strong></p>
+<ul>
+<li>Purpose: Handles each later interaction. It reads the screen, dispatches on the PF key, and redisplays the screen.</li>
+<li>Operations:
+<ul>
+<li>Issues EXEC CICS RECEIVE MAP(‘DLISCM01’) MAPSET(‘DLISCM’) with RESP(WS-RESP1).</li>
+<li>Copies EIBAID into WS-PFKEY.</li>
+<li>Dispatches on the pressed key.</li>
+<li>Issues EXEC CICS SEND MAP with DATAONLY and FREEKB to refresh the screen.</li>
+<li>Issues EXEC CICS RETURN TRANSID(‘DL02’) with the commarea.</li>
+</ul>
+</li>
+<li>Control flow: An EVALUATE TRUE on EIBAID:
+<ul>
+<li>PF1 performs CREATE-CANDIDATE.</li>
+<li>PF2 performs UPDATE-CANDIDATE.</li>
+<li>PF3 performs INQUIRE-CANDIDATE.</li>
+<li>PF4 performs DEACTIVATE-CANDIDATE.</li>
+<li>PF12 issues EXEC CICS RETURN with no transaction ID, which ends the conversation.</li>
+<li>The last branch is written as <code>OTHER</code>. The standard COBOL keyword is <code>WHEN OTHER</code>, so as written this branch is likely a syntax problem. Its intent is to set the message ‘INVALID KEY - USE F1-F4 OR F12’ for any other key.</li>
+</ul>
+</li>
+<li>External interaction: CICS RECEIVE MAP, SEND MAP and RETURN. The RESP value is stored but never checked.</li>
+</ul>
+<p><strong>CREATE-CANDIDATE</strong></p>
+<ul>
+<li>Purpose: Creates a new candidate (PF1) after validating input and checking for a duplicate national ID.</li>
+<li>Operations:
+<ul>
+<li>Validation: checks that first name (DCMFNAMI), last name (DCMLNAMI) and national ID (DCMIDNOI) are not spaces or low-values. Each failure sets a specific message in DCMMSG.</li>
+<li>Duplicate check: moves the national ID into ID-NUMBER and runs a SELECT of CANDIDATE_ID from DLIS.CANDIDATE where ID_NUMBER matches and RECORD_STATUS = ‘A’.</li>
+<li>Insert preparation: moves the screen fields into the DCLDLIS-CANDIDATE host variables. These are names, date of birth, ID number, address lines, city, state, postal code, country, phone and email. It sets RECORD-STATUS to ‘A’ and CREATED-BY to the terminal ID (EIBTRMID).</li>
+<li>Insert: runs an INSERT INTO DLIS.CANDIDATE with those values.</li>
+<li>ID retrieval: after a successful insert, runs SELECT IDENTITY_VAL_LOCAL() FROM SYSIBM.SYSDUMMY1 to get the generated candidate ID.</li>
+<li>Result: moves the generated ID to the output field DCMCIDO and sets ‘CANDIDATE CREATED SUCCESSFULLY’.</li>
+</ul>
+</li>
+<li>Control flow:
+<ul>
+<li>Sequential IF checks, each using GO TO CREATE-CANDIDATE-EXIT on failure.</li>
+<li>If the duplicate-check SQLCODE = 0, it reports ‘CANDIDATE WITH THIS ID NUMBER ALREADY EXISTS’ and exits.</li>
+<li>If the INSERT SQLCODE is not 0, it reports a database error and exits.</li>
+<li>Success also ends with a GO TO to the exit paragraph.</li>
+</ul>
+</li>
+<li>External interaction: DB2 SELECT, INSERT and IDENTITY_VAL_LOCAL on DLIS.CANDIDATE. The SQLCODE of the identity retrieval is not checked.</li>
+</ul>
+<p><strong>CREATE-CANDIDATE-EXIT</strong></p>
+<ul>
+<li>Purpose: Exit point for CREATE-CANDIDATE.</li>
+<li>Operations: A bare EXIT statement.</li>
+<li>Control flow: Target of all the GO TOs in CREATE-CANDIDATE.</li>
+<li>External interaction: None.</li>
+</ul>
+<p><strong>UPDATE-CANDIDATE</strong></p>
+<ul>
+<li>Purpose: Updates an existing candidate (PF2) identified by candidate ID.</li>
+<li>Operations:
+<ul>
+<li>Checks that the candidate ID (DCMCIDI) is not zeros or low-values.</li>
+<li>Moves DCMCIDI to CANDIDATE-ID.</li>
+<li>Runs an UPDATE on DLIS.CANDIDATE. It sets first name, last name, address lines 1 and 2, city, state, postal code, country, phone, email and record status from the host variables, where CANDIDATE_ID matches.</li>
+<li>Sets the message according to SQLCODE.</li>
+</ul>
+</li>
+<li>Control flow:
+<ul>
+<li>If the ID is missing, it sets ‘CANDIDATE ID IS REQUIRED FOR UPDATE’ and does GO TO UPDATE-CANDIDATE-EXIT.</li>
+<li>After the update: SQLCODE 100 gives ‘CANDIDATE NOT FOUND’, any other non-zero value gives ‘DATABASE ERROR ON UPDATE’, and zero gives ‘CANDIDATE UPDATED SUCCESSFULLY’.</li>
+</ul>
+</li>
+<li>External interaction: DB2 UPDATE on DLIS.CANDIDATE.</li>
+<li>Observation: The paragraph never moves the screen’s input fields (DCMFNAMI and so on) into the host variables before the UPDATE. The UPDATE therefore uses whatever the host variables already hold.</li>
+</ul>
+<p><strong>UPDATE-CANDIDATE-EXIT</strong></p>
+<ul>
+<li>Purpose: Exit point for UPDATE-CANDIDATE.</li>
+<li>Operations: A bare EXIT statement.</li>
+<li>Control flow: Target of the GO TO in UPDATE-CANDIDATE.</li>
+<li>External interaction: None.</li>
+</ul>
+<p><strong>INQUIRE-CANDIDATE</strong></p>
+<ul>
+<li>Purpose: Looks up a candidate (PF3) by candidate ID or national ID and shows the details.</li>
+<li>Operations:
+<ul>
+<li>Requires at least one search key. If candidate ID is zeros and national ID is spaces, it sets ‘ENTER CANDIDATE ID OR NATIONAL ID’.</li>
+<li>Moves DCMCIDI and DCMIDNOI to the host variables CANDIDATE-ID and ID-NUMBER.</li>
+<li>Runs a SELECT INTO of all candidate columns from DLIS.CANDIDATE where CANDIDATE_ID or ID_NUMBER matches, with FETCH FIRST 1 ROW ONLY.</li>
+<li>On success it moves each retrieved column to the output map fields: DCMCIDO, DCMFNAMO, DCMLNAMO, DCMDOBO, DCMIDNOO, DCMADR1O, DCMADR2O, DCMCITYO, DCMSTATO, DCMPOSTO, DCMCTRYO, DCMPHNO, DCMEMLO and DCMSTSO. It then sets ‘CANDIDATE FOUND’.</li>
+</ul>
+</li>
+<li>Control flow:
+<ul>
+<li>GO TO INQUIRE-CANDIDATE-EXIT when no key is entered.</li>
+<li>GO TO INQUIRE-CANDIDATE-EXIT with ‘CANDIDATE NOT FOUND’ when SQLCODE = 100.</li>
+<li>Other non-zero SQLCODE values are not handled.</li>
+</ul>
+</li>
+<li>External interaction: DB2 singleton SELECT on DLIS.CANDIDATE.</li>
+</ul>
+<p><strong>INQUIRE-CANDIDATE-EXIT</strong></p>
+<ul>
+<li>Purpose: Exit point for INQUIRE-CANDIDATE.</li>
+<li>Operations: A bare EXIT statement.</li>
+<li>Control flow: Target of the GO TOs in INQUIRE-CANDIDATE.</li>
+<li>External interaction: None.</li>
+</ul>
+<p><strong>DEACTIVATE-CANDIDATE</strong></p>
+<ul>
+<li>Purpose: Soft-deletes a candidate (PF4) by setting its status to inactive.</li>
+<li>Operations:
+<ul>
+<li>Checks that the candidate ID (DCMCIDI) is not zeros.</li>
+<li>Moves DCMCIDI to CANDIDATE-ID.</li>
+<li>Runs an UPDATE on DLIS.CANDIDATE that sets RECORD_STATUS = ‘I’ where CANDIDATE_ID matches.</li>
+<li>Sets the result message.</li>
+</ul>
+</li>
+<li>Control flow:
+<ul>
+<li>If the ID is missing, it sets ‘CANDIDATE ID IS REQUIRED TO DEACTIVATE’ and does GO TO DEACTIVATE-CANDIDATE-EXIT.</li>
+<li>After the update: SQLCODE 100 gives ‘CANDIDATE NOT FOUND’, any other non-zero value gives ‘DATABASE ERROR ON DEACTIVATE’, and zero moves ‘I’ to the status output DCMSTSO and sets ‘CANDIDATE DEACTIVATED’.</li>
+</ul>
+</li>
+<li>External interaction: DB2 UPDATE on DLIS.CANDIDATE.</li>
+</ul>
+<p><strong>DEACTIVATE-CANDIDATE-EXIT</strong></p>
+<ul>
+<li>Purpose: Exit point for DEACTIVATE-CANDIDATE.</li>
+<li>Operations: A bare EXIT statement.</li>
+<li>Control flow: Target of the GO TO in DEACTIVATE-CANDIDATE.</li>
+<li>External interaction: None.</li>
+</ul>
+<h2 id="6-dependencies" tabindex="-1">6. Dependencies</h2>
+<ul>
+<li>
+<p>Online transaction environment (CICS)</p>
+</li>
+<li>
+<p>Transaction DL02</p>
+<ul>
+<li>The program is registered under this transaction ID in the CICS CSD group <code>DLISGRP</code> (<code>csd/DLISCSD.csd</code>).</li>
+<li>It re-invokes itself with <code>EXEC CICS RETURN TRANSID('DL02')</code> to run pseudo-conversationally.</li>
+</ul>
+</li>
+<li>
+<p>CICS runtime services (<code>EXEC CICS</code>)</p>
+<ul>
+<li><code>SEND MAP</code> is used with ERASE and FREEKB on the first entry, and with DATAONLY and FREEKB on later replies.</li>
+<li><code>RECEIVE MAP</code> reads the user’s input from the screen.</li>
+<li><code>RETURN</code> is used both with TRANSID and COMMAREA, and as a plain <code>RETURN</code> on F12 to exit.</li>
+<li>Responses are captured in <code>WS-RESP1</code>, but the code never tests them.</li>
+</ul>
+</li>
+<li>
+<p>Execute Interface Block (EIB) fields supplied by CICS</p>
+<ul>
+<li><code>EIBTRNID</code> is moved to <code>CA-TRANSACTION-ID</code>.</li>
+<li><code>EIBCALEN</code> is used to distinguish first entry from a reply (zero length means first entry).</li>
+<li><code>EIBAID</code> identifies the key the user pressed.</li>
+<li><code>EIBTRMID</code> supplies the terminal ID, which is stored in <code>CREATED_BY</code>.</li>
+</ul>
+</li>
+<li>
+<p>Attention-key constants (<code>DFHPF1</code>, <code>DFHPF2</code>, <code>DFHPF3</code>, <code>DFHPF4</code>, <code>DFHPF12</code>)</p>
+<ul>
+<li>These come from the CICS-supplied <code>DFHAID</code> definitions.</li>
+<li>The program does not <code>COPY</code> them explicitly.</li>
+<li>They drive the function selection: F1 create, F2 update, F3 inquire, F4 deactivate, F12 exit.</li>
+</ul>
+</li>
+<li>
+<p>Communication area</p>
+<ul>
+<li><code>DFHCOMMAREA</code> is declared in the LINKAGE SECTION as 350 bytes.</li>
+<li>It is moved into <code>DLIS-COMMAREA</code> on re-entry.</li>
+<li>It is passed back with LENGTH(350) on each <code>RETURN</code>.</li>
+<li>The 350-byte length must match the layout in the copybook.</li>
+</ul>
+</li>
+<li>
+<p>User interface (BMS)</p>
+<ul>
+<li>Mapset <code>DLISCM</code>, map <code>DLISCM01</code> (<code>bms/DLISCM.bms</code>)
+<ul>
+<li>This is the Candidate Maintenance screen, sent and received by the program.</li>
+<li>The map must be assembled into <code>DLIS.LOADLIB</code>.</li>
+</ul>
+</li>
+<li>Symbolic map fields
+<ul>
+<li>These are generated by BMS assembly into the <code>DLIS.COPYBOOK</code> library.</li>
+<li>The program uses them without an explicit <code>COPY</code> statement.</li>
+<li>Input fields (suffix <code>I</code>):
+<ul>
+<li><code>DCMFNAMI</code>, <code>DCMLNAMI</code>, <code>DCMDOBI</code>, <code>DCMIDNOI</code>, <code>DCMCIDI</code></li>
+<li><code>DCMADR1I</code>, <code>DCMADR2I</code>, <code>DCMCITYI</code>, <code>DCMSTATI</code>, <code>DCMPOSTI</code></li>
+<li><code>DCMCTRYI</code>, <code>DCMPHNI</code>, <code>DCMEMLI</code></li>
+</ul>
+</li>
+<li>Output fields (suffix <code>O</code>):
+<ul>
+<li><code>DCMCIDO</code>, <code>DCMFNAMO</code>, <code>DCMLNAMO</code>, <code>DCMDOBO</code>, <code>DCMIDNOO</code></li>
+<li><code>DCMADR1O</code>, <code>DCMADR2O</code>, <code>DCMCITYO</code>, <code>DCMSTATO</code>, <code>DCMPOSTO</code></li>
+<li><code>DCMCTRYO</code>, <code>DCMPHNO</code>, <code>DCMEMLO</code>, <code>DCMSTSO</code></li>
+</ul>
+</li>
+<li>Message and date fields: <code>DCMMSG</code> and <code>DCMDATE</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Database (DB2)</p>
+<ul>
+<li>Subsystem and plan
+<ul>
+<li>DB2 subsystem <code>DSN1</code>.</li>
+<li>Plan <code>DLISPLAN</code>.</li>
+<li>Collection <code>DLISPKG</code>.</li>
+<li>The program’s DBRM is bound by <code>jcl/DLISBIND.jcl</code>.</li>
+<li>The program must be precompiled with <code>DSNHPC</code> (<code>jcl/DLISCOMP.jcl</code>).</li>
+</ul>
+</li>
+<li>Table <code>DLIS.CANDIDATE</code> (<code>db2/DLIS0001-CREATE-TABLES.sql</code>)
+<ul>
+<li>This is the only table the program accesses.</li>
+<li>Its columns are:
+<ul>
+<li><code>CANDIDATE_ID</code> (generated identity)</li>
+<li><code>FIRST_NAME</code>, <code>LAST_NAME</code>, <code>DATE_OF_BIRTH</code>, <code>ID_NUMBER</code></li>
+<li><code>ADDRESS_LINE_1</code>, <code>ADDRESS_LINE_2</code>, <code>CITY</code>, <code>STATE_PROVINCE</code>, <code>POSTAL_CODE</code>, <code>COUNTRY</code></li>
+<li><code>PHONE_NUMBER</code>, <code>EMAIL_ADDRESS</code></li>
+<li><code>RECORD_STATUS</code>, <code>CREATED_BY</code></li>
+</ul>
+</li>
+<li>SQL operations on it:
+<ul>
+<li>SELECT, to check for a duplicate active <code>ID_NUMBER</code></li>
+<li>INSERT, to create a candidate</li>
+<li>UPDATE, to change candidate details</li>
+<li>SELECT, to inquire by <code>CANDIDATE_ID</code> or <code>ID_NUMBER</code></li>
+<li>UPDATE, to set <code>RECORD_STATUS</code> to ‘I’ on deactivation</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Catalog table <code>SYSIBM.SYSDUMMY1</code>
+<ul>
+<li>It is used with the <code>IDENTITY_VAL_LOCAL()</code> function to retrieve the identity value generated by the insert.</li>
+</ul>
+</li>
+<li>Schema objects
+<ul>
+<li>Tables, indexes and grants come from <code>db2/DLIS0001-CREATE-TABLES.sql</code>, <code>db2/DLIS0002-CREATE-INDEXES.sql</code> and <code>db2/DLIS0003-GRANTS.sql</code>.</li>
+<li>They are applied by <code>jcl/DLISDB2.jcl</code>.</li>
+<li>The DB2 authorization (EXECUTE on the plan or package, and table access) must be granted to the CICS execution user.</li>
+</ul>
+</li>
+<li>SQL communication area
+<ul>
+<li><code>SQLCA</code> is brought in with <code>EXEC SQL INCLUDE SQLCA</code>.</li>
+<li>The program uses <code>SQLCODE</code> to detect success (0), not found (100) and errors.</li>
+<li>The include appears twice, in the working-storage copybook and again in the program.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Copybooks and shared definitions</p>
+<ul>
+<li><code>DLISWS</code> (<code>copybook/DLISWS.cpy</code>)
+<ul>
+<li>It holds common working storage: return codes and messages, and the candidate, application, payment, eligibility, history, approval and license work areas.</li>
+<li>It also holds the null indicators and <code>SQLCA</code>.</li>
+</ul>
+</li>
+<li><code>DLISCSEC</code> (<code>copybook/DLISCSEC.cpy</code>)
+<ul>
+<li>It holds the COMMAREA layouts: <code>DLIS-COMMAREA</code>, <code>DLIS-CAND-COMMAREA</code>, <code>DLIS-APPL-COMMAREA</code>.</li>
+<li>It also holds the CICS response work fields.</li>
+</ul>
+</li>
+<li><code>DLISDCLG</code> (<code>copybook/DLISDCLG.cpy</code>)
+<ul>
+<li>It holds the DCLGEN host structures: <code>DCLDLIS-CANDIDATE</code> and others.</li>
+<li>The program uses <code>DCLDLIS-CANDIDATE</code>, which carries the host variables <code>CANDIDATE-ID</code>, <code>RECORD-STATUS</code>, <code>ID-NUMBER</code>, <code>FIRST-NAME</code>, <code>LAST-NAME</code>, <code>DATE-OF-BIRTH</code>, <code>EMAIL-ADDRESS</code>, <code>PHONE-NUMBER</code>, <code>ADDRESS-LINE-1</code>, <code>ADDRESS-LINE-2</code>, <code>CITY</code>, <code>STATE-PROVINCE</code>, <code>POSTAL-CODE</code>, <code>COUNTRY</code> and <code>CREATED-BY</code>.</li>
+<li>The other table structures (application, driving history, payment, issued license, authority user, fee schedule) are unused by this program.</li>
+<li><code>CREATED-BY</code> is not a field of <code>DCLDLIS-CANDIDATE</code>. It exists only in the other structures (<code>DCLDLIS-LICENSE-APPL</code>). The unqualified <code>:CREATED-BY</code> host variable in the INSERT is therefore ambiguous or mismatched.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Input data and runtime values</p>
+<ul>
+<li>Terminal input
+<ul>
+<li>The user supplies the function key and the candidate fields on the screen.</li>
+<li>Create needs first name, last name and national ID.</li>
+<li>Update needs the candidate ID.</li>
+<li>Inquire needs the candidate ID or the national ID.</li>
+<li>Deactivate needs the candidate ID.</li>
+</ul>
+</li>
+<li>Incoming COMMAREA
+<ul>
+<li>This is the state passed from the previous invocation of the transaction (<code>DFHCOMMAREA</code>).</li>
+</ul>
+</li>
+<li>Terminal identifier
+<ul>
+<li><code>EIBTRMID</code> is stored in <code>CREATED_BY</code> as an audit value.</li>
+</ul>
+</li>
+<li>Current date
+<ul>
+<li><code>CURRENT-DATE(1:10)</code> is moved to <code>DCMDATE</code> on the initial screen.</li>
+<li>It is not declared in the program, so it would have to come from a compiler-supported function or a definition outside the program.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Build and deployment dependencies</p>
+<ul>
+<li>BMS assembly: <code>jcl/DLISBMS.jcl</code> with <code>proc/DLISBASM.proc</code>.</li>
+<li>Compile and link: <code>jcl/DLISCOMP.jcl</code> with <code>proc/DLISCLNK.proc</code>.
+<ul>
+<li>It runs the DB2 precompiler <code>DSNHPC</code>.</li>
+<li>It runs the compiler <code>IGYCRCTL</code> with the options <code>RENT,APOST,LIB,NOSEQ,NOTERM</code>.</li>
+<li>It runs the link-editor <code>IEWL</code> with <code>AMODE(31),RMODE(ANY)</code>.</li>
+</ul>
+</li>
+<li>DB2 bind: <code>jcl/DLISBIND.jcl</code>.</li>
+<li>Load library <code>DLIS.LOADLIB</code> holds the program load module and the BMS map load module.</li>
+<li>Copybook library <code>DLIS.COPYBOOK</code> holds the symbolic map and shared copybooks.</li>
+<li>CICS resource definitions (<code>csd/DLISCSD.csd</code>, installed by <code>DFHCSDUP</code> into group <code>DLISGRP</code>) define the program, the transaction <code>DL02</code> and the mapset.</li>
+</ul>
+</li>
+<li>
+<p>Related programs</p>
+<ul>
+<li>The program makes no <code>CALL</code>, <code>LINK</code> or <code>XCTL</code> to other programs.</li>
+<li><code>DLISMENU</code> (transaction <code>DL01</code>) is the main menu that routes to this transaction.</li>
+<li>The shared COMMAREA layout (<code>DLIS-COMMAREA</code>) is intended for transfer between the DLIS transactions.</li>
+<li>The program does not use <code>CA-RETURN-SCREEN</code> to navigate elsewhere.</li>
+</ul>
+</li>
+<li>
+<p>Not used</p>
+<ul>
+<li>The program uses no IBM MQ, no sequential or VSAM files, no IMS calls, no external subroutines and no environment variables.</li>
+</ul>
+</li>
+</ul>
+<h2 id="7-constraints" tabindex="-1">7. Constraints</h2>
+<ul>
+<li>
+<p><strong>Input and key validation (function-key driven)</strong></p>
+<ul>
+<li>Only specific attention keys are accepted.
+<ul>
+<li>PF1 runs create, PF2 runs update, PF3 runs inquire, PF4 runs deactivate, and PF12 exits with <code>EXEC CICS RETURN</code>.</li>
+<li>Any other key falls into the <code>OTHER</code> branch of the <code>EVALUATE</code>. The message “INVALID KEY - USE F1-F4 OR F12” is moved to <code>DCMMSG</code>, and no maintenance action runs.</li>
+<li>The <code>OTHER</code> branch is not valid COBOL (<code>WHEN OTHER</code> is required), so this is the intended rule rather than a reliably enforced one.</li>
+</ul>
+</li>
+<li>The program needs a screen interaction before it does any work.
+<ul>
+<li>If <code>EIBCALEN = 0</code>, it only runs <code>INIT-SCREEN</code>. That paragraph sends a blank map and returns to transaction DL02 with the COMMAREA.</li>
+<li>Only when a COMMAREA is present does it process input. The COMMAREA is copied from <code>DFHCOMMAREA</code> into <code>DLIS-COMMAREA</code>, then the map is received.</li>
+</ul>
+</li>
+<li>Each request handles one function only.
+<ul>
+<li>The <code>EVALUATE</code> runs exactly one action per interaction.</li>
+<li>After the action, the program always re-sends the map with <code>DATAONLY</code> and returns to DL02 (pseudo-conversational).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Create candidate (PF1) – data validation</strong></p>
+<ul>
+<li>Required fields:
+<ul>
+<li>First name (<code>DCMFNAMI</code>) must not be spaces or LOW-VALUES. Otherwise the message is “FIRST NAME IS REQUIRED”.</li>
+<li>Last name (<code>DCMLNAMI</code>) must not be spaces or LOW-VALUES. Otherwise the message is “LAST NAME IS REQUIRED”.</li>
+<li>National ID (<code>DCMIDNOI</code>) must not be spaces or LOW-VALUES. Otherwise the message is “NATIONAL ID IS REQUIRED”.</li>
+</ul>
+</li>
+<li>The checks run in that order, and each failure jumps to <code>CREATE-CANDIDATE-EXIT</code> with <code>GO TO</code>. Only the first failing message is shown, and no database access happens.</li>
+<li>Fields that are not validated:
+<ul>
+<li>Date of birth, address lines, city, state/province, postal code, country, phone and email are copied as entered.</li>
+<li>There is no format, range or length check on them. Their only limits are the PIC sizes of the host variables, for example <code>ID-NUMBER</code> X(20), <code>FIRST-NAME</code> X(30) and <code>EMAIL-ADDRESS</code> X(60).</li>
+</ul>
+</li>
+<li>Duplicate prevention:
+<ul>
+<li>Before the insert, the program selects <code>CANDIDATE_ID</code> from <code>DLIS.CANDIDATE</code> where <code>ID_NUMBER</code> matches and <code>RECORD_STATUS = 'A'</code>.</li>
+<li>If <code>SQLCODE = 0</code>, an active candidate with that ID number already exists. The message is “CANDIDATE WITH THIS ID NUMBER ALREADY EXISTS” and the insert is skipped.</li>
+<li>Uniqueness applies to active candidates only. An inactive (<code>'I'</code>) candidate does not block re-registering the same ID number.</li>
+<li>A SQLCODE other than 0 or 100 on this check is not examined and is treated as “no duplicate”.</li>
+<li>A SELECT INTO that matches more than one row returns SQLCODE -811 (nonzero), which would also be treated as “no duplicate”.</li>
+</ul>
+</li>
+<li>Forced and system-controlled values on insert:
+<ul>
+<li><code>RECORD_STATUS</code> is always set to <code>'A'</code> (active) on creation.</li>
+<li><code>CREATED_BY</code> is set from the terminal ID (<code>EIBTRMID</code>), not from user input.</li>
+<li>The candidate ID is not supplied by the user. It is generated by the database and read back with <code>IDENTITY_VAL_LOCAL()</code>.</li>
+</ul>
+</li>
+<li>Database outcome rules:
+<ul>
+<li>If the insert returns <code>SQLCODE NOT = 0</code>, the message is “DATABASE ERROR ON INSERT - CONTACT SUPPORT” and the program exits without retrieving an ID.</li>
+<li>The result of the <code>IDENTITY_VAL_LOCAL()</code> select is not checked.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Update candidate (PF2)</strong></p>
+<ul>
+<li>Preconditions:
+<ul>
+<li>The candidate ID (<code>DCMCIDI</code>) must not be zeros or LOW-VALUES. Otherwise the message is “CANDIDATE ID IS REQUIRED FOR UPDATE”.</li>
+<li>The update only touches the row where <code>CANDIDATE_ID</code> equals the supplied ID.</li>
+</ul>
+</li>
+<li>Restrictions on what can change:
+<ul>
+<li>The update covers first name, last name, address lines 1 and 2, city, state/province, postal code, country, phone, email and record status.</li>
+<li>Date of birth, national ID number and created-by/created-date are never modified by this function.</li>
+<li>No required-field validation is applied on update, so blank values could overwrite existing data.</li>
+</ul>
+</li>
+<li>Outcome handling:
+<ul>
+<li><code>SQLCODE = 100</code> gives “CANDIDATE NOT FOUND”.</li>
+<li>Any other nonzero SQLCODE gives “DATABASE ERROR ON UPDATE”.</li>
+<li><code>SQLCODE = 0</code> gives “CANDIDATE UPDATED SUCCESSFULLY”.</li>
+</ul>
+</li>
+<li>Implied dependency on working-storage values:
+<ul>
+<li>The update statement uses <code>:FIRST-NAME</code>, <code>:LAST-NAME</code>, <code>:RECORD-STATUS</code> and the other host variables.</li>
+<li>The paragraph does not move the screen input fields into these variables (only <code>CANDIDATE-ID</code> is set).</li>
+<li>The values written are therefore whatever the host variables currently hold, not what the user typed.</li>
+<li>This is an implied data-flow constraint, and it may be a defect.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Inquire candidate (PF3)</strong></p>
+<ul>
+<li>Search criteria:
+<ul>
+<li>At least one search key is required. If the candidate ID is zeros and the national ID is spaces, the message is “ENTER CANDIDATE ID OR NATIONAL ID”.</li>
+<li>The search matches on <code>CANDIDATE_ID</code> OR <code>ID_NUMBER</code>.</li>
+<li><code>FETCH FIRST 1 ROW ONLY</code> limits the result to a single record.</li>
+</ul>
+</li>
+<li>Result handling:
+<ul>
+<li><code>SQLCODE = 100</code> gives “CANDIDATE NOT FOUND” and no fields are displayed.</li>
+<li>Other nonzero SQLCODEs are not checked. If an error occurs, the program still moves the host variables to the screen and reports “CANDIDATE FOUND”.</li>
+</ul>
+</li>
+<li>Visibility:
+<ul>
+<li>Inquire does not filter on <code>RECORD_STATUS</code>, so both active and inactive candidates can be found.</li>
+<li>The record status is shown on the screen (<code>DCMSTSO</code>).</li>
+</ul>
+</li>
+<li>Partial key behavior:
+<ul>
+<li>Because of the OR condition, a blank or zero value for one key can still match rows when the other key is entered.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Deactivate candidate (PF4)</strong></p>
+<ul>
+<li>Preconditions:
+<ul>
+<li>The candidate ID (<code>DCMCIDI</code>) must not be zeros. Otherwise the message is “CANDIDATE ID IS REQUIRED TO DEACTIVATE”.</li>
+<li>The check does not include LOW-VALUES, which differs from update.</li>
+</ul>
+</li>
+<li>Business rule:
+<ul>
+<li>Deactivation is a soft delete. It sets <code>RECORD_STATUS = 'I'</code> and never removes the row.</li>
+<li>The update statement has no status condition, so deactivating an already inactive candidate succeeds.</li>
+<li>There is no check for dependent records such as applications, payments or licences.</li>
+</ul>
+</li>
+<li>Outcome handling:
+<ul>
+<li><code>SQLCODE = 100</code> gives “CANDIDATE NOT FOUND”.</li>
+<li>Any other nonzero SQLCODE gives “DATABASE ERROR ON DEACTIVATE”.</li>
+<li>On success, the status field on the screen is set to <code>'I'</code> and the message is “CANDIDATE DEACTIVATED”.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Sequencing and flow constraints</strong></p>
+<ul>
+<li>Validation comes before any database access in create, update, inquire and deactivate.</li>
+<li>In create, the order is fixed: required-field checks, then the duplicate check, then the insert, then the identity retrieval, then the success message.</li>
+<li>Each function paragraph exits early with <code>GO TO ...-EXIT</code> on the first failure, so only one error message is reported per request.</li>
+<li>Pseudo-conversational sequencing:
+<ul>
+<li>Every interaction ends with <code>EXEC CICS RETURN TRANSID('DL02')</code>, so the next input must come back through transaction DL02 with the COMMAREA.</li>
+<li>The map is received before any function key is evaluated.</li>
+<li>Outbound map handling: the first call sends the full map with <code>ERASE</code>, and later calls send <code>DATAONLY</code>.</li>
+</ul>
+</li>
+<li>Response codes from the CICS SEND and RECEIVE commands are stored in <code>WS-RESP1</code> but never tested. A failed <code>RECEIVE MAP</code> would not stop processing.</li>
+</ul>
+</li>
+<li>
+<p><strong>Resource and size limits</strong></p>
+<ul>
+<li>COMMAREA size:
+<ul>
+<li><code>DFHCOMMAREA</code> is X(350), and the return passes <code>LENGTH(350)</code>.</li>
+<li>Data moved from or to the COMMAREA is limited to 350 bytes.</li>
+</ul>
+</li>
+<li>Field length limits (host variables):
+<ul>
+<li>Candidate ID: S9(10) COMP-3 (up to 10 digits).</li>
+<li>First name and last name: 30 characters each.</li>
+<li>Date of birth: 10 characters.</li>
+<li>ID number: 20 characters.</li>
+<li>Address lines 1 and 2: 50 characters each.</li>
+<li>City, state/province, country: 30 characters each.</li>
+<li>Postal code: 10 characters.</li>
+<li>Phone: 15 characters.</li>
+<li>Email: 60 characters.</li>
+<li>Record status: 1 character.</li>
+</ul>
+</li>
+<li>Inquiry limit: one row per request (<code>FETCH FIRST 1 ROW ONLY</code>).</li>
+<li>Messages are limited by the size of the <code>DCMMSG</code> field.</li>
+</ul>
+</li>
+<li>
+<p><strong>Data integrity and status rules</strong></p>
+<ul>
+<li>Record status values:
+<ul>
+<li><code>'A'</code> means active, set at creation.</li>
+<li><code>'I'</code> means inactive, set on deactivation.</li>
+</ul>
+</li>
+<li>Only active records take part in the duplicate check.</li>
+<li>The candidate ID is system-generated, so users cannot choose it on create.</li>
+<li>The audit field <code>CREATED_BY</code> comes from the terminal ID, which ties creation to the originating terminal.</li>
+<li>Program structure issues that affect enforcement:
+<ul>
+<li>The <code>INSERT</code> contains a stray <code>OF DCLDLIS-CANDIDATE</code> clause after <code>VALUES</code>, and some qualified references in the SQL are unusual.</li>
+<li><code>MAIN-LOGIC</code> ends with <code>STOP RUN</code> after paragraphs that perform CICS RETURN.</li>
+<li>A single leading <code>IF</code> / <code>ELSE IF</code> chain is used for outcome handling in update and deactivate.</li>
+<li>These affect how reliably the rules above are enforced at compile time and run time.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="8-error-handling" tabindex="-1">8. Error Handling</h2>
+<ul>
+<li>
+<p>Input validation on the screen</p>
+<ul>
+<li>Create
+<ul>
+<li>The create routine rejects the request if first name, last name, or national ID is blank or low-values.</li>
+<li>It checks them in that order and stops at the first failure.</li>
+<li>The messages are “FIRST NAME IS REQUIRED”, “LAST NAME IS REQUIRED” and “NATIONAL ID IS REQUIRED”.</li>
+<li>After setting a message, the routine branches straight to its exit paragraph, so no database call is made.</li>
+</ul>
+</li>
+<li>Update
+<ul>
+<li>If the candidate ID is zeros or low-values, the routine sets “CANDIDATE ID IS REQUIRED FOR UPDATE” and exits without touching the database.</li>
+</ul>
+</li>
+<li>Inquire
+<ul>
+<li>If both the candidate ID is zeros and the national ID is blank, the routine sets “ENTER CANDIDATE ID OR NATIONAL ID” and exits.</li>
+<li>The check requires both fields to be empty. A candidate ID of low-values with a blank national ID is not caught by this test.</li>
+</ul>
+</li>
+<li>Deactivate
+<ul>
+<li>If the candidate ID is zeros, the routine sets “CANDIDATE ID IS REQUIRED TO DEACTIVATE” and exits.</li>
+<li>It does not test for low-values, unlike the update routine.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Business rule and duplicate checks</p>
+<ul>
+<li>Before inserting, the create routine selects an active candidate (status ‘A’) with the same national ID.</li>
+<li>If that select returns SQLCODE 0, a duplicate exists. The program sets “CANDIDATE WITH THIS ID NUMBER ALREADY EXISTS” and exits without inserting.</li>
+<li>Any other SQLCODE from this select is not treated as an error. Only “found” blocks the insert, so a real database failure during the check is ignored and processing continues to the insert.</li>
+</ul>
+</li>
+<li>
+<p>Database (DB2) error handling through SQLCODE</p>
+<ul>
+<li>Insert
+<ul>
+<li>After the insert, any SQLCODE other than 0 sets “DATABASE ERROR ON INSERT - CONTACT SUPPORT”.</li>
+<li>The routine then exits without retrieving the generated ID or reporting success. This message tells the user to contact support.</li>
+</ul>
+</li>
+<li>Update
+<ul>
+<li>SQLCODE 100 sets “CANDIDATE NOT FOUND”.</li>
+<li>Any other nonzero SQLCODE sets “DATABASE ERROR ON UPDATE”.</li>
+<li>SQLCODE 0 sets the success message “CANDIDATE UPDATED SUCCESSFULLY”.</li>
+</ul>
+</li>
+<li>Deactivate
+<ul>
+<li>SQLCODE 100 sets “CANDIDATE NOT FOUND”.</li>
+<li>Any other nonzero SQLCODE sets “DATABASE ERROR ON DEACTIVATE”.</li>
+<li>On success, the status field on the screen is set to ‘I’ and the message “CANDIDATE DEACTIVATED” is shown.</li>
+</ul>
+</li>
+<li>Inquire
+<ul>
+<li>SQLCODE 100 sets “CANDIDATE NOT FOUND” and exits before any output fields are filled.</li>
+<li>No other nonzero SQLCODE is handled. Errors such as a negative code or a multi-row condition fall through to the success path and show “CANDIDATE FOUND”.</li>
+<li>The query uses FETCH FIRST 1 ROW ONLY, which avoids the multiple-row error when the ID and national ID match different rows.</li>
+</ul>
+</li>
+<li>Generated ID retrieval
+<ul>
+<li>The SQLCODE of the IDENTITY_VAL_LOCAL select after a successful insert is not checked.</li>
+<li>The program shows the success message regardless of that select’s result.</li>
+</ul>
+</li>
+<li>Not handled
+<ul>
+<li>The program has no WHENEVER SQLERROR or SQLWARNING statement.</li>
+<li>It has no explicit rollback or syncpoint handling after a failed SQL statement.</li>
+<li>It has no distinction between specific negative SQLCODE values such as deadlock, timeout or constraint violation.</li>
+<li>It does not use the SQLCA diagnostic fields to report details.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>User notifications and feedback</p>
+<ul>
+<li>The program reports all outcomes by moving a text message to the map message field, DCMMSG.</li>
+<li>The message is sent back to the terminal by the SEND MAP with DATAONLY at the end of input processing.</li>
+<li>The messages fall into three groups:
+<ul>
+<li>validation failure</li>
+<li>business rule violation or not-found</li>
+<li>database error or success</li>
+</ul>
+</li>
+<li>The user is told to contact support only for insert failures.</li>
+<li>The common working-storage fields for return code, message and color (WS-RETURN-CODE, WS-RETURN-MSG, WS-MSG-COLOR) are defined but never used.</li>
+<li>Error messages are therefore not color-coded.</li>
+</ul>
+</li>
+<li>
+<p>Invalid terminal input handling</p>
+<ul>
+<li>The program evaluates the attention identifier (EIBAID) to route the request.</li>
+<li>PF1 to PF4 route to create, update, inquire and deactivate.</li>
+<li>PF12 exits with a CICS RETURN.</li>
+<li>Any other key falls to the default branch and sets “INVALID KEY - USE F1-F4 OR F12”.</li>
+<li>The message is then displayed on the re-sent screen.</li>
+<li>The default branch is written as OTHER rather than WHEN OTHER, which is a coding defect and may cause a compile error.</li>
+</ul>
+</li>
+<li>
+<p>CICS response handling</p>
+<ul>
+<li>SEND MAP and RECEIVE MAP specify RESP(WS-RESP1), so CICS conditions do not cause an automatic abend.</li>
+<li>WS-RESP1 is never tested after any of these commands. This affects:
+<ul>
+<li>the initial SEND MAP</li>
+<li>the RECEIVE MAP</li>
+<li>the later DATAONLY SEND MAP</li>
+</ul>
+</li>
+<li>A failure such as MAPFAIL, which occurs when the user presses a key with no data, is silently ignored.</li>
+<li>Processing continues using whatever is in the map input fields.</li>
+<li>The RETURN TRANSID commands have no RESP option, so the default CICS handling applies to them.</li>
+<li>The CICS response working-storage fields (WS-RESP2, WS-EIBRESP-SAVE) are defined but not used.</li>
+</ul>
+</li>
+<li>
+<p>Recovery, fallback and flow control</p>
+<ul>
+<li>Each business routine uses early exit through a branch to its own exit paragraph.
+<ul>
+<li>A failed validation or database step skips the remaining processing.</li>
+<li>The routine falls through to the screen send with the message set.</li>
+</ul>
+</li>
+<li>The program is pseudo-conversational. After every outcome, including errors, it sends the map and returns to transaction DL02 with the communication area.
+<ul>
+<li>The user can correct the input and retry.</li>
+<li>There are no automatic retries and no alternate data sources.</li>
+</ul>
+</li>
+<li>On initial entry (EIBCALEN = 0), the program sends a blank screen with an empty message field. This is the only default handling in the program.</li>
+<li>The program does not validate the communication area length beyond testing for zero.
+<ul>
+<li>It copies DFHCOMMAREA, a 350-byte area, into the communication area without a length check.</li>
+<li>It does not check that the length is sufficient.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Gaps and weaknesses in error handling</p>
+<ul>
+<li>Update does not validate its input.
+<ul>
+<li>It does not check that the name fields are populated.</li>
+<li>It does not move the screen input fields into the host variables before the update. The SQL uses host variables that were never loaded from the screen.</li>
+<li>The update can therefore overwrite data with blanks or uninitialized values and still report success.</li>
+</ul>
+</li>
+<li>Duplicate national ID is checked only on create. Update does not check that the new value is unique.</li>
+<li>There is no explicit abend or handling for unexpected CICS conditions, such as a HANDLE ABEND or a call to a common abort routine.</li>
+<li>The program ends with STOP RUN rather than relying on CICS RETURN. Because every path through the main routines ends in a CICS RETURN, this code is unlikely to execute.</li>
+<li>No logging or auditing of errors is done. Examples are writing to a CICS TD or TS queue or an error table. Diagnostics are limited to the terminal message.</li>
+</ul>
+</li>
+</ul>
+<h2 id="9-examples" tabindex="-1">9. Examples</h2>
+<h3 id="91-example-1-create-a-candidate-f1" tabindex="-1">9.1 Example 1: Create a candidate (F1)</h3>
+<p><strong>Input (screen fields, key pressed: F1)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First name</td>
+<td><code>JOHN</code></td>
+</tr>
+<tr>
+<td>Last name</td>
+<td><code>SMITH</code></td>
+</tr>
+<tr>
+<td>Date of birth</td>
+<td><code>1990-05-14</code></td>
+</tr>
+<tr>
+<td>National ID</td>
+<td><code>A1234567</code></td>
+</tr>
+<tr>
+<td>City</td>
+<td><code>BOSTON</code></td>
+</tr>
+<tr>
+<td>Country</td>
+<td><code>USA</code></td>
+</tr>
+<tr>
+<td>Terminal (EIBTRMID)</td>
+<td><code>T001</code></td>
+</tr>
+</tbody>
+</table>
+<p>No active candidate with ID number <code>A1234567</code> exists. The database generates the new candidate ID <code>1001</code>.</p>
+<p><strong>Expected output</strong></p>
+<ul>
+<li>Message: <code>CANDIDATE CREATED SUCCESSFULLY</code></li>
+<li>Candidate ID field: <code>1001</code></li>
+<li>A row is inserted into <code>DLIS.CANDIDATE</code> with <code>RECORD_STATUS = 'A'</code> and <code>CREATED_BY = 'T001'</code>.</li>
+</ul>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>F1 runs <code>CREATE-CANDIDATE</code>.</li>
+<li>First name, last name and national ID are all filled in, so validation passes.</li>
+<li>The duplicate check (<code>SELECT ... WHERE ID_NUMBER = ... AND RECORD_STATUS = 'A'</code>) returns SQLCODE +100 (no row), so processing continues.</li>
+<li>The screen values are copied to the host variables, status <code>'A'</code> is set, and the terminal ID is stored as creator.</li>
+<li>After the <code>INSERT</code>, <code>IDENTITY_VAL_LOCAL()</code> returns the generated ID, which is shown on the screen.</li>
+</ul>
+<h3 id="92-example-2-create-rejected-missing-field-or-duplicate" tabindex="-1">9.2 Example 2: Create rejected (missing field or duplicate)</h3>
+<p><strong>Input A (F1)</strong>: First name <code>JANE</code>, last name left blank, national ID <code>B7654321</code>.</p>
+<ul>
+<li><strong>Output:</strong> <code>LAST NAME IS REQUIRED</code></li>
+<li><strong>Explanation:</strong> The last-name validation fails first, so the program jumps to the exit and no SQL is run.</li>
+</ul>
+<p><strong>Input B (F1)</strong>: First name <code>JOHN</code>, last name <code>SMITH</code>, national ID <code>A1234567</code>, and an active record with this ID already exists.</p>
+<ul>
+<li><strong>Output:</strong> <code>CANDIDATE WITH THIS ID NUMBER ALREADY EXISTS</code></li>
+<li><strong>Explanation:</strong> The duplicate check returns SQLCODE 0, so the insert is skipped.</li>
+</ul>
+<h3 id="93-example-3-inquire-by-candidate-id-f3" tabindex="-1">9.3 Example 3: Inquire by candidate ID (F3)</h3>
+<p><strong>Input:</strong> Candidate ID <code>1001</code>, national ID blank, key F3.</p>
+<p><strong>Expected output</strong></p>
+<ul>
+<li>Message: <code>CANDIDATE FOUND</code></li>
+<li>The screen is filled with the stored data: <code>JOHN</code>, <code>SMITH</code>, <code>1990-05-14</code>, <code>A1234567</code>, <code>BOSTON</code>, <code>USA</code>.</li>
+<li>The status field shows <code>A</code>.</li>
+</ul>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>The query selects the first row where <code>CANDIDATE_ID</code> equals the entered ID or <code>ID_NUMBER</code> equals the entered national ID (<code>FETCH FIRST 1 ROW ONLY</code>).</li>
+<li>A match populates all output fields.</li>
+<li>If nothing matches (SQLCODE +100), the message is <code>CANDIDATE NOT FOUND</code>.</li>
+<li>If both the ID and the national ID are empty, the message is <code>ENTER CANDIDATE ID OR NATIONAL ID</code>.</li>
+</ul>
+<h3 id="94-example-4-deactivate-a-candidate-f4" tabindex="-1">9.4 Example 4: Deactivate a candidate (F4)</h3>
+<p><strong>Input:</strong> Candidate ID <code>1001</code>, key F4.</p>
+<p><strong>Expected output</strong></p>
+<ul>
+<li>Message: <code>CANDIDATE DEACTIVATED</code></li>
+<li>Status field: <code>I</code></li>
+<li>The row for candidate 1001 now has <code>RECORD_STATUS = 'I'</code>.</li>
+</ul>
+<p><strong>Explanation</strong></p>
+<ul>
+<li><code>DEACTIVATE-CANDIDATE</code> is a soft delete: it updates <code>RECORD_STATUS</code> to <code>'I'</code> and does not remove the row.</li>
+<li>A deactivated candidate no longer counts in the “active” duplicate check, so the same national ID can be registered again.</li>
+<li>If the ID does not exist, the message is <code>CANDIDATE NOT FOUND</code>.</li>
+<li>If the ID field is zero, the message is <code>CANDIDATE ID IS REQUIRED TO DEACTIVATE</code>.</li>
+</ul>
+<h3 id="95-example-5-other-keys" tabindex="-1">9.5 Example 5: Other keys</h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F2 with candidate ID <code>1001</code></td>
+<td>Runs the update. On success the message is <code>CANDIDATE UPDATED SUCCESSFULLY</code>. If the ID is not found (SQLCODE +100), it is <code>CANDIDATE NOT FOUND</code>. The update’s SET values come from the host variables (<code>FIRST-NAME</code>, <code>LAST-NAME</code>, and so on). The code does not copy the screen input into them first, so the stored values may not reflect what was typed.</td>
+</tr>
+<tr>
+<td>F12</td>
+<td>Ends the session with <code>EXEC CICS RETURN</code>.</td>
+</tr>
+<tr>
+<td>Any other key (such as ENTER)</td>
+<td>Message <code>INVALID KEY - USE F1-F4 OR F12</code>.</td>
+</tr>
+<tr>
+<td>First entry to transaction DL02 (<code>EIBCALEN = 0</code>)</td>
+<td>The empty map is sent with the current date, and the program returns to await input.</td>
+</tr>
+</tbody>
+</table>
+
+                    </article>
+                    <nav class="toc-panel" aria-label="On this page">
+  <span class="toc-panel-label">On this page</span>
+  <ul class="toc-list">
+<li class="toc-level-2"><a href="#1-purpose">1. Purpose</a></li>
+<li class="toc-level-2"><a href="#2-inputs">2. Inputs</a></li>
+<li class="toc-level-2"><a href="#3-outputs">3. Outputs</a>
+<ul>
+<li class="toc-level-3"><a href="#31-database-outputs">3.1 Database Outputs</a></li>
+<li class="toc-level-3"><a href="#32-user-interface--screen-outputs-bms-map-dliscm01">3.2 User Interface / Screen Outputs (BMS Map DLISCM01)</a></li>
+<li class="toc-level-3"><a href="#33-cics-communication-area-outputs">3.3 CICS Communication Area Outputs</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#4-processing-logic">4. Processing Logic</a>
+<ul>
+<li class="toc-level-3"><a href="#41-mermaid-flow-diagram">4.1 Mermaid Flow Diagram</a></li>
+<li class="toc-level-3"><a href="#42-processing-logic-description">4.2 Processing Logic Description</a></li>
+<li class="toc-level-3"><a href="#43-database-tables">4.3 Database Tables</a></li>
+</ul>
+</li>
+<li class="toc-level-2"><a href="#5-paragraphs">5. Paragraphs</a></li>
+<li class="toc-level-2"><a href="#6-dependencies">6. Dependencies</a></li>
+<li class="toc-level-2"><a href="#7-constraints">7. Constraints</a></li>
+<li class="toc-level-2"><a href="#8-error-handling">8. Error Handling</a></li>
+<li class="toc-level-2"><a href="#9-examples">9. Examples</a>
+<ul>
+<li class="toc-level-3"><a href="#91-example-1-create-a-candidate-f1">9.1 Example 1: Create a candidate (F1)</a></li>
+<li class="toc-level-3"><a href="#92-example-2-create-rejected-missing-field-or-duplicate">9.2 Example 2: Create rejected (missing field or duplicate)</a></li>
+<li class="toc-level-3"><a href="#93-example-3-inquire-by-candidate-id-f3">9.3 Example 3: Inquire by candidate ID (F3)</a></li>
+<li class="toc-level-3"><a href="#94-example-4-deactivate-a-candidate-f4">9.4 Example 4: Deactivate a candidate (F4)</a></li>
+<li class="toc-level-3"><a href="#95-example-5-other-keys">9.5 Example 5: Other keys</a></li>
+</ul>
+</li>
+</ul>
+
+</nav>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="wiki-footer">Made by IBM Bob Premium Package for Z</footer>
+    <script>
+    /* toc-spy.js — highlights the active heading in the TOC panel on scroll */
+    (function () {
+      function init() {
+        var panel = document.querySelector('.toc-panel');
+        if (!panel) return;
+        var links = Array.prototype.slice.call(panel.querySelectorAll('a[href^="#"]'));
+        if (!links.length) return;
+
+        var headingIds = links.map(function (a) { return a.getAttribute('href').slice(1); });
+        var headings = headingIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+        function clearActive() {
+          panel.querySelectorAll('.toc-active').forEach(function (el) { el.classList.remove('toc-active'); });
+          panel.querySelectorAll('.toc-parent-active').forEach(function (el) { el.classList.remove('toc-parent-active'); });
+        }
+
+        function setActive(id) {
+          clearActive();
+          var link = panel.querySelector('a[href="#' + id + '"]');
+          if (!link) return;
+          link.classList.add('toc-active');
+          var li = link.closest('li');
+          if (li) {
+            var parentLi = li.parentElement && li.parentElement.closest('li');
+            if (parentLi) parentLi.classList.add('toc-parent-active');
+          }
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+        headings.forEach(function (h) { observer.observe(h); });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
+    <script>
+    /* breadcrumb.js — reads sessionStorage['wiki_referrer'] and renders breadcrumb.
+       Only fires when the referrer was set by clicking a link inside the Source Files
+       disclosure on a wiki page; clears after rendering so stale state never lingers. */
+    (function () {
+      var raw;
+      try { raw = sessionStorage.getItem('wiki_referrer'); } catch (_e) {}
+      if (!raw) return;
+      /* Consume immediately — prevents the breadcrumb re-appearing on the next visit. */
+      try { sessionStorage.removeItem('wiki_referrer'); } catch (_e) {}
+      var ref;
+      try { ref = JSON.parse(raw); } catch (_e) { return; }
+      if (!ref || !ref.href) return;
+      var bc = document.getElementById('wiki-breadcrumb');
+      if (!bc) return;
+      bc.className = 'wiki-breadcrumb';
+      bc.innerHTML =
+        '<a href="' + ref.href + '">' + (ref.title || 'Back') + '</a>' +
+        '<span class="wiki-breadcrumb-sep"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' +
+        '<span class="wiki-breadcrumb-current">DLISCAND</span>';
+    })();
+    </script>
+    <script>
+    /* sidebar toggle — same as main wiki pages */
+    (function () {
+
+      var STORAGE_KEY = 'sb_open';
+
+      function getOpenSet() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+      }
+
+      function saveOpenSet(set) {
+        try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(set)); } catch (e) {}
+      }
+
+      function findItems(toggle) {
+        var node = toggle.nextSibling;
+        while (node) {
+          if (node.nodeType === 1 && node.classList.contains('nav-section-items'))
+            return node;
+          node = node.nextSibling;
+        }
+        return null;
+      }
+
+      function toggleKey(toggle, index) {
+        var label = (toggle.querySelector('.nav-toggle-text') || toggle).textContent.trim().replace(/\s+/g, ' ');
+        return index + ':' + label;
+      }
+
+      function openSection(toggle, items, key, set) {
+        toggle.classList.add('open');
+        items.classList.add('open');
+        if (set) set[key] = true;
+      }
+
+      function closeSection(toggle, items, key, set) {
+        toggle.classList.remove('open');
+        items.classList.remove('open');
+        if (set) set[key] = false;
+      }
+
+      function init() {
+        var sidebar = document.getElementById('wiki-sidebar');
+        var toggles = Array.prototype.slice.call(
+          document.querySelectorAll('.nav-section-toggle')
+        );
+
+        var savedSet = getOpenSet();
+        var openSet = savedSet || {};
+
+        toggles.forEach(function (toggle, idx) {
+          var items = findItems(toggle);
+          if (!items) return;
+
+          var key = toggleKey(toggle, idx);
+          var shouldOpen = openSet[key] === true;
+
+          if (shouldOpen) {
+            toggle.classList.add('open');
+            items.classList.add('open');
+          }
+
+          toggle.addEventListener('click', function () {
+            var nowOpen = toggle.classList.contains('open');
+            if (nowOpen) {
+              closeSection(toggle, items, key, openSet);
+            } else {
+              openSection(toggle, items, key, openSet);
+            }
+            saveOpenSet(openSet);
+          });
+        });
+
+        saveOpenSet(openSet);
+
+        /* Restore sidebar scroll position after sections are expanded so the
+           scroll height is correct when we apply scrollTop. */
+        if (sidebar) {
+          try {
+            var savedScroll = sessionStorage.getItem('sb_scroll');
+            if (savedScroll !== null) { sidebar.scrollTop = parseInt(savedScroll, 10) || 0; }
+          } catch (_e) {}
+        }
+
+        window.addEventListener('pagehide', function () {
+          saveOpenSet(openSet);
+          if (sidebar) {
+            try { sessionStorage.setItem('sb_scroll', String(sidebar.scrollTop)); } catch (_e) {}
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+    </script>
+</body>
+</html>

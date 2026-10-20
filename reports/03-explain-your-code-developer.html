@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DLISISSU – Developer Explanation</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<style>
+  :root { --accent:#0f62fe; --bg:#f4f6f9; --card:#fff; --text:#161616; --muted:#525252; --border:#d0d5dd; }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); margin: 0; line-height: 1.55; }
+  header { background: #161616; color: #fff; padding: 28px 40px; }
+  header h1 { margin: 0 0 6px; font-size: 1.8rem; }
+  header p { margin: 0; color: #c6c6c6; }
+  nav { background: #262626; padding: 10px 40px; position: sticky; top: 0; z-index: 10; }
+  nav a { color: #78a9ff; text-decoration: none; margin-right: 18px; font-size: .9rem; }
+  nav a:hover { text-decoration: underline; }
+  main { max-width: 1100px; margin: 0 auto; padding: 24px 24px 60px; }
+  section { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 22px 28px; margin-bottom: 22px; }
+  h2 { margin-top: 0; border-bottom: 2px solid var(--accent); padding-bottom: 6px; font-size: 1.35rem; }
+  h3 { margin-bottom: 6px; font-size: 1.05rem; color: #0043ce; }
+  h4 { margin: 14px 0 6px; font-size: .98rem; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: .92rem; }
+  th, td { border: 1px solid var(--border); padding: 7px 10px; text-align: left; vertical-align: top; }
+  th { background: #e8edf5; }
+  tr:nth-child(even) td { background: #fafbfc; }
+  code { background: #eef1f6; padding: 1px 5px; border-radius: 3px; font-family: Consolas, Menlo, monospace; font-size: .88em; }
+  .meta { display: flex; flex-wrap: wrap; gap: 12px; margin: 12px 0 0; }
+  .badge { background: #edf5ff; border: 1px solid #a6c8ff; color: #0043ce; padding: 3px 10px; border-radius: 14px; font-size: .82rem; }
+  .callout { border-left: 4px solid #f1c21b; background: #fcf4d6; padding: 10px 14px; margin: 12px 0; border-radius: 4px; }
+  .risk { border-left: 4px solid #da1e28; background: #fff1f1; padding: 8px 14px; margin: 10px 0; border-radius: 4px; }
+  .info { border-left: 4px solid #0f62fe; background: #edf5ff; padding: 10px 14px; margin: 12px 0; border-radius: 4px; }
+  .mermaid { text-align: center; overflow-x: auto; margin-top: 8px; }
+  ul { padding-left: 22px; }
+  ol { padding-left: 22px; }
+  li { margin-bottom: 4px; }
+  footer { text-align: center; color: var(--muted); font-size: .82rem; padding: 20px; }
+  .step-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 14px; }
+  .step-card { border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; background: #fafbff; }
+  .step-card h4 { margin: 0 0 8px; color: var(--accent); font-size: .95rem; text-transform: none; letter-spacing: 0; }
+  .key-pill { display: inline-block; background: #defbe6; border: 1px solid #42be65; color: #0e6027; padding: 1px 8px; border-radius: 10px; font-size: .8rem; margin-left: 4px; }
+  .warn-pill { display: inline-block; background: #fff1f1; border: 1px solid #fa4d56; color: #a2191f; padding: 1px 8px; border-radius: 10px; font-size: .8rem; margin-left: 4px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>DLISISSU – License Issuance Program</h1>
+  <p>Developer perspective explanation of <code>cobol/DLISISSU.cbl</code> (CICS transaction DL09)</p>
+  <div class="meta">
+    <span class="badge">Enterprise COBOL for z/OS</span>
+    <span class="badge">CICS pseudo-conversational</span>
+    <span class="badge">DB2 embedded SQL</span>
+    <span class="badge">BMS mapset DLISLI / map DLISLIM01</span>
+  </div>
+</header>
+
+<nav>
+  <a href="#overview">1. Overview</a>
+  <a href="#structures">2. Data Structures</a>
+  <a href="#model">3. Execution Model</a>
+  <a href="#procedure">4. Procedure Division</a>
+  <a href="#functional">5. Functional Areas</a>
+  <a href="#db2">6. DB2 Interactions</a>
+  <a href="#external">7. External Programs</a>
+  <a href="#cics">8. CICS Commands</a>
+  <a href="#io">9. I/O Summary</a>
+  <a href="#diagram">10. Program Flow</a>
+</nav>
+
+<main>
+
+<!-- ═══════════════════════════════ 1. OVERVIEW ═══════════════════════════════ -->
+<section id="overview">
+  <h2>1. Program Overview</h2>
+  <p>
+    <strong>DLISISSU</strong> is a CICS pseudo-conversational COBOL online program that implements the driver license
+    issuance function within the DLIS (Driver Licensing Information System) application suite. It runs under CICS
+    transaction identifier <strong>DL09</strong> and uses BMS map <strong>DLISLIM01</strong> within mapset
+    <strong>DLISLI</strong> as its single screen. The program has no file I/O other than its two DB2 table
+    interactions; all persistence is managed through embedded SQL.
+  </p>
+  <p>
+    The program terminates every processing cycle with <code>STOP RUN</code>, which in a CICS environment returns
+    control to CICS — it does not keep the task alive across terminal interactions. State is preserved across screen
+    interactions by returning control to CICS with
+    <code>EXEC CICS RETURN TRANSID('DL09') COMMAREA(DLIS-COMMAREA) LENGTH(350)</code>, which re-queues the
+    transaction and carries a 350-byte communication area into the next invocation.
+  </p>
+  <div class="meta" style="margin-top:14px;">
+    <span class="badge">Transaction: DL09</span>
+    <span class="badge">Map: DLISLIM01</span>
+    <span class="badge">Mapset: DLISLI</span>
+    <span class="badge">COMMAREA: 350 bytes</span>
+    <span class="badge">DB2 tables: ISSUED_LICENSE, LICENSE_APPLICATION</span>
+    <span class="badge">CICS LINK: DLISLPRT</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ 2. DATA STRUCTURES ═══════════════════════════════ -->
+<section id="structures">
+  <h2>2. Data Structures and Copybooks</h2>
+  <p>The WORKING-STORAGE SECTION is built from several inline-expanded copybooks (originally <code>COPY</code> statements that are present but commented out):</p>
+
+  <h3>WS-COMMON-AREA <span style="font-weight:normal;font-size:.85rem;color:var(--muted)">(from DLISWS)</span></h3>
+  <p>Holds the current date broken into <code>WS-CURR-YYYY</code>, <code>WS-CURR-MM</code>, and <code>WS-CURR-DD</code>
+  components, a message text area (<code>WS-RETURN-MSG</code>), the signed return code (<code>WS-RETURN-CODE</code>),
+  the current user ID (<code>WS-USER-ID</code>), and a message color indicator defaulting to <code>'GREEN'</code>.</p>
+
+  <h3>WS-APPLICATION <span style="font-weight:normal;font-size:.85rem;color:var(--muted)">(from DLISWS)</span></h3>
+  <p>Holds the working copy of application-level status indicators used during processing: <code>WS-APPLICATION-ID</code>,
+  <code>WS-LICENSE-TYPE</code>, <code>WS-APP-STATUS</code>, and the five gate statuses —
+  <code>WS-ELIG-STATUS</code>, <code>WS-HIST-STATUS</code>, <code>WS-PAY-STATUS</code>,
+  <code>WS-APP1-STATUS</code>, <code>WS-APP2-STATUS</code>.</p>
+
+  <h3>WS-LICENSE <span style="font-weight:normal;font-size:.85rem;color:var(--muted)">(from DLISWS)</span></h3>
+  <p>Contains the generated license data for a current issuance cycle: <code>WS-LICENSE-NUMBER</code> (20 characters),
+  <code>WS-VEHICLE-CLASS</code>, <code>WS-RESTRICTIONS</code>, <code>WS-ISSUED-BY-OFFICER</code>,
+  <code>WS-ISSUED-BY-AUTH</code>, <code>WS-EXPIRY-DATE</code>, <code>WS-YEARS-VALID</code>, and
+  <code>WS-LIC-PREFIX</code> (3 characters). The working-storage fields <code>WS-ISSUE-DATE</code>,
+  <code>WS-EXPIRY-YYYY</code>, and <code>WS-EXPIRY-MMDD</code> are declared at the 01 level separately to
+  support date calculations.</p>
+
+  <h3>DB2 DCLGEN Host Variable Structures <span style="font-weight:normal;font-size:.85rem;color:var(--muted)">(from DLISDCLG)</span></h3>
+  <table>
+    <thead><tr><th>Structure</th><th>DB2 Table</th><th>Used at Runtime?</th></tr></thead>
+    <tbody>
+      <tr><td><code>DCLDLIS-LICENSE-APPL</code></td><td><code>DLIS.LICENSE_APPLICATION</code></td><td><span class="key-pill">Yes</span></td></tr>
+      <tr><td><code>DCLDLIS-CANDIDATE</code></td><td><code>DLIS.CANDIDATE</code></td><td><span class="key-pill">Yes</span></td></tr>
+      <tr><td><code>DCLDLIS-ISSUED-LIC</code></td><td><code>DLIS.ISSUED_LICENSE</code></td><td><span class="key-pill">Yes</span></td></tr>
+      <tr><td><code>DCLDLIS-DRIVING-HIST</code></td><td><code>DLIS.DRIVING_HISTORY</code></td><td><span class="warn-pill">Declared only</span></td></tr>
+      <tr><td><code>DCLDLIS-PAYMENT</code></td><td><code>DLIS.PAYMENT</code></td><td><span class="warn-pill">Declared only</span></td></tr>
+      <tr><td><code>DCLDLIS-AUTH-USER</code></td><td><code>DLIS.AUTHORITY_USER</code></td><td><span class="warn-pill">Declared only</span></td></tr>
+      <tr><td><code>DCLDLIS-FEE-SCHED</code></td><td><code>DLIS.LICENSE_FEE_SCHEDULE</code></td><td><span class="warn-pill">Declared only</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>SQLCA</h3>
+  <p>The SQL Communication Area is included twice: once within the DLISWS copybook expansion and once directly at line
+  389. After every SQL execution, DB2 places a return code in <code>SQLCODE</code>. A value of <code>0</code> signals
+  success, <code>+100</code> signals no row found (NOT FOUND condition), and a negative value signals a DB2 error.</p>
+
+  <h3>COMMAREA Layouts <span style="font-weight:normal;font-size:.85rem;color:var(--muted)">(from DLISCSEC)</span></h3>
+  <p>Three COMMAREA structures are declared:</p>
+  <ul>
+    <li><strong><code>DLIS-COMMAREA</code></strong> — the primary 350-byte navigation commarea containing
+    <code>CA-TRANSACTION-ID</code>, <code>CA-CANDIDATE-ID</code>, <code>CA-APPLICATION-ID</code>,
+    <code>CA-LICENSE-ID</code>, <code>CA-PAYMENT-ID</code>, <code>CA-USER-ID</code>, <code>CA-RETURN-CODE</code>,
+    <code>CA-MSG-TEXT</code>, <code>CA-MSG-COLOR</code>, and <code>CA-ACTION</code>.</li>
+    <li><strong><code>DLIS-CAND-COMMAREA</code></strong> — candidate personal data layout.</li>
+    <li><strong><code>DLIS-APPL-COMMAREA</code></strong> — application status data layout including all five gate
+    statuses and <code>CA-LICENSE-NUMBER</code>.</li>
+  </ul>
+  <p>All three structures share the same 350-byte <code>DFHCOMMAREA</code> storage in the LINKAGE SECTION through the
+  CICS COMMAREA mechanism; the program overlays <code>DFHCOMMAREA</code> onto <code>DLIS-COMMAREA</code> by a direct
+  MOVE at the start of subsequent invocations.</p>
+
+  <h3>Null Indicators</h3>
+  <p><code>WS-NULL-INDICATORS</code> holds nine halfword COMP indicators (<code>NI-ADDR2</code>,
+  <code>NI-ELIG-DATE</code>, <code>NI-HIST-DATE</code>, <code>NI-PAY-REF</code>, <code>NI-A1-DATE</code>,
+  <code>NI-A2-DATE</code>, <code>NI-SUSP-END</code>, <code>NI-EXPIRY</code>, <code>NI-PREV-LIC</code>), all
+  initialized to 0. These are declared but none are referenced as indicator variables in any SQL statement — they are
+  present as part of the shared working storage copybook.</p>
+</section>
+
+<!-- ═══════════════════════════════ 3. EXECUTION MODEL ═══════════════════════════════ -->
+<section id="model">
+  <h2>3. Pseudo-Conversational Execution Model</h2>
+  <p>DLISISSU follows the standard CICS pseudo-conversational pattern. When <code>EIBCALEN</code> equals zero, no
+  commarea was passed to the task, meaning this is the very first invocation — the program routes to
+  <code>INIT-SCREEN</code>. On every subsequent invocation <code>EIBCALEN</code> is non-zero, and
+  <code>DFHCOMMAREA</code> is moved into <code>DLIS-COMMAREA</code> before control passes to
+  <code>PROCESS-INPUT</code>.</p>
+  <p>After each cycle, the program issues:</p>
+  <p><code>EXEC CICS RETURN TRANSID('DL09') COMMAREA(DLIS-COMMAREA) LENGTH(350)</code></p>
+  <p>This suspends the task, returns the terminal to the user, and pre-arms CICS to re-invoke DLISISSU under
+  transaction DL09 the next time the user presses an attention key. This means <strong>no CICS task exists
+  between keystrokes</strong> and no z/OS storage is held — the full 350-byte state of the conversation lives
+  exclusively in the CICS-managed COMMAREA.</p>
+  <div class="info">
+    <strong>Key design point:</strong> The bare <code>EXEC CICS RETURN END-EXEC</code> used for the F12 exit path
+    does not specify a <code>TRANSID</code>, so CICS does not pre-arm the next invocation and the transaction
+    terminates definitively.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ 4. PROCEDURE DIVISION ═══════════════════════════════ -->
+<section id="procedure">
+  <h2>4. Procedure Division — Execution Flow</h2>
+
+  <h3>MAIN-LOGIC (Entry Point)</h3>
+  <p>This is the sole entry point. It tests <code>EIBCALEN</code>:</p>
+  <ul>
+    <li><strong>= 0</strong> → <code>PERFORM INIT-SCREEN</code></li>
+    <li><strong>≠ 0</strong> → MOVE <code>DFHCOMMAREA</code> TO <code>DLIS-COMMAREA</code>, then <code>PERFORM PROCESS-INPUT</code></li>
+  </ul>
+  <p>The paragraph ends with <code>STOP RUN</code>, which terminates the CICS task after the chosen path completes.</p>
+
+  <h3>INIT-SCREEN — First Invocation Initialization</h3>
+  <p>Executed only when the transaction is started fresh (no commarea). The current system date is obtained via the
+  <code>CURRENT-DATE</code> intrinsic function, with the first 10 characters moved to <code>DLIDATE</code> (the date
+  output field on the map). Then:</p>
+  <ol>
+    <li><code>EXEC CICS SEND MAP('DLISLIM01') MAPSET('DLISLI') ERASE FREEKB RESP(WS-RESP1)</code> — sends the map to
+    the 3270 terminal. <code>ERASE</code> clears the entire screen buffer and returns the cursor to the upper-left
+    corner. <code>FREEKB</code> unlocks the 3270 keyboard so the operator can type immediately.</li>
+    <li><code>EXEC CICS RETURN TRANSID('DL09') COMMAREA(DLIS-COMMAREA) LENGTH(350)</code> — terminates the task and
+    instructs CICS to re-invoke DLISISSU under DL09 at the next attention keystroke, setting <code>EIBCALEN</code>
+    to 350 on the next invocation.</li>
+  </ol>
+
+  <h3>PROCESS-INPUT — Subsequent Invocation Dispatcher</h3>
+  <p>Executes on every invocation after the first. It first reads the screen input:</p>
+  <p><code>EXEC CICS RECEIVE MAP('DLISLIM01') MAPSET('DLISLI') RESP(WS-RESP1)</code> — maps the inbound 3270 data
+  stream from the terminal into the symbolic map area. BMS translates each modified screen field into the
+  corresponding <code>-I</code> (input) suffix map field. After this command, <code>EIBAID</code> contains the
+  one-byte Attention Identifier (AID) corresponding to the key pressed.</p>
+  <p>An <code>EVALUATE TRUE</code> block dispatches on <code>EIBAID</code>:</p>
+  <table>
+    <thead><tr><th>AID Value</th><th>Key</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td><code>DFHPF1</code></td><td>F1</td><td><code>PERFORM ISSUE-LICENSE</code></td></tr>
+      <tr><td><code>DFHPF3</code></td><td>F3</td><td><code>PERFORM LOAD-APPLICATION</code></td></tr>
+      <tr><td><code>DFHPF6</code></td><td>F6</td><td><code>PERFORM PRINT-LICENSE</code></td></tr>
+      <tr><td><code>DFHPF12</code></td><td>F12</td><td><code>EXEC CICS RETURN END-EXEC</code> — unconditional exit, no re-queue</td></tr>
+      <tr><td><em>Any other</em></td><td>OTHER</td><td>Moves <code>'USE F1 F3 F6 OR F12'</code> to <code>DLIMSG</code></td></tr>
+    </tbody>
+  </table>
+  <p>After the EVALUATE (for all paths except F12), control falls through to:</p>
+  <ol>
+    <li><code>EXEC CICS SEND MAP('DLISLIM01') MAPSET('DLISLI') DATAONLY FREEKB RESP(WS-RESP1)</code> — sends the
+    updated map back using <code>DATAONLY</code>, which writes only the application data fields without
+    re-transmitting static screen labels, reducing network traffic.</li>
+    <li><code>EXEC CICS RETURN TRANSID('DL09') COMMAREA(DLIS-COMMAREA) LENGTH(350)</code> — re-queues the transaction.</li>
+  </ol>
+  <div class="callout">
+    <strong>Unhandled AID values:</strong> When a key other than PF1, PF3, PF6, or PF12 is pressed (e.g., Enter, PF2,
+    Clear, PA keys), the <code>OTHER</code> branch sets the message field to guidance text and falls through to
+    <code>SEND MAP DATAONLY</code>. No ABEND or error is raised.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ 5. FUNCTIONAL AREAS ═══════════════════════════════ -->
+<section id="functional">
+  <h2>5. Functional Areas</h2>
+
+  <h3>F3 — LOAD-APPLICATION Paragraph</h3>
+  <p>This paragraph retrieves a license application and its associated candidate from DB2 using the Application ID
+  entered on the screen (<code>DLIAIDI</code>).</p>
+  <p><strong>Input validation:</strong> If <code>DLIAIDI</code> is zero, the message <code>'ENTER APPLICATION ID'</code>
+  is placed in <code>DLIMSG</code> and the paragraph exits via <code>GO TO LOAD-APP-EXIT</code>.</p>
+  <p><strong>DB2 SELECT — JOIN query:</strong> A single <code>SELECT … INTO</code> retrieves eight columns from
+  <code>DLIS.LICENSE_APPLICATION</code> and two from <code>DLIS.CANDIDATE</code> via a JOIN on
+  <code>CANDIDATE_ID</code>:</p>
+  <ul>
+    <li>From <code>DLIS.LICENSE_APPLICATION</code>: <code>CANDIDATE_ID</code>, <code>LICENSE_TYPE</code>,
+    <code>APPLICATION_STATUS</code>, <code>ELIG_CHECK_STATUS</code>, <code>HIST_CHECK_STATUS</code>,
+    <code>PAYMENT_STATUS</code>, <code>APPROVAL_1_STATUS</code>, <code>APPROVAL_2_STATUS</code>.</li>
+    <li>From <code>DLIS.CANDIDATE</code>: <code>FIRST_NAME</code>, <code>LAST_NAME</code>.</li>
+  </ul>
+  <p><strong>Result handling:</strong></p>
+  <ul>
+    <li>If <code>SQLCODE = 100</code> (NOT FOUND): <code>'APPLICATION NOT FOUND'</code> is moved to <code>DLIMSG</code> and the paragraph exits.</li>
+    <li>On success: the candidate's full name is assembled using a <code>STRING</code> statement into <code>DLICNAMO</code>. All five gate statuses and <code>LICENSE-TYPE</code> are moved to their respective map output fields. The message <code>'APPLICATION LOADED'</code> is placed in <code>DLIMSG</code> to signal success to the caller.</li>
+  </ul>
+
+  <h3>F1 — ISSUE-LICENSE Paragraph</h3>
+  <p>This is the primary business logic paragraph. It performs all validation, date calculation, license number
+  generation, and database writes necessary to issue a driver license.</p>
+
+  <h4>Step 1 — Screen Field Validation (Four Guards)</h4>
+  <p>Four sequential guards validate mandatory input fields. Any failure sets a descriptive message in <code>DLIMSG</code>
+  and branches to <code>ISSUE-LIC-EXIT</code>, bypassing all further processing:</p>
+  <table>
+    <thead><tr><th>Guard</th><th>Condition</th><th>Message</th></tr></thead>
+    <tbody>
+      <tr><td>Application ID</td><td><code>DLIAIDI = ZEROS</code></td><td><code>'ENTER APPLICATION ID'</code></td></tr>
+      <tr><td>Vehicle Class</td><td><code>DLIVCLSI = SPACES</code> or not in <code>('A','B','C','D')</code></td><td><code>'VEHICLE CLASS MUST BE A B C OR D'</code></td></tr>
+      <tr><td>Issuing Officer</td><td><code>DLIOFCRI = SPACES</code></td><td><code>'ISSUING OFFICER IS REQUIRED'</code></td></tr>
+      <tr><td>Issuing Authority</td><td><code>DLIAUTHI = SPACES</code></td><td><code>'ISSUING AUTHORITY IS REQUIRED'</code></td></tr>
+    </tbody>
+  </table>
+
+  <h4>Step 2 — Application Load and Status Gate</h4>
+  <p><code>PERFORM LOAD-APPLICATION</code> is called inline. If <code>DLIMSG</code> is anything other than
+  <code>'APPLICATION LOADED'</code>, the paragraph exits immediately. After a successful load,
+  <code>APPLICATION-STATUS</code> is checked — if it is not <code>'AP'</code> (Approved), the message
+  <code>'APPLICATION STATUS MUST BE AP BEFORE ISSUE'</code> is set and the paragraph exits.</p>
+  <div class="info">
+    <strong>Note:</strong> The five individual gate fields (eligibility, history, payment, approval 1, approval 2) are
+    displayed to the user for review but are <em>not</em> individually re-evaluated in the issuance logic — only the
+    composite <code>'AP'</code> status is enforced programmatically.
+  </div>
+
+  <h4>Step 3 — Expiry Date Calculation</h4>
+  <p>The current system date is obtained via <code>CURRENT-DATE</code>:</p>
+  <ul>
+    <li><code>CURRENT-DATE(1:10)</code> → <code>WS-ISSUE-DATE</code></li>
+    <li><code>CURRENT-DATE(1:4)</code> → <code>WS-EXPIRY-YYYY</code></li>
+    <li><code>CURRENT-DATE(5:6)</code> → <code>WS-EXPIRY-MMDD</code></li>
+  </ul>
+  <p>An <code>EVALUATE</code> on <code>LICENSE-TYPE</code> sets the validity period and license number prefix:</p>
+  <table>
+    <thead><tr><th>License Type</th><th>Years Added</th><th>Prefix</th></tr></thead>
+    <tbody>
+      <tr><td><code>'L'</code> — Learner</td><td>1</td><td><code>'LRN'</code></td></tr>
+      <tr><td><code>'P'</code> — Probationary</td><td>2</td><td><code>'PRB'</code></td></tr>
+      <tr><td><code>'O'</code> — Open</td><td>5</td><td><code>'OPN'</code></td></tr>
+    </tbody>
+  </table>
+  <div class="risk">
+    <strong>Silent boundary behavior:</strong> The <code>EVALUATE</code> covers only <code>'L'</code>,
+    <code>'P'</code>, and <code>'O'</code>. Any other license type value causes no WHEN branch to match —
+    <code>WS-LIC-PREFIX</code> remains spaces and <code>WS-EXPIRY-YYYY</code> is not incremented, producing a
+    malformed license number and a same-year expiry date with no error message or abend.
+  </div>
+
+  <h4>Step 4 — License Number Generation</h4>
+  <p><code>STRING WS-LIC-PREFIX DLIVCLSI CANDIDATE-ID APPLICATION-ID INTO WS-LICENSE-NUMBER</code></p>
+  <p>The 20-character <code>WS-LICENSE-NUMBER</code> is constructed by concatenating without delimiters: the 3-character
+  type prefix, the vehicle class, the packed-decimal <code>CANDIDATE-ID</code>, and the packed-decimal
+  <code>APPLICATION-ID</code>.</p>
+  <div class="risk">
+    <strong>Packed decimal in STRING:</strong> Because <code>CANDIDATE-ID</code> and <code>APPLICATION-ID</code> are
+    <code>PIC S9(10) COMP-3</code> (packed decimal), their raw internal representation is concatenated into the license
+    number string without a prior MOVE to a display field. This means the license number may contain non-printable bytes.
+  </div>
+
+  <h4>Step 5 — DB2 INSERT into DLIS.ISSUED_LICENSE</h4>
+  <p>Input fields are moved from screen map fields to host variables before the INSERT:</p>
+  <ul>
+    <li><code>DLIVCLSI</code> → <code>VEHICLE-CLASS OF DCLDLIS-ISSUED-LIC</code></li>
+    <li><code>DLIOFCRI</code> → <code>ISSUED-BY-OFFICER OF DCLDLIS-ISSUED-LIC</code></li>
+    <li><code>DLIAUTHI</code> → <code>ISSUED-BY-AUTH OF DCLDLIS-ISSUED-LIC</code></li>
+    <li><code>DLIRSTI</code> → <code>RESTRICTIONS OF DCLDLIS-ISSUED-LIC</code></li>
+  </ul>
+  <table>
+    <thead><tr><th>Column</th><th>Value Source</th></tr></thead>
+    <tbody>
+      <tr><td><code>APPLICATION_ID</code></td><td><code>:APPLICATION-ID</code> (host variable)</td></tr>
+      <tr><td><code>CANDIDATE_ID</code></td><td><code>:CANDIDATE-ID</code> (host variable)</td></tr>
+      <tr><td><code>LICENSE_NUMBER</code></td><td><code>:WS-LICENSE-NUMBER</code></td></tr>
+      <tr><td><code>LICENSE_TYPE</code></td><td><code>:LICENSE-TYPE</code> (host variable)</td></tr>
+      <tr><td><code>ISSUE_DATE</code></td><td><code>CURRENT DATE</code> (DB2 special register)</td></tr>
+      <tr><td><code>EXPIRY_DATE</code></td><td><code>:WS-EXPIRY-DATE</code></td></tr>
+      <tr><td><code>LICENSE_STATUS</code></td><td><code>'A'</code> (hardcoded — Active)</td></tr>
+      <tr><td><code>VEHICLE_CLASS</code></td><td><code>:VEHICLE-CLASS</code></td></tr>
+      <tr><td><code>RESTRICTIONS</code></td><td><code>:RESTRICTIONS</code></td></tr>
+      <tr><td><code>DEMERIT_BALANCE</code></td><td><code>12</code> (hardcoded literal)</td></tr>
+      <tr><td><code>ISSUED_BY_AUTH</code></td><td><code>:ISSUED-BY-AUTH</code></td></tr>
+      <tr><td><code>ISSUED_BY_OFFICER</code></td><td><code>:ISSUED-BY-OFFICER</code></td></tr>
+    </tbody>
+  </table>
+  <div class="callout">
+    <strong>Hardcoded business rules:</strong> <code>LICENSE_STATUS</code> is always <code>'A'</code> (Active).
+    <code>DEMERIT_BALANCE</code> is always initialized to <code>12</code> — every newly issued license starts with 12
+    demerit points regardless of license type or candidate history.
+  </div>
+  <p>If <code>SQLCODE NOT = 0</code> after the INSERT, <code>'DATABASE ERROR ON LICENSE INSERT'</code> is placed in
+  <code>DLIMSG</code> and the paragraph exits. No rollback is explicitly issued; CICS manages the unit of work sync
+  point at task end via <code>STOP RUN</code>.</p>
+
+  <h4>Step 6 — DB2 UPDATE of DLIS.LICENSE_APPLICATION</h4>
+  <p><code>UPDATE DLIS.LICENSE_APPLICATION SET APPLICATION_STATUS = 'IS', LAST_UPDATED_DATE = CURRENT DATE,
+  LAST_UPDATED_BY = :DLIOFCRI WHERE APPLICATION_ID = :APPLICATION-ID</code></p>
+  <p>The application record is updated to status <code>'IS'</code> (Issued). <code>LAST_UPDATED_DATE</code> is set to
+  the DB2 <code>CURRENT DATE</code> special register. <code>LAST_UPDATED_BY</code> is populated with the issuing
+  officer identifier.</p>
+  <div class="risk">
+    <strong>Unchecked SQLCODE:</strong> The SQLCODE from this UPDATE is not individually checked. If it fails
+    silently, the license INSERT stands but the application status remains <code>'AP'</code>, creating a potential
+    data inconsistency.
+  </div>
+
+  <h4>Step 7 — Screen Update on Success</h4>
+  <p><code>WS-LICENSE-NUMBER</code> is moved to <code>DLIILNUMO</code> (issued license number output field) and
+  <code>WS-EXPIRY-DATE</code> is moved to <code>DLIEXPO</code> (expiry date output field). The message
+  <code>'DRIVER LICENSE ISSUED SUCCESSFULLY'</code> is placed in <code>DLIMSG</code>.</p>
+
+  <h3>F6 — PRINT-LICENSE Paragraph</h3>
+  <p>This paragraph delegates printing to an external program.</p>
+  <p><strong>Guard:</strong> If <code>DLIILNUMO</code> is spaces, the message <code>'ISSUE LICENSE FIRST BEFORE
+  PRINTING'</code> is set and the paragraph exits. A license must have been successfully issued in a prior F1
+  invocation within the same session.</p>
+  <p><strong>Program delegation:</strong> <code>EXEC CICS LINK PROGRAM('DLISLPRT') COMMAREA(DLIS-COMMAREA)
+  LENGTH(350)</code> — issues a synchronous CICS LINK to <code>DLISLPRT</code>. DLISISSU suspends at the LINK
+  point, DLISLPRT runs to completion, then control is returned to the statement immediately following the LINK.
+  After the LINK returns, <code>'LICENSE SENT TO PRINTER'</code> is moved to <code>DLIMSG</code>.</p>
+
+  <h3>F12 — Exit</h3>
+  <p><code>EXEC CICS RETURN END-EXEC</code> within the EVALUATE block terminates the task definitively. Unlike the
+  <code>RETURN TRANSID('DL09') COMMAREA(…)</code> form used for pseudo-conversational re-queue, this bare
+  <code>RETURN</code> does not specify a <code>TRANSID</code>, so CICS does not pre-arm the next invocation and
+  the transaction ends. The remaining code in <code>PROCESS-INPUT</code> is never reached.</p>
+</section>
+
+<!-- ═══════════════════════════════ 6. DB2 INTERACTIONS ═══════════════════════════════ -->
+<section id="db2">
+  <h2>6. DB2 Interactions Summary</h2>
+  <table>
+    <thead><tr><th>Paragraph</th><th>Operation</th><th>Table(s)</th><th>Key</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><code>LOAD-APPLICATION</code></td>
+        <td><code>SELECT … INTO</code> (JOIN)</td>
+        <td><code>DLIS.LICENSE_APPLICATION</code> JOIN <code>DLIS.CANDIDATE</code></td>
+        <td><code>APPLICATION_ID</code></td>
+      </tr>
+      <tr>
+        <td><code>ISSUE-LICENSE</code></td>
+        <td><code>INSERT</code></td>
+        <td><code>DLIS.ISSUED_LICENSE</code></td>
+        <td>N/A (new row)</td>
+      </tr>
+      <tr>
+        <td><code>ISSUE-LICENSE</code></td>
+        <td><code>UPDATE</code></td>
+        <td><code>DLIS.LICENSE_APPLICATION</code></td>
+        <td><code>APPLICATION_ID</code></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════════════════════ 7. EXTERNAL PROGRAMS ═══════════════════════════════ -->
+<section id="external">
+  <h2>7. External Program Interactions</h2>
+  <table>
+    <thead><tr><th>Program</th><th>Mechanism</th><th>Commarea</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><code>DLISLPRT</code></td>
+        <td><code>EXEC CICS LINK</code></td>
+        <td><code>DLIS-COMMAREA</code> (350 bytes)</td>
+        <td>License print delegation</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════════════════════ 8. CICS COMMANDS ═══════════════════════════════ -->
+<section id="cics">
+  <h2>8. CICS Commands Summary</h2>
+  <table>
+    <thead><tr><th>Command</th><th>Where Used</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>SEND MAP … ERASE FREEKB</code></td><td><code>INIT-SCREEN</code></td><td>Initial blank map display; ERASE clears screen, FREEKB unlocks keyboard</td></tr>
+      <tr><td><code>RETURN TRANSID('DL09') COMMAREA(…)</code></td><td><code>INIT-SCREEN</code>, <code>PROCESS-INPUT</code></td><td>Pseudo-conversational re-queue with state</td></tr>
+      <tr><td><code>RECEIVE MAP</code></td><td><code>PROCESS-INPUT</code></td><td>Read terminal input into symbolic map fields</td></tr>
+      <tr><td><code>SEND MAP … DATAONLY FREEKB</code></td><td><code>PROCESS-INPUT</code></td><td>Refresh only data fields after each action</td></tr>
+      <tr><td><code>RETURN</code> (bare)</td><td>F12 path in <code>PROCESS-INPUT</code></td><td>Unconditional task termination</td></tr>
+      <tr><td><code>LINK PROGRAM('DLISLPRT')</code></td><td><code>PRINT-LICENSE</code></td><td>Synchronous call to print program</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════════════════════ 9. I/O SUMMARY ═══════════════════════════════ -->
+<section id="io">
+  <h2>9. Input / Output Summary</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+    <div>
+      <h3>Inputs (Screen)</h3>
+      <table>
+        <thead><tr><th>Field</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>DLIAIDI</code></td><td>Application ID entered by the operator</td></tr>
+          <tr><td><code>DLIVCLSI</code></td><td>Vehicle class (<code>A</code>/<code>B</code>/<code>C</code>/<code>D</code>)</td></tr>
+          <tr><td><code>DLIOFCRI</code></td><td>Issuing officer identifier</td></tr>
+          <tr><td><code>DLIAUTHI</code></td><td>Issuing authority</td></tr>
+          <tr><td><code>DLIRSTI</code></td><td>License restrictions (optional)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>Outputs (Screen)</h3>
+      <table>
+        <thead><tr><th>Field</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>DLICNAMO</code></td><td>Candidate full name (from DB2)</td></tr>
+          <tr><td><code>DLILTYO</code></td><td>License type</td></tr>
+          <tr><td><code>DLIELIG0</code></td><td>Eligibility check status</td></tr>
+          <tr><td><code>DLIHISTO</code></td><td>History check status</td></tr>
+          <tr><td><code>DLIPAYO</code></td><td>Payment status</td></tr>
+          <tr><td><code>DLIAU1O</code></td><td>Approval 1 status</td></tr>
+          <tr><td><code>DLIAU2O</code></td><td>Approval 2 status</td></tr>
+          <tr><td><code>DLIILNUMO</code></td><td>Generated license number (after issuance)</td></tr>
+          <tr><td><code>DLIEXPO</code></td><td>Calculated expiry date (after issuance)</td></tr>
+          <tr><td><code>DLIMSG</code></td><td>Status or error message after every action</td></tr>
+          <tr><td><code>DLIDATE</code></td><td>Current date, set at first screen display</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <h3 style="margin-top:16px;">DB2 Outputs</h3>
+  <ul>
+    <li>A new row inserted into <code>DLIS.ISSUED_LICENSE</code></li>
+    <li><code>APPLICATION_STATUS</code> updated to <code>'IS'</code> in <code>DLIS.LICENSE_APPLICATION</code></li>
+  </ul>
+</section>
+
+<!-- ═══════════════════════════════ 10. PROGRAM FLOW ═══════════════════════════════ -->
+<section id="diagram">
+  <h2>10. Program Flow Diagram</h2>
+  <div class="mermaid">
+flowchart TD
+    START([DLISISSU entry - Trans DL09]) --> MAIN{EIBCALEN = 0?}
+
+    MAIN -- Yes --> INIT[INIT-SCREEN: move CURRENT-DATE to DLIDATE]
+    INIT --> SENDM1[CICS SEND MAP DLISLIM01 / mapset DLISLI - ERASE FREEKB]
+    SENDM1 --> RET1[CICS RETURN TRANSID DL09 with COMMAREA 350 bytes]
+    RET1 --> ENDP1([Wait for next user input])
+
+    MAIN -- No --> MVCA[Move DFHCOMMAREA to DLIS-COMMAREA]
+    MVCA --> PI[PROCESS-INPUT]
+    PI --> RCV[CICS RECEIVE MAP DLISLIM01]
+    RCV --> EVAL{EVALUATE EIBAID}
+
+    EVAL -- PF1 --> ISS[[ISSUE-LICENSE]]
+    EVAL -- PF3 --> LOADA[[LOAD-APPLICATION]]
+    EVAL -- PF6 --> PRT[[PRINT-LICENSE]]
+    EVAL -- PF12 --> EXITRET[CICS RETURN - end transaction]
+    EXITRET --> ENDX([Transaction ends])
+    EVAL -- OTHER --> BADKEY[Message: USE F1 F3 F6 OR F12]
+
+    ISS --> SENDM2
+    LOADA --> SENDM2
+    PRT --> SENDM2
+    BADKEY --> SENDM2
+    SENDM2[CICS SEND MAP DLISLIM01 - DATAONLY FREEKB] --> RET2[CICS RETURN TRANSID DL09 with COMMAREA 350 bytes]
+    RET2 --> ENDP2([Pseudo-conversational wait for next input])
+
+    subgraph LA [LOAD-APPLICATION]
+        direction TB
+        L1{DLIAIDI = ZEROS?}
+        L1 -- Yes --> L1M[Message: ENTER APPLICATION ID]
+        L1M --> LEXIT
+        L1 -- No --> L2[Move application ID to host variable]
+        L2 --> L3[(SQL SELECT LICENSE_APPLICATION joined with CANDIDATE)]
+        L3 --> L4{SQLCODE = 100?}
+        L4 -- Yes --> L4M[Message: APPLICATION NOT FOUND]
+        L4M --> LEXIT
+        L4 -- No --> L5[STRING first name + last name into DLICNAMO]
+        L5 --> L6[Move license type and gate statuses to screen fields]
+        L6 --> L7[Message: APPLICATION LOADED]
+        L7 --> LEXIT[LOAD-APP-EXIT]
+    end
+
+    subgraph IL [ISSUE-LICENSE]
+        direction TB
+        I1{DLIAIDI = ZEROS?}
+        I1 -- Yes --> I1M[Message: ENTER APPLICATION ID]
+        I1M --> IEXIT
+        I1 -- No --> I2{Vehicle class blank or not A/B/C/D?}
+        I2 -- Yes --> I2M[Message: VEHICLE CLASS MUST BE A B C OR D]
+        I2M --> IEXIT
+        I2 -- No --> I3{DLIOFCRI = SPACES?}
+        I3 -- Yes --> I3M[Message: ISSUING OFFICER IS REQUIRED]
+        I3M --> IEXIT
+        I3 -- No --> I4{DLIAUTHI = SPACES?}
+        I4 -- Yes --> I4M[Message: ISSUING AUTHORITY IS REQUIRED]
+        I4M --> IEXIT
+        I4 -- No --> I5[[PERFORM LOAD-APPLICATION]]
+        I5 --> I6{DLIMSG = APPLICATION LOADED?}
+        I6 -- No --> IEXIT
+        I6 -- Yes --> I7{Application status = AP?}
+        I7 -- No --> I7M[Message: APPLICATION STATUS MUST BE AP BEFORE ISSUE]
+        I7M --> IEXIT
+        I7 -- Yes --> I8[Set issue date and expiry year/month-day from CURRENT-DATE]
+        I8 --> I9{EVALUATE license type}
+        I9 -- L --> I9L[Add 1 year, prefix LRN]
+        I9 -- P --> I9P[Add 2 years, prefix PRB]
+        I9 -- O --> I9O[Add 5 years, prefix OPN]
+        I9 -- Other --> I10
+        I9L --> I10
+        I9P --> I10
+        I9O --> I10
+        I10[STRING expiry date and license number]
+        I10 --> I11[Move class, officer, authority, restrictions to host vars]
+        I11 --> I12[(SQL INSERT into DLIS.ISSUED_LICENSE)]
+        I12 --> I13{SQLCODE NOT = 0?}
+        I13 -- Yes --> I13M[Message: DATABASE ERROR ON LICENSE INSERT]
+        I13M --> IEXIT
+        I13 -- No --> I14[(SQL UPDATE LICENSE_APPLICATION status = IS)]
+        I14 --> I15[Move license number and expiry date to screen]
+        I15 --> I16[Message: DRIVER LICENSE ISSUED SUCCESSFULLY]
+        I16 --> IEXIT[ISSUE-LIC-EXIT]
+    end
+
+    subgraph PL [PRINT-LICENSE]
+        direction TB
+        P1{DLIILNUMO = SPACES?}
+        P1 -- Yes --> P1M[Message: ISSUE LICENSE FIRST BEFORE PRINTING]
+        P1M --> PEXIT
+        P1 -- No --> P2[CICS LINK PROGRAM DLISLPRT with COMMAREA 350 bytes]
+        P2 --> P3[Message: LICENSE SENT TO PRINTER]
+        P3 --> PEXIT[PRINT-LIC-EXIT]
+    end
+
+    ISS -.-> I1
+    LOADA -.-> L1
+    PRT -.-> P1
+
+    classDef entry fill:#d4f1f4,stroke:#5aa9b5,color:#000
+    classDef decision fill:#fff3c4,stroke:#d4b84a,color:#000
+    classDef process fill:#e0e7ff,stroke:#8a96d6,color:#000
+    classDef cics fill:#d9f2d9,stroke:#6fb86f,color:#000
+    classDef db fill:#f9dcec,stroke:#c97aa5,color:#000
+    classDef msg fill:#ffe5d0,stroke:#d9976a,color:#000
+    classDef perform fill:#e8dcf5,stroke:#9b7fc4,color:#000
+    classDef term fill:#fdd9d9,stroke:#d68a8a,color:#000
+
+    class START entry
+    class MAIN,EVAL,L1,L4,I1,I2,I3,I4,I6,I7,I9,I13,P1 decision
+    class INIT,MVCA,PI,L2,L5,L6,I8,I10,I11,I15,L7 process
+    class SENDM1,RET1,RCV,EXITRET,SENDM2,RET2,P2 cics
+    class L3,I12,I14 db
+    class L1M,L4M,I1M,I2M,I3M,I4M,I7M,I13M,I16,P1M,P3,BADKEY msg
+    class ISS,LOADA,PRT,I5 perform
+    class I9L,I9P,I9O,LEXIT,IEXIT,PEXIT process
+    class ENDP1,ENDX,ENDP2 term
+  </div>
+
+  <div style="margin-top:16px;font-size:.85rem;">
+    <strong>Diagram legend:</strong>
+    <span style="background:#d4f1f4;border:1px solid #5aa9b5;padding:2px 8px;border-radius:4px;margin-right:8px;">Entry/Terminal</span>
+    <span style="background:#fff3c4;border:1px solid #d4b84a;padding:2px 8px;border-radius:4px;margin-right:8px;">Decision</span>
+    <span style="background:#e0e7ff;border:1px solid #8a96d6;padding:2px 8px;border-radius:4px;margin-right:8px;">Process</span>
+    <span style="background:#d9f2d9;border:1px solid #6fb86f;padding:2px 8px;border-radius:4px;margin-right:8px;">CICS</span>
+    <span style="background:#f9dcec;border:1px solid #c97aa5;padding:2px 8px;border-radius:4px;margin-right:8px;">DB2</span>
+    <span style="background:#ffe5d0;border:1px solid #d9976a;padding:2px 8px;border-radius:4px;margin-right:8px;">Message</span>
+    <span style="background:#e8dcf5;border:1px solid #9b7fc4;padding:2px 8px;border-radius:4px;">PERFORM / subgraph call</span>
+  </div>
+</section>
+
+</main>
+
+<footer>Generated by IBM Bob Premium Package for Z &nbsp;·&nbsp; DLISISSU – License Issuance Program – Developer Perspective</footer>
+
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'default', flowchart: { useMaxWidth: true, htmlLabels: true } });
+</script>
+</body>
+</html>
